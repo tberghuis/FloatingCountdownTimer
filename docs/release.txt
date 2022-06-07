@@ -1,0 +1,8 @@
+
+increment version build gradle
+generate signed aab
+upload internal testing
+test
+promote to production
+
+commit, merge, etc

@@ -1,8 +1,4 @@
 
-rename fresh github repo FloatingCountdownTimer
-
-
-
 
 screenshots
   timer over bigbuckbunny youtube app
