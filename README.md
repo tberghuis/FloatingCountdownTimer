@@ -12,3 +12,6 @@ Features a countdown timer that floats on other apps.
 SYSTEM_APPLICATION_WINDOW uses ComposeView that I got working using hacks discussed
 https://gist.github.com/handstandsam/6ecff2f39da72c0b38c07aa80bbb5a2f
 https://stackoverflow.com/questions/64585547/jetpack-compose-crash-when-adding-view-to-window-manager
+
+## Screenshot
+<img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_20220607_111514.png' width="400"/>
