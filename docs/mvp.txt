@@ -1,4 +1,9 @@
 privacy policy
+https://tberghuis.github.io/FloatingCountdownTimer/privacy-policy.html
+
+https://play.google.com/store/apps/details?id=xyz.tberghuis.floatingtimer
+
+reddit weekly feedback thread
 
 screenshots
   timer over bigbuckbunny youtube app
@@ -24,3 +29,14 @@ r/androiddev marketing
   brief description what it does
   uses hacks to render SYSTEM_ALERT_WINDOW using jetpack compose
   app has only MVP functionality
+
+
+
+####### play store desc
+Features a countdown timer that floats on other apps.
+
+* Can be dragged / moved around.
+* Click to start / pause / reset
+* Drag to trash to exit
+
+Open source: https://github.com/tberghuis/FloatingCountdownTimer

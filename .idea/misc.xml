@@ -5,6 +5,8 @@
       <map>
         <entry key="../../../../../../layout/compose-model-1653176966651.xml" value="0.5" />
         <entry key="app/src/main/res/drawable/ic_icon.xml" value="0.1055" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.176" />
+        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.176" />
         <entry key="app/src/main/res/layout/countdown_overlay.xml" value="0.24947916666666667" />
       </map>
     </option>
