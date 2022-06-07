@@ -1,0 +1,30 @@
+
+rename fresh github repo FloatingCountdownTimer
+
+
+
+
+screenshots
+  timer over bigbuckbunny youtube app
+  display over other apps settings screen (timer overlay showing)
+
+github readme
+  play store link
+playstore description
+release-checklist.txt
+
+release github
+release playstore
+
+
+playstore marketing
+  when you are baking a cake, no need to leave current app to see how long you need to wait
+  copy marketing from other timer / floating apps
+
+r/androidapps marketing, this is app is in a MVP state
+may or may not be further developed
+
+r/androiddev marketing
+  brief description what it does
+  uses hacks to render SYSTEM_ALERT_WINDOW using jetpack compose
+  app has only MVP functionality

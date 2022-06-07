@@ -1,0 +1,57 @@
+read all dagger and hilt docs, refactor
+
+move mediaplayer and alarm code to AlarmComponent
+
+read docs app architecture
+
+overlay shadow like FAB
+
+codelabs animation
+timer overlay shake on alarm
+
+create timer, animate timer entering from bottom
+
+input validation 
+  when using physical keyboard
+  max input
+  show error text next to field
+
+overlay shake animation when finished
+
+test alarm during sleep
+kill foreground service when sleep
+run foreground service on wakeup
+
+trash can icon bigger, animate on hover, move to center, scale up
+
+complete mvp.txt tasks for first release
+
+next-release.txt
+
+testing.txt
+
+on countdown finished settings
+  vibrate
+  overlay flashing
+  spinner like buffering animation
+  repeat looping option for each setting
+
+integrate google assistant
+
+testing spreadsheet, list each function - api level table
+
+copy features one at a time from competitor apps
+
+density = LocalDensity.current
+
+refactor architecture one thing at a time in passes
+
+derivedStateOf read test cases to understand how it works
+
+move endService code into onDestroy???
+
+trash icon larger, animate scale when hover
+
+smooth animation of progress bar
+
+input validation, TextField ignore everything except digits

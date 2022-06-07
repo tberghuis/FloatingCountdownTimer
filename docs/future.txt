@@ -1,0 +1,12 @@
+read MediaPlayer docs
+
+FEATURES
+google assistant integration
+  watch youtube googleio videos
+  codelabs to refresh memory
+
+
+ondone (tab ime keyboard) tab from minutes field to seconds field
+
+recent section, show list past timers, unique, reverse order,
+last 3...

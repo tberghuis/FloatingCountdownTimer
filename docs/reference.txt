@@ -1,0 +1,4 @@
+https://localazy.com/blog/floating-windows-on-android-1-jetpack-compose-room#the-series
+
+https://blog.canopas.com/android-drag-and-drop-ui-element-in-jetpack-compose-14922073b3f1
+https://github.com/cp-radhika-s/Drag_and_drop_jetpack_compose
