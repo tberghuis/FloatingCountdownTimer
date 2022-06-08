@@ -105,9 +105,7 @@ class ForegroundService : Service() {
 
     startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, notification)
 
-    // return START_STICKY
-    // it's not a critical app, just an open source MVP
-    return START_NOT_STICKY
+    return START_STICKY
   }
 
   override fun onDestroy() {
