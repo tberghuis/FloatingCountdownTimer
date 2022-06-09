@@ -24,8 +24,6 @@ run foreground service on wakeup
 
 trash can icon bigger, animate on hover, move to center, scale up
 
-complete mvp.txt tasks for first release
-
 next-release.txt
 
 testing.txt
@@ -55,6 +53,5 @@ trash icon larger, animate scale when hover
 smooth animation of progress bar
 
 input validation, TextField ignore everything except digits
-
 
 test UI with large scaled font - textfield labels wrap
