@@ -4,6 +4,8 @@ https://play.google.com/store/apps/details?id=xyz.tberghuis.floatingtimer
 
 https://www.reddit.com/r/androiddev/comments/v61vqx/weekly_discussion_code_review_and_feedback_thread/
 
+https://stackoverflow.com/questions/68244362/select-all-text-of-textfield-in-jetpack-compose/72504219#72504219
+
 todo
 r/androidapps
 
