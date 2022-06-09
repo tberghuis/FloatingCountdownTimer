@@ -57,4 +57,4 @@ smooth animation of progress bar
 input validation, TextField ignore everything except digits
 
 
-willitblend test
+test UI with large scaled font - textfield labels wrap
