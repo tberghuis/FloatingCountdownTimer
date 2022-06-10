@@ -1,10 +1,15 @@
 package xyz.tberghuis.floatingtimer.composables
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -16,11 +21,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import kotlinx.coroutines.flow.collect
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.isTimerHoverTrash
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerOffset
@@ -51,18 +59,26 @@ fun Trash() {
     }
   }
 
+
   Box(
     Modifier
       .size(TRASH_SIZE_DP.dp)
-//      .background(Color.LightGray)
+      .clip(CircleShape)
+      .background(Color.White.copy(alpha = .5f))
       .onGloballyPositioned {
         trashRect = it.boundsInRoot()
         logd("trashRect, $trashRect")
       },
     contentAlignment = Alignment.Center
   ) {
-    Icon(Icons.Filled.Delete, "trash", tint = iconTint)
+
+
+    Icon(
+      Icons.Filled.Delete, "trash", modifier = Modifier
+        .size(50.dp), tint = iconTint
+    )
   }
+
 
 // this is wack, but if it works...
   LaunchedEffect(isTimerDragHoveringTrash) {

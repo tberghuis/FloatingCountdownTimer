@@ -21,6 +21,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import kotlinx.coroutines.flow.collectLatest
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.countdownSeconds
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.durationSeconds
@@ -69,7 +70,9 @@ fun TimerOverlay(player: MediaPlayer) {
         }
 //        .background(Color.Red)
         .size(TIMER_SIZE_DP.dp)
-        .padding(PROGRESS_ARC_WIDTH / 2),
+        .padding(PROGRESS_ARC_WIDTH / 2)
+        .zIndex(1f)
+      ,
       contentAlignment = Alignment.Center
     ) {
 
