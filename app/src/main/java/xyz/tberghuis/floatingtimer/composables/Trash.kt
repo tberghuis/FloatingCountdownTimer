@@ -59,7 +59,6 @@ fun Trash() {
     }
   }
 
-
   Box(
     Modifier
       .size(TRASH_SIZE_DP.dp)
@@ -71,14 +70,11 @@ fun Trash() {
       },
     contentAlignment = Alignment.Center
   ) {
-
-
     Icon(
       Icons.Filled.Delete, "trash", modifier = Modifier
         .size(50.dp), tint = iconTint
     )
   }
-
 
 // this is wack, but if it works...
   LaunchedEffect(isTimerDragHoveringTrash) {
