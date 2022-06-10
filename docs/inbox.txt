@@ -40,7 +40,7 @@ testing spreadsheet, list each function - api level table
 
 copy features one at a time from competitor apps
 
-density = LocalDensity.current
+density = LocalDensity.current toPx() roundToPx()
 
 refactor architecture one thing at a time in passes
 
