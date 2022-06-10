@@ -55,3 +55,9 @@ smooth animation of progress bar
 input validation, TextField ignore everything except digits
 
 test UI with large scaled font - textfield labels wrap
+
+custom colors
+
+add stopwatch
+
+rfp f-droid
