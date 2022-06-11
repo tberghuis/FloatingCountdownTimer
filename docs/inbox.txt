@@ -63,3 +63,5 @@ add stopwatch
 rfp f-droid
 
 cancel the runRecomposeScope when the view is removed
+
+timer font fize fixed dp
