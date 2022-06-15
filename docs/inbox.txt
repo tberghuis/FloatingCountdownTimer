@@ -65,3 +65,5 @@ rfp f-droid
 cancel the runRecomposeScope when the view is removed
 
 timer font fize fixed dp
+
+START_REDELIVER_INTENT to fix NPE in onstartcommand???
