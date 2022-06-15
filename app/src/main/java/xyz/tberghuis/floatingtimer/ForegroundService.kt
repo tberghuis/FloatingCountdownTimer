@@ -39,37 +39,42 @@ class ForegroundService : Service() {
     notificationManager.createNotificationChannel(mChannel)
   }
 
-  override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
-    logd("onStartCommand intent $intent")
-    val command = intent.getStringExtra(INTENT_COMMAND)
-    logd("command $command")
+  override fun onStartCommand(intentOrNull: Intent?, flags: Int, startId: Int): Int {
+    logd("onStartCommand intentOrNull $intentOrNull")
 
-    when (command) {
-      INTENT_COMMAND_EXIT -> {
-        pendingAlarm?.cancel()
-        overlayComponent?.endService()
-        return START_NOT_STICKY
-      }
-      INTENT_COMMAND_CREATE_TIMER -> {
-        val duration = intent.getIntExtra(EXTRA_TIMER_DURATION, 10)
+    intentOrNull?.let { intent ->
+      val command = intent.getStringExtra(INTENT_COMMAND)
+      logd("command $command")
 
-        logd("INTENT_COMMAND_CREATE_TIMER duration $duration")
+      when (command) {
+        INTENT_COMMAND_EXIT -> {
+          pendingAlarm?.cancel()
+          overlayComponent?.endService()
+          return START_NOT_STICKY
+        }
+        INTENT_COMMAND_CREATE_TIMER -> {
+          val duration = intent.getIntExtra(EXTRA_TIMER_DURATION, 10)
 
-        pendingAlarm?.cancel()
-        resetTimerState(duration)
-        overlayComponent = overlayComponent ?: OverlayComponent(this, stopService = {
-          // todo test older api levels than 32
-          stopForeground(STOP_FOREGROUND_REMOVE)
-        })
-        // todo position timer default position
-        overlayComponent!!.showOverlay()
-      }
+          logd("INTENT_COMMAND_CREATE_TIMER duration $duration")
 
-      INTENT_COMMAND_COUNTDOWN_COMPLETE -> {
-        logd("onStartCommand INTENT_COMMAND_COUNTDOWN_COMPLETE")
-        timerState.value = TimerStateFinished
+          pendingAlarm?.cancel()
+          resetTimerState(duration)
+          overlayComponent = overlayComponent ?: OverlayComponent(this, stopService = {
+            // todo test older api levels than 32
+            stopForeground(STOP_FOREGROUND_REMOVE)
+          })
+          // todo position timer default position
+          overlayComponent!!.showOverlay()
+        }
+
+        INTENT_COMMAND_COUNTDOWN_COMPLETE -> {
+          logd("onStartCommand INTENT_COMMAND_COUNTDOWN_COMPLETE")
+          timerState.value = TimerStateFinished
+        }
       }
     }
+
+
 
     createNotificationChannel()
 

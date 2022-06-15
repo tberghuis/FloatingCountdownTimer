@@ -68,4 +68,4 @@ timer font fize fixed dp
 
 timer size option, slider with sample timer to the right
 
-START_REDELIVER_INTENT to fix NPE in onstartcommand???
+fix NPE in onstartcommand??? if intent null just create notification
