@@ -66,4 +66,6 @@ cancel the runRecomposeScope when the view is removed
 
 timer font fize fixed dp
 
+timer size option, slider with sample timer to the right
+
 START_REDELIVER_INTENT to fix NPE in onstartcommand???
