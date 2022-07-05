@@ -4,4 +4,10 @@ create a stopwatch in plain compose
 
 ...
 
+
+change app name "countdown timer"
+change repo name
+update play store screenshots
+
 release
+##########################
