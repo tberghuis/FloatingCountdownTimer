@@ -1,6 +1,5 @@
 
-next task,
-create a stopwatch in plain compose
+
 
 ...
 
@@ -11,3 +10,6 @@ update play store screenshots
 
 release
 ##########################
+
+next task,
+create a stopwatch in plain compose
