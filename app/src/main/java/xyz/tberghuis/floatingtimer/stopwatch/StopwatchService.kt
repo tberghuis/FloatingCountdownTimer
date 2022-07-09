@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.logd
 
 
 class StopwatchService : Service() {
@@ -23,7 +24,10 @@ class StopwatchService : Service() {
     // todo when command
 
     // INTENT_COMMAND_CREATE_TIMER
-    stopwatchOverlayComponent = stopwatchOverlayComponent ?: StopwatchOverlayComponent(this)
+    stopwatchOverlayComponent = stopwatchOverlayComponent ?: StopwatchOverlayComponent(this) {
+      logd("service stop")
+      stopForeground(STOP_FOREGROUND_REMOVE)
+    }
     stopwatchOverlayComponent!!.showOverlay()
 
 

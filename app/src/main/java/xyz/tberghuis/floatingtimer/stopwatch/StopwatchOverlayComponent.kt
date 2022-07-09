@@ -10,7 +10,7 @@ import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp.stopwatch.StopwatchServiceOverlay
 
-class StopwatchOverlayComponent(val context: Context) {
+class StopwatchOverlayComponent(val context: Context, val stopService: () -> Unit) {
   val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
   val fullscreenOverlay: OverlayViewHolder
@@ -39,11 +39,17 @@ class StopwatchOverlayComponent(val context: Context) {
     }
 
     fullscreenOverlay.view.setContent {
-      StopwatchServiceOverlay()
+      StopwatchServiceOverlay({ this.exit() })
     }
 
 
     return fullscreenOverlay
+  }
+
+  fun exit() {
+    logd("exit overlay component")
+    windowManager.removeView(fullscreenOverlay.view)
+    stopService()
   }
 
   fun showOverlay() {

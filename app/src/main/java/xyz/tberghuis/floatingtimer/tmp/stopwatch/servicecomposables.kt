@@ -8,12 +8,13 @@ import androidx.compose.runtime.Composable
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
-fun StopwatchServiceOverlay() {
+fun StopwatchServiceOverlay(exit: () -> Unit) {
 
   Column(verticalArrangement = Arrangement.Center) {
     Text("hello stopwatch overlay")
     Button(onClick = {
-      logd("exit")
+      logd("exit composable")
+      exit()
     }) {
       Text("exit")
     }
