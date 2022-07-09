@@ -10,6 +10,9 @@ import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp.stopwatch.StopwatchServiceOverlay
 
+
+// todo inherit interface OverlayComponent { exitOverlay, startOverlay }
+
 class StopwatchOverlayComponent(val context: Context, val stopService: () -> Unit) {
   val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
