@@ -25,6 +25,13 @@ fun StopwatchDemo() {
     }) {
       Text("start stopwatch")
     }
+
+    Button(onClick = {
+      logd("button")
+    }) {
+      Text("button")
+    }
+
   }
 
 }
