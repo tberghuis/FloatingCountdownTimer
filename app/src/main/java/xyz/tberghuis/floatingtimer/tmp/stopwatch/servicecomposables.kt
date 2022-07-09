@@ -20,7 +20,6 @@ fun StopwatchServiceOverlay(
 
   Column(verticalArrangement = Arrangement.Center) {
     Text("hello stopwatch overlay")
-    Text(state.willitblend)
     Row {
       Button(onClick = {
         logd("start")

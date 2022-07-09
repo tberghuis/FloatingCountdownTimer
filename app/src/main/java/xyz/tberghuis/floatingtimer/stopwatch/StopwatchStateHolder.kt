@@ -10,9 +10,11 @@ import androidx.compose.runtime.mutableStateOf
 // delete all import StopwatchStateHolder.*
 
 object StopwatchStateHolder {
-  val willitblend = "willitblend"
   val timeElapsed = mutableStateOf(0)
 
   var running = false
 
 }
+
+// todo fn resetStopwatchState
+// call from service onstartcommand
