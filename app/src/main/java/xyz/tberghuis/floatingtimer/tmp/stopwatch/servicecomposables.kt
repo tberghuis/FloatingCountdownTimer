@@ -7,7 +7,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
-import xyz.tberghuis.floatingtimer.composables.formatIntTimerDisplay
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchServiceHolder
 import java.util.*

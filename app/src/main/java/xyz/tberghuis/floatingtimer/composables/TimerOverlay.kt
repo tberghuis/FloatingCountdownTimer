@@ -35,6 +35,7 @@ import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.TimerStateFinished
 import xyz.tberghuis.floatingtimer.TimerStatePaused
 import xyz.tberghuis.floatingtimer.TimerStateRunning
+import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -77,7 +78,7 @@ fun TimerOverlay(player: MediaPlayer) {
     ) {
 
       ProgressArc(timeLeftFraction)
-      TimerDisplay()
+      TimeDisplay(countdownSeconds)
     }
 
     if (showTrash) {
