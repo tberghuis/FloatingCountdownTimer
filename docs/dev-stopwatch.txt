@@ -20,4 +20,4 @@ read https://developer.android.com/guide/components/broadcasts
 doitwrong
 read docs later
 
-
+next task, show a dialog

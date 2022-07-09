@@ -11,6 +11,9 @@ import xyz.tberghuis.floatingtimer.R
 
 
 class StopwatchService : Service() {
+
+  var stopwatchOverlayComponent: StopwatchOverlayComponent? = null
+
   override fun onBind(intent: Intent?): IBinder? {
     return null
   }
@@ -19,19 +22,25 @@ class StopwatchService : Service() {
 
     // todo when command
 
-    
-
+    // INTENT_COMMAND_CREATE_TIMER
+    stopwatchOverlayComponent = stopwatchOverlayComponent ?: StopwatchOverlayComponent(this)
+    stopwatchOverlayComponent!!.showOverlay()
 
 
     createNotificationChannel()
-    val notification: Notification = NotificationCompat.Builder(this, "stopwatch_channel")
-      .setContentTitle("Floating Stopwatch")
-      .setSmallIcon(R.drawable.ic_alarm)
-        // this does nothing on > gingerbread
-//      .setContentIntent(pendingIntent)
-      .build()
+    val notification: Notification = buildNotification()
     startForeground(2, notification)
     return START_NOT_STICKY
+  }
+
+
+  private fun buildNotification(): Notification {
+    return NotificationCompat.Builder(this, "stopwatch_channel")
+      .setContentTitle("Floating Stopwatch")
+      .setSmallIcon(R.drawable.ic_alarm)
+      // this does nothing on > gingerbread
+//      .setContentIntent(pendingIntent)
+      .build()
   }
 
 
