@@ -30,4 +30,4 @@ next task, show a dialog
 
 read all dagger hilt docs
 circular dependencies use Lazy on one side
-callback closures can be in a separate class
+callback closures can be in a separate class .e.g. class ExitOverlay, with invoke fn
