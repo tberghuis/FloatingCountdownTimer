@@ -7,9 +7,17 @@
 change app name "countdown timer"
 change repo name
 update play store screenshots
+  description
 
 release
 ##########################
 
 next task,
 create a stopwatch in plain compose
+
+read https://developer.android.com/guide/components/broadcasts
+
+doitwrong
+read docs later
+
+

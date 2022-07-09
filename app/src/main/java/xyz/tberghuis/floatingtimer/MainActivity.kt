@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import xyz.tberghuis.floatingtimer.screens.HomeScreen
 import xyz.tberghuis.floatingtimer.tmp.FabDemo
 import xyz.tberghuis.floatingtimer.tmp.GradientDemo
+import xyz.tberghuis.floatingtimer.tmp.StopwatchDemo
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 @AndroidEntryPoint
@@ -28,8 +29,8 @@ class MainActivity : ComponentActivity() {
             .background(Color.White),
           color = MaterialTheme.colors.background
         ) {
-          HomeScreen()
-//          FabDemo()
+//          HomeScreen()
+          StopwatchDemo()
         }
       }
     }
