@@ -37,3 +37,6 @@ next task, reference TimerOnServiceTutorial
 finish timer demo
 
 put in circle with animated rotation
+
+
+MVP separate serive

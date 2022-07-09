@@ -1,11 +1,14 @@
 package xyz.tberghuis.floatingtimer.tmp.stopwatch
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchServiceHolder
@@ -19,7 +22,10 @@ fun StopwatchServiceOverlay(
 //  exit: () -> Unit
 ) {
 
-  Column(verticalArrangement = Arrangement.Center) {
+  Column(
+    modifier = Modifier.background(Color.LightGray),
+    verticalArrangement = Arrangement.Center
+  ) {
     Text("hello stopwatch overlay")
     Row {
       StartPauseButton()
