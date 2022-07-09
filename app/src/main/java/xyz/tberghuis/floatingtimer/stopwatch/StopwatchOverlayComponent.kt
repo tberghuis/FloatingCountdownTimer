@@ -49,10 +49,14 @@ class StopwatchOverlayComponent(val context: Context, val stopService: () -> Uni
   fun exit() {
     logd("exit overlay component")
     windowManager.removeView(fullscreenOverlay.view)
+    // todo, instead notify service, stopwatch exit
+    // callback or intent???
     stopService()
   }
 
   fun showOverlay() {
+    // todo reset state
+
     windowManager.addView(fullscreenOverlay.view, fullscreenOverlay.params)
   }
 }

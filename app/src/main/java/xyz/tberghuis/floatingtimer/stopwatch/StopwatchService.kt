@@ -26,7 +26,12 @@ class StopwatchService : Service() {
     // INTENT_COMMAND_CREATE_TIMER
     stopwatchOverlayComponent = stopwatchOverlayComponent ?: StopwatchOverlayComponent(this) {
       logd("service stop")
-      stopForeground(STOP_FOREGROUND_REMOVE)
+      // todo if both stopwatch and countdown overlays removed stopForeground
+//      stopForeground(STOP_FOREGROUND_REMOVE)
+      // or should i listen for an intent to stop?
+      // would probably be cleaner
+      // doitwrong for now
+      // am i having fun... no
     }
     stopwatchOverlayComponent!!.showOverlay()
 

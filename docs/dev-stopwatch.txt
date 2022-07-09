@@ -21,3 +21,9 @@ doitwrong
 read docs later
 
 next task, show a dialog
+
+  implement a timer
+
+  think how to reuse the same service
+
+  when i exit i do not want to kill the service
