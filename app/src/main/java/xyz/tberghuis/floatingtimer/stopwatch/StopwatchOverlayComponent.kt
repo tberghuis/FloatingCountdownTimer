@@ -13,7 +13,10 @@ import xyz.tberghuis.floatingtimer.tmp.stopwatch.StopwatchServiceOverlay
 
 // todo inherit interface OverlayComponent { exitOverlay, startOverlay }
 
-class StopwatchOverlayComponent(val context: Context, val stopService: () -> Unit) {
+class StopwatchOverlayComponent(
+  val context: Context,
+// val stopService: () -> Unit
+) {
   val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
   val fullscreenOverlay: OverlayViewHolder
@@ -42,19 +45,11 @@ class StopwatchOverlayComponent(val context: Context, val stopService: () -> Uni
     }
 
     fullscreenOverlay.view.setContent {
-      StopwatchServiceOverlay({ this.exit() })
+      StopwatchServiceOverlay()
     }
 
 
     return fullscreenOverlay
-  }
-
-  fun exit() {
-    logd("exit overlay component")
-    windowManager.removeView(fullscreenOverlay.view)
-    // todo, instead notify service, stopwatch exit
-    // callback or intent???
-    stopService()
   }
 
   fun showOverlay() {

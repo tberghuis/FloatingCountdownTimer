@@ -10,30 +10,35 @@ import androidx.core.app.NotificationCompat
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 
+// doitwrong until hilt/dagger
+//var stopwatchServiceHolder: StopwatchService? = null
+lateinit var stopwatchServiceHolder: StopwatchService
 
 class StopwatchService : Service() {
 
-  var stopwatchOverlayComponent: StopwatchOverlayComponent? = null
+  //var stopwatchOverlayComponent: StopwatchOverlayComponent? = null
+
+  val stopwatchOverlayComponent: StopwatchOverlayComponent by lazy {
+    StopwatchOverlayComponent(this)
+  }
+
 
   override fun onBind(intent: Intent?): IBinder? {
+    logd("onbind")
     return null
   }
 
   override fun onStartCommand(intentOrNull: Intent?, flags: Int, startId: Int): Int {
 
+    logd("onstartcommand")
+    // doitwrong
+    stopwatchServiceHolder = this
+
+
     // todo when command
 
     // INTENT_COMMAND_CREATE_TIMER
-    stopwatchOverlayComponent = stopwatchOverlayComponent ?: StopwatchOverlayComponent(this) {
-      logd("service stop")
-      // todo if both stopwatch and countdown overlays removed stopForeground
-//      stopForeground(STOP_FOREGROUND_REMOVE)
-      // or should i listen for an intent to stop?
-      // would probably be cleaner
-      // doitwrong for now
-      // am i having fun... no
-    }
-    stopwatchOverlayComponent!!.showOverlay()
+    stopwatchOverlayComponent.showOverlay()
 
 
     createNotificationChannel()
