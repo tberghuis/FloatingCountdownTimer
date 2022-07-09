@@ -22,26 +22,7 @@ fun StopwatchServiceOverlay(
   Column(verticalArrangement = Arrangement.Center) {
     Text("hello stopwatch overlay")
     Row {
-      Button(onClick = {
-        logd("start")
-        state.running = true
-        Timer().scheduleAtFixedRate(timerTask {
-          logd("timertask")
-          if (state.running) {
-            state.timeElapsed.value++
-          } else {
-            cancel()
-          }
-        }, 1000, 1000)
-      }) {
-        Text("start")
-      }
-      Button(onClick = {
-        logd("pause")
-        state.running = false
-      }) {
-        Text("pause")
-      }
+      StartPauseButton()
       StopwatchTimeDisplay()
     }
     Button(onClick = {
@@ -70,4 +51,31 @@ fun StopwatchTimeDisplay() {
   TimeDisplay(state.timeElapsed.value)
 }
 
+@Composable
+fun StartPauseButton() {
+  Button(onClick = {
+    logd("start pause")
 
+    when (state.running) {
+      false -> {
+        state.running = true
+        Timer().scheduleAtFixedRate(timerTask {
+          logd("timertask")
+          if (state.running) {
+            state.timeElapsed.value++
+          } else {
+            cancel()
+          }
+        }, 1000, 1000)
+      }
+      true -> {
+        state.running = false
+      }
+    }
+
+
+  }) {
+    Text("start pause")
+  }
+
+}
