@@ -1,5 +1,7 @@
 package xyz.tberghuis.floatingtimer.stopwatch
 
+import androidx.compose.runtime.mutableStateOf
+
 // make sure use like
 // state.willitblend
 
@@ -9,4 +11,8 @@ package xyz.tberghuis.floatingtimer.stopwatch
 
 object StopwatchStateHolder {
   val willitblend = "willitblend"
+  val timeElapsed = mutableStateOf(0)
+
+  var running = false
+
 }
