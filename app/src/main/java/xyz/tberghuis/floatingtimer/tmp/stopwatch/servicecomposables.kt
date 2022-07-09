@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.stopwatch.StopwatchOverlay
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchServiceHolder
 import java.util.*
 import kotlin.concurrent.timerTask
@@ -31,6 +32,7 @@ fun StopwatchServiceOverlay(
       StartPauseButton()
       StopwatchTimeDisplay()
     }
+    StopwatchOverlay()
     Button(onClick = {
       logd("exit composable")
       exit()
