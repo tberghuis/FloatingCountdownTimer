@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import xyz.tberghuis.floatingtimer.composables.formatIntTimerDisplay
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchServiceHolder
 import java.util.*
@@ -66,5 +67,12 @@ fun exit() {
 
 @Composable
 fun StopwatchTimeDisplay() {
-  Text("${state.timeElapsed.value}")
+  TimeDisplay(state.timeElapsed.value)
+}
+
+@Composable
+fun TimeDisplay(totalSeconds: Int) {
+  val minutes = totalSeconds / 60
+  val seconds = totalSeconds % 60
+  Text("${formatIntTimerDisplay(minutes)}:${formatIntTimerDisplay(seconds)}")
 }
