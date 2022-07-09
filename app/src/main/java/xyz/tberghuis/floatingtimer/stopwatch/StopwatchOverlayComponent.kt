@@ -8,7 +8,7 @@ import android.os.Build
 import android.view.WindowManager
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp.StopwatchServiceOverlay
+import xyz.tberghuis.floatingtimer.tmp.stopwatch.StopwatchServiceOverlay
 
 class StopwatchOverlayComponent(val context: Context) {
   val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager

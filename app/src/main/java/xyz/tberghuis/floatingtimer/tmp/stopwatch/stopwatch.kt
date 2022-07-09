@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp
+package xyz.tberghuis.floatingtimer.tmp.stopwatch
 
 import android.content.Context
 import android.content.Intent

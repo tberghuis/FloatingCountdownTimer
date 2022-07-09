@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp
+package xyz.tberghuis.floatingtimer.tmp.stopwatch
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
