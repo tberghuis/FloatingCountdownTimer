@@ -7,7 +7,11 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_DESCRIPTION
+import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_ID
+import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_NAME
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.SERVICE_STOPWATCH_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.logd
 
 // doitwrong until hilt/dagger
@@ -43,13 +47,13 @@ class StopwatchService : Service() {
 
     createNotificationChannel()
     val notification: Notification = buildNotification()
-    startForeground(2, notification)
+    startForeground(SERVICE_STOPWATCH_NOTIFICATION_ID, notification)
     return START_NOT_STICKY
   }
 
 
   private fun buildNotification(): Notification {
-    return NotificationCompat.Builder(this, "stopwatch_channel")
+    return NotificationCompat.Builder(this, CHANNEL_STOPWATCH_ID)
       .setContentTitle("Floating Stopwatch")
       .setSmallIcon(R.drawable.ic_alarm)
       // this does nothing on > gingerbread
@@ -61,11 +65,11 @@ class StopwatchService : Service() {
   // todo refactor
   private fun createNotificationChannel() {
     val mChannel = NotificationChannel(
-      "stopwatch_channel",
-      "stopwatch channel",
+      CHANNEL_STOPWATCH_ID,
+      CHANNEL_STOPWATCH_NAME,
       NotificationManager.IMPORTANCE_DEFAULT
     )
-    mChannel.description = "stopwatch channel description"
+    mChannel.description = CHANNEL_STOPWATCH_DESCRIPTION
     val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     notificationManager.createNotificationChannel(mChannel)
   }
