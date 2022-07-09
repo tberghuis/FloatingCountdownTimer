@@ -36,4 +36,4 @@ callback closures can be in a separate class .e.g. class ExitOverlay, with invok
 next task, reference TimerOnServiceTutorial
 finish timer demo
 
-start pause single button
+put in circle with animated rotation
