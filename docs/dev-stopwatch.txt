@@ -49,3 +49,6 @@ read kotlin docs - delegation
 next task
   refactor + reuse touch overlay
   reuse trash composable
+
+next task
+  copy from service class
