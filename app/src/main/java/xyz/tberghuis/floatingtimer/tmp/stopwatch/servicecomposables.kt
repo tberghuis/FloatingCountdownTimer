@@ -64,12 +64,12 @@ fun StartPauseButton() {
   Button(onClick = {
     logd("start pause")
 
-    when (state.running) {
+    when (state.running.value) {
       false -> {
-        state.running = true
+        state.running.value = true
         Timer().scheduleAtFixedRate(timerTask {
           logd("timertask")
-          if (state.running) {
+          if (state.running.value) {
             state.timeElapsed.value++
           } else {
             cancel()
@@ -77,7 +77,7 @@ fun StartPauseButton() {
         }, 1000, 1000)
       }
       true -> {
-        state.running = false
+        state.running.value = false
       }
     }
 

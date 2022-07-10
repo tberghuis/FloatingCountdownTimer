@@ -12,7 +12,9 @@ import androidx.compose.runtime.mutableStateOf
 object StopwatchStateHolder {
   val timeElapsed = mutableStateOf(0)
 
-  var running = false
+  // change to
+//  var running = false
+  val running = mutableStateOf(false)
 
 }
 
