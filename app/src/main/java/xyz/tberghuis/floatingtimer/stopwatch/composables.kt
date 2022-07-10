@@ -108,15 +108,3 @@ fun BorderArc() {
       }
   }
 }
-
-//private operator fun <T> State<T>.getValue(t: T?, property: KProperty<T?>): State<T> {
-//
-//}
-
-
-//@Composable
-//fun animateArcAngle(
-//): State<Float> {
-//  return remember { mutableStateOf(0f) }
-//}
-
