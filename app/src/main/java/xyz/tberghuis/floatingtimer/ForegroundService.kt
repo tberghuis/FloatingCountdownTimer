@@ -61,7 +61,8 @@ class ForegroundService : Service() {
           resetTimerState(duration)
           overlayComponent = overlayComponent ?: OverlayComponent(this, stopService = {
             // todo test older api levels than 32
-            stopForeground(STOP_FOREGROUND_REMOVE)
+//            stopForeground(STOP_FOREGROUND_REMOVE)
+            stopSelf()
           })
           // todo position timer default position
           overlayComponent!!.showOverlay()

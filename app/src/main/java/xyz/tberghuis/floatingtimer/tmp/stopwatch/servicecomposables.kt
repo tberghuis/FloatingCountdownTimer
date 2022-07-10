@@ -51,6 +51,10 @@ fun exit() {
 
   // todo, here decides to stopForground if no overlays
 //  stopwatchServiceHolder.exitStopwatch()
+
+
+  // doitwrong
+  stopwatchServiceHolder.stopSelf()
 }
 
 
