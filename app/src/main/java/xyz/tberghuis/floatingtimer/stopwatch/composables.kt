@@ -51,7 +51,7 @@ fun StopwatchOverlay() {
 
 @Composable
 fun BorderArc() {
-  var pausedAngle by remember { mutableStateOf(0f) }
+  var pausedAngle by remember { mutableStateOf(210f) }
   var restartAngle by remember { mutableStateOf(0f) }
   val infiniteTransition = rememberInfiniteTransition()
   val animatedAngle by infiniteTransition.animateFloat(
