@@ -70,6 +70,15 @@ fun BorderArc() {
       color = Color.White,
     )
     drawArc(
+      color = Color.White,
+      startAngle = 0f,
+      sweepAngle = 360f,
+      useCenter = false,
+      style = Stroke(PROGRESS_ARC_WIDTH.toPx()),
+      size = Size(size.width, size.height)
+    )
+
+    drawArc(
       color = Color.Blue.copy(alpha = .1f),
       startAngle = 0f,
       sweepAngle = 360f,
