@@ -5,6 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.IntOffset
 
+// todo make constructor private/internal
+// disallow create from outside this file
 class OverlayState {
   var timerOffset by mutableStateOf(IntOffset.Zero)
   var showTrash by mutableStateOf(false)
