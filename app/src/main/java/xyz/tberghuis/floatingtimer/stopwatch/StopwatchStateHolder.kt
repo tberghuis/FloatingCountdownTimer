@@ -1,6 +1,9 @@
 package xyz.tberghuis.floatingtimer.stopwatch
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.unit.IntOffset
 
 // make sure use like
 // state.willitblend
@@ -23,6 +26,12 @@ class StopwatchState {
 
 val stopwatchState = StopwatchState()
 
+
+class OverlayState {
+  var timerOffset by mutableStateOf(IntOffset.Zero)
+}
+
+val stopwatchOverlayState = OverlayState()
 
 
 // todo fn resetStopwatchState
