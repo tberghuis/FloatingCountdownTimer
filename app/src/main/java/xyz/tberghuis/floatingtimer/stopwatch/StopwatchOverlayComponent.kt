@@ -17,7 +17,6 @@ import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchClickTarget
 import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchOverlay
-import xyz.tberghuis.floatingtimer.tmp.stopwatch.StopwatchServiceOverlay
 
 
 // todo inherit interface OverlayComponent { exitOverlay, startOverlay }
