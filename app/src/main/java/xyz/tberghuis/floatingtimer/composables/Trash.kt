@@ -32,11 +32,12 @@ import androidx.compose.ui.zIndex
 import kotlinx.coroutines.flow.collect
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
+import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.common.countdownOverlayState
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
-fun Trash() {
+fun Trash(overlayState: OverlayState = countdownOverlayState) {
   val context = LocalContext.current
   val timerSizePx = remember {
     val density = context.resources.displayMetrics.density
@@ -45,7 +46,7 @@ fun Trash() {
   var trashRect by remember { mutableStateOf(Rect.Zero) }
   val isTimerDragHoveringTrash = remember {
     derivedStateOf {
-      calcTimerIsHoverTrash(timerSizePx, trashRect)
+      calcTimerIsHoverTrash(overlayState, timerSizePx, trashRect)
     }
   }
   val iconTint by remember {
@@ -80,14 +81,18 @@ fun Trash() {
     snapshotFlow {
       isTimerDragHoveringTrash.value
     }.collect {
-      countdownOverlayState.isTimerHoverTrash = it
+      overlayState.isTimerHoverTrash = it
     }
   }
 }
 
-fun calcTimerIsHoverTrash(timerSizePx: Float, trashRect: Rect): Boolean {
-  val timerCenterX = countdownOverlayState.timerOffset.x + (timerSizePx / 2)
-  val timerCenterY = countdownOverlayState.timerOffset.y + (timerSizePx / 2)
+fun calcTimerIsHoverTrash(
+  overlayState: OverlayState,
+  timerSizePx: Float,
+  trashRect: Rect
+): Boolean {
+  val timerCenterX = overlayState.timerOffset.x + (timerSizePx / 2)
+  val timerCenterY = overlayState.timerOffset.y + (timerSizePx / 2)
   if (
     timerCenterX < trashRect.left ||
     timerCenterX > trashRect.right ||
