@@ -26,7 +26,6 @@ fun StopwatchServiceOverlay(
     modifier = Modifier.background(Color.LightGray),
     verticalArrangement = Arrangement.Center
   ) {
-    Text("hello stopwatch overlay")
 
     StopwatchOverlay()
     Button(onClick = {
