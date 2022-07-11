@@ -10,6 +10,8 @@ import androidx.core.app.NotificationCompat
 import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_DESCRIPTION
 import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_ID
 import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_NAME
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_CREATE_STOPWATCH
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.SERVICE_STOPWATCH_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.logd
@@ -33,16 +35,27 @@ class StopwatchService : Service() {
   }
 
   override fun onStartCommand(intentOrNull: Intent?, flags: Int, startId: Int): Int {
-
     logd("onstartcommand")
     // doitwrong
     stopwatchServiceHolder = this
 
+    intentOrNull?.let { intent ->
+      val command = intent.getStringExtra(INTENT_COMMAND)
+      logd("command $command")
+      // todo when command
 
-    // todo when command
+      when (command) {
+        INTENT_COMMAND_CREATE_STOPWATCH -> {
+          stopwatchOverlayComponent.showOverlay()
 
-    // INTENT_COMMAND_CREATE_TIMER
-    stopwatchOverlayComponent.showOverlay()
+        }
+      }
+
+
+    }
+
+
+
 
 
     createNotificationChannel()

@@ -13,9 +13,10 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.StopwatchOverlay
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchServiceHolder
+import xyz.tberghuis.floatingtimer.stopwatch.stopwatchState
 import java.util.*
 import kotlin.concurrent.timerTask
-import xyz.tberghuis.floatingtimer.stopwatch.StopwatchStateHolder as state
+//import xyz.tberghuis.floatingtimer.stopwatch.StopwatchStateHolder as state
 
 // todo inject ExitStopwatch usecase
 @Composable
@@ -30,7 +31,7 @@ fun StopwatchServiceOverlay(
     Text("hello stopwatch overlay")
     Row {
       StartPauseButton()
-      StopwatchTimeDisplay()
+//      StopwatchTimeDisplay()
     }
     StopwatchOverlay()
     Button(onClick = {
@@ -58,30 +59,30 @@ fun exit() {
 }
 
 
-@Composable
-fun StopwatchTimeDisplay() {
-  TimeDisplay(state.timeElapsed.value)
-}
+//@Composable
+//fun StopwatchTimeDisplay() {
+//  TimeDisplay(state.timeElapsed.value)
+//}
 
 @Composable
 fun StartPauseButton() {
   Button(onClick = {
     logd("start pause")
 
-    when (state.running.value) {
+    when (stopwatchState.running.value) {
       false -> {
-        state.running.value = true
+        stopwatchState.running.value = true
         Timer().scheduleAtFixedRate(timerTask {
           logd("timertask")
-          if (state.running.value) {
-            state.timeElapsed.value++
+          if (stopwatchState.running.value) {
+            stopwatchState.timeElapsed.value++
           } else {
             cancel()
           }
         }, 1000, 1000)
       }
       true -> {
-        state.running.value = false
+        stopwatchState.running.value = false
       }
     }
 

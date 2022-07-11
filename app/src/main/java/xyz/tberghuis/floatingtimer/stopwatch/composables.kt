@@ -35,6 +35,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import xyz.tberghuis.floatingtimer.logd
 import kotlinx.coroutines.flow.collect
+import xyz.tberghuis.floatingtimer.common.TimeDisplay
 
 @Composable
 fun StopwatchOverlay() {
@@ -46,6 +47,7 @@ fun StopwatchOverlay() {
     contentAlignment = Alignment.Center
   ) {
     BorderArc()
+    TimeDisplay(stopwatchState.timeElapsed.value)
   }
 }
 
@@ -84,7 +86,7 @@ fun BorderArc() {
 
     drawArc(
       color = Color.Blue,
-      startAngle = if (!StopwatchStateHolder.running.value) pausedAngle else drawAnimatedAngle,
+      startAngle = if (!stopwatchState.running.value) pausedAngle else drawAnimatedAngle,
       sweepAngle = 120f,
       useCenter = false,
       style = Stroke(PROGRESS_ARC_WIDTH.toPx()),
@@ -95,7 +97,7 @@ fun BorderArc() {
   // should learn to write my own delegate for angle instead
   // doitwrong
   LaunchedEffect(Unit) {
-    snapshotFlow { StopwatchStateHolder.running.value }
+    snapshotFlow { stopwatchState.running.value }
       .collect { running ->
         when (running) {
           true -> {

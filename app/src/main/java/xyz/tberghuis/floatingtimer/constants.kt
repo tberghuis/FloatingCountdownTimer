@@ -12,6 +12,8 @@ const val INTENT_COMMAND_COUNTDOWN_COMPLETE = "command_countdown_complete"
 const val INTENT_COMMAND_EXIT = "command_exit"
 const val EXTRA_TIMER_DURATION = "extra_timer_duration"
 
+const val INTENT_COMMAND_CREATE_STOPWATCH = "command_create_stopwatch"
+
 val PROGRESS_ARC_WIDTH = 8.dp
 
 const val FOREGROUND_SERVICE_NOTIFICATION_ID = 1

@@ -7,6 +7,8 @@ import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_CREATE_STOPWATCH
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.StopwatchService
 
@@ -39,5 +41,8 @@ fun StopwatchDemo() {
 
 fun startStopwatchService(context: Context) {
   val intent = Intent(context.applicationContext, StopwatchService::class.java)
+
+  intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_CREATE_STOPWATCH)
+
   context.startForegroundService(intent)
 }
