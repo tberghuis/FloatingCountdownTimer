@@ -52,3 +52,7 @@ next task
 
 next task
   copy from service class
+
+test START_STICKY stopSelf()
+
+cull notes mylists, noteboat
