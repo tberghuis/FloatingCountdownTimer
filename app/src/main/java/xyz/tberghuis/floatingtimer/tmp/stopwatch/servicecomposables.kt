@@ -58,24 +58,6 @@ fun exit() {
 @Composable
 fun StartPauseButton() {
   Button(onClick = {
-    logd("start pause")
-
-    when (stopwatchState.running.value) {
-      false -> {
-        stopwatchState.running.value = true
-        Timer().scheduleAtFixedRate(timerTask {
-          logd("timertask")
-          if (stopwatchState.running.value) {
-            stopwatchState.timeElapsed.value++
-          } else {
-            cancel()
-          }
-        }, 1000, 1000)
-      }
-      true -> {
-        stopwatchState.running.value = false
-      }
-    }
   }) {
     Text("start pause")
   }

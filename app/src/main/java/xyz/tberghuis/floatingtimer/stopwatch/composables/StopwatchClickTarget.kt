@@ -8,10 +8,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.stopwatch.stopwatchState
+import java.util.*
+import kotlin.concurrent.timerTask
 
 
 @Composable
 fun StopwatchClickTarget() {
+
   Box(
     modifier = Modifier
       .background(Color.Red)
@@ -27,6 +31,22 @@ fun StopwatchClickTarget() {
 
 
 // todo move into another file
-fun onClickStopwatchClickTarget(){
-  logd("click target")
+fun onClickStopwatchClickTarget() {
+  logd("click target start pause")
+  when (stopwatchState.running.value) {
+    false -> {
+      stopwatchState.running.value = true
+      Timer().scheduleAtFixedRate(timerTask {
+        logd("timertask")
+        if (stopwatchState.running.value) {
+          stopwatchState.timeElapsed.value++
+        } else {
+          cancel()
+        }
+      }, 1000, 1000)
+    }
+    true -> {
+      stopwatchState.running.value = false
+    }
+  }
 }
