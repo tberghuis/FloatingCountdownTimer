@@ -9,7 +9,7 @@ import androidx.compose.ui.graphics.Color
 
 
 @Composable
-fun StopwatchClickTargetOverlay() {
+fun StopwatchClickTarget() {
   Box(
     modifier = Modifier
       .background(Color.Red)
