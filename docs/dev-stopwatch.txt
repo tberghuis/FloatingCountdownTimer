@@ -17,5 +17,3 @@ comment update in reddit thread
 
 git merge dev-stopwatch-1 to master
 push
-
-test on phone
