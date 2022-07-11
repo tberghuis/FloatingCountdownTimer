@@ -37,6 +37,9 @@ import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
 import kotlin.math.roundToInt
 
+private val overlayState = countdownOverlayState
+//private val overlayState = OverlayState()
+
 // todo remove player reference
 // use class AlarmComponent??? contains player, deals with AlarmManager etc
 @Composable
@@ -50,21 +53,21 @@ fun TimerOverlay(player: MediaPlayer) {
 
   Box(Modifier.onGloballyPositioned {
     logd("TimerOverlay onGloballyPositioned")
-    countdownOverlayState.screenWidthPx = it.size.width
-    countdownOverlayState.screenHeightPx = it.size.height
+    overlayState.screenWidthPx = it.size.width
+    overlayState.screenHeightPx = it.size.height
 
     // do this instead of service onConfigurationChanged
     // to reposition timer when screen rotate
     val density = context.resources.displayMetrics.density
     val timerSizePx = (TIMER_SIZE_DP * density).toInt()
-    val x = min(countdownOverlayState.timerOffset.x, countdownOverlayState.screenWidthPx - timerSizePx)
-    val y = min(countdownOverlayState.timerOffset.y, countdownOverlayState.screenHeightPx - timerSizePx)
-    countdownOverlayState.timerOffset = IntOffset(x, y)
+    val x = min(overlayState.timerOffset.x, overlayState.screenWidthPx - timerSizePx)
+    val y = min(overlayState.timerOffset.y, overlayState.screenHeightPx - timerSizePx)
+    overlayState.timerOffset = IntOffset(x, y)
   }) {
     Box(
       modifier = Modifier
         .offset {
-          countdownOverlayState.timerOffset
+          overlayState.timerOffset
         }
 //        .background(Color.Red)
         .size(TIMER_SIZE_DP.dp)
@@ -78,7 +81,7 @@ fun TimerOverlay(player: MediaPlayer) {
       TimeDisplay(countdownSeconds)
     }
 
-    if (countdownOverlayState.showTrash) {
+    if (overlayState.showTrash) {
       // don't really need to nest this column
       // doing for positioning simplicity
       // refactor later
@@ -87,7 +90,7 @@ fun TimerOverlay(player: MediaPlayer) {
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
       ) {
-        Trash(countdownOverlayState)
+        Trash(overlayState)
       }
     }
   }
