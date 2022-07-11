@@ -33,13 +33,9 @@ import xyz.tberghuis.floatingtimer.TimerStatePaused
 import xyz.tberghuis.floatingtimer.TimerStateRunning
 import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
-import xyz.tberghuis.floatingtimer.common.countdownOverlayState
 import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
 import kotlin.math.roundToInt
-
-//private val overlayState = countdownOverlayState
-//private val overlayState = OverlayState()
 
 // todo remove player reference
 // use class AlarmComponent??? contains player, deals with AlarmManager etc

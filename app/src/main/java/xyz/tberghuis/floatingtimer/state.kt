@@ -9,6 +9,7 @@ import xyz.tberghuis.floatingtimer.OverlayStateHolder.countdownSeconds
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.durationSeconds
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerState
 
+// TODO refactor to class
 object OverlayStateHolder {
   var durationSeconds: Int = 10
   var countdownSeconds by mutableStateOf<Int>(10)
