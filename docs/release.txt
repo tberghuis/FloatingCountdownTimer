@@ -6,3 +6,7 @@ test
 promote to production
 
 commit, merge, etc
+  git checkout master
+  git merge --squash dev-stopwatch-1
+  git commit
+  git push
