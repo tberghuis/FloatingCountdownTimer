@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchClickTargetOverlay
 import xyz.tberghuis.floatingtimer.tmp.stopwatch.StopwatchServiceOverlay
 
 
@@ -48,12 +49,7 @@ class StopwatchOverlayComponent(
       ), context
     )
     clickTargetOverlay.view.setContent {
-      Box(
-        modifier = Modifier
-          .background(Color.Red)
-      ) {
-        Text("hello click target")
-      }
+      StopwatchClickTargetOverlay()
     }
 
     return clickTargetOverlay
