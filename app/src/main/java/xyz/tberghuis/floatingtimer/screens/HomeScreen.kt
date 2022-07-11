@@ -51,6 +51,7 @@ import xyz.tberghuis.floatingtimer.INTENT_COMMAND_CREATE_TIMER
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
 import xyz.tberghuis.floatingtimer.countdown.CreateCountdownCard
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.stopwatch.composables.CreateStopwatchCard
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 import java.lang.NumberFormatException
 
@@ -127,11 +128,8 @@ fun HomeScreenContent() {
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
-
-
     CreateCountdownCard()
-
-
+    CreateStopwatchCard()
   }
 }
 
