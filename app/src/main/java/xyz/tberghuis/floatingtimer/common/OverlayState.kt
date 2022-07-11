@@ -18,5 +18,5 @@ class OverlayState {
   var screenHeightPx = Int.MAX_VALUE
 }
 
-val stopwatchOverlayState = OverlayState()
+//val stopwatchOverlayState = OverlayState()
 val countdownOverlayState = OverlayState()

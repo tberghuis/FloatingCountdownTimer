@@ -17,7 +17,6 @@ import java.util.*
 import kotlin.concurrent.timerTask
 import kotlin.math.roundToInt
 
-
 @Composable
 fun StopwatchClickTarget() {
 
@@ -27,30 +26,14 @@ fun StopwatchClickTarget() {
       .pointerInput(Unit) {
         detectDragGestures(onDragStart = {
           logd("clicktarget onDragStart")
-//          showTrash = true
+
         },
           onDrag = { change, dragAmount ->
-            change.consumeAllChanges()
-            val dragAmountIntOffset =
-              IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
-//            val _timerOffset = timerOffset + dragAmountIntOffset
-//            var x = max(_timerOffset.x, 0)
-//            x = min(x, screenWidthPx - timerSizePx)
-//            var y = max(_timerOffset.y, 0)
-//            y = min(y, screenHeightPx - timerSizePx)
-//            timerOffset = IntOffset(x, y)
+
           },
           onDragEnd = {
             logd("onDragEnd")
-//            showTrash = false
-//            if (isTimerHoverTrash) {
-//              endService()
-//              return@detectDragGestures
-//            }
-//            clickTargetOverlay.params.x = timerOffset.x
-//            clickTargetOverlay.params.y = timerOffset.y
-//            logd("onDragEnd x ${timerOffset.x}")
-//            windowManager.updateViewLayout(clickTargetOverlay.view, clickTargetOverlay.params)
+
           }
         )
       }
