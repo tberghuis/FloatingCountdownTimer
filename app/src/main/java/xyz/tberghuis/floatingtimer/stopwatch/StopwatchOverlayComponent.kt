@@ -52,7 +52,7 @@ class StopwatchOverlayComponent(
       ), context
     )
     clickTargetOverlay.view.setContent {
-      StopwatchClickTarget()
+      StopwatchClickTarget(overlayState)
     }
 
     return clickTargetOverlay

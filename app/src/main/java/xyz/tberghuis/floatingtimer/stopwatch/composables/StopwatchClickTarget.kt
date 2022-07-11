@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
+import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchState
 import java.util.*
@@ -18,7 +19,7 @@ import kotlin.concurrent.timerTask
 import kotlin.math.roundToInt
 
 @Composable
-fun StopwatchClickTarget() {
+fun StopwatchClickTarget(overlayState: OverlayState) {
 
   Box(
     modifier = Modifier
@@ -26,7 +27,7 @@ fun StopwatchClickTarget() {
       .pointerInput(Unit) {
         detectDragGestures(onDragStart = {
           logd("clicktarget onDragStart")
-
+          overlayState.showTrash = true
         },
           onDrag = { change, dragAmount ->
 
