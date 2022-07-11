@@ -6,6 +6,9 @@ import xyz.tberghuis.floatingtimer.logd
 // todo move to a usecase class, inject with hilt/dagger
 fun stopwatchExit() {
   logd("stopwatchExit")
+  // fix, this makes timertask cancel
+  stopwatchState.resetStopwatchState()
+
   stopwatchServiceHolder.stopwatchOverlayComponent.removeOverlays()
 
   // todo, here decides to stopForground if no overlays
