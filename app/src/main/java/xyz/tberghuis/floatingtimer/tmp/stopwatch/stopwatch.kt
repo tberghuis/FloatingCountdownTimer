@@ -22,7 +22,7 @@ fun StopwatchDemo() {
     Text("hello stopwatch")
     Button(onClick = {
       logd("start stopwatch")
-      startStopwatchService(context)
+//      startStopwatchService(context)
 
     }) {
       Text("start stopwatch")
@@ -39,10 +39,3 @@ fun StopwatchDemo() {
 }
 
 
-fun startStopwatchService(context: Context) {
-  val intent = Intent(context.applicationContext, StopwatchService::class.java)
-
-  intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_CREATE_STOPWATCH)
-
-  context.startForegroundService(intent)
-}
