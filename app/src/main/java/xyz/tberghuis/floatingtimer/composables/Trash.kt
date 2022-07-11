@@ -30,10 +30,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import kotlinx.coroutines.flow.collect
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.isTimerHoverTrash
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerOffset
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
+import xyz.tberghuis.floatingtimer.common.countdownOverlayState
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
@@ -81,14 +80,14 @@ fun Trash() {
     snapshotFlow {
       isTimerDragHoveringTrash.value
     }.collect {
-      isTimerHoverTrash = it
+      countdownOverlayState.isTimerHoverTrash = it
     }
   }
 }
 
 fun calcTimerIsHoverTrash(timerSizePx: Float, trashRect: Rect): Boolean {
-  val timerCenterX = timerOffset.x + (timerSizePx / 2)
-  val timerCenterY = timerOffset.y + (timerSizePx / 2)
+  val timerCenterX = countdownOverlayState.timerOffset.x + (timerSizePx / 2)
+  val timerCenterY = countdownOverlayState.timerOffset.y + (timerSizePx / 2)
   if (
     timerCenterX < trashRect.left ||
     timerCenterX > trashRect.right ||

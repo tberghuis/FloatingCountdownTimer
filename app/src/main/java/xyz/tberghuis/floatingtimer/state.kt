@@ -11,13 +11,13 @@ import xyz.tberghuis.floatingtimer.OverlayStateHolder.durationSeconds
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerState
 
 object OverlayStateHolder {
-  var timerOffset by mutableStateOf(IntOffset.Zero)
-  var showTrash by mutableStateOf(false)
-  var isTimerHoverTrash = false
+//  var timerOffset by mutableStateOf(IntOffset.Zero)
+//  var showTrash by mutableStateOf(false)
+//  var isTimerHoverTrash = false
 
   // this is a hack
-  var screenWidthPx = Int.MAX_VALUE
-  var screenHeightPx = Int.MAX_VALUE
+//  var screenWidthPx = Int.MAX_VALUE
+//  var screenHeightPx = Int.MAX_VALUE
 
   var durationSeconds: Int = 10
   var countdownSeconds by mutableStateOf<Int>(10)

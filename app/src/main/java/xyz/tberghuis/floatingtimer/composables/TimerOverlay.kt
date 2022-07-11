@@ -25,10 +25,6 @@ import androidx.compose.ui.zIndex
 import kotlinx.coroutines.flow.collectLatest
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.countdownSeconds
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.durationSeconds
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.screenHeightPx
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.screenWidthPx
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.showTrash
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerOffset
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerState
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
@@ -36,6 +32,7 @@ import xyz.tberghuis.floatingtimer.TimerStateFinished
 import xyz.tberghuis.floatingtimer.TimerStatePaused
 import xyz.tberghuis.floatingtimer.TimerStateRunning
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
+import xyz.tberghuis.floatingtimer.common.countdownOverlayState
 import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -53,21 +50,21 @@ fun TimerOverlay(player: MediaPlayer) {
 
   Box(Modifier.onGloballyPositioned {
     logd("TimerOverlay onGloballyPositioned")
-    screenWidthPx = it.size.width
-    screenHeightPx = it.size.height
+    countdownOverlayState.screenWidthPx = it.size.width
+    countdownOverlayState.screenHeightPx = it.size.height
 
     // do this instead of service onConfigurationChanged
     // to reposition timer when screen rotate
     val density = context.resources.displayMetrics.density
     val timerSizePx = (TIMER_SIZE_DP * density).toInt()
-    val x = min(timerOffset.x, screenWidthPx - timerSizePx)
-    val y = min(timerOffset.y, screenHeightPx - timerSizePx)
-    timerOffset = IntOffset(x, y)
+    val x = min(countdownOverlayState.timerOffset.x, countdownOverlayState.screenWidthPx - timerSizePx)
+    val y = min(countdownOverlayState.timerOffset.y, countdownOverlayState.screenHeightPx - timerSizePx)
+    countdownOverlayState.timerOffset = IntOffset(x, y)
   }) {
     Box(
       modifier = Modifier
         .offset {
-          timerOffset
+          countdownOverlayState.timerOffset
         }
 //        .background(Color.Red)
         .size(TIMER_SIZE_DP.dp)
@@ -81,7 +78,7 @@ fun TimerOverlay(player: MediaPlayer) {
       TimeDisplay(countdownSeconds)
     }
 
-    if (showTrash) {
+    if (countdownOverlayState.showTrash) {
       // don't really need to nest this column
       // doing for positioning simplicity
       // refactor later

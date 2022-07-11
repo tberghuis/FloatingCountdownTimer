@@ -27,11 +27,7 @@ class StopwatchState {
 val stopwatchState = StopwatchState()
 
 
-class OverlayState {
-  var timerOffset by mutableStateOf(IntOffset.Zero)
-}
 
-val stopwatchOverlayState = OverlayState()
 
 
 // todo fn resetStopwatchState
