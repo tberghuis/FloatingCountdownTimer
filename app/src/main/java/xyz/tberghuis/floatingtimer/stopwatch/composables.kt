@@ -26,23 +26,34 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.layout.onGloballyPositioned
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import kotlinx.coroutines.flow.collect
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
+import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 
 @Composable
-fun StopwatchOverlay() {
+fun StopwatchOverlay(overlayState: OverlayState) {
+
   Box(
-    modifier = Modifier
-      .size(TIMER_SIZE_DP.dp)
-      .background(Color.Yellow)
-      .padding(PROGRESS_ARC_WIDTH / 2),
-    contentAlignment = Alignment.Center
+    Modifier.onGloballyPositioned {
+
+    }
   ) {
-    BorderArc()
-    TimeDisplay(stopwatchState.timeElapsed.value)
+    Box(
+      modifier = Modifier
+        .size(TIMER_SIZE_DP.dp)
+        .background(Color.Yellow)
+        .padding(PROGRESS_ARC_WIDTH / 2),
+      contentAlignment = Alignment.Center
+    ) {
+      BorderArc()
+      TimeDisplay(stopwatchState.timeElapsed.value)
+    }
+
   }
+
 }
 
 @Composable

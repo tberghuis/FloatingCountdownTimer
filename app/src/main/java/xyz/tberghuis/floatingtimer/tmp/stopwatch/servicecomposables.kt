@@ -16,6 +16,8 @@ import xyz.tberghuis.floatingtimer.stopwatch.stopwatchState
 import java.util.*
 import kotlin.concurrent.timerTask
 
+// TODO delete this file
+
 // todo inject ExitStopwatch usecase
 @Composable
 fun StopwatchServiceOverlay(
@@ -27,7 +29,7 @@ fun StopwatchServiceOverlay(
     verticalArrangement = Arrangement.Center
   ) {
 
-    StopwatchOverlay()
+//    StopwatchOverlay()
     Button(onClick = {
       logd("exit composable")
       exit()

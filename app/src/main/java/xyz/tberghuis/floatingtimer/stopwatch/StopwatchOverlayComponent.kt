@@ -76,7 +76,8 @@ class StopwatchOverlayComponent(
       fullscreenOverlay.params.alpha = inputManager.maximumObscuringOpacityForTouch
     }
     fullscreenOverlay.view.setContent {
-      StopwatchServiceOverlay()
+//      StopwatchServiceOverlay()
+      StopwatchOverlay(overlayState)
     }
     return fullscreenOverlay
   }
