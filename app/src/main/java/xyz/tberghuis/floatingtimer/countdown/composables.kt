@@ -6,10 +6,12 @@ import android.provider.Settings
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
@@ -34,67 +36,71 @@ fun CreateCountdownCard() {
   val focusManager = LocalFocusManager.current
   val context = LocalContext.current
 
-  Column {
-    Row {
-      TextField(
-        modifier = Modifier
-          .width(100.dp)
-          .onFocusSelectAll(vm.minutes),
-        label = { Text("minutes") },
-        value = vm.minutes.value,
-        onValueChange = { vm.minutes.value = it },
-        keyboardOptions = KeyboardOptions(
-          keyboardType = KeyboardType.Number
-        ),
-        singleLine = true
-      )
-      Spacer(Modifier.width(20.dp))
-      TextField(
-        modifier = Modifier
-          .width(100.dp)
+  Card(
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(15.dp),
+    elevation = 10.dp
+  ) {
+    Column {
+      Row {
+        TextField(
+          modifier = Modifier
+            .width(100.dp)
+            .onFocusSelectAll(vm.minutes),
+          label = { Text("minutes") },
+          value = vm.minutes.value,
+          onValueChange = { vm.minutes.value = it },
+          keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Number
+          ),
+          singleLine = true
+        )
+        Spacer(Modifier.width(20.dp))
+        TextField(
+          modifier = Modifier
+            .width(100.dp)
 //          .padding(vertical = 20.dp)
-          .onFocusSelectAll(vm.seconds),
-        label = { Text("seconds") },
-        value = vm.seconds.value,
-        onValueChange = { vm.seconds.value = it },
-        keyboardOptions = KeyboardOptions(
-          keyboardType = KeyboardType.Number
-        ),
-        singleLine = true
-      )
+            .onFocusSelectAll(vm.seconds),
+          label = { Text("seconds") },
+          value = vm.seconds.value,
+          onValueChange = { vm.seconds.value = it },
+          keyboardOptions = KeyboardOptions(
+            keyboardType = KeyboardType.Number
+          ),
+          singleLine = true
+        )
+      }
+
+      Button(onClick = {
+        logd("create")
+        focusManager.clearFocus()
+        if (!Settings.canDrawOverlays(context)) {
+          vm.showGrantOverlayDialog = true
+          return@Button
+        }
+        logd("after canDrawOverlays")
+        val min: Int
+        val sec: Int
+        try {
+          min = vm.minutes.value.text.toInt()
+          sec = vm.seconds.value.text.toInt()
+        } catch (e: NumberFormatException) {
+          // todo show dialog
+          return@Button
+        }
+        val totalSecs = min * 60 + sec
+        if (totalSecs == 0) {
+          // todo show dialog
+          return@Button
+        }
+        createTimer(context, totalSecs)
+      }) {
+        Text("create")
+      }
     }
-
-    Button(onClick = {
-      logd("create")
-      focusManager.clearFocus()
-      if (!Settings.canDrawOverlays(context)) {
-        vm.showGrantOverlayDialog = true
-        return@Button
-      }
-      logd("after canDrawOverlays")
-      val min: Int
-      val sec: Int
-      try {
-        min = vm.minutes.value.text.toInt()
-        sec = vm.seconds.value.text.toInt()
-      } catch (e: NumberFormatException) {
-        // todo show dialog
-        return@Button
-      }
-      val totalSecs = min * 60 + sec
-      if (totalSecs == 0) {
-        // todo show dialog
-        return@Button
-      }
-      createTimer(context, totalSecs)
-    }) {
-      Text("create")
-    }
-
-
   }
 }
-
 
 fun createTimer(context: Context, duration: Int) {
   val intent = Intent(context.applicationContext, ForegroundService::class.java)
