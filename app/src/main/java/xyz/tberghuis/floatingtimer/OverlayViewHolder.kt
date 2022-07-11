@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewTreeViewModelStoreOwner
 import androidx.savedstate.SavedStateRegistry
 import androidx.savedstate.SavedStateRegistryController
 import androidx.savedstate.SavedStateRegistryOwner
-import androidx.savedstate.ViewTreeSavedStateRegistryOwner
+import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -42,7 +42,8 @@ fun composeViewConfigure(composeView: ComposeView) {
   lifecycleOwner.performRestore(null)
   lifecycleOwner.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
   ViewTreeLifecycleOwner.set(composeView, lifecycleOwner)
-  ViewTreeSavedStateRegistryOwner.set(composeView, lifecycleOwner)
+//  ViewTreeSavedStateRegistryOwner.set(composeView, lifecycleOwner)
+  composeView.setViewTreeSavedStateRegistryOwner(lifecycleOwner)
 
   val viewModelStore = ViewModelStore()
   ViewTreeViewModelStoreOwner.set(composeView) { viewModelStore }
@@ -69,6 +70,9 @@ internal class MyLifecycleOwner : SavedStateRegistryOwner {
     return mLifecycleRegistry
   }
 
+  override val savedStateRegistry: SavedStateRegistry
+    get() = mSavedStateRegistryController.savedStateRegistry
+
   fun setCurrentState(state: Lifecycle.State) {
     mLifecycleRegistry.currentState = state
   }
@@ -77,9 +81,9 @@ internal class MyLifecycleOwner : SavedStateRegistryOwner {
     mLifecycleRegistry.handleLifecycleEvent(event)
   }
 
-  override fun getSavedStateRegistry(): SavedStateRegistry {
-    return mSavedStateRegistryController.savedStateRegistry
-  }
+//  override fun getSavedStateRegistry(): SavedStateRegistry {
+//    return mSavedStateRegistryController.savedStateRegistry
+//  }
 
   fun performRestore(savedState: Bundle?) {
     mSavedStateRegistryController.performRestore(savedState)

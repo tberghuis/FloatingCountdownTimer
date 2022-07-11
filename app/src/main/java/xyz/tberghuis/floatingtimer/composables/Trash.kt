@@ -2,14 +2,11 @@ package xyz.tberghuis.floatingtimer.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -23,21 +20,18 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import kotlinx.coroutines.flow.collect
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.isTimerHoverTrash
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerOffset
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
+import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
-fun Trash() {
+fun Trash(overlayState: OverlayState) {
   val context = LocalContext.current
   val timerSizePx = remember {
     val density = context.resources.displayMetrics.density
@@ -46,7 +40,7 @@ fun Trash() {
   var trashRect by remember { mutableStateOf(Rect.Zero) }
   val isTimerDragHoveringTrash = remember {
     derivedStateOf {
-      calcTimerIsHoverTrash(timerSizePx, trashRect)
+      calcTimerIsHoverTrash(overlayState, timerSizePx, trashRect)
     }
   }
   val iconTint by remember {
@@ -81,14 +75,18 @@ fun Trash() {
     snapshotFlow {
       isTimerDragHoveringTrash.value
     }.collect {
-      isTimerHoverTrash = it
+      overlayState.isTimerHoverTrash = it
     }
   }
 }
 
-fun calcTimerIsHoverTrash(timerSizePx: Float, trashRect: Rect): Boolean {
-  val timerCenterX = timerOffset.x + (timerSizePx / 2)
-  val timerCenterY = timerOffset.y + (timerSizePx / 2)
+fun calcTimerIsHoverTrash(
+  overlayState: OverlayState,
+  timerSizePx: Float,
+  trashRect: Rect
+): Boolean {
+  val timerCenterX = overlayState.timerOffset.x + (timerSizePx / 2)
+  val timerCenterY = overlayState.timerOffset.y + (timerSizePx / 2)
   if (
     timerCenterX < trashRect.left ||
     timerCenterX > trashRect.right ||

@@ -12,6 +12,8 @@ const val INTENT_COMMAND_COUNTDOWN_COMPLETE = "command_countdown_complete"
 const val INTENT_COMMAND_EXIT = "command_exit"
 const val EXTRA_TIMER_DURATION = "extra_timer_duration"
 
+const val INTENT_COMMAND_CREATE_STOPWATCH = "command_create_stopwatch"
+
 val PROGRESS_ARC_WIDTH = 8.dp
 
 const val FOREGROUND_SERVICE_NOTIFICATION_ID = 1
@@ -19,6 +21,13 @@ const val FOREGROUND_SERVICE_NOTIFICATION_ID = 1
 const val CHANNEL_DEFAULT_ID = "default_channel"
 const val CHANNEL_DEFAULT_NAME = "default channel"
 const val CHANNEL_DEFAULT_DESCRIPTION = "default channel description"
+
+const val SERVICE_STOPWATCH_NOTIFICATION_ID = 2
+const val CHANNEL_STOPWATCH_ID = "stopwatch_channel"
+const val CHANNEL_STOPWATCH_NAME = "stopwatch"
+const val CHANNEL_STOPWATCH_DESCRIPTION = "stopwatch channel"
+
+
 
 const val REQUEST_CODE_PENDING_ALARM = 0
 const val REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION = 1

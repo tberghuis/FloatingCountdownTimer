@@ -11,8 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.tberghuis.floatingtimer.screens.HomeScreen
-import xyz.tberghuis.floatingtimer.tmp.FabDemo
-import xyz.tberghuis.floatingtimer.tmp.GradientDemo
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 @AndroidEntryPoint
@@ -29,7 +27,6 @@ class MainActivity : ComponentActivity() {
           color = MaterialTheme.colors.background
         ) {
           HomeScreen()
-//          FabDemo()
         }
       }
     }

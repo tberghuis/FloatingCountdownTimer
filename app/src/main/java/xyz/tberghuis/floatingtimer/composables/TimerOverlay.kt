@@ -25,16 +25,14 @@ import androidx.compose.ui.zIndex
 import kotlinx.coroutines.flow.collectLatest
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.countdownSeconds
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.durationSeconds
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.screenHeightPx
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.screenWidthPx
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.showTrash
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerOffset
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerState
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.TimerStateFinished
 import xyz.tberghuis.floatingtimer.TimerStatePaused
 import xyz.tberghuis.floatingtimer.TimerStateRunning
+import xyz.tberghuis.floatingtimer.common.OverlayState
+import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -42,7 +40,7 @@ import kotlin.math.roundToInt
 // todo remove player reference
 // use class AlarmComponent??? contains player, deals with AlarmManager etc
 @Composable
-fun TimerOverlay(player: MediaPlayer) {
+fun TimerOverlay(overlayState: OverlayState, player: MediaPlayer) {
 
   // should i use derivedStateOf ???
   // i don't understand the benefit
@@ -52,35 +50,34 @@ fun TimerOverlay(player: MediaPlayer) {
 
   Box(Modifier.onGloballyPositioned {
     logd("TimerOverlay onGloballyPositioned")
-    screenWidthPx = it.size.width
-    screenHeightPx = it.size.height
+    overlayState.screenWidthPx = it.size.width
+    overlayState.screenHeightPx = it.size.height
 
     // do this instead of service onConfigurationChanged
     // to reposition timer when screen rotate
     val density = context.resources.displayMetrics.density
     val timerSizePx = (TIMER_SIZE_DP * density).toInt()
-    val x = min(timerOffset.x, screenWidthPx - timerSizePx)
-    val y = min(timerOffset.y, screenHeightPx - timerSizePx)
-    timerOffset = IntOffset(x, y)
+    val x = min(overlayState.timerOffset.x, overlayState.screenWidthPx - timerSizePx)
+    val y = min(overlayState.timerOffset.y, overlayState.screenHeightPx - timerSizePx)
+    overlayState.timerOffset = IntOffset(x, y)
   }) {
     Box(
       modifier = Modifier
         .offset {
-          timerOffset
+          overlayState.timerOffset
         }
 //        .background(Color.Red)
         .size(TIMER_SIZE_DP.dp)
         .padding(PROGRESS_ARC_WIDTH / 2)
-        .zIndex(1f)
-      ,
+        .zIndex(1f),
       contentAlignment = Alignment.Center
     ) {
 
       ProgressArc(timeLeftFraction)
-      TimerDisplay()
+      TimeDisplay(countdownSeconds)
     }
 
-    if (showTrash) {
+    if (overlayState.showTrash) {
       // don't really need to nest this column
       // doing for positioning simplicity
       // refactor later
@@ -89,7 +86,7 @@ fun TimerOverlay(player: MediaPlayer) {
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
       ) {
-        Trash()
+        Trash(overlayState)
       }
     }
   }
