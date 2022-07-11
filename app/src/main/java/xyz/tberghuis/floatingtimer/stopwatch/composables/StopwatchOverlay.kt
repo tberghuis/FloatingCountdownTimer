@@ -62,7 +62,7 @@ fun StopwatchOverlay(overlayState: OverlayState) {
           overlayState.timerOffset
         }
         .size(TIMER_SIZE_DP.dp)
-        .background(Color.Yellow)
+//        .background(Color.Yellow)
         .padding(PROGRESS_ARC_WIDTH / 2),
       contentAlignment = Alignment.Center
     ) {
