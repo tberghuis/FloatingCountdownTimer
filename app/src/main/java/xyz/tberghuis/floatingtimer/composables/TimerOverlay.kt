@@ -87,7 +87,7 @@ fun TimerOverlay(player: MediaPlayer) {
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
       ) {
-        Trash()
+        Trash(countdownOverlayState)
       }
     }
   }

@@ -17,12 +17,16 @@ import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.pendingAlarm
+import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.common.countdownOverlayState
 import xyz.tberghuis.floatingtimer.composables.TimerOverlay
 import xyz.tberghuis.floatingtimer.events.onClickClickTargetOverlay
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
+
+private val overlayState = countdownOverlayState
+//val overlayState = OverlayState()
 
 class OverlayComponent(private val context: Context, private val stopService: () -> Unit) {
   // should i move this into service??? meh
@@ -110,7 +114,7 @@ class OverlayComponent(private val context: Context, private val stopService: ()
     player.pause()
     pendingAlarm?.cancel()
 
-    countdownOverlayState.timerOffset = IntOffset.Zero
+    overlayState.timerOffset = IntOffset.Zero
     clickTargetOverlay.params.x = 0
     clickTargetOverlay.params.y = 0
 
@@ -131,34 +135,34 @@ class OverlayComponent(private val context: Context, private val stopService: ()
           .pointerInput(Unit) {
             detectDragGestures(onDragStart = {
               logd("clicktarget onDragStart")
-              countdownOverlayState.showTrash = true
+              overlayState.showTrash = true
             },
               onDrag = { change, dragAmount ->
                 change.consumeAllChanges()
                 val dragAmountIntOffset =
                   IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
-                val _timerOffset = countdownOverlayState.timerOffset + dragAmountIntOffset
+                val _timerOffset = overlayState.timerOffset + dragAmountIntOffset
                 var x = max(_timerOffset.x, 0)
-                x = min(x, countdownOverlayState.screenWidthPx - timerSizePx)
+                x = min(x, overlayState.screenWidthPx - timerSizePx)
                 var y = max(_timerOffset.y, 0)
-                y = min(y, countdownOverlayState.screenHeightPx - timerSizePx)
-                countdownOverlayState.timerOffset = IntOffset(x, y)
+                y = min(y, overlayState.screenHeightPx - timerSizePx)
+                overlayState.timerOffset = IntOffset(x, y)
               },
               onDragEnd = {
 
                 logd("onDragEnd")
 
-                countdownOverlayState.showTrash = false
+                overlayState.showTrash = false
 
                 // todo calc hover trash
-                if (countdownOverlayState.isTimerHoverTrash) {
+                if (overlayState.isTimerHoverTrash) {
                   endService()
                   return@detectDragGestures
                 }
 
-                clickTargetOverlay.params.x = countdownOverlayState.timerOffset.x
-                clickTargetOverlay.params.y = countdownOverlayState.timerOffset.y
-                logd("onDragEnd x ${countdownOverlayState.timerOffset.x}")
+                clickTargetOverlay.params.x = overlayState.timerOffset.x
+                clickTargetOverlay.params.y = overlayState.timerOffset.y
+                logd("onDragEnd x ${overlayState.timerOffset.x}")
                 windowManager.updateViewLayout(clickTargetOverlay.view, clickTargetOverlay.params)
               }
             )

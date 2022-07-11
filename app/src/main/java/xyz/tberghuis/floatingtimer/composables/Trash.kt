@@ -33,11 +33,10 @@ import kotlinx.coroutines.flow.collect
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayState
-import xyz.tberghuis.floatingtimer.common.countdownOverlayState
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
-fun Trash(overlayState: OverlayState = countdownOverlayState) {
+fun Trash(overlayState: OverlayState) {
   val context = LocalContext.current
   val timerSizePx = remember {
     val density = context.resources.displayMetrics.density
