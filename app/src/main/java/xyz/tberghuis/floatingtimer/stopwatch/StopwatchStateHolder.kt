@@ -22,12 +22,16 @@ class StopwatchState {
   val timeElapsed = mutableStateOf(0)
 
   val running = mutableStateOf(false)
+
+  fun resetStopwatchState() {
+    timeElapsed.value = 0
+    running.value = false
+  }
+
 }
 
+// todo move to member of StopwatchOverlayComponent
 val stopwatchState = StopwatchState()
-
-
-
 
 
 // todo fn resetStopwatchState
