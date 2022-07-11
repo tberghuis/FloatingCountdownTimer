@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.stopwatch.stopwatchExit
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchServiceHolder
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchState
 import java.util.*
@@ -52,11 +53,10 @@ fun StopwatchClickTarget(overlayState: OverlayState) {
             logd("onDragEnd")
             overlayState.showTrash = false
 
-            // todo calc hover trash
-//            if (overlayState.isTimerHoverTrash) {
-//              endService()
-//              return@detectDragGestures
-//            }
+            if (overlayState.isTimerHoverTrash) {
+              stopwatchExit()
+              return@detectDragGestures
+            }
 
             // doitwrong
             val cto = stopwatchServiceHolder.stopwatchOverlayComponent.clickTargetOverlay

@@ -46,7 +46,7 @@ class StopwatchService : Service() {
 
       when (command) {
         INTENT_COMMAND_CREATE_STOPWATCH -> {
-          stopwatchOverlayComponent.showOverlay()
+          stopwatchOverlayComponent.showOverlays()
 
         }
       }

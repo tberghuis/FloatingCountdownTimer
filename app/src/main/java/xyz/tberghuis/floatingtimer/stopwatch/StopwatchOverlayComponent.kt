@@ -83,9 +83,14 @@ class StopwatchOverlayComponent(
     return fullscreenOverlay
   }
 
-  fun showOverlay() {
+  fun showOverlays() {
     // todo reset state
     windowManager.addView(clickTargetOverlay.view, clickTargetOverlay.params)
     windowManager.addView(fullscreenOverlay.view, fullscreenOverlay.params)
+  }
+
+  fun removeOverlays() {
+    windowManager.removeView(clickTargetOverlay.view)
+    windowManager.removeView(fullscreenOverlay.view)
   }
 }

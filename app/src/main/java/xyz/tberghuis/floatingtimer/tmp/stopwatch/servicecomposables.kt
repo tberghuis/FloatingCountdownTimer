@@ -31,24 +31,10 @@ fun StopwatchServiceOverlay(
 //    StopwatchOverlay()
     Button(onClick = {
       logd("exit composable")
-      exit()
+//      exit()
     }) {
       Text("exit")
     }
   }
 }
 
-// doitwrong
-// todo move to a usecase class, inject with hilt/dagger
-fun exit() {
-  logd("exit fn")
-  val view = stopwatchServiceHolder.stopwatchOverlayComponent.fullscreenOverlay.view
-  stopwatchServiceHolder.stopwatchOverlayComponent.windowManager.removeView(view)
-
-  // todo, here decides to stopForground if no overlays
-//  stopwatchServiceHolder.exitStopwatch()
-
-
-  // doitwrong
-  stopwatchServiceHolder.stopSelf()
-}
