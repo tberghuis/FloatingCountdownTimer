@@ -1,18 +1,11 @@
 
 change app name "countdown timer"
-change repo name -- nah
+
 update play store screenshots
   description
 
-release
 ##########################
 
-update github readme
-  screenshot
-  description
-  app name change
-
-release play store
 comment update in reddit thread
 
 git merge dev-stopwatch-1 to master
