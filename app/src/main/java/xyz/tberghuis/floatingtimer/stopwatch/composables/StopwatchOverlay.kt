@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
@@ -27,23 +28,37 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.IntOffset
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import kotlinx.coroutines.flow.collect
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
+import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchState
+import kotlin.math.min
 
 @Composable
 fun StopwatchOverlay(overlayState: OverlayState) {
+  val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
 
   Box(
     Modifier.onGloballyPositioned {
-
+      logd("TimerOverlay onGloballyPositioned")
+      overlayState.screenWidthPx = it.size.width
+      overlayState.screenHeightPx = it.size.height
+      val x = min(overlayState.timerOffset.x, overlayState.screenWidthPx - timerSizePx)
+      val y = min(overlayState.timerOffset.y, overlayState.screenHeightPx - timerSizePx)
+      overlayState.timerOffset = IntOffset(x, y)
     }
   ) {
     Box(
       modifier = Modifier
+        .offset {
+          overlayState.timerOffset
+        }
         .size(TIMER_SIZE_DP.dp)
         .background(Color.Yellow)
         .padding(PROGRESS_ARC_WIDTH / 2),
