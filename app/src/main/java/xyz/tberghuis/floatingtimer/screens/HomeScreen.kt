@@ -63,7 +63,7 @@ fun HomeScreen() {
   Scaffold(
     topBar = {
       TopAppBar(title = {
-        Text("Floating Countdown Timer")
+        Text("Floating Timer")
       })
     },
     content = {
@@ -101,7 +101,7 @@ fun HomeScreen() {
         Text(buildAnnotatedString {
           append("Please enable \"Allow display over other apps\" permission for application ")
           withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-            append("Floating Countdown Timer")
+            append("Floating Timer")
           }
         })
       }
