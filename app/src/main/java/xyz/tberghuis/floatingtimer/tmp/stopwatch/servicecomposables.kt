@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.stopwatch.StopwatchOverlay
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchServiceHolder
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchState
 import java.util.*

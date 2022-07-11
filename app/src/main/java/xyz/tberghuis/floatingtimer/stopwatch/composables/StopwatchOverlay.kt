@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.stopwatch
+package xyz.tberghuis.floatingtimer.stopwatch.composables
 
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
@@ -32,6 +32,7 @@ import kotlinx.coroutines.flow.collect
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
+import xyz.tberghuis.floatingtimer.stopwatch.stopwatchState
 
 @Composable
 fun StopwatchOverlay(overlayState: OverlayState) {
