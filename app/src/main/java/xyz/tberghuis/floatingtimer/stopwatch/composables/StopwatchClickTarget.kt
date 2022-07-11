@@ -10,16 +10,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
+import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchState
 import java.util.*
 import kotlin.concurrent.timerTask
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.roundToInt
 
 @Composable
 fun StopwatchClickTarget(overlayState: OverlayState) {
+
+  val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
 
   Box(
     modifier = Modifier
@@ -30,7 +37,15 @@ fun StopwatchClickTarget(overlayState: OverlayState) {
           overlayState.showTrash = true
         },
           onDrag = { change, dragAmount ->
-
+            change.consumeAllChanges()
+            val dragAmountIntOffset =
+              IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
+            val _timerOffset = overlayState.timerOffset + dragAmountIntOffset
+            var x = max(_timerOffset.x, 0)
+            x = min(x, overlayState.screenWidthPx - timerSizePx)
+            var y = max(_timerOffset.y, 0)
+            y = min(y, overlayState.screenHeightPx - timerSizePx)
+            overlayState.timerOffset = IntOffset(x, y)
           },
           onDragEnd = {
             logd("onDragEnd")

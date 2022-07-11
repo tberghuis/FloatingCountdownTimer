@@ -27,8 +27,8 @@ class MainActivity : ComponentActivity() {
             .background(Color.White),
           color = MaterialTheme.colors.background
         ) {
-          HomeScreen()
-//          StopwatchDemo()
+//          HomeScreen()
+          StopwatchDemo()
         }
       }
     }
