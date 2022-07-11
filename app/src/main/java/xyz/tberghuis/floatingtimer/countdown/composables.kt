@@ -15,11 +15,13 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import xyz.tberghuis.floatingtimer.EXTRA_TIMER_DURATION
 import xyz.tberghuis.floatingtimer.ForegroundService
@@ -42,8 +44,16 @@ fun CreateCountdownCard() {
       .padding(15.dp),
     elevation = 10.dp
   ) {
-    Column {
-      Row {
+    Column(
+      modifier = Modifier
+        .padding(10.dp),
+      horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+      Text("Countdown", fontSize = 20.sp)
+      Row(
+        modifier = Modifier
+          .padding(10.dp)
+      ) {
         TextField(
           modifier = Modifier
             .width(100.dp)
@@ -96,7 +106,7 @@ fun CreateCountdownCard() {
         }
         createTimer(context, totalSecs)
       }) {
-        Text("create")
+        Text("Create")
       }
     }
   }
