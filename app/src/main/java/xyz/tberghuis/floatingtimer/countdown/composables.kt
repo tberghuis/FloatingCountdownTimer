@@ -5,6 +5,7 @@ import android.content.Intent
 import android.provider.Settings
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
@@ -47,13 +48,11 @@ fun CreateCountdownCard() {
         ),
         singleLine = true
       )
-    }
-
-    Row {
+      Spacer(Modifier.width(20.dp))
       TextField(
         modifier = Modifier
           .width(100.dp)
-          .padding(vertical = 20.dp)
+//          .padding(vertical = 20.dp)
           .onFocusSelectAll(vm.seconds),
         label = { Text("seconds") },
         value = vm.seconds.value,
