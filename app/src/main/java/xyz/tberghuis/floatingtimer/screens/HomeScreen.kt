@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
@@ -111,14 +113,13 @@ fun HomeScreen() {
 
 @Composable
 fun HomeScreenContent() {
-  val vm: HomeViewModel = hiltViewModel()
-  val context = LocalContext.current
   val focusManager = LocalFocusManager.current
 
   Column(
     modifier = Modifier
 //      .background(Color.Yellow)
       .fillMaxSize()
+      .verticalScroll(rememberScrollState())
       .pointerInput(Unit) {
         detectTapGestures(onTap = {
           focusManager.clearFocus()
