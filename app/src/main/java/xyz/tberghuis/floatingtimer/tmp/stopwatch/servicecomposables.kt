@@ -27,9 +27,7 @@ fun StopwatchServiceOverlay(
     verticalArrangement = Arrangement.Center
   ) {
     Text("hello stopwatch overlay")
-    Row {
-      StartPauseButton()
-    }
+
     StopwatchOverlay()
     Button(onClick = {
       logd("exit composable")
@@ -53,12 +51,4 @@ fun exit() {
 
   // doitwrong
   stopwatchServiceHolder.stopSelf()
-}
-
-@Composable
-fun StartPauseButton() {
-  Button(onClick = {
-  }) {
-    Text("start pause")
-  }
 }
