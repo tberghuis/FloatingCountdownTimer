@@ -56,3 +56,6 @@ next task
 test START_STICKY stopSelf()
 
 cull notes mylists, noteboat
+
+next task show trash
+  exit
