@@ -31,19 +31,20 @@ import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.TimerStateFinished
 import xyz.tberghuis.floatingtimer.TimerStatePaused
 import xyz.tberghuis.floatingtimer.TimerStateRunning
+import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.common.countdownOverlayState
 import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-private val overlayState = countdownOverlayState
+//private val overlayState = countdownOverlayState
 //private val overlayState = OverlayState()
 
 // todo remove player reference
 // use class AlarmComponent??? contains player, deals with AlarmManager etc
 @Composable
-fun TimerOverlay(player: MediaPlayer) {
+fun TimerOverlay(overlayState: OverlayState, player: MediaPlayer) {
 
   // should i use derivedStateOf ???
   // i don't understand the benefit
@@ -72,8 +73,7 @@ fun TimerOverlay(player: MediaPlayer) {
 //        .background(Color.Red)
         .size(TIMER_SIZE_DP.dp)
         .padding(PROGRESS_ARC_WIDTH / 2)
-        .zIndex(1f)
-      ,
+        .zIndex(1f),
       contentAlignment = Alignment.Center
     ) {
 

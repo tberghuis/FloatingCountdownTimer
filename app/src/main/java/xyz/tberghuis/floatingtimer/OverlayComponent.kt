@@ -178,7 +178,7 @@ class OverlayComponent(private val context: Context, private val stopService: ()
 
   private fun setContentFullscreenOverlay() {
     fullscreenOverlay.view.setContent {
-      TimerOverlay(player)
+      TimerOverlay(overlayState, player)
     }
   }
 }
