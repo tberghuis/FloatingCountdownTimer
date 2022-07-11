@@ -28,6 +28,7 @@ next task, show a dialog
 
   when i exit i do not want to kill the service
 
+future
 read all dagger hilt docs
 circular dependencies use Lazy on one side
 callback closures can be in a separate class .e.g. class ExitOverlay, with invoke fn
@@ -64,3 +65,23 @@ future
 add exit pendingintent to notification  
 
 test with bigger font scaling
+
+cull tmp code
+
+update github readme
+  screenshot
+  description
+  app name change
+
+clean code
+
+release play store
+comment update in reddit thread
+
+git merge dev-stopwatch-1 to master
+push
+
+
+test on phone
+
+start_sticky selfstop
