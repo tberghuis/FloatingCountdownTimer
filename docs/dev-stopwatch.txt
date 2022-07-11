@@ -7,14 +7,10 @@ update play store screenshots
 release
 ##########################
 
-cull tmp code
-
 update github readme
   screenshot
   description
   app name change
-
-clean code
 
 release play store
 comment update in reddit thread
@@ -22,7 +18,4 @@ comment update in reddit thread
 git merge dev-stopwatch-1 to master
 push
 
-
 test on phone
-
-start_sticky selfstop
