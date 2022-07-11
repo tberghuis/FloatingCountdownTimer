@@ -9,14 +9,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.StopwatchOverlay
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchServiceHolder
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchState
 import java.util.*
 import kotlin.concurrent.timerTask
-//import xyz.tberghuis.floatingtimer.stopwatch.StopwatchStateHolder as state
 
 // todo inject ExitStopwatch usecase
 @Composable
@@ -31,7 +29,6 @@ fun StopwatchServiceOverlay(
     Text("hello stopwatch overlay")
     Row {
       StartPauseButton()
-//      StopwatchTimeDisplay()
     }
     StopwatchOverlay()
     Button(onClick = {
@@ -58,12 +55,6 @@ fun exit() {
   stopwatchServiceHolder.stopSelf()
 }
 
-
-//@Composable
-//fun StopwatchTimeDisplay() {
-//  TimeDisplay(state.timeElapsed.value)
-//}
-
 @Composable
 fun StartPauseButton() {
   Button(onClick = {
@@ -85,10 +76,7 @@ fun StartPauseButton() {
         stopwatchState.running.value = false
       }
     }
-
-
   }) {
     Text("start pause")
   }
-
 }
