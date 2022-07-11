@@ -10,10 +10,12 @@ import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_CREATE_STOPWATCH
 import xyz.tberghuis.floatingtimer.logd
@@ -30,13 +32,19 @@ fun CreateStopwatchCard() {
   ) {
     Column(
       modifier = Modifier
-        .background(Color.Green)
+        .padding(10.dp)
+//        .background(Color.Green)
+      ,
+      horizontalAlignment = Alignment.CenterHorizontally
     ) {
-      Text("Stopwatch")
-      Button(onClick = {
-        logd("start stopwatch")
-        startStopwatchService(context)
-      }) {
+      Text("Stopwatch", fontSize = 20.sp)
+
+      Button(
+        modifier = Modifier.padding(top = 10.dp),
+        onClick = {
+          logd("start stopwatch")
+          startStopwatchService(context)
+        }) {
         Text("Create")
       }
     }
