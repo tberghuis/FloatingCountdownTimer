@@ -1,70 +1,11 @@
 
-
-
-...
-
-
 change app name "countdown timer"
-change repo name
+change repo name -- nah
 update play store screenshots
   description
 
 release
 ##########################
-
-next task,
-create a stopwatch in plain compose
-
-read https://developer.android.com/guide/components/broadcasts
-
-doitwrong
-read docs later
-
-next task, show a dialog
-
-  implement a timer
-
-  think how to reuse the same service
-
-  when i exit i do not want to kill the service
-
-future
-read all dagger hilt docs
-circular dependencies use Lazy on one side
-callback closures can be in a separate class .e.g. class ExitOverlay, with invoke fn
-
-
-next task, reference TimerOnServiceTutorial
-finish timer demo
-
-put in circle with animated rotation
-
-
-MVP separate serive
-
-draw arc
-compose animation codelab
-
-read kotlin docs - delegation
-
-next task
-  refactor + reuse touch overlay
-  reuse trash composable
-
-next task
-  copy from service class
-
-test START_STICKY stopSelf()
-
-cull notes mylists, noteboat
-
-next task show trash
-  exit
-
-future
-add exit pendingintent to notification  
-
-test with bigger font scaling
 
 cull tmp code
 
