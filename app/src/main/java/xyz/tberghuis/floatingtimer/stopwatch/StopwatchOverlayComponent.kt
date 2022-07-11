@@ -6,18 +6,12 @@ import android.graphics.PixelFormat
 import android.hardware.input.InputManager
 import android.os.Build
 import android.view.WindowManager
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.material.Text
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchClickTarget
 import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchOverlay
-
 
 // todo inherit interface OverlayComponent { exitOverlay, startOverlay }
 
@@ -33,6 +27,7 @@ class StopwatchOverlayComponent(
   val clickTargetOverlay: OverlayViewHolder
 
   val overlayState = OverlayState()
+  var isOverlayShowing = false
 
   init {
     fullscreenOverlay = initFullscreenOverlay()
@@ -76,16 +71,17 @@ class StopwatchOverlayComponent(
       fullscreenOverlay.params.alpha = inputManager.maximumObscuringOpacityForTouch
     }
     fullscreenOverlay.view.setContent {
-//      StopwatchServiceOverlay()
       StopwatchOverlay(overlayState)
     }
     return fullscreenOverlay
   }
 
   fun showOverlays() {
-    // todo reset state
+    if(isOverlayShowing){
+      return
+    }
+    isOverlayShowing = true
     stopwatchState.resetStopwatchState()
-
     windowManager.addView(clickTargetOverlay.view, clickTargetOverlay.params)
     windowManager.addView(fullscreenOverlay.view, fullscreenOverlay.params)
   }
@@ -93,5 +89,6 @@ class StopwatchOverlayComponent(
   fun removeOverlays() {
     windowManager.removeView(clickTargetOverlay.view)
     windowManager.removeView(fullscreenOverlay.view)
+    isOverlayShowing = false
   }
 }
