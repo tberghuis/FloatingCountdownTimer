@@ -42,26 +42,19 @@ class StopwatchService : Service() {
     intentOrNull?.let { intent ->
       val command = intent.getStringExtra(INTENT_COMMAND)
       logd("command $command")
-      // todo when command
 
       when (command) {
         INTENT_COMMAND_CREATE_STOPWATCH -> {
           stopwatchOverlayComponent.showOverlays()
-
         }
       }
-
-
     }
-
-
-
-
 
     createNotificationChannel()
     val notification: Notification = buildNotification()
     startForeground(SERVICE_STOPWATCH_NOTIFICATION_ID, notification)
-    return START_NOT_STICKY
+//    return START_NOT_STICKY
+    return START_STICKY
   }
 
 
