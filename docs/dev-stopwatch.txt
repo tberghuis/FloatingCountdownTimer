@@ -1,10 +1,7 @@
 comment update in reddit thread
 
-add reset and exit buttons to persistant notification
-
-doitwrong, separate broadcastrecievers
-
-add reset countdown timer notification
-
-
 screenshot of notification playstore
+
+increment build version
+release
+git merge push
