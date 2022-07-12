@@ -15,8 +15,10 @@ import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_NAME
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_CREATE_STOPWATCH
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_EXIT
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_RESET
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_STOPWATCH_SERVICE
+import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_STOPWATCH_SERVICE
 import xyz.tberghuis.floatingtimer.SERVICE_STOPWATCH_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.logd
 
@@ -53,6 +55,9 @@ class StopwatchService : Service() {
           stopwatchExit()
           return START_NOT_STICKY
         }
+        INTENT_COMMAND_RESET -> {
+          stopwatchState.resetStopwatchState()
+        }
 
         INTENT_COMMAND_CREATE_STOPWATCH -> {
           stopwatchOverlayComponent.showOverlays()
@@ -76,12 +81,21 @@ class StopwatchService : Service() {
       REQUEST_CODE_EXIT_STOPWATCH_SERVICE, exitIntent, FLAG_IMMUTABLE
     )
 
+    val resetIntent = Intent(applicationContext, StopwatchResetReceiver::class.java)
+    val resetPendingIntent = PendingIntent.getBroadcast(
+      applicationContext,
+      REQUEST_CODE_RESET_STOPWATCH_SERVICE, resetIntent, FLAG_IMMUTABLE
+    )
+
+
+
 
     return NotificationCompat.Builder(this, CHANNEL_STOPWATCH_ID)
       .setContentTitle("Floating Stopwatch")
       .setSmallIcon(R.drawable.ic_alarm)
       // this does nothing on > gingerbread
 //      .setContentIntent(pendingIntent)
+      .addAction(0, "Reset", resetPendingIntent)
       .addAction(0, "Exit", exitPendingIntent)
       .build()
   }

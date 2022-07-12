@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_EXIT
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_RESET
 import xyz.tberghuis.floatingtimer.logd
 
 
@@ -18,3 +19,12 @@ class StopwatchExitReceiver : BroadcastReceiver() {
   }
 }
 
+class StopwatchResetReceiver : BroadcastReceiver() {
+  override fun onReceive(context: Context, intent: Intent) {
+    logd("StopwatchResetReceiver onReceive")
+
+    val resetIntent = Intent(context.applicationContext, StopwatchService::class.java)
+    resetIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_RESET)
+    context.startForegroundService(resetIntent)
+  }
+}

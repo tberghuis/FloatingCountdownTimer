@@ -48,7 +48,7 @@ fun StopwatchOverlay(overlayState: OverlayState) {
 
   Box(
     Modifier.onGloballyPositioned {
-      logd("TimerOverlay onGloballyPositioned")
+//      logd("TimerOverlay onGloballyPositioned")
       overlayState.screenWidthPx = it.size.width
       overlayState.screenHeightPx = it.size.height
       val x = min(overlayState.timerOffset.x, overlayState.screenWidthPx - timerSizePx)
