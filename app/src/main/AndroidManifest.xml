@@ -29,6 +29,7 @@
 
         <receiver android:name=".receivers.AlarmReceiver" />
         <receiver android:name=".receivers.ExitReceiver" />
+        <receiver android:name=".receivers.CountdownResetReceiver" />
         <receiver android:name=".stopwatch.StopwatchExitReceiver" />
         <receiver android:name=".stopwatch.StopwatchResetReceiver" />
 
