@@ -1,7 +1,3 @@
 comment update in reddit thread
 
-screenshot of notification playstore
-
-increment build version
-release
 git merge push
