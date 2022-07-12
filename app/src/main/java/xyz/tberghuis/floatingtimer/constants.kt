@@ -10,6 +10,7 @@ const val INTENT_COMMAND_SHOW_OVERLAY = "command_show_overlay"
 const val INTENT_COMMAND_CREATE_TIMER = "command_create_timer"
 const val INTENT_COMMAND_COUNTDOWN_COMPLETE = "command_countdown_complete"
 const val INTENT_COMMAND_EXIT = "command_exit"
+const val INTENT_COMMAND_RESET = "command_reset"
 const val EXTRA_TIMER_DURATION = "extra_timer_duration"
 
 const val INTENT_COMMAND_CREATE_STOPWATCH = "command_create_stopwatch"
@@ -31,4 +32,8 @@ const val CHANNEL_STOPWATCH_DESCRIPTION = "stopwatch channel"
 
 const val REQUEST_CODE_PENDING_ALARM = 0
 const val REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION = 1
-const val REQUEST_CODE_EXIT_SERVICE = 2
+const val REQUEST_CODE_EXIT_COUNTDOWN = 2
+const val REQUEST_CODE_RESET_COUNTDOWN = 3
+
+const val REQUEST_CODE_EXIT_STOPWATCH_SERVICE = 4
+const val REQUEST_CODE_RESET_STOPWATCH_SERVICE = 5

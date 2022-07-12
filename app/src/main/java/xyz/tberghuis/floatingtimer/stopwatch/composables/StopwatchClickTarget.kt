@@ -84,7 +84,7 @@ fun onClickStopwatchClickTarget() {
     false -> {
       stopwatchState.running.value = true
       Timer().scheduleAtFixedRate(timerTask {
-        logd("timertask")
+//        logd("timertask")
         if (stopwatchState.running.value) {
           stopwatchState.timeElapsed.value++
         } else {
