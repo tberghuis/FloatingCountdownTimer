@@ -90,6 +90,9 @@ class ForegroundService : Service() {
         PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
       }
 
+    // todo shouldn't need BroadcastReceiver
+    // https://stackoverflow.com/questions/73344244/how-to-invoke-a-method-on-a-foreground-service-by-clicking-on-a-notification-act
+
     val exitIntent = Intent(applicationContext, ExitReceiver::class.java)
     val exitPendingIntent = PendingIntent.getBroadcast(
       applicationContext,
