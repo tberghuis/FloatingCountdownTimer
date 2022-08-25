@@ -144,7 +144,8 @@ class OverlayComponent(private val context: Context, private val stopService: ()
               overlayState.showTrash = true
             },
               onDrag = { change, dragAmount ->
-                change.consumeAllChanges()
+//                change.consumeAllChanges()
+                change.consume()
                 val dragAmountIntOffset =
                   IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
                 val _timerOffset = overlayState.timerOffset + dragAmountIntOffset

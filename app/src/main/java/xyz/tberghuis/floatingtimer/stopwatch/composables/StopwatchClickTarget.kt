@@ -36,7 +36,7 @@ fun StopwatchClickTarget(overlayState: OverlayState) {
           overlayState.showTrash = true
         },
           onDrag = { change, dragAmount ->
-            change.consumeAllChanges()
+            change.consume()
             val dragAmountIntOffset =
               IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
             val _timerOffset = overlayState.timerOffset + dragAmountIntOffset
