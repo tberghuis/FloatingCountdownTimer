@@ -87,8 +87,13 @@ class StopwatchOverlayComponent(
   }
 
   fun removeOverlays() {
+    logd("StopwatchOverlayComponent removeOverlays")
     windowManager.removeView(clickTargetOverlay.view)
     windowManager.removeView(fullscreenOverlay.view)
+
+    clickTargetOverlay.view.disposeComposition()
+    fullscreenOverlay.view.disposeComposition()
+
     isOverlayShowing = false
   }
 }

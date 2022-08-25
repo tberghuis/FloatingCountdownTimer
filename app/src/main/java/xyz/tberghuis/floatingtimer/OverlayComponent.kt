@@ -120,6 +120,12 @@ class OverlayComponent(private val context: Context, private val stopService: ()
 
     windowManager.removeView(clickTargetOverlay.view)
     windowManager.removeView(fullscreenOverlay.view)
+
+    // prevents multiple alarms playing TimerOverlay LaunchedEffect TimerFinished
+    // i don't fully understand this fix...
+    fullscreenOverlay.view.disposeComposition()
+    clickTargetOverlay.view.disposeComposition()
+
     // is this needed
     isTimerOverlayShowing = false
     stopService()
