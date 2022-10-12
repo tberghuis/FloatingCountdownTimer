@@ -9,6 +9,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import dagger.hilt.android.AndroidEntryPoint
 import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_DESCRIPTION
 import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_ID
 import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_NAME
@@ -21,19 +22,16 @@ import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_STOPWATCH_SERVICE
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_STOPWATCH_SERVICE
 import xyz.tberghuis.floatingtimer.SERVICE_STOPWATCH_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.logd
+import javax.inject.Inject
 
-// doitwrong until hilt/dagger
 //var stopwatchServiceHolder: StopwatchService? = null
 lateinit var stopwatchServiceHolder: StopwatchService
 
+@AndroidEntryPoint
 class StopwatchService : Service() {
 
-  //var stopwatchOverlayComponent: StopwatchOverlayComponent? = null
-
-  val stopwatchOverlayComponent: StopwatchOverlayComponent by lazy {
-    StopwatchOverlayComponent(this)
-  }
-
+  @Inject
+  lateinit var stopwatchOverlayComponent: StopwatchOverlayComponent
 
   override fun onBind(intent: Intent?): IBinder? {
     logd("onbind")
@@ -72,7 +70,6 @@ class StopwatchService : Service() {
     return START_STICKY
   }
 
-
   private fun buildNotification(): Notification {
 
     val exitIntent = Intent(applicationContext, StopwatchExitReceiver::class.java)
@@ -87,9 +84,6 @@ class StopwatchService : Service() {
       REQUEST_CODE_RESET_STOPWATCH_SERVICE, resetIntent, FLAG_IMMUTABLE
     )
 
-
-
-
     return NotificationCompat.Builder(this, CHANNEL_STOPWATCH_ID)
       .setContentTitle("Floating Stopwatch")
       .setSmallIcon(R.drawable.ic_alarm)
@@ -99,7 +93,6 @@ class StopwatchService : Service() {
       .addAction(0, "Exit", exitPendingIntent)
       .build()
   }
-
 
   // todo refactor
   private fun createNotificationChannel() {
@@ -112,6 +105,4 @@ class StopwatchService : Service() {
     val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     notificationManager.createNotificationChannel(mChannel)
   }
-
 }
-
