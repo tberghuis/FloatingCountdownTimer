@@ -75,4 +75,5 @@ git branch dev-hilt
 update gradle dependencies
 add hilt
 release
+merge to master
 ...
