@@ -1,25 +1,21 @@
 package xyz.tberghuis.floatingtimer.screens
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -40,22 +36,15 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.hilt.navigation.compose.hiltViewModel
-import xyz.tberghuis.floatingtimer.EXTRA_TIMER_DURATION
-import xyz.tberghuis.floatingtimer.ForegroundService
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_CREATE_TIMER
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
 import xyz.tberghuis.floatingtimer.countdown.CreateCountdownCard
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.composables.CreateStopwatchCard
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
-import java.lang.NumberFormatException
 
 @Composable
 fun HomeScreen() {
@@ -69,7 +58,7 @@ fun HomeScreen() {
       })
     },
     content = {
-      HomeScreenContent()
+      HomeScreenContent(it)
     }
   )
 
@@ -112,12 +101,12 @@ fun HomeScreen() {
 }
 
 @Composable
-fun HomeScreenContent() {
+fun HomeScreenContent(paddingValues: PaddingValues) {
   val focusManager = LocalFocusManager.current
 
   Column(
     modifier = Modifier
-//      .background(Color.Yellow)
+      .padding(paddingValues)
       .fillMaxSize()
       .verticalScroll(rememberScrollState())
       .pointerInput(Unit) {
