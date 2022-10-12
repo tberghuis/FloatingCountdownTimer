@@ -77,3 +77,4 @@ add hilt
 release
 merge to master
 ...
+cull inbox.txt
