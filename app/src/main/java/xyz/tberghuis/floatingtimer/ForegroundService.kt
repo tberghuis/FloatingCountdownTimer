@@ -10,14 +10,18 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import dagger.hilt.android.AndroidEntryPoint
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.durationSeconds
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.pendingAlarm
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerState
 import xyz.tberghuis.floatingtimer.receivers.CountdownResetReceiver
 import xyz.tberghuis.floatingtimer.receivers.ExitReceiver
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ForegroundService : Service() {
-  var overlayComponent: OverlayComponent? = null
+  @Inject
+  lateinit var overlayComponent: OverlayComponent
 
   private val binder = LocalBinder()
 
@@ -51,7 +55,7 @@ class ForegroundService : Service() {
       when (command) {
         INTENT_COMMAND_EXIT -> {
           pendingAlarm?.cancel()
-          overlayComponent?.endService()
+          overlayComponent.endService()
           return START_NOT_STICKY
         }
         INTENT_COMMAND_RESET -> {
@@ -60,20 +64,12 @@ class ForegroundService : Service() {
         }
         INTENT_COMMAND_CREATE_TIMER -> {
           val duration = intent.getIntExtra(EXTRA_TIMER_DURATION, 10)
-
           logd("INTENT_COMMAND_CREATE_TIMER duration $duration")
-
           pendingAlarm?.cancel()
           resetTimerState(duration)
-          overlayComponent = overlayComponent ?: OverlayComponent(this, stopService = {
-            // todo test older api levels than 32
-//            stopForeground(STOP_FOREGROUND_REMOVE)
-            stopSelf()
-          })
           // todo position timer default position
-          overlayComponent!!.showOverlay()
+          overlayComponent.showOverlay()
         }
-
         INTENT_COMMAND_COUNTDOWN_COMPLETE -> {
           logd("onStartCommand INTENT_COMMAND_COUNTDOWN_COMPLETE")
           timerState.value = TimerStateFinished
@@ -81,13 +77,11 @@ class ForegroundService : Service() {
       }
     }
 
-
-
     createNotificationChannel()
 
     val pendingIntent: PendingIntent =
       Intent(this, MainActivity::class.java).let { notificationIntent ->
-        PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE)
+        PendingIntent.getActivity(this, 0, notificationIntent, FLAG_IMMUTABLE)
       }
 
     // todo shouldn't need BroadcastReceiver
@@ -104,7 +98,6 @@ class ForegroundService : Service() {
       applicationContext,
       REQUEST_CODE_RESET_COUNTDOWN, resetIntent, FLAG_IMMUTABLE
     )
-
 
     val notification: Notification = NotificationCompat.Builder(this, CHANNEL_DEFAULT_ID)
       .setContentTitle("Floating Countdown Timer")
