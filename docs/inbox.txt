@@ -69,14 +69,3 @@ timer font fize fixed dp
 timer size option, slider with sample timer to the right
 
 fix NPE in onstartcommand??? if intent null just create notification
-
-#################
-git branch dev-hilt
-update gradle dependencies
-add hilt
-increment version
-build
-release
-merge to master
-...
-cull inbox.txt
