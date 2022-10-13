@@ -7,7 +7,6 @@ import android.hardware.input.InputManager
 import android.os.Build
 import android.view.WindowManager
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.staticCompositionLocalOf
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
@@ -18,9 +17,6 @@ import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchOverlay
 
 // todo inherit interface OverlayComponent { exitOverlay, startOverlay }
 
-
-//val LocalStopwatchOverlayComponent = compositionLocalOf { StopwatchOverlayComponent(Context()) }
-
 val LocalStopwatchOverlayComponent = staticCompositionLocalOf<StopwatchOverlayComponent> {
   error("CompositionLocal LocalStopwatchOverlayComponent not present")
 }
@@ -30,14 +26,14 @@ class StopwatchOverlayComponent(
 // val stopService: () -> Unit
 ) {
   val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-  val density = context.resources.displayMetrics.density
-  val timerSizePx = (TIMER_SIZE_DP * density).toInt()
+  private val density = context.resources.displayMetrics.density
+  private val timerSizePx = (TIMER_SIZE_DP * density).toInt()
 
-  val fullscreenOverlay: OverlayViewHolder
+  private val fullscreenOverlay: OverlayViewHolder
   val clickTargetOverlay: OverlayViewHolder
 
-  val overlayState = OverlayState()
-  var isOverlayShowing = false
+  private val overlayState = OverlayState()
+  private var isOverlayShowing = false
 
   init {
     fullscreenOverlay = initFullscreenOverlay()
@@ -66,7 +62,7 @@ class StopwatchOverlayComponent(
   }
 
   private fun initFullscreenOverlay(): OverlayViewHolder {
-    var fullscreenOverlay = OverlayViewHolder(
+    val fullscreenOverlay = OverlayViewHolder(
       WindowManager.LayoutParams(
         WindowManager.LayoutParams.MATCH_PARENT,
         WindowManager.LayoutParams.MATCH_PARENT,
