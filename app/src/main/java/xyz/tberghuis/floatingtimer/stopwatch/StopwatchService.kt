@@ -24,8 +24,6 @@ import xyz.tberghuis.floatingtimer.SERVICE_STOPWATCH_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.logd
 import javax.inject.Inject
 
-//lateinit var stopwatchServiceHolder: StopwatchService
-
 @AndroidEntryPoint
 class StopwatchService : Service() {
 
@@ -39,8 +37,6 @@ class StopwatchService : Service() {
 
   override fun onStartCommand(intentOrNull: Intent?, flags: Int, startId: Int): Int {
     logd("onstartcommand")
-    // doitwrong
-//    stopwatchServiceHolder = this
 
     intentOrNull?.let { intent ->
       val command = intent.getStringExtra(INTENT_COMMAND)
