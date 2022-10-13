@@ -13,8 +13,8 @@ import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.stopwatch.LocalStopwatchOverlayComponent
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchExit
-import xyz.tberghuis.floatingtimer.stopwatch.stopwatchServiceHolder
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchState
 import java.util.*
 import kotlin.concurrent.timerTask
@@ -26,6 +26,11 @@ import kotlin.math.roundToInt
 fun StopwatchClickTarget(overlayState: OverlayState) {
 
   val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
+
+  val cto = LocalStopwatchOverlayComponent.current.clickTargetOverlay
+  val wm = LocalStopwatchOverlayComponent.current.windowManager
+
+  val stopwatchOverlayComponent = LocalStopwatchOverlayComponent.current
 
   Box(
     modifier = Modifier
@@ -51,13 +56,13 @@ fun StopwatchClickTarget(overlayState: OverlayState) {
             overlayState.showTrash = false
 
             if (overlayState.isTimerHoverTrash) {
-              stopwatchExit()
+              stopwatchExit(stopwatchOverlayComponent)
               return@detectDragGestures
             }
 
             // doitwrong
-            val cto = stopwatchServiceHolder.stopwatchOverlayComponent.clickTargetOverlay
-            val wm = stopwatchServiceHolder.stopwatchOverlayComponent.windowManager
+//            val cto = stopwatchServiceHolder.stopwatchOverlayComponent.clickTargetOverlay
+//            val wm = stopwatchServiceHolder.stopwatchOverlayComponent.windowManager
 
             cto.params.x = overlayState.timerOffset.x
             cto.params.y = overlayState.timerOffset.y

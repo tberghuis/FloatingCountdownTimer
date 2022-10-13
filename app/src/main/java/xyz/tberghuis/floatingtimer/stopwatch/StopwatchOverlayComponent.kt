@@ -6,6 +6,9 @@ import android.graphics.PixelFormat
 import android.hardware.input.InputManager
 import android.os.Build
 import android.view.WindowManager
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.staticCompositionLocalOf
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayState
@@ -14,6 +17,13 @@ import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchClickTarget
 import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchOverlay
 
 // todo inherit interface OverlayComponent { exitOverlay, startOverlay }
+
+
+//val LocalStopwatchOverlayComponent = compositionLocalOf { StopwatchOverlayComponent(Context()) }
+
+val LocalStopwatchOverlayComponent = staticCompositionLocalOf<StopwatchOverlayComponent> {
+  error("CompositionLocal LocalStopwatchOverlayComponent not present")
+}
 
 class StopwatchOverlayComponent(
   val context: Context,
@@ -47,7 +57,9 @@ class StopwatchOverlayComponent(
       ), context
     )
     clickTargetOverlay.view.setContent {
-      StopwatchClickTarget(overlayState)
+      CompositionLocalProvider(LocalStopwatchOverlayComponent provides this) {
+        StopwatchClickTarget(overlayState)
+      }
     }
 
     return clickTargetOverlay
@@ -59,8 +71,7 @@ class StopwatchOverlayComponent(
         WindowManager.LayoutParams.MATCH_PARENT,
         WindowManager.LayoutParams.MATCH_PARENT,
         WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
         PixelFormat.TRANSLUCENT
       ), context
     )
@@ -71,13 +82,15 @@ class StopwatchOverlayComponent(
       fullscreenOverlay.params.alpha = inputManager.maximumObscuringOpacityForTouch
     }
     fullscreenOverlay.view.setContent {
-      StopwatchOverlay(overlayState)
+      CompositionLocalProvider(LocalStopwatchOverlayComponent provides this) {
+        StopwatchOverlay(overlayState)
+      }
     }
     return fullscreenOverlay
   }
 
   fun showOverlays() {
-    if(isOverlayShowing){
+    if (isOverlayShowing) {
       return
     }
     isOverlayShowing = true
