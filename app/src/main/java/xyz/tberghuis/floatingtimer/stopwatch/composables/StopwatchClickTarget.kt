@@ -5,7 +5,6 @@ import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
@@ -24,17 +23,11 @@ import kotlin.math.roundToInt
 
 @Composable
 fun StopwatchClickTarget(overlayState: OverlayState) {
-
   val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
-
-  val cto = LocalStopwatchOverlayComponent.current.clickTargetOverlay
-  val wm = LocalStopwatchOverlayComponent.current.windowManager
-
   val stopwatchOverlayComponent = LocalStopwatchOverlayComponent.current
 
   Box(
     modifier = Modifier
-//      .background(Color.Red)
       .pointerInput(Unit) {
         detectDragGestures(onDragStart = {
           logd("clicktarget onDragStart")
@@ -60,9 +53,8 @@ fun StopwatchClickTarget(overlayState: OverlayState) {
               return@detectDragGestures
             }
 
-            // doitwrong
-//            val cto = stopwatchServiceHolder.stopwatchOverlayComponent.clickTargetOverlay
-//            val wm = stopwatchServiceHolder.stopwatchOverlayComponent.windowManager
+            val cto = stopwatchOverlayComponent.clickTargetOverlay
+            val wm = stopwatchOverlayComponent.windowManager
 
             cto.params.x = overlayState.timerOffset.x
             cto.params.y = overlayState.timerOffset.y
