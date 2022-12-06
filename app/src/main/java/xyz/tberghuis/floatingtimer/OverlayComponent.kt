@@ -18,17 +18,17 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.pendingAlarm
 import xyz.tberghuis.floatingtimer.common.OverlayState
-import xyz.tberghuis.floatingtimer.common.countdownOverlayState
 import xyz.tberghuis.floatingtimer.composables.TimerOverlay
 import xyz.tberghuis.floatingtimer.events.onClickClickTargetOverlay
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 
-private val overlayState = countdownOverlayState
-//val overlayState = OverlayState()
-
-class OverlayComponent(private val context: Context, private val stopService: () -> Unit) {
+class OverlayComponent(
+  private val context: Context,
+  private val overlayState: OverlayState,
+  private val stopService: () -> Unit
+) {
   // should i move this into service??? meh
   // put into an AlarmService class
   // inject with dagger / hilt
@@ -60,8 +60,7 @@ class OverlayComponent(private val context: Context, private val stopService: ()
       WindowManager.LayoutParams.MATCH_PARENT,
       WindowManager.LayoutParams.MATCH_PARENT,
       WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-      WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or
-          WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+      WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
       PixelFormat.TRANSLUCENT
     ), context
   )
@@ -135,49 +134,44 @@ class OverlayComponent(private val context: Context, private val stopService: ()
   private fun setContentClickTargetOverlay() {
     clickTargetOverlay.view.setContent {
 
-      Box(
-        modifier = Modifier
+      Box(modifier = Modifier
 //          .background(Color.LightGray)
-          .pointerInput(Unit) {
-            detectDragGestures(onDragStart = {
-              logd("clicktarget onDragStart")
-              overlayState.showTrash = true
-            },
-              onDrag = { change, dragAmount ->
+        .pointerInput(Unit) {
+          detectDragGestures(onDragStart = {
+            logd("clicktarget onDragStart")
+            overlayState.showTrash = true
+          }, onDrag = { change, dragAmount ->
 //                change.consumeAllChanges()
-                change.consume()
-                val dragAmountIntOffset =
-                  IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
-                val _timerOffset = overlayState.timerOffset + dragAmountIntOffset
-                var x = max(_timerOffset.x, 0)
-                x = min(x, overlayState.screenWidthPx - timerSizePx)
-                var y = max(_timerOffset.y, 0)
-                y = min(y, overlayState.screenHeightPx - timerSizePx)
-                overlayState.timerOffset = IntOffset(x, y)
-              },
-              onDragEnd = {
+            change.consume()
+            val dragAmountIntOffset =
+              IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
+            val _timerOffset = overlayState.timerOffset + dragAmountIntOffset
+            var x = max(_timerOffset.x, 0)
+            x = min(x, overlayState.screenWidthPx - timerSizePx)
+            var y = max(_timerOffset.y, 0)
+            y = min(y, overlayState.screenHeightPx - timerSizePx)
+            overlayState.timerOffset = IntOffset(x, y)
+          }, onDragEnd = {
 
-                logd("onDragEnd")
+            logd("onDragEnd")
 
-                overlayState.showTrash = false
+            overlayState.showTrash = false
 
-                // todo calc hover trash
-                if (overlayState.isTimerHoverTrash) {
-                  endService()
-                  return@detectDragGestures
-                }
+            // todo calc hover trash
+            if (overlayState.isTimerHoverTrash) {
+              endService()
+              return@detectDragGestures
+            }
 
-                clickTargetOverlay.params.x = overlayState.timerOffset.x
-                clickTargetOverlay.params.y = overlayState.timerOffset.y
-                logd("onDragEnd x ${overlayState.timerOffset.x}")
-                windowManager.updateViewLayout(clickTargetOverlay.view, clickTargetOverlay.params)
-              }
-            )
-          }
-          .clickable {
-            onClickClickTargetOverlay(context, player)
-          }
-      ) {
+            clickTargetOverlay.params.x = overlayState.timerOffset.x
+            clickTargetOverlay.params.y = overlayState.timerOffset.y
+            logd("onDragEnd x ${overlayState.timerOffset.x}")
+            windowManager.updateViewLayout(clickTargetOverlay.view, clickTargetOverlay.params)
+          })
+        }
+        .clickable {
+          onClickClickTargetOverlay(context, player)
+        }) {
 //        Text("click target")
       }
     }

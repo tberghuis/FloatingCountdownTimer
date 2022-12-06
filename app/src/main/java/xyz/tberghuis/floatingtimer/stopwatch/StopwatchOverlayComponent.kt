@@ -24,6 +24,7 @@ val LocalStopwatchOverlayComponent = staticCompositionLocalOf<StopwatchOverlayCo
 class StopwatchOverlayComponent(
   val context: Context,
 // val stopService: () -> Unit
+  private val overlayState: OverlayState
 ) {
   val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
   private val density = context.resources.displayMetrics.density
@@ -32,7 +33,6 @@ class StopwatchOverlayComponent(
   private val fullscreenOverlay: OverlayViewHolder
   val clickTargetOverlay: OverlayViewHolder
 
-  private val overlayState = OverlayState()
   private var isOverlayShowing = false
 
   init {

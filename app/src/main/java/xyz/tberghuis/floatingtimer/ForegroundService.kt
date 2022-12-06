@@ -16,14 +16,23 @@ import xyz.tberghuis.floatingtimer.OverlayStateHolder.pendingAlarm
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerState
 import xyz.tberghuis.floatingtimer.receivers.CountdownResetReceiver
 import xyz.tberghuis.floatingtimer.receivers.ExitReceiver
-import javax.inject.Inject
+import xyz.tberghuis.floatingtimer.common.countdownOverlayState
 
 @AndroidEntryPoint
 class ForegroundService : Service() {
-  @Inject
-  lateinit var overlayComponent: OverlayComponent
+  private lateinit var overlayComponent: OverlayComponent
 
   private val binder = LocalBinder()
+
+  override fun onCreate() {
+    super.onCreate()
+    logd("ForegroundService onCreate")
+    overlayComponent = OverlayComponent(this, countdownOverlayState) {
+      // todo test older api levels than 32
+      // stopForeground(STOP_FOREGROUND_REMOVE)
+      stopSelf()
+    }
+  }
 
   inner class LocalBinder : Binder() {
     fun getService(): ForegroundService = this@ForegroundService
@@ -36,9 +45,7 @@ class ForegroundService : Service() {
 
   private fun createNotificationChannel() {
     val mChannel = NotificationChannel(
-      CHANNEL_DEFAULT_ID,
-      CHANNEL_DEFAULT_NAME,
-      NotificationManager.IMPORTANCE_DEFAULT
+      CHANNEL_DEFAULT_ID, CHANNEL_DEFAULT_NAME, NotificationManager.IMPORTANCE_DEFAULT
     )
     mChannel.description = CHANNEL_DEFAULT_DESCRIPTION
     val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
@@ -89,29 +96,24 @@ class ForegroundService : Service() {
 
     val exitIntent = Intent(applicationContext, ExitReceiver::class.java)
     val exitPendingIntent = PendingIntent.getBroadcast(
-      applicationContext,
-      REQUEST_CODE_EXIT_COUNTDOWN, exitIntent, FLAG_IMMUTABLE
+      applicationContext, REQUEST_CODE_EXIT_COUNTDOWN, exitIntent, FLAG_IMMUTABLE
     )
 
     val resetIntent = Intent(applicationContext, CountdownResetReceiver::class.java)
     val resetPendingIntent = PendingIntent.getBroadcast(
-      applicationContext,
-      REQUEST_CODE_RESET_COUNTDOWN, resetIntent, FLAG_IMMUTABLE
+      applicationContext, REQUEST_CODE_RESET_COUNTDOWN, resetIntent, FLAG_IMMUTABLE
     )
 
     val notification: Notification = NotificationCompat.Builder(this, CHANNEL_DEFAULT_ID)
       .setContentTitle("Floating Countdown Timer")
 //      .setContentText("content text service running")
-      .setSmallIcon(R.drawable.ic_alarm)
-      .setContentIntent(pendingIntent)
+      .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent)
 //      .setTicker("ticker service running")
       .addAction(
         0, "Reset", resetPendingIntent
-      )
-      .addAction(
+      ).addAction(
         0, "Exit", exitPendingIntent
-      )
-      .build()
+      ).build()
 
     startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, notification)
 

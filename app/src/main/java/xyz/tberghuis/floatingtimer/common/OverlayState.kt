@@ -16,5 +16,7 @@ class OverlayState {
   var screenHeightPx = Int.MAX_VALUE
 }
 
-// todo move into OverlayComponent
+// todo initialise in Service
+// restore from shared preferences
 val countdownOverlayState = OverlayState()
+val stopwatchOverlayState = OverlayState()
