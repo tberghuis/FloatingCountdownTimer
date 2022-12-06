@@ -1,3 +1,0 @@
-update version
-release
-git merge
