@@ -78,6 +78,7 @@ class StopwatchOverlayComponent(
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
       logd("inputManager max opacity ${inputManager.maximumObscuringOpacityForTouch}")
       fullscreenOverlay.params.alpha = inputManager.maximumObscuringOpacityForTouch
+//      fullscreenOverlay.params.alpha = .5f
     }
     fullscreenOverlay.view.setContent {
       CompositionLocalProvider(LocalStopwatchOverlayComponent provides this) {
@@ -111,8 +112,6 @@ class StopwatchOverlayComponent(
 
     isOverlayShowing = false
   }
-
-
 
 
 }

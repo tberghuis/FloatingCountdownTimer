@@ -1,0 +1,11 @@
+when both countdown and stopwatch timers, ui touch events to applications behind overlays are blocked
+
+ ok so it only occurs for api => 30
+
+ solution, rewrite as 1 service that supports multiple overlays
+
+ bug cause
+ https://developer.android.com/reference/android/view/WindowManager.LayoutParams#FLAG_NOT_TOUCHABLE
+  opacity({A,B}) = 1 - (1 - opacity(A))*(1 - opacity(B)) <= 0.8
+  this is because multiple fullscreenoverlays
+
