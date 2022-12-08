@@ -1,0 +1,5 @@
+
+increment version
+build, 
+release
+git merge

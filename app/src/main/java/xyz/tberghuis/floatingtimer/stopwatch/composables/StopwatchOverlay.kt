@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -87,6 +88,7 @@ fun BorderArc() {
   var pausedAngle by remember { mutableStateOf(210f) }
   var restartAngle by remember { mutableStateOf(0f) }
   val infiniteTransition = rememberInfiniteTransition()
+  val primaryColor = MaterialTheme.colorScheme.primary
   val animatedAngle by infiniteTransition.animateFloat(
     initialValue = 0f,
     targetValue = 360f,
@@ -116,7 +118,7 @@ fun BorderArc() {
     )
 
     drawArc(
-      color = Color.Blue.copy(alpha = .1f),
+      color = primaryColor.copy(alpha = .1f),
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
@@ -125,7 +127,7 @@ fun BorderArc() {
     )
 
     drawArc(
-      color = Color.Blue,
+      color = primaryColor,
       startAngle = if (!stopwatchState.running.value) pausedAngle else drawAnimatedAngle,
       sweepAngle = 120f,
       useCenter = false,

@@ -3,17 +3,18 @@ package xyz.tberghuis.floatingtimer.stopwatch.composables
 import android.content.Context
 import android.content.Intent
 import android.provider.Settings
-import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
-import androidx.compose.material.Card
-import androidx.compose.material.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -28,31 +29,31 @@ import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 fun CreateStopwatchCard() {
   val context = LocalContext.current
   val vm: HomeViewModel = hiltViewModel()
-  Card(
+  ElevatedCard(
     modifier = Modifier
       .fillMaxWidth()
       .padding(15.dp),
-    elevation = 10.dp
   ) {
-    Column(
+    Row(
       modifier = Modifier
         .padding(10.dp)
-//        .background(Color.Green)
-      ,
-      horizontalAlignment = Alignment.CenterHorizontally
+        .fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
       Text("Stopwatch", fontSize = 20.sp)
-
-      Button(
-        modifier = Modifier.padding(top = 10.dp),
-        onClick = {
-          logd("start stopwatch")
-          if (!Settings.canDrawOverlays(context)) {
-            vm.showGrantOverlayDialog = true
-            return@Button
-          }
-          startStopwatchService(context)
-        }) {
+    }
+    Row(
+      modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth(), horizontalArrangement = Arrangement.Center
+    ) {
+      Button(modifier = Modifier.padding(top = 10.dp), onClick = {
+        logd("start stopwatch")
+        if (!Settings.canDrawOverlays(context)) {
+          vm.showGrantOverlayDialog = true
+          return@Button
+        }
+        startStopwatchService(context)
+      }) {
         Text("Create")
       }
     }

@@ -12,8 +12,6 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.RingtoneManager
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.NotificationCompat
@@ -23,29 +21,29 @@ import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_COMPLETE
 import xyz.tberghuis.floatingtimer.logd
 
-@Composable
-fun AlarmDemo() {
-  val context = LocalContext.current
-  Column {
-
-    Button(onClick = {
-      logd("countdown")
-      val intent = Intent(context, TmpAlarmReceiver::class.java)
-      intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-      val pendingIntent = PendingIntent.getBroadcast(
-        context.applicationContext,
-        0, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
-      )
-      val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-      alarmManager.setAlarmClock(
-        AlarmClockInfo(System.currentTimeMillis() + 10000, pendingIntent),
-        pendingIntent
-      )
-    }) {
-      Text("countdown")
-    }
-  }
-}
+//@Composable
+//fun AlarmDemo() {
+//  val context = LocalContext.current
+//  Column {
+//
+//    Button(onClick = {
+//      logd("countdown")
+//      val intent = Intent(context, TmpAlarmReceiver::class.java)
+//      intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+//      val pendingIntent = PendingIntent.getBroadcast(
+//        context.applicationContext,
+//        0, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
+//      )
+//      val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//      alarmManager.setAlarmClock(
+//        AlarmClockInfo(System.currentTimeMillis() + 10000, pendingIntent),
+//        pendingIntent
+//      )
+//    }) {
+//      Text("countdown")
+//    }
+//  }
+//}
 
 class TmpAlarmReceiver : BroadcastReceiver() {
   override fun onReceive(context: Context, intent: Intent?) {

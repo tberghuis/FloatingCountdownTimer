@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -130,6 +131,8 @@ fun TimerOverlay(overlayState: OverlayState, player: MediaPlayer) {
 fun ProgressArc(timeLeftFraction: Float) {
   val sweepAngle = 360 * timeLeftFraction
 
+  val primaryColor = MaterialTheme.colorScheme.primary
+
   Canvas(
     Modifier
       .fillMaxSize()
@@ -149,7 +152,7 @@ fun ProgressArc(timeLeftFraction: Float) {
     )
 
     drawArc(
-      color = Color.Blue.copy(alpha = .1f),
+      color = primaryColor.copy(alpha = .1f),
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
@@ -158,7 +161,7 @@ fun ProgressArc(timeLeftFraction: Float) {
     )
 
     drawArc(
-      color = Color.Blue,
+      color = primaryColor,
       -90f,
       sweepAngle,
       false,

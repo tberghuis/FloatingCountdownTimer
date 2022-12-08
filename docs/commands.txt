@@ -1,0 +1,4 @@
+### git
+git rm --cached .idea/vcs.xml
+git rm --cached .idea/deploymentTargetDropDown.xml
+
