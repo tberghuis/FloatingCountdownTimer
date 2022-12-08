@@ -8,6 +8,7 @@ import android.os.Build
 import android.view.WindowManager
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.unit.IntOffset
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayState
@@ -23,8 +24,9 @@ val LocalStopwatchOverlayComponent = staticCompositionLocalOf<StopwatchOverlayCo
 
 class StopwatchOverlayComponent(
   val context: Context,
-// val stopService: () -> Unit
-  private val overlayState: OverlayState, private val stopwatchState: StopwatchState
+  private val overlayState: OverlayState,
+  private val stopwatchState: StopwatchState,
+//  private val stopService: () -> Unit
 ) {
   val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
   private val density = context.resources.displayMetrics.density
@@ -100,9 +102,17 @@ class StopwatchOverlayComponent(
     windowManager.removeView(clickTargetOverlay.view)
     windowManager.removeView(fullscreenOverlay.view)
 
+    overlayState.timerOffset = IntOffset.Zero
+    clickTargetOverlay.params.x = 0
+    clickTargetOverlay.params.y = 0
+
     clickTargetOverlay.view.disposeComposition()
     fullscreenOverlay.view.disposeComposition()
 
     isOverlayShowing = false
   }
+
+
+
+
 }
