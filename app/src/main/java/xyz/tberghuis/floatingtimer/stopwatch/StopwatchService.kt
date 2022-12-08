@@ -23,12 +23,24 @@ import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_STOPWATCH_SERVICE
 import xyz.tberghuis.floatingtimer.SERVICE_STOPWATCH_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.logd
 import javax.inject.Inject
+import xyz.tberghuis.floatingtimer.OverlayComponent
+import xyz.tberghuis.floatingtimer.common.OverlayState
 
 @AndroidEntryPoint
 class StopwatchService : Service() {
 
-  @Inject
+  val stopwatchOverlayState = OverlayState()
   lateinit var stopwatchOverlayComponent: StopwatchOverlayComponent
+  val stopwatchState = StopwatchState()
+
+
+  override fun onCreate() {
+    super.onCreate()
+    logd("ForegroundService onCreate")
+    stopwatchOverlayComponent =
+      StopwatchOverlayComponent(this, stopwatchOverlayState, stopwatchState)
+  }
+
 
   override fun onBind(intent: Intent?): IBinder? {
     logd("onbind")
@@ -45,7 +57,7 @@ class StopwatchService : Service() {
       when (command) {
 
         INTENT_COMMAND_EXIT -> {
-          stopwatchExit(stopwatchOverlayComponent)
+          stopwatchExit(stopwatchOverlayComponent, stopwatchState)
           return START_NOT_STICKY
         }
         INTENT_COMMAND_RESET -> {
@@ -53,6 +65,7 @@ class StopwatchService : Service() {
         }
 
         INTENT_COMMAND_CREATE_STOPWATCH -> {
+          stopwatchOverlayState.reset()
           stopwatchOverlayComponent.showOverlays()
         }
       }

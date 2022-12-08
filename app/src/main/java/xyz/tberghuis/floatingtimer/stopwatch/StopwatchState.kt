@@ -31,7 +31,7 @@ class StopwatchState {
 }
 
 // todo move to member of StopwatchOverlayComponent
-val stopwatchState = StopwatchState()
+//val stopwatchState = StopwatchState()
 
 
 // todo fn resetStopwatchState

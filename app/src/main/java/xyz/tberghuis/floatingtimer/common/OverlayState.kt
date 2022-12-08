@@ -14,9 +14,17 @@ class OverlayState {
   // this is a hack
   var screenWidthPx = Int.MAX_VALUE
   var screenHeightPx = Int.MAX_VALUE
+
+
+  fun reset(){
+    timerOffset = IntOffset.Zero
+    showTrash = false
+    isTimerHoverTrash = false
+  }
+
 }
 
 // todo initialise in Service
 // restore from shared preferences
 val countdownOverlayState = OverlayState()
-val stopwatchOverlayState = OverlayState()
+//val stopwatchOverlayState = OverlayState()

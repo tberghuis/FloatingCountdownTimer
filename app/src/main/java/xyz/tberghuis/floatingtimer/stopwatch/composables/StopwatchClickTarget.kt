@@ -14,15 +14,15 @@ import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.LocalStopwatchOverlayComponent
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchExit
-import xyz.tberghuis.floatingtimer.stopwatch.stopwatchState
 import java.util.*
 import kotlin.concurrent.timerTask
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
+import xyz.tberghuis.floatingtimer.stopwatch.StopwatchState
 
 @Composable
-fun StopwatchClickTarget(overlayState: OverlayState) {
+fun StopwatchClickTarget(overlayState: OverlayState, stopwatchState: StopwatchState) {
   val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
   val stopwatchOverlayComponent = LocalStopwatchOverlayComponent.current
 
@@ -49,7 +49,7 @@ fun StopwatchClickTarget(overlayState: OverlayState) {
             overlayState.showTrash = false
 
             if (overlayState.isTimerHoverTrash) {
-              stopwatchExit(stopwatchOverlayComponent)
+              stopwatchExit(stopwatchOverlayComponent, stopwatchState)
               return@detectDragGestures
             }
 
@@ -64,7 +64,7 @@ fun StopwatchClickTarget(overlayState: OverlayState) {
         )
       }
       .clickable {
-        onClickStopwatchClickTarget()
+        onClickStopwatchClickTarget(stopwatchState)
       }
 
   ) {
@@ -75,7 +75,7 @@ fun StopwatchClickTarget(overlayState: OverlayState) {
 
 
 // todo move into another file
-fun onClickStopwatchClickTarget() {
+fun onClickStopwatchClickTarget(stopwatchState: StopwatchState) {
   logd("click target start pause")
   when (stopwatchState.running.value) {
     false -> {
