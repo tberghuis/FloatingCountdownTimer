@@ -5,6 +5,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ServiceComponent
 import dagger.hilt.android.scopes.ServiceScoped
+import xyz.tberghuis.floatingtimer.countdown.CountdownAlarmRepository
 import xyz.tberghuis.floatingtimer.countdown.CountdownState
 
 @Module
@@ -21,8 +22,8 @@ object ServiceModule {
 
   @Provides
   @ServiceScoped
-  fun provideCountdownState(): CountdownState {
-    return CountdownState()
+  fun provideCountdownState(alarmRepository: CountdownAlarmRepository): CountdownState {
+    return CountdownState(alarmRepository)
   }
 
 }
