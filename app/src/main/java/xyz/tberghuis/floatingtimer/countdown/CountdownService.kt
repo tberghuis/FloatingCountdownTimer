@@ -10,6 +10,7 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import dagger.hilt.android.AndroidEntryPoint
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_DESCRIPTION
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_ID
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_NAME
@@ -30,12 +31,11 @@ import xyz.tberghuis.floatingtimer.receivers.CountdownResetReceiver
 import xyz.tberghuis.floatingtimer.receivers.ExitReceiver
 import xyz.tberghuis.floatingtimer.logd
 
-// todo remove hilt, i don't need that shit
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class CountdownService : Service() {
 
   private val overlayState = OverlayState()
-  private val countdownOverlayState = CountdownState()
+  private val countdownState = CountdownState()
 
 
   private lateinit var overlayComponent: OverlayComponent
@@ -45,7 +45,7 @@ class CountdownService : Service() {
   override fun onCreate() {
     super.onCreate()
     logd("ForegroundService onCreate")
-    overlayComponent = OverlayComponent(this, overlayState, countdownOverlayState) {
+    overlayComponent = OverlayComponent(this, overlayState, countdownState) {
       // todo test older api levels than 32
       // stopForeground(STOP_FOREGROUND_REMOVE)
       stopSelf()
@@ -79,25 +79,25 @@ class CountdownService : Service() {
 
       when (command) {
         INTENT_COMMAND_EXIT -> {
-          countdownOverlayState.pendingAlarm?.cancel()
+          countdownState.pendingAlarm?.cancel()
           overlayComponent.endService()
           return START_NOT_STICKY
         }
         INTENT_COMMAND_RESET -> {
-          countdownOverlayState.pendingAlarm?.cancel()
-          countdownOverlayState.resetTimerState(countdownOverlayState.durationSeconds)
+          countdownState.pendingAlarm?.cancel()
+          countdownState.resetTimerState(countdownState.durationSeconds)
         }
         INTENT_COMMAND_CREATE_TIMER -> {
           val duration = intent.getIntExtra(EXTRA_TIMER_DURATION, 10)
           logd("INTENT_COMMAND_CREATE_TIMER duration $duration")
-          countdownOverlayState.pendingAlarm?.cancel()
-          countdownOverlayState.resetTimerState(duration)
+          countdownState.pendingAlarm?.cancel()
+          countdownState.resetTimerState(duration)
           // todo position timer default position
           overlayComponent.showOverlay()
         }
         INTENT_COMMAND_COUNTDOWN_COMPLETE -> {
           logd("onStartCommand INTENT_COMMAND_COUNTDOWN_COMPLETE")
-          countdownOverlayState.timerState.value = TimerStateFinished
+          countdownState.timerState.value = TimerStateFinished
         }
       }
     }
