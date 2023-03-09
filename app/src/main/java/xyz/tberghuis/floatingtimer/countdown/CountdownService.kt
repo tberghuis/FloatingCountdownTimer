@@ -51,6 +51,7 @@ class CountdownService : Service() {
 
   private lateinit var overlayComponent: OverlayComponent
 
+  // todo remove as don't need
   private val binder = LocalBinder()
 
   override fun onCreate() {
