@@ -7,7 +7,7 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class CountdownAlarmRepository(val dataStore: DataStore<Preferences>) {
+class CountdownAlarmRepository(private val dataStore: DataStore<Preferences>) {
   val alarmTimeFlow: Flow<Long?> = dataStore.data.map { preferences ->
     preferences[longPreferencesKey("countdown_alarm_time")]
   }
