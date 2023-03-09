@@ -3,7 +3,7 @@ package xyz.tberghuis.floatingtimer.receivers
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import xyz.tberghuis.floatingtimer.ForegroundService
+import xyz.tberghuis.floatingtimer.countdown.ForegroundService
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_COMPLETE
 import xyz.tberghuis.floatingtimer.logd

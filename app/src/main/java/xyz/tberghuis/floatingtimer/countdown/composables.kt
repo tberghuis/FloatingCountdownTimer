@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import xyz.tberghuis.floatingtimer.EXTRA_TIMER_DURATION
-import xyz.tberghuis.floatingtimer.ForegroundService
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_CREATE_TIMER
 import xyz.tberghuis.floatingtimer.logd

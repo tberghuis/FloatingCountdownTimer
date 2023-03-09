@@ -1,8 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp
 
 import android.R
-import android.app.AlarmManager
-import android.app.AlarmManager.AlarmClockInfo
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -11,12 +9,9 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.media.RingtoneManager
-import androidx.compose.foundation.layout.Column
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.FLAG_INSISTENT
-import xyz.tberghuis.floatingtimer.ForegroundService
+import xyz.tberghuis.floatingtimer.countdown.ForegroundService
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_COMPLETE
 import xyz.tberghuis.floatingtimer.logd

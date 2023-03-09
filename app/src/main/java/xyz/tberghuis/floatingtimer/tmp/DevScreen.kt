@@ -17,7 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat.startActivityForResult
-import xyz.tberghuis.floatingtimer.ForegroundService
+import xyz.tberghuis.floatingtimer.countdown.ForegroundService
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_SHOW_OVERLAY
 import xyz.tberghuis.floatingtimer.logd

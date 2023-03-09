@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer
+package xyz.tberghuis.floatingtimer.countdown
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -11,12 +11,30 @@ import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import dagger.hilt.android.AndroidEntryPoint
+import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_DESCRIPTION
+import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_ID
+import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_NAME
+import xyz.tberghuis.floatingtimer.EXTRA_TIMER_DURATION
+import xyz.tberghuis.floatingtimer.FOREGROUND_SERVICE_NOTIFICATION_ID
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_COMPLETE
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_CREATE_TIMER
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_EXIT
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_RESET
+import xyz.tberghuis.floatingtimer.MainActivity
+import xyz.tberghuis.floatingtimer.OverlayComponent
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.durationSeconds
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.pendingAlarm
 import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerState
+import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_COUNTDOWN
+import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_COUNTDOWN
+import xyz.tberghuis.floatingtimer.TimerStateFinished
 import xyz.tberghuis.floatingtimer.receivers.CountdownResetReceiver
 import xyz.tberghuis.floatingtimer.receivers.ExitReceiver
 import xyz.tberghuis.floatingtimer.common.countdownOverlayState
+import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.resetTimerState
 
 @AndroidEntryPoint
 class ForegroundService : Service() {
