@@ -31,10 +31,10 @@ import xyz.tberghuis.floatingtimer.receivers.CountdownResetReceiver
 import xyz.tberghuis.floatingtimer.receivers.ExitReceiver
 import xyz.tberghuis.floatingtimer.logd
 
+// todo remove hilt, i don't need that shit
 @AndroidEntryPoint
 class ForegroundService : Service() {
 
-//  OverlayStateHolder
   private val overlayState = OverlayState()
   private val countdownOverlayState = OverlayStateHolder()
 
