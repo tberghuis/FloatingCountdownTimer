@@ -23,11 +23,9 @@ import xyz.tberghuis.floatingtimer.INTENT_COMMAND_EXIT
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_RESET
 import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.OverlayComponent
-import xyz.tberghuis.floatingtimer.OverlayStateHolder
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_COUNTDOWN
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_COUNTDOWN
-import xyz.tberghuis.floatingtimer.TimerStateFinished
 import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.receivers.CountdownResetReceiver
 import xyz.tberghuis.floatingtimer.receivers.ExitReceiver

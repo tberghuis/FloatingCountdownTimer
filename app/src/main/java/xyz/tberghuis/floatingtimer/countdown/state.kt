@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer
+package xyz.tberghuis.floatingtimer.countdown
 
 import android.app.PendingIntent
 import androidx.compose.runtime.getValue

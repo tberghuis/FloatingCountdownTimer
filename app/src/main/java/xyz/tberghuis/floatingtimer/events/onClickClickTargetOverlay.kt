@@ -5,11 +5,11 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import xyz.tberghuis.floatingtimer.OverlayStateHolder
+import xyz.tberghuis.floatingtimer.countdown.OverlayStateHolder
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
-import xyz.tberghuis.floatingtimer.TimerStateFinished
-import xyz.tberghuis.floatingtimer.TimerStatePaused
-import xyz.tberghuis.floatingtimer.TimerStateRunning
+import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
+import xyz.tberghuis.floatingtimer.countdown.TimerStatePaused
+import xyz.tberghuis.floatingtimer.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 
