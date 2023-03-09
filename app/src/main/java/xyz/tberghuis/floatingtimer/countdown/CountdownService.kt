@@ -10,7 +10,6 @@ import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
-import dagger.hilt.android.AndroidEntryPoint
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_DESCRIPTION
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_ID
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_NAME
