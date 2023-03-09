@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.consumeAllChanges
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.pendingAlarm
 import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.composables.TimerOverlay
 import xyz.tberghuis.floatingtimer.events.onClickClickTargetOverlay
@@ -27,6 +26,7 @@ import kotlin.math.roundToInt
 class OverlayComponent(
   private val context: Context,
   private val overlayState: OverlayState,
+  private val countdownOverlayState: OverlayStateHolder,
   private val stopService: () -> Unit
 ) {
   // should i move this into service??? meh
@@ -112,7 +112,7 @@ class OverlayComponent(
 
     // doitwrong
     player.pause()
-    pendingAlarm?.cancel()
+    countdownOverlayState.pendingAlarm?.cancel()
 
     overlayState.timerOffset = IntOffset.Zero
     clickTargetOverlay.params.x = 0
@@ -171,7 +171,7 @@ class OverlayComponent(
           })
         }
         .clickable {
-          onClickClickTargetOverlay(context, player)
+          onClickClickTargetOverlay(context, player, countdownOverlayState)
         }) {
 //        Text("click target")
       }
@@ -180,7 +180,7 @@ class OverlayComponent(
 
   private fun setContentFullscreenOverlay() {
     fullscreenOverlay.view.setContent {
-      TimerOverlay(overlayState, player)
+      TimerOverlay(overlayState, player, countdownOverlayState)
     }
   }
 }

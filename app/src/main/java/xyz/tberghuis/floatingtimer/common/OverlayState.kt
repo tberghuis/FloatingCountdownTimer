@@ -26,5 +26,5 @@ class OverlayState {
 
 // todo initialise in Service
 // restore from shared preferences
-val countdownOverlayState = OverlayState()
+//val countdownOverlayState = OverlayState()
 //val stopwatchOverlayState = OverlayState()

@@ -22,8 +22,6 @@ import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_STOPWATCH_SERVICE
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_STOPWATCH_SERVICE
 import xyz.tberghuis.floatingtimer.SERVICE_STOPWATCH_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.logd
-import javax.inject.Inject
-import xyz.tberghuis.floatingtimer.OverlayComponent
 import xyz.tberghuis.floatingtimer.common.OverlayState
 
 @AndroidEntryPoint

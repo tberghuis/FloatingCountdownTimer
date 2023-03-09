@@ -23,21 +23,24 @@ import xyz.tberghuis.floatingtimer.INTENT_COMMAND_EXIT
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_RESET
 import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.OverlayComponent
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.durationSeconds
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.pendingAlarm
-import xyz.tberghuis.floatingtimer.OverlayStateHolder.timerState
+import xyz.tberghuis.floatingtimer.OverlayStateHolder
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_COUNTDOWN
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_COUNTDOWN
 import xyz.tberghuis.floatingtimer.TimerStateFinished
+import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.receivers.CountdownResetReceiver
 import xyz.tberghuis.floatingtimer.receivers.ExitReceiver
-import xyz.tberghuis.floatingtimer.common.countdownOverlayState
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.resetTimerState
 
 @AndroidEntryPoint
 class ForegroundService : Service() {
+
+//  OverlayStateHolder
+  private val overlayState = OverlayState()
+  private val countdownOverlayState = OverlayStateHolder()
+
+
   private lateinit var overlayComponent: OverlayComponent
 
   private val binder = LocalBinder()
@@ -45,7 +48,7 @@ class ForegroundService : Service() {
   override fun onCreate() {
     super.onCreate()
     logd("ForegroundService onCreate")
-    overlayComponent = OverlayComponent(this, countdownOverlayState) {
+    overlayComponent = OverlayComponent(this, overlayState, countdownOverlayState) {
       // todo test older api levels than 32
       // stopForeground(STOP_FOREGROUND_REMOVE)
       stopSelf()
@@ -79,25 +82,25 @@ class ForegroundService : Service() {
 
       when (command) {
         INTENT_COMMAND_EXIT -> {
-          pendingAlarm?.cancel()
+          countdownOverlayState.pendingAlarm?.cancel()
           overlayComponent.endService()
           return START_NOT_STICKY
         }
         INTENT_COMMAND_RESET -> {
-          pendingAlarm?.cancel()
-          resetTimerState(durationSeconds)
+          countdownOverlayState.pendingAlarm?.cancel()
+          countdownOverlayState.resetTimerState(countdownOverlayState.durationSeconds)
         }
         INTENT_COMMAND_CREATE_TIMER -> {
           val duration = intent.getIntExtra(EXTRA_TIMER_DURATION, 10)
           logd("INTENT_COMMAND_CREATE_TIMER duration $duration")
-          pendingAlarm?.cancel()
-          resetTimerState(duration)
+          countdownOverlayState.pendingAlarm?.cancel()
+          countdownOverlayState.resetTimerState(duration)
           // todo position timer default position
           overlayComponent.showOverlay()
         }
         INTENT_COMMAND_COUNTDOWN_COMPLETE -> {
           logd("onStartCommand INTENT_COMMAND_COUNTDOWN_COMPLETE")
-          timerState.value = TimerStateFinished
+          countdownOverlayState.timerState.value = TimerStateFinished
         }
       }
     }
