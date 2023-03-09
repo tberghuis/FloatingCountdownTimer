@@ -112,7 +112,7 @@ class OverlayComponent(
 
     // doitwrong
     player.pause()
-    countdownOverlayState.pendingAlarm?.cancel()
+//    countdownOverlayState.pendingAlarm?.cancel()
 
     overlayState.timerOffset = IntOffset.Zero
     clickTargetOverlay.params.x = 0
@@ -171,7 +171,7 @@ class OverlayComponent(
           })
         }
         .clickable {
-          onClickClickTargetOverlay(context, player, countdownOverlayState)
+          onClickClickTargetOverlay(player, countdownOverlayState)
         }) {
 //        Text("click target")
       }

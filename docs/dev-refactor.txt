@@ -20,4 +20,6 @@ add overflow menu,
   help
     dontkillmyapp.com
     intent battery optimisations
-    
+
+
+  test service killed

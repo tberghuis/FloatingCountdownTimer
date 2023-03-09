@@ -1,17 +1,22 @@
 package xyz.tberghuis.floatingtimer.countdown
 
+import android.app.AlarmManager
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_DESCRIPTION
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_ID
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_NAME
@@ -26,16 +31,19 @@ import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.OverlayComponent
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_COUNTDOWN
+import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_COUNTDOWN
 import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.receivers.CountdownResetReceiver
 import xyz.tberghuis.floatingtimer.receivers.ExitReceiver
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 
 @AndroidEntryPoint
 class CountdownService : Service() {
 
   private val overlayState = OverlayState()
+  private var pendingAlarm: PendingIntent? = null
 
   @Inject
   lateinit var countdownState: CountdownState
@@ -48,11 +56,14 @@ class CountdownService : Service() {
   override fun onCreate() {
     super.onCreate()
     logd("ForegroundService onCreate")
+    alarmSetup()
     overlayComponent = OverlayComponent(this, overlayState, countdownState) {
       // todo test older api levels than 32
       // stopForeground(STOP_FOREGROUND_REMOVE)
       stopSelf()
+      pendingAlarm?.cancel()
     }
+
   }
 
   inner class LocalBinder : Binder() {
@@ -82,18 +93,18 @@ class CountdownService : Service() {
 
       when (command) {
         INTENT_COMMAND_EXIT -> {
-          countdownState.pendingAlarm?.cancel()
+          pendingAlarm?.cancel()
           overlayComponent.endService()
           return START_NOT_STICKY
         }
         INTENT_COMMAND_RESET -> {
-          countdownState.pendingAlarm?.cancel()
+          pendingAlarm?.cancel()
           countdownState.resetTimerState(countdownState.durationSeconds)
         }
         INTENT_COMMAND_CREATE_TIMER -> {
           val duration = intent.getIntExtra(EXTRA_TIMER_DURATION, 10)
           logd("INTENT_COMMAND_CREATE_TIMER duration $duration")
-          countdownState.pendingAlarm?.cancel()
+          pendingAlarm?.cancel()
           countdownState.resetTimerState(duration)
           // todo position timer default position
           overlayComponent.showOverlay()
@@ -145,6 +156,41 @@ class CountdownService : Service() {
     super.onDestroy()
     logd("onDestroy")
   }
+
+  private fun alarmSetup() {
+    val context = this@CountdownService
+
+    CoroutineScope(Dispatchers.Default).launch {
+      countdownState.timerState.collect { timerState ->
+
+        when (timerState) {
+          TimerStateRunning -> {
+            // set alarm
+            logd("todo: run the timer")
+            val intent = Intent(context, AlarmReceiver::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+            // todo do i need to save pendingAlarm to state???
+            pendingAlarm = PendingIntent.getBroadcast(
+              context.applicationContext,
+              REQUEST_CODE_PENDING_ALARM,
+              intent,
+              PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.setAlarmClock(
+              AlarmManager.AlarmClockInfo(
+                System.currentTimeMillis() + (countdownState.countdownSeconds * 1000), pendingAlarm
+              ), pendingAlarm
+            )
+          }
+          else -> {
+            pendingAlarm?.cancel()
+          }
+        }
+      }
+    }
+  }
+
 
 /*  override fun onConfigurationChanged(newConfig: Configuration) {
     super.onConfigurationChanged(newConfig)

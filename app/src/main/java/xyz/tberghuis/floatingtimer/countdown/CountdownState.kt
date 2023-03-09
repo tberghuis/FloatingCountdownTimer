@@ -12,13 +12,16 @@ class CountdownState(private val alarmRepository: CountdownAlarmRepository) {
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
 
   // don't really need because i can cancel with requestCode???
-  var pendingAlarm: PendingIntent? = null
+//  private var pendingAlarm: PendingIntent? = null
 
   fun resetTimerState(duration: Int) {
     durationSeconds = duration
     countdownSeconds = duration
     timerState.value = TimerStatePaused
   }
+
+
+
 }
 
 

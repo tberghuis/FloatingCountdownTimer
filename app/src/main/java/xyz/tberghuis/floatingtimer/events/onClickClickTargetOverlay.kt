@@ -13,35 +13,16 @@ import xyz.tberghuis.floatingtimer.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 
-fun onClickClickTargetOverlay(context: Context, player: MediaPlayer, countdownState: CountdownState) {
+fun onClickClickTargetOverlay(
+  player: MediaPlayer, countdownState: CountdownState
+) {
   logd("onTimerClick")
   when (countdownState.timerState.value) {
     is TimerStatePaused -> {
-      logd("todo: run the timer")
-
-      // launch intent for alarm
-      val intent = Intent(context, AlarmReceiver::class.java)
-      intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-      // todo do i need to save pendingAlarm to state???
-      countdownState.pendingAlarm = PendingIntent.getBroadcast(
-        context.applicationContext,
-        REQUEST_CODE_PENDING_ALARM,
-        intent,
-        PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
-      )
-      val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-      alarmManager.setAlarmClock(
-        AlarmManager.AlarmClockInfo(
-          System.currentTimeMillis() + (countdownState.countdownSeconds * 1000),
-          countdownState.pendingAlarm
-        ),
-        countdownState.pendingAlarm
-      )
       countdownState.timerState.value = TimerStateRunning
     }
     is TimerStateRunning -> {
       countdownState.timerState.value = TimerStatePaused
-      countdownState.pendingAlarm?.cancel()
     }
     is TimerStateFinished -> {
       player.pause()
