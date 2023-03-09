@@ -32,7 +32,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".countdown.ForegroundService" />
+        <service android:name=".countdown.CountdownService" />
 
         <receiver android:name=".receivers.AlarmReceiver" />
         <receiver android:name=".receivers.ExitReceiver" />

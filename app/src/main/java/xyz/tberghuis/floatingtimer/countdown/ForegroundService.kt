@@ -32,8 +32,8 @@ import xyz.tberghuis.floatingtimer.receivers.ExitReceiver
 import xyz.tberghuis.floatingtimer.logd
 
 // todo remove hilt, i don't need that shit
-@AndroidEntryPoint
-class ForegroundService : Service() {
+//@AndroidEntryPoint
+class CountdownService : Service() {
 
   private val overlayState = OverlayState()
   private val countdownOverlayState = CountdownState()
@@ -54,7 +54,7 @@ class ForegroundService : Service() {
   }
 
   inner class LocalBinder : Binder() {
-    fun getService(): ForegroundService = this@ForegroundService
+    fun getService(): CountdownService = this@CountdownService
   }
 
   // can probably return null because i don't need direct communication with activity

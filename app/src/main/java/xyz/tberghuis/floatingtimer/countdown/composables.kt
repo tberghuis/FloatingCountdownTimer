@@ -128,7 +128,7 @@ fun CreateCountdownCard() {
 }
 
 fun createTimer(context: Context, duration: Int) {
-  val intent = Intent(context.applicationContext, ForegroundService::class.java)
+  val intent = Intent(context.applicationContext, CountdownService::class.java)
   intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_CREATE_TIMER)
   intent.putExtra(EXTRA_TIMER_DURATION, duration)
   context.startForegroundService(intent)

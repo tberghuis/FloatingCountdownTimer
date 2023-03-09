@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.tmp
 
 import android.R
+import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -11,9 +12,9 @@ import android.graphics.BitmapFactory
 import android.media.RingtoneManager
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.FLAG_INSISTENT
-import xyz.tberghuis.floatingtimer.countdown.ForegroundService
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_COMPLETE
+import xyz.tberghuis.floatingtimer.countdown.CountdownService
 import xyz.tberghuis.floatingtimer.logd
 
 //@Composable
@@ -57,6 +58,7 @@ class TmpAlarmReceiver : BroadcastReceiver() {
   }
 
   // no need for this
+  @SuppressLint("NotificationPermission")
   private fun sendNotification(context: Context, intent: Intent?) {
     createNotificationChannel(context)
 
@@ -102,7 +104,7 @@ class TmpAlarmReceiver : BroadcastReceiver() {
   }
 
   private fun sendCommandService(context: Context) {
-    val intent = Intent(context.applicationContext, ForegroundService::class.java)
+    val intent = Intent(context.applicationContext, CountdownService::class.java)
     intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_COUNTDOWN_COMPLETE)
     context.startForegroundService(intent)
   }
