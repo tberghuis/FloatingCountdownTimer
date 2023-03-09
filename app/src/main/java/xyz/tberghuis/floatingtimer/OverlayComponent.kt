@@ -21,12 +21,12 @@ import xyz.tberghuis.floatingtimer.events.onClickClickTargetOverlay
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
-import xyz.tberghuis.floatingtimer.countdown.OverlayStateHolder
+import xyz.tberghuis.floatingtimer.countdown.CountdownState
 
 class OverlayComponent(
   private val context: Context,
   private val overlayState: OverlayState,
-  private val countdownOverlayState: OverlayStateHolder,
+  private val countdownOverlayState: CountdownState,
   private val stopService: () -> Unit
 ) {
   // should i move this into service??? meh

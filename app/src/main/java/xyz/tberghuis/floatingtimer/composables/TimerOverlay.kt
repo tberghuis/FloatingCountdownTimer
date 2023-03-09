@@ -34,16 +34,16 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
 import kotlin.math.roundToInt
-import xyz.tberghuis.floatingtimer.countdown.OverlayStateHolder
+import xyz.tberghuis.floatingtimer.countdown.CountdownState
 
 // todo remove player reference
 // use class AlarmComponent??? contains player, deals with AlarmManager etc
 @Composable
-fun TimerOverlay(overlayState: OverlayState, player: MediaPlayer, countdownOverlayState: OverlayStateHolder) {
+fun TimerOverlay(overlayState: OverlayState, player: MediaPlayer, countdownState: CountdownState) {
 
   // should i use derivedStateOf ???
   // i don't understand the benefit
-  val timeLeftFraction = countdownOverlayState.countdownSeconds / countdownOverlayState.durationSeconds.toFloat()
+  val timeLeftFraction = countdownState.countdownSeconds / countdownState.durationSeconds.toFloat()
 
   val context = LocalContext.current
 
@@ -73,7 +73,7 @@ fun TimerOverlay(overlayState: OverlayState, player: MediaPlayer, countdownOverl
     ) {
 
       ProgressArc(timeLeftFraction)
-      TimeDisplay(countdownOverlayState.countdownSeconds)
+      TimeDisplay(countdownState.countdownSeconds)
     }
 
     if (overlayState.showTrash) {
@@ -94,19 +94,19 @@ fun TimerOverlay(overlayState: OverlayState, player: MediaPlayer, countdownOverl
   // that lives in service
   LaunchedEffect(Unit) {
     var countDownTimer: CountDownTimer? = null
-    countdownOverlayState.timerState.collectLatest {
+    countdownState.timerState.collectLatest {
       countDownTimer?.cancel()
       when (it) {
         is TimerStateRunning -> {
           // todo make timer more accurate
           // when pause store countdownMillis
-          countDownTimer = object : CountDownTimer(countdownOverlayState.countdownSeconds * 1000L, 1000) {
+          countDownTimer = object : CountDownTimer(countdownState.countdownSeconds * 1000L, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-              countdownOverlayState.countdownSeconds = (millisUntilFinished / 1000f).roundToInt()
+              countdownState.countdownSeconds = (millisUntilFinished / 1000f).roundToInt()
             }
 
             override fun onFinish() {
-              countdownOverlayState.countdownSeconds = 0
+              countdownState.countdownSeconds = 0
               // todo no i need to do this???
 //              timerState.value = TimerStateFinished
             }

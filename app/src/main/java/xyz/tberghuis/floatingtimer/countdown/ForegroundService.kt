@@ -36,7 +36,7 @@ import xyz.tberghuis.floatingtimer.logd
 class ForegroundService : Service() {
 
   private val overlayState = OverlayState()
-  private val countdownOverlayState = OverlayStateHolder()
+  private val countdownOverlayState = CountdownState()
 
 
   private lateinit var overlayComponent: OverlayComponent

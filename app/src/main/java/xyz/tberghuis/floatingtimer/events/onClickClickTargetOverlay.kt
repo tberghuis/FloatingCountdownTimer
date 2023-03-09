@@ -5,17 +5,17 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
-import xyz.tberghuis.floatingtimer.countdown.OverlayStateHolder
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
+import xyz.tberghuis.floatingtimer.countdown.CountdownState
 import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 
-fun onClickClickTargetOverlay(context: Context, player: MediaPlayer, countdownOverlayState: OverlayStateHolder) {
+fun onClickClickTargetOverlay(context: Context, player: MediaPlayer, countdownState: CountdownState) {
   logd("onTimerClick")
-  when (countdownOverlayState.timerState.value) {
+  when (countdownState.timerState.value) {
     is TimerStatePaused -> {
       logd("todo: run the timer")
 
@@ -23,7 +23,7 @@ fun onClickClickTargetOverlay(context: Context, player: MediaPlayer, countdownOv
       val intent = Intent(context, AlarmReceiver::class.java)
       intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
       // todo do i need to save pendingAlarm to state???
-      countdownOverlayState.pendingAlarm = PendingIntent.getBroadcast(
+      countdownState.pendingAlarm = PendingIntent.getBroadcast(
         context.applicationContext,
         REQUEST_CODE_PENDING_ALARM,
         intent,
@@ -32,20 +32,20 @@ fun onClickClickTargetOverlay(context: Context, player: MediaPlayer, countdownOv
       val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
       alarmManager.setAlarmClock(
         AlarmManager.AlarmClockInfo(
-          System.currentTimeMillis() + (countdownOverlayState.countdownSeconds * 1000),
-          countdownOverlayState.pendingAlarm
+          System.currentTimeMillis() + (countdownState.countdownSeconds * 1000),
+          countdownState.pendingAlarm
         ),
-        countdownOverlayState.pendingAlarm
+        countdownState.pendingAlarm
       )
-      countdownOverlayState.timerState.value = TimerStateRunning
+      countdownState.timerState.value = TimerStateRunning
     }
     is TimerStateRunning -> {
-      countdownOverlayState.timerState.value = TimerStatePaused
-      countdownOverlayState.pendingAlarm?.cancel()
+      countdownState.timerState.value = TimerStatePaused
+      countdownState.pendingAlarm?.cancel()
     }
     is TimerStateFinished -> {
       player.pause()
-      countdownOverlayState.resetTimerState(countdownOverlayState.durationSeconds)
+      countdownState.resetTimerState(countdownState.durationSeconds)
     }
   }
 }
