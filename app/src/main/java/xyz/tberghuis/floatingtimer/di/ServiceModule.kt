@@ -1,14 +1,11 @@
 package xyz.tberghuis.floatingtimer.di
 
-import android.app.Service
-import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ServiceComponent
 import dagger.hilt.android.scopes.ServiceScoped
-import xyz.tberghuis.floatingtimer.OverlayComponent
-import xyz.tberghuis.floatingtimer.stopwatch.StopwatchOverlayComponent
+import xyz.tberghuis.floatingtimer.countdown.CountdownState
 
 @Module
 @InstallIn(ServiceComponent::class)
@@ -22,6 +19,10 @@ object ServiceModule {
 //  }
 
 
-
+  @Provides
+  @ServiceScoped
+  fun provideCountdownState(): CountdownState {
+    return CountdownState()
+  }
 
 }

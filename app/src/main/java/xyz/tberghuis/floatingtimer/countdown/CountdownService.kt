@@ -11,6 +11,7 @@ import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_DESCRIPTION
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_ID
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_NAME
@@ -35,7 +36,9 @@ import xyz.tberghuis.floatingtimer.logd
 class CountdownService : Service() {
 
   private val overlayState = OverlayState()
-  private val countdownState = CountdownState()
+
+  @Inject
+  lateinit var countdownState: CountdownState
 
 
   private lateinit var overlayComponent: OverlayComponent
