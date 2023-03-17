@@ -1,0 +1,14 @@
+
+fix bug multi timers block ui
+
+use a single service
+
+read https://developer.android.com/guide/components/foreground-services
+
+compositionlocal for service
+lazy???
+
+
+learn to use notifications permissions api 33+
+https://www.youtube.com/watch?v=bHlLYhSrXvc
+
