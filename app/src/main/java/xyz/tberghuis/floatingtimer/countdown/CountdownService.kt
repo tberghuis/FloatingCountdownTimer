@@ -17,9 +17,6 @@ import javax.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_DESCRIPTION
-import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_ID
-import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_NAME
 import xyz.tberghuis.floatingtimer.EXTRA_COUNTDOWN_DURATION
 import xyz.tberghuis.floatingtimer.FOREGROUND_SERVICE_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
@@ -28,6 +25,8 @@ import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_CREATE
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_EXIT
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_RESET
 import xyz.tberghuis.floatingtimer.MainActivity
+import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
+import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL_DISPLAY
 import xyz.tberghuis.floatingtimer.OverlayComponent
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_COUNTDOWN
@@ -71,9 +70,9 @@ class CountdownServiceFDSFSDFSD : Service() {
 
   private fun createNotificationChannel() {
     val mChannel = NotificationChannel(
-      CHANNEL_DEFAULT_ID, CHANNEL_DEFAULT_NAME, NotificationManager.IMPORTANCE_DEFAULT
+      NOTIFICATION_CHANNEL, NOTIFICATION_CHANNEL_DISPLAY, NotificationManager.IMPORTANCE_DEFAULT
     )
-    mChannel.description = CHANNEL_DEFAULT_DESCRIPTION
+//    mChannel.description = CHANNEL_DEFAULT_DESCRIPTION
     val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     notificationManager.createNotificationChannel(mChannel)
   }
@@ -129,7 +128,7 @@ class CountdownServiceFDSFSDFSD : Service() {
       applicationContext, REQUEST_CODE_RESET_COUNTDOWN, resetIntent, FLAG_IMMUTABLE
     )
 
-    val notification: Notification = NotificationCompat.Builder(this, CHANNEL_DEFAULT_ID)
+    val notification: Notification = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL)
       .setContentTitle("Floating Countdown Timer")
 //      .setContentText("content text service running")
       .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent)

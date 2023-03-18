@@ -19,10 +19,9 @@ const val INTENT_COMMAND_STOPWATCH_EXIT = "stopwatch_exit"
 val PROGRESS_ARC_WIDTH = 8.dp
 
 const val FOREGROUND_SERVICE_NOTIFICATION_ID = 1
+const val NOTIFICATION_CHANNEL = "xyz.tberghuis.floatingtimer.ONGOING_OVERLAY"
+const val NOTIFICATION_CHANNEL_DISPLAY = "Ongoing Timer"
 
-const val CHANNEL_DEFAULT_ID = "default_channel"
-const val CHANNEL_DEFAULT_NAME = "default channel"
-const val CHANNEL_DEFAULT_DESCRIPTION = "default channel description"
 
 const val SERVICE_STOPWATCH_NOTIFICATION_ID = 2
 const val CHANNEL_STOPWATCH_ID = "stopwatch_channel"
