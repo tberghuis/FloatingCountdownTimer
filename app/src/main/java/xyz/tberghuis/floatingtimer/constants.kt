@@ -6,14 +6,15 @@ const val TRASH_SIZE_DP = 80
 const val TIMER_SIZE_DP = 60
 
 const val INTENT_COMMAND = "xyz.tberghuis.floatingtimer.COMMAND"
-const val INTENT_COMMAND_SHOW_OVERLAY = "command_show_overlay"
-const val INTENT_COMMAND_CREATE_TIMER = "command_create_timer"
-const val INTENT_COMMAND_COUNTDOWN_COMPLETE = "command_countdown_complete"
-const val INTENT_COMMAND_EXIT = "command_exit"
-const val INTENT_COMMAND_RESET = "command_reset"
-const val EXTRA_TIMER_DURATION = "extra_timer_duration"
+const val INTENT_COMMAND_COUNTDOWN_CREATE = "countdown_create"
+const val INTENT_COMMAND_COUNTDOWN_COMPLETE = "countdown_complete"
+const val INTENT_COMMAND_COUNTDOWN_EXIT = "countdown_exit"
+const val INTENT_COMMAND_COUNTDOWN_RESET = "countdown_reset"
+const val EXTRA_COUNTDOWN_DURATION = "countdown_duration"
 
-const val INTENT_COMMAND_CREATE_STOPWATCH = "command_create_stopwatch"
+const val INTENT_COMMAND_STOPWATCH_CREATE = "stopwatch_create"
+const val INTENT_COMMAND_STOPWATCH_RESET = "stopwatch_reset"
+const val INTENT_COMMAND_STOPWATCH_EXIT = "stopwatch_exit"
 
 val PROGRESS_ARC_WIDTH = 8.dp
 

@@ -5,12 +5,12 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
-<!--    TODO when targeting build sdk 33 TIRAMISU -->
-<!--    https://support.google.com/googleplay/android-developer/answer/12253906#exact_alarm_preview -->
-<!--    <uses-permission-->
-<!--        android:name="android.permission.SCHEDULE_EXACT_ALARM"-->
-<!--        android:maxSdkVersion="32" />-->
-<!--    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />-->
+    <!--    TODO when targeting build sdk 33 TIRAMISU -->
+    <!--    https://support.google.com/googleplay/android-developer/answer/12253906#exact_alarm_preview -->
+    <!--    <uses-permission-->
+    <!--        android:name="android.permission.SCHEDULE_EXACT_ALARM"-->
+    <!--        android:maxSdkVersion="32" />-->
+    <!--    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />-->
 
     <application
         android:name=".MainApplication"
@@ -32,7 +32,8 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".countdown.CountdownService" />
+<!--        <service android:name=".countdown.CountdownService" />-->
+        <service android:name=".service.FloatingService" />
 
         <receiver android:name=".receivers.AlarmReceiver" />
         <receiver android:name=".receivers.ExitReceiver" />

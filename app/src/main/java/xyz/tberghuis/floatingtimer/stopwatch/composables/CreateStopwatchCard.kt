@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_CREATE_STOPWATCH
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_CREATE
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.StopwatchService
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
@@ -62,6 +62,6 @@ fun CreateStopwatchCard() {
 
 fun startStopwatchService(context: Context) {
   val intent = Intent(context.applicationContext, StopwatchService::class.java)
-  intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_CREATE_STOPWATCH)
+  intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_STOPWATCH_CREATE)
   context.startForegroundService(intent)
 }

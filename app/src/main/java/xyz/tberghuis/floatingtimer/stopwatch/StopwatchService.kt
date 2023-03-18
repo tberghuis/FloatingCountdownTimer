@@ -14,9 +14,9 @@ import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_DESCRIPTION
 import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_ID
 import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_NAME
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_CREATE_STOPWATCH
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_EXIT
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_RESET
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_CREATE
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_EXIT
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_RESET
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_STOPWATCH_SERVICE
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_STOPWATCH_SERVICE
@@ -54,15 +54,15 @@ class StopwatchService : Service() {
 
       when (command) {
 
-        INTENT_COMMAND_EXIT -> {
+        INTENT_COMMAND_STOPWATCH_EXIT -> {
           stopwatchExit(stopwatchOverlayComponent, stopwatchState)
           return START_NOT_STICKY
         }
-        INTENT_COMMAND_RESET -> {
+        INTENT_COMMAND_STOPWATCH_RESET -> {
           stopwatchState.resetStopwatchState()
         }
 
-        INTENT_COMMAND_CREATE_STOPWATCH -> {
+        INTENT_COMMAND_STOPWATCH_CREATE -> {
           stopwatchOverlayState.reset()
           stopwatchOverlayComponent.showOverlays()
         }

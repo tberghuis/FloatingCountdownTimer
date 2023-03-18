@@ -25,11 +25,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import xyz.tberghuis.floatingtimer.EXTRA_TIMER_DURATION
+import xyz.tberghuis.floatingtimer.EXTRA_COUNTDOWN_DURATION
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_CREATE_TIMER
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_CREATE
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.screens.onFocusSelectAll
+import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -128,8 +129,8 @@ fun CreateCountdownCard() {
 }
 
 fun createTimer(context: Context, duration: Int) {
-  val intent = Intent(context.applicationContext, CountdownService::class.java)
-  intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_CREATE_TIMER)
-  intent.putExtra(EXTRA_TIMER_DURATION, duration)
+  val intent = Intent(context.applicationContext, FloatingService::class.java)
+  intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_COUNTDOWN_CREATE)
+  intent.putExtra(EXTRA_COUNTDOWN_DURATION, duration)
   context.startForegroundService(intent)
 }

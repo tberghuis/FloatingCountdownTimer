@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_COMPLETE
-import xyz.tberghuis.floatingtimer.countdown.CountdownService
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.service.FloatingService
 
 class AlarmReceiver : BroadcastReceiver() {
   override fun onReceive(context: Context, intent: Intent?) {
@@ -18,7 +18,7 @@ class AlarmReceiver : BroadcastReceiver() {
   }
 
   private fun sendCommandService(context: Context) {
-    val intent = Intent(context.applicationContext, CountdownService::class.java)
+    val intent = Intent(context.applicationContext, FloatingService::class.java)
     // doitwrong
     intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_COUNTDOWN_COMPLETE)
     context.startForegroundService(intent)

@@ -18,27 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.app.ActivityCompat.startActivityForResult
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_SHOW_OVERLAY
-import xyz.tberghuis.floatingtimer.countdown.CountdownService
 import xyz.tberghuis.floatingtimer.logd
 
-@Composable
-fun DevScreen() {
-  val context = LocalContext.current
-  Column(modifier = Modifier.background(Color.Yellow)) {
-    Text("hello dev screen")
-    Button(onClick = {
-      logd("persistent notification")
-      val intent = Intent(context.applicationContext, CountdownService::class.java)
-      context.startForegroundService(intent)
-    }) {
-      Text("persistent notification")
-    }
-    PermissionDemo()
-    StartOverlay()
-    BindService()
-  }
-}
 
 @Composable
 fun PermissionDemo() {
@@ -64,37 +45,8 @@ fun PermissionDemo() {
 fun StartOverlay() {
   val context = LocalContext.current
   Button(onClick = {
-    val intent = Intent(context.applicationContext, CountdownService::class.java)
-    intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_SHOW_OVERLAY)
-    context.startForegroundService(intent)
+
   }) {
     Text("start overlay")
-  }
-}
-
-// doitwrong
-// deal with changing activity rotation
-var foregroundService: CountdownService? = null
-
-@Composable
-fun BindService() {
-  val context = LocalContext.current
-  Button(onClick = {
-    logd("bind service")
-    val connection = object : ServiceConnection {
-      override fun onServiceConnected(className: ComponentName, service: IBinder) {
-        // We've bound to LocalService, cast the IBinder and get LocalService instance
-        val binder = service as CountdownService.LocalBinder
-        foregroundService = binder.getService()
-      }
-      override fun onServiceDisconnected(arg0: ComponentName) {
-        foregroundService = null
-      }
-    }
-    Intent(context, CountdownService::class.java).also { intent ->
-      context.bindService(intent, connection, Context.BIND_AUTO_CREATE)
-    }
-  }) {
-    Text("bind service")
   }
 }

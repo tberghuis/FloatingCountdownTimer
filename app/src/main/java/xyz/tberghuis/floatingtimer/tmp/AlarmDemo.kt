@@ -14,47 +14,13 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.FLAG_INSISTENT
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_COMPLETE
-import xyz.tberghuis.floatingtimer.countdown.CountdownService
 import xyz.tberghuis.floatingtimer.logd
-
-//@Composable
-//fun AlarmDemo() {
-//  val context = LocalContext.current
-//  Column {
-//
-//    Button(onClick = {
-//      logd("countdown")
-//      val intent = Intent(context, TmpAlarmReceiver::class.java)
-//      intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-//      val pendingIntent = PendingIntent.getBroadcast(
-//        context.applicationContext,
-//        0, intent, PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
-//      )
-//      val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-//      alarmManager.setAlarmClock(
-//        AlarmClockInfo(System.currentTimeMillis() + 10000, pendingIntent),
-//        pendingIntent
-//      )
-//    }) {
-//      Text("countdown")
-//    }
-//  }
-//}
 
 class TmpAlarmReceiver : BroadcastReceiver() {
   override fun onReceive(context: Context, intent: Intent?) {
     logd("onReceive start")
     logd("context $context")
 
-    // TODO
-    // instead of notification call method in service
-    // play sound, vibrate, flash timer overlay, animate vibration
-
-    // do it by explicit Intent to the service with a COMMAND_ALARM
-    // or I can just bind service here
-
-    // todo call service method to play alarm and vibrate until user clicks stop
-    sendCommandService(context)
   }
 
   // no need for this
@@ -103,9 +69,5 @@ class TmpAlarmReceiver : BroadcastReceiver() {
     manager.createNotificationChannel(serviceChannel)
   }
 
-  private fun sendCommandService(context: Context) {
-    val intent = Intent(context.applicationContext, CountdownService::class.java)
-    intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_COUNTDOWN_COMPLETE)
-    context.startForegroundService(intent)
-  }
+
 }

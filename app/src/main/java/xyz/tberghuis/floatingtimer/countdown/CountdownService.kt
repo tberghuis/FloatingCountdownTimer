@@ -20,13 +20,13 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_DESCRIPTION
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_ID
 import xyz.tberghuis.floatingtimer.CHANNEL_DEFAULT_NAME
-import xyz.tberghuis.floatingtimer.EXTRA_TIMER_DURATION
+import xyz.tberghuis.floatingtimer.EXTRA_COUNTDOWN_DURATION
 import xyz.tberghuis.floatingtimer.FOREGROUND_SERVICE_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_COMPLETE
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_CREATE_TIMER
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_EXIT
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_RESET
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_CREATE
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_EXIT
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_RESET
 import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.OverlayComponent
 import xyz.tberghuis.floatingtimer.R
@@ -40,7 +40,7 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 
 @AndroidEntryPoint
-class CountdownService : Service() {
+class CountdownServiceFDSFSDFSD : Service() {
 
   private val overlayState = OverlayState()
   private var pendingAlarm: PendingIntent? = null
@@ -51,8 +51,6 @@ class CountdownService : Service() {
 
   private lateinit var overlayComponent: OverlayComponent
 
-  // todo remove as don't need
-  private val binder = LocalBinder()
 
   override fun onCreate() {
     super.onCreate()
@@ -67,13 +65,8 @@ class CountdownService : Service() {
 
   }
 
-  inner class LocalBinder : Binder() {
-    fun getService(): CountdownService = this@CountdownService
-  }
-
-  // can probably return null because i don't need direct communication with activity
-  override fun onBind(intent: Intent?): IBinder {
-    return binder
+  override fun onBind(intent: Intent?): IBinder? {
+    return null
   }
 
   private fun createNotificationChannel() {
@@ -93,21 +86,20 @@ class CountdownService : Service() {
       logd("command $command")
 
       when (command) {
-        INTENT_COMMAND_EXIT -> {
+        INTENT_COMMAND_COUNTDOWN_EXIT -> {
           pendingAlarm?.cancel()
           overlayComponent.endService()
           return START_NOT_STICKY
         }
-        INTENT_COMMAND_RESET -> {
+        INTENT_COMMAND_COUNTDOWN_RESET -> {
           pendingAlarm?.cancel()
           countdownState.resetTimerState(countdownState.durationSeconds)
         }
-        INTENT_COMMAND_CREATE_TIMER -> {
-          val duration = intent.getIntExtra(EXTRA_TIMER_DURATION, 10)
+        INTENT_COMMAND_COUNTDOWN_CREATE -> {
+          val duration = intent.getIntExtra(EXTRA_COUNTDOWN_DURATION, 10)
           logd("INTENT_COMMAND_CREATE_TIMER duration $duration")
           pendingAlarm?.cancel()
           countdownState.resetTimerState(duration)
-          // todo position timer default position
           overlayComponent.showOverlay()
         }
         INTENT_COMMAND_COUNTDOWN_COMPLETE -> {
@@ -159,7 +151,7 @@ class CountdownService : Service() {
   }
 
   private fun alarmSetup() {
-    val context = this@CountdownService
+    val context = this@CountdownServiceFDSFSDFSD
 
     CoroutineScope(Dispatchers.Default).launch {
       countdownState.timerState.collect { timerState ->
@@ -191,10 +183,4 @@ class CountdownService : Service() {
       }
     }
   }
-
-
-/*  override fun onConfigurationChanged(newConfig: Configuration) {
-    super.onConfigurationChanged(newConfig)
-    logd("onConfigurationChanged $newConfig")
-  }*/
 }
