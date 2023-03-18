@@ -10,6 +10,8 @@ import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import xyz.tberghuis.floatingtimer.FOREGROUND_SERVICE_NOTIFICATION_ID
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_CREATE
 import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL_DISPLAY
@@ -32,8 +34,15 @@ class FloatingService : Service() {
     logd("FloatingService onStartCommand")
     postOngoingActivityNotification()
 
-
-
+    intent?.let {
+      val command = intent.getStringExtra(INTENT_COMMAND)
+      when (command) {
+        INTENT_COMMAND_COUNTDOWN_CREATE -> {
+//          overlayController.incrementState.overlayState.isVisible.value = true
+          logd("onStartCommand countdown create")
+        }
+      }
+    }
     return START_STICKY
   }
 
