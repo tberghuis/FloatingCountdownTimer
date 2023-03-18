@@ -1,8 +1,13 @@
 package xyz.tberghuis.floatingtimer.service
 
 import android.content.Context
+import android.content.Context.INPUT_SERVICE
 import android.graphics.PixelFormat
+import android.hardware.input.InputManager
+import android.os.Build
 import android.view.WindowManager
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -14,6 +19,9 @@ import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownState
+
+val LocalOverlayController =
+  compositionLocalOf<OverlayController> { error("No OverlayController provided") }
 
 class OverlayController(val service: FloatingService) {
 
@@ -50,10 +58,26 @@ class OverlayController(val service: FloatingService) {
 
   init {
     logd("OverlayController init")
-//    setContentOverlayView()
+    setContentOverlayView()
     setContentClickTargets()
     watchState()
   }
+
+  private fun setContentOverlayView() {
+    fullscreenOverlay.params.alpha = 1f
+    val inputManager = service.applicationContext.getSystemService(INPUT_SERVICE) as InputManager
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      logd("inputManager max opacity ${inputManager.maximumObscuringOpacityForTouch}")
+      fullscreenOverlay.params.alpha = inputManager.maximumObscuringOpacityForTouch
+    }
+
+    fullscreenOverlay.view.setContent {
+      CompositionLocalProvider(LocalOverlayController provides this) {
+        OverlayContent()
+      }
+    }
+  }
+
 
   private fun watchState() {
     with(CoroutineScope(Dispatchers.Default)) {
