@@ -17,3 +17,4 @@ upgrade androidx.lifecycle:lifecycle-extensions
 androidx.lifecycle:lifecycle-runtime-ktx
 https://stackoverflow.com/questions/57229877/how-to-cast-lifecycleowner-on-service-class
 
+try add fragment with nested composeview as system overlay
