@@ -21,9 +21,11 @@ import xyz.tberghuis.floatingtimer.logd
 class FloatingService : Service() {
   private var isStarted = false
 
+  private lateinit var overlayController: OverlayController
+
   override fun onCreate() {
     super.onCreate()
-    // todo
+    overlayController = OverlayController(this)
   }
 
   override fun onBind(intent: Intent?): IBinder? {
@@ -38,8 +40,7 @@ class FloatingService : Service() {
       val command = intent.getStringExtra(INTENT_COMMAND)
       when (command) {
         INTENT_COMMAND_COUNTDOWN_CREATE -> {
-//          overlayController.incrementState.overlayState.isVisible.value = true
-          logd("onStartCommand countdown create")
+          overlayController.countdownState.overlayState.isVisible.value = true
         }
       }
     }
