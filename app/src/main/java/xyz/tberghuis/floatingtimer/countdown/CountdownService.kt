@@ -45,7 +45,7 @@ class CountdownServiceFDSFSDFSD : Service() {
   private var pendingAlarm: PendingIntent? = null
 
   @Inject
-  lateinit var countdownState: CountdownState
+  lateinit var countdownState: CountdownStateVFDVDFV
 
 
   private lateinit var overlayComponent: OverlayComponent

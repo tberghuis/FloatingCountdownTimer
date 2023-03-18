@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class CountdownState(private val alarmRepository: CountdownAlarmRepository) {
+class CountdownStateVFDVDFV(private val alarmRepository: CountdownAlarmRepository) {
   var durationSeconds: Int = 10
   var countdownSeconds by mutableStateOf<Int>(10)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)

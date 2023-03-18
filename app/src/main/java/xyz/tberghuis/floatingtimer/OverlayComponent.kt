@@ -21,12 +21,12 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
-import xyz.tberghuis.floatingtimer.countdown.CountdownState
+import xyz.tberghuis.floatingtimer.countdown.CountdownStateVFDVDFV
 
 class OverlayComponent(
   private val context: Context,
   private val overlayState: OverlayStateFDSFSDF,
-  private val countdownOverlayState: CountdownState,
+  private val countdownOverlayState: CountdownStateVFDVDFV,
   private val stopService: () -> Unit
 ) {
   // should i move this into service??? meh

@@ -1,14 +1,14 @@
 package xyz.tberghuis.floatingtimer.events
 
 import android.media.MediaPlayer
-import xyz.tberghuis.floatingtimer.countdown.CountdownState
+import xyz.tberghuis.floatingtimer.countdown.CountdownStateVFDVDFV
 import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.logd
 
 fun onClickClickTargetOverlay(
-  player: MediaPlayer, countdownState: CountdownState
+  player: MediaPlayer, countdownState: CountdownStateVFDVDFV
 ) {
   logd("onTimerClick")
   when (countdownState.timerState.value) {
