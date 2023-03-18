@@ -12,3 +12,8 @@ lazy???
 learn to use notifications permissions api 33+
 https://www.youtube.com/watch?v=bHlLYhSrXvc
 
+
+upgrade androidx.lifecycle:lifecycle-extensions
+androidx.lifecycle:lifecycle-runtime-ktx
+https://stackoverflow.com/questions/57229877/how-to-cast-lifecycleowner-on-service-class
+
