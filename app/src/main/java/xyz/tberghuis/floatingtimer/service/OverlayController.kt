@@ -6,6 +6,7 @@ import android.view.WindowManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -57,29 +58,49 @@ class OverlayController(val service: FloatingService) {
   private fun watchState() {
     with(CoroutineScope(Dispatchers.Default)) {
       launch {
+        deriveFullscreenVisibleFlow().collect { showFullscreen ->
+          addOrRemoveView(fullscreenOverlay, showFullscreen)
+        }
+      }
+
+      launch {
         addOrRemoveClickTargetView(countdownIsVisible, countdownClickTarget)
       }
     }
   }
 
+  private suspend fun addOrRemoveView(viewHolder: OverlayViewHolder, isVisible: Boolean) {
+    withContext(Dispatchers.Main) {
+      when (isVisible) {
+        true -> {
+          windowManager.addView(viewHolder.view, viewHolder.params)
+        }
+        false -> {
+          // wrap in try catch???
+          windowManager.removeView(viewHolder.view)
+          viewHolder.view.disposeComposition()
+        }
+      }
+    }
+  }
+
+  private fun deriveFullscreenVisibleFlow(): Flow<Boolean> {
+    // todo
+//    return incrementIsVisible.combine(decrementIsVisible) { b1, b2 ->
+//      if (b1 == null && b2 == null) {
+//        null
+//      } else {
+//        listOf(b1, b2).contains(true)
+//      }
+//    }.filterNotNull().distinctUntilChanged()
+    return countdownIsVisible.filterNotNull().distinctUntilChanged()
+  }
+
   private suspend fun addOrRemoveClickTargetView(
     isVisible: Flow<Boolean?>, viewHolder: OverlayViewHolder
   ) {
-    isVisible.filterNotNull().collect { isVisible ->
-      when (isVisible) {
-        true -> {
-          withContext(Dispatchers.Main) {
-            windowManager.addView(viewHolder.view, viewHolder.params)
-          }
-        }
-        false -> {
-          withContext(Dispatchers.Main) {
-            // wrap in try catch???
-            windowManager.removeView(viewHolder.view)
-            viewHolder.view.disposeComposition()
-          }
-        }
-      }
+    isVisible.filterNotNull().collect {
+      addOrRemoveView(viewHolder, it)
     }
   }
 
