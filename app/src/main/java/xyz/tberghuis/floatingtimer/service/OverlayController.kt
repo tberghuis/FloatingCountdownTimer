@@ -50,4 +50,15 @@ class OverlayController(val service: FloatingService) {
   }
 
 
+  private fun setContentClickTargets() {
+
+    countdownClickTarget.view.setContent {
+      ClickTarget {
+        logd("click target onclick")
+      }
+    }
+
+  }
+
+
 }
