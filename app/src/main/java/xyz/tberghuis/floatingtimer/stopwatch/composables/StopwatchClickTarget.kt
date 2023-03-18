@@ -10,7 +10,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
-import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.LocalStopwatchOverlayComponent
 import xyz.tberghuis.floatingtimer.stopwatch.stopwatchExit
@@ -19,10 +18,11 @@ import kotlin.concurrent.timerTask
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
+import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.stopwatch.StopwatchState
 
 @Composable
-fun StopwatchClickTarget(overlayState: OverlayState, stopwatchState: StopwatchState) {
+fun StopwatchClickTarget(overlayState: OverlayStateFDSFSDF, stopwatchState: StopwatchState) {
   val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
   val stopwatchOverlayComponent = LocalStopwatchOverlayComponent.current
 

@@ -27,11 +27,11 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.collect
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
-import xyz.tberghuis.floatingtimer.common.OverlayState
+import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
-fun Trash(overlayState: OverlayState) {
+fun Trash(overlayState: OverlayStateFDSFSDF) {
   val context = LocalContext.current
   val timerSizePx = remember {
     val density = context.resources.displayMetrics.density
@@ -81,7 +81,7 @@ fun Trash(overlayState: OverlayState) {
 }
 
 fun calcTimerIsHoverTrash(
-  overlayState: OverlayState,
+  overlayState: OverlayStateFDSFSDF,
   timerSizePx: Float,
   trashRect: Rect
 ): Boolean {

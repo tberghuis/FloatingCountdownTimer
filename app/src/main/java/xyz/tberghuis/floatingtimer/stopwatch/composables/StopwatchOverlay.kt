@@ -36,15 +36,15 @@ import androidx.compose.ui.unit.IntOffset
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import kotlinx.coroutines.flow.collect
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
-import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.composables.Trash
 import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
+import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.stopwatch.StopwatchState
 
 @Composable
-fun StopwatchOverlay(overlayState: OverlayState, stopwatchState: StopwatchState) {
+fun StopwatchOverlay(overlayState: OverlayStateFDSFSDF, stopwatchState: StopwatchState) {
   val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
 
   Box(

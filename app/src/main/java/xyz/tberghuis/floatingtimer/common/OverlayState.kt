@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.IntOffset
 
-class OverlayState {
+class OverlayStateFDSFSDF {
   var timerOffset by mutableStateOf(IntOffset.Zero)
   var showTrash by mutableStateOf(false)
   var isTimerHoverTrash = false

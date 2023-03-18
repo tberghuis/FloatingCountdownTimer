@@ -11,7 +11,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.IntOffset
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
-import xyz.tberghuis.floatingtimer.common.OverlayState
+import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchClickTarget
 import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchOverlay
@@ -24,7 +24,7 @@ val LocalStopwatchOverlayComponent = staticCompositionLocalOf<StopwatchOverlayCo
 
 class StopwatchOverlayComponent(
   val context: Context,
-  private val overlayState: OverlayState,
+  private val overlayState: OverlayStateFDSFSDF,
   private val stopwatchState: StopwatchState,
 //  private val stopService: () -> Unit
 ) {

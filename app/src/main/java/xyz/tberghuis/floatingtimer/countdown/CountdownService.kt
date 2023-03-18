@@ -32,7 +32,7 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_COUNTDOWN
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_COUNTDOWN
-import xyz.tberghuis.floatingtimer.common.OverlayState
+import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.receivers.CountdownResetReceiver
 import xyz.tberghuis.floatingtimer.receivers.ExitReceiver
 import xyz.tberghuis.floatingtimer.logd
@@ -41,7 +41,7 @@ import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 @AndroidEntryPoint
 class CountdownServiceFDSFSDFSD : Service() {
 
-  private val overlayState = OverlayState()
+  private val overlayState = OverlayStateFDSFSDF()
   private var pendingAlarm: PendingIntent? = null
 
   @Inject

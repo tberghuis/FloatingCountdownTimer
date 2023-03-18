@@ -21,13 +21,13 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_STOPWATCH_SERVICE
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_STOPWATCH_SERVICE
 import xyz.tberghuis.floatingtimer.SERVICE_STOPWATCH_NOTIFICATION_ID
+import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.common.OverlayState
 
 @AndroidEntryPoint
 class StopwatchService : Service() {
 
-  val stopwatchOverlayState = OverlayState()
+  val stopwatchOverlayState = OverlayStateFDSFSDF()
   lateinit var stopwatchOverlayComponent: StopwatchOverlayComponent
   val stopwatchState = StopwatchState()
 

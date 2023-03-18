@@ -29,17 +29,17 @@ import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.countdown.TimerStateRunning
-import xyz.tberghuis.floatingtimer.common.OverlayState
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
 import kotlin.math.roundToInt
+import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.countdown.CountdownState
 
 // todo remove player reference
 // use class AlarmComponent??? contains player, deals with AlarmManager etc
 @Composable
-fun TimerOverlay(overlayState: OverlayState, player: MediaPlayer, countdownState: CountdownState) {
+fun TimerOverlay(overlayState: OverlayStateFDSFSDF, player: MediaPlayer, countdownState: CountdownState) {
 
   // should i use derivedStateOf ???
   // i don't understand the benefit
