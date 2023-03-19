@@ -14,7 +14,7 @@ import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchClickTarget
-import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchOverlay
+import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchOverlayVFDSDSC
 
 // todo inherit interface OverlayComponent { exitOverlay, startOverlay }
 
@@ -82,7 +82,7 @@ class StopwatchOverlayComponent(
     }
     fullscreenOverlay.view.setContent {
       CompositionLocalProvider(LocalStopwatchOverlayComponent provides this) {
-        StopwatchOverlay(overlayState, stopwatchState)
+        StopwatchOverlayVFDSDSC(overlayState, stopwatchState)
       }
     }
     return fullscreenOverlay
