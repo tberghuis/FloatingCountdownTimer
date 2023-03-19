@@ -66,7 +66,9 @@ class AlarmController(val service: FloatingService) {
           }
           TimerStatePaused -> {
             pendingAlarm?.cancel()
-//            player.pause()
+            if (player.isPlaying) {
+              player.pause()
+            }
           }
         }
       }
