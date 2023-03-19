@@ -9,6 +9,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import xyz.tberghuis.floatingtimer.EXTRA_COUNTDOWN_DURATION
 import xyz.tberghuis.floatingtimer.FOREGROUND_SERVICE_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_CREATE
@@ -40,6 +41,7 @@ class FloatingService : Service() {
       val command = intent.getStringExtra(INTENT_COMMAND)
       when (command) {
         INTENT_COMMAND_COUNTDOWN_CREATE -> {
+          val duration = intent.getIntExtra(EXTRA_COUNTDOWN_DURATION, 10)
           overlayController.countdownState.overlayState.isVisible.value = true
         }
       }
