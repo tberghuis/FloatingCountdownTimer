@@ -17,7 +17,8 @@ fun OverlayContent() {
   // todo refactor timers to share code ...
   // move onGloballyPositioned code here
   Box(Modifier.onGloballyPositioned {
-
+    controller.screenWidthPx = it.size.width
+    controller.screenHeightPx = it.size.height
   }) {
     if (isCountdownVisible.value == true) {
       CountdownOverlay(controller)

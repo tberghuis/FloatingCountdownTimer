@@ -47,16 +47,12 @@ fun CountdownOverlay(controller: OverlayController) {
   val context = LocalContext.current
 
   Box(Modifier.onGloballyPositioned {
-    logd("TimerOverlay onGloballyPositioned")
-    overlayState.screenWidthPx = it.size.width
-    overlayState.screenHeightPx = it.size.height
-
     // do this instead of service onConfigurationChanged
     // to reposition timer when screen rotate
     val density = context.resources.displayMetrics.density
     val timerSizePx = (TIMER_SIZE_DP * density).toInt()
-    val x = min(overlayState.timerOffset.x, overlayState.screenWidthPx - timerSizePx)
-    val y = min(overlayState.timerOffset.y, overlayState.screenHeightPx - timerSizePx)
+    val x = min(overlayState.timerOffset.x, controller.screenWidthPx - timerSizePx)
+    val y = min(overlayState.timerOffset.y, controller.screenHeightPx - timerSizePx)
     overlayState.timerOffset = IntOffset(x, y)
   }) {
     Box(

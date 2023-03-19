@@ -29,6 +29,8 @@ val LocalOverlayController =
 class OverlayController(val service: FloatingService) {
 
   val player: MediaPlayer
+  var screenWidthPx = Int.MAX_VALUE
+  var screenHeightPx = Int.MAX_VALUE
 
   val countdownState = CountdownState()
   private val countdownIsVisible: Flow<Boolean?>
