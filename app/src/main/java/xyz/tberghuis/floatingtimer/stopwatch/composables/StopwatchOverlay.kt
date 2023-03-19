@@ -41,6 +41,7 @@ import xyz.tberghuis.floatingtimer.composables.Trash
 import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
 import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
+import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 import xyz.tberghuis.floatingtimer.stopwatch.StopwatchStateGDFGDFG
 
 @Composable
@@ -67,7 +68,7 @@ fun StopwatchOverlayVFDSDSC(overlayState: OverlayStateFDSFSDF, stopwatchState: S
         .padding(PROGRESS_ARC_WIDTH / 2),
       contentAlignment = Alignment.Center
     ) {
-      BorderArc(stopwatchState)
+//      BorderArc(stopwatchState)
       TimeDisplay(stopwatchState.timeElapsed.value)
     }
 
@@ -84,7 +85,7 @@ fun StopwatchOverlayVFDSDSC(overlayState: OverlayStateFDSFSDF, stopwatchState: S
 }
 
 @Composable
-fun BorderArc(stopwatchState: StopwatchStateGDFGDFG) {
+fun BorderArc(stopwatchState: StopwatchState) {
   var pausedAngle by remember { mutableStateOf(210f) }
   var restartAngle by remember { mutableStateOf(0f) }
   val infiniteTransition = rememberInfiniteTransition()

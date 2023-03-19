@@ -24,10 +24,10 @@ import xyz.tberghuis.floatingtimer.stopwatch.StopwatchStateGDFGDFG
 import xyz.tberghuis.floatingtimer.stopwatch.composables.BorderArc
 
 @Composable
-fun StopwatchOverlay(stopwatchState: StopwatchStateGDFGDFG) {
-
+fun StopwatchOverlay() {
   val serviceState = LocalServiceState.current
-  val overlayState = serviceState.stopwatchState.overlayState
+  val stopwatchState = serviceState.stopwatchState
+  val overlayState = stopwatchState.overlayState
 
 
   val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
