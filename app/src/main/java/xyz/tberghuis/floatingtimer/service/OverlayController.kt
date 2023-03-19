@@ -41,7 +41,6 @@ val LocalServiceState =
 class OverlayController(val service: FloatingService) {
 
 
-
   private var pendingAlarm: PendingIntent? = null
 
   private val countdownState = service.state.countdownState
@@ -154,7 +153,7 @@ class OverlayController(val service: FloatingService) {
 
   private fun setContentClickTargets() {
     countdownClickTarget.view.setContent {
-      ClickTarget(service.state,this, countdownState.overlayState, countdownClickTarget) {
+      ClickTarget(service.state, this, countdownState.overlayState, countdownClickTarget) {
         logd("click target onclick")
         when (countdownState.timerState.value) {
           is TimerStatePaused -> {
