@@ -22,14 +22,23 @@ import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.logd
 
 class FloatingService : Service() {
+
+  val state = ServiceState()
+
+
   private var isStarted = false
 
-  private lateinit var overlayController: OverlayController
+
+
+  // todo make private
+  lateinit var overlayController: OverlayController
+  lateinit var alarmController: AlarmController
 
 
   override fun onCreate() {
     super.onCreate()
     overlayController = OverlayController(this)
+    alarmController = AlarmController(this)
   }
 
   override fun onBind(intent: Intent?): IBinder? {
@@ -46,12 +55,12 @@ class FloatingService : Service() {
         INTENT_COMMAND_COUNTDOWN_CREATE -> {
           // todo cancel pending alarm
           val duration = intent.getIntExtra(EXTRA_COUNTDOWN_DURATION, 10)
-          overlayController.countdownState.resetTimerState(duration)
-          overlayController.countdownState.overlayState.isVisible.value = true
+          state.countdownState.resetTimerState(duration)
+          state.countdownState.overlayState.isVisible.value = true
         }
         INTENT_COMMAND_COUNTDOWN_COMPLETE -> {
           logd("onStartCommand INTENT_COMMAND_COUNTDOWN_COMPLETE")
-          overlayController.countdownState.timerState.value = TimerStateFinished
+          state.countdownState.timerState.value = TimerStateFinished
         }
       }
     }

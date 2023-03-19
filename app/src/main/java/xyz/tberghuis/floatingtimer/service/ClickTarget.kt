@@ -32,9 +32,10 @@ import xyz.tberghuis.floatingtimer.logd
 //  }
 //}
 
-
+// doitwrong
 @Composable
 fun ClickTarget(
+  serviceState: ServiceState,
   controller: OverlayController,
   overlayState: OverlayState,
   viewHolder: OverlayViewHolder,
@@ -52,9 +53,9 @@ fun ClickTarget(
           IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
         val _timerOffset = overlayState.timerOffset + dragAmountIntOffset
         var x = max(_timerOffset.x, 0)
-        x = min(x, controller.screenWidthPx - controller.timerSizePx)
+        x = min(x, serviceState.screenWidthPx - controller.timerSizePx)
         var y = max(_timerOffset.y, 0)
-        y = min(y, controller.screenHeightPx - controller.timerSizePx)
+        y = min(y, serviceState.screenHeightPx - controller.timerSizePx)
         overlayState.timerOffset = IntOffset(x, y)
       }, onDragEnd = {
         logd("onDragEnd")

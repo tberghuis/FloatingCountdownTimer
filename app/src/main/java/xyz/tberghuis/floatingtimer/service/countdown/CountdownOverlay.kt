@@ -30,12 +30,14 @@ import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.service.OverlayController
+import xyz.tberghuis.floatingtimer.service.ServiceState
 
 @Composable
-fun CountdownOverlay(controller: OverlayController) {
-  val countdownState = controller.countdownState
+fun CountdownOverlay(state: ServiceState) {
+  val countdownState = state.countdownState
+
   val overlayState = countdownState.overlayState
-  val player = controller.player
+//  val player = controller.player
 
   // should i use derivedStateOf ???
   // i don't understand the benefit
@@ -48,20 +50,18 @@ fun CountdownOverlay(controller: OverlayController) {
     // to reposition timer when screen rotate
     val density = context.resources.displayMetrics.density
     val timerSizePx = (TIMER_SIZE_DP * density).toInt()
-    val x = min(overlayState.timerOffset.x, controller.screenWidthPx - timerSizePx)
-    val y = min(overlayState.timerOffset.y, controller.screenHeightPx - timerSizePx)
+    val x = min(overlayState.timerOffset.x, state.screenWidthPx - timerSizePx)
+    val y = min(overlayState.timerOffset.y, state.screenHeightPx - timerSizePx)
     overlayState.timerOffset = IntOffset(x, y)
   }) {
-    Box(
-      modifier = Modifier
-        .offset {
-          overlayState.timerOffset
-        }
-        .size(TIMER_SIZE_DP.dp)
-        .padding(PROGRESS_ARC_WIDTH / 2)
-        .zIndex(1f),
-      contentAlignment = Alignment.Center
-    ) {
+    Box(modifier = Modifier
+      .offset {
+        overlayState.timerOffset
+      }
+      .size(TIMER_SIZE_DP.dp)
+      .padding(PROGRESS_ARC_WIDTH / 2)
+      .zIndex(1f),
+      contentAlignment = Alignment.Center) {
       ProgressArc(timeLeftFraction)
       TimeDisplay(countdownState.countdownSeconds)
     }
@@ -93,6 +93,7 @@ fun CountdownOverlay(controller: OverlayController) {
             override fun onTick(millisUntilFinished: Long) {
               countdownState.countdownSeconds = (millisUntilFinished / 1000f).roundToInt()
             }
+
             override fun onFinish() {
               countdownState.countdownSeconds = 0
             }
@@ -101,10 +102,7 @@ fun CountdownOverlay(controller: OverlayController) {
         is TimerStatePaused -> {
           // do nothing
         }
-        is TimerStateFinished -> {
-          logd("does the player start")
-          player.start()
-        }
+        else -> {}
       }
     }
   }

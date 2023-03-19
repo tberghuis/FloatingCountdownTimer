@@ -31,18 +31,20 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownState
 
-val LocalOverlayController =
-  compositionLocalOf<OverlayController> { error("No OverlayController provided") }
+//val LocalOverlayController =
+//  compositionLocalOf<OverlayController> { error("No OverlayController provided") }
+
+val LocalServiceState =
+  compositionLocalOf<ServiceState> { error("No ServiceState provided") }
+
 
 class OverlayController(val service: FloatingService) {
 
-  val player: MediaPlayer
-  var screenWidthPx = Int.MAX_VALUE
-  var screenHeightPx = Int.MAX_VALUE
+
 
   private var pendingAlarm: PendingIntent? = null
 
-  val countdownState = CountdownState()
+  private val countdownState = service.state.countdownState
   private val countdownIsVisible: Flow<Boolean?>
     get() = countdownState.overlayState.isVisible
 
@@ -76,9 +78,7 @@ class OverlayController(val service: FloatingService) {
   init {
     logd("OverlayController init")
 
-    val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-    player = MediaPlayer.create(service, alarmSound)
-    player.isLooping = true
+
 
     alarmSetup()
     setContentOverlayView()
@@ -95,7 +95,7 @@ class OverlayController(val service: FloatingService) {
     }
 
     fullscreenOverlay.view.setContent {
-      CompositionLocalProvider(LocalOverlayController provides this) {
+      CompositionLocalProvider(LocalServiceState provides service.state) {
         OverlayContent()
       }
     }
@@ -154,7 +154,7 @@ class OverlayController(val service: FloatingService) {
 
   private fun setContentClickTargets() {
     countdownClickTarget.view.setContent {
-      ClickTarget(this, countdownState.overlayState, countdownClickTarget) {
+      ClickTarget(service.state,this, countdownState.overlayState, countdownClickTarget) {
         logd("click target onclick")
         when (countdownState.timerState.value) {
           is TimerStatePaused -> {
@@ -164,7 +164,7 @@ class OverlayController(val service: FloatingService) {
             countdownState.timerState.value = TimerStatePaused
           }
           is TimerStateFinished -> {
-            player.pause()
+            service.alarmController.player.pause()
             countdownState.resetTimerState(countdownState.durationSeconds)
           }
         }
@@ -214,7 +214,7 @@ class OverlayController(val service: FloatingService) {
     countdownState.overlayState.reset()
     countdownState.resetTimerState()
 
-    player.pause()
+    service.alarmController.player.pause()
     pendingAlarm?.cancel()
     service.stopSelf()
   }
