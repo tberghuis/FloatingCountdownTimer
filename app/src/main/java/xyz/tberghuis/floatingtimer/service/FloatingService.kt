@@ -41,7 +41,9 @@ class FloatingService : Service() {
       val command = intent.getStringExtra(INTENT_COMMAND)
       when (command) {
         INTENT_COMMAND_COUNTDOWN_CREATE -> {
+          // todo cancel pending alarm
           val duration = intent.getIntExtra(EXTRA_COUNTDOWN_DURATION, 10)
+          overlayController.countdownState.resetTimerState(duration)
           overlayController.countdownState.overlayState.isVisible.value = true
         }
       }
