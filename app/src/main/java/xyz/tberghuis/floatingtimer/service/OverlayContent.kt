@@ -14,6 +14,8 @@ fun OverlayContent() {
   val isCountdownVisible =
     controller.countdownState.overlayState.isVisible.collectAsState()
 
+  // todo refactor timers to share code ...
+  // move onGloballyPositioned code here
   Box(Modifier.onGloballyPositioned {
 
   }) {
