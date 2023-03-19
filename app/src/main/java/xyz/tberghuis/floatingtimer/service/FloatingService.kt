@@ -14,6 +14,7 @@ import xyz.tberghuis.floatingtimer.FOREGROUND_SERVICE_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_COMPLETE
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_CREATE
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_CREATE
 import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL_DISPLAY
@@ -27,7 +28,6 @@ class FloatingService : Service() {
 
 
   private var isStarted = false
-
 
 
   // todo make private
@@ -62,6 +62,14 @@ class FloatingService : Service() {
           logd("onStartCommand INTENT_COMMAND_COUNTDOWN_COMPLETE")
           state.countdownState.timerState.value = TimerStateFinished
         }
+
+        INTENT_COMMAND_STOPWATCH_CREATE -> {
+//          stopwatchOverlayState.reset()
+//          stopwatchOverlayComponent.showOverlays()
+          state.stopwatchState.running.value = true
+        }
+
+
       }
     }
     return START_STICKY
@@ -91,8 +99,7 @@ class FloatingService : Service() {
       }
     val notification: Notification =
       NotificationCompat.Builder(this, NOTIFICATION_CHANNEL).setContentTitle("Floating Timer")
-        .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent)
-        .build()
+        .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent).build()
     return notification
   }
 
