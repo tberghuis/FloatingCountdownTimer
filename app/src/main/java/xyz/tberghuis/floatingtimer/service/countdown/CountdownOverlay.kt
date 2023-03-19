@@ -80,6 +80,7 @@ fun CountdownOverlay(state: ServiceState) {
     }
   }
 
+  // todo move into AlarmController
   LaunchedEffect(Unit) {
     logd("CountdownOverlay LaunchedEffect")
     var countDownTimer: CountDownTimer? = null

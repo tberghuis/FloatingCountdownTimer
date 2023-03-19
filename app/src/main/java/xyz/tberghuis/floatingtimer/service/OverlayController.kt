@@ -31,17 +31,11 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownState
 
-//val LocalOverlayController =
-//  compositionLocalOf<OverlayController> { error("No OverlayController provided") }
-
-val LocalServiceState =
-  compositionLocalOf<ServiceState> { error("No ServiceState provided") }
-
+val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }
 
 class OverlayController(val service: FloatingService) {
 
-
-  private var pendingAlarm: PendingIntent? = null
+//  private var pendingAlarm: PendingIntent? = null
 
   private val countdownState = service.state.countdownState
   private val countdownIsVisible: Flow<Boolean?>
@@ -77,9 +71,6 @@ class OverlayController(val service: FloatingService) {
   init {
     logd("OverlayController init")
 
-
-
-    alarmSetup()
     setContentOverlayView()
     setContentClickTargets()
     watchState()
@@ -163,7 +154,7 @@ class OverlayController(val service: FloatingService) {
             countdownState.timerState.value = TimerStatePaused
           }
           is TimerStateFinished -> {
-            service.alarmController.player.pause()
+//            service.alarmController.player.pause()
             countdownState.resetTimerState(countdownState.durationSeconds)
           }
         }
@@ -171,39 +162,6 @@ class OverlayController(val service: FloatingService) {
     }
   }
 
-
-  private fun alarmSetup() {
-    val context = service
-    CoroutineScope(Dispatchers.Default).launch {
-      countdownState.timerState.collect { timerState ->
-
-        when (timerState) {
-          TimerStateRunning -> {
-            // set alarm
-            logd("todo: run the timer")
-            val intent = Intent(context, AlarmReceiver::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-            // todo do i need to save pendingAlarm to state???
-            pendingAlarm = PendingIntent.getBroadcast(
-              context.applicationContext,
-              REQUEST_CODE_PENDING_ALARM,
-              intent,
-              PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
-            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            alarmManager.setAlarmClock(
-              AlarmManager.AlarmClockInfo(
-                System.currentTimeMillis() + (countdownState.countdownSeconds * 1000), pendingAlarm
-              ), pendingAlarm
-            )
-          }
-          else -> {
-            pendingAlarm?.cancel()
-          }
-        }
-      }
-    }
-  }
 
   fun exitCountdown() {
     // what do i do ????
@@ -213,8 +171,7 @@ class OverlayController(val service: FloatingService) {
     countdownState.overlayState.reset()
     countdownState.resetTimerState()
 
-    service.alarmController.player.pause()
-    pendingAlarm?.cancel()
+//    service.alarmController.player.pause()
     service.stopSelf()
   }
 
