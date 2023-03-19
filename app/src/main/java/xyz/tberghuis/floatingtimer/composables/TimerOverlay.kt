@@ -85,7 +85,7 @@ fun TimerOverlay(overlayState: OverlayStateFDSFSDF, player: MediaPlayer, countdo
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
       ) {
-        Trash(overlayState)
+//        Trash(overlayState)
       }
     }
   }

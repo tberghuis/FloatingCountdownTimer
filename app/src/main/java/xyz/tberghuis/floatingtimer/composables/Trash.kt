@@ -29,9 +29,10 @@ import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.service.OverlayState
 
 @Composable
-fun Trash(overlayState: OverlayStateFDSFSDF) {
+fun Trash(overlayState: OverlayState) {
   val context = LocalContext.current
   val timerSizePx = remember {
     val density = context.resources.displayMetrics.density
@@ -81,7 +82,7 @@ fun Trash(overlayState: OverlayStateFDSFSDF) {
 }
 
 fun calcTimerIsHoverTrash(
-  overlayState: OverlayStateFDSFSDF,
+  overlayState: OverlayState,
   timerSizePx: Float,
   trashRect: Rect
 ): Boolean {

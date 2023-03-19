@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.Context.INPUT_SERVICE
 import android.graphics.PixelFormat
 import android.hardware.input.InputManager
+import android.media.MediaPlayer
+import android.media.RingtoneManager
+import android.net.Uri
 import android.os.Build
 import android.view.WindowManager
 import androidx.compose.runtime.CompositionLocalProvider
@@ -24,6 +27,8 @@ val LocalOverlayController =
   compositionLocalOf<OverlayController> { error("No OverlayController provided") }
 
 class OverlayController(val service: FloatingService) {
+
+  val player: MediaPlayer
 
   val countdownState = CountdownState()
   private val countdownIsVisible: Flow<Boolean?>
@@ -58,6 +63,12 @@ class OverlayController(val service: FloatingService) {
 
   init {
     logd("OverlayController init")
+
+    val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+    player = MediaPlayer.create(service, alarmSound)
+    player.isLooping = true
+
+
     setContentOverlayView()
     setContentClickTargets()
     watchState()

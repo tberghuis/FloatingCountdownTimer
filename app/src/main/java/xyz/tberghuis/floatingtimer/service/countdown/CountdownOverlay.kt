@@ -32,9 +32,13 @@ import xyz.tberghuis.floatingtimer.composables.Trash
 import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.countdown.TimerStateRunning
+import xyz.tberghuis.floatingtimer.service.OverlayController
 
 @Composable
-fun CountdownOverlay(overlayState: OverlayStateFDSFSDF, player: MediaPlayer, countdownState: CountdownStateVFDVDFV) {
+fun CountdownOverlay(controller: OverlayController) {
+  val countdownState = controller.countdownState
+  val overlayState = countdownState.overlayState
+  val player = controller.player
 
   // should i use derivedStateOf ???
   // i don't understand the benefit

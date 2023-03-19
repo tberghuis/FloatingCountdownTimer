@@ -77,7 +77,7 @@ fun StopwatchOverlay(overlayState: OverlayStateFDSFSDF, stopwatchState: Stopwatc
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
       ) {
-        Trash(overlayState)
+//        Trash(overlayState)
       }
     }
   }

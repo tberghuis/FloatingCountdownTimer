@@ -6,17 +6,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
+import xyz.tberghuis.floatingtimer.service.countdown.CountdownOverlay
 
 @Composable
 fun OverlayContent() {
+  val controller = LocalOverlayController.current
   val isCountdownVisible =
-    LocalOverlayController.current.countdownState.overlayState.isVisible.collectAsState()
+    controller.countdownState.overlayState.isVisible.collectAsState()
 
   Box(Modifier.onGloballyPositioned {
 
   }) {
     if (isCountdownVisible.value == true) {
-      Text("hello countdown")
+      CountdownOverlay(controller)
     }
   }
 }
