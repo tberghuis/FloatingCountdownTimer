@@ -20,6 +20,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
+import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
+import xyz.tberghuis.floatingtimer.countdown.TimerStatePaused
+import xyz.tberghuis.floatingtimer.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownState
 
@@ -38,8 +41,8 @@ class OverlayController(val service: FloatingService) {
 
 
   private val density = service.resources.displayMetrics.density
-  private val timerSizePx = (TIMER_SIZE_DP * density).toInt()
-  private val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+  val timerSizePx = (TIMER_SIZE_DP * density).toInt()
+  val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
   private val countdownClickTarget = OverlayViewHolder(
     WindowManager.LayoutParams(
@@ -144,8 +147,20 @@ class OverlayController(val service: FloatingService) {
 
   private fun setContentClickTargets() {
     countdownClickTarget.view.setContent {
-      ClickTarget {
+      ClickTarget(this, countdownState.overlayState, countdownClickTarget) {
         logd("click target onclick")
+        when (countdownState.timerState.value) {
+          is TimerStatePaused -> {
+            countdownState.timerState.value = TimerStateRunning
+          }
+          is TimerStateRunning -> {
+            countdownState.timerState.value = TimerStatePaused
+          }
+          is TimerStateFinished -> {
+            player.pause()
+            countdownState.resetTimerState(countdownState.durationSeconds)
+          }
+        }
       }
     }
   }
