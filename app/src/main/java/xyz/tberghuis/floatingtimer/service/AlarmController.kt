@@ -42,7 +42,7 @@ class AlarmController(val service: FloatingService) {
           is TimerStateFinished -> {
             logd("does the player start")
             player.start()
-//            pendingAlarm?.cancel()
+            pendingAlarm?.cancel()
           }
 
           TimerStateRunning -> {
