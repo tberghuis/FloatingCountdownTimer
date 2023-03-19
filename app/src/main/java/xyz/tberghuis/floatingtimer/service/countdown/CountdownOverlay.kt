@@ -1,6 +1,5 @@
 package xyz.tberghuis.floatingtimer.service.countdown
 
-import android.media.MediaPlayer
 import android.os.CountDownTimer
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,8 +18,6 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
-import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
-import xyz.tberghuis.floatingtimer.countdown.CountdownStateVFDVDFV
 import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -60,13 +57,11 @@ fun CountdownOverlay(controller: OverlayController) {
         .offset {
           overlayState.timerOffset
         }
-//        .background(Color.Red)
         .size(TIMER_SIZE_DP.dp)
         .padding(PROGRESS_ARC_WIDTH / 2)
         .zIndex(1f),
       contentAlignment = Alignment.Center
     ) {
-
       ProgressArc(timeLeftFraction)
       TimeDisplay(countdownState.countdownSeconds)
     }
@@ -85,8 +80,6 @@ fun CountdownOverlay(controller: OverlayController) {
     }
   }
 
-  // i should move this code into AlarmController
-  // that lives in service
   LaunchedEffect(Unit) {
     logd("CountdownOverlay LaunchedEffect")
     var countDownTimer: CountDownTimer? = null
@@ -100,11 +93,8 @@ fun CountdownOverlay(controller: OverlayController) {
             override fun onTick(millisUntilFinished: Long) {
               countdownState.countdownSeconds = (millisUntilFinished / 1000f).roundToInt()
             }
-
             override fun onFinish() {
               countdownState.countdownSeconds = 0
-              // todo no i need to do this???
-//              timerState.value = TimerStateFinished
             }
           }.start()
         }
