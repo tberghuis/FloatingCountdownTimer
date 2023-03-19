@@ -1,7 +1,10 @@
 package xyz.tberghuis.floatingtimer.service
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Context.INPUT_SERVICE
+import android.content.Intent
 import android.graphics.PixelFormat
 import android.hardware.input.InputManager
 import android.media.MediaPlayer
@@ -19,11 +22,13 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
+import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownState
 
 val LocalOverlayController =
@@ -34,6 +39,8 @@ class OverlayController(val service: FloatingService) {
   val player: MediaPlayer
   var screenWidthPx = Int.MAX_VALUE
   var screenHeightPx = Int.MAX_VALUE
+
+  private var pendingAlarm: PendingIntent? = null
 
   val countdownState = CountdownState()
   private val countdownIsVisible: Flow<Boolean?>
@@ -73,7 +80,7 @@ class OverlayController(val service: FloatingService) {
     player = MediaPlayer.create(service, alarmSound)
     player.isLooping = true
 
-
+    alarmSetup()
     setContentOverlayView()
     setContentClickTargets()
     watchState()
@@ -164,4 +171,40 @@ class OverlayController(val service: FloatingService) {
       }
     }
   }
+
+
+  private fun alarmSetup() {
+    val context = service
+    CoroutineScope(Dispatchers.Default).launch {
+      countdownState.timerState.collect { timerState ->
+
+        when (timerState) {
+          TimerStateRunning -> {
+            // set alarm
+            logd("todo: run the timer")
+            val intent = Intent(context, AlarmReceiver::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
+            // todo do i need to save pendingAlarm to state???
+            pendingAlarm = PendingIntent.getBroadcast(
+              context.applicationContext,
+              REQUEST_CODE_PENDING_ALARM,
+              intent,
+              PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.setAlarmClock(
+              AlarmManager.AlarmClockInfo(
+                System.currentTimeMillis() + (countdownState.countdownSeconds * 1000), pendingAlarm
+              ), pendingAlarm
+            )
+          }
+          else -> {
+            pendingAlarm?.cancel()
+          }
+        }
+      }
+    }
+  }
+
+
 }

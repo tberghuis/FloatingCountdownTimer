@@ -12,11 +12,13 @@ import androidx.core.app.NotificationCompat
 import xyz.tberghuis.floatingtimer.EXTRA_COUNTDOWN_DURATION
 import xyz.tberghuis.floatingtimer.FOREGROUND_SERVICE_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_COMPLETE
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_CREATE
 import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL_DISPLAY
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.logd
 
 class FloatingService : Service() {
@@ -46,6 +48,10 @@ class FloatingService : Service() {
           val duration = intent.getIntExtra(EXTRA_COUNTDOWN_DURATION, 10)
           overlayController.countdownState.resetTimerState(duration)
           overlayController.countdownState.overlayState.isVisible.value = true
+        }
+        INTENT_COMMAND_COUNTDOWN_COMPLETE -> {
+          logd("onStartCommand INTENT_COMMAND_COUNTDOWN_COMPLETE")
+          overlayController.countdownState.timerState.value = TimerStateFinished
         }
       }
     }

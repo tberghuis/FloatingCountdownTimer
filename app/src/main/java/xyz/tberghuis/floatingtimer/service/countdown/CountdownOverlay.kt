@@ -88,6 +88,7 @@ fun CountdownOverlay(controller: OverlayController) {
   // i should move this code into AlarmController
   // that lives in service
   LaunchedEffect(Unit) {
+    logd("CountdownOverlay LaunchedEffect")
     var countDownTimer: CountDownTimer? = null
     countdownState.timerState.collectLatest {
       countDownTimer?.cancel()
@@ -111,9 +112,8 @@ fun CountdownOverlay(controller: OverlayController) {
           // do nothing
         }
         is TimerStateFinished -> {
-          // play alarm
+          logd("does the player start")
           player.start()
-          // vibrate
         }
       }
     }
