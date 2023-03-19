@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.service
 
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownState
+import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 
 
 // place reactive state here
@@ -8,6 +9,7 @@ import xyz.tberghuis.floatingtimer.service.countdown.CountdownState
 class ServiceState {
 
   val countdownState = CountdownState()
+  val stopwatchState = StopwatchState()
 
   // these could be moved back into OverlayController
   // meh
