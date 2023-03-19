@@ -17,6 +17,7 @@ import androidx.compose.runtime.compositionLocalOf
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
@@ -122,15 +123,16 @@ class OverlayController(val service: FloatingService) {
   }
 
   private fun deriveFullscreenVisibleFlow(): Flow<Boolean> {
-    // todo
-//    return incrementIsVisible.combine(decrementIsVisible) { b1, b2 ->
-//      if (b1 == null && b2 == null) {
-//        null
-//      } else {
-//        listOf(b1, b2).contains(true)
-//      }
-//    }.filterNotNull().distinctUntilChanged()
-    return countdownIsVisible.filterNotNull().distinctUntilChanged()
+    val f1 = service.state.countdownState.overlayState.isVisible
+    val f2 = service.state.stopwatchState.overlayState.isVisible
+
+    return f1.combine(f2) { b1, b2 ->
+      if (b1 == null && b2 == null) {
+        null
+      } else {
+        listOf(b1, b2).contains(true)
+      }
+    }.filterNotNull().distinctUntilChanged()
   }
 
   private suspend fun addOrRemoveClickTargetView(
