@@ -61,8 +61,7 @@ fun ClickTarget(
         overlayState.showTrash = false
 
         if (overlayState.isTimerHoverTrash) {
-          // todo
-//          endService()
+          controller.exitCountdown()
           return@detectDragGestures
         }
 

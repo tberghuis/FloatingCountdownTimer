@@ -206,5 +206,17 @@ class OverlayController(val service: FloatingService) {
     }
   }
 
+  fun exitCountdown() {
+    // what do i do ????
+    // todo rewrite
+
+    countdownState.overlayState.isVisible.value = false
+    countdownState.overlayState.reset()
+    countdownState.resetTimerState()
+
+    player.pause()
+    pendingAlarm?.cancel()
+    service.stopSelf()
+  }
 
 }

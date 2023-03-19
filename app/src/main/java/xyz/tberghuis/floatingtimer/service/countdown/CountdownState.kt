@@ -15,7 +15,7 @@ class CountdownState {
   var countdownSeconds by mutableStateOf<Int>(10)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
 
-  fun resetTimerState(duration: Int) {
+  fun resetTimerState(duration: Int = this.durationSeconds) {
     durationSeconds = duration
     countdownSeconds = duration
     timerState.value = TimerStatePaused
