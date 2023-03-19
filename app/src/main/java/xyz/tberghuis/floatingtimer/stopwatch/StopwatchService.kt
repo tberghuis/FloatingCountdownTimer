@@ -25,7 +25,7 @@ import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.logd
 
 @AndroidEntryPoint
-class StopwatchService : Service() {
+class StopwatchServiceFEFE : Service() {
 
   val stopwatchOverlayState = OverlayStateFDSFSDF()
   lateinit var stopwatchOverlayComponent: StopwatchOverlayComponent

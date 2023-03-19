@@ -41,6 +41,6 @@
         <receiver android:name=".stopwatch.StopwatchExitReceiver" />
         <receiver android:name=".stopwatch.StopwatchResetReceiver" />
 
-        <service android:name=".stopwatch.StopwatchService" />
+<!--        <service android:name=".stopwatch.StopwatchService" />-->
     </application>
 </manifest>

@@ -4,16 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -22,7 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_CREATE
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.stopwatch.StopwatchService
+import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @Composable
@@ -61,7 +58,7 @@ fun CreateStopwatchCard() {
 }
 
 fun startStopwatchService(context: Context) {
-  val intent = Intent(context.applicationContext, StopwatchService::class.java)
+  val intent = Intent(context.applicationContext, FloatingService::class.java)
   intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_STOPWATCH_CREATE)
   context.startForegroundService(intent)
 }
