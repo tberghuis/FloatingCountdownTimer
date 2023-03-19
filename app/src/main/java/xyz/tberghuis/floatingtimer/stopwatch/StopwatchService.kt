@@ -29,7 +29,7 @@ class StopwatchServiceFEFE : Service() {
 
   val stopwatchOverlayState = OverlayStateFDSFSDF()
   lateinit var stopwatchOverlayComponent: StopwatchOverlayComponent
-  val stopwatchState = StopwatchState()
+  val stopwatchState = StopwatchStateGDFGDFG()
 
 
   override fun onCreate() {

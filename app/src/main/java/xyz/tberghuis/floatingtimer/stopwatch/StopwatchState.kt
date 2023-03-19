@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.IntOffset
 //  val running = mutableStateOf(false)
 //}
 
-class StopwatchState {
+class StopwatchStateGDFGDFG {
   val timeElapsed = mutableStateOf(0)
 
   val running = mutableStateOf(false)

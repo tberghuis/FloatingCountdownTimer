@@ -41,10 +41,10 @@ import xyz.tberghuis.floatingtimer.composables.Trash
 import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
 import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
-import xyz.tberghuis.floatingtimer.stopwatch.StopwatchState
+import xyz.tberghuis.floatingtimer.stopwatch.StopwatchStateGDFGDFG
 
 @Composable
-fun StopwatchOverlay(overlayState: OverlayStateFDSFSDF, stopwatchState: StopwatchState) {
+fun StopwatchOverlay(overlayState: OverlayStateFDSFSDF, stopwatchState: StopwatchStateGDFGDFG) {
   val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
 
   Box(
@@ -84,7 +84,7 @@ fun StopwatchOverlay(overlayState: OverlayStateFDSFSDF, stopwatchState: Stopwatc
 }
 
 @Composable
-fun BorderArc(stopwatchState: StopwatchState) {
+fun BorderArc(stopwatchState: StopwatchStateGDFGDFG) {
   var pausedAngle by remember { mutableStateOf(210f) }
   var restartAngle by remember { mutableStateOf(0f) }
   val infiniteTransition = rememberInfiniteTransition()

@@ -19,10 +19,10 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
-import xyz.tberghuis.floatingtimer.stopwatch.StopwatchState
+import xyz.tberghuis.floatingtimer.stopwatch.StopwatchStateGDFGDFG
 
 @Composable
-fun StopwatchClickTarget(overlayState: OverlayStateFDSFSDF, stopwatchState: StopwatchState) {
+fun StopwatchClickTarget(overlayState: OverlayStateFDSFSDF, stopwatchState: StopwatchStateGDFGDFG) {
   val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
   val stopwatchOverlayComponent = LocalStopwatchOverlayComponent.current
 
@@ -75,7 +75,7 @@ fun StopwatchClickTarget(overlayState: OverlayStateFDSFSDF, stopwatchState: Stop
 
 
 // todo move into another file
-fun onClickStopwatchClickTarget(stopwatchState: StopwatchState) {
+fun onClickStopwatchClickTarget(stopwatchState: StopwatchStateGDFGDFG) {
   logd("click target start pause")
   when (stopwatchState.running.value) {
     false -> {

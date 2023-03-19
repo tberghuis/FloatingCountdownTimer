@@ -25,7 +25,7 @@ val LocalStopwatchOverlayComponent = staticCompositionLocalOf<StopwatchOverlayCo
 class StopwatchOverlayComponent(
   val context: Context,
   private val overlayState: OverlayStateFDSFSDF,
-  private val stopwatchState: StopwatchState,
+  private val stopwatchState: StopwatchStateGDFGDFG,
 //  private val stopService: () -> Unit
 ) {
   val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
