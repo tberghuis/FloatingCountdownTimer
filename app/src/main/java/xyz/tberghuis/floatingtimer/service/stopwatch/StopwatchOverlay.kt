@@ -19,20 +19,24 @@ import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
+import xyz.tberghuis.floatingtimer.service.LocalServiceState
 import xyz.tberghuis.floatingtimer.stopwatch.StopwatchStateGDFGDFG
 import xyz.tberghuis.floatingtimer.stopwatch.composables.BorderArc
 
 @Composable
-fun StopwatchOverlay(overlayState: OverlayStateFDSFSDF, stopwatchState: StopwatchStateGDFGDFG) {
+fun StopwatchOverlay(stopwatchState: StopwatchStateGDFGDFG) {
+
+  val serviceState = LocalServiceState.current
+  val overlayState = serviceState.stopwatchState.overlayState
+
+
   val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
 
   Box(
     Modifier.onGloballyPositioned {
-//      logd("TimerOverlay onGloballyPositioned")
-      overlayState.screenWidthPx = it.size.width
-      overlayState.screenHeightPx = it.size.height
-      val x = min(overlayState.timerOffset.x, overlayState.screenWidthPx - timerSizePx)
-      val y = min(overlayState.timerOffset.y, overlayState.screenHeightPx - timerSizePx)
+
+      val x = min(overlayState.timerOffset.x, serviceState.screenWidthPx - timerSizePx)
+      val y = min(overlayState.timerOffset.y, serviceState.screenHeightPx - timerSizePx)
       overlayState.timerOffset = IntOffset(x, y)
     }
   ) {
