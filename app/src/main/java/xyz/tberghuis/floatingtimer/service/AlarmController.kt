@@ -25,9 +25,11 @@ class AlarmController(val service: FloatingService) {
   private var pendingAlarm: PendingIntent? = null
 
   init {
-    val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-    // MediaPlayer.create can return null
-    player = MediaPlayer.create(service, alarmSound)
+    val alarmSound: Uri? = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+    // no default alarm sound set
+    if (alarmSound != null) {
+      player = MediaPlayer.create(service, alarmSound)
+    }
     player?.isLooping = true
 
     watchState()
