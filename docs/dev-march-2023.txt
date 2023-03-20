@@ -37,3 +37,5 @@ increment version
 build aab
 play store release
 git merge
+
+cull notes
