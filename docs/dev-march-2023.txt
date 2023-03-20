@@ -22,3 +22,13 @@ try add fragment with nested composeview as system overlay
 
 
 on drop trash, player pause, isvisible false
+
+next task clicktarget
+
+trash exit logic
+
+then ....
+
+notification
+
+....
