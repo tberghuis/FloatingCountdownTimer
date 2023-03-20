@@ -35,14 +35,10 @@ import xyz.tberghuis.floatingtimer.service.ServiceState
 @Composable
 fun CountdownOverlay(state: ServiceState) {
   val countdownState = state.countdownState
-
   val overlayState = countdownState.overlayState
-//  val player = controller.player
-
   // should i use derivedStateOf ???
   // i don't understand the benefit
   val timeLeftFraction = countdownState.countdownSeconds / countdownState.durationSeconds.toFloat()
-
   val context = LocalContext.current
 
   Box(Modifier.onGloballyPositioned {
