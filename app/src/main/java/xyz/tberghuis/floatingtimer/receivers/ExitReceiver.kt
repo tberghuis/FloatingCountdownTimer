@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_EXIT
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_EXIT
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.FloatingService
 
@@ -13,7 +13,7 @@ class ExitReceiver : BroadcastReceiver() {
     logd("exit receiver")
 
     val exitIntent = Intent(context.applicationContext, FloatingService::class.java)
-    exitIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_COUNTDOWN_EXIT)
+    exitIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_EXIT)
     context.startForegroundService(exitIntent)
   }
 }

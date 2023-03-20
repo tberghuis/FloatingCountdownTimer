@@ -19,7 +19,11 @@ import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL_DISPLAY
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT
+import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.receivers.ExitReceiver
+import xyz.tberghuis.floatingtimer.receivers.ResetReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 
 class FloatingService : Service() {
@@ -86,6 +90,22 @@ class FloatingService : Service() {
       Intent(this, MainActivity::class.java).let { notificationIntent ->
         PendingIntent.getActivity(this, 0, notificationIntent, FLAG_IMMUTABLE)
       }
+
+
+       val exitIntent = Intent(applicationContext, ExitReceiver::class.java)
+    val exitPendingIntent = PendingIntent.getBroadcast(
+      applicationContext, REQUEST_CODE_EXIT, exitIntent, FLAG_IMMUTABLE
+    )
+
+    val resetIntent = Intent(applicationContext, ResetReceiver::class.java)
+    val resetPendingIntent = PendingIntent.getBroadcast(
+      applicationContext, REQUEST_CODE_RESET, resetIntent, FLAG_IMMUTABLE
+    )
+
+
+
+
+
     val notification: Notification =
       NotificationCompat.Builder(this, NOTIFICATION_CHANNEL).setContentTitle("Floating Timer")
         .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent).build()
