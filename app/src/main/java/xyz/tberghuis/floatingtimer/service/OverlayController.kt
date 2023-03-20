@@ -14,6 +14,8 @@ import android.os.Build
 import android.view.WindowManager
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
+import java.util.*
+import kotlin.concurrent.timerTask
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -31,6 +33,7 @@ import xyz.tberghuis.floatingtimer.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownState
+import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 
 val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }
 
@@ -41,6 +44,10 @@ class OverlayController(val service: FloatingService) {
   private val countdownState = service.state.countdownState
   private val countdownIsVisible: Flow<Boolean?>
     get() = countdownState.overlayState.isVisible
+
+  private val stopwatchState = service.state.stopwatchState
+  private val stopwatchIsVisible: Flow<Boolean?>
+    get() = stopwatchState.overlayState.isVisible
 
 
   private val density = service.resources.displayMetrics.density
@@ -58,6 +65,19 @@ class OverlayController(val service: FloatingService) {
       PixelFormat.TRANSLUCENT
     ), service
   )
+
+  private val stopwatchClickTarget = OverlayViewHolder(
+    WindowManager.LayoutParams(
+      timerSizePx,
+      timerSizePx,
+      0,
+      0,
+      WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+      WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+      PixelFormat.TRANSLUCENT
+    ), service
+  )
+
 
   val fullscreenOverlay: OverlayViewHolder = OverlayViewHolder(
     WindowManager.LayoutParams(
@@ -104,6 +124,9 @@ class OverlayController(val service: FloatingService) {
       launch {
         addOrRemoveClickTargetView(countdownIsVisible, countdownClickTarget)
       }
+      launch {
+        addOrRemoveClickTargetView(stopwatchIsVisible, stopwatchClickTarget)
+      }
     }
   }
 
@@ -147,7 +170,9 @@ class OverlayController(val service: FloatingService) {
 
   private fun setContentClickTargets() {
     countdownClickTarget.view.setContent {
-      ClickTarget(service.state, this, countdownState.overlayState, countdownClickTarget, this::exitCountdown) {
+      ClickTarget(
+        service.state, this, countdownState.overlayState, countdownClickTarget, this::exitCountdown
+      ) {
         logd("click target onclick")
         when (countdownState.timerState.value) {
           is TimerStatePaused -> {
@@ -162,19 +187,59 @@ class OverlayController(val service: FloatingService) {
         }
       }
     }
+
+
+
+    stopwatchClickTarget.view.setContent {
+      ClickTarget(
+        service.state, this, stopwatchState.overlayState, stopwatchClickTarget, this::exitStopwatch
+      ) {
+        onClickStopwatchClickTarget(stopwatchState)
+      }
+    }
+
+
   }
 
-
-  fun exitCountdown() {
-    // what do i do ????
-    // todo rewrite
-
+  private fun exitCountdown() {
     countdownState.overlayState.isVisible.value = false
     countdownState.overlayState.reset()
     countdownState.resetTimerState()
-
-//    service.alarmController.player.pause()
-    service.stopSelf()
+    if (service.state.stopwatchState.overlayState.isVisible.value != true) {
+      service.stopSelf()
+    }
   }
 
+  private fun exitStopwatch() {
+    val stopwatchState = service.state.stopwatchState
+    stopwatchState.overlayState.isVisible.value = false
+    stopwatchState.overlayState.reset()
+    stopwatchState.resetStopwatchState()
+    if (countdownState.overlayState.isVisible.value != true) {
+      service.stopSelf()
+    }
+  }
+}
+
+
+fun onClickStopwatchClickTarget(stopwatchState: StopwatchState) {
+  logd("click target start pause")
+  val running = stopwatchState.isRunningStateFlow
+
+  when (running.value) {
+    false -> {
+      running.value = true
+      Timer().scheduleAtFixedRate(timerTask {
+//        logd("timertask")
+        if (running.value) {
+          stopwatchState.timeElapsed.value++
+        } else {
+          cancel()
+        }
+      }, 1000, 1000)
+    }
+    true -> {
+      running.value = false
+    }
+  }
 }

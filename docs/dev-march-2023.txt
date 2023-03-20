@@ -29,6 +29,6 @@ trash exit logic
 
 then ....
 
-notification
+notification, exit, reset
 
 ....
