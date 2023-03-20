@@ -38,13 +38,14 @@ import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.LocalServiceState
 import androidx.compose.ui.graphics.drawscope.Stroke
+import kotlinx.coroutines.flow.collect
 import xyz.tberghuis.floatingtimer.composables.Trash
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
 fun StopwatchOverlay() {
 
-  LaunchedEffect(Unit ){
+  LaunchedEffect(Unit) {
     logd("StopwatchOverlay does it run")
   }
 
@@ -62,7 +63,8 @@ fun StopwatchOverlay() {
         overlayState.timerOffset
       }
       .size(TIMER_SIZE_DP.dp)
-      .padding(PROGRESS_ARC_WIDTH / 2), contentAlignment = Alignment.Center) {
+      .padding(PROGRESS_ARC_WIDTH / 2),
+      contentAlignment = Alignment.Center) {
       BorderArc(stopwatchState)
       TimeDisplay(stopwatchState.timeElapsed.value)
     }
@@ -95,7 +97,7 @@ fun BorderArc(stopwatchState: StopwatchState) {
     derivedStateOf { pausedAngle + animatedAngle - restartAngle }
   }
 
-  val running = stopwatchState.runningStateFlow.collectAsState()
+  val running = stopwatchState.isRunningStateFlow.collectAsState()
 
   Canvas(
     Modifier.fillMaxSize()
@@ -134,8 +136,8 @@ fun BorderArc(stopwatchState: StopwatchState) {
   // should learn to write my own delegate for angle instead
   // doitwrong
   LaunchedEffect(Unit) {
-    snapshotFlow { running.value }.collect { running ->
-      when (running) {
+    stopwatchState.isRunningStateFlow.collect {
+      when (it) {
         true -> {
           restartAngle = animatedAngle
         }
