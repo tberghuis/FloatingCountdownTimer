@@ -96,6 +96,7 @@ class FloatingService : Service() {
     val notificationChannel = NotificationChannel(
       NOTIFICATION_CHANNEL, NOTIFICATION_CHANNEL_DISPLAY, NotificationManager.IMPORTANCE_DEFAULT
     )
+    // channel description???
     val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     manager.createNotificationChannel(notificationChannel)
   }
