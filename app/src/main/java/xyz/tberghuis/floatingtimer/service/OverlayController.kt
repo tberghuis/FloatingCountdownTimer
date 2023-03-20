@@ -182,7 +182,7 @@ class OverlayController(val service: FloatingService) {
     }
   }
 
-  private fun exitCountdown() {
+  fun exitCountdown() {
     countdownState.overlayState.isVisible.value = false
     countdownState.overlayState.reset()
     countdownState.resetTimerState()
@@ -191,7 +191,7 @@ class OverlayController(val service: FloatingService) {
     }
   }
 
-  private fun exitStopwatch() {
+  fun exitStopwatch() {
     val stopwatchState = service.state.stopwatchState
     stopwatchState.overlayState.isVisible.value = false
     stopwatchState.overlayState.reset()

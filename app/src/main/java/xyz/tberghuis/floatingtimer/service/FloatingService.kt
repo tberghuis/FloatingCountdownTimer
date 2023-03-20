@@ -14,6 +14,8 @@ import xyz.tberghuis.floatingtimer.FOREGROUND_SERVICE_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_COMPLETE
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_CREATE
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_EXIT
+import xyz.tberghuis.floatingtimer.INTENT_COMMAND_RESET
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_CREATE
 import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
@@ -64,6 +66,19 @@ class FloatingService : Service() {
         INTENT_COMMAND_STOPWATCH_CREATE -> {
           state.stopwatchState.overlayState.isVisible.value = true
         }
+        INTENT_COMMAND_EXIT -> {
+          if (state.countdownState.overlayState.isVisible.value == true) {
+            overlayController.exitCountdown()
+          }
+          if (state.stopwatchState.overlayState.isVisible.value == true) {
+            overlayController.exitStopwatch()
+          }
+          return START_NOT_STICKY
+        }
+        INTENT_COMMAND_RESET -> {
+          state.stopwatchState.resetStopwatchState()
+          state.countdownState.resetTimerState()
+        }
       }
     }
     return START_STICKY
@@ -90,25 +105,21 @@ class FloatingService : Service() {
       Intent(this, MainActivity::class.java).let { notificationIntent ->
         PendingIntent.getActivity(this, 0, notificationIntent, FLAG_IMMUTABLE)
       }
-
-
-       val exitIntent = Intent(applicationContext, ExitReceiver::class.java)
+    val exitIntent = Intent(applicationContext, ExitReceiver::class.java)
     val exitPendingIntent = PendingIntent.getBroadcast(
       applicationContext, REQUEST_CODE_EXIT, exitIntent, FLAG_IMMUTABLE
     )
-
     val resetIntent = Intent(applicationContext, ResetReceiver::class.java)
     val resetPendingIntent = PendingIntent.getBroadcast(
       applicationContext, REQUEST_CODE_RESET, resetIntent, FLAG_IMMUTABLE
     )
-
-
-
-
-
     val notification: Notification =
       NotificationCompat.Builder(this, NOTIFICATION_CHANNEL).setContentTitle("Floating Timer")
-        .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent).build()
+        .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent).addAction(
+          0, "Reset", resetPendingIntent
+        ).addAction(
+          0, "Exit", exitPendingIntent
+        ).build()
     return notification
   }
 }
