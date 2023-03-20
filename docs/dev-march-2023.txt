@@ -12,6 +12,10 @@ try add fragment with nested composeview as system overlay
 increment version
 build aab
 play store release
+
+test on phone before push production
+  timer froze but can't reproduce
+
 git merge
 
 cull notes
