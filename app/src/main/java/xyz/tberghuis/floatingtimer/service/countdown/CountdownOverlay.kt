@@ -24,7 +24,6 @@ import kotlin.math.roundToInt
 import kotlinx.coroutines.flow.collectLatest
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
-import xyz.tberghuis.floatingtimer.composables.ProgressArc
 import xyz.tberghuis.floatingtimer.composables.Trash
 import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.countdown.TimerStatePaused
