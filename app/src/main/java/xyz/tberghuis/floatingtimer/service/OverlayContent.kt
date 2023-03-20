@@ -13,11 +13,6 @@ import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchOverlay
 
 @Composable
 fun OverlayContent() {
-  LaunchedEffect(Unit) {
-    logd("OverlayContent does it run")
-  }
-
-
   val state = LocalServiceState.current
   val isCountdownVisible = state.countdownState.overlayState.isVisible.collectAsState()
   val isStopwatchVisible = state.stopwatchState.overlayState.isVisible.collectAsState()

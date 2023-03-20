@@ -64,9 +64,7 @@ class FloatingService : Service() {
         }
 
         INTENT_COMMAND_STOPWATCH_CREATE -> {
-//          stopwatchOverlayState.reset()
-//          stopwatchOverlayComponent.showOverlays()
-          state.stopwatchState.runningStateFlow.value = true
+          state.stopwatchState.overlayState.isVisible.value = true
         }
 
 
