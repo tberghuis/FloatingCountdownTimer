@@ -23,7 +23,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
@@ -38,17 +37,10 @@ import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.LocalServiceState
 import androidx.compose.ui.graphics.drawscope.Stroke
-import kotlinx.coroutines.flow.collect
 import xyz.tberghuis.floatingtimer.composables.Trash
-import xyz.tberghuis.floatingtimer.logd
 
 @Composable
 fun StopwatchOverlay() {
-
-  LaunchedEffect(Unit) {
-    logd("StopwatchOverlay does it run")
-  }
-
   val serviceState = LocalServiceState.current
   val stopwatchState = serviceState.stopwatchState
   val overlayState = stopwatchState.overlayState
