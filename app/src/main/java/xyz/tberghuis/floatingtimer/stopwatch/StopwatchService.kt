@@ -10,17 +10,6 @@ import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import dagger.hilt.android.AndroidEntryPoint
-import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_DESCRIPTION
-import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_ID
-import xyz.tberghuis.floatingtimer.CHANNEL_STOPWATCH_NAME
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_CREATE
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_EXIT
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_RESET
-import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_STOPWATCH_SERVICE
-import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_STOPWATCH_SERVICE
-import xyz.tberghuis.floatingtimer.SERVICE_STOPWATCH_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.logd
 
 //@AndroidEntryPoint

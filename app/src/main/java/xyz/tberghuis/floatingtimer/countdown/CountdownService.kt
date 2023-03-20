@@ -26,11 +26,6 @@ import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_RESET
 import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL_DISPLAY
-import xyz.tberghuis.floatingtimer.OverlayComponent
-import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT_COUNTDOWN
-import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
-import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET_COUNTDOWN
 import xyz.tberghuis.floatingtimer.receivers.CountdownResetReceiver
 import xyz.tberghuis.floatingtimer.receivers.ExitReceiver
 import xyz.tberghuis.floatingtimer.logd
