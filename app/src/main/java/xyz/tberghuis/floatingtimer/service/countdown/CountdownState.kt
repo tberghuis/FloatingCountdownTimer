@@ -4,8 +4,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.flow.MutableStateFlow
-import xyz.tberghuis.floatingtimer.countdown.TimerState
-import xyz.tberghuis.floatingtimer.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.OverlayState
 
 class CountdownState {
@@ -21,3 +19,9 @@ class CountdownState {
     timerState.value = TimerStatePaused
   }
 }
+
+sealed class TimerState {}
+
+object TimerStateRunning : TimerState()
+object TimerStatePaused : TimerState()
+object TimerStateFinished : TimerState()

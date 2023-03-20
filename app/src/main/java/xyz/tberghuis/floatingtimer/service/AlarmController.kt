@@ -12,11 +12,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
-import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
-import xyz.tberghuis.floatingtimer.countdown.TimerStatePaused
-import xyz.tberghuis.floatingtimer.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
+import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
+import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
+import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
 
 class AlarmController(val service: FloatingService) {
 

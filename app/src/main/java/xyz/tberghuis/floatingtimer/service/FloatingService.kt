@@ -19,8 +19,8 @@ import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL_DISPLAY
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 
 class FloatingService : Service() {
 

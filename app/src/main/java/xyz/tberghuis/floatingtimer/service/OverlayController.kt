@@ -27,12 +27,12 @@ import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
-import xyz.tberghuis.floatingtimer.countdown.TimerStateFinished
-import xyz.tberghuis.floatingtimer.countdown.TimerStatePaused
-import xyz.tberghuis.floatingtimer.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownState
+import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
+import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
+import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 
 val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }
