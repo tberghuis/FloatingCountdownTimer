@@ -127,6 +127,7 @@ class OverlayController(val service: FloatingService) {
     val f2 = service.state.stopwatchState.overlayState.isVisible
 
     return f1.combine(f2) { b1, b2 ->
+      logd("deriveFullscreenVisibleFlow b1 $b1 b2 $b2")
       if (b1 == null && b2 == null) {
         null
       } else {

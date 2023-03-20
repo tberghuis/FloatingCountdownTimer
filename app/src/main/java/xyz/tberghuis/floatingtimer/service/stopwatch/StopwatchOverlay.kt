@@ -39,9 +39,15 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.LocalServiceState
 import androidx.compose.ui.graphics.drawscope.Stroke
 import xyz.tberghuis.floatingtimer.composables.Trash
+import xyz.tberghuis.floatingtimer.logd
 
 @Composable
 fun StopwatchOverlay() {
+
+  LaunchedEffect(Unit ){
+    logd("StopwatchOverlay does it run")
+  }
+
   val serviceState = LocalServiceState.current
   val stopwatchState = serviceState.stopwatchState
   val overlayState = stopwatchState.overlayState
