@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,18 +38,15 @@ import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.LocalServiceState
 import androidx.compose.ui.graphics.drawscope.Stroke
+import xyz.tberghuis.floatingtimer.composables.Trash
 
 @Composable
 fun StopwatchOverlay() {
   val serviceState = LocalServiceState.current
   val stopwatchState = serviceState.stopwatchState
   val overlayState = stopwatchState.overlayState
-
-
   val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
-
   Box(Modifier.onGloballyPositioned {
-
     val x = min(overlayState.timerOffset.x, serviceState.screenWidthPx - timerSizePx)
     val y = min(overlayState.timerOffset.y, serviceState.screenHeightPx - timerSizePx)
     overlayState.timerOffset = IntOffset(x, y)
@@ -58,7 +56,6 @@ fun StopwatchOverlay() {
         overlayState.timerOffset
       }
       .size(TIMER_SIZE_DP.dp)
-//        .background(Color.Yellow)
       .padding(PROGRESS_ARC_WIDTH / 2), contentAlignment = Alignment.Center) {
       BorderArc(stopwatchState)
       TimeDisplay(stopwatchState.timeElapsed.value)
@@ -70,7 +67,7 @@ fun StopwatchOverlay() {
         verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally
       ) {
-//        Trash(overlayState)
+        Trash(overlayState)
       }
     }
   }
@@ -91,6 +88,8 @@ fun BorderArc(stopwatchState: StopwatchState) {
   val drawAnimatedAngle by remember {
     derivedStateOf { pausedAngle + animatedAngle - restartAngle }
   }
+
+  val running = stopwatchState.runningStateFlow.collectAsState()
 
   Canvas(
     Modifier.fillMaxSize()
@@ -118,7 +117,7 @@ fun BorderArc(stopwatchState: StopwatchState) {
 
     drawArc(
       color = primaryColor,
-      startAngle = if (!stopwatchState.running.value) pausedAngle else drawAnimatedAngle,
+      startAngle = if (!running.value) pausedAngle else drawAnimatedAngle,
       sweepAngle = 120f,
       useCenter = false,
       style = Stroke(PROGRESS_ARC_WIDTH.toPx()),
@@ -129,7 +128,7 @@ fun BorderArc(stopwatchState: StopwatchState) {
   // should learn to write my own delegate for angle instead
   // doitwrong
   LaunchedEffect(Unit) {
-    snapshotFlow { stopwatchState.running.value }.collect { running ->
+    snapshotFlow { running.value }.collect { running ->
       when (running) {
         true -> {
           restartAngle = animatedAngle

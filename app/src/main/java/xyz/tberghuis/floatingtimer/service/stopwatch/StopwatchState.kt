@@ -7,10 +7,10 @@ import xyz.tberghuis.floatingtimer.service.OverlayState
 class StopwatchState {
   val overlayState = OverlayState()
   val timeElapsed = mutableStateOf(0)
-  val running = MutableStateFlow(false)
+  val runningStateFlow = MutableStateFlow(false)
 
   fun resetStopwatchState() {
     timeElapsed.value = 0
-    running.value = false
+    runningStateFlow.value = false
   }
 }
