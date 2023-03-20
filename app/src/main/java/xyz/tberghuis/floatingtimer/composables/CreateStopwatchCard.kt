@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.stopwatch.composables
+package xyz.tberghuis.floatingtimer.composables
 
 import android.content.Context
 import android.content.Intent
@@ -27,21 +27,15 @@ fun CreateStopwatchCard() {
   val context = LocalContext.current
   val vm: HomeViewModel = hiltViewModel()
   ElevatedCard(
-    modifier = Modifier
-      .fillMaxWidth()
-      .padding(15.dp),
+    modifier = Modifier.fillMaxWidth().padding(15.dp),
   ) {
     Row(
-      modifier = Modifier
-        .padding(10.dp)
-        .fillMaxWidth(), horizontalArrangement = Arrangement.Center
+      modifier = Modifier.padding(10.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
       Text("Stopwatch", fontSize = 20.sp)
     }
     Row(
-      modifier = Modifier
-        .padding(10.dp)
-        .fillMaxWidth(), horizontalArrangement = Arrangement.Center
+      modifier = Modifier.padding(10.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
       Button(modifier = Modifier.padding(top = 10.dp), onClick = {
         logd("start stopwatch")

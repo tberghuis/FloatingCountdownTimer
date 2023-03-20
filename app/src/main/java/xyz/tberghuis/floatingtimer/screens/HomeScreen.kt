@@ -43,9 +43,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.hilt.navigation.compose.hiltViewModel
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
+import xyz.tberghuis.floatingtimer.composables.CreateStopwatchCard
 import xyz.tberghuis.floatingtimer.countdown.CreateCountdownCard
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.stopwatch.composables.CreateStopwatchCard
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
