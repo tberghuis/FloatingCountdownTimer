@@ -105,6 +105,10 @@ class FloatingService : Service() {
       Intent(this, MainActivity::class.java).let { notificationIntent ->
         PendingIntent.getActivity(this, 0, notificationIntent, FLAG_IMMUTABLE)
       }
+
+    // todo shouldn't need BroadcastReceiver
+    // https://stackoverflow.com/questions/73344244/how-to-invoke-a-method-on-a-foreground-service-by-clicking-on-a-notification-act
+
     val exitIntent = Intent(applicationContext, ExitReceiver::class.java)
     val exitPendingIntent = PendingIntent.getBroadcast(
       applicationContext, REQUEST_CODE_EXIT, exitIntent, FLAG_IMMUTABLE
