@@ -39,7 +39,8 @@ fun ClickTarget(
   controller: OverlayController,
   overlayState: OverlayState,
   viewHolder: OverlayViewHolder,
-  onClick: ()->Unit
+  onDragTrash: () -> Unit,
+  onClick: () -> Unit
 ) {
   Box(modifier = Modifier
     .pointerInput(Unit) {
@@ -47,10 +48,8 @@ fun ClickTarget(
         logd("clicktarget onDragStart")
         overlayState.showTrash = true
       }, onDrag = { change, dragAmount ->
-//                change.consumeAllChanges()
         change.consume()
-        val dragAmountIntOffset =
-          IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
+        val dragAmountIntOffset = IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
         val _timerOffset = overlayState.timerOffset + dragAmountIntOffset
         var x = max(_timerOffset.x, 0)
         x = min(x, serviceState.screenWidthPx - controller.timerSizePx)
@@ -62,7 +61,8 @@ fun ClickTarget(
         overlayState.showTrash = false
 
         if (overlayState.isTimerHoverTrash) {
-          controller.exitCountdown()
+//          controller.exitCountdown()
+          onDragTrash()
           return@detectDragGestures
         }
 

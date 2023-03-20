@@ -147,7 +147,7 @@ class OverlayController(val service: FloatingService) {
 
   private fun setContentClickTargets() {
     countdownClickTarget.view.setContent {
-      ClickTarget(service.state, this, countdownState.overlayState, countdownClickTarget) {
+      ClickTarget(service.state, this, countdownState.overlayState, countdownClickTarget, this::exitCountdown) {
         logd("click target onclick")
         when (countdownState.timerState.value) {
           is TimerStatePaused -> {
@@ -157,7 +157,6 @@ class OverlayController(val service: FloatingService) {
             countdownState.timerState.value = TimerStatePaused
           }
           is TimerStateFinished -> {
-//            service.alarmController.player.pause()
             countdownState.resetTimerState(countdownState.durationSeconds)
           }
         }
