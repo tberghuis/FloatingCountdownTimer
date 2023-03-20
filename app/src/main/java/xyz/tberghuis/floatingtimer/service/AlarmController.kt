@@ -20,14 +20,15 @@ import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
 
 class AlarmController(val service: FloatingService) {
 
-  val player: MediaPlayer
+  private var player: MediaPlayer? = null
 
   private var pendingAlarm: PendingIntent? = null
 
   init {
     val alarmSound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+    // MediaPlayer.create can return null
     player = MediaPlayer.create(service, alarmSound)
-    player.isLooping = true
+    player?.isLooping = true
 
     watchState()
   }
@@ -41,7 +42,7 @@ class AlarmController(val service: FloatingService) {
         when (it) {
           is TimerStateFinished -> {
             logd("does the player start")
-            player.start()
+            player?.start()
             pendingAlarm?.cancel()
           }
 
@@ -66,8 +67,8 @@ class AlarmController(val service: FloatingService) {
           }
           TimerStatePaused -> {
             pendingAlarm?.cancel()
-            if (player.isPlaying) {
-              player.pause()
+            if (player?.isPlaying == true) {
+              player?.pause()
             }
           }
         }
