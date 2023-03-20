@@ -13,7 +13,7 @@ import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchClickTarget
+import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchClickTargetCDSCDS
 import xyz.tberghuis.floatingtimer.stopwatch.composables.StopwatchOverlayVFDSDSC
 
 // todo inherit interface OverlayComponent { exitOverlay, startOverlay }
@@ -56,7 +56,7 @@ class StopwatchOverlayComponent(
     )
     clickTargetOverlay.view.setContent {
       CompositionLocalProvider(LocalStopwatchOverlayComponent provides this) {
-        StopwatchClickTarget(overlayState, stopwatchState)
+        StopwatchClickTargetCDSCDS(overlayState, stopwatchState)
       }
     }
 

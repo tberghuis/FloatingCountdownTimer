@@ -22,7 +22,7 @@ import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.stopwatch.StopwatchStateGDFGDFG
 
 @Composable
-fun StopwatchClickTarget(overlayState: OverlayStateFDSFSDF, stopwatchState: StopwatchStateGDFGDFG) {
+fun StopwatchClickTargetCDSCDS(overlayState: OverlayStateFDSFSDF, stopwatchState: StopwatchStateGDFGDFG) {
   val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
   val stopwatchOverlayComponent = LocalStopwatchOverlayComponent.current
 
