@@ -32,3 +32,8 @@ then ....
 notification, exit, reset
 
 ....
+
+increment version
+build aab
+play store release
+git merge
