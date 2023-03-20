@@ -40,47 +40,46 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.composables.Trash
 import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
-import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 import xyz.tberghuis.floatingtimer.stopwatch.StopwatchStateGDFGDFG
 
-@Composable
-fun StopwatchOverlayVFDSDSC(overlayState: OverlayStateFDSFSDF, stopwatchState: StopwatchStateGDFGDFG) {
-  val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
-
-  Box(
-    Modifier.onGloballyPositioned {
-//      logd("TimerOverlay onGloballyPositioned")
-      overlayState.screenWidthPx = it.size.width
-      overlayState.screenHeightPx = it.size.height
-      val x = min(overlayState.timerOffset.x, overlayState.screenWidthPx - timerSizePx)
-      val y = min(overlayState.timerOffset.y, overlayState.screenHeightPx - timerSizePx)
-      overlayState.timerOffset = IntOffset(x, y)
-    }
-  ) {
-    Box(
-      modifier = Modifier
-        .offset {
-          overlayState.timerOffset
-        }
-        .size(TIMER_SIZE_DP.dp)
-//        .background(Color.Yellow)
-        .padding(PROGRESS_ARC_WIDTH / 2),
-      contentAlignment = Alignment.Center
-    ) {
-//      BorderArc(stopwatchState)
-      TimeDisplay(stopwatchState.timeElapsed.value)
-    }
-
-    if (overlayState.showTrash) {
-      Column(
-        Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally
-      ) {
-//        Trash(overlayState)
-      }
-    }
-  }
-}
+//@Composable
+//fun StopwatchOverlayVFDSDSC(overlayState: OverlayStateFDSFSDF, stopwatchState: StopwatchStateGDFGDFG) {
+//  val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
+//
+//  Box(
+//    Modifier.onGloballyPositioned {
+////      logd("TimerOverlay onGloballyPositioned")
+//      overlayState.screenWidthPx = it.size.width
+//      overlayState.screenHeightPx = it.size.height
+//      val x = min(overlayState.timerOffset.x, overlayState.screenWidthPx - timerSizePx)
+//      val y = min(overlayState.timerOffset.y, overlayState.screenHeightPx - timerSizePx)
+//      overlayState.timerOffset = IntOffset(x, y)
+//    }
+//  ) {
+//    Box(
+//      modifier = Modifier
+//        .offset {
+//          overlayState.timerOffset
+//        }
+//        .size(TIMER_SIZE_DP.dp)
+////        .background(Color.Yellow)
+//        .padding(PROGRESS_ARC_WIDTH / 2),
+//      contentAlignment = Alignment.Center
+//    ) {
+////      BorderArc(stopwatchState)
+//      TimeDisplay(stopwatchState.timeElapsed.value)
+//    }
+//
+//    if (overlayState.showTrash) {
+//      Column(
+//        Modifier.fillMaxSize(),
+//        verticalArrangement = Arrangement.Bottom,
+//        horizontalAlignment = Alignment.CenterHorizontally
+//      ) {
+////        Trash(overlayState)
+//      }
+//    }
+//  }
+//}
 

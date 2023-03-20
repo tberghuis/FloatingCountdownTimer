@@ -24,10 +24,8 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.flow.collect
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
-import xyz.tberghuis.floatingtimer.common.OverlayStateFDSFSDF
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.OverlayState
 

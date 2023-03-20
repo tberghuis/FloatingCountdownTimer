@@ -98,6 +98,7 @@ class OverlayController(val service: FloatingService) {
   }
 
   private fun setContentOverlayView() {
+    // https://developer.android.com/reference/android/view/WindowManager.LayoutParams#MaximumOpacity
     fullscreenOverlay.params.alpha = 1f
     val inputManager = service.applicationContext.getSystemService(INPUT_SERVICE) as InputManager
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
