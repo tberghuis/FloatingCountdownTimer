@@ -1,14 +1,4 @@
 
-fix bug multi timers block ui
-
-use a single service
-
-read https://developer.android.com/guide/components/foreground-services
-
-compositionlocal for service
-lazy???
-
-
 learn to use notifications permissions api 33+
 https://www.youtube.com/watch?v=bHlLYhSrXvc
 
@@ -18,20 +8,6 @@ androidx.lifecycle:lifecycle-runtime-ktx
 https://stackoverflow.com/questions/57229877/how-to-cast-lifecycleowner-on-service-class
 
 try add fragment with nested composeview as system overlay
-
-
-
-on drop trash, player pause, isvisible false
-
-next task clicktarget
-
-trash exit logic
-
-then ....
-
-notification, exit, reset
-
-....
 
 increment version
 build aab
