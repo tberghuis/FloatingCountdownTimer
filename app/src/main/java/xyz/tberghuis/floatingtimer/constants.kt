@@ -11,8 +11,6 @@ const val INTENT_COMMAND_COUNTDOWN_COMPLETE = "countdown_complete"
 const val EXTRA_COUNTDOWN_DURATION = "countdown_duration"
 
 const val INTENT_COMMAND_STOPWATCH_CREATE = "stopwatch_create"
-const val INTENT_COMMAND_STOPWATCH_RESET = "stopwatch_reset"
-const val INTENT_COMMAND_STOPWATCH_EXIT = "stopwatch_exit"
 
 val PROGRESS_ARC_WIDTH = 8.dp
 
