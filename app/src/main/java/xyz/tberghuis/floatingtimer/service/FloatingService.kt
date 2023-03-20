@@ -23,17 +23,12 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 
 class FloatingService : Service() {
-
   val state = ServiceState()
-
-
   private var isStarted = false
-
 
   // todo make private
   lateinit var overlayController: OverlayController
   lateinit var alarmController: AlarmController
-
 
   override fun onCreate() {
     super.onCreate()
@@ -62,17 +57,13 @@ class FloatingService : Service() {
           logd("onStartCommand INTENT_COMMAND_COUNTDOWN_COMPLETE")
           state.countdownState.timerState.value = TimerStateFinished
         }
-
         INTENT_COMMAND_STOPWATCH_CREATE -> {
           state.stopwatchState.overlayState.isVisible.value = true
         }
-
-
       }
     }
     return START_STICKY
   }
-
 
   private fun postOngoingActivityNotification() {
     if (!isStarted) {
@@ -100,6 +91,4 @@ class FloatingService : Service() {
         .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent).build()
     return notification
   }
-
-
 }

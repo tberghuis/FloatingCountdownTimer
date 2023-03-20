@@ -1,15 +1,9 @@
 package xyz.tberghuis.floatingtimer.service
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
 import android.content.Context.INPUT_SERVICE
-import android.content.Intent
 import android.graphics.PixelFormat
 import android.hardware.input.InputManager
-import android.media.MediaPlayer
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
 import android.view.WindowManager
 import androidx.compose.runtime.CompositionLocalProvider
@@ -25,11 +19,8 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
-import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
-import xyz.tberghuis.floatingtimer.service.countdown.CountdownState
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
@@ -38,9 +29,6 @@ import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }
 
 class OverlayController(val service: FloatingService) {
-
-//  private var pendingAlarm: PendingIntent? = null
-
   private val countdownState = service.state.countdownState
   private val countdownIsVisible: Flow<Boolean?>
     get() = countdownState.overlayState.isVisible
@@ -48,7 +36,6 @@ class OverlayController(val service: FloatingService) {
   private val stopwatchState = service.state.stopwatchState
   private val stopwatchIsVisible: Flow<Boolean?>
     get() = stopwatchState.overlayState.isVisible
-
 
   private val density = service.resources.displayMetrics.density
   val timerSizePx = (TIMER_SIZE_DP * density).toInt()
@@ -113,7 +100,6 @@ class OverlayController(val service: FloatingService) {
     }
   }
 
-
   private fun watchState() {
     with(CoroutineScope(Dispatchers.Default)) {
       launch {
@@ -121,7 +107,6 @@ class OverlayController(val service: FloatingService) {
           addOrRemoveView(fullscreenOverlay, showFullscreen)
         }
       }
-
       launch {
         addOrRemoveClickTargetView(countdownIsVisible, countdownClickTarget)
       }
@@ -168,7 +153,6 @@ class OverlayController(val service: FloatingService) {
     }
   }
 
-
   private fun setContentClickTargets() {
     countdownClickTarget.view.setContent {
       ClickTarget(
@@ -189,8 +173,6 @@ class OverlayController(val service: FloatingService) {
       }
     }
 
-
-
     stopwatchClickTarget.view.setContent {
       ClickTarget(
         service.state, this, stopwatchState.overlayState, stopwatchClickTarget, this::exitStopwatch
@@ -198,8 +180,6 @@ class OverlayController(val service: FloatingService) {
         onClickStopwatchClickTarget(stopwatchState)
       }
     }
-
-
   }
 
   private fun exitCountdown() {
@@ -222,16 +202,13 @@ class OverlayController(val service: FloatingService) {
   }
 }
 
-
 fun onClickStopwatchClickTarget(stopwatchState: StopwatchState) {
   logd("click target start pause")
   val running = stopwatchState.isRunningStateFlow
-
   when (running.value) {
     false -> {
       running.value = true
       Timer().scheduleAtFixedRate(timerTask {
-//        logd("timertask")
         if (running.value) {
           stopwatchState.timeElapsed.value++
         } else {
