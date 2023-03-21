@@ -2,3 +2,8 @@
 git rm --cached .idea/vcs.xml
 git rm --cached .idea/deploymentTargetDropDown.xml
 
+adb devices
+
+adb disconnect poco
+
+adb uninstall xyz.tberghuis.floatingtimer
