@@ -39,18 +39,12 @@ class HomeViewModel @Inject constructor(
         if (firstRun == false) {
           return@launch
         }
-
-        // check if granted permission
         val permission = ContextCompat.checkSelfPermission(
           context, Manifest.permission.POST_NOTIFICATIONS
         )
         if (permission != PackageManager.PERMISSION_GRANTED) {
           prompt()
         }
-
-        logd("after launch")
-
-        // set first_run to false
         context.dataStore.edit { preferences ->
           preferences[booleanPreferencesKey("first_run")] = false
         }
