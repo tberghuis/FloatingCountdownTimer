@@ -1,9 +1,12 @@
 package xyz.tberghuis.floatingtimer.screens
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -53,53 +56,51 @@ import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 fun HomeScreen() {
   val vm: HomeViewModel = hiltViewModel()
   val context = LocalContext.current
-
-  Scaffold(
-    topBar = {
-      CenterAlignedTopAppBar(title = {
-        Text("Floating Timer")
-      })
-    },
-    content = {
-      HomeScreenContent(it)
+  val launcher = rememberLauncherForActivityResult(
+    contract = ActivityResultContracts.RequestPermission(),
+    onResult = { })
+  LaunchedEffect(Unit) {
+    vm.promptNotificationPermission(context) {
+      launcher.launch(Manifest.permission.POST_NOTIFICATIONS)
     }
-  )
+  }
+
+  Scaffold(topBar = {
+    CenterAlignedTopAppBar(title = {
+      Text("Floating Timer")
+    })
+  }, content = {
+    HomeScreenContent(it)
+  })
 
   if (vm.showGrantOverlayDialog) {
     AlertDialog(onDismissRequest = {
       vm.showGrantOverlayDialog = false
-    },
-      confirmButton = {
-        Button(onClick = {
-          logd("go to settings")
-          val intent = Intent(
-            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-            Uri.parse("package:" + context.packageName)
-          )
+    }, confirmButton = {
+      Button(onClick = {
+        logd("go to settings")
+        val intent = Intent(
+          Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + context.packageName)
+        )
 
-          startActivityForResult(
-            context as Activity,
-            intent,
-            REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION, null
-          )
-          vm.showGrantOverlayDialog = false
+        startActivityForResult(
+          context as Activity, intent, REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION, null
+        )
+        vm.showGrantOverlayDialog = false
 
-        }) {
-          Text("Go To Settings")
-        }
-      },
-      title = {
-        Text("Enable Overlay Permission")
-      },
-      text = {
-        Text(buildAnnotatedString {
-          append("Please enable \"Allow display over other apps\" permission for application ")
-          withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-            append("Floating Timer")
-          }
-        })
+      }) {
+        Text("Go To Settings")
       }
-    )
+    }, title = {
+      Text("Enable Overlay Permission")
+    }, text = {
+      Text(buildAnnotatedString {
+        append("Please enable \"Allow display over other apps\" permission for application ")
+        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+          append("Floating Timer")
+        }
+      })
+    })
   }
 }
 
@@ -128,12 +129,10 @@ fun HomeScreenContent(paddingValues: PaddingValues) {
 
 
 fun Modifier.onFocusSelectAll(textFieldValueState: MutableState<TextFieldValue>): Modifier =
-  composed(
-    inspectorInfo = debugInspectorInfo {
-      name = "textFieldValueState"
-      properties["textFieldValueState"] = textFieldValueState
-    }
-  ) {
+  composed(inspectorInfo = debugInspectorInfo {
+    name = "textFieldValueState"
+    properties["textFieldValueState"] = textFieldValueState
+  }) {
     var triggerEffect by remember {
       mutableStateOf<Boolean?>(null)
     }

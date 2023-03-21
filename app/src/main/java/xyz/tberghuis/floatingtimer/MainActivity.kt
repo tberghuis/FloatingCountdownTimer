@@ -25,8 +25,8 @@ class MainActivity : ComponentActivity() {
             .fillMaxSize()
             .background(Color.White),
         ) {
-//          HomeScreen()
-          NotificationPermissionDemo()
+          HomeScreen()
+//          NotificationPermissionDemo()
         }
       }
     }
