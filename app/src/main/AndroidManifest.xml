@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+
     <!--    TODO when targeting build sdk 33 TIRAMISU -->
     <!--    https://support.google.com/googleplay/android-developer/answer/12253906#exact_alarm_preview -->
     <!--    <uses-permission-->
