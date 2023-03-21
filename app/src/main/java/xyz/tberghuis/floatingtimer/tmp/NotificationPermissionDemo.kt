@@ -30,6 +30,8 @@ import xyz.tberghuis.floatingtimer.logd
 class FakeVm {
 
   val vmScope = CoroutineScope(Dispatchers.IO)
+
+  // prevent run twice if configuration changed
   var promptRunOnce = false
 
   fun promptNotificationPermission(context: Context, prompt: () -> Unit) {
