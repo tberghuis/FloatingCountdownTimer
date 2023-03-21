@@ -32,6 +32,7 @@ class FakeVm {
   val vmScope = CoroutineScope(Dispatchers.IO)
 
   // prevent run twice if configuration changed
+  // this is being pedantic
   var promptRunOnce = false
 
   fun promptNotificationPermission(context: Context, prompt: () -> Unit) {
