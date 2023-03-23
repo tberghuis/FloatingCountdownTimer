@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.tberghuis.floatingtimer.screens.HomeScreen
+import xyz.tberghuis.floatingtimer.tmp.fragment.FragmentDemo
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 @AndroidEntryPoint
@@ -24,7 +25,8 @@ class MainActivity : ComponentActivity() {
             .fillMaxSize()
             .background(Color.White),
         ) {
-          HomeScreen()
+//          HomeScreen()
+          FragmentDemo()
         }
       }
     }
