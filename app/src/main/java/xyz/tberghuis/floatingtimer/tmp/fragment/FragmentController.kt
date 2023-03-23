@@ -4,6 +4,8 @@ import android.content.Context
 import android.graphics.PixelFormat
 import android.view.LayoutInflater
 import android.view.WindowManager
+import androidx.activity.ComponentActivity
+import androidx.fragment.app.FragmentActivity
 import xyz.tberghuis.floatingtimer.R
 
 class FragmentController(val service: FragmentService) {
@@ -25,12 +27,26 @@ class FragmentController(val service: FragmentService) {
     )
 
 // https://levelup.gitconnected.com/add-view-outside-activity-through-windowmanager-1a70590bad40
-    val floatView = (service.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(
-      R.layout.fragment_blank,
-      null
-    )
+//    val floatView = (service.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(
+//      R.layout.fragment_blank,
+//      null
+//    )
+//
+//
+//    val fa = FragmentActivity()
 
-    windowManager.addView(floatView, params)
+//    val ca = ComponentActivity()
+//
+//    val view = ca.layoutInflater.inflate(R.layout.fragment_demo, null)
+//
+//    windowManager.addView(view, params)
+
+
+//    val da = DemoActvity()
+//
+//    val fd = DemoFragment()
+//
+//    da.fragmentManager
 
   }
 

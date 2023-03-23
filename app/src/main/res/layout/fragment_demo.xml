@@ -5,12 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".tmp.fragment.BlankFragment">
 
-
-    <fragment
-        android:id="@+id/demoFrag"
-        android:name="xyz.tberghuis.floatingtimer.tmp.fragment.DemoFragment"
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        android:text="@string/hello_demo_fragment" />
 
 </FrameLayout>
