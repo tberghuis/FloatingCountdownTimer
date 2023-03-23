@@ -19,9 +19,12 @@ import xyz.tberghuis.floatingtimer.logd
 
 class FragmentService : Service() {
 
+  lateinit var controller: FragmentController
+
+
   override fun onCreate() {
     super.onCreate()
-
+    controller = FragmentController(this)
   }
 
   override fun onBind(intent: Intent?): IBinder? {
@@ -33,6 +36,9 @@ class FragmentService : Service() {
 
     createNotificationChannel()
     startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification())
+
+    controller.addView()
+
     return START_STICKY
   }
 
