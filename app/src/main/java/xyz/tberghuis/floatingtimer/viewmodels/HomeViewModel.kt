@@ -15,6 +15,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.data.PreferencesRepository
+import xyz.tberghuis.floatingtimer.logd
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -43,4 +44,15 @@ class HomeViewModel @Inject constructor(
       }
     }
   }
+
+
+  val vibrationFlow = preferencesRepository.vibrationFlow
+  fun updateVibration(vibration: Boolean) {
+    logd("updateVibration $vibration")
+    viewModelScope.launch {
+      preferencesRepository.updateVibration(vibration)
+    }
+  }
+
+
 }

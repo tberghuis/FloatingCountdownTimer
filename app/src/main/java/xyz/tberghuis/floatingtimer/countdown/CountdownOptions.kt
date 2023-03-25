@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.hilt.navigation.compose.hiltViewModel
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
@@ -13,19 +14,22 @@ import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 fun CountdownOptions() {
   val vm: HomeViewModel = hiltViewModel()
 
+  // doitwrong
+  val vibration = vm.vibrationFlow.collectAsState(false)
+
   Column {
     Row(verticalAlignment = Alignment.CenterVertically) {
       Checkbox(
-        checked = true,
+        checked = vibration.value,
         onCheckedChange = {
-
+          vm.updateVibration(it)
         }
       )
       Text("Vibration")
     }
     Row(verticalAlignment = Alignment.CenterVertically) {
       Checkbox(
-        checked = true,
+        checked = false,
         onCheckedChange = {
 
         }
