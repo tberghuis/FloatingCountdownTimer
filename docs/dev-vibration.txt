@@ -1,0 +1,8 @@
+checkbox
+  vibration
+  sound
+
+doitwrong
+
+
+cull *.txt docs
