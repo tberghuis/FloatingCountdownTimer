@@ -6,9 +6,12 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.hilt.navigation.compose.hiltViewModel
+import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @Composable
 fun CountdownOptions() {
+  val vm: HomeViewModel = hiltViewModel()
 
   Column {
     Row(verticalAlignment = Alignment.CenterVertically) {
