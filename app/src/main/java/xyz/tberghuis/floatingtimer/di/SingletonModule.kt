@@ -11,24 +11,30 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 import xyz.tberghuis.floatingtimer.countdown.CountdownAlarmRepository
+import xyz.tberghuis.floatingtimer.data.PreferencesRepository
+import xyz.tberghuis.floatingtimer.data.dataStore
 
-val Context.dataStore by preferencesDataStore(
-  name = "user_preferences",
-)
 
 @InstallIn(SingletonComponent::class)
 @Module
 object SingletonModule {
 
-  @Provides
-  @Singleton
-  fun provideDataStore(@ApplicationContext appContext: Context): DataStore<Preferences> {
-    return appContext.dataStore
-  }
+//  @Provides
+//  @Singleton
+//  fun provideDataStore(@ApplicationContext appContext: Context): DataStore<Preferences> {
+//    return appContext.dataStore
+//  }
+//
+//  @Provides
+//  @Singleton
+//  fun provideCountdownAlarmRepository(dataStore: DataStore<Preferences>): CountdownAlarmRepository {
+//    return CountdownAlarmRepository(dataStore)
+//  }
+
 
   @Provides
   @Singleton
-  fun provideCountdownAlarmRepository(dataStore: DataStore<Preferences>): CountdownAlarmRepository {
-    return CountdownAlarmRepository(dataStore)
+  fun providePreferencesRepository(@ApplicationContext appContext: Context): PreferencesRepository {
+    return PreferencesRepository(appContext.dataStore)
   }
 }

@@ -2,11 +2,9 @@ package xyz.tberghuis.floatingtimer.tmp
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.material3.Button
@@ -22,8 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.MainActivity
-import xyz.tberghuis.floatingtimer.di.dataStore
+import xyz.tberghuis.floatingtimer.data.dataStore
 import xyz.tberghuis.floatingtimer.logd
 
 

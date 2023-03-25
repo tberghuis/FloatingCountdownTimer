@@ -18,8 +18,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.di.dataStore
-import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.data.dataStore
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
