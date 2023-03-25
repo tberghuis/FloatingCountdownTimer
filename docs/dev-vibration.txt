@@ -2,6 +2,8 @@ checkbox
   vibration
   sound
 
+PreferencesRepository
+
 doitwrong
 
 
