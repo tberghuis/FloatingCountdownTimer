@@ -8,3 +8,6 @@ doitwrong
 
 
 cull *.txt docs
+
+
+update play store screenshots + description
