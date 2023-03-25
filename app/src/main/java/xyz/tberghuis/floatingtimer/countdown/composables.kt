@@ -16,6 +16,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -91,6 +92,15 @@ fun CreateCountdownCard() {
         ),
         singleLine = true
       )
+    }
+    Row(
+      modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth(),
+      horizontalArrangement = Arrangement.Center,
+      verticalAlignment = Alignment.CenterVertically
+    ) {
+      CountdownOptions()
     }
     Row(
       modifier = Modifier
