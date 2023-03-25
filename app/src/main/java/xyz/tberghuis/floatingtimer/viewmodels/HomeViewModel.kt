@@ -9,19 +9,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.core.content.ContextCompat
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.data.dataStore
+import xyz.tberghuis.floatingtimer.data.PreferencesRepository
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+  private val preferencesRepository: PreferencesRepository
 ) : ViewModel() {
   var minutes = mutableStateOf(TextFieldValue("0"))
   var seconds = mutableStateOf(TextFieldValue("0"))
@@ -32,10 +29,8 @@ class HomeViewModel @Inject constructor(
     viewModelScope.launch {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         // check if first run, to determine if to prompt
-        val firstRun = context.dataStore.data.map { preferences ->
-          preferences[booleanPreferencesKey("first_run")]
-        }.first()
-        if (firstRun == false) {
+        val firstRun = preferencesRepository.checkFirstRun()
+        if (!firstRun) {
           return@launch
         }
         val permission = ContextCompat.checkSelfPermission(
@@ -44,9 +39,7 @@ class HomeViewModel @Inject constructor(
         if (permission != PackageManager.PERMISSION_GRANTED) {
           prompt()
         }
-        context.dataStore.edit { preferences ->
-          preferences[booleanPreferencesKey("first_run")] = false
-        }
+        preferencesRepository.setFirstRunFalse()
       }
     }
   }
