@@ -46,7 +46,9 @@ class AlarmController(val service: FloatingService) {
     watchState()
   }
 
-
+  // todo rewrite without
+  //   private var vibrate, sound
+  // just call .first in watchState()
   private fun collectPreferences() {
     // doitwrong
     val preferences = providePreferencesRepository(service)
