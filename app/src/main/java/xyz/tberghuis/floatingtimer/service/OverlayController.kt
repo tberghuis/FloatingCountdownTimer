@@ -41,19 +41,6 @@ class OverlayController(val service: FloatingService) {
   val timerSizePx = (TIMER_SIZE_DP * density).toInt()
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-//  private val countdownClickTarget = OverlayViewHolder(
-//    WindowManager.LayoutParams(
-//      timerSizePx,
-//      timerSizePx,
-//      0, // todo place default position
-//      0,
-//      WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-//      WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-//      PixelFormat.TRANSLUCENT
-//    ), service
-//  )
-
-
   val fullscreenOverlay: OverlayViewHolder = OverlayViewHolder(
     WindowManager.LayoutParams(
       WindowManager.LayoutParams.MATCH_PARENT,
@@ -66,12 +53,9 @@ class OverlayController(val service: FloatingService) {
 
   init {
     logd("OverlayController init")
-
     setContentOverlayView()
-//    setContentClickTargets()
     watchState()
   }
-
 
   private fun createCountdownClickTarget(): OverlayViewHolder {
     val countdownClickTarget = OverlayViewHolder(
