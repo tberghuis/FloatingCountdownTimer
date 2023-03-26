@@ -14,11 +14,10 @@ import android.os.Vibrator
 import android.os.VibratorManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
-import xyz.tberghuis.floatingtimer.di.SingletonModule_ProvidePreferencesRepositoryFactory.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
@@ -42,12 +41,12 @@ class AlarmController(val service: FloatingService) {
     }
     player?.isLooping = true
 
-    collectPrefenceVibrate()
+    collectPreferenceVibrate()
     watchState()
   }
 
 
-  private fun collectPrefenceVibrate() {
+  private fun collectPreferenceVibrate() {
     // doitwrong
     val preferences = providePreferencesRepository(service)
     CoroutineScope(Dispatchers.Default).launch {
