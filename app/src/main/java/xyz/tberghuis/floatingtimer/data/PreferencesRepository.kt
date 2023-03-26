@@ -25,6 +25,14 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
     }
   }
 
+  val soundFlow: Flow<Boolean> = dataStore.data.map { preferences ->
+    preferences[booleanPreferencesKey("sound")] ?: true
+  }
+  suspend fun updateSound(sound: Boolean) {
+    dataStore.edit { preferences ->
+      preferences[booleanPreferencesKey("sound")] = sound
+    }
+  }
 
   suspend fun checkFirstRun(): Boolean {
     return dataStore.data.map { preferences ->

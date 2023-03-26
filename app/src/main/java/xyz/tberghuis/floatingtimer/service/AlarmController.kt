@@ -32,6 +32,7 @@ class AlarmController(val service: FloatingService) {
 
   private var vibrate = true
   private val vibrator = initVibrator()
+  private var sound = true
 
   init {
     val alarmSound: Uri? = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
@@ -41,17 +42,25 @@ class AlarmController(val service: FloatingService) {
     }
     player?.isLooping = true
 
-    collectPreferenceVibrate()
+    collectPreferences()
     watchState()
   }
 
 
-  private fun collectPreferenceVibrate() {
+  private fun collectPreferences() {
     // doitwrong
     val preferences = providePreferencesRepository(service)
-    CoroutineScope(Dispatchers.Default).launch {
-      preferences.vibrationFlow.collect {
-        vibrate = it
+
+    with(CoroutineScope(Dispatchers.Default)) {
+      launch {
+        preferences.vibrationFlow.collect {
+          vibrate = it
+        }
+      }
+      launch {
+        preferences.soundFlow.collect {
+          sound = it
+        }
       }
     }
   }
@@ -76,8 +85,10 @@ class AlarmController(val service: FloatingService) {
         when (it) {
           is TimerStateFinished -> {
             logd("does the player start")
-            player?.start()
             pendingAlarm?.cancel()
+            if (sound) {
+              player?.start()
+            }
             if (vibrate) {
               vibrator.vibrate(
                 VibrationEffect.createWaveform(

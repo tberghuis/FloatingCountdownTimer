@@ -54,5 +54,10 @@ class HomeViewModel @Inject constructor(
     }
   }
 
-
+  val soundFlow = preferencesRepository.soundFlow
+  fun updateSound(sound: Boolean) {
+    viewModelScope.launch {
+      preferencesRepository.updateSound(sound)
+    }
+  }
 }

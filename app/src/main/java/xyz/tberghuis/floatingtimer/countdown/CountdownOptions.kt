@@ -16,6 +16,7 @@ fun CountdownOptions() {
 
   // doitwrong
   val vibration = vm.vibrationFlow.collectAsState(false)
+  val sound = vm.soundFlow.collectAsState(false)
 
   Column {
     Row(verticalAlignment = Alignment.CenterVertically) {
@@ -29,9 +30,9 @@ fun CountdownOptions() {
     }
     Row(verticalAlignment = Alignment.CenterVertically) {
       Checkbox(
-        checked = false,
+        checked = sound.value,
         onCheckedChange = {
-
+          vm.updateSound(it)
         }
       )
       Text("Sound")
