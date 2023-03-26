@@ -15,34 +15,46 @@ import androidx.compose.ui.platform.LocalContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-
+import kotlinx.coroutines.launch
 
 class VibrationVm(private val context: Context) {
-
   val vibrating = MutableStateFlow(false)
-
 
   val scope = CoroutineScope(Dispatchers.Default)
 
-  fun startVibration() {
+  private val vibrator = initVibrator()
 
+  init {
+    scope.launch {
+      vibrating.collect {
+        when (it) {
+          true -> {
+            vibrator.vibrate(
+              VibrationEffect.createWaveform(
+                longArrayOf(1500, 200),
+                intArrayOf(255, 0),
+                0
+              )
+            )
+          }
+          false -> {
+            vibrator.cancel()
+          }
+        }
+      }
+    }
+  }
 
-    val vib = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+  private fun initVibrator(): Vibrator {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
       val vibratorManager =
         context.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
       vibratorManager.defaultVibrator
     } else {
       @Suppress("DEPRECATION") context.getSystemService(VIBRATOR_SERVICE) as Vibrator
     }
-
-
-//    VibrationEffect
-    vib.vibrate(VibrationEffect.createOneShot(2000, VibrationEffect.DEFAULT_AMPLITUDE))
   }
 }
-
-//val vibrationVm = VibrationVm()
-
 
 @Composable
 fun VibrationDemo() {
@@ -56,13 +68,15 @@ fun VibrationDemo() {
 
     Button(onClick = {
 
-      vibrationVm.startVibration()
+      vibrationVm.vibrating.value = true
 
     }) {
       Text("start vibration")
     }
 
-    Button(onClick = {}) {
+    Button(onClick = {
+      vibrationVm.vibrating.value = false
+    }) {
       Text("stop vibration")
     }
 
