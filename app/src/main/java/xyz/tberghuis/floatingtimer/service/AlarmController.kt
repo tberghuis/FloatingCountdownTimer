@@ -3,15 +3,22 @@ package xyz.tberghuis.floatingtimer.service
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Context.VIBRATOR_SERVICE
 import android.content.Intent
 import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.net.Uri
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.os.VibratorManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
+import xyz.tberghuis.floatingtimer.di.SingletonModule_ProvidePreferencesRepositoryFactory.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
@@ -24,6 +31,9 @@ class AlarmController(val service: FloatingService) {
 
   private var pendingAlarm: PendingIntent? = null
 
+  private var vibrate = true
+  private val vibrator = initVibrator()
+
   init {
     val alarmSound: Uri? = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
     // no default alarm sound set
@@ -32,8 +42,31 @@ class AlarmController(val service: FloatingService) {
     }
     player?.isLooping = true
 
+    collectPrefenceVibrate()
     watchState()
   }
+
+
+  private fun collectPrefenceVibrate() {
+    // doitwrong
+    val preferences = providePreferencesRepository(service)
+    CoroutineScope(Dispatchers.Default).launch {
+      preferences.vibrationFlow.collect {
+        vibrate = it
+      }
+    }
+  }
+
+  private fun initVibrator(): Vibrator {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      val vibratorManager =
+        service.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+      vibratorManager.defaultVibrator
+    } else {
+      @Suppress("DEPRECATION") service.getSystemService(VIBRATOR_SERVICE) as Vibrator
+    }
+  }
+
 
   private fun watchState() {
     val context = service
@@ -46,6 +79,13 @@ class AlarmController(val service: FloatingService) {
             logd("does the player start")
             player?.start()
             pendingAlarm?.cancel()
+            if (vibrate) {
+              vibrator.vibrate(
+                VibrationEffect.createWaveform(
+                  longArrayOf(1500, 200), intArrayOf(255, 0), 0
+                )
+              )
+            }
           }
 
           TimerStateRunning -> {
@@ -72,6 +112,7 @@ class AlarmController(val service: FloatingService) {
             if (player?.isPlaying == true) {
               player?.pause()
             }
+            vibrator.cancel()
           }
         }
       }
