@@ -41,29 +41,17 @@ class OverlayController(val service: FloatingService) {
   val timerSizePx = (TIMER_SIZE_DP * density).toInt()
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-  private val countdownClickTarget = OverlayViewHolder(
-    WindowManager.LayoutParams(
-      timerSizePx,
-      timerSizePx,
-      0, // todo place default position
-      0,
-      WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-      WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-      PixelFormat.TRANSLUCENT
-    ), service
-  )
-
-  private val stopwatchClickTarget = OverlayViewHolder(
-    WindowManager.LayoutParams(
-      timerSizePx,
-      timerSizePx,
-      0,
-      0,
-      WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-      WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-      PixelFormat.TRANSLUCENT
-    ), service
-  )
+//  private val countdownClickTarget = OverlayViewHolder(
+//    WindowManager.LayoutParams(
+//      timerSizePx,
+//      timerSizePx,
+//      0, // todo place default position
+//      0,
+//      WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+//      WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+//      PixelFormat.TRANSLUCENT
+//    ), service
+//  )
 
 
   val fullscreenOverlay: OverlayViewHolder = OverlayViewHolder(
@@ -80,9 +68,66 @@ class OverlayController(val service: FloatingService) {
     logd("OverlayController init")
 
     setContentOverlayView()
-    setContentClickTargets()
+//    setContentClickTargets()
     watchState()
   }
+
+
+  private fun createCountdownClickTarget(): OverlayViewHolder {
+    val countdownClickTarget = OverlayViewHolder(
+      WindowManager.LayoutParams(
+        timerSizePx,
+        timerSizePx,
+        0, // todo place default position
+        0,
+        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+        PixelFormat.TRANSLUCENT
+      ), service
+    )
+    countdownClickTarget.view.setContent {
+      ClickTarget(
+        service.state, this, countdownState.overlayState, countdownClickTarget, this::exitCountdown
+      ) {
+        logd("click target onclick")
+        when (countdownState.timerState.value) {
+          is TimerStatePaused -> {
+            countdownState.timerState.value = TimerStateRunning
+          }
+          is TimerStateRunning -> {
+            countdownState.timerState.value = TimerStatePaused
+          }
+          is TimerStateFinished -> {
+            countdownState.resetTimerState(countdownState.durationSeconds)
+          }
+        }
+      }
+    }
+    return countdownClickTarget
+  }
+
+  private fun createStopwatchClickTarget(): OverlayViewHolder {
+    val stopwatchClickTarget = OverlayViewHolder(
+      WindowManager.LayoutParams(
+        timerSizePx,
+        timerSizePx,
+        0,
+        0,
+        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+        PixelFormat.TRANSLUCENT
+      ), service
+    )
+    stopwatchClickTarget.view.setContent {
+      ClickTarget(
+        service.state, this, stopwatchState.overlayState, stopwatchClickTarget, this::exitStopwatch
+      ) {
+        onClickStopwatchClickTarget(stopwatchState)
+      }
+    }
+    return stopwatchClickTarget
+  }
+
 
   private fun setContentOverlayView() {
     // https://developer.android.com/reference/android/view/WindowManager.LayoutParams#MaximumOpacity
@@ -101,28 +146,33 @@ class OverlayController(val service: FloatingService) {
   }
 
   private fun watchState() {
-    with(CoroutineScope(Dispatchers.Default)) {
+    with(CoroutineScope(Dispatchers.Main)) {
       launch {
         deriveFullscreenVisibleFlow().collect { showFullscreen ->
           addOrRemoveView(fullscreenOverlay, showFullscreen)
         }
       }
       launch {
-        addOrRemoveClickTargetView(countdownIsVisible, countdownClickTarget)
+        addOrRemoveClickTargetView(countdownIsVisible, ::createCountdownClickTarget)
       }
       launch {
-        addOrRemoveClickTargetView(stopwatchIsVisible, stopwatchClickTarget)
+        addOrRemoveClickTargetView(stopwatchIsVisible, ::createStopwatchClickTarget)
       }
     }
   }
 
-  private suspend fun addOrRemoveView(viewHolder: OverlayViewHolder, isVisible: Boolean) {
+  private suspend fun addOrRemoveView(
+    viewHolder: OverlayViewHolder, isVisible: Boolean
+  ) {
+
     withContext(Dispatchers.Main) {
       when (isVisible) {
         true -> {
+          logd("addview ${viewHolder.view}")
           windowManager.addView(viewHolder.view, viewHolder.params)
         }
         false -> {
+          logd("removeview ${viewHolder.view}")
           // wrap in try catch???
           windowManager.removeView(viewHolder.view)
           viewHolder.view.disposeComposition()
@@ -146,39 +196,15 @@ class OverlayController(val service: FloatingService) {
   }
 
   private suspend fun addOrRemoveClickTargetView(
-    isVisible: Flow<Boolean?>, viewHolder: OverlayViewHolder
+    isVisible: Flow<Boolean?>, createViewHolder: () -> OverlayViewHolder
   ) {
-    isVisible.filterNotNull().collect {
-      addOrRemoveView(viewHolder, it)
-    }
-  }
-
-  private fun setContentClickTargets() {
-    countdownClickTarget.view.setContent {
-      ClickTarget(
-        service.state, this, countdownState.overlayState, countdownClickTarget, this::exitCountdown
-      ) {
-        logd("click target onclick")
-        when (countdownState.timerState.value) {
-          is TimerStatePaused -> {
-            countdownState.timerState.value = TimerStateRunning
-          }
-          is TimerStateRunning -> {
-            countdownState.timerState.value = TimerStatePaused
-          }
-          is TimerStateFinished -> {
-            countdownState.resetTimerState(countdownState.durationSeconds)
-          }
-        }
+    var viewHolder: OverlayViewHolder? = null
+    // isVisible first() should always be true
+    isVisible.filterNotNull().collect { isVisible ->
+      if (isVisible) {
+        viewHolder = createViewHolder()
       }
-    }
-
-    stopwatchClickTarget.view.setContent {
-      ClickTarget(
-        service.state, this, stopwatchState.overlayState, stopwatchClickTarget, this::exitStopwatch
-      ) {
-        onClickStopwatchClickTarget(stopwatchState)
-      }
+      addOrRemoveView(viewHolder!!, isVisible)
     }
   }
 
@@ -187,8 +213,12 @@ class OverlayController(val service: FloatingService) {
     countdownState.overlayState.reset()
     countdownState.resetTimerState()
     if (service.state.stopwatchState.overlayState.isVisible.value != true) {
-      service.stopSelf()
+      exit()
     }
+  }
+
+  private fun exit() {
+    service.stopSelf()
   }
 
   fun exitStopwatch() {
@@ -197,7 +227,7 @@ class OverlayController(val service: FloatingService) {
     stopwatchState.overlayState.reset()
     stopwatchState.resetStopwatchState()
     if (countdownState.overlayState.isVisible.value != true) {
-      service.stopSelf()
+      exit()
     }
   }
 }
