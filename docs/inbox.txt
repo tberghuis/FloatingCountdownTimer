@@ -77,4 +77,4 @@ bug cannot click when showing 2 overlays
 refactor and debug
 
 
-CoroutineScope service
+CoroutineScope service is there a function like viewModelScope i should be using???
