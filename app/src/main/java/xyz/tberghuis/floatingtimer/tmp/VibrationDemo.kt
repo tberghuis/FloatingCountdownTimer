@@ -10,16 +10,21 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.ContextCompat.getSystemService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
 
 
-class VibrationVm {
+class VibrationVm(private val context: Context) {
+
+  val vibrating = MutableStateFlow(false)
+
+
   val scope = CoroutineScope(Dispatchers.Default)
 
-  fun startVibration(context: Context) {
+  fun startVibration() {
 
 
     val vib = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -36,18 +41,22 @@ class VibrationVm {
   }
 }
 
-val vibrationVm = VibrationVm()
+//val vibrationVm = VibrationVm()
 
 
 @Composable
 fun VibrationDemo() {
   val context = LocalContext.current
+
+  // doitwrong
+  val vibrationVm = remember { VibrationVm(context) }
+
   Column {
     Text("hello vibration")
 
     Button(onClick = {
 
-      vibrationVm.startVibration(context)
+      vibrationVm.startVibration()
 
     }) {
       Text("start vibration")
