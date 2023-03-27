@@ -1,6 +1,6 @@
 # Floating Timer
 
-<a href='https://play.google.com/store/apps/details?id=xyz.tberghuis.floatingtimer&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="200"/></a>
+<a href='https://play.google.com/store/apps/details?id=xyz.tberghuis.floatingtimer'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="200"/></a>
 
 Features both a countdown timer and stopwatch that will float over other apps.
 
@@ -13,4 +13,4 @@ https://gist.github.com/handstandsam/6ecff2f39da72c0b38c07aa80bbb5a2f
 https://stackoverflow.com/questions/64585547/jetpack-compose-crash-when-adding-view-to-window-manager
 
 ## Screenshot
-<img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_20220712_063412.png' width="400"/>
+<img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_home.png' width="400"/>
