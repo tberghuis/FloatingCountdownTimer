@@ -41,15 +41,13 @@ class OverlayController(val service: FloatingService) {
   val timerSizePx = (TIMER_SIZE_DP * density).toInt()
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-
   init {
     logd("OverlayController init")
-    setContentOverlayView()
     initViewControllers()
   }
 
   private fun createFullscreenOverlay(): OverlayViewHolder {
-    val fullscreenOverlay: OverlayViewHolder = OverlayViewHolder(
+    val fullscreenOverlay = OverlayViewHolder(
       WindowManager.LayoutParams(
         WindowManager.LayoutParams.MATCH_PARENT,
         WindowManager.LayoutParams.MATCH_PARENT,
@@ -75,7 +73,6 @@ class OverlayController(val service: FloatingService) {
 
     return fullscreenOverlay
   }
-
 
   private fun createCountdownClickTarget(): OverlayViewHolder {
     val countdownClickTarget = OverlayViewHolder(
@@ -132,12 +129,6 @@ class OverlayController(val service: FloatingService) {
     return stopwatchClickTarget
   }
 
-
-  private fun setContentOverlayView() {
-
-  }
-
-
   private fun initViewControllers() {
     OverlayViewController(
       this::createFullscreenOverlay, deriveFullscreenVisibleFlow(), windowManager
@@ -149,43 +140,6 @@ class OverlayController(val service: FloatingService) {
       this::createStopwatchClickTarget, stopwatchIsVisible.filterNotNull(), windowManager
     )
   }
-
-
-//  private fun watchState() {
-//    with(CoroutineScope(Dispatchers.Main)) {
-//      launch {
-//        deriveFullscreenVisibleFlow().collect { showFullscreen ->
-//          addOrRemoveView(fullscreenOverlay, showFullscreen)
-//        }
-//      }
-//      launch {
-//        addOrRemoveClickTargetView(countdownIsVisible, ::createCountdownClickTarget)
-//      }
-//      launch {
-//        addOrRemoveClickTargetView(stopwatchIsVisible, ::createStopwatchClickTarget)
-//      }
-//    }
-//  }
-
-//  private suspend fun addOrRemoveView(
-//    viewHolder: OverlayViewHolder, isVisible: Boolean
-//  ) {
-//
-//    withContext(Dispatchers.Main) {
-//      when (isVisible) {
-//        true -> {
-//          logd("addview ${viewHolder.view}")
-//          windowManager.addView(viewHolder.view, viewHolder.params)
-//        }
-//        false -> {
-//          logd("removeview ${viewHolder.view}")
-//          // wrap in try catch???
-//          windowManager.removeView(viewHolder.view)
-//          viewHolder.view.disposeComposition()
-//        }
-//      }
-//    }
-//  }
 
   private fun deriveFullscreenVisibleFlow(): Flow<Boolean> {
     val f1 = service.state.countdownState.overlayState.isVisible
@@ -200,19 +154,6 @@ class OverlayController(val service: FloatingService) {
       }
     }.filterNotNull().distinctUntilChanged()
   }
-
-//  private suspend fun addOrRemoveClickTargetView(
-//    isVisible: Flow<Boolean?>, createViewHolder: () -> OverlayViewHolder
-//  ) {
-//    var viewHolder: OverlayViewHolder? = null
-//    // isVisible first() should always be true
-//    isVisible.filterNotNull().collect { isVisible ->
-//      if (isVisible) {
-//        viewHolder = createViewHolder()
-//      }
-//      addOrRemoveView(viewHolder!!, isVisible)
-//    }
-//  }
 
   fun exitCountdown() {
     countdownState.overlayState.isVisible.value = false
