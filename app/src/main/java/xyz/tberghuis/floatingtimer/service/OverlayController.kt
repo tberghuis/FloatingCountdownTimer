@@ -41,21 +41,41 @@ class OverlayController(val service: FloatingService) {
   val timerSizePx = (TIMER_SIZE_DP * density).toInt()
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
-  val fullscreenOverlay: OverlayViewHolder = OverlayViewHolder(
-    WindowManager.LayoutParams(
-      WindowManager.LayoutParams.MATCH_PARENT,
-      WindowManager.LayoutParams.MATCH_PARENT,
-      WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-      WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-      PixelFormat.TRANSLUCENT
-    ), service
-  )
 
   init {
     logd("OverlayController init")
     setContentOverlayView()
-    watchState()
+    initViewControllers()
   }
+
+  private fun createFullscreenOverlay(): OverlayViewHolder {
+    val fullscreenOverlay: OverlayViewHolder = OverlayViewHolder(
+      WindowManager.LayoutParams(
+        WindowManager.LayoutParams.MATCH_PARENT,
+        WindowManager.LayoutParams.MATCH_PARENT,
+        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+        PixelFormat.TRANSLUCENT
+      ), service
+    )
+
+    // https://developer.android.com/reference/android/view/WindowManager.LayoutParams#MaximumOpacity
+    fullscreenOverlay.params.alpha = 1f
+    val inputManager = service.applicationContext.getSystemService(INPUT_SERVICE) as InputManager
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      logd("inputManager max opacity ${inputManager.maximumObscuringOpacityForTouch}")
+      fullscreenOverlay.params.alpha = inputManager.maximumObscuringOpacityForTouch
+    }
+
+    fullscreenOverlay.view.setContent {
+      CompositionLocalProvider(LocalServiceState provides service.state) {
+        OverlayContent()
+      }
+    }
+
+    return fullscreenOverlay
+  }
+
 
   private fun createCountdownClickTarget(): OverlayViewHolder {
     val countdownClickTarget = OverlayViewHolder(
@@ -114,56 +134,58 @@ class OverlayController(val service: FloatingService) {
 
 
   private fun setContentOverlayView() {
-    // https://developer.android.com/reference/android/view/WindowManager.LayoutParams#MaximumOpacity
-    fullscreenOverlay.params.alpha = 1f
-    val inputManager = service.applicationContext.getSystemService(INPUT_SERVICE) as InputManager
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-      logd("inputManager max opacity ${inputManager.maximumObscuringOpacityForTouch}")
-      fullscreenOverlay.params.alpha = inputManager.maximumObscuringOpacityForTouch
-    }
 
-    fullscreenOverlay.view.setContent {
-      CompositionLocalProvider(LocalServiceState provides service.state) {
-        OverlayContent()
-      }
-    }
   }
 
-  private fun watchState() {
-    with(CoroutineScope(Dispatchers.Main)) {
-      launch {
-        deriveFullscreenVisibleFlow().collect { showFullscreen ->
-          addOrRemoveView(fullscreenOverlay, showFullscreen)
-        }
-      }
-      launch {
-        addOrRemoveClickTargetView(countdownIsVisible, ::createCountdownClickTarget)
-      }
-      launch {
-        addOrRemoveClickTargetView(stopwatchIsVisible, ::createStopwatchClickTarget)
-      }
-    }
+
+  private fun initViewControllers() {
+    OverlayViewController(
+      this::createFullscreenOverlay, deriveFullscreenVisibleFlow(), windowManager
+    )
+    OverlayViewController(
+      this::createCountdownClickTarget, countdownIsVisible.filterNotNull(), windowManager
+    )
+    OverlayViewController(
+      this::createStopwatchClickTarget, stopwatchIsVisible.filterNotNull(), windowManager
+    )
   }
 
-  private suspend fun addOrRemoveView(
-    viewHolder: OverlayViewHolder, isVisible: Boolean
-  ) {
 
-    withContext(Dispatchers.Main) {
-      when (isVisible) {
-        true -> {
-          logd("addview ${viewHolder.view}")
-          windowManager.addView(viewHolder.view, viewHolder.params)
-        }
-        false -> {
-          logd("removeview ${viewHolder.view}")
-          // wrap in try catch???
-          windowManager.removeView(viewHolder.view)
-          viewHolder.view.disposeComposition()
-        }
-      }
-    }
-  }
+//  private fun watchState() {
+//    with(CoroutineScope(Dispatchers.Main)) {
+//      launch {
+//        deriveFullscreenVisibleFlow().collect { showFullscreen ->
+//          addOrRemoveView(fullscreenOverlay, showFullscreen)
+//        }
+//      }
+//      launch {
+//        addOrRemoveClickTargetView(countdownIsVisible, ::createCountdownClickTarget)
+//      }
+//      launch {
+//        addOrRemoveClickTargetView(stopwatchIsVisible, ::createStopwatchClickTarget)
+//      }
+//    }
+//  }
+
+//  private suspend fun addOrRemoveView(
+//    viewHolder: OverlayViewHolder, isVisible: Boolean
+//  ) {
+//
+//    withContext(Dispatchers.Main) {
+//      when (isVisible) {
+//        true -> {
+//          logd("addview ${viewHolder.view}")
+//          windowManager.addView(viewHolder.view, viewHolder.params)
+//        }
+//        false -> {
+//          logd("removeview ${viewHolder.view}")
+//          // wrap in try catch???
+//          windowManager.removeView(viewHolder.view)
+//          viewHolder.view.disposeComposition()
+//        }
+//      }
+//    }
+//  }
 
   private fun deriveFullscreenVisibleFlow(): Flow<Boolean> {
     val f1 = service.state.countdownState.overlayState.isVisible
@@ -179,18 +201,18 @@ class OverlayController(val service: FloatingService) {
     }.filterNotNull().distinctUntilChanged()
   }
 
-  private suspend fun addOrRemoveClickTargetView(
-    isVisible: Flow<Boolean?>, createViewHolder: () -> OverlayViewHolder
-  ) {
-    var viewHolder: OverlayViewHolder? = null
-    // isVisible first() should always be true
-    isVisible.filterNotNull().collect { isVisible ->
-      if (isVisible) {
-        viewHolder = createViewHolder()
-      }
-      addOrRemoveView(viewHolder!!, isVisible)
-    }
-  }
+//  private suspend fun addOrRemoveClickTargetView(
+//    isVisible: Flow<Boolean?>, createViewHolder: () -> OverlayViewHolder
+//  ) {
+//    var viewHolder: OverlayViewHolder? = null
+//    // isVisible first() should always be true
+//    isVisible.filterNotNull().collect { isVisible ->
+//      if (isVisible) {
+//        viewHolder = createViewHolder()
+//      }
+//      addOrRemoveView(viewHolder!!, isVisible)
+//    }
+//  }
 
   fun exitCountdown() {
     countdownState.overlayState.isVisible.value = false
