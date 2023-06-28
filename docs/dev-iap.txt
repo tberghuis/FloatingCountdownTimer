@@ -8,3 +8,4 @@ make sure secrets are not uploaded to public repo
 
 https://codelabs.developers.google.com/play-billing-codelab?hl=en#0
 
+remove IAPDemo activity manifest.xml
