@@ -3,3 +3,5 @@
 codelab
 ...
 copy from sample, update play console
+
+make sure secrets are not uploaded to public repo
