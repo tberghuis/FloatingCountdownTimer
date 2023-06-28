@@ -1,5 +1,5 @@
 
 
-fresh activity
 codelab
 ...
+copy from sample, update play console
