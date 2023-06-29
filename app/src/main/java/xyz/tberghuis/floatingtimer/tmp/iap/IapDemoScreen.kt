@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
+import xyz.tberghuis.floatingtimer.tmp.iaphalo.HaloScreen
 
 
 @Composable
@@ -41,5 +42,7 @@ fun IapDemoScreen(
       Text("terminate Billing Connection")
     }
     Text("---------------------------")
+
+    HaloScreen()
   }
 }
