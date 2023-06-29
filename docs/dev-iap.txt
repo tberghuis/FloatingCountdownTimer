@@ -17,3 +17,6 @@ use env var to unlock IAP gradle
 
 fix my payments profile (play console)
   TFN ...
+
+https://codelabs.developers.google.com/play-billing-codelab?hl=en#3
+
