@@ -1,9 +1,11 @@
 package xyz.tberghuis.floatingtimer.tmp.iap
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 
@@ -11,6 +13,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun IapDemoScreen(
   vm: IapDemoVm = viewModel()
 ) {
+  val context = LocalContext.current
   Column {
     Button(onClick = {
       vm.startBillingConnection()
@@ -26,6 +29,11 @@ fun IapDemoScreen(
       vm.queryPurchases()
     }) {
       Text("query Purchases")
+    }
+    Button(onClick = {
+      vm.launchBillingFlow(context as Activity)
+    }) {
+      Text("launch Billing Flow")
     }
   }
 }

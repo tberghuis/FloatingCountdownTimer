@@ -21,3 +21,5 @@ fix my payments profile (play console)
 https://codelabs.developers.google.com/play-billing-codelab?hl=en#3
 
 don't i need to include base64EncodedPublicKey in manifest???
+
+https://stackoverflow.com/questions/11068686/this-version-of-the-application-is-not-configured-for-billing-through-google-pla

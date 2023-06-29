@@ -1,9 +1,11 @@
 package xyz.tberghuis.floatingtimer.tmp.iap
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
+import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.ProductDetailsResponseListener
@@ -11,6 +13,8 @@ import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import xyz.tberghuis.floatingtimer.logd
 
 // should call this billing
@@ -22,6 +26,12 @@ class BillingClientWrapper(
     .setListener(this)
     .enablePendingPurchases()
     .build()
+
+  private val _productWithProductDetails =
+    MutableStateFlow<Map<String, ProductDetails>>(emptyMap())
+  val productWithProductDetails =
+    _productWithProductDetails.asStateFlow()
+
 
   override fun onPurchasesUpdated(p0: BillingResult, p1: MutableList<Purchase>?) {
     logd("onPurchasesUpdated")
@@ -41,6 +51,9 @@ class BillingClientWrapper(
         logd("productDetailsList $productDetailsList")
         productDetailsList.forEach {
           logd("ProductDetails: $it")
+        }
+        _productWithProductDetails.value = productDetailsList.associateBy {
+          it.productId
         }
       }
 
@@ -95,4 +108,20 @@ class BillingClientWrapper(
       }
     }
   }
+
+
+  fun launchBillingFlow(activity: Activity, productDetails: ProductDetails) {
+    val productDetailsParams =
+      BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails).build()
+
+    val params = BillingFlowParams.newBuilder()
+      .setProductDetailsParamsList(listOf(productDetailsParams))
+      .build()
+    if (!billingClient.isReady) {
+      logd("launchBillingFlow: BillingClient is not ready")
+    }
+    billingClient.launchBillingFlow(activity, params)
+  }
+
+
 }
