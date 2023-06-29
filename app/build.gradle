@@ -46,6 +46,12 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    // https://stackoverflow.com/questions/70550883/warning-the-following-options-were-not-recognized-by-any-processor-dagger-f
+    hilt {
+        enableAggregatingTask = true
+    }
+
     namespace 'xyz.tberghuis.floatingtimer'
 }
 

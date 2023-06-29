@@ -26,8 +26,14 @@ class BillingClientWrapper(
     logd("onPurchasesUpdated")
   }
 
-  override fun onProductDetailsResponse(p0: BillingResult, p1: MutableList<ProductDetails>) {
-    logd("onProductDetailsResponse")
+  override fun onProductDetailsResponse(
+    billingResult: BillingResult,
+    productDetailsList: MutableList<ProductDetails>
+  ) {
+    val responseCode = billingResult.responseCode
+    val debugMessage = billingResult.debugMessage
+
+    logd("onProductDetailsResponse responseCode $responseCode debugMessage $debugMessage")
   }
 
 
