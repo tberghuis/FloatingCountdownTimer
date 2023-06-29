@@ -41,4 +41,10 @@ class IapDemoVm(application: Application) : AndroidViewModel(application) {
       billingClientWrapper.launchBillingFlow(activity, productDetails!!)
     }
   }
+
+  fun terminateBillingConnection() {
+    viewModelScope.launch(IO) {
+      billingClientWrapper.terminateBillingConnection()
+    }
+  }
 }

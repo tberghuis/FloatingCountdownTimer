@@ -51,6 +51,7 @@ class BillingClientWrapper(
           acknowledgePurchase(purchase)
         }
       }
+
       BillingClient.BillingResponseCode.USER_CANCELED -> {
       }
     }
@@ -156,5 +157,10 @@ class BillingClientWrapper(
     billingClient.launchBillingFlow(activity, params)
   }
 
+
+  fun terminateBillingConnection() {
+    logd("Terminating connection")
+    billingClient.endConnection()
+  }
 
 }

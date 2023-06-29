@@ -35,5 +35,11 @@ fun IapDemoScreen(
     }) {
       Text("launch Billing Flow")
     }
+    Button(onClick = {
+      vm.terminateBillingConnection()
+    }) {
+      Text("terminate Billing Connection")
+    }
+    Text("---------------------------")
   }
 }
