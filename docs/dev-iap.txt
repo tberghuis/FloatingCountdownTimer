@@ -13,3 +13,7 @@ remove IAPDemo activity manifest.xml
 find open source color picker
 
 use env var to unlock IAP gradle
+
+
+fix my payments profile (play console)
+  TFN ...
