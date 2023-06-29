@@ -36,3 +36,5 @@ no need to keep open connection billing client,
 just create new object when needed
 return a flow???
 sealed class PurchaseFlowEvent
+billingClient endConnection
+
