@@ -38,3 +38,5 @@ return a flow???
 sealed class PurchaseFlowEvent
 billingClient endConnection
 
+business name: TJB Apps
+credit card statement name: TJB Apps
