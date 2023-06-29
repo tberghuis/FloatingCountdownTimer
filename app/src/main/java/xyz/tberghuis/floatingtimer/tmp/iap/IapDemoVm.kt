@@ -8,9 +8,8 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
 class IapDemoVm(application: Application) : AndroidViewModel(application) {
-  val gdfgdf = "fdsfsd"
 
-  val billingClientWrapper: BillingClientWrapper = BillingClientWrapper(application)
+  private val billingClientWrapper: BillingClientWrapper = BillingClientWrapper(application)
 
   fun startBillingConnection() {
     viewModelScope.launch(IO) {
@@ -21,6 +20,12 @@ class IapDemoVm(application: Application) : AndroidViewModel(application) {
   fun queryProductDetails() {
     viewModelScope.launch(IO) {
       billingClientWrapper.queryProductDetails()
+    }
+  }
+
+  fun queryPurchases() {
+    viewModelScope.launch(IO) {
+      billingClientWrapper.queryPurchases()
     }
   }
 

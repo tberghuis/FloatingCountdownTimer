@@ -10,6 +10,7 @@ import com.android.billingclient.api.ProductDetailsResponseListener
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
+import com.android.billingclient.api.QueryPurchasesParams
 import xyz.tberghuis.floatingtimer.logd
 
 // should call this billing
@@ -42,6 +43,7 @@ class BillingClientWrapper(
           logd("ProductDetails: $it")
         }
       }
+
       else -> {
         logd("onProductDetailsResponse: $responseCode $debugMessage")
       }
@@ -77,5 +79,20 @@ class BillingClientWrapper(
     val params = QueryProductDetailsParams.newBuilder().setProductList(listOf(product)).build()
 
     billingClient.queryProductDetailsAsync(params, this)
+  }
+
+  fun queryPurchases() {
+    if (!billingClient.isReady) {
+      logd("queryPurchases: BillingClient is not ready")
+    }
+    billingClient.queryPurchasesAsync(
+      QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build()
+    ) { billingResult, purchaseList ->
+      if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+        logd("purchaseList $purchaseList")
+      } else {
+        logd("billingResult.debugMessage: ${billingResult.debugMessage}")
+      }
+    }
   }
 }

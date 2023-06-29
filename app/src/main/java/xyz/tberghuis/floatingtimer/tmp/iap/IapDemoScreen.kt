@@ -22,5 +22,10 @@ fun IapDemoScreen(
     }) {
       Text("query Product Details")
     }
+    Button(onClick = {
+      vm.queryPurchases()
+    }) {
+      Text("query Purchases")
+    }
   }
 }
