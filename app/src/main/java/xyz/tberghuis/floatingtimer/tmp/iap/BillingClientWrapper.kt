@@ -2,7 +2,6 @@ package xyz.tberghuis.floatingtimer.tmp.iap
 
 import android.app.Activity
 import android.content.Context
-import android.util.Log
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
@@ -18,8 +17,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import xyz.tberghuis.floatingtimer.logd
 
-// should call this billing
-
+// reference https://github.com/android/play-billing-samples
+// PlayBillingCodelab
 class BillingClientWrapper(
   context: Context
 ) : PurchasesUpdatedListener, ProductDetailsResponseListener {
