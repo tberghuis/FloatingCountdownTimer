@@ -26,3 +26,13 @@ https://stackoverflow.com/questions/11068686/this-version-of-the-application-is-
 
 https://developer.android.com/google/play/billing/test
 https://github.com/wdtheprovider/in-app-purchases-subscription
+
+
+purchases saved in dataStore preferences
+  nullable boolean
+  halo_color_purchased = null, false, true
+
+no need to keep open connection billing client,
+just create new object when needed
+return a flow???
+sealed class PurchaseFlowEvent
