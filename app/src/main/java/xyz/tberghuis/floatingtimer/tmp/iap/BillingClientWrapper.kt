@@ -9,6 +9,7 @@ import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.ProductDetailsResponseListener
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
+import com.android.billingclient.api.QueryProductDetailsParams
 import xyz.tberghuis.floatingtimer.logd
 
 // should call this billing
@@ -41,9 +42,22 @@ class BillingClientWrapper(
           logd("billing not ok: ${billingResult.debugMessage}")
         }
       }
+
       override fun onBillingServiceDisconnected() {
         logd("Billing connection disconnected")
       }
     })
+  }
+
+  fun queryProductDetails() {
+    val productId = "halo_colour"
+    val product = QueryProductDetailsParams.Product.newBuilder()
+      .setProductId(productId)
+      .setProductType(BillingClient.ProductType.INAPP)
+      .build()
+
+    val params = QueryProductDetailsParams.newBuilder().setProductList(listOf(product)).build()
+
+    billingClient.queryProductDetailsAsync(params, this)
   }
 }

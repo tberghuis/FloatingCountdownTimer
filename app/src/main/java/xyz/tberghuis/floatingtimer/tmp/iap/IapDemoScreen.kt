@@ -12,12 +12,15 @@ fun IapDemoScreen(
   vm: IapDemoVm = viewModel()
 ) {
   Column {
-    Text("dsad")
-    Text("dsad ${vm.gdfgdf}")
     Button(onClick = {
       vm.startBillingConnection()
     }) {
       Text("start billing connection")
+    }
+    Button(onClick = {
+      vm.queryProductDetails()
+    }) {
+      Text("query Product Details")
     }
   }
 }

@@ -18,4 +18,10 @@ class IapDemoVm(application: Application) : AndroidViewModel(application) {
     }
   }
 
+  fun queryProductDetails() {
+    viewModelScope.launch(IO) {
+      billingClientWrapper.queryProductDetails()
+    }
+  }
+
 }
