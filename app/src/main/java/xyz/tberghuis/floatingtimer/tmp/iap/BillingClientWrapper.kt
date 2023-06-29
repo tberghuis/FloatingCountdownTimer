@@ -3,6 +3,7 @@ package xyz.tberghuis.floatingtimer.tmp.iap
 import android.app.Activity
 import android.content.Context
 import android.util.Log
+import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
@@ -32,9 +33,42 @@ class BillingClientWrapper(
   val productWithProductDetails =
     _productWithProductDetails.asStateFlow()
 
+  private val _purchases =
+    MutableStateFlow<List<Purchase>>(listOf())
+  val purchases = _purchases.asStateFlow()
 
-  override fun onPurchasesUpdated(p0: BillingResult, p1: MutableList<Purchase>?) {
-    logd("onPurchasesUpdated")
+  override fun onPurchasesUpdated(
+    billingResult: BillingResult,
+    purchases: List<Purchase>?
+  ) {
+    logd("onPurchasesUpdated billingResult $billingResult purchases $purchases")
+    when (billingResult.responseCode) {
+      BillingClient.BillingResponseCode.OK -> {
+        if (purchases.isNullOrEmpty()) {
+          return
+        }
+        _purchases.value = purchases
+        for (purchase in purchases) {
+          acknowledgePurchase(purchase)
+        }
+      }
+      BillingClient.BillingResponseCode.USER_CANCELED -> {
+      }
+    }
+  }
+
+  private fun acknowledgePurchase(purchase: Purchase) {
+    if (!purchase.isAcknowledged) {
+      val params = AcknowledgePurchaseParams.newBuilder()
+        .setPurchaseToken(purchase.purchaseToken)
+        .build()
+
+      billingClient.acknowledgePurchase(
+        params
+      ) { billingResult ->
+        logd("acknowledgePurchase billingResult $billingResult")
+      }
+    }
   }
 
   override fun onProductDetailsResponse(
