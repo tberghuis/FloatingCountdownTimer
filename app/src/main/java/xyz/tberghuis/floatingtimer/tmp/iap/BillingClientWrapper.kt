@@ -34,6 +34,18 @@ class BillingClientWrapper(
     val debugMessage = billingResult.debugMessage
 
     logd("onProductDetailsResponse responseCode $responseCode debugMessage $debugMessage")
+
+    when (responseCode) {
+      BillingClient.BillingResponseCode.OK -> {
+        logd("productDetailsList $productDetailsList")
+        productDetailsList.forEach {
+          logd("ProductDetails: $it")
+        }
+      }
+      else -> {
+        logd("onProductDetailsResponse: $responseCode $debugMessage")
+      }
+    }
   }
 
 

@@ -1,0 +1,24 @@
+{
+  "jsonString=""{\"productId\":\"halo_colour\",\"type\":\"inapp\",\"title\":\"Halo Colour (Floating Timer)\",\"name\":\"Halo Colour\",\"description\":\"Set a custom colour for the timers halo.\",\"localizedIn\":[\"en-AU\"],\"skuDetailsToken\":\"AEuhp4LKUDSTfSqirH0Rs2vyusvQlGZrpfyrB_rJj4B8dRu49MPs_kdanq6VakGTR_Y3\",\"oneTimePurchaseOfferDetails\":{\"priceAmountMicros\":990000,\"priceCurrencyCode\":\"AUD\",\"formattedPrice\":\"$0.99\"}}",
+  "parsedJson="{
+     "productId":"halo_colour",
+     "type":"inapp",
+     "title":"Halo Colour (Floating Timer)",
+     "name":"Halo Colour",
+     "description":"Set a custom colour for the timers halo.",
+     "localizedIn":[
+        "en-AU"
+     ],
+     "skuDetailsToken":"AEuhp4LKUDSTfSqirH0Rs2vyusvQlGZrpfyrB_rJj4B8dRu49MPs_kdanq6VakGTR_Y3",
+     "oneTimePurchaseOfferDetails":{
+        "priceAmountMicros":990000,
+        "priceCurrencyCode":"AUD",
+        "formattedPrice":"$0.99"
+     }
+  },
+  "productId=""halo_colour",
+  "productType=""inapp",
+  "title=""Halo Colour (Floating Timer)",
+  "productDetailsToken=""AEuhp4LKUDSTfSqirH0Rs2vyusvQlGZrpfyrB_rJj4B8dRu49MPs_kdanq6VakGTR_Y3",
+  "subscriptionOfferDetails=null"
+}
