@@ -59,5 +59,13 @@ click on color picker
 use arrow.kt for either
 
 doitwrong
+use my own Result sealed interface
+with data classes as values
+
+interface GetHaloPurchasedResult
+  data class Result(purchased: Boolean)
+  data class Error(snackbar message)
+ 
+nah, lets just read the arrow docs and use either 
 
 halo screen purchase button
