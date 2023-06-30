@@ -55,3 +55,7 @@ click on color picker
       1 aud, button buy, cancel
   if purchased == true
     color picker
+
+use arrow.kt for either
+
+doitwrong
