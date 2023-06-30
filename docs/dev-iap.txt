@@ -59,3 +59,5 @@ click on color picker
 use arrow.kt for either
 
 doitwrong
+
+halo screen purchase button
