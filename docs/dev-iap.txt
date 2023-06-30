@@ -40,3 +40,18 @@ billingClient endConnection
 
 business name: TJB Apps
 credit card statement name: TJB Apps
+
+######
+
+next task, use shared prefs
+rewrite billingwrapper idiomatic kotlin
+  results, flow
+
+click on color picker
+  if purchased == null
+    billing client check
+  if purchased == false
+    dialog: charnge halo color is a premium feature
+      1 aud, button buy, cancel
+  if purchased == true
+    color picker

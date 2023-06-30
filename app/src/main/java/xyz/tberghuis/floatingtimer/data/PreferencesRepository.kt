@@ -28,6 +28,7 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
   val soundFlow: Flow<Boolean> = dataStore.data.map { preferences ->
     preferences[booleanPreferencesKey("sound")] ?: true
   }
+
   suspend fun updateSound(sound: Boolean) {
     dataStore.edit { preferences ->
       preferences[booleanPreferencesKey("sound")] = sound
@@ -45,5 +46,17 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
       preferences[booleanPreferencesKey("first_run")] = false
     }
   }
+
+
+  val haloColourPurchasedFlow: Flow<Boolean> = dataStore.data.map { preferences ->
+    preferences[booleanPreferencesKey("halo_colour_purchased")] ?: false
+  }
+
+  suspend fun haloColourPurchased() {
+    dataStore.edit { preferences ->
+      preferences[booleanPreferencesKey("halo_colour_purchased")] = true
+    }
+  }
+
 
 }
