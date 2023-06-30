@@ -62,7 +62,7 @@ doitwrong
 use my own Result sealed interface
 with data classes as values
 
-interface GetHaloPurchasedResult
+sealed interface GetHaloPurchasedResult
   data class Result(purchased: Boolean)
   data class Error(snackbar message)
  
