@@ -14,6 +14,8 @@ class HaloScreenViewModel(application: Application) : AndroidViewModel(applicati
 
   val preferencesRepository = providePreferencesRepository(application)
 
+  val bds = BillingDataSource(application)
+
   init {
     viewModelScope.launch(IO) {
       preferencesRepository.haloColourPurchasedFlow.collect {
@@ -23,6 +25,11 @@ class HaloScreenViewModel(application: Application) : AndroidViewModel(applicati
   }
 
   fun changeHaloColour(){
+
+    viewModelScope.launch(IO) {
+      bds.checkHaloColourPurchased()
+    }
+
 
     if(haloColourPurchased){
       // show change color dialog

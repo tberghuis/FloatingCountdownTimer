@@ -15,7 +15,9 @@ fun HaloScreen(
 ) {
   Text("halo screen")
 
-  Button(onClick = {}) {
+  Button(onClick = {
+    vm.changeHaloColour()
+  }) {
     Text("change color")
   }
 
