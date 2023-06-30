@@ -27,14 +27,6 @@ class BillingDataSource(
     // doitwrong
     // move reusable functions outside of class
 
-    val productDetailsResponseListener =
-      ProductDetailsResponseListener { billingResult, productDetailsList ->
-        logd("productDetailsResponseListener")
-        logd("billingResult $billingResult")
-        logd("productDetailsList $productDetailsList")
-
-
-      }
 
     // not used....
     val purchasesUpdatedListener =
@@ -42,7 +34,7 @@ class BillingDataSource(
         logd("purchasesUpdatedListener")
       }
 
-
+    // todo, put in fun pass in purchasesUpdatedListener lambda
     val billingClient = BillingClient.newBuilder(context)
       .setListener(purchasesUpdatedListener)
       .enablePendingPurchases()
@@ -121,3 +113,8 @@ private suspend fun getHaloColourProductDetails(billingClient: BillingClient): P
     billingClient.queryProductDetailsAsync(params, productDetailsResponseListener)
   }
 
+private suspend fun isHaloColourPurchased(billingClient: BillingClient): Boolean =
+  suspendCoroutine { continuation ->
+    // copy from queryPurchases
+
+  }
