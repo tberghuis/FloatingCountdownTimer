@@ -69,7 +69,7 @@ class BillingDataSource(
 
 
     // end connection
-
+    billingClient.endConnection()
 
     return false
 
@@ -78,11 +78,13 @@ class BillingDataSource(
 }
 
 
-suspend fun startBillingConnection(billingClient: BillingClient): BillingResult =
+private suspend fun startBillingConnection(billingClient: BillingClient): BillingResult =
   suspendCoroutine { continuation ->
     val billingClientStateListener = object : BillingClientStateListener {
       override fun onBillingServiceDisconnected() {
         // todo
+        // probably best to let the app crash if this called???
+        logd("onBillingServiceDisconnected")
 //        continuation.resumeWithException()
       }
 
