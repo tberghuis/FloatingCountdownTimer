@@ -4,6 +4,7 @@ import android.content.Context
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.ProductDetailsResponseListener
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
@@ -31,6 +32,8 @@ class BillingDataSource(
         logd("productDetailsResponseListener")
         logd("billingResult $billingResult")
         logd("productDetailsList $productDetailsList")
+
+
       }
 
     // not used....
@@ -51,21 +54,17 @@ class BillingDataSource(
     when (billingResult.responseCode) {
       BillingClient.BillingResponseCode.OK -> {}
       else -> {
+        // todo show error to user????
         return false
       }
     }
     logd("after when")
 
     // query product details
-    val productId = "halo_colour"
-    val product = QueryProductDetailsParams.Product.newBuilder()
-      .setProductId(productId)
-      .setProductType(BillingClient.ProductType.INAPP)
-      .build()
+    val productDetails = getHaloColourProductDetails(billingClient)
 
-    val params = QueryProductDetailsParams.newBuilder().setProductList(listOf(product)).build()
 
-    billingClient.queryProductDetailsAsync(params, productDetailsResponseListener)
+    logd("productDetails $productDetails")
 
 
     // end connection
@@ -95,4 +94,30 @@ private suspend fun startBillingConnection(billingClient: BillingClient): Billin
     billingClient.startConnection(billingClientStateListener)
   }
 
+
+private suspend fun getHaloColourProductDetails(billingClient: BillingClient): ProductDetails? =
+  suspendCoroutine { continuation ->
+    val productId = "halo_colour"
+    val product = QueryProductDetailsParams.Product.newBuilder()
+      .setProductId(productId)
+      .setProductType(BillingClient.ProductType.INAPP)
+      .build()
+
+    val params = QueryProductDetailsParams.newBuilder().setProductList(listOf(product)).build()
+
+    val productDetailsResponseListener =
+      ProductDetailsResponseListener { billingResult, productDetailsList ->
+        logd("productDetailsResponseListener")
+        logd("billingResult $billingResult")
+        logd("productDetailsList $productDetailsList")
+
+        val productDetails = productDetailsList.find {
+          it.productId == "halo_colour"
+        }
+
+        continuation.resume(productDetails)
+
+      }
+    billingClient.queryProductDetailsAsync(params, productDetailsResponseListener)
+  }
 
