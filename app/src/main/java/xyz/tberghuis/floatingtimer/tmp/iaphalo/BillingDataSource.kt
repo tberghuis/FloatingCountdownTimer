@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp.iaphalo
 
+import android.app.Application
 import android.content.Context
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
@@ -13,6 +14,10 @@ import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.logd
 
 
@@ -36,12 +41,7 @@ class BillingDataSource(
         logd("purchasesUpdatedListener")
       }
 
-    // todo, put in fun pass in purchasesUpdatedListener lambda
-    val billingClient = BillingClient.newBuilder(context)
-      .setListener(purchasesUpdatedListener)
-      .enablePendingPurchases()
-      .build()
-
+    val billingClient = createBillingClient(context, purchasesUpdatedListener)
     // start connection
 
     val billingResult = startBillingConnection(billingClient)
@@ -58,7 +58,7 @@ class BillingDataSource(
     val productDetails = getHaloColourProductDetails(billingClient)
     logd("productDetails $productDetails")
 
-    if(productDetails == null){
+    if (productDetails == null) {
       // todo some sort of message to user
       // snackbar
       return false
@@ -74,6 +74,53 @@ class BillingDataSource(
 
   }
 
+
+  // todo return PurchaseHaloColourChangeResult
+  // future.txt use arrow.kt Either
+  suspend fun purchaseHaloColourChange(): Boolean =
+    suspendCoroutine { continuation ->
+      val purchasesUpdatedListener =
+        PurchasesUpdatedListener { billingResult: BillingResult, purchases: MutableList<Purchase>? ->
+          logd("purchasesUpdatedListener")
+          // todo
+          continuation.resume(false)
+        }
+      val billingClient = createBillingClient(context, purchasesUpdatedListener)
+
+      // todo make scope child Job of suspendCoroutine ???
+      val scope = CoroutineScope(IO)
+
+      scope.launch {
+        val billingResult = startBillingConnection(billingClient)
+        when (billingResult.responseCode) {
+          BillingClient.BillingResponseCode.OK -> {}
+          else -> {
+            // todo show error to user????
+            continuation.resume(false)
+          }
+        }
+        logd("after when")
+
+
+      }
+
+
+    }
+
+
+}
+
+/////////////////////////////////////////////////////////
+
+
+fun createBillingClient(
+  context: Context,
+  purchasesUpdatedListener: PurchasesUpdatedListener
+): BillingClient {
+  return BillingClient.newBuilder(context)
+    .setListener(purchasesUpdatedListener)
+    .enablePendingPurchases()
+    .build()
 }
 
 

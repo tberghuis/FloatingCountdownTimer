@@ -24,7 +24,7 @@ class HaloScreenViewModel(application: Application) : AndroidViewModel(applicati
     }
   }
 
-  fun changeHaloColour(){
+  fun changeHaloColour() {
 
     var haloColourPurchased = false
 
@@ -33,10 +33,9 @@ class HaloScreenViewModel(application: Application) : AndroidViewModel(applicati
     }
 
 
-    if(haloColourPurchased){
+    if (haloColourPurchased) {
       // show change color dialog
-    }
-    else {
+    } else {
 //      val checkPurchased = billingclientwrapper.check_purchased
 //      if(checkPurchased){
 //        // show change color dialog
@@ -44,6 +43,13 @@ class HaloScreenViewModel(application: Application) : AndroidViewModel(applicati
 //      else {
 //        // show buy dialog
 //      }
+    }
+  }
+
+
+  fun purchaseHaloColourChange() {
+    viewModelScope.launch(IO) {
+      bds.purchaseHaloColourChange()
     }
   }
 }

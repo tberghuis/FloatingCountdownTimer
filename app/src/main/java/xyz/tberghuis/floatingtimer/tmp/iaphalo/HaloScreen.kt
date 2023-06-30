@@ -26,4 +26,12 @@ fun HaloScreen(
     Text("change color")
   }
 
+
+  Button(onClick = {
+    vm.purchaseHaloColourChange()
+  }) {
+    Text("purchase change halo color")
+  }
+
+
 }
