@@ -3,6 +3,7 @@ package xyz.tberghuis.floatingtimer.tmp.iaphalo
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 // todo rewrite billingclientwrapper so only exposes flow
@@ -13,7 +14,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun HaloScreen(
   vm: HaloScreenViewModel = viewModel()
 ) {
+
+  val purchased = vm.haloColourPurchasedFlow.collectAsState(initial = false)
+
   Text("halo screen")
+  Text("purchased: ${purchased.value}")
 
   Button(onClick = {
     vm.changeHaloColour()

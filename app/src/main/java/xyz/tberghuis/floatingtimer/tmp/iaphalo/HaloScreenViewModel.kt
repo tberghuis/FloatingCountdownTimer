@@ -10,21 +10,23 @@ import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesReposito
 
 
 class HaloScreenViewModel(application: Application) : AndroidViewModel(application) {
-  var haloColourPurchased = false
+//  var haloColourPurchased = false
 
-  val preferencesRepository = providePreferencesRepository(application)
+  private val preferencesRepository = providePreferencesRepository(application)
 
-  val bds = BillingDataSource(application)
+  val haloColourPurchasedFlow get() = preferencesRepository.haloColourPurchasedFlow
+
+  private val bds = BillingDataSource(application)
 
   init {
     viewModelScope.launch(IO) {
-      preferencesRepository.haloColourPurchasedFlow.collect {
-        haloColourPurchased = it
-      }
+
     }
   }
 
   fun changeHaloColour(){
+
+    var haloColourPurchased = false
 
     viewModelScope.launch(IO) {
       bds.checkHaloColourPurchased()
