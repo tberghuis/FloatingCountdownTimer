@@ -68,4 +68,6 @@ interface GetHaloPurchasedResult
  
 nah, lets just read the arrow docs and use either 
 
+finsh doing it wrong first
+
 halo screen purchase button
