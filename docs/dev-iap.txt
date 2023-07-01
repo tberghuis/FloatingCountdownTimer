@@ -63,8 +63,8 @@ use my own Result sealed interface
 with data classes as values
 
 sealed interface GetHaloPurchasedResult
-  data class Result(purchased: Boolean)
-  data class Error(snackbar message)
+  data class Ok(purchased: Boolean)
+  data class Err(snackbar message)
  
 nah, lets just read the arrow docs and use either 
 
