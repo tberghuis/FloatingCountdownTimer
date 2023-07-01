@@ -2,6 +2,6 @@
 git rm --cached .idea/vcs.xml
 git rm --cached .idea/deploymentTargetDropDown.xml
 
-
+# clear in-app purchases
 adb shell pm clear com.android.vending
 adb uninstall xyz.tberghuis.floatingtimer
