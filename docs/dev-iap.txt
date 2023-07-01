@@ -73,3 +73,5 @@ finsh doing it wrong first
 halo screen purchase button
 
 delete vscode setting sync issue comment when resolved
+
+acknowledge purchase

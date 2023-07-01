@@ -30,9 +30,13 @@ class HaloScreenViewModel(application: Application) : AndroidViewModel(applicati
     var haloColourPurchased = false
 
     viewModelScope.launch(IO) {
-      bds.checkHaloColourPurchased()
+      haloColourPurchased = bds.checkHaloColourPurchased()
+      if(haloColourPurchased){
+        preferencesRepository.haloColourPurchased()
+      }
     }
 
+/////////////////////////////
 
     if (haloColourPurchased) {
       // show change color dialog

@@ -50,7 +50,7 @@ class BillingDataSource(
     when (billingResult.responseCode) {
       BillingClient.BillingResponseCode.OK -> {}
       else -> {
-        // todo show error to user????
+        // todo show error to user???? snackbar
         return false
       }
     }
@@ -59,12 +59,6 @@ class BillingDataSource(
     // query product details
     val productDetails = getHaloColourProductDetails(billingClient)
     logd("productDetails $productDetails")
-
-    if (productDetails == null) {
-      // todo some sort of message to user
-      // snackbar
-      return false
-    }
 
     val purchased = isHaloColourPurchased(billingClient, productDetails)
 
@@ -205,7 +199,30 @@ private suspend fun isHaloColourPurchased(
         // todo
         // write purchase button first
 
-        continuation.resume(false)
+        var purchased = false
+
+        when (billingResult.responseCode) {
+          BillingClient.BillingResponseCode.OK -> {
+            for (purchase in purchases) {
+
+              if (purchase.products.contains("halo_colour")) {
+                purchased = true
+                break
+              }
+
+
+            }
+
+          }
+
+          else -> {
+            // TODO snackbar debugMessage
+          }
+        }
+
+
+
+        continuation.resume(purchased)
 
       }
 
