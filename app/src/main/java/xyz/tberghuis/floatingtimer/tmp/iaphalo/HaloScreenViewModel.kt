@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.logd
 
 class HaloScreenViewModel(private val application: Application) : AndroidViewModel(application) {
   private val preferencesRepository = providePreferencesRepository(application)
@@ -30,9 +31,11 @@ class HaloScreenViewModel(private val application: Application) : AndroidViewMod
         preferencesRepository.haloColourPurchased()
       }
       bds.startBillingConnection()
-      bds.purchaseHaloColourChange(activity)
+      val br = bds.purchaseHaloColourChange(activity)
+      logd("purchaseHaloColourChange after br $br")
       // doitwrong: this is inefficient
       bds.checkHaloColourPurchased()
+      // for some reason Terminating connection logs before acknowledge purchase???
       bds.endBillingConnection()
     }
   }

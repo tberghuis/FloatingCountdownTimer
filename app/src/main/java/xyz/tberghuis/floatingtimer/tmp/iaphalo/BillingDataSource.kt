@@ -37,19 +37,18 @@ class BillingDataSource(
     .enablePendingPurchases()
     .build()
 
-  // doitwrong
+  // doitwrong: this is wack but it works
   private var purchasesUpdatedContinuation: Continuation<BillingResult>? = null
 
   override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
     logd("purchasesUpdatedListener")
+    purchasesUpdatedContinuation?.resume(billingResult)
     if (billingResult.responseCode != BillingClient.BillingResponseCode.OK || purchases.isNullOrEmpty()) {
-      purchasesUpdatedContinuation?.resume(billingResult)
       return
     }
     for (purchase in purchases) {
       acknowledgePurchase(purchase)
     }
-    purchasesUpdatedContinuation?.resume(billingResult)
   }
 
   private fun acknowledgePurchase(purchase: Purchase) {
@@ -102,11 +101,40 @@ class BillingDataSource(
   }
 
 
+//  // todo return PurchaseHaloColourChangeResult
+//  // future.txt use arrow.kt Either
+//  suspend fun purchaseHaloColourChange(activity: Activity): BillingResult =
+//    suspendCoroutine { continuation ->
+//      purchasesUpdatedContinuation = continuation
+//
+//
+//      // todo make scope child Job of suspendCoroutine ???
+//      val scope = CoroutineScope(IO)
+//
+//      scope.launch {
+//        val productDetails = getHaloColourProductDetails(billingClient)
+//
+//        val productDetailsParams =
+//          BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
+//            .build()
+//
+//        val params = BillingFlowParams.newBuilder()
+//          .setProductDetailsParamsList(listOf(productDetailsParams))
+//          .build()
+//        if (!billingClient.isReady) {
+//          logd("launchBillingFlow: BillingClient is not ready")
+//        }
+//        billingClient.launchBillingFlow(activity, params)
+//      }
+//    }
+
+
   // todo return PurchaseHaloColourChangeResult
   // future.txt use arrow.kt Either
   suspend fun purchaseHaloColourChange(activity: Activity): BillingResult =
     suspendCoroutine { continuation ->
       purchasesUpdatedContinuation = continuation
+
 
       // todo make scope child Job of suspendCoroutine ???
       val scope = CoroutineScope(IO)
@@ -126,6 +154,7 @@ class BillingDataSource(
         }
         billingClient.launchBillingFlow(activity, params)
       }
+      logd("purchaseHaloColourChange finish")
     }
 }
 
