@@ -27,12 +27,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.logd
 
-
-// this does my head in
-// what am i doing with my life
-
 class BillingDataSource(
-  private val context: Context
+  context: Context,
+  private val updateHaloColourPurchased: () -> Unit = {}
 ) : PurchasesUpdatedListener {
 
   private val billingClient = BillingClient.newBuilder(context)
@@ -73,9 +70,12 @@ class BillingDataSource(
   // allow me to show snackbars on error cases
 
   // startBillingConnection must be called first
-  suspend fun checkHaloColourPurchased(): Boolean {
+  suspend fun checkHaloColourPurchased() {
     // query product details
-    return isHaloColourPurchased(billingClient)
+    val purchased = isHaloColourPurchased(billingClient)
+    if(purchased){
+      updateHaloColourPurchased()
+    }
   }
 
   fun endBillingConnection() {

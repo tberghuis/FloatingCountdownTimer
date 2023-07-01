@@ -9,51 +9,18 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
 
-
 class HaloScreenViewModel(private val application: Application) : AndroidViewModel(application) {
-//  var haloColourPurchased = false
-
   private val preferencesRepository = providePreferencesRepository(application)
-
   val haloColourPurchasedFlow get() = preferencesRepository.haloColourPurchasedFlow
 
-//  private val bds = BillingDataSource(application)
-
-  init {
-    viewModelScope.launch(IO) {
-
-    }
-  }
-
-  fun changeHaloColour() {
-
-    var haloColourPurchased = false
-
+  fun checkHaloColourPurchased() {
     viewModelScope.launch(IO) {
       val bds = BillingDataSource(application)
       bds.startBillingConnection()
-      haloColourPurchased = bds.checkHaloColourPurchased()
+      bds.checkHaloColourPurchased()
       bds.endBillingConnection()
-      if (haloColourPurchased) {
-        preferencesRepository.haloColourPurchased()
-      }
-    }
-
-/////////////////////////////
-
-    if (haloColourPurchased) {
-      // show change color dialog
-    } else {
-//      val checkPurchased = billingclientwrapper.check_purchased
-//      if(checkPurchased){
-//        // show change color dialog
-//      }
-//      else {
-//        // show buy dialog
-//      }
     }
   }
-
 
   fun purchaseHaloColourChange(activity: Activity) {
     viewModelScope.launch(IO) {

@@ -23,9 +23,9 @@ fun HaloScreen(
   Text("purchased: ${purchased.value}")
 
   Button(onClick = {
-    vm.changeHaloColour()
+    vm.checkHaloColourPurchased()
   }) {
-    Text("change color")
+    Text("check Halo Colour Purchased")
   }
 
 
