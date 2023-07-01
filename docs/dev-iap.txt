@@ -75,3 +75,6 @@ halo screen purchase button
 delete vscode setting sync issue comment when resolved
 
 acknowledge purchase
+
+test case, refund, purchased reset to false next startup
+test case, airplane mode, on startup, purchased stays as true
