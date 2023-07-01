@@ -24,7 +24,7 @@ import xyz.tberghuis.floatingtimer.logd
 
 class BillingDataSource(
   context: Context,
-  private val updateHaloColourPurchased: suspend () -> Unit = {}
+
 ) : PurchasesUpdatedListener {
 
   private val billingClient = BillingClient.newBuilder(context)
@@ -77,7 +77,9 @@ class BillingDataSource(
   // allow me to show snackbars on error cases
 
   // startBillingConnection must be called first
-  suspend fun checkHaloColourPurchased() {
+  suspend fun checkHaloColourPurchased(
+    updateHaloColourPurchased: suspend () -> Unit = {}
+  ) {
     // query product details
     val purchased = isHaloColourPurchased(billingClient)
     if (purchased) {
