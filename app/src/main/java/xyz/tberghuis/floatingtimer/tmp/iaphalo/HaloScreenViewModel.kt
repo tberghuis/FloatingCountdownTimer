@@ -31,6 +31,8 @@ class HaloScreenViewModel(private val application: Application) : AndroidViewMod
       }
       bds.startBillingConnection()
       bds.purchaseHaloColourChange(activity)
+      // doitwrong: this is inefficient
+      bds.checkHaloColourPurchased()
       bds.endBillingConnection()
     }
   }

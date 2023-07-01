@@ -40,11 +40,29 @@ class BillingDataSource(
   // doitwrong
   private var purchasesUpdatedContinuation: Continuation<BillingResult>? = null
 
-  override fun onPurchasesUpdated(billingResult: BillingResult, p1: MutableList<Purchase>?) {
+  override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
     logd("purchasesUpdatedListener")
-//    TODO("Not yet implemented")
-    // acknowledge
+    if (billingResult.responseCode != BillingClient.BillingResponseCode.OK || purchases.isNullOrEmpty()) {
+      purchasesUpdatedContinuation?.resume(billingResult)
+      return
+    }
+    for (purchase in purchases) {
+      acknowledgePurchase(purchase)
+    }
     purchasesUpdatedContinuation?.resume(billingResult)
+  }
+
+  private fun acknowledgePurchase(purchase: Purchase) {
+    if (!purchase.isAcknowledged) {
+      val params = AcknowledgePurchaseParams.newBuilder()
+        .setPurchaseToken(purchase.purchaseToken)
+        .build()
+      billingClient.acknowledgePurchase(
+        params
+      ) { billingResult ->
+        logd("acknowledgePurchase billingResult $billingResult")
+      }
+    }
   }
 
   // todo endconnection
@@ -73,7 +91,7 @@ class BillingDataSource(
   suspend fun checkHaloColourPurchased() {
     // query product details
     val purchased = isHaloColourPurchased(billingClient)
-    if(purchased){
+    if (purchased) {
       updateHaloColourPurchased()
     }
   }
