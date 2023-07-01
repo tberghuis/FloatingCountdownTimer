@@ -2,7 +2,6 @@ package xyz.tberghuis.floatingtimer.tmp.iaphalo
 
 import android.app.Activity
 import android.content.Context
-import androidx.compose.runtime.LaunchedEffect
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
@@ -21,7 +20,6 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 
@@ -79,14 +77,19 @@ class BillingDataSource(
   // allow me to show snackbars on error cases
 
   // startBillingConnection must be called first
+//  suspend fun checkHaloColourPurchased(
+//    updateHaloColourPurchased: suspend () -> Unit
+//  ) {
+//    // query product details
+//    val purchased = isHaloColourPurchased(billingClient)
+//    if (purchased) {
+//      updateHaloColourPurchased()
+//    }
+//  }
   suspend fun checkHaloColourPurchased(
-    updateHaloColourPurchased: suspend () -> Unit = {}
-  ) {
+  ): Boolean {
     // query product details
-    val purchased = isHaloColourPurchased(billingClient)
-    if (purchased) {
-      updateHaloColourPurchased()
-    }
+    return isHaloColourPurchased(billingClient)
   }
 
   fun endBillingConnection() {

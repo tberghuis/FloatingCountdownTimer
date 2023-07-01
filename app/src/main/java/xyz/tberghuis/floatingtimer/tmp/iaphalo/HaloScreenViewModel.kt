@@ -18,7 +18,7 @@ class HaloScreenViewModel(private val application: Application) : AndroidViewMod
     viewModelScope.launch(IO) {
       val bds = BillingDataSource(application)
       bds.startBillingConnection()
-      bds.checkHaloColourPurchased {
+      if (bds.checkHaloColourPurchased()) {
         preferencesRepository.haloColourPurchased()
       }
       bds.endBillingConnection()
@@ -29,13 +29,12 @@ class HaloScreenViewModel(private val application: Application) : AndroidViewMod
     viewModelScope.launch(IO) {
       val bds = BillingDataSource(application)
       bds.startBillingConnection()
-      val br = bds.purchaseHaloColourChange(activity)
-      logd("purchaseHaloColourChange after br $br")
+      bds.purchaseHaloColourChange(activity)
+      logd("purchaseHaloColourChange after")
       // doitwrong: this is inefficient
-      bds.checkHaloColourPurchased {
+      if (bds.checkHaloColourPurchased()) {
         preferencesRepository.haloColourPurchased()
       }
-      // for some reason Terminating connection logs before acknowledge purchase???
       bds.endBillingConnection()
     }
   }
