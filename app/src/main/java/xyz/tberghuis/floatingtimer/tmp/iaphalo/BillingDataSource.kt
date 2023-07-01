@@ -23,8 +23,7 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 
 class BillingDataSource(
-  context: Context,
-
+  context: Context
 ) : PurchasesUpdatedListener {
 
   private val billingClient = BillingClient.newBuilder(context)
