@@ -3,6 +3,7 @@ package xyz.tberghuis.floatingtimer.tmp.iaphalo
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
@@ -14,10 +15,14 @@ import com.android.billingclient.api.PurchasesResponseListener
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
+import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.logd
@@ -28,116 +33,26 @@ import xyz.tberghuis.floatingtimer.logd
 
 class BillingDataSource(
   private val context: Context
-) {
+) : PurchasesUpdatedListener {
 
-  // rewrite with my own result type, or arrow either
-  // allow me to show snackbars on error cases
-  suspend fun checkHaloColourPurchased(): Boolean {
-    // doitwrong
-    // move reusable functions outside of class
-
-
-    // not used....
-    val purchasesUpdatedListener =
-      PurchasesUpdatedListener { billingResult: BillingResult, purchases: MutableList<Purchase>? ->
-        logd("purchasesUpdatedListener")
-      }
-
-    val billingClient = createBillingClient(context, purchasesUpdatedListener)
-    // start connection
-
-    val billingResult = startBillingConnection(billingClient)
-    when (billingResult.responseCode) {
-      BillingClient.BillingResponseCode.OK -> {}
-      else -> {
-        // todo show error to user???? snackbar
-        return false
-      }
-    }
-    logd("after when")
-
-    // query product details
-    val productDetails = getHaloColourProductDetails(billingClient)
-    logd("productDetails $productDetails")
-
-    val purchased = isHaloColourPurchased(billingClient, productDetails)
-
-
-    // end connection
-    billingClient.endConnection()
-
-    return purchased
-
-  }
-
-
-  // todo return PurchaseHaloColourChangeResult
-  // future.txt use arrow.kt Either
-  suspend fun purchaseHaloColourChange(activity: Activity): Boolean =
-    suspendCoroutine { continuation ->
-      val purchasesUpdatedListener =
-        PurchasesUpdatedListener { billingResult: BillingResult, purchases: MutableList<Purchase>? ->
-          logd("purchasesUpdatedListener")
-          // todo
-          continuation.resume(false)
-        }
-      val billingClient = createBillingClient(context, purchasesUpdatedListener)
-
-      // todo make scope child Job of suspendCoroutine ???
-      val scope = CoroutineScope(IO)
-
-      scope.launch {
-        val billingResult = startBillingConnection(billingClient)
-        when (billingResult.responseCode) {
-          BillingClient.BillingResponseCode.OK -> {}
-          else -> {
-            // todo show error to user????
-            continuation.resume(false)
-          }
-        }
-        logd("after when")
-
-        // get product details
-
-        val productDetails = getHaloColourProductDetails(billingClient)
-
-        val productDetailsParams =
-          BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
-            .build()
-
-        val params = BillingFlowParams.newBuilder()
-          .setProductDetailsParamsList(listOf(productDetailsParams))
-          .build()
-        if (!billingClient.isReady) {
-          logd("launchBillingFlow: BillingClient is not ready")
-        }
-        billingClient.launchBillingFlow(activity, params)
-
-
-      }
-
-
-    }
-
-
-}
-
-/////////////////////////////////////////////////////////
-
-
-fun createBillingClient(
-  context: Context,
-  purchasesUpdatedListener: PurchasesUpdatedListener
-): BillingClient {
-  return BillingClient.newBuilder(context)
-    .setListener(purchasesUpdatedListener)
+  private val billingClient = BillingClient.newBuilder(context)
+    .setListener(this)
     .enablePendingPurchases()
     .build()
-}
 
+  // doitwrong
+  private var purchasesUpdatedContinuation: Continuation<BillingResult>? = null
 
-private suspend fun startBillingConnection(billingClient: BillingClient): BillingResult =
-  suspendCoroutine { continuation ->
+  override fun onPurchasesUpdated(billingResult: BillingResult, p1: MutableList<Purchase>?) {
+    logd("purchasesUpdatedListener")
+//    TODO("Not yet implemented")
+    // acknowledge
+    purchasesUpdatedContinuation?.resume(billingResult)
+  }
+
+  // todo endconnection
+
+  suspend fun startBillingConnection(): BillingResult = suspendCoroutine { continuation ->
     val billingClientStateListener = object : BillingClientStateListener {
       override fun onBillingServiceDisconnected() {
         // todo
@@ -152,6 +67,64 @@ private suspend fun startBillingConnection(billingClient: BillingClient): Billin
     }
     billingClient.startConnection(billingClientStateListener)
   }
+
+
+  // rewrite with my own result type, or arrow either
+  // allow me to show snackbars on error cases
+
+  // startBillingConnection must be called first
+  suspend fun checkHaloColourPurchased(): Boolean {
+    // query product details
+    return isHaloColourPurchased(billingClient)
+  }
+
+  fun endBillingConnection() {
+    logd("Terminating connection")
+    billingClient.endConnection()
+  }
+
+
+  // todo return PurchaseHaloColourChangeResult
+  // future.txt use arrow.kt Either
+  suspend fun purchaseHaloColourChange(activity: Activity): BillingResult =
+    suspendCoroutine { continuation ->
+      purchasesUpdatedContinuation = continuation
+
+      // todo make scope child Job of suspendCoroutine ???
+      val scope = CoroutineScope(IO)
+
+      scope.launch {
+        val productDetails = getHaloColourProductDetails(billingClient)
+
+        val productDetailsParams =
+          BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
+            .build()
+
+        val params = BillingFlowParams.newBuilder()
+          .setProductDetailsParamsList(listOf(productDetailsParams))
+          .build()
+        if (!billingClient.isReady) {
+          logd("launchBillingFlow: BillingClient is not ready")
+        }
+        billingClient.launchBillingFlow(activity, params)
+      }
+    }
+}
+
+/////////////////////////////////////////////////////////
+
+private fun acknowledgePurchase(billingClient: BillingClient, purchase: Purchase) {
+  if (!purchase.isAcknowledged) {
+    val params = AcknowledgePurchaseParams.newBuilder()
+      .setPurchaseToken(purchase.purchaseToken)
+      .build()
+    billingClient.acknowledgePurchase(
+      params
+    ) { billingResult ->
+      logd("acknowledgePurchase billingResult $billingResult")
+    }
+  }
+}
 
 
 private suspend fun getHaloColourProductDetails(billingClient: BillingClient): ProductDetails =
@@ -182,11 +155,8 @@ private suspend fun getHaloColourProductDetails(billingClient: BillingClient): P
 
 private suspend fun isHaloColourPurchased(
   billingClient: BillingClient,
-  productDetails: ProductDetails
 ): Boolean =
   suspendCoroutine { continuation ->
-    // copy from queryPurchases
-
     val queryPurchasesParams =
       QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build()
 
@@ -195,37 +165,22 @@ private suspend fun isHaloColourPurchased(
         logd("purchasesResponseListener")
         logd("billingResult $billingResult")
         logd("purchases $purchases")
-
-        // todo
-        // write purchase button first
-
         var purchased = false
-
         when (billingResult.responseCode) {
           BillingClient.BillingResponseCode.OK -> {
             for (purchase in purchases) {
-
               if (purchase.products.contains("halo_colour")) {
                 purchased = true
                 break
               }
-
-
             }
-
           }
 
           else -> {
             // TODO snackbar debugMessage
           }
         }
-
-
-
         continuation.resume(purchased)
-
       }
-
     billingClient.queryPurchasesAsync(queryPurchasesParams, purchasesResponseListener)
-
   }

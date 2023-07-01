@@ -10,14 +10,14 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
 
 
-class HaloScreenViewModel(application: Application) : AndroidViewModel(application) {
+class HaloScreenViewModel(private val application: Application) : AndroidViewModel(application) {
 //  var haloColourPurchased = false
 
   private val preferencesRepository = providePreferencesRepository(application)
 
   val haloColourPurchasedFlow get() = preferencesRepository.haloColourPurchasedFlow
 
-  private val bds = BillingDataSource(application)
+//  private val bds = BillingDataSource(application)
 
   init {
     viewModelScope.launch(IO) {
@@ -30,8 +30,11 @@ class HaloScreenViewModel(application: Application) : AndroidViewModel(applicati
     var haloColourPurchased = false
 
     viewModelScope.launch(IO) {
+      val bds = BillingDataSource(application)
+      bds.startBillingConnection()
       haloColourPurchased = bds.checkHaloColourPurchased()
-      if(haloColourPurchased){
+      bds.endBillingConnection()
+      if (haloColourPurchased) {
         preferencesRepository.haloColourPurchased()
       }
     }
@@ -54,7 +57,10 @@ class HaloScreenViewModel(application: Application) : AndroidViewModel(applicati
 
   fun purchaseHaloColourChange(activity: Activity) {
     viewModelScope.launch(IO) {
+      val bds = BillingDataSource(application)
+      bds.startBillingConnection()
       bds.purchaseHaloColourChange(activity)
+      bds.endBillingConnection()
     }
   }
 }
