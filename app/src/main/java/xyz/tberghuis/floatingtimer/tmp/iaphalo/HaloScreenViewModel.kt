@@ -15,7 +15,9 @@ class HaloScreenViewModel(private val application: Application) : AndroidViewMod
 
   fun checkHaloColourPurchased() {
     viewModelScope.launch(IO) {
-      val bds = BillingDataSource(application)
+      val bds = BillingDataSource(application) {
+        preferencesRepository.haloColourPurchased()
+      }
       bds.startBillingConnection()
       bds.checkHaloColourPurchased()
       bds.endBillingConnection()
@@ -24,7 +26,9 @@ class HaloScreenViewModel(private val application: Application) : AndroidViewMod
 
   fun purchaseHaloColourChange(activity: Activity) {
     viewModelScope.launch(IO) {
-      val bds = BillingDataSource(application)
+      val bds = BillingDataSource(application) {
+        preferencesRepository.haloColourPurchased()
+      }
       bds.startBillingConnection()
       bds.purchaseHaloColourChange(activity)
       bds.endBillingConnection()

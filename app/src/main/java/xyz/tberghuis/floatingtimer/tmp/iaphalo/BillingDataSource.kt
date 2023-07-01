@@ -29,7 +29,7 @@ import xyz.tberghuis.floatingtimer.logd
 
 class BillingDataSource(
   context: Context,
-  private val updateHaloColourPurchased: () -> Unit = {}
+  private val updateHaloColourPurchased: suspend () -> Unit = {}
 ) : PurchasesUpdatedListener {
 
   private val billingClient = BillingClient.newBuilder(context)
