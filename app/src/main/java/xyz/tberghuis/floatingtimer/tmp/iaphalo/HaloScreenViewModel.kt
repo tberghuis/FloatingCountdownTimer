@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp.iaphalo
 
+import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -47,9 +48,9 @@ class HaloScreenViewModel(application: Application) : AndroidViewModel(applicati
   }
 
 
-  fun purchaseHaloColourChange() {
+  fun purchaseHaloColourChange(activity: Activity) {
     viewModelScope.launch(IO) {
-      bds.purchaseHaloColourChange()
+      bds.purchaseHaloColourChange(activity)
     }
   }
 }

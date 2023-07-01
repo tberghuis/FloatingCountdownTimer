@@ -1,9 +1,11 @@
 package xyz.tberghuis.floatingtimer.tmp.iaphalo
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
+import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.ProductDetailsResponseListener
@@ -77,7 +79,7 @@ class BillingDataSource(
 
   // todo return PurchaseHaloColourChangeResult
   // future.txt use arrow.kt Either
-  suspend fun purchaseHaloColourChange(): Boolean =
+  suspend fun purchaseHaloColourChange(activity: Activity): Boolean =
     suspendCoroutine { continuation ->
       val purchasesUpdatedListener =
         PurchasesUpdatedListener { billingResult: BillingResult, purchases: MutableList<Purchase>? ->
@@ -100,6 +102,22 @@ class BillingDataSource(
           }
         }
         logd("after when")
+
+        // get product details
+
+        val productDetails = getHaloColourProductDetails(billingClient)
+
+        val productDetailsParams =
+          BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
+            .build()
+
+        val params = BillingFlowParams.newBuilder()
+          .setProductDetailsParamsList(listOf(productDetailsParams))
+          .build()
+        if (!billingClient.isReady) {
+          logd("launchBillingFlow: BillingClient is not ready")
+        }
+        billingClient.launchBillingFlow(activity, params)
 
 
       }
@@ -142,7 +160,7 @@ private suspend fun startBillingConnection(billingClient: BillingClient): Billin
   }
 
 
-private suspend fun getHaloColourProductDetails(billingClient: BillingClient): ProductDetails? =
+private suspend fun getHaloColourProductDetails(billingClient: BillingClient): ProductDetails =
   suspendCoroutine { continuation ->
     val productId = "halo_colour"
     val product = QueryProductDetailsParams.Product.newBuilder()
@@ -162,7 +180,7 @@ private suspend fun getHaloColourProductDetails(billingClient: BillingClient): P
           it.productId == "halo_colour"
         }
 
-        continuation.resume(productDetails)
+        continuation.resume(productDetails!!)
 
       }
     billingClient.queryProductDetailsAsync(params, productDetailsResponseListener)
