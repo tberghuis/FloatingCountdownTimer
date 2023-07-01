@@ -18,10 +18,7 @@ class HaloScreenViewModel(private val application: Application) : AndroidViewMod
     viewModelScope.launch(IO) {
       val bds = BillingDataSource(application)
       bds.startBillingConnection()
-
-      val purchased = bds.checkHaloColourPurchased()
-      preferencesRepository.updateHaloColourPurchased(purchased)
-
+      checkHaloColourPurchased(bds)
       bds.endBillingConnection()
     }
   }
@@ -33,10 +30,17 @@ class HaloScreenViewModel(private val application: Application) : AndroidViewMod
       bds.purchaseHaloColourChange(activity)
       logd("purchaseHaloColourChange after")
       // doitwrong: this is inefficient
-      val purchased = bds.checkHaloColourPurchased()
-      preferencesRepository.updateHaloColourPurchased(purchased)
-
+      checkHaloColourPurchased(bds)
       bds.endBillingConnection()
     }
   }
+
+  private suspend fun checkHaloColourPurchased(billingDataSource: BillingDataSource) {
+    // todo snackbar when errors
+    // such as airplane mode
+    // use CheckHaloColourPurchasedResult interface
+    val purchased = billingDataSource.checkHaloColourPurchased()
+    preferencesRepository.updateHaloColourPurchased(purchased)
+  }
+
 }
