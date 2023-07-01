@@ -66,7 +66,7 @@ sealed interface GetHaloPurchasedResult
   data class Ok(purchased: Boolean)
   data class Err(snackbar message)
  
-nah, lets just read the arrow docs and use either 
+future.txt: read the arrow docs and use Either 
 
 finsh doing it wrong first
 
