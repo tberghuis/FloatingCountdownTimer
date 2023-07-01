@@ -1,7 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp.iaphalo
 
 import android.app.Activity
-import android.app.Application
 import android.content.Context
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
@@ -19,12 +18,8 @@ import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.logd
 
 class BillingDataSource(
@@ -64,15 +59,11 @@ class BillingDataSource(
     }
   }
 
-  // todo endconnection
-
   suspend fun startBillingConnection(): BillingResult = suspendCoroutine { continuation ->
     val billingClientStateListener = object : BillingClientStateListener {
       override fun onBillingServiceDisconnected() {
-        // todo
         // probably best to let the app crash if this called???
         logd("onBillingServiceDisconnected")
-//        continuation.resumeWithException()
       }
 
       override fun onBillingSetupFinished(billingResult: BillingResult) {
@@ -81,7 +72,6 @@ class BillingDataSource(
     }
     billingClient.startConnection(billingClientStateListener)
   }
-
 
   // rewrite with my own result type, or arrow either
   // allow me to show snackbars on error cases
@@ -99,35 +89,6 @@ class BillingDataSource(
     logd("Terminating connection")
     billingClient.endConnection()
   }
-
-
-//  // todo return PurchaseHaloColourChangeResult
-//  // future.txt use arrow.kt Either
-//  suspend fun purchaseHaloColourChange(activity: Activity): BillingResult =
-//    suspendCoroutine { continuation ->
-//      purchasesUpdatedContinuation = continuation
-//
-//
-//      // todo make scope child Job of suspendCoroutine ???
-//      val scope = CoroutineScope(IO)
-//
-//      scope.launch {
-//        val productDetails = getHaloColourProductDetails(billingClient)
-//
-//        val productDetailsParams =
-//          BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
-//            .build()
-//
-//        val params = BillingFlowParams.newBuilder()
-//          .setProductDetailsParamsList(listOf(productDetailsParams))
-//          .build()
-//        if (!billingClient.isReady) {
-//          logd("launchBillingFlow: BillingClient is not ready")
-//        }
-//        billingClient.launchBillingFlow(activity, params)
-//      }
-//    }
-
 
   // todo return PurchaseHaloColourChangeResult
   // future.txt use arrow.kt Either
@@ -159,20 +120,6 @@ class BillingDataSource(
 }
 
 /////////////////////////////////////////////////////////
-
-private fun acknowledgePurchase(billingClient: BillingClient, purchase: Purchase) {
-  if (!purchase.isAcknowledged) {
-    val params = AcknowledgePurchaseParams.newBuilder()
-      .setPurchaseToken(purchase.purchaseToken)
-      .build()
-    billingClient.acknowledgePurchase(
-      params
-    ) { billingResult ->
-      logd("acknowledgePurchase billingResult $billingResult")
-    }
-  }
-}
-
 
 private suspend fun getHaloColourProductDetails(billingClient: BillingClient): ProductDetails =
   suspendCoroutine { continuation ->
