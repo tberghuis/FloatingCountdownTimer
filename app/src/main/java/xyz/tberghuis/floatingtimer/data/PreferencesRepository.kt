@@ -52,9 +52,9 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
     preferences[booleanPreferencesKey("halo_colour_purchased")] ?: false
   }
 
-  suspend fun haloColourPurchased() {
+  suspend fun updateHaloColourPurchased(purchased: Boolean) {
     dataStore.edit { preferences ->
-      preferences[booleanPreferencesKey("halo_colour_purchased")] = true
+      preferences[booleanPreferencesKey("halo_colour_purchased")] = purchased
     }
   }
 

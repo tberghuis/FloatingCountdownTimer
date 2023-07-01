@@ -20,7 +20,9 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.logd
 
 class BillingDataSource(
@@ -100,28 +102,45 @@ class BillingDataSource(
   // todo return PurchaseHaloColourChangeResult
   // future.txt use arrow.kt Either
   suspend fun purchaseHaloColourChange(activity: Activity): BillingResult {
-    // will this get cancelled properly
-    // according to structured concurrency???
-    val scope = CoroutineScope(coroutineContext)
+    val productDetails = getHaloColourProductDetails(billingClient)
     return suspendCoroutine { continuation ->
       // this is a hack, shouldn't be a problem if using fresh BillingClientWrapper
       // for each call to purchaseHaloColourChange()
       purchasesUpdatedContinuation = continuation
-      scope.launch(IO) {
-        val productDetails = getHaloColourProductDetails(billingClient)
 
-        val productDetailsParams =
-          BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
-            .build()
-
-        val params = BillingFlowParams.newBuilder()
-          .setProductDetailsParamsList(listOf(productDetailsParams))
+      val productDetailsParams =
+        BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
           .build()
-        billingClient.launchBillingFlow(activity, params)
-      }
+
+      val params = BillingFlowParams.newBuilder()
+        .setProductDetailsParamsList(listOf(productDetailsParams))
+        .build()
+      billingClient.launchBillingFlow(activity, params)
     }
   }
+
+
+//  suspend fun purchaseHaloColourChange(activity: Activity): BillingResult =
+//    coroutineScope {
+//      val productDetails = getHaloColourProductDetails(billingClient)
+//      launch(IO) {
+//        suspendCoroutine<BillingResult> { continuation ->
+//          purchasesUpdatedContinuation = continuation
+//          val productDetailsParams =
+//            BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
+//              .build()
+//          val params = BillingFlowParams.newBuilder()
+//            .setProductDetailsParamsList(listOf(productDetailsParams))
+//            .build()
+//          billingClient.launchBillingFlow(activity, params)
+//
+//        }
+//      }
+//
+//    }
+
 }
+
 
 /////////////////////////////////////////////////////////
 
