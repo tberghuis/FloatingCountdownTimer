@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.tmp.iaphalo
 
 import android.app.Activity
 import android.content.Context
+import androidx.compose.runtime.LaunchedEffect
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
@@ -15,10 +16,12 @@ import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
 import kotlin.coroutines.Continuation
+import kotlin.coroutines.coroutineContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 
@@ -93,15 +96,15 @@ class BillingDataSource(
 
   // todo return PurchaseHaloColourChangeResult
   // future.txt use arrow.kt Either
-  suspend fun purchaseHaloColourChange(activity: Activity): BillingResult =
-    suspendCoroutine { continuation ->
+  suspend fun purchaseHaloColourChange(activity: Activity): BillingResult {
+    // will this get cancelled properly
+    // according to structured concurrency???
+    val scope = CoroutineScope(coroutineContext)
+    return suspendCoroutine { continuation ->
+      // this is a hack, shouldn't be a problem if using fresh BillingClientWrapper
+      // for each call to purchaseHaloColourChange()
       purchasesUpdatedContinuation = continuation
-
-
-      // todo make scope child Job of suspendCoroutine ???
-      val scope = CoroutineScope(IO)
-
-      scope.launch {
+      scope.launch(IO) {
         val productDetails = getHaloColourProductDetails(billingClient)
 
         val productDetailsParams =
@@ -111,13 +114,10 @@ class BillingDataSource(
         val params = BillingFlowParams.newBuilder()
           .setProductDetailsParamsList(listOf(productDetailsParams))
           .build()
-        if (!billingClient.isReady) {
-          logd("launchBillingFlow: BillingClient is not ready")
-        }
         billingClient.launchBillingFlow(activity, params)
       }
-      logd("purchaseHaloColourChange finish")
     }
+  }
 }
 
 /////////////////////////////////////////////////////////
