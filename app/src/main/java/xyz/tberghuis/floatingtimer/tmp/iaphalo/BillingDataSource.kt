@@ -15,14 +15,8 @@ import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
 import kotlin.coroutines.Continuation
-import kotlin.coroutines.coroutineContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.logd
 
 class BillingDataSource(
@@ -79,15 +73,6 @@ class BillingDataSource(
   // allow me to show snackbars on error cases
 
   // startBillingConnection must be called first
-//  suspend fun checkHaloColourPurchased(
-//    updateHaloColourPurchased: suspend () -> Unit
-//  ) {
-//    // query product details
-//    val purchased = isHaloColourPurchased(billingClient)
-//    if (purchased) {
-//      updateHaloColourPurchased()
-//    }
-//  }
   suspend fun checkHaloColourPurchased(
   ): Boolean {
     // query product details
@@ -102,6 +87,7 @@ class BillingDataSource(
   // todo return PurchaseHaloColourChangeResult
   // future.txt use arrow.kt Either
   suspend fun purchaseHaloColourChange(activity: Activity): BillingResult {
+    // do i need withContext(IO) ??? assume no
     val productDetails = getHaloColourProductDetails(billingClient)
     return suspendCoroutine { continuation ->
       // this is a hack, shouldn't be a problem if using fresh BillingClientWrapper
@@ -118,29 +104,7 @@ class BillingDataSource(
       billingClient.launchBillingFlow(activity, params)
     }
   }
-
-
-//  suspend fun purchaseHaloColourChange(activity: Activity): BillingResult =
-//    coroutineScope {
-//      val productDetails = getHaloColourProductDetails(billingClient)
-//      launch(IO) {
-//        suspendCoroutine<BillingResult> { continuation ->
-//          purchasesUpdatedContinuation = continuation
-//          val productDetailsParams =
-//            BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
-//              .build()
-//          val params = BillingFlowParams.newBuilder()
-//            .setProductDetailsParamsList(listOf(productDetailsParams))
-//            .build()
-//          billingClient.launchBillingFlow(activity, params)
-//
-//        }
-//      }
-//
-//    }
-
 }
-
 
 /////////////////////////////////////////////////////////
 
