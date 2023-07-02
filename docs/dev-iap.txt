@@ -89,3 +89,6 @@ color picker landscape mode, screen scroll
 pull request lib snapshot bug
 
 pull request strevdasan demo github repo
+
+t. figure out default halo colour
+...
