@@ -92,3 +92,5 @@ pull request strevdasan demo github repo
 
 t. figure out default halo colour
 ...
+
+color picker, button, reset to material theme primary
