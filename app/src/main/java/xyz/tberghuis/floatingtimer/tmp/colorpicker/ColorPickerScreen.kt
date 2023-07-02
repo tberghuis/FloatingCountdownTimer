@@ -24,6 +24,7 @@ import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.ColorPickerController
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
+import xyz.tberghuis.floatingtimer.LocalHaloColour
 
 @Composable
 fun ColorPickerScreen(
@@ -37,6 +38,8 @@ fun ColorPickerScreen(
 //    }
 //  }
 
+
+  val haloColour = LocalHaloColour.current
 
   Column(
     modifier = Modifier
@@ -65,7 +68,7 @@ fun ColorPickerScreen(
       onColorChanged = {
         Log.d("Color", it.hexCode)
       },
-      initialColor = Color.Blue
+      initialColor = haloColour
     )
     AlphaSlider(
       modifier = Modifier

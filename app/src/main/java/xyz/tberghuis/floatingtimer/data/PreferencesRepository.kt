@@ -63,8 +63,6 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
     }
   }
 
-
-  // long or int???
   val haloColourFlow: Flow<Long?> = dataStore.data.map { preferences ->
     preferences[longPreferencesKey("halo_colour")]
   }
