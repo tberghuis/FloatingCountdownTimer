@@ -89,5 +89,7 @@ dependencies {
 
     implementation "androidx.navigation:navigation-compose:2.6.0"
 
-    implementation("com.github.skydoves:colorpicker-compose:1.0.3-SNAPSHOT")
+    // snapshot has a bug with initial color
+//    implementation("com.github.skydoves:colorpicker-compose:1.0.3-SNAPSHOT")
+    implementation("com.github.skydoves:colorpicker-compose:1.0.2")
 }
