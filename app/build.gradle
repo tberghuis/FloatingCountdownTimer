@@ -48,9 +48,9 @@ android {
     }
 
     // https://stackoverflow.com/questions/70550883/warning-the-following-options-were-not-recognized-by-any-processor-dagger-f
-    hilt {
-        enableAggregatingTask = true
-    }
+//    hilt {
+//        enableAggregatingTask = true
+//    }
 
     namespace 'xyz.tberghuis.floatingtimer'
 }
@@ -86,4 +86,6 @@ dependencies {
 
     def billing_version = "6.0.1"
     implementation "com.android.billingclient:billing-ktx:$billing_version"
+
+    implementation "androidx.navigation:navigation-compose:2.6.0"
 }

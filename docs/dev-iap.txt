@@ -78,3 +78,9 @@ acknowledge purchase
 
 test case, refund, purchased reset to false next startup
 test case, airplane mode, on startup, purchased stays as true
+
+color picker
+
+step 1, navigation
+reference one of my latest projects
+
