@@ -1,10 +1,15 @@
 package xyz.tberghuis.floatingtimer.data
 
 import android.content.Context
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -59,4 +64,14 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
   }
 
 
+  // long or int???
+  val haloColourFlow: Flow<Long?> = dataStore.data.map { preferences ->
+    preferences[longPreferencesKey("halo_colour")]
+  }
+
+  suspend fun updateHaloColour(argb: Long) {
+    dataStore.edit { preferences ->
+      preferences[longPreferencesKey("halo_colour")] = argb
+    }
+  }
 }
