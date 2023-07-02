@@ -84,3 +84,4 @@ color picker
 step 1, navigation
 reference one of my latest projects
 
+color picker landscape mode, screen scroll
