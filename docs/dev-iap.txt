@@ -85,3 +85,7 @@ step 1, navigation
 reference one of my latest projects
 
 color picker landscape mode, screen scroll
+
+pull request lib snapshot bug
+
+pull request strevdasan demo github repo
