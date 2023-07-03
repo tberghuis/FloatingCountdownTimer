@@ -13,12 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp.colorpicker.ColorPickerHomeScreen
@@ -27,6 +27,10 @@ import xyz.tberghuis.floatingtimer.tmp.iap.IapDemoScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 
+val LocalHaloColour = compositionLocalOf<Color> {
+  error("CompositionLocal LocalHaloColour not present")
+}
+
 class IapDemo : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -34,16 +38,23 @@ class IapDemo : ComponentActivity() {
     val preferencesRepository = providePreferencesRepository(application)
 
     setContent {
+
+
+//
+//      val haloColourLong =
+//        preferencesRepository.haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary.value.toLong())
+
+
       val haloColourLong =
-        preferencesRepository.haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary.value.toLong())
+        preferencesRepository.haloColourFlow.collectAsState(initial = 0)
+
 
       FloatingTimerTheme {
 //        val haloColour =
 //          if (haloColourLong.value == null) MaterialTheme.colorScheme.primary else Color(
 //            haloColourLong.value!!
 //          )
-
-        val haloColour =MaterialTheme.colorScheme.primary
+        val haloColour = Color(haloColourLong.value)
 
 
         val primary = MaterialTheme.colorScheme.primary

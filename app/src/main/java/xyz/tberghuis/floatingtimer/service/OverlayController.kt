@@ -6,6 +6,7 @@ import android.graphics.PixelFormat
 import android.hardware.input.InputManager
 import android.os.Build
 import android.view.WindowManager
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import java.util.*
@@ -25,6 +26,7 @@ import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
+import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }
 
@@ -95,9 +97,11 @@ class OverlayController(val service: FloatingService) {
           is TimerStatePaused -> {
             countdownState.timerState.value = TimerStateRunning
           }
+
           is TimerStateRunning -> {
             countdownState.timerState.value = TimerStatePaused
           }
+
           is TimerStateFinished -> {
             countdownState.resetTimerState(countdownState.durationSeconds)
           }
@@ -193,6 +197,7 @@ fun onClickStopwatchClickTarget(stopwatchState: StopwatchState) {
         }
       }, 1000, 1000)
     }
+
     true -> {
       running.value = false
     }

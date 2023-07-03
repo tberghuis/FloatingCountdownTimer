@@ -24,7 +24,7 @@ import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.ColorPickerController
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
-import xyz.tberghuis.floatingtimer.LocalHaloColour
+import xyz.tberghuis.floatingtimer.tmp.LocalHaloColour
 
 @Composable
 fun ColorPickerScreen(

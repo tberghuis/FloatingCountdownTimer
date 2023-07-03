@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
@@ -22,44 +23,31 @@ import xyz.tberghuis.floatingtimer.tmp.VibrationDemo
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 
-val LocalHaloColour = compositionLocalOf<Color> {
-  error("CompositionLocal LocalHaloColour not present")
-}
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-
-  @Inject
-  lateinit var preferencesRepository: PreferencesRepository
 
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     logd("onCreate")
 
-//    val haloColourFlow = application.
-
 
     setContent {
-      val haloColourLong =
-        preferencesRepository.haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary.value.toLong())
+
 
       FloatingTimerTheme {
-        val haloColour =
-          if (haloColourLong.value == null) MaterialTheme.colorScheme.primary else Color(
-            haloColourLong.value!!
-          )
 
-        CompositionLocalProvider(LocalHaloColour provides haloColour) {
-          Surface(
-            modifier = Modifier
-              .fillMaxSize()
-              .background(Color.White),
-          ) {
-            HomeScreen()
-          }
+        Surface(
+          modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White),
+        ) {
+          HomeScreen()
         }
+
       }
     }
   }

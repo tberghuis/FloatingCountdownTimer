@@ -63,8 +63,12 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
     }
   }
 
-  val haloColourFlow: Flow<Long?> = dataStore.data.map { preferences ->
-    preferences[longPreferencesKey("halo_colour")]
+  val haloColourFlow: Flow<Long> = dataStore.data.map { preferences ->
+    preferences[longPreferencesKey("halo_colour")] ?: Color(
+      red = 103,
+      green = 80,
+      blue = 164
+    ).value.toLong()
   }
 
   suspend fun updateHaloColour(argb: Long) {
