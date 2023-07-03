@@ -23,7 +23,7 @@ test with bigger font scaling
 ###################
 seperate color for each timer
 
-fix color picker
+fix color picker [initialColor on configuration change]
   controller live in VM
   extension function select color
     uses selectByCoordinate
