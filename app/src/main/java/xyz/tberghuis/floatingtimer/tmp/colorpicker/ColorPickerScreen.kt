@@ -85,6 +85,7 @@ fun ColorPickerScreen(
         .padding(10.dp)
         .height(35.dp),
       controller = controller,
+      initialColor = haloColour
     )
   }
 

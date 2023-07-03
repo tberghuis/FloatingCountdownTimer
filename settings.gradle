@@ -11,6 +11,11 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
+
+        flatDir {
+            dirs 'libs'
+        }
+
     }
 }
 rootProject.name = "Floating Countdown Timer"
