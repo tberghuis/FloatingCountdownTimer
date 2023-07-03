@@ -10,10 +10,12 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import xyz.tberghuis.floatingtimer.logd
 
 val Context.dataStore by preferencesDataStore(
   name = "user_preferences",
@@ -63,24 +65,37 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
     }
   }
 
-  val haloColourFlow: Flow<Long> = dataStore.data.map { preferences ->
-    preferences[longPreferencesKey("halo_colour")] ?: Color(
-      red = 103,
-      green = 80,
-      blue = 164
-    ).value.toLong()
+  val haloColourFlow: Flow<Color> = dataStore.data.map { preferences ->
+    val haloColourString = preferences[stringPreferencesKey("halo_colour")]
+    val haloColor = if (haloColourString == null)
+      Color(
+        red = 103,
+        green = 80,
+        blue = 164
+      )
+    else
+      Color(haloColourString.toULong())
+
+    logd("haloColourFlow halocolor $haloColor")
+    logd("haloColourFlow halocolor.value ${haloColor.value}")
+    logd("haloColourFlow halocolor.value.tolong ${haloColor.value.toLong()}")
+    logd("haloColourFlow Color(halocolor.value.tolong) ${Color(haloColor.value.toLong())}")
+    logd("haloColourFlow Color(halocolor.value) ${Color(haloColor.value)}")
+
+    haloColor
   }
 
-  suspend fun updateHaloColour(argb: Long) {
+  suspend fun updateHaloColour(color: Color) {
+    val haloColourString = color.value.toString()
     dataStore.edit { preferences ->
-      preferences[longPreferencesKey("halo_colour")] = argb
+      preferences[stringPreferencesKey("halo_colour")] = haloColourString
     }
   }
 
   // todo test this
   suspend fun resetHaloColour() {
     dataStore.edit { preferences ->
-      preferences.remove(longPreferencesKey("halo_colour"))
+      preferences.remove(stringPreferencesKey("halo_colour"))
     }
   }
 

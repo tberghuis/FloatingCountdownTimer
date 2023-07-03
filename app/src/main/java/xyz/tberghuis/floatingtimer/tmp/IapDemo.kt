@@ -40,34 +40,20 @@ class IapDemo : ComponentActivity() {
     setContent {
 
 
-//
-//      val haloColourLong =
-//        preferencesRepository.haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary.value.toLong())
-
-
-      val haloColourLong =
-        preferencesRepository.haloColourFlow.collectAsState(initial = 0)
-
-
       FloatingTimerTheme {
-//        val haloColour =
-//          if (haloColourLong.value == null) MaterialTheme.colorScheme.primary else Color(
-//            haloColourLong.value!!
-//          )
-        val haloColour = Color(haloColourLong.value)
+
+        val haloColour =
+          preferencesRepository.haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
 
 
         val primary = MaterialTheme.colorScheme.primary
 
         LaunchedEffect(haloColour) {
           logd("haloColour: $haloColour")
-
-          logd("primary: ${primary}")
-          logd("haloColourLong: ${haloColourLong.value}")
         }
 
 
-        CompositionLocalProvider(LocalHaloColour provides haloColour) {
+        CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
           Surface(
             modifier = Modifier
               .fillMaxSize()
