@@ -94,3 +94,8 @@ t. figure out default halo colour
 ...
 
 color picker, button, reset to material theme primary
+
+https://github.com/skydoves/colorpicker-compose
+using commit 2a1b152cb736bea7618e9576dda8f88bb1ecb1c1
+ plus my pull request, should be in my public repo
+
