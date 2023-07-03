@@ -95,9 +95,14 @@ dependencies {
 
 //      implementation ('colorpicker-compose-1.0.2-sources')
 //    implementation name: 'colorpicker-compose-1.0.2-sources'
-//    implementation name: 'colorpicker-compose-release'
 
-    implementation(name: 'colorpicker-compose-debug', ext: 'aar')
+// todo, package correct jar for release build
+
+    implementation name: 'full'
+    implementation name: 'colorpicker-compose-debug-1.0.2-sources'
+
+
+//    implementation(name: 'colorpicker-compose-debug', ext: 'aar')
 
 
 }

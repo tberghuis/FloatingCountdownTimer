@@ -11,11 +11,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.github.skydoves.colorpicker.compose.AlphaSlider
@@ -24,6 +26,7 @@ import com.github.skydoves.colorpicker.compose.BrightnessSlider
 import com.github.skydoves.colorpicker.compose.ColorPickerController
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
+import kotlinx.coroutines.delay
 import xyz.tberghuis.floatingtimer.tmp.LocalHaloColour
 
 @Composable
@@ -32,11 +35,22 @@ fun ColorPickerScreen(
 ) {
   val controller = rememberColorPickerController()
 
+//  val fsdf = {
+//    controller.setWheelColor(Color.Green)
+//  }
+
 //  val controller = remember {
 //    ColorPickerController().apply {
 //      this.selectByCoordinate()
 //    }
 //  }
+
+  LaunchedEffect(Unit) {
+    delay(5000)
+//    controller.setWheelColor(Color.Green)
+//controller.set
+//    controller.setWheelPaint(Paint().apply { color = Color.Green })
+  }
 
 
   val haloColour = LocalHaloColour.current

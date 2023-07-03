@@ -5,3 +5,16 @@ git rm --cached .idea/deploymentTargetDropDown.xml
 # clear in-app purchases
 adb shell pm clear com.android.vending
 adb uninstall xyz.tberghuis.floatingtimer
+
+
+#### color picker jar ####
+cd /home/tom/Desktop/myprojects/android/FloatingCountdownTimer-reference/colorpicker-compose
+
+cd colorpicker-compose
+./gradlew debugSourcesJar
+./gradlew assemble
+cd ..
+
+cp ./colorpicker-compose/build/intermediates/full_jar/debug/full.jar ../../FloatingCountdownTimer/libs/
+cp ./colorpicker-compose/build/libs/colorpicker-compose-debug-1.0.2-sources.jar ../../FloatingCountdownTimer/libs/
+
