@@ -38,20 +38,14 @@ class IapDemo : ComponentActivity() {
     val preferencesRepository = providePreferencesRepository(application)
 
     setContent {
-
-
       FloatingTimerTheme {
 
         val haloColour =
           preferencesRepository.haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
 
-
-        val primary = MaterialTheme.colorScheme.primary
-
-        LaunchedEffect(haloColour) {
-          logd("haloColour: $haloColour")
+        LaunchedEffect(haloColour.value) {
+          logd("LaunchedEffect haloColour: ${haloColour.value}")
         }
-
 
         CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
           Surface(
