@@ -19,3 +19,6 @@ callback closures can be in a separate class .e.g. class ExitOverlay, with invok
 add exit pendingintent to stopwatch notification  
 
 test with bigger font scaling
+
+###################
+seperate color for each timer
