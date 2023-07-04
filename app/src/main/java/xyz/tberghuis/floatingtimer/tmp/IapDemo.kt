@@ -23,6 +23,7 @@ import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesReposito
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp.colorpicker.ColorPickerHomeScreen
 import xyz.tberghuis.floatingtimer.tmp.colorpicker.ColorPickerScreen
+import xyz.tberghuis.floatingtimer.tmp.godaddypicker.GodaddyPickerScreen
 import xyz.tberghuis.floatingtimer.tmp.iap.IapDemoScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
@@ -72,13 +73,16 @@ fun MyAppNavHost(
     navController = navController, startDestination = "home"
   ) {
     composable("home") {
-      ColorPickerHomeScreen {
-        navController.navigate("color_picker")
-      }
+      ColorPickerHomeScreen(navController)
     }
     composable("color_picker") {
       ColorPickerScreen()
     }
+
+    composable("godaddy_picker") {
+      GodaddyPickerScreen()
+    }
+
   }
 }
 

@@ -105,4 +105,8 @@ dependencies {
 //    implementation(name: 'colorpicker-compose-debug', ext: 'aar')
 
 
+    implementation 'com.godaddy.android.colorpicker:compose-color-picker:0.7.0'
+    implementation 'com.godaddy.android.colorpicker:compose-color-picker-android:0.7.0'
+
+
 }
