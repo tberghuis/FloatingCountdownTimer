@@ -9,12 +9,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.godaddy.android.colorpicker.ClassicColorPicker
 import com.godaddy.android.colorpicker.HsvColor
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
-fun GodaddyPickerScreen() {
+fun GodaddyPickerScreen(
+  vm: GdpsVm = viewModel()
+) {
 
   // todo calc screen width and height
   // test on small and large devices
@@ -22,7 +25,7 @@ fun GodaddyPickerScreen() {
   // it already deals with screen rotating
 
   Column {
-    Text("godaddy screen")
+    Text("godaddy screen ${vm.dsfds}")
 
 
     ClassicColorPicker(
