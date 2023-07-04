@@ -36,40 +36,9 @@ fun GodaddyPickerScreen(
   // it already deals with screen rotating
 
 
-//  val haloColour = vm.haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
-  val haloColour = LocalHaloColour.current
-
-  val colorFlow: MutableSharedFlow<HsvColor> = remember {
-    MutableSharedFlow()
-  }
-  val scope = rememberCoroutineScope()
-//
-//  LaunchedEffect(haloColour) {
-//    logd("GodaddyPickerScreen haloColour ${haloColour}")
-//    colorFlow.emit(HsvColor.from(haloColour))
-//  }
-
-//  val colorFlow = remember {
-//    vm.haloColourFlow.map { HsvColor.from(it) }
-//  }
-
-
   Column {
     Text("godaddy screen")
 
-
-//    ClassicColorPicker(
-//      modifier = Modifier
-//        .height(300.dp)
-//        .widthIn(0.dp, 300.dp),
-//      color = HsvColor.from(haloColour),
-//      updateColorFlow = colorFlow,
-//      onColorChanged = { color: HsvColor ->
-//        // Do something with the color
-//        logd("color: $color")
-//        vm.colorPickerColor = color
-//      }
-//    )
 
     ClassicColorPicker(
       modifier = Modifier
@@ -79,20 +48,16 @@ fun GodaddyPickerScreen(
     )
 
 
-
-
-    Button(onClick = {
-      scope.launch {
-        colorFlow.emit(HsvColor.from(Color.Blue))
-      }
-    }) {
-      Text("set color blue")
-    }
-
     Button(onClick = {
       vm.saveHaloColor()
     }) {
       Text("update user prefs")
+    }
+
+    Button(onClick = {
+      vm.clearUserPrefs()
+    }) {
+      Text("clear user prefs")
     }
 
 

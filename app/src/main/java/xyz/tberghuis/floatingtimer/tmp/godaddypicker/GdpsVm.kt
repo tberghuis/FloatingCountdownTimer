@@ -22,9 +22,26 @@ class GdpsVm(application: Application) : AndroidViewModel(application) {
 //  var colorPickerColor by mutableStateOf(HsvColor.from(Color.Blue))
   var colorPickerColorState = mutableStateOf(HsvColor.from(Color.Blue))
 
+  init {
+    viewModelScope.launch {
+      preferences.haloColourFlow.collect {
+        colorPickerColorState.value = HsvColor.from(it)
+      }
+    }
+  }
+
+
   fun saveHaloColor() {
     viewModelScope.launch {
       preferences.updateHaloColour(colorPickerColorState.value.toColor())
     }
   }
+
+    fun clearUserPrefs() {
+    viewModelScope.launch {
+      preferences.resetHaloColour()
+    }
+  }
+
+
 }
