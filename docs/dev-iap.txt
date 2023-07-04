@@ -109,3 +109,7 @@ build forked lib
   ./gradlew build
   find . | grep \\.jar | grep full
   copy to libs folder
+  manually add transitive dependencies to app build.gradle
+  is there a better way?
+  find source code for publishAllPublicationsToMavenRepository gradle task
+  
