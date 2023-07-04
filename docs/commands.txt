@@ -18,3 +18,12 @@ cd ..
 cp ./colorpicker-compose/build/intermediates/full_jar/debug/full.jar ../../FloatingCountdownTimer/libs/
 cp ./colorpicker-compose/build/libs/colorpicker-compose-debug-1.0.2-sources.jar ../../FloatingCountdownTimer/libs/
 
+##############
+
+cd /home/tom/Desktop/myprojects/pullrequests/compose-color-picker
+
+find . | grep \\.jar | grep sources
+find . | grep \\.jar | grep full
+
+cp /home/tom/Desktop/myprojects/pullrequests/compose-color-picker/color-picker/build/libs/color-picker-android-debug-sources.jar /home/tom/Desktop/myprojects/android/FloatingCountdownTimer/libs/
+cp /home/tom/Desktop/myprojects/pullrequests/compose-color-picker/color-picker/build/intermediates/full_jar/release/full.jar /home/tom/Desktop/myprojects/android/FloatingCountdownTimer/libs/color-picker-full.jar

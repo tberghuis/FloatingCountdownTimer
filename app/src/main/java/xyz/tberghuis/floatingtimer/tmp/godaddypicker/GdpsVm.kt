@@ -19,11 +19,12 @@ class GdpsVm(application: Application) : AndroidViewModel(application) {
 //  val haloColourFlow get() = preferences.haloColourFlow
 
   // wrong initial color, meh
-  var colorPickerColor by mutableStateOf(HsvColor.from(Color.Blue))
+//  var colorPickerColor by mutableStateOf(HsvColor.from(Color.Blue))
+  var colorPickerColorState = mutableStateOf(HsvColor.from(Color.Blue))
 
   fun saveHaloColor() {
     viewModelScope.launch {
-      preferences.updateHaloColour(colorPickerColor.toColor())
+      preferences.updateHaloColour(colorPickerColorState.value.toColor())
     }
   }
 }

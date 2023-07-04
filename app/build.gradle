@@ -112,8 +112,11 @@ dependencies {
     // todo learn proper gradle tasks for android library
     // forked https://github.com/godaddy/compose-color-picker
     implementation name: 'color-picker-full'
-    implementation name: 'color-picker-android-sources'
+//    implementation name: 'color-picker-android-debug-sources'
     implementation("com.github.ajalt.colormath:colormath:3.2.0")
+
+//    implementation(name: 'color-picker-release', ext: 'aar')
+
 
 
 }

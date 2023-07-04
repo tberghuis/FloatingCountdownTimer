@@ -58,18 +58,27 @@ fun GodaddyPickerScreen(
     Text("godaddy screen")
 
 
+//    ClassicColorPicker(
+//      modifier = Modifier
+//        .height(300.dp)
+//        .widthIn(0.dp, 300.dp),
+//      color = HsvColor.from(haloColour),
+//      updateColorFlow = colorFlow,
+//      onColorChanged = { color: HsvColor ->
+//        // Do something with the color
+//        logd("color: $color")
+//        vm.colorPickerColor = color
+//      }
+//    )
+
     ClassicColorPicker(
       modifier = Modifier
         .height(300.dp)
         .widthIn(0.dp, 300.dp),
-      color = HsvColor.from(haloColour),
-      updateColorFlow = colorFlow,
-      onColorChanged = { color: HsvColor ->
-        // Do something with the color
-        logd("color: $color")
-        vm.colorPickerColor = color
-      }
+      colorState = vm.colorPickerColorState
     )
+
+
 
 
     Button(onClick = {
