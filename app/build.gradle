@@ -96,7 +96,7 @@ dependencies {
 //      implementation ('colorpicker-compose-1.0.2-sources')
 //    implementation name: 'colorpicker-compose-1.0.2-sources'
 
-// todo, package correct jar for release build
+// todo, remove skydoves color picker
 
     implementation name: 'full'
     implementation name: 'colorpicker-compose-debug-1.0.2-sources'
@@ -106,7 +106,7 @@ dependencies {
 
 
     implementation 'com.godaddy.android.colorpicker:compose-color-picker:0.7.0'
-    implementation 'com.godaddy.android.colorpicker:compose-color-picker-android:0.7.0'
+//    implementation 'com.godaddy.android.colorpicker:compose-color-picker-android:0.7.0'
 
 
 }
