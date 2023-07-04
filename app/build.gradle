@@ -110,6 +110,7 @@ dependencies {
 //    implementation 'com.godaddy.android.colorpicker:compose-color-picker-android:0.7.0'
 
     // todo learn proper gradle tasks for android library
+    // forked https://github.com/godaddy/compose-color-picker
     implementation name: 'color-picker-full'
     implementation name: 'color-picker-android-sources'
 
