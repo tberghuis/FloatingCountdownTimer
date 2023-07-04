@@ -103,3 +103,9 @@ t. save button
 
 clean code, fresh diff with master review before release
 remove skydove gradle changes
+
+build forked lib
+  project root
+  ./gradlew build
+  find . | grep \\.jar | grep full
+  copy to libs folder
