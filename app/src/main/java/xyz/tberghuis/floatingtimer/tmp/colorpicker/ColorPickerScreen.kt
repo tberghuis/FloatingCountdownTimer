@@ -29,7 +29,7 @@ import com.github.skydoves.colorpicker.compose.ColorPickerController
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 import kotlinx.coroutines.delay
-import xyz.tberghuis.floatingtimer.tmp.LocalHaloColourState
+import xyz.tberghuis.floatingtimer.tmp.LocalHaloColour
 
 @Composable
 fun ColorPickerScreen(
@@ -55,7 +55,7 @@ fun ColorPickerScreen(
   }
 
 
-  val haloColourState = LocalHaloColourState.current
+  val haloColour = LocalHaloColour.current
 
   Column(
     modifier = Modifier
@@ -85,7 +85,7 @@ fun ColorPickerScreen(
       onColorChanged = {
         Log.d("Color", it.hexCode)
       },
-      initialColor = haloColourState.value
+      initialColor = haloColour
     )
     AlphaSlider(
       modifier = Modifier
@@ -102,7 +102,7 @@ fun ColorPickerScreen(
         .padding(10.dp)
         .height(35.dp),
       controller = controller,
-      initialColor = haloColourState.value
+      initialColor = haloColour
     )
   }
 

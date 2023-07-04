@@ -10,6 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -17,8 +19,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.godaddy.android.colorpicker.ClassicColorPicker
 import com.godaddy.android.colorpicker.HsvColor
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp.LocalHaloColourState
+import xyz.tberghuis.floatingtimer.tmp.LocalHaloColour
 
 @Composable
 fun GodaddyPickerScreen(
@@ -32,13 +37,21 @@ fun GodaddyPickerScreen(
 
 
 //  val haloColour = vm.haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
-  val haloColourState = LocalHaloColourState.current
+  val haloColour = LocalHaloColour.current
 
-
-
-  LaunchedEffect(haloColourState.value) {
-    logd("GodaddyPickerScreen haloColour ${haloColourState.value}")
+  val colorFlow: MutableSharedFlow<HsvColor> = remember {
+    MutableSharedFlow()
   }
+  val scope = rememberCoroutineScope()
+//
+//  LaunchedEffect(haloColour) {
+//    logd("GodaddyPickerScreen haloColour ${haloColour}")
+//    colorFlow.emit(HsvColor.from(haloColour))
+//  }
+
+//  val colorFlow = remember {
+//    vm.haloColourFlow.map { HsvColor.from(it) }
+//  }
 
 
   Column {
@@ -49,7 +62,8 @@ fun GodaddyPickerScreen(
       modifier = Modifier
         .height(300.dp)
         .widthIn(0.dp, 300.dp),
-      color = HsvColor.from(haloColourState.value),
+      color = HsvColor.from(haloColour),
+      updateColorFlow = colorFlow,
       onColorChanged = { color: HsvColor ->
         // Do something with the color
         logd("color: $color")
@@ -60,7 +74,9 @@ fun GodaddyPickerScreen(
 
 
     Button(onClick = {
-      vm.saveHaloColor(Color.Blue)
+      scope.launch {
+        colorFlow.emit(HsvColor.from(Color.Blue))
+      }
     }) {
       Text("set color blue")
     }

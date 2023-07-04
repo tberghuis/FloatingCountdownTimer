@@ -113,6 +113,7 @@ dependencies {
     // forked https://github.com/godaddy/compose-color-picker
     implementation name: 'color-picker-full'
     implementation name: 'color-picker-android-sources'
+    implementation("com.github.ajalt.colormath:colormath:3.2.0")
 
 
 }

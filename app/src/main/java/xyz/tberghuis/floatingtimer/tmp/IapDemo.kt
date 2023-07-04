@@ -29,9 +29,14 @@ import xyz.tberghuis.floatingtimer.tmp.iap.IapDemoScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 
-val LocalHaloColourState = compositionLocalOf<State<Color>> {
+//val LocalHaloColourState = compositionLocalOf<State<Color>> {
+//  error("CompositionLocal LocalHaloColour not present")
+//}
+
+val LocalHaloColour = compositionLocalOf<Color> {
   error("CompositionLocal LocalHaloColour not present")
 }
+
 
 class IapDemo : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +54,7 @@ class IapDemo : ComponentActivity() {
           logd("LaunchedEffect haloColour: ${haloColour.value}")
         }
 
-        CompositionLocalProvider(LocalHaloColourState provides haloColour) {
+        CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
           Surface(
             modifier = Modifier
               .fillMaxSize()
