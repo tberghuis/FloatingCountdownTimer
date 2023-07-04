@@ -9,14 +9,14 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
-import xyz.tberghuis.floatingtimer.tmp.LocalHaloColour
+import xyz.tberghuis.floatingtimer.tmp.LocalHaloColourState
 
 @Composable
 fun ProgressArc(timeLeftFraction: Float) {
   val sweepAngle = 360 * timeLeftFraction
 
 //  val primaryColor = MaterialTheme.colorScheme.primary
-  val haloColour = LocalHaloColour.current
+  val haloColourState = LocalHaloColourState.current
 
   Canvas(
     Modifier.fillMaxSize()
@@ -36,7 +36,7 @@ fun ProgressArc(timeLeftFraction: Float) {
     )
 
     drawArc(
-      color = haloColour.copy(alpha = .1f),
+      color = haloColourState.value.copy(alpha = .1f),
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
@@ -45,7 +45,7 @@ fun ProgressArc(timeLeftFraction: Float) {
     )
 
     drawArc(
-      color = haloColour,
+      color = haloColourState.value,
       -90f,
       sweepAngle,
       false,

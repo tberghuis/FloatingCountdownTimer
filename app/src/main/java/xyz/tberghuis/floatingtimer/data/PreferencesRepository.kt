@@ -83,6 +83,7 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
   }
 
   suspend fun updateHaloColour(color: Color) {
+    logd("updateHaloColour")
     val haloColourString = color.value.toString()
     dataStore.edit { preferences ->
       preferences[stringPreferencesKey("halo_colour")] = haloColourString

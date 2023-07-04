@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
@@ -28,7 +29,7 @@ import xyz.tberghuis.floatingtimer.tmp.iap.IapDemoScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 
-val LocalHaloColour = compositionLocalOf<Color> {
+val LocalHaloColourState = compositionLocalOf<State<Color>> {
   error("CompositionLocal LocalHaloColour not present")
 }
 
@@ -48,7 +49,7 @@ class IapDemo : ComponentActivity() {
           logd("LaunchedEffect haloColour: ${haloColour.value}")
         }
 
-        CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
+        CompositionLocalProvider(LocalHaloColourState provides haloColour) {
           Surface(
             modifier = Modifier
               .fillMaxSize()
