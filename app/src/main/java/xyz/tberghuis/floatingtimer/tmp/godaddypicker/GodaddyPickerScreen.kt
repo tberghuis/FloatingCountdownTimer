@@ -67,8 +67,7 @@ fun GodaddyPickerScreen(
       onColorChanged = { color: HsvColor ->
         // Do something with the color
         logd("color: $color")
-
-
+        vm.colorPickerColor = color
       }
     )
 
@@ -79,6 +78,12 @@ fun GodaddyPickerScreen(
       }
     }) {
       Text("set color blue")
+    }
+
+    Button(onClick = {
+      vm.saveHaloColor()
+    }) {
+      Text("update user prefs")
     }
 
 
