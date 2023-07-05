@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
+import xyz.tberghuis.floatingtimer.screens.ChangeColorScreen
 import xyz.tberghuis.floatingtimer.screens.HomeScreen
 import xyz.tberghuis.floatingtimer.screens.SettingsScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
@@ -56,6 +57,9 @@ fun FloatingTimerNavHost(
       }
       composable("settings") {
         SettingsScreen()
+      }
+      composable("change_halo_colour") {
+        ChangeColorScreen()
       }
     }
   }

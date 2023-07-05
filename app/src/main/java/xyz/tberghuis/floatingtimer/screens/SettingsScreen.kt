@@ -45,7 +45,14 @@ fun SettingsScreen(
       Row(
         modifier = Modifier
           .fillMaxWidth()
-          .clickable { vm.changeTimerColor(navController) },
+          .clickable {
+            logd("change timer color")
+            if(vm.haloColourPurchased){
+              navController.navigate("change_halo_colour")
+            }else{
+              vm.showPurchaseDialog = true
+            }
+          },
       ) {
         Text("Change Timer color")
         Text("LOCKED ICON")
