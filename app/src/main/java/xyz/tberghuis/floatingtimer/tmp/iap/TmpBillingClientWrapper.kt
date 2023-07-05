@@ -19,7 +19,7 @@ import xyz.tberghuis.floatingtimer.logd
 
 // reference https://github.com/android/play-billing-samples
 // PlayBillingCodelab
-class BillingClientWrapper(
+class TmpBillingClientWrapper(
   context: Context
 ) : PurchasesUpdatedListener, ProductDetailsResponseListener {
   private val billingClient = BillingClient.newBuilder(context)

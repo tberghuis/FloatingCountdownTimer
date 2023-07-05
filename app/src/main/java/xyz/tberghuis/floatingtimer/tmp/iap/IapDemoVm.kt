@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class IapDemoVm(application: Application) : AndroidViewModel(application) {
 
-  private val billingClientWrapper: BillingClientWrapper = BillingClientWrapper(application)
+  private val billingClientWrapper: TmpBillingClientWrapper = TmpBillingClientWrapper(application)
 
 //  var productDetails: ProductDetails? = null
 
