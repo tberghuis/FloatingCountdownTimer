@@ -16,6 +16,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsViewModel
 
@@ -24,6 +25,8 @@ import xyz.tberghuis.floatingtimer.viewmodels.SettingsViewModel
 fun SettingsScreen(
   vm: SettingsViewModel = viewModel()
 ) {
+
+  val navController = LocalNavController.current
 
   Scaffold(
     modifier = Modifier,
@@ -42,14 +45,7 @@ fun SettingsScreen(
       Row(
         modifier = Modifier
           .fillMaxWidth()
-          .clickable {
-            logd("change timer color")
-            // if not purchased
-            // show dialog
-            vm.showPurchaseDialog = true
-            // else
-            // nav halo_colour_change
-          },
+          .clickable { vm.changeTimerColor(navController) },
       ) {
         Text("Change Timer color")
         Text("LOCKED ICON")
