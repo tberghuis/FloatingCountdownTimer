@@ -15,10 +15,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -45,6 +49,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.hilt.navigation.compose.hiltViewModel
+import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
 import xyz.tberghuis.floatingtimer.composables.CreateStopwatchCard
 import xyz.tberghuis.floatingtimer.countdown.CreateCountdownCard
@@ -65,10 +70,25 @@ fun HomeScreen() {
     }
   }
 
+  val navController = LocalNavController.current
+
   Scaffold(topBar = {
-    CenterAlignedTopAppBar(title = {
-      Text("Floating Timer")
-    })
+//    CenterAlignedTopAppBar(title = {
+//      Text("Floating Timer")
+//    })
+
+    TopAppBar(
+      title = { Text("Floating Timer") },
+      modifier = Modifier,
+      actions = {
+        IconButton(onClick = {
+          navController.navigate("settings")
+        }) {
+          Icon(Icons.Filled.Settings, "settings")
+        }
+      },
+    )
+
   }, content = {
     HomeScreenContent(it)
   })

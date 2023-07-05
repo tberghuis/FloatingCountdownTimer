@@ -17,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.tberghuis.floatingtimer.screens.HomeScreen
+import xyz.tberghuis.floatingtimer.screens.SettingsScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 @AndroidEntryPoint
@@ -38,7 +39,6 @@ class MainActivity : ComponentActivity() {
   }
 }
 
-
 val LocalNavController = compositionLocalOf<NavHostController> {
   error("CompositionLocal LocalNavController not present")
 }
@@ -55,6 +55,7 @@ fun FloatingTimerNavHost(
         HomeScreen()
       }
       composable("settings") {
+        SettingsScreen()
       }
     }
   }
