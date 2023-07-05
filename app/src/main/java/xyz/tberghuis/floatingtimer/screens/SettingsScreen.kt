@@ -14,11 +14,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.viewmodels.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(
+  vm: SettingsViewModel = viewModel()
+) {
 
   Scaffold(
     modifier = Modifier,
@@ -41,6 +45,7 @@ fun SettingsScreen() {
             logd("change timer color")
             // if not purchased
             // show dialog
+            vm.showPurchaseDialog = true
             // else
             // nav halo_colour_change
           },
@@ -51,20 +56,23 @@ fun SettingsScreen() {
     }
   }
 
-
-  AlertDialog(
-    onDismissRequest = {},
-    confirmButton = {},
-    modifier = Modifier,
-    dismissButton = {},
-    title = { Text("Premium Feature") },
-    text = {
-      Column {
-        Text("Purchase premium feature: Change Timer Halo Color?")
-        Text("todo list price")
-      }
-    },
-  )
+  if (vm.showPurchaseDialog) {
+    AlertDialog(
+      onDismissRequest = {
+        vm.showPurchaseDialog = false
+      },
+      confirmButton = { Text("Buy") },
+      modifier = Modifier,
+      dismissButton = { Text("Cancel") },
+      title = { Text("Premium Feature") },
+      text = {
+        Column {
+          Text("Purchase premium feature: Change Timer Halo Color?")
+          Text("todo list price")
+        }
+      },
+    )
+  }
 
 
 }
