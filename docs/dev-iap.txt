@@ -117,3 +117,8 @@ build forked lib
 
 next task, feature-pass-in-color-state
 compose-color-picker  
+
+t. start on the real app
+navigation
+setting icon in topbar
+...
