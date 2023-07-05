@@ -122,3 +122,5 @@ t. start on the real app
 navigation
 setting icon in topbar
 ...
+doitwrong
+
