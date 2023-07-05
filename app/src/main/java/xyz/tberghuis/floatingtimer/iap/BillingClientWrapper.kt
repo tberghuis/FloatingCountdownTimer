@@ -24,6 +24,7 @@ class BillingClientWrapper(
   context: Context
 ) : PurchasesUpdatedListener {
 
+  // future.txt refactor billingClient as class dependency
   private val billingClient = BillingClient.newBuilder(context)
     .setListener(this)
     .enablePendingPurchases()
