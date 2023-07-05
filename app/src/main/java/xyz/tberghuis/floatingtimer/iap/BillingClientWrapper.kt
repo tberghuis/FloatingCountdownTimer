@@ -17,6 +17,7 @@ import com.android.billingclient.api.QueryPurchasesParams
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.flow.MutableSharedFlow
 import xyz.tberghuis.floatingtimer.logd
 
 class BillingClientWrapper(
@@ -158,4 +159,18 @@ class BillingClientWrapper(
     }
 
 
+  companion object {
+    // use this function to start connection, run callback, end connection
+    // poor design, future.txt use arrow.kt to deal with error handling
+    suspend fun run(
+      context: Context,
+      errorMessageFlow: MutableSharedFlow<String>? = null,
+      callback: (BillingClientWrapper) -> Unit
+    ) {
+      val client = BillingClientWrapper(context)
+      client.startBillingConnection()
+      callback(client)
+      client.endBillingConnection()
+    }
+  }
 }
