@@ -13,7 +13,7 @@ class SettingsViewModel : ViewModel() {
 
   fun changeTimerColor(navController: NavHostController) {
     logd("change timer color")
-    // if not purchased
+    // if not purchased (from user prefs)
     // show dialog
     showPurchaseDialog = true
     // else
