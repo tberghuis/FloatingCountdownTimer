@@ -125,3 +125,7 @@ setting icon in topbar
 doitwrong
 
 localcomposition navcontroller
+
+settings topappbar
+  back nav
+
