@@ -165,7 +165,7 @@ class BillingClientWrapper(
     suspend fun run(
       context: Context,
       errorMessageFlow: MutableSharedFlow<String>? = null,
-      callback: (BillingClientWrapper) -> Unit
+      callback: suspend (BillingClientWrapper) -> Unit
     ) {
       val client = BillingClientWrapper(context)
       client.startBillingConnection()
