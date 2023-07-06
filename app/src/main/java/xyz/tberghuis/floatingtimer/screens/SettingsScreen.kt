@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.screens
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -29,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -47,6 +49,7 @@ fun SettingsScreen(
   vm: SettingsViewModel = viewModel()
 ) {
   val navController = LocalNavController.current
+  val context = LocalContext.current
 
   Scaffold(
     modifier = Modifier,
@@ -112,7 +115,9 @@ fun SettingsScreen(
         vm.showPurchaseDialog = false
       },
       confirmButton = {
-        TextButton(onClick = { /* TODO */ }) {
+        TextButton(onClick = {
+          vm.buy(context as Activity)
+        }) {
           Text("Buy".uppercase())
         }
       },

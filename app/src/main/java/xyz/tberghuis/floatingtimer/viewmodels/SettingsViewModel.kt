@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.viewmodels
 
+import android.app.Activity
 import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import com.godaddy.android.colorpicker.HsvColor
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
@@ -34,13 +36,12 @@ class SettingsViewModel(private val application: Application) : AndroidViewModel
       }
     }
     viewModelScope.launch {
-      preferences.haloColourFlow.collect {
-        colorPickerColorState.value = HsvColor.from(it)
-      }
+      colorPickerColorState.value = HsvColor.from(preferences.haloColourFlow.first())
     }
     updateHaloColorChangePriceText()
   }
 
+  // should call again when showPurchaseDialog if still equal LOADING
   fun updateHaloColorChangePriceText() {
     viewModelScope.launch {
       BillingClientWrapper.run(application) { client ->
@@ -55,5 +56,24 @@ class SettingsViewModel(private val application: Application) : AndroidViewModel
       preferences.updateHaloColour(colorPickerColorState.value.toColor())
     }
   }
+
+  fun buy(activity: Activity) {
+    showPurchaseDialog = false
+    viewModelScope.launch {
+      BillingClientWrapper.run(application) { client ->
+        val billingResult = client.purchaseHaloColourChange(activity)
+        // todo error
+
+        val purchased = client.checkHaloColourPurchased()
+        preferences.updateHaloColourPurchased(purchased)
+
+        // assume user wants to save (they did click save button)
+        if (purchased) {
+          saveHaloColor()
+        }
+      }
+    }
+  }
+
 
 }
