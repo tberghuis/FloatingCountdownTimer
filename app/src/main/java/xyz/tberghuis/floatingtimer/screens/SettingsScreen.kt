@@ -4,11 +4,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.AlertDialog
@@ -28,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.godaddy.android.colorpicker.ClassicColorPicker
 import com.godaddy.android.colorpicker.HsvColor
@@ -70,9 +74,14 @@ fun SettingsScreen(
     Column(
       modifier = Modifier
         .padding(padding)
-        .fillMaxWidth(),
-    ) {
-      Text("Change Timer color")
+        .fillMaxSize()
+        .verticalScroll(rememberScrollState()),
+
+      verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
+      horizontalAlignment = Alignment.CenterHorizontally,
+
+      ) {
+      Text("Change Timer color", fontSize = 20.sp)
 
       // derived state of???
       val previewHaloColor = vm.colorPickerColorState.value.toColor()

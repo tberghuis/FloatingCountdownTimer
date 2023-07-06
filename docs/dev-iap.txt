@@ -130,3 +130,4 @@ settings topappbar
   back nav
 
 t. preview timer color
+center ui
