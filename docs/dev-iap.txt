@@ -129,5 +129,5 @@ localcomposition navcontroller
 settings topappbar
   back nav
 
-t. preview timer color
-center ui
+t. snackbar error
+all billing client wrapper methods test

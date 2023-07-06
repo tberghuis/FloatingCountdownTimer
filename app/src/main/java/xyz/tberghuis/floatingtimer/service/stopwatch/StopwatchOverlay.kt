@@ -38,6 +38,7 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.LocalServiceState
 import androidx.compose.ui.graphics.drawscope.Stroke
 import xyz.tberghuis.floatingtimer.composables.Trash
+import xyz.tberghuis.floatingtimer.tmp.LocalHaloColour
 
 @Composable
 fun StopwatchOverlay() {
@@ -79,7 +80,10 @@ fun BorderArc(stopwatchState: StopwatchState) {
   var pausedAngle by remember { mutableStateOf(210f) }
   var restartAngle by remember { mutableStateOf(0f) }
   val infiniteTransition = rememberInfiniteTransition()
-  val primaryColor = MaterialTheme.colorScheme.primary
+
+//  val primaryColor = MaterialTheme.colorScheme.primary
+  val haloColor = LocalHaloColour.current
+
   val animatedAngle by infiniteTransition.animateFloat(
     initialValue = 0f, targetValue = 360f, animationSpec = infiniteRepeatable(
       animation = tween(3000, easing = LinearEasing), repeatMode = RepeatMode.Restart
@@ -107,7 +111,7 @@ fun BorderArc(stopwatchState: StopwatchState) {
     )
 
     drawArc(
-      color = primaryColor.copy(alpha = .1f),
+      color = haloColor.copy(alpha = .1f),
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
@@ -116,7 +120,7 @@ fun BorderArc(stopwatchState: StopwatchState) {
     )
 
     drawArc(
-      color = primaryColor,
+      color = haloColor,
       startAngle = if (!running.value) pausedAngle else drawAnimatedAngle,
       sweepAngle = 120f,
       useCenter = false,

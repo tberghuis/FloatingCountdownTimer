@@ -8,6 +8,7 @@ import android.os.Build
 import android.view.WindowManager
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import java.util.*
 import kotlin.concurrent.timerTask
@@ -21,11 +22,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
+import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
+import xyz.tberghuis.floatingtimer.tmp.LocalHaloColour
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }
@@ -68,8 +71,12 @@ class OverlayController(val service: FloatingService) {
     }
 
     fullscreenOverlay.view.setContent {
+      val haloColour =
+        providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
       CompositionLocalProvider(LocalServiceState provides service.state) {
-        OverlayContent()
+        CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
+          OverlayContent()
+        }
       }
     }
 
