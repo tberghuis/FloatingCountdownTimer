@@ -37,7 +37,7 @@ class GdpsVm(application: Application) : AndroidViewModel(application) {
     }
   }
 
-    fun clearUserPrefs() {
+  fun clearUserPrefs() {
     viewModelScope.launch {
       preferences.resetHaloColour()
     }

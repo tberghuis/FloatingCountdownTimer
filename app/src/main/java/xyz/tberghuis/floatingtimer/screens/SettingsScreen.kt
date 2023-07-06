@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
@@ -17,7 +19,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.min
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.godaddy.android.colorpicker.ClassicColorPicker
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsViewModel
@@ -40,14 +46,27 @@ fun SettingsScreen(
     snackbarHost = {},
   ) { padding ->
     Column(
-      modifier = Modifier.padding(padding),
+      modifier = Modifier
+        .padding(padding)
+        .fillMaxWidth(),
     ) {
       Text("Change Timer color")
+
+      val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+      val width =
+        if (screenWidth < 350.dp) Modifier.fillMaxWidth() else Modifier.widthIn(0.dp, 300.dp)
+
+      ClassicColorPicker(
+        modifier = Modifier
+          .height(300.dp)
+          .then(width),
+        colorState = vm.colorPickerColorState
+      )
+
       Button(onClick = {
         logd("change timer color")
         if (vm.haloColourPurchased) {
-          // todo
-//          vm.save()
+          vm.saveHaloColor()
         } else {
           vm.showPurchaseDialog = true
         }
