@@ -76,11 +76,9 @@ fun SettingsScreen(
         .padding(padding)
         .fillMaxSize()
         .verticalScroll(rememberScrollState()),
-
       verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
       horizontalAlignment = Alignment.CenterHorizontally,
-
-      ) {
+    ) {
       Text("Change Timer color", fontSize = 20.sp)
 
       // derived state of???
