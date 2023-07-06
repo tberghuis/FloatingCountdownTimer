@@ -133,7 +133,7 @@ class BillingClientWrapper(
   }
 
 
-  private suspend fun getHaloColourProductDetails(): ProductDetails =
+  suspend fun getHaloColourProductDetails(): ProductDetails =
     suspendCoroutine { continuation ->
       val productId = "halo_colour"
       val product = QueryProductDetailsParams.Product.newBuilder()

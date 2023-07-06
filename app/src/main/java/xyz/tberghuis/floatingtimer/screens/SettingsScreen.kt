@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.screens
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -47,9 +48,9 @@ fun SettingsScreen(
           .fillMaxWidth()
           .clickable {
             logd("change timer color")
-            if(vm.haloColourPurchased){
+            if (vm.haloColourPurchased) {
               navController.navigate("change_halo_colour")
-            }else{
+            } else {
               vm.showPurchaseDialog = true
             }
           },
@@ -78,9 +79,12 @@ fun SettingsScreen(
       },
       title = { Text("Premium Feature") },
       text = {
-        Column {
-          Text("Purchase premium feature: Change Timer Halo Color?")
-          Text("todo list price")
+        Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+          Text("Change Timer halo color")
+          Text(vm.haloColorChangePriceText)
         }
       },
     )

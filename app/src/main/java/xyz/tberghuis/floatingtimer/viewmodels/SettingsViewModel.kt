@@ -10,10 +10,14 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
 import xyz.tberghuis.floatingtimer.logd
 
 class SettingsViewModel(private val application: Application) : AndroidViewModel(application) {
   var showPurchaseDialog by mutableStateOf(false)
+
+  var haloColorChangePriceText by mutableStateOf("LOADING")
+    private set
 
   private val preferencesRepository = providePreferencesRepository(application)
   var haloColourPurchased = false
@@ -25,5 +29,16 @@ class SettingsViewModel(private val application: Application) : AndroidViewModel
         haloColourPurchased = it
       }
     }
+    updateHaloColorChangePriceText()
   }
+
+  fun updateHaloColorChangePriceText() {
+    viewModelScope.launch {
+      BillingClientWrapper.run(application) { client ->
+        val details = client.getHaloColourProductDetails().oneTimePurchaseOfferDetails
+        haloColorChangePriceText = details?.formattedPrice ?: "null error"
+      }
+    }
+  }
+
 }
