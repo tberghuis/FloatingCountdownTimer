@@ -129,3 +129,4 @@ localcomposition navcontroller
 settings topappbar
   back nav
 
+t. preview timer color
