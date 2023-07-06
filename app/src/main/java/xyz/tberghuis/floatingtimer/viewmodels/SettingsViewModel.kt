@@ -36,7 +36,7 @@ class SettingsViewModel(private val application: Application) : AndroidViewModel
     viewModelScope.launch {
       BillingClientWrapper.run(application) { client ->
         val details = client.getHaloColourProductDetails().oneTimePurchaseOfferDetails
-        haloColorChangePriceText = details?.formattedPrice ?: "null error"
+        haloColorChangePriceText = details?.formattedPrice ?: ""
       }
     }
   }
