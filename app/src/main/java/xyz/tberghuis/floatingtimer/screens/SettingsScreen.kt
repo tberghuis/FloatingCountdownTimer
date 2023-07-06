@@ -45,6 +45,11 @@ fun SettingsScreen(
     },
     snackbarHost = {},
   ) { padding ->
+
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+    val colorPickerWidth =
+      if (screenWidth < 350.dp) Modifier.fillMaxWidth() else Modifier.widthIn(0.dp, 300.dp)
+
     Column(
       modifier = Modifier
         .padding(padding)
@@ -52,14 +57,10 @@ fun SettingsScreen(
     ) {
       Text("Change Timer color")
 
-      val screenWidth = LocalConfiguration.current.screenWidthDp.dp
-      val width =
-        if (screenWidth < 350.dp) Modifier.fillMaxWidth() else Modifier.widthIn(0.dp, 300.dp)
-
       ClassicColorPicker(
         modifier = Modifier
           .height(300.dp)
-          .then(width),
+          .then(colorPickerWidth),
         colorState = vm.colorPickerColorState
       )
 
