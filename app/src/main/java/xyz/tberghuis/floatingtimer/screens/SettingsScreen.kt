@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -26,7 +27,6 @@ import xyz.tberghuis.floatingtimer.viewmodels.SettingsViewModel
 fun SettingsScreen(
   vm: SettingsViewModel = viewModel()
 ) {
-
   val navController = LocalNavController.current
 
   Scaffold(
@@ -42,21 +42,17 @@ fun SettingsScreen(
     Column(
       modifier = Modifier.padding(padding),
     ) {
-      Text("settings")
-      Row(
-        modifier = Modifier
-          .fillMaxWidth()
-          .clickable {
-            logd("change timer color")
-            if (vm.haloColourPurchased) {
-              navController.navigate("change_halo_colour")
-            } else {
-              vm.showPurchaseDialog = true
-            }
-          },
-      ) {
-        Text("Change Timer color")
-        Text("LOCKED ICON")
+      Text("Change Timer color")
+      Button(onClick = {
+        logd("change timer color")
+        if (vm.haloColourPurchased) {
+          // todo
+//          vm.save()
+        } else {
+          vm.showPurchaseDialog = true
+        }
+      }) {
+        Text("SAVE")
       }
     }
   }

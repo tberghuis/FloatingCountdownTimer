@@ -76,9 +76,10 @@ fun FloatingTimerNavHost(
       composable("settings") {
         SettingsScreen()
       }
-      composable("change_halo_colour") {
-        ChangeColorScreen()
-      }
+      // future.txt as only one setting at the moment
+//      composable("change_halo_colour") {
+//        ChangeColorScreen()
+//      }
     }
   }
 }
