@@ -7,15 +7,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavHostController
 import com.godaddy.android.colorpicker.HsvColor
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
-import xyz.tberghuis.floatingtimer.logd
 
 class SettingsViewModel(private val application: Application) : AndroidViewModel(application) {
   var showPurchaseDialog by mutableStateOf(false)
@@ -64,17 +61,12 @@ class SettingsViewModel(private val application: Application) : AndroidViewModel
     // future.txt exit running timers because buy method will not work....
     // only if complaints
 
-
-
-
     viewModelScope.launch {
       BillingClientWrapper.run(application) { client ->
         val billingResult = client.purchaseHaloColourChange(activity)
-        // todo error
-
+        // todo error snackbar
         val purchased = client.checkHaloColourPurchased()
         preferences.updateHaloColourPurchased(purchased)
-
         // assume user wants to save (they did click save button)
         if (purchased) {
           saveHaloColor()
@@ -82,6 +74,4 @@ class SettingsViewModel(private val application: Application) : AndroidViewModel
       }
     }
   }
-
-
 }

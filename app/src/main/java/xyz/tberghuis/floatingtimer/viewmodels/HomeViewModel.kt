@@ -45,7 +45,6 @@ class HomeViewModel @Inject constructor(
     }
   }
 
-
   val vibrationFlow = preferencesRepository.vibrationFlow
   fun updateVibration(vibration: Boolean) {
     logd("updateVibration $vibration")
