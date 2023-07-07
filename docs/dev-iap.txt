@@ -144,4 +144,11 @@ just kill any timers
   launched effect fetch price
 
   or just check for internet.....
+
+  release, upload new screenshot
+  add to description
+  
+  diff
+  cull notes
+  clean cull code
   
