@@ -2,7 +2,6 @@ package xyz.tberghuis.floatingtimer.service.countdown
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
@@ -14,8 +13,6 @@ import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 @Composable
 fun ProgressArc(timeLeftFraction: Float) {
   val sweepAngle = 360 * timeLeftFraction
-
-//  val primaryColor = MaterialTheme.colorScheme.primary
   val haloColour = LocalHaloColour.current
 
   Canvas(

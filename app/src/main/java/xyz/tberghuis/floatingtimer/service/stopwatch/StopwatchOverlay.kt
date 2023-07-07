@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -80,8 +79,6 @@ fun BorderArc(stopwatchState: StopwatchState) {
   var pausedAngle by remember { mutableStateOf(210f) }
   var restartAngle by remember { mutableStateOf(0f) }
   val infiniteTransition = rememberInfiniteTransition()
-
-//  val primaryColor = MaterialTheme.colorScheme.primary
   val haloColor = LocalHaloColour.current
 
   val animatedAngle by infiniteTransition.animateFloat(
@@ -144,4 +141,3 @@ fun BorderArc(stopwatchState: StopwatchState) {
     }
   }
 }
-
