@@ -14,3 +14,4 @@ https://stackoverflow.com/questions/64585547/jetpack-compose-crash-when-adding-v
 
 ## Screenshot
 <img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_home.png' width="400"/>
+<img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_halo_color.png' width="400"/>
