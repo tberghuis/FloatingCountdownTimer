@@ -9,7 +9,6 @@ fun logd(s: String) {
     Log.d("xxx", s)
 }
 
-
 // need a better place to keep this
 val LocalHaloColour = compositionLocalOf<Color> {
   error("CompositionLocal LocalHaloColour not present")
