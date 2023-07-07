@@ -25,11 +25,8 @@ import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
 
 class AlarmController(val service: FloatingService) {
-
   private var player: MediaPlayer? = null
-
   private var pendingAlarm: PendingIntent? = null
-
   private var vibrate = true
   private val vibrator = initVibrator()
   private var sound = true
@@ -41,7 +38,6 @@ class AlarmController(val service: FloatingService) {
       player = MediaPlayer.create(service, alarmSound)
     }
     player?.isLooping = true
-
     collectPreferences()
     watchState()
   }
@@ -76,7 +72,6 @@ class AlarmController(val service: FloatingService) {
       @Suppress("DEPRECATION") service.getSystemService(VIBRATOR_SERVICE) as Vibrator
     }
   }
-
 
   private fun watchState() {
     val context = service
