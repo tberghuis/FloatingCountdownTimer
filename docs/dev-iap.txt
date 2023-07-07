@@ -1,23 +1,7 @@
-business name: TJB Apps
-credit card statement name: TJB Apps
 
-######
+ update version
+ release build
+ screenshot
+ play store description 
 
-build forked lib
-  project root
-  ./gradlew build
-  find . | grep \\.jar | grep full
-  copy to libs folder
-  manually add transitive dependencies to app build.gradle
-  is there a better way?
-  find source code for publishAllPublicationsToMavenRepository gradle task
-  just use the build/outputs .aar
-  
-bug cannot buy if timer overlay running
-
-
-  release, upload new screenshot
-  add to description
-  
-  cull notes
-  
+ git merge
