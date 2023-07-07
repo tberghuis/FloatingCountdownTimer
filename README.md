@@ -13,5 +13,4 @@ https://gist.github.com/handstandsam/6ecff2f39da72c0b38c07aa80bbb5a2f
 https://stackoverflow.com/questions/64585547/jetpack-compose-crash-when-adding-view-to-window-manager
 
 ## Screenshot
-<img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_home.png' width="400"/>
-<img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_halo_color.png' width="400"/>
+<img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_home.png' width="350"/> <img alt='Screenshot' src='https://github.com/tberghuis/FloatingCountdownTimer/raw/master/docs/images/Screenshot_halo_color.png' width="350"/>
