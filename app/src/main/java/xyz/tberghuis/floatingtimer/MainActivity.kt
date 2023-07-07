@@ -41,6 +41,9 @@ class MainActivity : ComponentActivity() {
         val purchased = it.checkHaloColourPurchased()
         logd("MainActivity onCreate purchased $purchased")
         preferencesRepository.updateHaloColourPurchased(purchased)
+        if(!purchased){
+          preferencesRepository.resetHaloColour()
+        }
       }
     }
 

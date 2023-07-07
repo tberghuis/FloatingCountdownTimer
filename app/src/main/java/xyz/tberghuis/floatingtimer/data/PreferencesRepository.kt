@@ -1,15 +1,11 @@
 package xyz.tberghuis.floatingtimer.data
 
 import android.content.Context
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -54,7 +50,6 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
     }
   }
 
-
   val haloColourPurchasedFlow: Flow<Boolean> = dataStore.data.map { preferences ->
     preferences[booleanPreferencesKey("halo_colour_purchased")] ?: false
   }
@@ -67,8 +62,7 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
 
   val haloColourFlow: Flow<Color> = dataStore.data.map { preferences ->
     val haloColourString = preferences[stringPreferencesKey("halo_colour")]
-    val purchased = preferences[booleanPreferencesKey("halo_colour_purchased")]
-    val haloColor = if (haloColourString == null || purchased == false)
+    val haloColor = if (haloColourString == null)
     // this is same as MaterialTheme.colorScheme.primary outside of FloatingTimerTheme
       Color(
         red = 103,
@@ -77,9 +71,7 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
       )
     else
       Color(haloColourString.toULong())
-
     logd("haloColourFlow halocolor $haloColor")
-
     haloColor
   }
 
@@ -97,5 +89,4 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
       preferences.remove(stringPreferencesKey("halo_colour"))
     }
   }
-
 }
