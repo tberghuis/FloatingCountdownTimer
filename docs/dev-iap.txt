@@ -131,3 +131,17 @@ settings topappbar
 
 t. snackbar error
 all billing client wrapper methods test
+
+
+bug cannot buy if timer overlay running
+.... release anyway????
+just kill any timers
+  ....
+  ok
+  just close it, intent
+
+  make price nullable and show a loading spinner
+  launched effect fetch price
+
+  or just check for internet.....
+  

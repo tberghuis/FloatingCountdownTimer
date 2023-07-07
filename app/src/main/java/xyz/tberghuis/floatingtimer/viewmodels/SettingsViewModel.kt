@@ -20,7 +20,8 @@ import xyz.tberghuis.floatingtimer.logd
 class SettingsViewModel(private val application: Application) : AndroidViewModel(application) {
   var showPurchaseDialog by mutableStateOf(false)
 
-  var haloColorChangePriceText by mutableStateOf("LOADING")
+  // future.txt nullable and a loading spinner
+  var haloColorChangePriceText by mutableStateOf("")
     private set
 
   private val preferences = providePreferencesRepository(application)
@@ -59,6 +60,13 @@ class SettingsViewModel(private val application: Application) : AndroidViewModel
 
   fun buy(activity: Activity) {
     showPurchaseDialog = false
+
+    // future.txt exit running timers because buy method will not work....
+    // only if complaints
+
+
+
+
     viewModelScope.launch {
       BillingClientWrapper.run(application) { client ->
         val billingResult = client.purchaseHaloColourChange(activity)
