@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
@@ -28,7 +29,6 @@ import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
-import xyz.tberghuis.floatingtimer.tmp.LocalHaloColour
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }

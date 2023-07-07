@@ -36,12 +36,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.godaddy.android.colorpicker.ClassicColorPicker
+import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.ProgressArc
-import xyz.tberghuis.floatingtimer.tmp.LocalHaloColour
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)

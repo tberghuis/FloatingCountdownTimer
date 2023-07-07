@@ -10,7 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
+
+        // this was for skydoves color picker snapshot
+//        maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
 
         flatDir {
             dirs 'libs'
