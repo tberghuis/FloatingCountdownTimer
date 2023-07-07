@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -34,7 +33,6 @@ import xyz.tberghuis.floatingtimer.screens.onFocusSelectAll
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun CreateCountdownCard() {
