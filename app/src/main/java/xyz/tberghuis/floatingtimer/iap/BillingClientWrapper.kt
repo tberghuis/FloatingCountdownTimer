@@ -152,9 +152,7 @@ class BillingClientWrapper(
           val productDetails = productDetailsList.find {
             it.productId == "halo_colour"
           }
-
           continuation.resume(productDetails!!)
-
         }
       billingClient.queryProductDetailsAsync(params, productDetailsResponseListener)
     }
