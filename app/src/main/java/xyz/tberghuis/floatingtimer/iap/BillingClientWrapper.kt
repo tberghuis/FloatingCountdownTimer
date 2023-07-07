@@ -169,8 +169,13 @@ class BillingClientWrapper(
       callback: suspend (BillingClientWrapper) -> Unit
     ) {
       val client = BillingClientWrapper(context)
-      client.startBillingConnection()
-      callback(client)
+      val result = client.startBillingConnection()
+      if (result.responseCode == BillingClient.BillingResponseCode.OK) {
+        callback(client)
+      } else {
+        // i could move this into startBillingConnection
+        errorMessageFlow?.emit(result.debugMessage)
+      }
       client.endBillingConnection()
     }
   }

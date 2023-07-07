@@ -67,8 +67,9 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
 
   val haloColourFlow: Flow<Color> = dataStore.data.map { preferences ->
     val haloColourString = preferences[stringPreferencesKey("halo_colour")]
-    val haloColor = if (haloColourString == null)
-      // this is same as MaterialTheme.colorScheme.primary outside of FloatingTimerTheme
+    val purchased = preferences[booleanPreferencesKey("halo_colour_purchased")]
+    val haloColor = if (haloColourString == null || purchased == false)
+    // this is same as MaterialTheme.colorScheme.primary outside of FloatingTimerTheme
       Color(
         red = 103,
         green = 80,
