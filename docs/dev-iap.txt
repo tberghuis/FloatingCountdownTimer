@@ -4,4 +4,8 @@
  screenshot
  play store description 
 
- git merge
+git readme
+  description
+  screenshot
+
+git merge
