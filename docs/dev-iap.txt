@@ -1,108 +1,7 @@
-
-
-codelab
-...
-copy from sample, update play console
-
-make sure secrets are not uploaded to public repo
-
-https://codelabs.developers.google.com/play-billing-codelab?hl=en#0
-
-remove IAPDemo activity manifest.xml
-
-find open source color picker
-
-use env var to unlock IAP gradle
-
-
-fix my payments profile (play console)
-  TFN ...
-
-https://codelabs.developers.google.com/play-billing-codelab?hl=en#3
-
-don't i need to include base64EncodedPublicKey in manifest???
-
-https://stackoverflow.com/questions/11068686/this-version-of-the-application-is-not-configured-for-billing-through-google-pla
-
-https://developer.android.com/google/play/billing/test
-https://github.com/wdtheprovider/in-app-purchases-subscription
-
-
-purchases saved in dataStore preferences
-  nullable boolean
-  halo_color_purchased = null, false, true
-
-no need to keep open connection billing client,
-just create new object when needed
-return a flow???
-sealed class PurchaseFlowEvent
-billingClient endConnection
-
 business name: TJB Apps
 credit card statement name: TJB Apps
 
 ######
-
-next task, use shared prefs
-rewrite billingwrapper idiomatic kotlin
-  results, flow
-
-click on color picker
-  if purchased == null
-    billing client check
-  if purchased == false
-    dialog: charnge halo color is a premium feature
-      1 aud, button buy, cancel
-  if purchased == true
-    color picker
-
-use arrow.kt for either
-
-doitwrong
-use my own Result sealed interface
-with data classes as values
-
-sealed interface GetHaloPurchasedResult
-  data class Ok(purchased: Boolean)
-  data class Err(snackbar message)
- 
-future.txt: read the arrow docs and use Either 
-
-finsh doing it wrong first
-
-halo screen purchase button
-
-delete vscode setting sync issue comment when resolved
-
-acknowledge purchase
-
-test case, refund, purchased reset to false next startup
-test case, airplane mode, on startup, purchased stays as true
-
-color picker
-
-step 1, navigation
-reference one of my latest projects
-
-color picker landscape mode, screen scroll
-
-pull request lib snapshot bug
-
-pull request strevdasan demo github repo
-
-t. figure out default halo colour
-...
-
-color picker, button, reset to material theme primary
-
-https://github.com/skydoves/colorpicker-compose
-using commit 2a1b152cb736bea7618e9576dda8f88bb1ecb1c1
- plus my pull request, should be in my public repo
-
-t. save button
-
-clean code, fresh diff with master review before release
-remove skydove gradle changes
 
 build forked lib
   project root
@@ -114,41 +13,11 @@ build forked lib
   find source code for publishAllPublicationsToMavenRepository gradle task
   just use the build/outputs .aar
   
-
-next task, feature-pass-in-color-state
-compose-color-picker  
-
-t. start on the real app
-navigation
-setting icon in topbar
-...
-doitwrong
-
-localcomposition navcontroller
-
-settings topappbar
-  back nav
-
-t. snackbar error
-all billing client wrapper methods test
-
-
 bug cannot buy if timer overlay running
-.... release anyway????
-just kill any timers
-  ....
-  ok
-  just close it, intent
 
-  make price nullable and show a loading spinner
-  launched effect fetch price
-
-  or just check for internet.....
 
   release, upload new screenshot
   add to description
   
-  diff
   cull notes
-  clean cull code
   
