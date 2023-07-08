@@ -88,3 +88,8 @@ refactor add new class
       createParams lambda
     do stuff like windowsmanager addview removeView
     composeview.dispose ....
+
+
+fix ANR service separate process, manifest :processName
+
+chatgpt translate strings xml
