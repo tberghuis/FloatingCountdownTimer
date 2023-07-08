@@ -87,19 +87,12 @@ class FloatingService : Service() {
   private fun postOngoingActivityNotification() {
     if (!isStarted) {
       isStarted = true
-      createNotificationChannel()
+
       startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification())
     }
   }
 
-  private fun createNotificationChannel() {
-    val notificationChannel = NotificationChannel(
-      NOTIFICATION_CHANNEL, NOTIFICATION_CHANNEL_DISPLAY, NotificationManager.IMPORTANCE_DEFAULT
-    )
-    // channel description???
-    val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
-    manager.createNotificationChannel(notificationChannel)
-  }
+
 
   private fun buildNotification(): Notification {
     val pendingIntent: PendingIntent =
