@@ -93,3 +93,13 @@ refactor add new class
 fix ANR service separate process, manifest :processName
 
 chatgpt translate strings xml
+
+notification expanded by default?
+
+settings page:
+  enable notifocations
+  disable battery optimisation
+  long press reset: when paused
+  background, text color
+  alarm ringtone
+  
