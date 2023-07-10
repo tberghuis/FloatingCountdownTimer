@@ -103,3 +103,6 @@ settings page:
   background, text color
   alarm ringtone
   
+
+test process death, kill emulator
+  
