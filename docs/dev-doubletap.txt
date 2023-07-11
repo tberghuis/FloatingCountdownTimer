@@ -13,4 +13,3 @@ release
 merge
 playstore screenshot, redo with instructions
 readme.md, play store description
-git merge master          
