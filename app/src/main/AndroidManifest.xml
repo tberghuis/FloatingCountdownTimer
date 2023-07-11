@@ -36,21 +36,6 @@
             </intent-filter>
         </activity>
 
-
-<!--        todo remove-->
-        <activity
-            android:name=".tmp.DoubleTapActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.FloatingTimer">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
         <service android:name=".service.FloatingService" />
 
         <receiver android:name=".receivers.AlarmReceiver" />
