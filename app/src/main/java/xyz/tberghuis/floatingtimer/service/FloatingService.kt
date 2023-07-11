@@ -1,8 +1,6 @@
 package xyz.tberghuis.floatingtimer.service
 
 import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.Service
@@ -22,7 +20,6 @@ import xyz.tberghuis.floatingtimer.INTENT_COMMAND_RESET
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_CREATE
 import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
-import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL_DISPLAY
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
@@ -32,11 +29,8 @@ import xyz.tberghuis.floatingtimer.receivers.ResetReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 
 class FloatingService : Service() {
-
   private val job = SupervisorJob()
   private val scope = CoroutineScope(Dispatchers.Default + job)
-
-
   val state = ServiceState(scope)
   private var isStarted = false
 
@@ -104,7 +98,6 @@ class FloatingService : Service() {
     }
   }
 
-
   private fun buildNotification(): Notification {
     val pendingIntent: PendingIntent =
       Intent(this, MainActivity::class.java).let { notificationIntent ->
@@ -132,10 +125,8 @@ class FloatingService : Service() {
     return notification
   }
 
-
   override fun onDestroy() {
     super.onDestroy()
     job.cancel()
   }
-
 }

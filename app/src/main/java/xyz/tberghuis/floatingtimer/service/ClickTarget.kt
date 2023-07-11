@@ -1,6 +1,5 @@
 package xyz.tberghuis.floatingtimer.service
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
@@ -54,7 +53,6 @@ fun ClickTarget(
         controller.windowManager.updateViewLayout(viewHolder.view, viewHolder.params)
       })
     }
-
     .pointerInput(Unit) {
       detectTapGestures(
         onDoubleTap = {
