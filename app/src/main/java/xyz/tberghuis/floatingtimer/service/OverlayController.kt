@@ -188,20 +188,5 @@ class OverlayController(val service: FloatingService) {
 fun onClickStopwatchClickTarget(stopwatchState: StopwatchState) {
   logd("click target start pause")
   val running = stopwatchState.isRunningStateFlow
-  when (running.value) {
-    false -> {
-      running.value = true
-      Timer().scheduleAtFixedRate(timerTask {
-        if (running.value) {
-          stopwatchState.timeElapsed.value++
-        } else {
-          cancel()
-        }
-      }, 1000, 1000)
-    }
-
-    true -> {
-      running.value = false
-    }
-  }
+  running.value = !running.value
 }
