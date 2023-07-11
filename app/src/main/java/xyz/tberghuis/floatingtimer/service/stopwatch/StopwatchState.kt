@@ -4,13 +4,14 @@ import androidx.compose.runtime.mutableStateOf
 import java.util.Timer
 import java.util.TimerTask
 import kotlin.concurrent.timerTask
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.service.OverlayState
 
-class StopwatchState {
+class StopwatchState(scope: CoroutineScope) {
   val overlayState = OverlayState()
   val timeElapsed = mutableStateOf(0)
   val isRunningStateFlow = MutableStateFlow(false)
@@ -28,7 +29,7 @@ class StopwatchState {
 
   init {
     // todo pass in scope dependency
-    GlobalScope.launch {
+    scope.launch {
       // test flow collect only distinct values
       isRunningStateFlow.collect { running ->
         when (running) {

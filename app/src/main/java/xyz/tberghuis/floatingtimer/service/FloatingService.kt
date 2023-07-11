@@ -9,6 +9,9 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import xyz.tberghuis.floatingtimer.EXTRA_COUNTDOWN_DURATION
 import xyz.tberghuis.floatingtimer.FOREGROUND_SERVICE_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
@@ -29,7 +32,12 @@ import xyz.tberghuis.floatingtimer.receivers.ResetReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 
 class FloatingService : Service() {
-  val state = ServiceState()
+
+  private val job = SupervisorJob()
+  private val scope = CoroutineScope(Dispatchers.Default + job)
+
+
+  val state = ServiceState(scope)
   private var isStarted = false
 
   // todo make private
@@ -59,13 +67,16 @@ class FloatingService : Service() {
           state.countdownState.resetTimerState(duration)
           state.countdownState.overlayState.isVisible.value = true
         }
+
         INTENT_COMMAND_COUNTDOWN_COMPLETE -> {
           logd("onStartCommand INTENT_COMMAND_COUNTDOWN_COMPLETE")
           state.countdownState.timerState.value = TimerStateFinished
         }
+
         INTENT_COMMAND_STOPWATCH_CREATE -> {
           state.stopwatchState.overlayState.isVisible.value = true
         }
+
         INTENT_COMMAND_EXIT -> {
           if (state.countdownState.overlayState.isVisible.value == true) {
             overlayController.exitCountdown()
@@ -75,6 +86,7 @@ class FloatingService : Service() {
           }
           return START_NOT_STICKY
         }
+
         INTENT_COMMAND_RESET -> {
           state.stopwatchState.resetStopwatchState()
           state.countdownState.resetTimerState()
@@ -91,7 +103,6 @@ class FloatingService : Service() {
       startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification())
     }
   }
-
 
 
   private fun buildNotification(): Notification {
@@ -120,4 +131,11 @@ class FloatingService : Service() {
         ).build()
     return notification
   }
+
+
+  override fun onDestroy() {
+    super.onDestroy()
+    job.cancel()
+  }
+
 }

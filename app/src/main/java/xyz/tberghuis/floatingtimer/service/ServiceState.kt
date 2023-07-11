@@ -1,11 +1,12 @@
 package xyz.tberghuis.floatingtimer.service
 
+import kotlinx.coroutines.CoroutineScope
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownState
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 
-class ServiceState {
+class ServiceState(scope: CoroutineScope) {
   val countdownState = CountdownState()
-  val stopwatchState = StopwatchState()
+  val stopwatchState = StopwatchState(scope)
 
   // these could be moved back into OverlayController
   // meh
