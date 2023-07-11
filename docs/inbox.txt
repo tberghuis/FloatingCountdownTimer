@@ -105,4 +105,7 @@ settings page:
   
 
 test process death, kill emulator
+
+
+delete activity doubletap manifest
   
