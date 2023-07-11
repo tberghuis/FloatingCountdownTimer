@@ -5,7 +5,8 @@
 Features both a countdown timer and stopwatch that will float over other apps.
 
 * Can be dragged / moved around.
-* Click to start / pause / reset
+* Tap to start / pause
+* Double tap to reset
 * Drag to trash to exit
 
 SYSTEM_ALERT_WINDOW uses ComposeView that I got working using hacks discussed
