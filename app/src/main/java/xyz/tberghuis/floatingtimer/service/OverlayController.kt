@@ -92,7 +92,7 @@ class OverlayController(val service: FloatingService) {
     )
     countdownClickTarget.view.setContent {
       ClickTarget(
-        service.state, this, countdownState.overlayState, countdownClickTarget, this::exitCountdown
+        service.state, this, countdownState.overlayState, countdownClickTarget, this::exitCountdown, countdownState::resetTimerState
       ) {
         logd("click target onclick")
         when (countdownState.timerState.value) {
@@ -127,7 +127,7 @@ class OverlayController(val service: FloatingService) {
     )
     stopwatchClickTarget.view.setContent {
       ClickTarget(
-        service.state, this, stopwatchState.overlayState, stopwatchClickTarget, this::exitStopwatch
+        service.state, this, stopwatchState.overlayState, stopwatchClickTarget, this::exitStopwatch, stopwatchState::resetStopwatchState
       ) {
         onClickStopwatchClickTarget(stopwatchState)
       }

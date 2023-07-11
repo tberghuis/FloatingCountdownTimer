@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.service
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,7 +22,8 @@ fun ClickTarget(
   overlayState: OverlayState,
   viewHolder: OverlayViewHolder,
   onDropOnTrash: () -> Unit,
-  onClick: () -> Unit
+  onDoubleTap: () -> Unit,
+  onTap: () -> Unit
 ) {
   Box(modifier = Modifier
     .pointerInput(Unit) {
@@ -52,9 +54,20 @@ fun ClickTarget(
         controller.windowManager.updateViewLayout(viewHolder.view, viewHolder.params)
       })
     }
-    .clickable {
-      onClick()
-    }) {
+
+    .pointerInput(Unit) {
+      detectTapGestures(
+        onDoubleTap = {
+          logd("onDoubleTap")
+          onDoubleTap()
+        },
+        onTap = {
+          logd("onTap")
+          onTap()
+        }
+      )
+    }
+  ) {
 //        Text("click target")
   }
 }
