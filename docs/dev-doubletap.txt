@@ -1,0 +1,13 @@
+check bug stopwatch double tap
+
+
+double tap to reset
+
+marketing screenshot
+
+refactor broadcast receivers
+
+
+     state.stopwatchState.resetStopwatchState()
+          state.countdownState.resetTimerState()
+          
