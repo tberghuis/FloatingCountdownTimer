@@ -1,13 +1,15 @@
-check bug stopwatch double tap
-
+fix bug stopwatch double tap
 
 double tap to reset
 
 marketing screenshot
 
-refactor broadcast receivers
+future.txt refactor broadcast receivers
 
-
-     state.stopwatchState.resetStopwatchState()
-          state.countdownState.resetTimerState()
-          
+increment version
+build
+release
+merge
+playstore screenshot, redo with instructions
+readme.md, play store description
+git merge master          
