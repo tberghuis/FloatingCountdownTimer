@@ -3,6 +3,7 @@ package xyz.tberghuis.floatingtimer.service
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
@@ -104,17 +105,24 @@ class FloatingService : Service() {
         PendingIntent.getActivity(this, 0, notificationIntent, FLAG_IMMUTABLE)
       }
 
-    // todo shouldn't need BroadcastReceiver
-    // https://stackoverflow.com/questions/73344244/how-to-invoke-a-method-on-a-foreground-service-by-clicking-on-a-notification-act
+    val exitIntent = Intent(applicationContext, FloatingService::class.java)
+    exitIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_EXIT)
+    val exitPendingIntent = PendingIntent.getService(
+      applicationContext,
+      REQUEST_CODE_EXIT,
+      exitIntent,
+      FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
+    )
 
-    val exitIntent = Intent(applicationContext, ExitReceiver::class.java)
-    val exitPendingIntent = PendingIntent.getBroadcast(
-      applicationContext, REQUEST_CODE_EXIT, exitIntent, FLAG_IMMUTABLE
+    val resetIntent = Intent(applicationContext, FloatingService::class.java)
+    resetIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_RESET)
+    val resetPendingIntent = PendingIntent.getService(
+      applicationContext,
+      REQUEST_CODE_RESET,
+      resetIntent,
+      FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
     )
-    val resetIntent = Intent(applicationContext, ResetReceiver::class.java)
-    val resetPendingIntent = PendingIntent.getBroadcast(
-      applicationContext, REQUEST_CODE_RESET, resetIntent, FLAG_IMMUTABLE
-    )
+
     val notification: Notification =
       NotificationCompat.Builder(this, NOTIFICATION_CHANNEL).setContentTitle("Floating Timer")
         .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent).addAction(
