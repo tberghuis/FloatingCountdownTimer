@@ -25,8 +25,6 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.receivers.ExitReceiver
-import xyz.tberghuis.floatingtimer.receivers.ResetReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 
 class FloatingService : Service() {

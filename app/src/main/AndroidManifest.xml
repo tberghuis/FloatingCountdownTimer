@@ -37,9 +37,6 @@
         </activity>
 
         <service android:name=".service.FloatingService" />
-
         <receiver android:name=".receivers.AlarmReceiver" />
-        <receiver android:name=".receivers.ExitReceiver" />
-        <receiver android:name=".receivers.ResetReceiver" />
     </application>
 </manifest>
