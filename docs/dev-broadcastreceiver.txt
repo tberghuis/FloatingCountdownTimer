@@ -1,8 +1,0 @@
-
-release note
-  refactor pending intents
-
-increment version
-build
-release
-merge
