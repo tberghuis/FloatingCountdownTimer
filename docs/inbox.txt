@@ -106,3 +106,10 @@ settings page:
 
 test process death, kill emulator
   
+
+count up checkbox as in-app product
+
+read source floating bubble view library
+https://github.com/TorryDo/Floating-Bubble-View
+
+set timer text size with dp, not sp
