@@ -1,6 +1,11 @@
 read source https://github.com/KuhakuPixel/UberAlles/
 https://github.com/TorryDo/Floating-Bubble-View
 
+strings xml
 indo
+screenshots for indo
+make a google sheet
+
+
 FloatingService have its own process
 
