@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Floating Timer</string>
     <string name="create">Create</string>
+    <string name="stopwatch">Stopwatch</string>
 </resources>

@@ -38,7 +38,7 @@ fun CreateStopwatchCard() {
         .padding(10.dp)
         .fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
-      Text("Stopwatch", fontSize = 20.sp)
+      Text(stringResource(id = R.string.stopwatch) , fontSize = 20.sp)
     }
     Row(
       modifier = Modifier
