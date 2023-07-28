@@ -9,3 +9,5 @@ make a google sheet
 
 FloatingService have its own process
 
+gradle plugin update
+dependencies update
