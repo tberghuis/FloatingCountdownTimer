@@ -114,6 +114,7 @@ fun HomeScreen() {
     }, text = {
       Text(buildAnnotatedString {
         append(stringResource(R.string.dialog_enable_overlay_permission))
+        append(" ")
         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
           append(stringResource(R.string.app_name))
         }

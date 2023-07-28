@@ -8,4 +8,19 @@
     <string name="seconds">detik</string>
     <string name="vibration">Getaran</string>
     <string name="sound">Suara</string>
+
+
+        <string name="settings">Pengaturan</string>
+    <string name="go_to_settings">Go To Settings</string>
+    <string name="enable_overlay_permission">Enable Overlay Permission</string>
+    <string name="dialog_enable_overlay_permission">Please enable \"Allow display over other apps\" permission for application</string>
+    <string name="back">Back</string>
+    <string name="change_timer_color">Change Timer color</string>
+    <string name="save">Save</string>
+    <string name="buy">Buy</string>
+    <string name="cancel">Cancel</string>
+    <string name="premium_feature">Premium Feature</string>
+    <string name="change_timer_halo_color">Change Timer halo color</string>
+
+
 </resources>
