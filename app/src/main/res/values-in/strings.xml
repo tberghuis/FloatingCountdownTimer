@@ -8,19 +8,15 @@
     <string name="seconds">detik</string>
     <string name="vibration">Getaran</string>
     <string name="sound">Suara</string>
-
-
-        <string name="settings">Pengaturan</string>
-    <string name="go_to_settings">Go To Settings</string>
-    <string name="enable_overlay_permission">Enable Overlay Permission</string>
-    <string name="dialog_enable_overlay_permission">Please enable \"Allow display over other apps\" permission for application</string>
-    <string name="back">Back</string>
-    <string name="change_timer_color">Change Timer color</string>
-    <string name="save">Save</string>
-    <string name="buy">Buy</string>
-    <string name="cancel">Cancel</string>
-    <string name="premium_feature">Premium Feature</string>
-    <string name="change_timer_halo_color">Change Timer halo color</string>
-
-
+    <string name="settings">Pengaturan</string>
+    <string name="go_to_settings">Pergi ke pengaturan</string>
+    <string name="enable_overlay_permission">Aktifkan Izin Hamparan</string>
+    <string name="dialog_enable_overlay_permission">Harap aktifkan izin \"Tampilkan di atas aplikasi lain\" untuk aplikasi</string>
+    <string name="back">Kembali</string>
+    <string name="change_timer_color">Ubah warna Timer</string>
+    <string name="save">Menyimpan</string>
+    <string name="buy">Membeli</string>
+    <string name="cancel">Membatalkan</string>
+    <string name="premium_feature">Fitur Premium</string>
+    <string name="change_timer_halo_color">Ubah warna halo Timer</string>
 </resources>
