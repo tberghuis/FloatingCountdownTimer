@@ -13,11 +13,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_CREATE
+import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
@@ -27,15 +29,21 @@ fun CreateStopwatchCard() {
   val context = LocalContext.current
   val vm: HomeViewModel = hiltViewModel()
   ElevatedCard(
-    modifier = Modifier.fillMaxWidth().padding(15.dp),
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(15.dp),
   ) {
     Row(
-      modifier = Modifier.padding(10.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center
+      modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
       Text("Stopwatch", fontSize = 20.sp)
     }
     Row(
-      modifier = Modifier.padding(10.dp).fillMaxWidth(), horizontalArrangement = Arrangement.Center
+      modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
       Button(modifier = Modifier.padding(top = 10.dp), onClick = {
         logd("start stopwatch")
@@ -45,7 +53,7 @@ fun CreateStopwatchCard() {
         }
         startStopwatchService(context)
       }) {
-        Text("Create")
+        Text(stringResource(id = R.string.create))
       }
     }
   }
