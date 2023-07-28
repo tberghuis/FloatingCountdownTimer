@@ -40,6 +40,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.debugInspectorInfo
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.buildAnnotatedString
@@ -49,6 +50,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.hilt.navigation.compose.hiltViewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
+import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
 import xyz.tberghuis.floatingtimer.composables.CreateStopwatchCard
 import xyz.tberghuis.floatingtimer.countdown.CreateCountdownCard
@@ -61,8 +63,8 @@ fun HomeScreen() {
   val vm: HomeViewModel = hiltViewModel()
   val context = LocalContext.current
   val launcher = rememberLauncherForActivityResult(
-    contract = ActivityResultContracts.RequestPermission(),
-    onResult = { })
+      contract = ActivityResultContracts.RequestPermission(),
+      onResult = { })
   LaunchedEffect(Unit) {
     vm.promptNotificationPermission(context) {
       launcher.launch(Manifest.permission.POST_NOTIFICATIONS)
@@ -74,15 +76,15 @@ fun HomeScreen() {
   Scaffold(topBar = {
 
     TopAppBar(
-      title = { Text("Floating Timer") },
-      modifier = Modifier,
-      actions = {
-        IconButton(onClick = {
-          navController.navigate("settings")
-        }) {
-          Icon(Icons.Filled.Settings, "settings")
-        }
-      },
+        title = { Text(stringResource(R.string.app_name)) },
+        modifier = Modifier,
+        actions = {
+          IconButton(onClick = {
+            navController.navigate("settings")
+          }) {
+            Icon(Icons.Filled.Settings, stringResource(R.string.settings))
+          }
+        },
     )
 
   }, content = {
@@ -96,24 +98,24 @@ fun HomeScreen() {
       Button(onClick = {
         logd("go to settings")
         val intent = Intent(
-          Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + context.packageName)
+            Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + context.packageName)
         )
 
         startActivityForResult(
-          context as Activity, intent, REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION, null
+            context as Activity, intent, REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION, null
         )
         vm.showGrantOverlayDialog = false
 
       }) {
-        Text("Go To Settings")
+        Text(stringResource(R.string.go_to_settings))
       }
     }, title = {
-      Text("Enable Overlay Permission")
+      Text(stringResource(R.string.enable_overlay_permission))
     }, text = {
       Text(buildAnnotatedString {
-        append("Please enable \"Allow display over other apps\" permission for application ")
+        append(stringResource(R.string.dialog_enable_overlay_permission))
         withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-          append("Floating Timer")
+          append(stringResource(R.string.app_name))
         }
       })
     })
@@ -125,18 +127,18 @@ fun HomeScreenContent(paddingValues: PaddingValues) {
   val focusManager = LocalFocusManager.current
 
   Column(
-    modifier = Modifier
-      .padding(paddingValues)
-      .fillMaxSize()
-      .verticalScroll(rememberScrollState())
-      .pointerInput(Unit) {
-        detectTapGestures(onTap = {
-          focusManager.clearFocus()
-          logd("on tap")
-        })
-      },
-    verticalArrangement = Arrangement.Center,
-    horizontalAlignment = Alignment.CenterHorizontally
+      modifier = Modifier
+          .padding(paddingValues)
+          .fillMaxSize()
+          .verticalScroll(rememberScrollState())
+          .pointerInput(Unit) {
+            detectTapGestures(onTap = {
+              focusManager.clearFocus()
+              logd("on tap")
+            })
+          },
+      verticalArrangement = Arrangement.Center,
+      horizontalAlignment = Alignment.CenterHorizontally
   ) {
     CreateCountdownCard()
     CreateStopwatchCard()
@@ -145,24 +147,24 @@ fun HomeScreenContent(paddingValues: PaddingValues) {
 
 
 fun Modifier.onFocusSelectAll(textFieldValueState: MutableState<TextFieldValue>): Modifier =
-  composed(inspectorInfo = debugInspectorInfo {
-    name = "textFieldValueState"
-    properties["textFieldValueState"] = textFieldValueState
-  }) {
-    var triggerEffect by remember {
-      mutableStateOf<Boolean?>(null)
-    }
-    if (triggerEffect != null) {
-      LaunchedEffect(triggerEffect) {
-        val tfv = textFieldValueState.value
-        textFieldValueState.value = tfv.copy(selection = TextRange(0, tfv.text.length))
+    composed(inspectorInfo = debugInspectorInfo {
+      name = "textFieldValueState"
+      properties["textFieldValueState"] = textFieldValueState
+    }) {
+      var triggerEffect by remember {
+        mutableStateOf<Boolean?>(null)
+      }
+      if (triggerEffect != null) {
+        LaunchedEffect(triggerEffect) {
+          val tfv = textFieldValueState.value
+          textFieldValueState.value = tfv.copy(selection = TextRange(0, tfv.text.length))
+        }
+      }
+      Modifier.onFocusChanged { focusState ->
+        if (focusState.isFocused) {
+          triggerEffect = triggerEffect?.let { bool ->
+            !bool
+          } ?: true
+        }
       }
     }
-    Modifier.onFocusChanged { focusState ->
-      if (focusState.isFocused) {
-        triggerEffect = triggerEffect?.let { bool ->
-          !bool
-        } ?: true
-      }
-    }
-  }

@@ -7,4 +7,8 @@
     <string name="seconds">seconds</string>
     <string name="vibration">Vibration</string>
     <string name="sound">Sound</string>
+    <string name="settings">settings</string>
+    <string name="go_to_settings">Go To Settings</string>
+    <string name="enable_overlay_permission">Enable Overlay Permission</string>
+    <string name="dialog_enable_overlay_permission">Please enable \"Allow display over other apps\" permission for application </string>
 </resources>
