@@ -7,7 +7,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
+import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @Composable
@@ -21,21 +23,21 @@ fun CountdownOptions() {
   Column {
     Row(verticalAlignment = Alignment.CenterVertically) {
       Checkbox(
-        checked = vibration.value,
-        onCheckedChange = {
-          vm.updateVibration(it)
-        }
+          checked = vibration.value,
+          onCheckedChange = {
+            vm.updateVibration(it)
+          }
       )
-      Text("Vibration")
+      Text(stringResource(R.string.vibration))
     }
     Row(verticalAlignment = Alignment.CenterVertically) {
       Checkbox(
-        checked = sound.value,
-        onCheckedChange = {
-          vm.updateSound(it)
-        }
+          checked = sound.value,
+          onCheckedChange = {
+            vm.updateSound(it)
+          }
       )
-      Text("Sound")
+      Text(stringResource(R.string.sound))
     }
   }
 }
