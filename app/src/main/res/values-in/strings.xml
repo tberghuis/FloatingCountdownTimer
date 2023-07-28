@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Timer Mengambang</string>
+    <string name="create">Membuat</string>
+    <string name="stopwatch">Stopwatch</string>
+    <string name="countdown">Hitung mundur</string>
+    <string name="minutes">menit</string>
+    <string name="seconds">detik</string>
+    <string name="vibration">Getaran</string>
+    <string name="sound">Suara</string>
+</resources>

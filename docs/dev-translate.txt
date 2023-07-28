@@ -4,6 +4,7 @@ https://github.com/TorryDo/Floating-Bubble-View
 strings xml
 indo
 screenshots for indo
+play store description
 make a google sheet
 
 
