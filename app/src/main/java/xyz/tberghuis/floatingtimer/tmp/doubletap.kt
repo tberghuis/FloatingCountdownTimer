@@ -36,7 +36,7 @@ class DoubleTapActivity : ComponentActivity() {
             .fillMaxSize()
             .background(Color.White),
         ) {
-          DoubleTapDemo()
+          MaccasScreen()
         }
       }
     }

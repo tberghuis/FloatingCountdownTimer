@@ -1,0 +1,4 @@
+copy from scratch
+https://github.com/TorryDo/Floating-Bubble-View
+
+just stick everything in tmp
