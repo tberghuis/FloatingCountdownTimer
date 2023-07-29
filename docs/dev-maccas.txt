@@ -9,6 +9,6 @@ might be able to have 100% opacity if my way works out
   switch overlay rendered in click target to fullscreen overlay when drag starts
 
 communicate to service through user_prefs
-that way can recover
+that way can recover, no need to read intent onStartCommand
 
 start the ui in service oncreate
