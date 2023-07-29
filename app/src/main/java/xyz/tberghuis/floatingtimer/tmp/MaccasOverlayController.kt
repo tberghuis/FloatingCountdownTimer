@@ -49,8 +49,6 @@ private fun initBubbleLayoutParams(context: Context): WindowManager.LayoutParams
 
 private fun setContentBubbleView(bubbleView: ComposeView) {
   bubbleView.setContent {
-    Box {
-      Text("0:00")
-    }
+    MaccasBubble()
   }
 }
