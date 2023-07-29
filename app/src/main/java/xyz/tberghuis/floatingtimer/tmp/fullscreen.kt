@@ -22,6 +22,6 @@ fun MaccasFullscreen() {
         controller.bubbleState.offset
       }
       .size(MC.OVERLAY_SIZE_DP.dp)
-    MaccasOverlayContent(modifier)
+    MaccasOverlayContent(modifier, { MaccasPassInComposable() })
   }
 }

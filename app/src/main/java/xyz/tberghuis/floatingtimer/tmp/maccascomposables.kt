@@ -47,19 +47,26 @@ fun MaccasBubble() {
     if (isDragging.value != true) {
       // pass this in
       val modifier = Modifier.fillMaxSize()
-      MaccasOverlayContent(modifier)
+      MaccasOverlayContent(modifier) {
+        MaccasPassInComposable()
+      }
     }
   }
 }
 
 @Composable
-fun MaccasOverlayContent(modifier: Modifier) {
+fun MaccasOverlayContent(modifier: Modifier, content: @Composable () -> Unit) {
   Box(
     modifier = Modifier
       .then(modifier)
       .background(Color.Gray)
   ) {
-    Text("0:00")
+//    Text("0:00")
+    content()
   }
 }
 
+@Composable
+fun MaccasPassInComposable() {
+  Text("0:00")
+}
