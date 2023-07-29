@@ -35,3 +35,30 @@ refactor slowly
 billingclient
 await after acknowledgePurchase to resume continuation
 
+
+architecture
+
+FloatingService
+  ServiceState
+    CountdownState
+      OverlayState
+    StopwatchState
+      OverlayState
+
+  OverlayController
+    OverlayViewController x3
+      OverlayViewHolder
+        LayoutParams
+        ComposeView
+
+
+OverlayController
+  FloatingService
+    
+
+step 1 service onconfigurationchanged width height
+
+rewrite deriveFullscreenVisibleFlow to listen for isDragging
+
+change layoutparam alpha to 1
+
