@@ -62,3 +62,7 @@ rewrite deriveFullscreenVisibleFlow to listen for isDragging
 
 change layoutparam alpha to 1
 
+StopwatchBubble
+CountdownBubble
+
+write a bunch of test cases
