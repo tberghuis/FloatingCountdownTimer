@@ -2,3 +2,13 @@ copy from scratch
 https://github.com/TorryDo/Floating-Bubble-View
 
 just stick everything in tmp
+
+read code top to bottom, where is he adding view to window manager
+
+might be able to have 100% opacity if my way works out
+  switch overlay rendered in click target to fullscreen overlay when drag starts
+
+communicate to service through user_prefs
+that way can recover
+
+start the ui in service oncreate
