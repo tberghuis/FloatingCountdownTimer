@@ -3,8 +3,10 @@ package xyz.tberghuis.floatingtimer.tmp
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
@@ -13,14 +15,12 @@ import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.max
 import kotlin.math.roundToInt
 
-
 @Composable
 fun MaccasBubble() {
-
   val controller = LocalMaccasOverlayController.current
+  val isDragging = controller.bubbleState.isDragging.collectAsState()
 
-
-  Box(modifier = Modifier.background(Color.Gray)
+  Box(modifier = Modifier
     .pointerInput(Unit) {
       detectDragGestures(onDragStart = {
         logd("clicktarget onDragStart")
@@ -41,9 +41,13 @@ fun MaccasBubble() {
         controller.bubbleState.isDragging.value = false
       })
     }
-
-
   ) {
-    Text("0:00")
+    if (isDragging.value != true) {
+      Box(
+        modifier = Modifier.background(Color.Gray).fillMaxSize()
+      ) {
+        Text("0:00")
+      }
+    }
   }
 }
