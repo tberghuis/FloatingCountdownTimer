@@ -50,16 +50,14 @@ fun StopwatchOverlay() {
     val y = min(overlayState.timerOffset.y, serviceState.screenHeightPx - timerSizePx)
     overlayState.timerOffset = IntOffset(x, y)
   }) {
-    Box(modifier = Modifier
+
+
+    val modifier = Modifier
       .offset {
         overlayState.timerOffset
       }
-      .size(TIMER_SIZE_DP.dp)
-      .padding(PROGRESS_ARC_WIDTH / 2),
-      contentAlignment = Alignment.Center) {
-      BorderArc(stopwatchState)
-      TimeDisplay(stopwatchState.timeElapsed.value)
-    }
+      // .size(TIMER_SIZE_DP.dp) // if issues in cut off due to px to dp rounding issues
+    StopwatchBubble(modifier, stopwatchState)
 
     if (overlayState.showTrash) {
       Column(
@@ -73,6 +71,19 @@ fun StopwatchOverlay() {
   }
 }
 
+@Composable
+fun StopwatchBubble(modifier: Modifier, stopwatchState: StopwatchState) {
+  Box(
+    modifier = Modifier
+      .then(modifier)
+      .size(TIMER_SIZE_DP.dp)
+      .padding(PROGRESS_ARC_WIDTH / 2),
+    contentAlignment = Alignment.Center
+  ) {
+    BorderArc(stopwatchState)
+    TimeDisplay(stopwatchState.timeElapsed.value)
+  }
+}
 
 @Composable
 fun BorderArc(stopwatchState: StopwatchState) {
@@ -134,6 +145,7 @@ fun BorderArc(stopwatchState: StopwatchState) {
         true -> {
           restartAngle = animatedAngle
         }
+
         false -> {
           pausedAngle = drawAnimatedAngle
         }

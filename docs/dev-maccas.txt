@@ -65,6 +65,11 @@ change layoutparam alpha to 1
 StopwatchBubble
 CountdownBubble
 
+Bubble(@Composable bubbleContents)
+
 write a bunch of test cases
 
 deriveFullscreenVisibleFlow from showTrash flow combine
+
+there is no need to share the fullscreen overlay
+  seperate fullscreen overlay for each timer type
