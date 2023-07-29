@@ -14,3 +14,5 @@ that way can recover, no need to read intent onStartCommand
 start the ui in service oncreate
 
 refactor overlayViewFactory using https://github.com/KuhakuPixel/UberAlles/
+
+remove tmp activity and service from manifest.xml
