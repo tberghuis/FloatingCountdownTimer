@@ -14,5 +14,8 @@ that way can recover, no need to read intent onStartCommand
 start the ui in service oncreate
 
 refactor overlayViewFactory using https://github.com/KuhakuPixel/UberAlles/
+how does floating bubble view lib work composeview lifecycleowner, recomposer etc
 
 remove tmp activity and service from manifest.xml
+
+test click past overlay on billingclient IAP buy dialog
