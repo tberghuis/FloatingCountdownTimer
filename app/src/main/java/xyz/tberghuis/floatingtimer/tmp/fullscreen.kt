@@ -17,15 +17,11 @@ fun MaccasFullscreen() {
   Box(
     modifier = Modifier
   ) {
-    Box(
-      modifier = Modifier
-        .offset {
-          controller.bubbleState.offset
-        }
-        .background(Color.Gray)
-        .size(MC.OVERLAY_SIZE_DP.dp)
-    ) {
-      Text("0:00")
-    }
+    val modifier = Modifier
+      .offset {
+        controller.bubbleState.offset
+      }
+      .size(MC.OVERLAY_SIZE_DP.dp)
+    MaccasOverlayContent(modifier)
   }
 }
