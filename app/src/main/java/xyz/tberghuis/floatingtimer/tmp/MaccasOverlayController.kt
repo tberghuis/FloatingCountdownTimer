@@ -3,16 +3,20 @@ package xyz.tberghuis.floatingtimer.tmp
 import android.content.Context
 import android.graphics.PixelFormat
 import android.view.WindowManager
+import androidx.compose.ui.platform.ComposeView
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.service.overlayViewFactory
 
 class MaccasOverlayController(val service: MaccasService) {
 
   val bubbleParams: WindowManager.LayoutParams
-
+  val bubbleView: ComposeView
 
   init {
     logd("MaccasOverlayController init")
     bubbleParams = initBubbleLayoutParams(service)
+    // todo refactor overlayViewFactory
+    bubbleView = overlayViewFactory(service)
   }
 }
 
