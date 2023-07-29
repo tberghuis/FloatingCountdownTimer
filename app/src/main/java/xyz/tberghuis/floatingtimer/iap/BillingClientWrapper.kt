@@ -35,6 +35,8 @@ class BillingClientWrapper(
 
   override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
     logd("purchasesUpdatedListener")
+
+    // todo await after acknowledgePurchase to resume continuation
     purchasesUpdatedContinuation?.resume(billingResult)
     if (billingResult.responseCode != BillingClient.BillingResponseCode.OK || purchases.isNullOrEmpty()) {
       return

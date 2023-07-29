@@ -29,3 +29,9 @@ just write a lot of test cases
 
 architecture diagram
 refactor slowly
+
+
+
+billingclient
+await after acknowledgePurchase to resume continuation
+
