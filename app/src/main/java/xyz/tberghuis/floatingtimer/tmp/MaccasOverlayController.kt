@@ -43,7 +43,7 @@ class MaccasOverlayController(val service: MaccasService) {
     fullscreenView = overlayViewFactory(service)
     setContentFullscreenView()
 
-    windowManager.addView(bubbleView, bubbleParams)
+//    windowManager.addView(bubbleView, bubbleParams)
     windowManager.addView(fullscreenView, fullscreenParams)
 
   }
