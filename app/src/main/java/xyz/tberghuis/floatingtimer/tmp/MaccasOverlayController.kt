@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.tmp
 
 import android.content.Context
 import android.graphics.PixelFormat
+import android.view.Gravity
 import android.view.WindowManager
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
@@ -36,7 +37,7 @@ class MaccasOverlayController(val service: MaccasService) {
 private fun initBubbleLayoutParams(context: Context): WindowManager.LayoutParams {
   val density = context.resources.displayMetrics.density
   val overlaySizePx = (MC.OVERLAY_SIZE_DP * density).toInt()
-  return WindowManager.LayoutParams(
+  val params = WindowManager.LayoutParams(
     overlaySizePx,
     overlaySizePx,
     0,
@@ -45,6 +46,8 @@ private fun initBubbleLayoutParams(context: Context): WindowManager.LayoutParams
     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
     PixelFormat.TRANSLUCENT
   )
+  params.gravity = Gravity.TOP or Gravity.LEFT
+  return params
 }
 
 private fun setContentBubbleView(bubbleView: ComposeView) {
