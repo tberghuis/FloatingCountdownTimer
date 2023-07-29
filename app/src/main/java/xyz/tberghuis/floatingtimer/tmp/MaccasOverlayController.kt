@@ -6,14 +6,23 @@ import android.view.Gravity
 import android.view.WindowManager
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.platform.ComposeView
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.overlayViewFactory
+
+val LocalMaccasOverlayController = compositionLocalOf<MaccasOverlayController> {
+  error("CompositionLocal LocalMaccasOverlayController not present")
+}
+
 
 class MaccasOverlayController(val service: MaccasService) {
 
   val bubbleParams: WindowManager.LayoutParams
   val bubbleView: ComposeView
+
+  val bubbleState = MaccasBubbleState()
 
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
@@ -29,6 +38,14 @@ class MaccasOverlayController(val service: MaccasService) {
 
     windowManager.addView(bubbleView, bubbleParams)
 
+  }
+
+  private fun setContentBubbleView(bubbleView: ComposeView) {
+    bubbleView.setContent {
+      CompositionLocalProvider(LocalMaccasOverlayController provides this) {
+        MaccasBubble()
+      }
+    }
   }
 }
 
@@ -50,8 +67,3 @@ private fun initBubbleLayoutParams(context: Context): WindowManager.LayoutParams
   return params
 }
 
-private fun setContentBubbleView(bubbleView: ComposeView) {
-  bubbleView.setContent {
-    MaccasBubble()
-  }
-}
