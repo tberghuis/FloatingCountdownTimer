@@ -25,7 +25,7 @@ fun MaccasBubble() {
       detectDragGestures(onDragStart = {
         logd("clicktarget onDragStart")
       }, onDrag = { change, dragAmount ->
-        controller.bubbleState.isDragging = true
+        controller.bubbleState.isDragging.value = true
         change.consume()
         val dragAmountIntOffset = IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
         val _timerOffset = controller.bubbleState.offset + dragAmountIntOffset
@@ -38,7 +38,7 @@ fun MaccasBubble() {
         controller.bubbleParams.x = controller.bubbleState.offset.x
         controller.bubbleParams.y = controller.bubbleState.offset.y
         controller.windowManager.updateViewLayout(controller.bubbleView, controller.bubbleParams)
-        controller.bubbleState.isDragging = false
+        controller.bubbleState.isDragging.value = false
       })
     }
 

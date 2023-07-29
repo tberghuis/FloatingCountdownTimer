@@ -9,6 +9,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.platform.ComposeView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.overlayViewFactory
 
@@ -25,7 +28,7 @@ class MaccasOverlayController(val service: MaccasService) {
   val bubbleState = MaccasBubbleState()
 
   val fullscreenParams: WindowManager.LayoutParams
-  val fullscreenView: ComposeView
+  var fullscreenView: ComposeView? = null
 
 
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -40,13 +43,34 @@ class MaccasOverlayController(val service: MaccasService) {
     setContentBubbleView()
 
     fullscreenParams = initFullscreenLayoutParams()
-    fullscreenView = overlayViewFactory(service)
-    setContentFullscreenView()
 
-//    windowManager.addView(bubbleView, bubbleParams)
-    windowManager.addView(fullscreenView, fullscreenParams)
+
+    windowManager.addView(bubbleView, bubbleParams)
+//    windowManager.addView(fullscreenView, fullscreenParams)
+
+
+    watchIsBubbleDragging()
 
   }
+
+  private fun watchIsBubbleDragging() {
+    // which scope???
+    service.scope.launch(Dispatchers.Main) {
+      bubbleState.isDragging.collect {
+        when (it) {
+          true -> {
+            fullscreenView = createFullscreenView()
+            windowManager.addView(fullscreenView, fullscreenParams)
+          }
+          false -> {
+            windowManager.removeView(fullscreenView)
+          }
+          null -> {}
+        }
+      }
+    }
+  }
+
 
   private fun setContentBubbleView() {
     bubbleView.setContent {
@@ -56,12 +80,14 @@ class MaccasOverlayController(val service: MaccasService) {
     }
   }
 
-  private fun setContentFullscreenView() {
-    fullscreenView.setContent {
+  private fun createFullscreenView(): ComposeView {
+    val view = overlayViewFactory(service)
+    view.setContent {
       CompositionLocalProvider(LocalMaccasOverlayController provides this) {
         MaccasFullscreen()
       }
     }
+    return view
   }
 }
 
