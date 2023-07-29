@@ -24,6 +24,10 @@ class MaccasOverlayController(val service: MaccasService) {
 
   val bubbleState = MaccasBubbleState()
 
+  val fullscreenParams: WindowManager.LayoutParams
+  val fullscreenView: ComposeView
+
+
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
 
@@ -33,17 +37,29 @@ class MaccasOverlayController(val service: MaccasService) {
     // todo refactor overlayViewFactory
     // OverlayComposeViewBuilder build returns ComposeView
     bubbleView = overlayViewFactory(service)
-    setContentBubbleView(bubbleView)
+    setContentBubbleView()
 
+    fullscreenParams = initFullscreenLayoutParams()
+    fullscreenView = overlayViewFactory(service)
+    setContentFullscreenView()
 
     windowManager.addView(bubbleView, bubbleParams)
+    windowManager.addView(fullscreenView, fullscreenParams)
 
   }
 
-  private fun setContentBubbleView(bubbleView: ComposeView) {
+  private fun setContentBubbleView() {
     bubbleView.setContent {
       CompositionLocalProvider(LocalMaccasOverlayController provides this) {
         MaccasBubble()
+      }
+    }
+  }
+
+  private fun setContentFullscreenView() {
+    fullscreenView.setContent {
+      CompositionLocalProvider(LocalMaccasOverlayController provides this) {
+        MaccasFullscreen()
       }
     }
   }
@@ -66,4 +82,23 @@ private fun initBubbleLayoutParams(context: Context): WindowManager.LayoutParams
   params.gravity = Gravity.TOP or Gravity.LEFT
   return params
 }
+
+
+private fun initFullscreenLayoutParams(): WindowManager.LayoutParams {
+  val params = WindowManager.LayoutParams(
+    WindowManager.LayoutParams.MATCH_PARENT,
+    WindowManager.LayoutParams.MATCH_PARENT,
+    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+    PixelFormat.TRANSLUCENT
+  )
+  params.gravity = Gravity.TOP or Gravity.LEFT
+  return params
+}
+
+
+
+
+
+
 
