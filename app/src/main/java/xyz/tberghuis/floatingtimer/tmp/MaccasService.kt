@@ -14,6 +14,8 @@ class MaccasService : Service() {
 
   private var isStarted = false
 
+  lateinit var maccasOverlayController: MaccasOverlayController
+
   override fun onBind(intent: Intent?): IBinder? {
     return null
   }
@@ -22,6 +24,8 @@ class MaccasService : Service() {
     super.onCreate()
 
     logd("MaccasService oncreate")
+
+    maccasOverlayController = MaccasOverlayController(this)
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
