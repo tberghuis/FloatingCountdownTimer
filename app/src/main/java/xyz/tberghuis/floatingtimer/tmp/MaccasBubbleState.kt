@@ -9,4 +9,7 @@ class MaccasBubbleState {
 
     var offset by mutableStateOf(IntOffset.Zero)
 
+    var isDragging by mutableStateOf(false)
+
+
 }
