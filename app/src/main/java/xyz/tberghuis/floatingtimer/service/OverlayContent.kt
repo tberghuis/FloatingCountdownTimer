@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
+import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownOverlay
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchOverlay
 
@@ -15,8 +16,11 @@ fun OverlayContent() {
   val isStopwatchVisible = state.stopwatchState.overlayState.isVisible.collectAsState()
 
   Box(Modifier.onGloballyPositioned {
-    state.screenWidthPx = it.size.width
-    state.screenHeightPx = it.size.height
+//    state.screenWidthPx = it.size.width
+//    state.screenHeightPx = it.size.height
+
+//    logd("OverlayContent onGloballyPositioned ${state.screenWidthPx} ${state.screenHeightPx}")
+
   }) {
     // future.txt correct z-order
     if (isCountdownVisible.value == true) {

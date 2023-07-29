@@ -5,9 +5,14 @@ import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.app.Service
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.IBinder
+import android.util.DisplayMetrics
+import android.view.WindowManager
 import androidx.core.app.NotificationCompat
+import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -27,6 +32,7 @@ import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 
+
 class FloatingService : Service() {
   private val job = SupervisorJob()
   private val scope = CoroutineScope(Dispatchers.Default + job)
@@ -39,6 +45,8 @@ class FloatingService : Service() {
 
   override fun onCreate() {
     super.onCreate()
+    ScreenEz.with(this.applicationContext)
+    updateScreenDimensions()
     overlayController = OverlayController(this)
     alarmController = AlarmController(this)
   }
@@ -134,5 +142,19 @@ class FloatingService : Service() {
   override fun onDestroy() {
     super.onDestroy()
     job.cancel()
+  }
+
+
+  override fun onConfigurationChanged(newConfig: Configuration) {
+    super.onConfigurationChanged(newConfig)
+
+    // doitwrong
+    ScreenEz.refresh()
+    updateScreenDimensions()
+  }
+
+  private fun updateScreenDimensions() {
+    state.screenWidthPx = ScreenEz.safeWidth
+    state.screenHeightPx = ScreenEz.safeHeight
   }
 }
