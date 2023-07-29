@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.service
 
+import android.app.Service
 import android.content.Context
 import android.os.Bundle
 import androidx.compose.runtime.Recomposer
@@ -21,8 +22,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 // https://gist.github.com/handstandsam/6ecff2f39da72c0b38c07aa80bbb5a2f
-fun overlayViewFactory(context: Context): ComposeView {
-  val view = ComposeView(context)
+fun overlayViewFactory(service: Service): ComposeView {
+  // is service correct context
+  val view = ComposeView(service)
   view.setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
   val lifecycleOwner = MyLifecycleOwner()
   lifecycleOwner.performRestore(null)

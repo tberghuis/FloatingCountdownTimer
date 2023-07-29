@@ -12,3 +12,5 @@ communicate to service through user_prefs
 that way can recover, no need to read intent onStartCommand
 
 start the ui in service oncreate
+
+refactor overlayViewFactory using https://github.com/KuhakuPixel/UberAlles/
