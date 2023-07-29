@@ -26,3 +26,6 @@ why is addView ignoring position of layoutparams???
 doitwrong
 what if breaks prod.... oh well
 just write a lot of test cases
+
+architecture diagram
+refactor slowly
