@@ -66,3 +66,5 @@ StopwatchBubble
 CountdownBubble
 
 write a bunch of test cases
+
+deriveFullscreenVisibleFlow from showTrash flow combine
