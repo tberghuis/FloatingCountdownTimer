@@ -19,3 +19,6 @@ how does floating bubble view lib work composeview lifecycleowner, recomposer et
 remove tmp activity and service from manifest.xml
 
 test click past overlay on billingclient IAP buy dialog
+
+
+why is addView ignoring position of layoutparams???
