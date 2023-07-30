@@ -1,24 +1,15 @@
-copy from scratch
+how does 
 https://github.com/TorryDo/Floating-Bubble-View
-
-just stick everything in tmp
-
-read code top to bottom, where is he adding view to window manager
-
-might be able to have 100% opacity if my way works out
-  switch overlay rendered in click target to fullscreen overlay when drag starts
+https://github.com/KuhakuPixel/UberAlles/
+deal with ViewCompositionStrategy setViewTreeLifecycleOwner recomposer ...
 
 communicate to service through user_prefs
 that way can recover, no need to read intent onStartCommand
 
-start the ui in service oncreate
+test what happens if service killed
 
-refactor overlayViewFactory using https://github.com/KuhakuPixel/UberAlles/
-how does floating bubble view lib work composeview lifecycleowner, recomposer etc
 
-remove tmp activity and service from manifest.xml
-
-test click past overlay on billingclient IAP buy dialog
+*** test click past overlay on billingclient IAP buy dialog
 
 
 why is addView ignoring position of layoutparams???
