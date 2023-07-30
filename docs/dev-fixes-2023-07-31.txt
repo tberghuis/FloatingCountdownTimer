@@ -1,0 +1,42 @@
+android 11, sdk 30
+
+Exception java.lang.NullPointerException:
+  at xyz.tberghuis.floatingtimer.iap.BillingClientWrapper$getHaloColourProductDetails$2$productDetailsResponseListener$1.onProductDetailsResponse (BillingClientWrapper.kt:157)
+  at com.android.billingclient.api.BillingClientImpl.queryProductDetailsAsync (com.android.billingclient:billing@@6.0.1:8)
+  at xyz.tberghuis.floatingtimer.iap.BillingClientWrapper.getHaloColourProductDetails (BillingClientWrapper.kt:159)
+  at xyz.tberghuis.floatingtimer.viewmodels.SettingsViewModel$updateHaloColorChangePriceText$1$1.invokeSuspend (SettingsViewModel.kt:46)
+  at xyz.tberghuis.floatingtimer.viewmodels.SettingsViewModel$updateHaloColorChangePriceText$1$1.invoke
+  at xyz.tberghuis.floatingtimer.viewmodels.SettingsViewModel$updateHaloColorChangePriceText$1$1.invoke
+  at xyz.tberghuis.floatingtimer.iap.BillingClientWrapper$Companion.run (BillingClientWrapper.kt:174)
+  at xyz.tberghuis.floatingtimer.iap.BillingClientWrapper$Companion$run$1.invokeSuspend
+  at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith (ContinuationImpl.kt:33)
+  at kotlinx.coroutines.DispatchedTask.run (DispatchedTask.kt:106)
+  at android.os.Handler.handleCallback (Handler.java:938)
+  at android.os.Handler.dispatchMessage (Handler.java:99)
+  at android.os.Looper.loop (Looper.java:246)
+  at android.app.ActivityThread.main (ActivityThread.java:8653)
+  at java.lang.reflect.Method.invoke
+  at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run (RuntimeInit.java:602)
+  at com.android.internal.os.ZygoteInit.main (ZygoteInit.java:1130)
+
+
+
+android 10, sdk 29
+
+Exception java.lang.IllegalArgumentException:
+  at android.view.WindowManagerGlobal.findViewLocked (WindowManagerGlobal.java:550)
+  at android.view.WindowManagerGlobal.removeView (WindowManagerGlobal.java:459)
+  at android.view.WindowManagerImpl.removeView (WindowManagerImpl.java:123)
+  at xyz.tberghuis.floatingtimer.service.OverlayViewController$watchIsVisible$2.emit (OverlayViewController.kt:34)
+  at xyz.tberghuis.floatingtimer.service.OverlayViewController$watchIsVisible$2.emit (OverlayViewController.kt:26)
+  at kotlinx.coroutines.flow.StateFlowImpl.collect (StateFlow.kt:398)
+  at kotlinx.coroutines.flow.StateFlowImpl$collect$1.invokeSuspend
+  at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith (ContinuationImpl.kt:33)
+  at kotlinx.coroutines.DispatchedTask.run (DispatchedTask.kt:106)
+  at android.os.Handler.handleCallback (Handler.java:899)
+  at android.os.Handler.dispatchMessage (Handler.java:100)
+  at android.os.Looper.loop (Looper.java:241)
+  at android.app.ActivityThread.main (ActivityThread.java:7888)
+  at java.lang.reflect.Method.invoke
+  at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run (RuntimeInit.java:512)
+  at com.android.internal.os.ZygoteInit.main (ZygoteInit.java:998)
