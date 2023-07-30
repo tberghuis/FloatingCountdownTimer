@@ -4,6 +4,7 @@ import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
@@ -25,6 +26,10 @@ fun ClickTarget(
   onDoubleTap: () -> Unit,
   onTap: () -> Unit
 ) {
+
+  val isDragging = overlayState.isDragging.collectAsState()
+
+
   Box(modifier = Modifier
     .pointerInput(Unit) {
       detectDragGestures(onDragStart = {
@@ -69,10 +74,8 @@ fun ClickTarget(
       )
     }
   ) {
-//        Text("click target")
-
-    // todo isDragging != true
-
-    bubbleContent()
+    if (isDragging.value != true) {
+      bubbleContent()
+    }
   }
 }
