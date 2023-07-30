@@ -148,39 +148,16 @@ class FloatingService : Service() {
     job.cancel()
   }
 
-
   override fun onConfigurationChanged(newConfig: Configuration) {
     super.onConfigurationChanged(newConfig)
-
-    var x = state.stopwatchState.overlayState.timerOffset.x
-    var y = state.stopwatchState.overlayState.timerOffset.y
-    logd("onConfigurationChanged $x $y")
-
 
     // doitwrong
     ScreenEz.refresh()
     updateScreenDimensions()
-//    moveOffsetIntoView(state.countdownState.overlayState)
-//    moveOffsetIntoView(state.stopwatchState.overlayState)
-
-
-    x = state.stopwatchState.overlayState.timerOffset.x
-    y = state.stopwatchState.overlayState.timerOffset.y
-    logd("onConfigurationChanged $x $y")
-
   }
 
   private fun updateScreenDimensions() {
     state.screenWidthPx = ScreenEz.safeWidth
     state.screenHeightPx = ScreenEz.safeHeight
-  }
-
-  // todo
-  private fun moveOffsetIntoView(overlayState: OverlayState) {
-    // move to member var
-    val timerSizePx = (Resources.getSystem().displayMetrics.density * TIMER_SIZE_DP).toInt()
-    val x = min(overlayState.timerOffset.x, state.screenWidthPx - timerSizePx)
-    val y = min(overlayState.timerOffset.y, state.screenHeightPx - timerSizePx)
-    overlayState.timerOffset = IntOffset(x, y)
   }
 }
