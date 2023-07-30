@@ -56,36 +56,6 @@ fun CountdownOverlay(state: ServiceState) {
   ) {
     Trash(overlayState)
   }
-
-  // todo move into AlarmController
-  LaunchedEffect(Unit) {
-    logd("CountdownOverlay LaunchedEffect")
-    var countDownTimer: CountDownTimer? = null
-    countdownState.timerState.collectLatest {
-      countDownTimer?.cancel()
-      when (it) {
-        is TimerStateRunning -> {
-          // todo make timer more accurate
-          // when pause store countdownMillis
-          countDownTimer = object : CountDownTimer(countdownState.countdownSeconds * 1000L, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-              countdownState.countdownSeconds = (millisUntilFinished / 1000f).roundToInt()
-            }
-
-            override fun onFinish() {
-              countdownState.countdownSeconds = 0
-            }
-          }.start()
-        }
-
-        is TimerStatePaused -> {
-          // do nothing
-        }
-
-        else -> {}
-      }
-    }
-  }
 }
 
 @Composable

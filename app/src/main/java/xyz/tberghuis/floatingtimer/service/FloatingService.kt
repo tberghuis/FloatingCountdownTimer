@@ -39,7 +39,7 @@ import kotlin.math.min
 
 class FloatingService : Service() {
   private val job = SupervisorJob()
-  private val scope = CoroutineScope(Dispatchers.Default + job)
+  val scope = CoroutineScope(Dispatchers.Default + job)
   val state = ServiceState(scope)
   private var isStarted = false
 

@@ -9,6 +9,7 @@ import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.os.CountDownTimer
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
@@ -23,6 +24,7 @@ import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
+import kotlin.math.roundToInt
 
 class AlarmController(val service: FloatingService) {
   private var player: MediaPlayer? = null
@@ -40,6 +42,7 @@ class AlarmController(val service: FloatingService) {
     player?.isLooping = true
     collectPreferences()
     watchState()
+    scheduleCountdownTimer()
   }
 
   // todo rewrite without
@@ -114,6 +117,7 @@ class AlarmController(val service: FloatingService) {
               ), pendingAlarm
             )
           }
+
           TimerStatePaused -> {
             pendingAlarm?.cancel()
             if (player?.isPlaying == true) {
@@ -121,6 +125,34 @@ class AlarmController(val service: FloatingService) {
             }
             vibrator.cancel()
           }
+        }
+      }
+    }
+  }
+
+
+  private fun scheduleCountdownTimer() {
+    logd("scheduleCountdownTimer")
+
+    val countdownState = service.state.countdownState
+
+    service.scope.launch(Dispatchers.Main) {
+      var countDownTimer: CountDownTimer? = null
+      countdownState.timerState.collectLatest {
+        countDownTimer?.cancel()
+        if (it is TimerStateRunning) {
+          // todo make timer more accurate
+          // when pause store countdownMillis
+          countDownTimer =
+            object : CountDownTimer(countdownState.countdownSeconds * 1000L, 1000) {
+              override fun onTick(millisUntilFinished: Long) {
+                countdownState.countdownSeconds = (millisUntilFinished / 1000f).roundToInt()
+              }
+
+              override fun onFinish() {
+                countdownState.countdownSeconds = 0
+              }
+            }.start()
         }
       }
     }
