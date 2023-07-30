@@ -75,3 +75,5 @@ there is no need to share the fullscreen overlay
   seperate fullscreen overlay for each timer type
 
 refactor so viewholder holds bubblecontent and state
+
+audit ScreenEz library
