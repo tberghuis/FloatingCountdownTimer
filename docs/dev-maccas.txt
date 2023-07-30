@@ -77,3 +77,7 @@ there is no need to share the fullscreen overlay
 refactor so viewholder holds bubblecontent and state
 
 audit ScreenEz library
+
+use StringResource for notification strings translation
+  and notification channel
+
