@@ -8,9 +8,11 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.IBinder
 import android.util.DisplayMetrics
 import android.view.WindowManager
+import androidx.compose.ui.unit.IntOffset
 import androidx.core.app.NotificationCompat
 import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.CoroutineScope
@@ -29,8 +31,10 @@ import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
+import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
+import kotlin.math.min
 
 
 class FloatingService : Service() {
@@ -151,8 +155,8 @@ class FloatingService : Service() {
     // doitwrong
     ScreenEz.refresh()
     updateScreenDimensions()
-
-
+    moveOffsetIntoView(state.countdownState.overlayState)
+    moveOffsetIntoView(state.stopwatchState.overlayState)
   }
 
   private fun updateScreenDimensions() {
@@ -161,9 +165,11 @@ class FloatingService : Service() {
   }
 
   // todo
-  private fun moveOffsetIntoView() {
-    state.screenWidthPx = ScreenEz.safeWidth
-    state.screenHeightPx = ScreenEz.safeHeight
+  private fun moveOffsetIntoView(overlayState: OverlayState) {
+    // move to member var
+    val timerSizePx = (Resources.getSystem().displayMetrics.density * TIMER_SIZE_DP).toInt()
+    val x = min(overlayState.timerOffset.x, state.screenWidthPx - timerSizePx)
+    val y = min(overlayState.timerOffset.y, state.screenHeightPx - timerSizePx)
+    overlayState.timerOffset = IntOffset(x, y)
   }
-
 }

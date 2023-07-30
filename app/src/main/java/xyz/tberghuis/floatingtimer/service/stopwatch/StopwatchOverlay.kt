@@ -48,9 +48,7 @@ fun StopwatchOverlay() {
   Box(Modifier.onGloballyPositioned {
     // todo move this to service onconfigurationchanged
 
-    val x = min(overlayState.timerOffset.x, serviceState.screenWidthPx - timerSizePx)
-    val y = min(overlayState.timerOffset.y, serviceState.screenHeightPx - timerSizePx)
-    overlayState.timerOffset = IntOffset(x, y)
+
   }) {
 
 
