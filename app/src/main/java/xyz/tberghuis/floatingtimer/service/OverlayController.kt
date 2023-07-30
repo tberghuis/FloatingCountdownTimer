@@ -1,10 +1,7 @@
 package xyz.tberghuis.floatingtimer.service
 
 import android.content.Context
-import android.content.Context.INPUT_SERVICE
 import android.graphics.PixelFormat
-import android.hardware.input.InputManager
-import android.os.Build
 import android.view.WindowManager
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -16,7 +13,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.mapNotNull
 import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
@@ -174,7 +170,6 @@ class OverlayController(val service: FloatingService) {
     OverlayViewController(
       this::createStopwatchClickTarget, stopwatchIsVisible.filterNotNull(), windowManager
     )
-
     OverlayViewController(
       {
         createFullscreenOverlay {
@@ -184,20 +179,6 @@ class OverlayController(val service: FloatingService) {
       service.state.stopwatchState.overlayState.isDragging,
       windowManager
     )
-  }
-
-  private fun deriveFullscreenVisibleFlow(): Flow<Boolean> {
-    val f1 = service.state.countdownState.overlayState.isVisible
-    val f2 = service.state.stopwatchState.overlayState.isVisible
-
-    return f1.combine(f2) { b1, b2 ->
-      logd("deriveFullscreenVisibleFlow b1 $b1 b2 $b2")
-      if (b1 == null && b2 == null) {
-        null
-      } else {
-        listOf(b1, b2).contains(true)
-      }
-    }.filterNotNull().distinctUntilChanged()
   }
 
   fun exitCountdown() {
