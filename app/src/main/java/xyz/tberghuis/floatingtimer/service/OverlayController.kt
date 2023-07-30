@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.Modifier
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -22,6 +23,7 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
+import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchBubble
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 
 val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }
@@ -90,7 +92,9 @@ class OverlayController(val service: FloatingService) {
     )
     countdownClickTarget.view.setContent {
       ClickTarget(
-        service.state, this, countdownState.overlayState, countdownClickTarget, this::exitCountdown, countdownState::resetTimerState
+        service.state, this, countdownState.overlayState, countdownClickTarget,
+        bubbleContent = { },
+        this::exitCountdown, countdownState::resetTimerState
       ) {
         logd("click target onclick")
         when (countdownState.timerState.value) {
@@ -124,10 +128,24 @@ class OverlayController(val service: FloatingService) {
       ), service
     )
     stopwatchClickTarget.view.setContent {
-      ClickTarget(
-        service.state, this, stopwatchState.overlayState, stopwatchClickTarget, this::exitStopwatch, stopwatchState::resetStopwatchState
-      ) {
-        onClickStopwatchClickTarget(stopwatchState)
+      val haloColour =
+        providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
+      CompositionLocalProvider(LocalServiceState provides service.state) {
+        CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
+          ClickTarget(
+            service.state,
+            this,
+            stopwatchState.overlayState,
+            stopwatchClickTarget,
+            bubbleContent = {
+              StopwatchBubble(Modifier, stopwatchState)
+            },
+            this::exitStopwatch,
+            stopwatchState::resetStopwatchState
+          ) {
+            onClickStopwatchClickTarget(stopwatchState)
+          }
+        }
       }
     }
     return stopwatchClickTarget

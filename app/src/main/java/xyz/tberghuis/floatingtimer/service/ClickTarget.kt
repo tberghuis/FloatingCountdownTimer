@@ -20,6 +20,7 @@ fun ClickTarget(
   controller: OverlayController,
   overlayState: OverlayState,
   viewHolder: OverlayViewHolder,
+  bubbleContent: @Composable () -> Unit,
   onDropOnTrash: () -> Unit,
   onDoubleTap: () -> Unit,
   onTap: () -> Unit
@@ -69,5 +70,6 @@ fun ClickTarget(
     }
   ) {
 //        Text("click target")
+    bubbleContent()
   }
 }
