@@ -8,21 +8,6 @@ that way can recover, no need to read intent onStartCommand
 
 test what happens if service killed
 
-
-*** test click past overlay on billingclient IAP buy dialog
-
-
-why is addView ignoring position of layoutparams???
-
-doitwrong
-what if breaks prod.... oh well
-just write a lot of test cases
-
-architecture diagram
-refactor slowly
-
-
-
 billingclient
 await after acknowledgePurchase to resume continuation
 
@@ -42,33 +27,12 @@ FloatingService
         LayoutParams
         ComposeView
 
-
 OverlayController
   FloatingService
     
-
-step 1 service onconfigurationchanged width height
-
-rewrite deriveFullscreenVisibleFlow to listen for isDragging
-
-change layoutparam alpha to 1
-
-StopwatchBubble
-CountdownBubble
-
-Bubble(@Composable bubbleContents)
-
-write a bunch of test cases
-
-deriveFullscreenVisibleFlow from showTrash flow combine
-
-there is no need to share the fullscreen overlay
-  seperate fullscreen overlay for each timer type
-
 refactor so viewholder holds bubblecontent and state
 
 audit ScreenEz library
 
 use StringResource for notification strings translation
   and notification channel
-
