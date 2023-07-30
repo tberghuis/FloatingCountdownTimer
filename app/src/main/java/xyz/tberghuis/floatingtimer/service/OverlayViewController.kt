@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.service
 
+import android.util.Log
 import android.view.WindowManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,10 +30,15 @@ class OverlayViewController(
           viewHolder = createOverlayViewHolder()
           windowManager.addView(viewHolder!!.view, viewHolder!!.params)
         }
+
         false, null -> {
           viewHolder?.view?.let {
-            windowManager.removeView(it)
-            it.disposeComposition()
+            try {
+              windowManager.removeView(it)
+              it.disposeComposition()
+            } catch (e: IllegalArgumentException) {
+              Log.e("OverlayViewController", "IllegalArgumentException $e")
+            }
           }
         }
       }
