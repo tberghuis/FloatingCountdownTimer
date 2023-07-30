@@ -27,75 +27,78 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.composables.Trash
 import xyz.tberghuis.floatingtimer.service.ServiceState
 
-@Composable
-fun CountdownOverlay(state: ServiceState) {
-  val countdownState = state.countdownState
-  val overlayState = countdownState.overlayState
-  // should i use derivedStateOf ???
-  // i don't understand the benefit
-  val timeLeftFraction = countdownState.countdownSeconds / countdownState.durationSeconds.toFloat()
-  val context = LocalContext.current
-
-  Box(Modifier.onGloballyPositioned {
-    // do this instead of service onConfigurationChanged
-    // to reposition timer when screen rotate
-    val density = context.resources.displayMetrics.density
-    val timerSizePx = (TIMER_SIZE_DP * density).toInt()
-    val x = min(overlayState.timerOffset.x, state.screenWidthPx - timerSizePx)
-    val y = min(overlayState.timerOffset.y, state.screenHeightPx - timerSizePx)
-    overlayState.timerOffset = IntOffset(x, y)
-  }) {
-    Box(modifier = Modifier
-      .offset {
-        overlayState.timerOffset
-      }
-      .size(TIMER_SIZE_DP.dp)
-      .padding(PROGRESS_ARC_WIDTH / 2)
-      .zIndex(1f),
-      contentAlignment = Alignment.Center) {
-      ProgressArc(timeLeftFraction)
-      TimeDisplay(countdownState.countdownSeconds)
-    }
-
-    if (overlayState.showTrash) {
-      // don't really need to nest this column
-      // doing for positioning simplicity
-      // refactor later
-      Column(
-        Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally
-      ) {
-        Trash(overlayState)
-      }
-    }
-  }
-
-  // todo move into AlarmController
-  LaunchedEffect(Unit) {
-    logd("CountdownOverlay LaunchedEffect")
-    var countDownTimer: CountDownTimer? = null
-    countdownState.timerState.collectLatest {
-      countDownTimer?.cancel()
-      when (it) {
-        is TimerStateRunning -> {
-          // todo make timer more accurate
-          // when pause store countdownMillis
-          countDownTimer = object : CountDownTimer(countdownState.countdownSeconds * 1000L, 1000) {
-            override fun onTick(millisUntilFinished: Long) {
-              countdownState.countdownSeconds = (millisUntilFinished / 1000f).roundToInt()
-            }
-
-            override fun onFinish() {
-              countdownState.countdownSeconds = 0
-            }
-          }.start()
-        }
-        is TimerStatePaused -> {
-          // do nothing
-        }
-        else -> {}
-      }
-    }
-  }
-}
+//@Composable
+//fun CountdownOverlay(state: ServiceState) {
+//  val countdownState = state.countdownState
+//  val overlayState = countdownState.overlayState
+//  // should i use derivedStateOf ???
+//  // i don't understand the benefit
+//  val timeLeftFraction = countdownState.countdownSeconds / countdownState.durationSeconds.toFloat()
+//  val context = LocalContext.current
+//
+//  Box(Modifier.onGloballyPositioned {
+//    // do this instead of service onConfigurationChanged
+//    // to reposition timer when screen rotate
+//
+//    // todo move this to service onconfiguration changed
+//
+//    val density = context.resources.displayMetrics.density
+//    val timerSizePx = (TIMER_SIZE_DP * density).toInt()
+//    val x = min(overlayState.timerOffset.x, state.screenWidthPx - timerSizePx)
+//    val y = min(overlayState.timerOffset.y, state.screenHeightPx - timerSizePx)
+//    overlayState.timerOffset = IntOffset(x, y)
+//  }) {
+//    Box(modifier = Modifier
+//      .offset {
+//        overlayState.timerOffset
+//      }
+//      .size(TIMER_SIZE_DP.dp)
+//      .padding(PROGRESS_ARC_WIDTH / 2)
+//      .zIndex(1f),
+//      contentAlignment = Alignment.Center) {
+//      ProgressArc(timeLeftFraction)
+//      TimeDisplay(countdownState.countdownSeconds)
+//    }
+//
+//    if (overlayState.showTrash) {
+//      // don't really need to nest this column
+//      // doing for positioning simplicity
+//      // refactor later
+//      Column(
+//        Modifier.fillMaxSize(),
+//        verticalArrangement = Arrangement.Bottom,
+//        horizontalAlignment = Alignment.CenterHorizontally
+//      ) {
+//        Trash(overlayState)
+//      }
+//    }
+//  }
+//
+//  // todo move into AlarmController
+//  LaunchedEffect(Unit) {
+//    logd("CountdownOverlay LaunchedEffect")
+//    var countDownTimer: CountDownTimer? = null
+//    countdownState.timerState.collectLatest {
+//      countDownTimer?.cancel()
+//      when (it) {
+//        is TimerStateRunning -> {
+//          // todo make timer more accurate
+//          // when pause store countdownMillis
+//          countDownTimer = object : CountDownTimer(countdownState.countdownSeconds * 1000L, 1000) {
+//            override fun onTick(millisUntilFinished: Long) {
+//              countdownState.countdownSeconds = (millisUntilFinished / 1000f).roundToInt()
+//            }
+//
+//            override fun onFinish() {
+//              countdownState.countdownSeconds = 0
+//            }
+//          }.start()
+//        }
+//        is TimerStatePaused -> {
+//          // do nothing
+//        }
+//        else -> {}
+//      }
+//    }
+//  }
+//}

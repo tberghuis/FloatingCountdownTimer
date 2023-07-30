@@ -46,6 +46,8 @@ fun StopwatchOverlay() {
   val overlayState = stopwatchState.overlayState
   val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
   Box(Modifier.onGloballyPositioned {
+    // todo move this to service onconfigurationchanged
+
     val x = min(overlayState.timerOffset.x, serviceState.screenWidthPx - timerSizePx)
     val y = min(overlayState.timerOffset.y, serviceState.screenHeightPx - timerSizePx)
     overlayState.timerOffset = IntOffset(x, y)
@@ -56,17 +58,15 @@ fun StopwatchOverlay() {
       .offset {
         overlayState.timerOffset
       }
-      // .size(TIMER_SIZE_DP.dp) // if issues in cut off due to px to dp rounding issues
+    // .size(TIMER_SIZE_DP.dp) // if issues in cut off due to px to dp rounding issues
     StopwatchBubble(modifier, stopwatchState)
 
-    if (overlayState.showTrash) {
-      Column(
-        Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally
-      ) {
-        Trash(overlayState)
-      }
+    Column(
+      Modifier.fillMaxSize(),
+      verticalArrangement = Arrangement.Bottom,
+      horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+      Trash(overlayState)
     }
   }
 }
