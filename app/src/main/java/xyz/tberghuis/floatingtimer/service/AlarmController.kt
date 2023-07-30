@@ -13,6 +13,7 @@ import android.os.CountDownTimer
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import android.util.Log
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
@@ -52,16 +53,14 @@ class AlarmController(val service: FloatingService) {
     // doitwrong
     val preferences = providePreferencesRepository(service)
 
-    with(CoroutineScope(Dispatchers.Default)) {
-      launch {
-        preferences.vibrationFlow.collect {
-          vibrate = it
-        }
+    service.scope.launch {
+      preferences.vibrationFlow.collect {
+        vibrate = it
       }
-      launch {
-        preferences.soundFlow.collect {
-          sound = it
-        }
+    }
+    service.scope.launch {
+      preferences.soundFlow.collect {
+        sound = it
       }
     }
   }
@@ -80,7 +79,7 @@ class AlarmController(val service: FloatingService) {
     val context = service
     val countdownState = service.state.countdownState
 
-    CoroutineScope(Dispatchers.Default).launch {
+    service.scope.launch {
       countdownState.timerState.collectLatest {
         when (it) {
           is TimerStateFinished -> {
@@ -111,11 +110,17 @@ class AlarmController(val service: FloatingService) {
               PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
             val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-            alarmManager.setAlarmClock(
-              AlarmManager.AlarmClockInfo(
-                System.currentTimeMillis() + (countdownState.countdownSeconds * 1000), pendingAlarm
-              ), pendingAlarm
-            )
+
+            try {
+              alarmManager.setAlarmClock(
+                AlarmManager.AlarmClockInfo(
+                  System.currentTimeMillis() + (countdownState.countdownSeconds * 1000),
+                  pendingAlarm
+                ), pendingAlarm
+              )
+            } catch (e: SecurityException) {
+              Log.e("AlarmController", "SecurityException: $e")
+            }
           }
 
           TimerStatePaused -> {
@@ -130,12 +135,9 @@ class AlarmController(val service: FloatingService) {
     }
   }
 
-
   private fun scheduleCountdownTimer() {
     logd("scheduleCountdownTimer")
-
     val countdownState = service.state.countdownState
-
     service.scope.launch(Dispatchers.Main) {
       var countDownTimer: CountDownTimer? = null
       countdownState.timerState.collectLatest {
