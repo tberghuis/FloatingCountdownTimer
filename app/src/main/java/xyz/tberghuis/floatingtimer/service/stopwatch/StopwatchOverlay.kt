@@ -26,11 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import kotlin.math.min
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
@@ -44,28 +40,23 @@ fun StopwatchOverlay() {
   val serviceState = LocalServiceState.current
   val stopwatchState = serviceState.stopwatchState
   val overlayState = stopwatchState.overlayState
-  val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
-  Box(Modifier.onGloballyPositioned {
-    // todo move this to service onconfigurationchanged
 
-
-  }) {
-
-
-    val modifier = Modifier
-      .offset {
-        overlayState.timerOffset
-      }
-    // .size(TIMER_SIZE_DP.dp) // if issues in cut off due to px to dp rounding issues
-    StopwatchBubble(modifier, stopwatchState)
-
-    Column(
-      Modifier.fillMaxSize(),
-      verticalArrangement = Arrangement.Bottom,
-      horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-      Trash(overlayState)
+  val modifier = Modifier
+    .offset {
+      overlayState.timerOffset
     }
+  // .size(TIMER_SIZE_DP.dp) // if issues in cut off due to px to dp rounding issues
+
+  Box {
+    StopwatchBubble(modifier, stopwatchState)
+  }
+
+  Column(
+    Modifier.fillMaxSize(),
+    verticalArrangement = Arrangement.Bottom,
+    horizontalAlignment = Alignment.CenterHorizontally
+  ) {
+    Trash(overlayState)
   }
 }
 

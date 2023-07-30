@@ -70,6 +70,9 @@ fun ClickTarget(
     }
   ) {
 //        Text("click target")
+
+    // todo isDragging != true
+
     bubbleContent()
   }
 }

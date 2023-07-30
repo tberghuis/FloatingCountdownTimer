@@ -10,7 +10,7 @@ import xyz.tberghuis.floatingtimer.logd
 
 class OverlayViewController(
   val createOverlayViewHolder: () -> OverlayViewHolder,
-  val isVisible: Flow<Boolean>,
+  val isVisible: Flow<Boolean?>,
   val windowManager: WindowManager
 ) {
   // doitwrong
@@ -23,28 +23,19 @@ class OverlayViewController(
 
   private suspend fun watchIsVisible() {
     var viewHolder: OverlayViewHolder? = null
-    // isVisible first() should always be true
-    isVisible.collect { isVisible ->
-      if (isVisible) {
-        viewHolder = createOverlayViewHolder()
-      }
-      addOrRemoveView(viewHolder!!, isVisible)
-    }
-  }
 
-  private fun addOrRemoveView(
-    viewHolder: OverlayViewHolder, isVisible: Boolean
-  ) {
-    when (isVisible) {
-      true -> {
-        logd("addview ${viewHolder.view}")
-        windowManager.addView(viewHolder.view, viewHolder.params)
-      }
-      false -> {
-        logd("removeview ${viewHolder.view}")
-        // wrap in try catch???
-        windowManager.removeView(viewHolder.view)
-        viewHolder.view.disposeComposition()
+    isVisible.collect { isVisible ->
+      when (isVisible) {
+        true -> {
+          viewHolder = createOverlayViewHolder()
+          windowManager.addView(viewHolder!!.view, viewHolder!!.params)
+        }
+        false, null -> {
+          viewHolder?.let {
+            windowManager.removeView(it.view)
+            it.view.disposeComposition()
+          }
+        }
       }
     }
   }

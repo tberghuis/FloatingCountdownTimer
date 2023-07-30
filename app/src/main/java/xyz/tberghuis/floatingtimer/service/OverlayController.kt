@@ -152,7 +152,7 @@ class OverlayController(val service: FloatingService) {
 
     OverlayViewController(
       this::createFullscreenOverlay,
-      service.state.stopwatchState.overlayState.isDragging.mapNotNull { it },
+      service.state.stopwatchState.overlayState.isDragging,
       windowManager
     )
 
