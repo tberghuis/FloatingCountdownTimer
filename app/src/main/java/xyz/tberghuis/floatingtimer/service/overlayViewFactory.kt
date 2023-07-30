@@ -1,7 +1,6 @@
 package xyz.tberghuis.floatingtimer.service
 
 import android.app.Service
-import android.content.Context
 import android.os.Bundle
 import androidx.compose.runtime.Recomposer
 import androidx.compose.ui.platform.AndroidUiDispatcher
