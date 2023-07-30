@@ -26,15 +26,12 @@ fun ClickTarget(
   onDoubleTap: () -> Unit,
   onTap: () -> Unit
 ) {
-
   val isDragging = overlayState.isDragging.collectAsState()
-
 
   Box(modifier = Modifier
     .pointerInput(Unit) {
       detectDragGestures(onDragStart = {
         logd("clicktarget onDragStart")
-//        overlayState.showTrash = true
         overlayState.isDragging.value = true
       }, onDrag = { change, dragAmount ->
         change.consume()
@@ -47,14 +44,11 @@ fun ClickTarget(
         overlayState.timerOffset = IntOffset(x, y)
       }, onDragEnd = {
         logd("onDragEnd")
-//        overlayState.showTrash = false
         overlayState.isDragging.value = false
-
         if (overlayState.isTimerHoverTrash) {
           onDropOnTrash()
           return@detectDragGestures
         }
-
         viewHolder.params.x = overlayState.timerOffset.x
         viewHolder.params.y = overlayState.timerOffset.y
         logd("onDragEnd x ${overlayState.timerOffset.x}")
