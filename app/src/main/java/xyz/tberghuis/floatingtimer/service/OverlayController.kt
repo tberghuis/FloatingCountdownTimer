@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.mapNotNull
 import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
@@ -52,18 +53,11 @@ class OverlayController(val service: FloatingService) {
         WindowManager.LayoutParams.MATCH_PARENT,
         WindowManager.LayoutParams.MATCH_PARENT,
         WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+//        WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
         PixelFormat.TRANSLUCENT
       ), service
     )
-
-    // https://developer.android.com/reference/android/view/WindowManager.LayoutParams#MaximumOpacity
-    fullscreenOverlay.params.alpha = 1f
-    val inputManager = service.applicationContext.getSystemService(INPUT_SERVICE) as InputManager
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-      logd("inputManager max opacity ${inputManager.maximumObscuringOpacityForTouch}")
-      fullscreenOverlay.params.alpha = inputManager.maximumObscuringOpacityForTouch
-    }
 
     fullscreenOverlay.view.setContent {
       val haloColour =
@@ -152,12 +146,19 @@ class OverlayController(val service: FloatingService) {
   }
 
   private fun initViewControllers() {
+//    OverlayViewController(
+//      this::createFullscreenOverlay, deriveFullscreenVisibleFlow(), windowManager
+//    )
+
     OverlayViewController(
-      this::createFullscreenOverlay, deriveFullscreenVisibleFlow(), windowManager
+      this::createFullscreenOverlay,
+      service.state.stopwatchState.overlayState.isDragging.mapNotNull { it },
+      windowManager
     )
-    OverlayViewController(
-      this::createCountdownClickTarget, countdownIsVisible.filterNotNull(), windowManager
-    )
+
+//    OverlayViewController(
+//      this::createCountdownClickTarget, countdownIsVisible.filterNotNull(), windowManager
+//    )
     OverlayViewController(
       this::createStopwatchClickTarget, stopwatchIsVisible.filterNotNull(), windowManager
     )

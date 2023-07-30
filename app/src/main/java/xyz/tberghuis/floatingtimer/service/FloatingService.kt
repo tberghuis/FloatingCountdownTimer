@@ -151,10 +151,19 @@ class FloatingService : Service() {
     // doitwrong
     ScreenEz.refresh()
     updateScreenDimensions()
+
+
   }
 
   private fun updateScreenDimensions() {
     state.screenWidthPx = ScreenEz.safeWidth
     state.screenHeightPx = ScreenEz.safeHeight
   }
+
+  // todo
+  private fun moveOffsetIntoView() {
+    state.screenWidthPx = ScreenEz.safeWidth
+    state.screenHeightPx = ScreenEz.safeHeight
+  }
+
 }
