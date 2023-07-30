@@ -32,14 +32,19 @@ import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.LocalServiceState
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.IntOffset
 import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.composables.Trash
+import kotlin.math.min
 
 @Composable
 fun StopwatchOverlay() {
   val serviceState = LocalServiceState.current
   val stopwatchState = serviceState.stopwatchState
   val overlayState = stopwatchState.overlayState
+  val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
 
   val modifier = Modifier
     .offset {
@@ -47,7 +52,11 @@ fun StopwatchOverlay() {
     }
   // .size(TIMER_SIZE_DP.dp) // if issues in cut off due to px to dp rounding issues
 
-  Box {
+  Box(Modifier.onGloballyPositioned {
+    val x = min(overlayState.timerOffset.x, serviceState.screenWidthPx - timerSizePx)
+    val y = min(overlayState.timerOffset.y, serviceState.screenHeightPx - timerSizePx)
+    overlayState.timerOffset = IntOffset(x, y)
+  }) {
     StopwatchBubble(modifier, stopwatchState)
   }
 

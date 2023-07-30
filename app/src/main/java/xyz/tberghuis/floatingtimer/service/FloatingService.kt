@@ -152,11 +152,22 @@ class FloatingService : Service() {
   override fun onConfigurationChanged(newConfig: Configuration) {
     super.onConfigurationChanged(newConfig)
 
+    var x = state.stopwatchState.overlayState.timerOffset.x
+    var y = state.stopwatchState.overlayState.timerOffset.y
+    logd("onConfigurationChanged $x $y")
+
+
     // doitwrong
     ScreenEz.refresh()
     updateScreenDimensions()
-    moveOffsetIntoView(state.countdownState.overlayState)
-    moveOffsetIntoView(state.stopwatchState.overlayState)
+//    moveOffsetIntoView(state.countdownState.overlayState)
+//    moveOffsetIntoView(state.stopwatchState.overlayState)
+
+
+    x = state.stopwatchState.overlayState.timerOffset.x
+    y = state.stopwatchState.overlayState.timerOffset.y
+    logd("onConfigurationChanged $x $y")
+
   }
 
   private fun updateScreenDimensions() {
