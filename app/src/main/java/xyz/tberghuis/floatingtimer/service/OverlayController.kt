@@ -155,7 +155,10 @@ class OverlayController(val service: FloatingService) {
 
   private fun initViewControllers() {
     OverlayViewController(
-      this::createCountdownClickTarget, countdownIsVisible.filterNotNull(), windowManager
+      this::createCountdownClickTarget,
+      countdownIsVisible.filterNotNull(),
+      windowManager,
+      service.scope
     )
     OverlayViewController(
       {
@@ -164,11 +167,14 @@ class OverlayController(val service: FloatingService) {
         }
       },
       service.state.countdownState.overlayState.isDragging,
-      windowManager
+      windowManager, service.scope
     )
 
     OverlayViewController(
-      this::createStopwatchClickTarget, stopwatchIsVisible.filterNotNull(), windowManager
+      this::createStopwatchClickTarget,
+      stopwatchIsVisible.filterNotNull(),
+      windowManager,
+      service.scope
     )
     OverlayViewController(
       {
@@ -177,7 +183,7 @@ class OverlayController(val service: FloatingService) {
         }
       },
       service.state.stopwatchState.overlayState.isDragging,
-      windowManager
+      windowManager, service.scope
     )
   }
 

@@ -6,17 +6,16 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
-import xyz.tberghuis.floatingtimer.logd
 
 class OverlayViewController(
   val createOverlayViewHolder: () -> OverlayViewHolder,
   val isVisible: Flow<Boolean?>,
-  val windowManager: WindowManager
+  val windowManager: WindowManager,
+  scope: CoroutineScope
 ) {
   // doitwrong
   init {
-    // todo get scope from service
-    CoroutineScope(Dispatchers.Main).launch {
+    scope.launch(Dispatchers.Main){
       watchIsVisible()
     }
   }

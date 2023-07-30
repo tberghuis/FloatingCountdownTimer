@@ -9,15 +9,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 class OverlayState {
   val isVisible = MutableStateFlow<Boolean?>(null)
   var timerOffset by mutableStateOf(IntOffset.Zero)
-
-  //  var showTrash by mutableStateOf(false)
   val isDragging = MutableStateFlow<Boolean?>(null)
-
   var isTimerHoverTrash = false
 
   fun reset() {
     timerOffset = IntOffset.Zero
-//    showTrash = false
     isDragging.value = null
     isTimerHoverTrash = false
   }
