@@ -115,9 +115,12 @@ class BillingClientWrapper(
 
   // todo return PurchaseHaloColourChangeResult
   // future.txt use arrow.kt Either
-  suspend fun purchaseHaloColourChange(activity: Activity): BillingResult {
+  suspend fun purchaseHaloColourChange(activity: Activity): BillingResult? {
     // do i need withContext(IO) ??? assume no
-    val productDetails = getHaloColourProductDetails()
+
+    // todo show error snackbar
+    val productDetails = getHaloColourProductDetails() ?: return null
+
     return suspendCoroutine { continuation ->
       // this is a hack, shouldn't be a problem if using fresh BillingClientWrapper
       // for each call to purchaseHaloColourChange()
@@ -135,7 +138,7 @@ class BillingClientWrapper(
   }
 
 
-  suspend fun getHaloColourProductDetails(): ProductDetails =
+  suspend fun getHaloColourProductDetails(): ProductDetails? =
     suspendCoroutine { continuation ->
       val productId = "halo_colour"
       val product = QueryProductDetailsParams.Product.newBuilder()
@@ -154,7 +157,7 @@ class BillingClientWrapper(
           val productDetails = productDetailsList.find {
             it.productId == "halo_colour"
           }
-          continuation.resume(productDetails!!)
+          continuation.resume(productDetails)
         }
       billingClient.queryProductDetailsAsync(params, productDetailsResponseListener)
     }

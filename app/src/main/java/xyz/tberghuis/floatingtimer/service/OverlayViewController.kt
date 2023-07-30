@@ -15,7 +15,7 @@ class OverlayViewController(
 ) {
   // doitwrong
   init {
-    scope.launch(Dispatchers.Main){
+    scope.launch(Dispatchers.Main) {
       watchIsVisible()
     }
   }
@@ -30,9 +30,9 @@ class OverlayViewController(
           windowManager.addView(viewHolder!!.view, viewHolder!!.params)
         }
         false, null -> {
-          viewHolder?.let {
-            windowManager.removeView(it.view)
-            it.view.disposeComposition()
+          viewHolder?.view?.let {
+            windowManager.removeView(it)
+            it.disposeComposition()
           }
         }
       }

@@ -43,7 +43,7 @@ class SettingsViewModel(private val application: Application) : AndroidViewModel
   fun updateHaloColorChangePriceText() {
     viewModelScope.launch {
       BillingClientWrapper.run(application) { client ->
-        val details = client.getHaloColourProductDetails().oneTimePurchaseOfferDetails
+        val details = client.getHaloColourProductDetails()?.oneTimePurchaseOfferDetails
         haloColorChangePriceText = details?.formattedPrice ?: ""
       }
     }
