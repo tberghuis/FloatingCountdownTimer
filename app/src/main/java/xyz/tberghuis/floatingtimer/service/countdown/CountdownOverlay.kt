@@ -1,6 +1,5 @@
 package xyz.tberghuis.floatingtimer.service.countdown
 
-import android.os.CountDownTimer
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,7 +8,6 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -18,15 +16,13 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
-import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.min
-import kotlin.math.roundToInt
-import kotlinx.coroutines.flow.collectLatest
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.composables.Trash
 import xyz.tberghuis.floatingtimer.service.ServiceState
 
+// this is only displayed in fullscreen overlay when isDragging=true
 @Composable
 fun CountdownOverlay(state: ServiceState) {
   val countdownState = state.countdownState
@@ -61,7 +57,6 @@ fun CountdownOverlay(state: ServiceState) {
 @Composable
 fun CountdownBubble(modifier: Modifier, countdownState: CountdownState) {
   val timeLeftFraction = countdownState.countdownSeconds / countdownState.durationSeconds.toFloat()
-
   Box(
     modifier = Modifier
       .then(modifier)

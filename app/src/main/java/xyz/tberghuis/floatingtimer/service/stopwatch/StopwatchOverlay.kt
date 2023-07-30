@@ -39,6 +39,7 @@ import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.composables.Trash
 import kotlin.math.min
 
+// this is only displayed in fullscreen overlay when isDragging=true
 @Composable
 fun StopwatchOverlay() {
   val serviceState = LocalServiceState.current
