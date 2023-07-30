@@ -82,7 +82,7 @@ class AlarmController(val service: FloatingService) {
     service.scope.launch {
       countdownState.timerState.collectLatest {
         when (it) {
-          is TimerStateFinished -> {
+          TimerStateFinished -> {
             logd("does the player start")
             pendingAlarm?.cancel()
             if (sound) {

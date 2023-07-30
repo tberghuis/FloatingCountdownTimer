@@ -5,14 +5,9 @@ import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.app.Service
-import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.IBinder
-import android.util.DisplayMetrics
-import android.view.WindowManager
-import androidx.compose.ui.unit.IntOffset
 import androidx.core.app.NotificationCompat
 import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.CoroutineScope
@@ -31,11 +26,8 @@ import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
-import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
-import kotlin.math.min
-
 
 class FloatingService : Service() {
   private val job = SupervisorJob()
@@ -67,7 +59,6 @@ class FloatingService : Service() {
       val command = intent.getStringExtra(INTENT_COMMAND)
       when (command) {
         INTENT_COMMAND_COUNTDOWN_CREATE -> {
-          // todo cancel pending alarm
           val duration = intent.getIntExtra(EXTRA_COUNTDOWN_DURATION, 10)
           state.countdownState.resetTimerState(duration)
           state.countdownState.overlayState.isVisible.value = true
@@ -151,7 +142,6 @@ class FloatingService : Service() {
   override fun onConfigurationChanged(newConfig: Configuration) {
     super.onConfigurationChanged(newConfig)
 
-    // doitwrong
     ScreenEz.refresh()
     updateScreenDimensions()
   }
