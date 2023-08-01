@@ -42,7 +42,6 @@ class FloatingService : Service() {
   override fun onCreate() {
     super.onCreate()
     ScreenEz.with(this.applicationContext)
-    updateScreenDimensions()
     overlayController = OverlayController(this)
     alarmController = AlarmController(this)
   }
@@ -141,14 +140,9 @@ class FloatingService : Service() {
 
   override fun onConfigurationChanged(newConfig: Configuration) {
     super.onConfigurationChanged(newConfig)
-
     ScreenEz.refresh()
-    updateScreenDimensions()
+
+    // todo move click target within screen bounds
   }
 
-  // todo refactor remove
-  private fun updateScreenDimensions() {
-    state.screenWidthPx = ScreenEz.safeWidth
-    state.screenHeightPx = ScreenEz.safeHeight
-  }
 }

@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.IntOffset
+import com.torrydo.screenez.ScreenEz
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -39,9 +40,9 @@ fun TmpClickTarget(
         val dragAmountIntOffset = IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
         val _timerOffset = overlayState.timerOffset + dragAmountIntOffset
         var x = max(_timerOffset.x, 0)
-        x = min(x, serviceState.screenWidthPx - TIMER_SIZE_PX)
+        x = min(x, ScreenEz.safeWidth - TIMER_SIZE_PX)
         var y = max(_timerOffset.y, 0)
-        y = min(y, serviceState.screenHeightPx - TIMER_SIZE_PX)
+        y = min(y, ScreenEz.safeHeight - TIMER_SIZE_PX)
         overlayState.timerOffset = IntOffset(x, y)
       }, onDragEnd = {
         logd("onDragEnd")

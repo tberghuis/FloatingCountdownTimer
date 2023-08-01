@@ -35,6 +35,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.IntOffset
+import com.torrydo.screenez.ScreenEz
 import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.composables.Trash
 import kotlin.math.min
@@ -54,8 +55,8 @@ fun TmpStopwatchOverlay() {
   // .size(TIMER_SIZE_DP.dp) // if issues in cut off due to px to dp rounding issues
 
   Box(Modifier.onGloballyPositioned {
-    val x = min(overlayState.timerOffset.x, serviceState.screenWidthPx - timerSizePx)
-    val y = min(overlayState.timerOffset.y, serviceState.screenHeightPx - timerSizePx)
+    val x = min(overlayState.timerOffset.x, ScreenEz.safeWidth - timerSizePx)
+    val y = min(overlayState.timerOffset.y, ScreenEz.safeHeight - timerSizePx)
     overlayState.timerOffset = IntOffset(x, y)
   }) {
     StopwatchBubble(modifier, stopwatchState)

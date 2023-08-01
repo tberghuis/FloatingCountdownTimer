@@ -13,6 +13,6 @@ class ServiceState(scope: CoroutineScope) {
 
 
   // todo refactor use ScreenEz.safeWidth
-  var screenWidthPx = Int.MAX_VALUE
-  var screenHeightPx = Int.MAX_VALUE
+//  var screenWidthPx = Int.MAX_VALUE
+//  var screenHeightPx = Int.MAX_VALUE
 }

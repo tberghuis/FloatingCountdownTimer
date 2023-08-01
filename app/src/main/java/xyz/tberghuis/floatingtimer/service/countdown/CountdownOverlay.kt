@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.torrydo.screenez.ScreenEz
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import kotlin.math.min
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
@@ -35,8 +36,8 @@ fun CountdownOverlay(state: ServiceState) {
   Box(Modifier.onGloballyPositioned {
     val density = context.resources.displayMetrics.density
     val timerSizePx = (TIMER_SIZE_DP * density).toInt()
-    val x = min(overlayState.timerOffset.x, state.screenWidthPx - timerSizePx)
-    val y = min(overlayState.timerOffset.y, state.screenHeightPx - timerSizePx)
+    val x = min(overlayState.timerOffset.x, ScreenEz.safeWidth - timerSizePx)
+    val y = min(overlayState.timerOffset.y, ScreenEz.safeHeight - timerSizePx)
     overlayState.timerOffset = IntOffset(x, y)
   }) {
     val modifier = Modifier.offset {
