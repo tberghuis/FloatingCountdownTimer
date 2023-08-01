@@ -33,8 +33,6 @@ import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 import kotlin.math.max
 import kotlin.math.min
 
-val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }
-
 class OverlayController(val service: FloatingService) {
   private val countdownState = service.state.countdownState
   private val countdownIsVisible: Flow<Boolean?>
@@ -69,10 +67,8 @@ class OverlayController(val service: FloatingService) {
 
       val haloColour =
         providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
-      CompositionLocalProvider(LocalServiceState provides service.state) {
-        CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-          overlayContent()
-        }
+      CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
+        overlayContent()
       }
     }
 
@@ -94,11 +90,10 @@ class OverlayController(val service: FloatingService) {
     countdownClickTarget.view.setContent {
       val haloColour =
         providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
-      CompositionLocalProvider(LocalServiceState provides service.state) {
-        CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-          CountdownBubble(Modifier, countdownState)
-        }
+      CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
+        CountdownBubble(Modifier, countdownState)
       }
+
     }
     return countdownClickTarget
   }
@@ -156,10 +151,8 @@ class OverlayController(val service: FloatingService) {
     stopwatchClickTarget.view.setContent {
       val haloColour =
         providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
-      CompositionLocalProvider(LocalServiceState provides service.state) {
-        CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-          StopwatchBubble(Modifier, stopwatchState)
-        }
+      CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
+        StopwatchBubble(Modifier, stopwatchState)
       }
 
       LaunchedEffect(Unit) {
