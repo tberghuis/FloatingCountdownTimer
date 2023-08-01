@@ -156,18 +156,17 @@ class OverlayController(val service: FloatingService) {
       }
     }
 
-    clickTargetSetupDragging(stopwatchClickTarget, service.state.stopwatchState.overlayState)
+    clickTargetSetOnTouchListener(stopwatchClickTarget, service.state.stopwatchState.overlayState)
     return stopwatchClickTarget
   }
 
   @SuppressLint("ClickableViewAccessibility")
-  private fun clickTargetSetupDragging(viewHolder: OverlayViewHolder, overlayState: OverlayState) {
+  private fun clickTargetSetOnTouchListener(viewHolder: OverlayViewHolder, overlayState: OverlayState) {
 
     var paramStartDragX: Int = 0
     var paramStartDragY: Int = 0
     var startDragRawX: Float = 0F
     var startDragRawY: Float = 0F
-
 
     val tapDetector = GestureDetector(service, object : SimpleOnGestureListener() {
       override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
@@ -214,10 +213,6 @@ class OverlayController(val service: FloatingService) {
       false
     }
   }
-
-  private fun clickTargetSetupTap(viewHolder: OverlayViewHolder, overlayState: OverlayState) {
-  }
-
 
   fun updateClickTargetParamsWithinScreenBounds(
     viewHolder: OverlayViewHolder,
