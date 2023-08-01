@@ -25,21 +25,17 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
+import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.OverlayState
 
 @Composable
 fun Trash(overlayState: OverlayState) {
-  val context = LocalContext.current
-  val timerSizePx = remember {
-    val density = context.resources.displayMetrics.density
-    TIMER_SIZE_DP * density
-  }
   var trashRect by remember { mutableStateOf(Rect.Zero) }
   val isTimerDragHoveringTrash = remember {
     derivedStateOf {
-      calcTimerIsHoverTrash(overlayState, timerSizePx, trashRect)
+      calcTimerIsHoverTrash(overlayState, trashRect)
     }
   }
   val iconTint by remember {
@@ -81,11 +77,11 @@ fun Trash(overlayState: OverlayState) {
 
 fun calcTimerIsHoverTrash(
   overlayState: OverlayState,
-  timerSizePx: Float,
   trashRect: Rect
 ): Boolean {
-  val timerCenterX = overlayState.timerOffset.x + (timerSizePx / 2)
-  val timerCenterY = overlayState.timerOffset.y + (timerSizePx / 2)
+  val halfTimerSize = TIMER_SIZE_PX.toFloat() / 2f
+  val timerCenterX = overlayState.timerOffset.x + halfTimerSize
+  val timerCenterY = overlayState.timerOffset.y + halfTimerSize
   if (
     timerCenterX < trashRect.left ||
     timerCenterX > trashRect.right ||
