@@ -23,8 +23,8 @@ class DoubleTapActivity : ComponentActivity() {
             .fillMaxSize()
             .background(Color.White),
         ) {
-//          MaccasScreen()
-          DDScreen()
+          MaccasScreen()
+//          DDScreen()
         }
       }
     }
