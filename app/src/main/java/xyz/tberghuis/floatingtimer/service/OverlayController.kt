@@ -44,9 +44,6 @@ class OverlayController(val service: FloatingService) {
   private val stopwatchIsVisible: Flow<Boolean?>
     get() = stopwatchState.overlayState.isVisible
 
-  private val density = service.resources.displayMetrics.density
-
-  //  val timerSizePx = (TIMER_SIZE_DP * density).toInt()
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
   init {
@@ -67,6 +64,9 @@ class OverlayController(val service: FloatingService) {
     )
 
     fullscreenOverlay.view.setContent {
+
+      // todo remove CompositionLocalProvider's
+
       val haloColour =
         providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
       CompositionLocalProvider(LocalServiceState provides service.state) {
@@ -185,7 +185,7 @@ class OverlayController(val service: FloatingService) {
       }
     })
 
-    viewHolder.view.setOnTouchListener { v, event ->
+    viewHolder.view.setOnTouchListener { _, event ->
       if (tapDetector.onTouchEvent(event)) {
         // just to be safe
         overlayState.isDragging.value = false
