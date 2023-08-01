@@ -135,15 +135,10 @@ class OverlayController(val service: FloatingService) {
         providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
       CompositionLocalProvider(LocalServiceState provides service.state) {
         CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-          TmpClickTarget(
-            service.state,
-            this,
-            stopwatchState.overlayState,
-            stopwatchClickTarget,
+          ClickTarget(
             bubbleContent = {
               StopwatchBubble(Modifier, stopwatchState)
             },
-            this::exitStopwatch,
             stopwatchState::resetStopwatchState
           ) {
             onClickStopwatchClickTarget(stopwatchState)
