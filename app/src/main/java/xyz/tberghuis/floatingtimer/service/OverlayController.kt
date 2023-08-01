@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import com.torrydo.screenez.ScreenEz
@@ -94,6 +93,7 @@ class OverlayController(val service: FloatingService) {
         CountdownBubble(Modifier, countdownState)
       }
 
+
     }
     return countdownClickTarget
   }
@@ -136,8 +136,11 @@ class OverlayController(val service: FloatingService) {
   }
 
 
-  private fun createStopwatchClickTarget(): OverlayViewHolder {
-    val stopwatchClickTarget = OverlayViewHolder(
+  private fun createTimerBubble(
+    overlayState: OverlayState,
+    bubble: @Composable () -> Unit
+  ): OverlayViewHolder {
+    val viewHolder = OverlayViewHolder(
       WindowManager.LayoutParams(
         TIMER_SIZE_PX,
         TIMER_SIZE_PX,
@@ -148,26 +151,28 @@ class OverlayController(val service: FloatingService) {
         PixelFormat.TRANSLUCENT
       ), service
     )
-    stopwatchClickTarget.view.setContent {
+    viewHolder.view.setContent {
       val haloColour =
         providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
       CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-        StopwatchBubble(Modifier, stopwatchState)
+        bubble()
       }
-
       LaunchedEffect(Unit) {
         service.state.configurationChanged.collect {
           updateClickTargetParamsWithinScreenBounds(
-            stopwatchClickTarget,
-            stopwatchState.overlayState
+            viewHolder,
+            overlayState
           )
         }
       }
-
     }
+    clickTargetSetOnTouchListener(viewHolder, service.state.stopwatchState.overlayState)
+    return viewHolder
+  }
 
-    clickTargetSetOnTouchListener(stopwatchClickTarget, service.state.stopwatchState.overlayState)
-    return stopwatchClickTarget
+  private fun createStopwatchClickTarget(): OverlayViewHolder {
+    val bubble: @Composable () -> Unit = { StopwatchBubble(Modifier, stopwatchState) }
+    return createTimerBubble(stopwatchState.overlayState, bubble)
   }
 
   @SuppressLint("ClickableViewAccessibility")
