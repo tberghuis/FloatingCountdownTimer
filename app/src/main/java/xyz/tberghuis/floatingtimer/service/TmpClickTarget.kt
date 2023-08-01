@@ -15,10 +15,9 @@ import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.logd
 
-
-
+// doitwrong
 @Composable
-fun ClickTarget(
+fun TmpClickTarget(
   serviceState: ServiceState,
   controller: OverlayController,
   overlayState: OverlayState,
@@ -75,7 +74,3 @@ fun ClickTarget(
     }
   }
 }
-
-
-
-
