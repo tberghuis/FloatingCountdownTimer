@@ -17,56 +17,56 @@ import xyz.tberghuis.floatingtimer.logd
 import kotlin.math.max
 import kotlin.math.roundToInt
 
-@Composable
-fun MaccasBubble() {
-  val controller = LocalMaccasOverlayController.current
-  val isDragging = controller.bubbleState.isDragging.collectAsState()
-
-  Box(modifier = Modifier
-    .pointerInput(Unit) {
-      detectDragGestures(onDragStart = {
-        logd("clicktarget onDragStart")
-      }, onDrag = { change, dragAmount ->
-        controller.bubbleState.isDragging.value = true
-        change.consume()
-        val dragAmountIntOffset = IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
-        val _timerOffset = controller.bubbleState.offset + dragAmountIntOffset
-        var x = max(_timerOffset.x, 0)
-        var y = max(_timerOffset.y, 0)
-        controller.bubbleState.offset = IntOffset(x, y)
-      }, onDragEnd = {
-        logd("onDragEnd")
-
-        controller.bubbleParams.x = controller.bubbleState.offset.x
-        controller.bubbleParams.y = controller.bubbleState.offset.y
-        controller.windowManager.updateViewLayout(controller.bubbleView, controller.bubbleParams)
-        controller.bubbleState.isDragging.value = false
-      })
-    }
-  ) {
-    if (isDragging.value != true) {
-      // pass this in
-      val modifier = Modifier.fillMaxSize()
-      MaccasOverlayContent(modifier) {
-        MaccasPassInComposable()
-      }
-    }
-  }
-}
-
-@Composable
-fun MaccasOverlayContent(modifier: Modifier, content: @Composable () -> Unit) {
-  Box(
-    modifier = Modifier
-      .then(modifier)
-      .background(Color.Gray)
-  ) {
-//    Text("0:00")
-    content()
-  }
-}
-
-@Composable
-fun MaccasPassInComposable() {
-  Text("0:00")
-}
+//@Composable
+//fun MaccasBubble() {
+//  val controller = LocalMaccasOverlayController.current
+//  val isDragging = controller.bubbleState.isDragging.collectAsState()
+//
+//  Box(modifier = Modifier
+//    .pointerInput(Unit) {
+//      detectDragGestures(onDragStart = {
+//        logd("clicktarget onDragStart")
+//      }, onDrag = { change, dragAmount ->
+//        controller.bubbleState.isDragging.value = true
+//        change.consume()
+//        val dragAmountIntOffset = IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
+//        val _timerOffset = controller.bubbleState.offset + dragAmountIntOffset
+//        var x = max(_timerOffset.x, 0)
+//        var y = max(_timerOffset.y, 0)
+//        controller.bubbleState.offset = IntOffset(x, y)
+//      }, onDragEnd = {
+//        logd("onDragEnd")
+//
+//        controller.bubbleParams.x = controller.bubbleState.offset.x
+//        controller.bubbleParams.y = controller.bubbleState.offset.y
+//        controller.windowManager.updateViewLayout(controller.bubbleView, controller.bubbleParams)
+//        controller.bubbleState.isDragging.value = false
+//      })
+//    }
+//  ) {
+//    if (isDragging.value != true) {
+//      // pass this in
+//      val modifier = Modifier.fillMaxSize()
+//      MaccasOverlayContent(modifier) {
+//        MaccasPassInComposable()
+//      }
+//    }
+//  }
+//}
+//
+//@Composable
+//fun MaccasOverlayContent(modifier: Modifier, content: @Composable () -> Unit) {
+//  Box(
+//    modifier = Modifier
+//      .then(modifier)
+//      .background(Color.Gray)
+//  ) {
+////    Text("0:00")
+//    content()
+//  }
+//}
+//
+//@Composable
+//fun MaccasPassInComposable() {
+//  Text("0:00")
+//}

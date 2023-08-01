@@ -8,7 +8,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class MaccasBubbleState {
 
-  var offset by mutableStateOf(IntOffset.Zero)
+//  var offset by mutableStateOf(IntOffset.Zero)
+  var offsetPx by mutableStateOf(IntOffset.Zero)
 
 //    var isDragging by mutableStateOf(false)
 

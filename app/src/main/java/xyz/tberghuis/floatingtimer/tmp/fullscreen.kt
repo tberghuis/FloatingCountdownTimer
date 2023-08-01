@@ -39,6 +39,7 @@ fun MaccasFullscreen() {
       verticalArrangement = Arrangement.Bottom,
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
+      Text("offset ${controller.bubbleState.offsetPx}")
       DDTrash()
     }
   }
@@ -51,13 +52,13 @@ fun DDTrash() {
   val context = LocalContext.current
   val timerSizePx = remember {
     val density = context.resources.displayMetrics.density
-    TIMER_SIZE_DP * density
+    MC.OVERLAY_SIZE_DP * density
   }
   var trashRect by remember { mutableStateOf(Rect.Zero) }
 
   val isTimerDragHoveringTrash = remember {
     derivedStateOf {
-      calcBubbleIsHoverTrash(controller.bubbleState.offset, timerSizePx, trashRect)
+      calcBubbleIsHoverTrash(controller.bubbleState.offsetPx, timerSizePx, trashRect)
     }
   }
 

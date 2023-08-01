@@ -120,10 +120,12 @@ class MaccasOverlayController(val service: MaccasService) {
 
           windowManager.updateViewLayout(bubbleView, bubbleParams)
 
-          val density = Resources.getSystem().displayMetrics.density
-          val offsetX = (bubbleParams.x / density).toInt()
-          val offsetY = (bubbleParams.y / density).toInt()
-          bubbleState.offset = IntOffset(offsetX, offsetY)
+//          val density = Resources.getSystem().displayMetrics.density
+//          val offsetX = (bubbleParams.x / density).toInt()
+//          val offsetY = (bubbleParams.y / density).toInt()
+//          bubbleState.offset = IntOffset(offsetX, offsetY)
+
+          bubbleState.offsetPx = IntOffset(bubbleParams.x, bubbleParams.y)
         }
 
         MotionEvent.ACTION_UP -> {
