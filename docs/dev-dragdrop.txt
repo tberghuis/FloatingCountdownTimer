@@ -1,6 +1,4 @@
 
-remove tmp activity service manifest.xml
-
 *final steps
 test oldest and newest api levels
 version

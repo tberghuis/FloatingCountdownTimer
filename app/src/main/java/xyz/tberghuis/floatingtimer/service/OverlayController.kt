@@ -219,6 +219,7 @@ class OverlayController(val service: FloatingService) {
         MotionEvent.ACTION_UP -> {
           overlayState.isDragging.value = false
           if (overlayState.isTimerHoverTrash) {
+            overlayState.isTimerHoverTrash = false
             exitStopwatch()
           }
         }
