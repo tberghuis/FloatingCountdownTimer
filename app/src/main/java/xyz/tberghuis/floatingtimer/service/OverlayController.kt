@@ -31,8 +31,8 @@ import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchBubble
-import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchOverlay
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
+import xyz.tberghuis.floatingtimer.service.stopwatch.TmpStopwatchOverlay
 import kotlin.math.max
 import kotlin.math.min
 
@@ -255,7 +255,7 @@ class OverlayController(val service: FloatingService) {
     OverlayViewController(
       {
         createFullscreenOverlay {
-          StopwatchOverlay()
+          TmpStopwatchOverlay()
         }
       },
       service.state.stopwatchState.overlayState.isDragging,

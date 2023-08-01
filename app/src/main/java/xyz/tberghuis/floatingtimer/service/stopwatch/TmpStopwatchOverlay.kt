@@ -41,7 +41,7 @@ import kotlin.math.min
 
 // this is only displayed in fullscreen overlay when isDragging=true
 @Composable
-fun StopwatchOverlay() {
+fun TmpStopwatchOverlay() {
   val serviceState = LocalServiceState.current
   val stopwatchState = serviceState.stopwatchState
   val overlayState = stopwatchState.overlayState
