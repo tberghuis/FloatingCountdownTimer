@@ -30,6 +30,7 @@ import xyz.tberghuis.floatingtimer.service.countdown.CountdownOverlay
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
+import xyz.tberghuis.floatingtimer.service.stopwatch.IsDraggingOverlay
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchBubble
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 import xyz.tberghuis.floatingtimer.service.stopwatch.TmpStopwatchOverlay
@@ -255,7 +256,7 @@ class OverlayController(val service: FloatingService) {
     OverlayViewController(
       {
         createFullscreenOverlay {
-          TmpStopwatchOverlay()
+          IsDraggingOverlay()
         }
       },
       service.state.stopwatchState.overlayState.isDragging,
