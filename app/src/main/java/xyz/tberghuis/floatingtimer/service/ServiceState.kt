@@ -10,6 +10,9 @@ class ServiceState(scope: CoroutineScope) {
 
   // these could be moved back into OverlayController
   // meh
+
+
+  // todo refactor use ScreenEz.safeWidth
   var screenWidthPx = Int.MAX_VALUE
   var screenHeightPx = Int.MAX_VALUE
 }

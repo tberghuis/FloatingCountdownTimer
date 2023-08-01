@@ -31,9 +31,11 @@ class MaccasService : Service() {
 
     logd("MaccasService oncreate")
     ScreenEz.with(this.applicationContext)
-// TODO     updateScreenDimensions()
+
 
     maccasOverlayController = MaccasOverlayController(this)
+
+
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

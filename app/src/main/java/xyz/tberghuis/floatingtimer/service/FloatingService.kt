@@ -146,6 +146,7 @@ class FloatingService : Service() {
     updateScreenDimensions()
   }
 
+  // todo refactor remove
   private fun updateScreenDimensions() {
     state.screenWidthPx = ScreenEz.safeWidth
     state.screenHeightPx = ScreenEz.safeHeight
