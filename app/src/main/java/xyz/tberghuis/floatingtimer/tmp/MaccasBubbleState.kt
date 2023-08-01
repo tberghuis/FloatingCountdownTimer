@@ -7,14 +7,6 @@ import androidx.compose.ui.unit.IntOffset
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class MaccasBubbleState {
-
-//  var offset by mutableStateOf(IntOffset.Zero)
   var offsetPx by mutableStateOf(IntOffset.Zero)
-
-//    var isDragging by mutableStateOf(false)
-
-
   val isDragging = MutableStateFlow<Boolean?>(null)
-
-
 }
