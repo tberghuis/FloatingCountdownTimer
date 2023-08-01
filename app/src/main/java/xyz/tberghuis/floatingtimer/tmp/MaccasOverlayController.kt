@@ -97,8 +97,8 @@ class MaccasOverlayController(val service: MaccasService) {
     var startDragRawX: Float = 0F
     var startDragRawY: Float = 0F
 
-    val screenWidthPx = ScreenEz.safeWidth
-    val screenHeightPx = ScreenEz.safeHeight
+//    val screenWidthPx = ScreenEz.safeWidth
+//    val screenHeightPx = ScreenEz.safeHeight
     val bubbleSizePx = service.resources.displayMetrics.density * MC.OVERLAY_SIZE_DP
 
     bubbleView.setOnTouchListener { v, event ->
@@ -119,14 +119,16 @@ class MaccasOverlayController(val service: MaccasService) {
           var x = (paramStartDragX + (event.rawX - startDragRawX))
           var y = (paramStartDragY + (event.rawY - startDragRawY))
 
-          x = max(x, 0f)
-          x = min(x, screenWidthPx - bubbleSizePx)
-
-          y = max(y, 0f)
-          y = min(y, screenHeightPx - bubbleSizePx)
+//          x = max(x, 0f)
+//          x = min(x, screenWidthPx - bubbleSizePx)
+//
+//          y = max(y, 0f)
+//          y = min(y, screenHeightPx - bubbleSizePx)
 
           bubbleParams.x = x.toInt()
           bubbleParams.y = y.toInt()
+
+          updateBubbleParamsWithinScreenBounds(bubbleParams)
 
           windowManager.updateViewLayout(bubbleView, bubbleParams)
 
