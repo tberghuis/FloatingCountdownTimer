@@ -15,3 +15,9 @@ version
 build
 release
 merge
+
+
+########################
+do an xml drag and drop tutorial,
+programmatically
+
