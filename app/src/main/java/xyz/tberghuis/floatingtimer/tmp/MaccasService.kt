@@ -74,28 +74,6 @@ class MaccasService : Service() {
   override fun onConfigurationChanged(newConfig: Configuration) {
     super.onConfigurationChanged(newConfig)
     ScreenEz.refresh()
-    updateBubbleOffset()
+    maccasOverlayController.updateBubbleParamsWithinScreenBounds()
   }
-
-  private fun updateBubbleOffset() {
-    // doitwrong
-    val params = maccasOverlayController.bubbleParams
-    updateBubbleParamsWithinScreenBounds(params)
-    maccasOverlayController.bubbleState.offsetPx = IntOffset(params.x, params.y)
-    // don't need to bother with windowmanager.updateview ???
-  }
-
-}
-
-fun updateBubbleParamsWithinScreenBounds(params: WindowManager.LayoutParams) {
-  var x = params.x.toFloat()
-  var y = params.y.toFloat()
-  x = max(x, 0f)
-  x = min(x, ScreenEz.safeWidth - MC.OVERLAY_SIZE_PX)
-
-  y = max(y, 0f)
-  y = min(y, ScreenEz.safeHeight - MC.OVERLAY_SIZE_PX)
-
-  params.x = x.toInt()
-  params.y = y.toInt()
 }

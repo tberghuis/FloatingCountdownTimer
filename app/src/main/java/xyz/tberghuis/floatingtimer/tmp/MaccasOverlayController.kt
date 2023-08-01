@@ -116,28 +116,10 @@ class MaccasOverlayController(val service: MaccasService) {
         MotionEvent.ACTION_MOVE -> {
           bubbleState.isDragging.value = true
 
-          var x = (paramStartDragX + (event.rawX - startDragRawX))
-          var y = (paramStartDragY + (event.rawY - startDragRawY))
+          bubbleParams.x = (paramStartDragX + (event.rawX - startDragRawX)).toInt()
+          bubbleParams.y = (paramStartDragY + (event.rawY - startDragRawY)).toInt()
 
-//          x = max(x, 0f)
-//          x = min(x, screenWidthPx - bubbleSizePx)
-//
-//          y = max(y, 0f)
-//          y = min(y, screenHeightPx - bubbleSizePx)
-
-          bubbleParams.x = x.toInt()
-          bubbleParams.y = y.toInt()
-
-          updateBubbleParamsWithinScreenBounds(bubbleParams)
-
-          windowManager.updateViewLayout(bubbleView, bubbleParams)
-
-//          val density = Resources.getSystem().displayMetrics.density
-//          val offsetX = (bubbleParams.x / density).toInt()
-//          val offsetY = (bubbleParams.y / density).toInt()
-//          bubbleState.offset = IntOffset(offsetX, offsetY)
-
-          bubbleState.offsetPx = IntOffset(bubbleParams.x, bubbleParams.y)
+          updateBubbleParamsWithinScreenBounds()
         }
 
         MotionEvent.ACTION_UP -> {
@@ -159,6 +141,24 @@ class MaccasOverlayController(val service: MaccasService) {
     }
     return view
   }
+
+  // refactor for countdown or stopwatch
+  fun updateBubbleParamsWithinScreenBounds() {
+    var x = bubbleParams.x.toFloat()
+    var y = bubbleParams.y.toFloat()
+    x = max(x, 0f)
+    x = min(x, ScreenEz.safeWidth - MC.OVERLAY_SIZE_PX)
+
+    y = max(y, 0f)
+    y = min(y, ScreenEz.safeHeight - MC.OVERLAY_SIZE_PX)
+
+    bubbleParams.x = x.toInt()
+    bubbleParams.y = y.toInt()
+
+    windowManager.updateViewLayout(bubbleView, bubbleParams)
+    bubbleState.offsetPx = IntOffset(bubbleParams.x, bubbleParams.y)
+  }
+
 }
 
 ///////////////////////////////////////////
