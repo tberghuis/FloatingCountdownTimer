@@ -30,3 +30,12 @@ trash derivedstateof, isdragging & calcBubbleHoverTrash
 get demo working in tmp
 clean code to mvp
 draw trash square in fullscreen
+
+###################3
+aint nothing to it but to do it
+
+refactor small as i go
+replace screenWidthPx with ScreenEz.safeWidth
+
+trash on TOUCH_UP snapshotflow ....
+
