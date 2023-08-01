@@ -1,11 +1,3 @@
-cull docs/*.txt
-
-drag drop plain compose
-try flag watch outside
-plain xml
-reference floating bubble view library
-
-...
 
 remove tmp activity service manifest.xml
 
