@@ -14,22 +14,24 @@ fun ClickTarget(
   onTap: () -> Unit
 ) {
 
-  Box(modifier = Modifier
-    .pointerInput(Unit) {
-      detectTapGestures(
-        onDoubleTap = {
-          logd("onDoubleTap")
-          onDoubleTap()
-        },
-        onTap = {
-          logd("onTap")
-          onTap()
-        }
-      )
-    }
-  ) {
-    bubbleContent()
-  }
+  bubbleContent()
+
+//  Box(modifier = Modifier
+//    .pointerInput(Unit) {
+//      detectTapGestures(
+//        onDoubleTap = {
+//          logd("onDoubleTap")
+//          onDoubleTap()
+//        },
+//        onTap = {
+//          logd("onTap")
+//          onTap()
+//        }
+//      )
+//    }
+//  ) {
+//    bubbleContent()
+//  }
 }
 
 
