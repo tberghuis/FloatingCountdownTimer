@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.tmp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
@@ -17,11 +18,19 @@ fun MaccasFullscreen() {
   Box(
     modifier = Modifier
   ) {
-    val modifier = Modifier
-      .offset {
-        controller.bubbleState.offset
-      }
-      .size(MC.OVERLAY_SIZE_DP.dp)
-    MaccasOverlayContent(modifier, { MaccasPassInComposable() })
+    Column {
+      DDTrash()
+    }
+  }
+}
+
+@Composable
+fun DDTrash() {
+  Box(
+    modifier = Modifier
+      .size(100.dp)
+      .background(Color.Green)
+  ) {
+
   }
 }

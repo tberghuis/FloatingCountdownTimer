@@ -104,12 +104,10 @@ class MaccasOverlayController(val service: MaccasService) {
           startDragRawY = event.rawY
 
 
-
         }
 
         MotionEvent.ACTION_MOVE -> {
-          // todo state.isDragging = true
-
+          bubbleState.isDragging.value = true
 
           bubbleParams.x = (paramStartDragX + (event.rawX - startDragRawX)).toInt()
           bubbleParams.y = (paramStartDragY + (event.rawY - startDragRawY)).toInt()
@@ -123,7 +121,7 @@ class MaccasOverlayController(val service: MaccasService) {
         }
 
         MotionEvent.ACTION_UP -> {
-          // todo state.isDragging = false
+          bubbleState.isDragging.value = false
         }
 
       }
