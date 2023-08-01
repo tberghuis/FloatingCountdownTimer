@@ -18,6 +18,15 @@ merge
 
 
 ########################
-do an xml drag and drop tutorial,
-programmatically
 
+service onconfigurationchanged
+  update offset
+    params
+    windowmanager.updateview
+
+trash derivedstateof, isdragging & calcBubbleHoverTrash
+
+
+get demo working in tmp
+clean code to mvp
+draw trash square in fullscreen
