@@ -37,6 +37,8 @@ aint nothing to it but to do it
 refactor small as i go
 replace screenWidthPx with ScreenEz.safeWidth
 
-trash on TOUCH_UP snapshotflow ....
 
 stopwatch first
+
+trash on action_UP
+
