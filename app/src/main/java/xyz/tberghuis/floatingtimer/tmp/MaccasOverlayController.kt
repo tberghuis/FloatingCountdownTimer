@@ -1,21 +1,16 @@
 package xyz.tberghuis.floatingtimer.tmp
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.PixelFormat
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.WindowManager
-import androidx.compose.foundation.layout.Box
-import androidx.compose.material3.Text
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.IntOffset
 import com.torrydo.screenez.ScreenEz
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
@@ -39,7 +34,6 @@ class MaccasOverlayController(val service: MaccasService) {
   val fullscreenParams: WindowManager.LayoutParams
   var fullscreenView: ComposeView? = null
 
-
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
 
@@ -53,13 +47,9 @@ class MaccasOverlayController(val service: MaccasService) {
 
     fullscreenParams = initFullscreenLayoutParams()
 
-
     windowManager.addView(bubbleView, bubbleParams)
-//    windowManager.addView(fullscreenView, fullscreenParams)
-
 
     watchIsBubbleDragging()
-
   }
 
   private fun watchIsBubbleDragging() {
@@ -97,13 +87,7 @@ class MaccasOverlayController(val service: MaccasService) {
     var startDragRawX: Float = 0F
     var startDragRawY: Float = 0F
 
-//    val screenWidthPx = ScreenEz.safeWidth
-//    val screenHeightPx = ScreenEz.safeHeight
-    val bubbleSizePx = service.resources.displayMetrics.density * MC.OVERLAY_SIZE_DP
-
     bubbleView.setOnTouchListener { v, event ->
-//      logd("setOnTouchListener $event")
-//      logd("setOnTouchListener view $v")
 
       when (event.action) {
         MotionEvent.ACTION_DOWN -> {
@@ -191,10 +175,3 @@ private fun initFullscreenLayoutParams(): WindowManager.LayoutParams {
   params.gravity = Gravity.TOP or Gravity.LEFT
   return params
 }
-
-
-
-
-
-
-
