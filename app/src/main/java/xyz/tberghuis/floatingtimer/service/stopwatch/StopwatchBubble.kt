@@ -97,7 +97,6 @@ fun BorderArc(stopwatchState: StopwatchState) {
   }
 
   // should learn to write my own delegate for angle instead
-  // this is broken when dragging. meh
   LaunchedEffect(Unit) {
     stopwatchState.isRunningStateFlow.collect {
       when (it) {
