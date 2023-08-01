@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.overlayViewFactory
+import xyz.tberghuis.floatingtimer.tmp.dragdrop.DDBubble
 
 val LocalMaccasOverlayController = compositionLocalOf<MaccasOverlayController> {
   error("CompositionLocal LocalMaccasOverlayController not present")
@@ -75,9 +76,12 @@ class MaccasOverlayController(val service: MaccasService) {
   private fun setContentBubbleView() {
     bubbleView.setContent {
       CompositionLocalProvider(LocalMaccasOverlayController provides this) {
-        MaccasBubble()
+        DDBubble()
       }
     }
+
+//    bubbleView.setOnTouchListener { v, event ->  }()
+
   }
 
   private fun createFullscreenView(): ComposeView {
