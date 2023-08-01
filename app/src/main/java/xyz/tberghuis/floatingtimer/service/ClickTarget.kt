@@ -9,29 +9,9 @@ import xyz.tberghuis.floatingtimer.logd
 
 @Composable
 fun ClickTarget(
-  bubbleContent: @Composable () -> Unit,
-  onDoubleTap: () -> Unit,
-  onTap: () -> Unit
+  bubbleContent: @Composable () -> Unit
 ) {
-
   bubbleContent()
-
-//  Box(modifier = Modifier
-//    .pointerInput(Unit) {
-//      detectTapGestures(
-//        onDoubleTap = {
-//          logd("onDoubleTap")
-//          onDoubleTap()
-//        },
-//        onTap = {
-//          logd("onTap")
-//          onTap()
-//        }
-//      )
-//    }
-//  ) {
-//    bubbleContent()
-//  }
 }
 
 

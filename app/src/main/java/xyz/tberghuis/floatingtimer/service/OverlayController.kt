@@ -144,14 +144,7 @@ class OverlayController(val service: FloatingService) {
         providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
       CompositionLocalProvider(LocalServiceState provides service.state) {
         CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-          ClickTarget(
-            bubbleContent = {
-              StopwatchBubble(Modifier, stopwatchState)
-            },
-            stopwatchState::resetStopwatchState
-          ) {
-            onClickStopwatchClickTarget(stopwatchState)
-          }
+          StopwatchBubble(Modifier, stopwatchState)
         }
       }
     }
@@ -161,7 +154,10 @@ class OverlayController(val service: FloatingService) {
   }
 
   @SuppressLint("ClickableViewAccessibility")
-  private fun clickTargetSetOnTouchListener(viewHolder: OverlayViewHolder, overlayState: OverlayState) {
+  private fun clickTargetSetOnTouchListener(
+    viewHolder: OverlayViewHolder,
+    overlayState: OverlayState
+  ) {
 
     var paramStartDragX: Int = 0
     var paramStartDragY: Int = 0
@@ -171,17 +167,19 @@ class OverlayController(val service: FloatingService) {
     val tapDetector = GestureDetector(service, object : SimpleOnGestureListener() {
       override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
         logd("onSingleTapConfirmed")
+        onClickStopwatchClickTarget(stopwatchState)
         return true
       }
 
       override fun onDoubleTap(e: MotionEvent): Boolean {
         logd("onDoubleTap")
+        stopwatchState.resetStopwatchState()
         return true
       }
     })
 
     viewHolder.view.setOnTouchListener { v, event ->
-      if(tapDetector.onTouchEvent(event)){
+      if (tapDetector.onTouchEvent(event)) {
         // just to be safe
         overlayState.isDragging.value = false
         return@setOnTouchListener true
