@@ -13,6 +13,7 @@ import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.EXTRA_COUNTDOWN_DURATION
 import xyz.tberghuis.floatingtimer.FOREGROUND_SERVICE_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
@@ -141,8 +142,9 @@ class FloatingService : Service() {
   override fun onConfigurationChanged(newConfig: Configuration) {
     super.onConfigurationChanged(newConfig)
     ScreenEz.refresh()
-
-    // todo move click target within screen bounds
+    scope.launch {
+      state.configurationChanged.emit(Unit)
+    }
   }
 
 }

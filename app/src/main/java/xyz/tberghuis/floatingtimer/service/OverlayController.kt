@@ -10,6 +10,7 @@ import android.view.WindowManager
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
@@ -148,6 +149,16 @@ class OverlayController(val service: FloatingService) {
           StopwatchBubble(Modifier, stopwatchState)
         }
       }
+
+      LaunchedEffect(Unit) {
+        service.state.configurationChanged.collect {
+          updateClickTargetParamsWithinScreenBounds(
+            stopwatchClickTarget,
+            stopwatchState.overlayState
+          )
+        }
+      }
+
     }
 
     clickTargetSetOnTouchListener(stopwatchClickTarget, service.state.stopwatchState.overlayState)
@@ -207,7 +218,7 @@ class OverlayController(val service: FloatingService) {
 
         MotionEvent.ACTION_UP -> {
           overlayState.isDragging.value = false
-          if(overlayState.isTimerHoverTrash){
+          if (overlayState.isTimerHoverTrash) {
             exitStopwatch()
           }
         }
@@ -216,7 +227,7 @@ class OverlayController(val service: FloatingService) {
     }
   }
 
-  fun updateClickTargetParamsWithinScreenBounds(
+  private fun updateClickTargetParamsWithinScreenBounds(
     viewHolder: OverlayViewHolder,
     overlayState: OverlayState
   ) {
