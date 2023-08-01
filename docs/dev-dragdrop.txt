@@ -39,3 +39,4 @@ replace screenWidthPx with ScreenEz.safeWidth
 
 trash on TOUCH_UP snapshotflow ....
 
+stopwatch first
