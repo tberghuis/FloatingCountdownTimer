@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import xyz.tberghuis.floatingtimer.tmp.dragdrop.DDScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class DoubleTapActivity : ComponentActivity() {
@@ -22,7 +23,8 @@ class DoubleTapActivity : ComponentActivity() {
             .fillMaxSize()
             .background(Color.White),
         ) {
-          MaccasScreen()
+//          MaccasScreen()
+          DDScreen()
         }
       }
     }
