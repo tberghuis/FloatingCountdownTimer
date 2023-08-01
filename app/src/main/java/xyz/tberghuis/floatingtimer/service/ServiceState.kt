@@ -9,15 +9,5 @@ class ServiceState(scope: CoroutineScope) {
   val countdownState = CountdownState()
   val stopwatchState = StopwatchState(scope)
 
-  // these could be moved back into OverlayController
-  // meh
-
-
-  // todo refactor use ScreenEz.safeWidth
-//  var screenWidthPx = Int.MAX_VALUE
-//  var screenHeightPx = Int.MAX_VALUE
-
-
   val configurationChanged = MutableSharedFlow<Unit>()
-
 }
