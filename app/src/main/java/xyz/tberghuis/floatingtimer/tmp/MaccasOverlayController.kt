@@ -1,8 +1,10 @@
 package xyz.tberghuis.floatingtimer.tmp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PixelFormat
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.WindowManager
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
@@ -63,9 +65,11 @@ class MaccasOverlayController(val service: MaccasService) {
             fullscreenView = createFullscreenView()
             windowManager.addView(fullscreenView, fullscreenParams)
           }
+
           false -> {
             windowManager.removeView(fullscreenView)
           }
+
           null -> {}
         }
       }
@@ -73,14 +77,65 @@ class MaccasOverlayController(val service: MaccasService) {
   }
 
 
+  @SuppressLint("ClickableViewAccessibility")
   private fun setContentBubbleView() {
     bubbleView.setContent {
       CompositionLocalProvider(LocalMaccasOverlayController provides this) {
         DDBubble()
       }
     }
+    logd("setContentBubbleView $bubbleView")
 
-//    bubbleView.setOnTouchListener { v, event ->  }()
+    var paramStartDragX: Int = 0
+    var paramStartDragY: Int = 0
+    var startDragRawX: Float = 0F
+    var startDragRawY: Float = 0F
+
+
+    bubbleView.setOnTouchListener { v, event ->
+//      logd("setOnTouchListener $event")
+//      logd("setOnTouchListener view $v")
+
+      when (event.action) {
+        MotionEvent.ACTION_DOWN -> {
+          paramStartDragX = bubbleParams.x
+          paramStartDragY = bubbleParams.y
+          startDragRawX = event.rawX
+          startDragRawY = event.rawY
+
+
+
+        }
+
+        MotionEvent.ACTION_MOVE -> {
+          // todo state.isDragging = true
+
+
+          bubbleParams.x = (paramStartDragX + (event.rawX - startDragRawX)).toInt()
+          bubbleParams.y = (paramStartDragY + (event.rawY - startDragRawY)).toInt()
+
+          // todo Math.min max.max to ensure no move outside screen
+
+
+          windowManager.updateViewLayout(bubbleView, bubbleParams)
+
+          // todo overlayState.offset = ...
+        }
+
+        MotionEvent.ACTION_UP -> {
+          // todo state.isDragging = false
+        }
+
+      }
+      false
+    }
+
+//    bubbleView.setOnDragListener { v, event ->
+//
+//      logd("drag event $event")
+//      true
+//    }
+
 
   }
 
