@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.tmp
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.PixelFormat
 import android.view.Gravity
 import android.view.MotionEvent
@@ -11,6 +12,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.unit.IntOffset
+import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -117,7 +120,10 @@ class MaccasOverlayController(val service: MaccasService) {
 
           windowManager.updateViewLayout(bubbleView, bubbleParams)
 
-          // todo overlayState.offset = ...
+          val density = Resources.getSystem().displayMetrics.density
+          val offsetX = (bubbleParams.x / density).toInt()
+          val offsetY = (bubbleParams.y / density).toInt()
+          bubbleState.offset = IntOffset(offsetX, offsetY)
         }
 
         MotionEvent.ACTION_UP -> {
@@ -127,13 +133,6 @@ class MaccasOverlayController(val service: MaccasService) {
       }
       false
     }
-
-//    bubbleView.setOnDragListener { v, event ->
-//
-//      logd("drag event $event")
-//      true
-//    }
-
 
   }
 
