@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.tmp
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.PixelFormat
@@ -20,6 +21,8 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.overlayViewFactory
 import xyz.tberghuis.floatingtimer.tmp.dragdrop.DDBubble
+import kotlin.math.max
+import kotlin.math.min
 
 val LocalMaccasOverlayController = compositionLocalOf<MaccasOverlayController> {
   error("CompositionLocal LocalMaccasOverlayController not present")
@@ -94,6 +97,9 @@ class MaccasOverlayController(val service: MaccasService) {
     var startDragRawX: Float = 0F
     var startDragRawY: Float = 0F
 
+    val screenWidthPx = ScreenEz.safeWidth
+    val screenHeightPx = ScreenEz.safeHeight
+    val bubbleSizePx = service.resources.displayMetrics.density * MC.OVERLAY_SIZE_DP
 
     bubbleView.setOnTouchListener { v, event ->
 //      logd("setOnTouchListener $event")
@@ -105,18 +111,22 @@ class MaccasOverlayController(val service: MaccasService) {
           paramStartDragY = bubbleParams.y
           startDragRawX = event.rawX
           startDragRawY = event.rawY
-
-
         }
 
         MotionEvent.ACTION_MOVE -> {
           bubbleState.isDragging.value = true
 
-          bubbleParams.x = (paramStartDragX + (event.rawX - startDragRawX)).toInt()
-          bubbleParams.y = (paramStartDragY + (event.rawY - startDragRawY)).toInt()
+          var x = (paramStartDragX + (event.rawX - startDragRawX))
+          var y = (paramStartDragY + (event.rawY - startDragRawY))
 
-          // todo Math.min max.max to ensure no move outside screen
+          x = max(x, 0f)
+          x = min(x, screenWidthPx - bubbleSizePx)
 
+          y = max(y, 0f)
+          y = min(y, screenHeightPx - bubbleSizePx)
+
+          bubbleParams.x = x.toInt()
+          bubbleParams.y = y.toInt()
 
           windowManager.updateViewLayout(bubbleView, bubbleParams)
 

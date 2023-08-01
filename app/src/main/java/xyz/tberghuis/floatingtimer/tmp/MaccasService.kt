@@ -6,6 +6,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -29,6 +30,8 @@ class MaccasService : Service() {
     super.onCreate()
 
     logd("MaccasService oncreate")
+    ScreenEz.with(this.applicationContext)
+// TODO     updateScreenDimensions()
 
     maccasOverlayController = MaccasOverlayController(this)
   }
@@ -36,9 +39,7 @@ class MaccasService : Service() {
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     postOngoingActivityNotification()
     return START_STICKY
-
   }
-
 
   private fun postOngoingActivityNotification() {
     if (!isStarted) {
