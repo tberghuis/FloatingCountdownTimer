@@ -1,7 +1,9 @@
 package xyz.tberghuis.floatingtimer.service
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PixelFormat
+import android.view.MotionEvent
 import android.view.WindowManager
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -9,6 +11,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.IntOffset
+import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -27,6 +31,8 @@ import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchBubble
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchOverlay
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
+import kotlin.math.max
+import kotlin.math.min
 
 val LocalServiceState = compositionLocalOf<ServiceState> { error("No ServiceState provided") }
 
@@ -40,7 +46,8 @@ class OverlayController(val service: FloatingService) {
     get() = stopwatchState.overlayState.isVisible
 
   private val density = service.resources.displayMetrics.density
-//  val timerSizePx = (TIMER_SIZE_DP * density).toInt()
+
+  //  val timerSizePx = (TIMER_SIZE_DP * density).toInt()
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
   init {
@@ -146,7 +153,59 @@ class OverlayController(val service: FloatingService) {
         }
       }
     }
+
+    clickTargetSetupDragging(stopwatchClickTarget, service.state.stopwatchState.overlayState)
     return stopwatchClickTarget
+  }
+
+  @SuppressLint("ClickableViewAccessibility")
+  private fun clickTargetSetupDragging(viewHolder: OverlayViewHolder, overlayState: OverlayState) {
+
+    var paramStartDragX: Int = 0
+    var paramStartDragY: Int = 0
+    var startDragRawX: Float = 0F
+    var startDragRawY: Float = 0F
+
+    viewHolder.view.setOnTouchListener { v, event ->
+      val params = viewHolder.params
+      when (event.action) {
+        MotionEvent.ACTION_DOWN -> {
+          paramStartDragX = params.x
+          paramStartDragY = params.y
+          startDragRawX = event.rawX
+          startDragRawY = event.rawY
+        }
+
+        MotionEvent.ACTION_MOVE -> {
+          overlayState.isDragging.value = true
+          params.x = (paramStartDragX + (event.rawX - startDragRawX)).toInt()
+          params.y = (paramStartDragY + (event.rawY - startDragRawY)).toInt()
+          updateClickTargetParamsWithinScreenBounds(viewHolder, overlayState)
+        }
+
+        MotionEvent.ACTION_UP -> {
+          overlayState.isDragging.value = false
+        }
+      }
+      false
+    }
+  }
+
+  fun updateClickTargetParamsWithinScreenBounds(
+    viewHolder: OverlayViewHolder,
+    overlayState: OverlayState
+  ) {
+    val params = viewHolder.params
+    var x = params.x
+    var y = params.y
+    x = max(x, 0)
+    x = min(x, ScreenEz.safeWidth - TIMER_SIZE_PX)
+    y = max(y, 0)
+    y = min(y, ScreenEz.safeHeight - TIMER_SIZE_PX)
+    params.x = x
+    params.y = y
+    windowManager.updateViewLayout(viewHolder.view, params)
+    overlayState.timerOffset = IntOffset(params.x, params.y)
   }
 
   private fun initViewControllers() {
