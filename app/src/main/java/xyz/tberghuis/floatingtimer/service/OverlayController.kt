@@ -17,12 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.filterNotNull
 import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
-import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.logd
@@ -31,10 +28,8 @@ import xyz.tberghuis.floatingtimer.service.countdown.CountdownOverlay
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
-import xyz.tberghuis.floatingtimer.service.stopwatch.IsDraggingOverlay
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchBubble
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
-import xyz.tberghuis.floatingtimer.service.stopwatch.TmpStopwatchOverlay
 import kotlin.math.max
 import kotlin.math.min
 
