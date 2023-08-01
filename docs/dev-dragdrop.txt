@@ -7,3 +7,11 @@ reference floating bubble view library
 
 ...
 
+remove tmp activity service manifest.xml
+
+*final steps
+test oldest and newest api levels
+version
+build
+release
+merge
