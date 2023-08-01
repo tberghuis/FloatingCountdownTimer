@@ -7,11 +7,8 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -30,46 +27,8 @@ import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
-import xyz.tberghuis.floatingtimer.service.LocalServiceState
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.IntOffset
-import com.torrydo.screenez.ScreenEz
 import xyz.tberghuis.floatingtimer.LocalHaloColour
-import xyz.tberghuis.floatingtimer.composables.Trash
-import kotlin.math.min
-
-// this is only displayed in fullscreen overlay when isDragging=true
-@Composable
-fun TmpStopwatchOverlay() {
-  val serviceState = LocalServiceState.current
-  val stopwatchState = serviceState.stopwatchState
-  val overlayState = stopwatchState.overlayState
-  val timerSizePx = LocalDensity.current.run { TIMER_SIZE_DP.dp.toPx() }.toInt()
-
-  val modifier = Modifier
-    .offset {
-      overlayState.timerOffset
-    }
-  // .size(TIMER_SIZE_DP.dp) // if issues in cut off due to px to dp rounding issues
-
-  Box(Modifier.onGloballyPositioned {
-    val x = min(overlayState.timerOffset.x, ScreenEz.safeWidth - timerSizePx)
-    val y = min(overlayState.timerOffset.y, ScreenEz.safeHeight - timerSizePx)
-    overlayState.timerOffset = IntOffset(x, y)
-  }) {
-    StopwatchBubble(modifier, stopwatchState)
-  }
-
-  Column(
-    Modifier.fillMaxSize(),
-    verticalArrangement = Arrangement.Bottom,
-    horizontalAlignment = Alignment.CenterHorizontally
-  ) {
-    Trash(overlayState)
-  }
-}
 
 @Composable
 fun StopwatchBubble(modifier: Modifier, stopwatchState: StopwatchState) {
