@@ -1,9 +1,11 @@
 package xyz.tberghuis.floatingtimer
 
+import android.content.res.Resources
 import androidx.compose.ui.unit.dp
 
 const val TRASH_SIZE_DP = 80
 const val TIMER_SIZE_DP = 60
+val TIMER_SIZE_PX = (TIMER_SIZE_DP * Resources.getSystem().displayMetrics.density).toInt()
 
 const val INTENT_COMMAND = "xyz.tberghuis.floatingtimer.COMMAND"
 const val INTENT_COMMAND_COUNTDOWN_CREATE = "countdown_create"

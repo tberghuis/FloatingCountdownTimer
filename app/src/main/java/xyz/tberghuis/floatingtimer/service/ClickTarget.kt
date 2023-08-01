@@ -12,6 +12,7 @@ import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
+import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.logd
 
 // doitwrong
@@ -38,9 +39,9 @@ fun ClickTarget(
         val dragAmountIntOffset = IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
         val _timerOffset = overlayState.timerOffset + dragAmountIntOffset
         var x = max(_timerOffset.x, 0)
-        x = min(x, serviceState.screenWidthPx - controller.timerSizePx)
+        x = min(x, serviceState.screenWidthPx - TIMER_SIZE_PX)
         var y = max(_timerOffset.y, 0)
-        y = min(y, serviceState.screenHeightPx - controller.timerSizePx)
+        y = min(y, serviceState.screenHeightPx - TIMER_SIZE_PX)
         overlayState.timerOffset = IntOffset(x, y)
       }, onDragEnd = {
         logd("onDragEnd")

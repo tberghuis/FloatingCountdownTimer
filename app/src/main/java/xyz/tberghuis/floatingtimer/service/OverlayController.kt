@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.filterNotNull
 import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
+import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownBubble
@@ -39,7 +40,7 @@ class OverlayController(val service: FloatingService) {
     get() = stopwatchState.overlayState.isVisible
 
   private val density = service.resources.displayMetrics.density
-  val timerSizePx = (TIMER_SIZE_DP * density).toInt()
+//  val timerSizePx = (TIMER_SIZE_DP * density).toInt()
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
   init {
@@ -75,8 +76,8 @@ class OverlayController(val service: FloatingService) {
   private fun createCountdownClickTarget(): OverlayViewHolder {
     val countdownClickTarget = OverlayViewHolder(
       WindowManager.LayoutParams(
-        timerSizePx,
-        timerSizePx,
+        TIMER_SIZE_PX,
+        TIMER_SIZE_PX,
         0, // todo place default position
         0,
         WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
@@ -120,8 +121,8 @@ class OverlayController(val service: FloatingService) {
   private fun createStopwatchClickTarget(): OverlayViewHolder {
     val stopwatchClickTarget = OverlayViewHolder(
       WindowManager.LayoutParams(
-        timerSizePx,
-        timerSizePx,
+        TIMER_SIZE_PX,
+        TIMER_SIZE_PX,
         0,
         0,
         WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
