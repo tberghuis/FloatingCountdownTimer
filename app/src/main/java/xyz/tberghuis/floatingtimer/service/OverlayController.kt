@@ -90,7 +90,7 @@ class OverlayController(val service: FloatingService) {
         providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
       CompositionLocalProvider(LocalServiceState provides service.state) {
         CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-          ClickTarget(
+          TmpClickTarget(
             service.state, this, countdownState.overlayState, countdownClickTarget,
             bubbleContent = {
               CountdownBubble(Modifier, countdownState)
@@ -135,7 +135,7 @@ class OverlayController(val service: FloatingService) {
         providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
       CompositionLocalProvider(LocalServiceState provides service.state) {
         CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-          ClickTarget(
+          TmpClickTarget(
             service.state,
             this,
             stopwatchState.overlayState,

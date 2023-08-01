@@ -17,6 +17,66 @@ import xyz.tberghuis.floatingtimer.logd
 
 // doitwrong
 @Composable
+fun TmpClickTarget(
+  serviceState: ServiceState,
+  controller: OverlayController,
+  overlayState: OverlayState,
+  viewHolder: OverlayViewHolder,
+  bubbleContent: @Composable () -> Unit,
+  onDropOnTrash: () -> Unit,
+  onDoubleTap: () -> Unit,
+  onTap: () -> Unit
+) {
+  val isDragging = overlayState.isDragging.collectAsState()
+
+  Box(modifier = Modifier
+    .pointerInput(Unit) {
+      detectDragGestures(onDragStart = {
+        logd("clicktarget onDragStart")
+        overlayState.isDragging.value = true
+      }, onDrag = { change, dragAmount ->
+        change.consume()
+        val dragAmountIntOffset = IntOffset(dragAmount.x.roundToInt(), dragAmount.y.roundToInt())
+        val _timerOffset = overlayState.timerOffset + dragAmountIntOffset
+        var x = max(_timerOffset.x, 0)
+        x = min(x, serviceState.screenWidthPx - TIMER_SIZE_PX)
+        var y = max(_timerOffset.y, 0)
+        y = min(y, serviceState.screenHeightPx - TIMER_SIZE_PX)
+        overlayState.timerOffset = IntOffset(x, y)
+      }, onDragEnd = {
+        logd("onDragEnd")
+        overlayState.isDragging.value = false
+        if (overlayState.isTimerHoverTrash) {
+          onDropOnTrash()
+          return@detectDragGestures
+        }
+        viewHolder.params.x = overlayState.timerOffset.x
+        viewHolder.params.y = overlayState.timerOffset.y
+        logd("onDragEnd x ${overlayState.timerOffset.x}")
+        controller.windowManager.updateViewLayout(viewHolder.view, viewHolder.params)
+      })
+    }
+    .pointerInput(Unit) {
+      detectTapGestures(
+        onDoubleTap = {
+          logd("onDoubleTap")
+          onDoubleTap()
+        },
+        onTap = {
+          logd("onTap")
+          onTap()
+        }
+      )
+    }
+  ) {
+    if (isDragging.value != true) {
+      bubbleContent()
+    }
+  }
+}
+
+
+@Composable
 fun ClickTarget(
   serviceState: ServiceState,
   controller: OverlayController,
@@ -74,3 +134,7 @@ fun ClickTarget(
     }
   }
 }
+
+
+
+
