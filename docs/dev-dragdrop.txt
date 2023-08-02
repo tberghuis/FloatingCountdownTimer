@@ -9,41 +9,12 @@ merge
 
 ########################
 
-service onconfigurationchanged
-  update offset
-    params
-    windowmanager.updateview
-
-trash derivedstateof, isdragging & calcBubbleHoverTrash
+clean code
 
 
-get demo working in tmp
-clean code to mvp
-draw trash square in fullscreen
-
-###################3
-aint nothing to it but to do it
-
-refactor small as i go
-replace screenWidthPx with ScreenEz.safeWidth
-
-
-stopwatch first
-
-trash on action_UP
-
-doitwrong
 refactor
-stopwatch
 
 cull tmp
 
 clean all "todo"
 remove CompositionLocalProvider's from fullscreenOverlay
-
-
-delete LocalServiceState
-
-
-
-refactor createClickTarget bubble composable as argument
