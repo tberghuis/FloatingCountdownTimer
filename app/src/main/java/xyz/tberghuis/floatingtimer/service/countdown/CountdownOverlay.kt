@@ -23,38 +23,6 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.composables.Trash
 import xyz.tberghuis.floatingtimer.service.ServiceState
 
-// this is only displayed in fullscreen overlay when isDragging=true
-@Composable
-fun CountdownOverlay(state: ServiceState) {
-  val countdownState = state.countdownState
-  val overlayState = countdownState.overlayState
-  // should i use derivedStateOf ???
-  // i don't understand the benefit
-
-  val context = LocalContext.current
-
-  Box(Modifier.onGloballyPositioned {
-    val density = context.resources.displayMetrics.density
-    val timerSizePx = (TIMER_SIZE_DP * density).toInt()
-    val x = min(overlayState.timerOffset.x, ScreenEz.safeWidth - timerSizePx)
-    val y = min(overlayState.timerOffset.y, ScreenEz.safeHeight - timerSizePx)
-    overlayState.timerOffset = IntOffset(x, y)
-  }) {
-    val modifier = Modifier.offset {
-      overlayState.timerOffset
-    }
-    CountdownBubble(modifier, countdownState)
-  }
-
-  Column(
-    Modifier.fillMaxSize(),
-    verticalArrangement = Arrangement.Bottom,
-    horizontalAlignment = Alignment.CenterHorizontally
-  ) {
-    Trash(overlayState)
-  }
-}
-
 @Composable
 fun CountdownBubble(modifier: Modifier, countdownState: CountdownState) {
   val timeLeftFraction = countdownState.countdownSeconds / countdownState.durationSeconds.toFloat()
