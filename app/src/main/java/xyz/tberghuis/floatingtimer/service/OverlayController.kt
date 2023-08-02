@@ -138,7 +138,9 @@ class OverlayController(val service: FloatingService) {
 
   private fun createTimerBubble(
     overlayState: OverlayState,
-    bubble: @Composable () -> Unit
+    bubble: @Composable () -> Unit,
+    onDoubleTap: () -> Unit,
+    onTap: () -> Unit
   ): OverlayViewHolder {
     val viewHolder = OverlayViewHolder(
       WindowManager.LayoutParams(
@@ -166,19 +168,31 @@ class OverlayController(val service: FloatingService) {
         }
       }
     }
-    clickTargetSetOnTouchListener(viewHolder, service.state.stopwatchState.overlayState)
+    clickTargetSetOnTouchListener(
+      viewHolder,
+      service.state.stopwatchState.overlayState,
+      onDoubleTap,
+      onTap
+    )
     return viewHolder
   }
 
   private fun createStopwatchClickTarget(): OverlayViewHolder {
     val bubble: @Composable () -> Unit = { StopwatchBubble(Modifier, stopwatchState) }
-    return createTimerBubble(stopwatchState.overlayState, bubble)
+    return createTimerBubble(
+      stopwatchState.overlayState,
+      bubble,
+      onDoubleTap = { stopwatchState.resetStopwatchState() },
+      onTap = { onClickStopwatchClickTarget(stopwatchState) }
+    )
   }
 
   @SuppressLint("ClickableViewAccessibility")
   private fun clickTargetSetOnTouchListener(
     viewHolder: OverlayViewHolder,
-    overlayState: OverlayState
+    overlayState: OverlayState,
+    onDoubleTap: () -> Unit,
+    onTap: () -> Unit
   ) {
 
     var paramStartDragX: Int = 0
@@ -189,13 +203,13 @@ class OverlayController(val service: FloatingService) {
     val tapDetector = GestureDetector(service, object : SimpleOnGestureListener() {
       override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
         logd("onSingleTapConfirmed")
-        onClickStopwatchClickTarget(stopwatchState)
+        onTap()
         return true
       }
 
       override fun onDoubleTap(e: MotionEvent): Boolean {
         logd("onDoubleTap")
-        stopwatchState.resetStopwatchState()
+        onDoubleTap()
         return true
       }
     })
