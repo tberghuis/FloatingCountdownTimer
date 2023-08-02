@@ -40,8 +40,7 @@ class MaccasOverlayController(val service: MaccasService) {
   init {
     logd("MaccasOverlayController init")
     bubbleParams = initBubbleLayoutParams(service)
-    // todo refactor overlayViewFactory
-    // OverlayComposeViewBuilder build returns ComposeView
+
     bubbleView = overlayViewFactory(service)
     setContentBubbleView()
 
