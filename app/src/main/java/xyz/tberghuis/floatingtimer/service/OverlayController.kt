@@ -60,14 +60,7 @@ class OverlayController(val service: FloatingService) {
     )
 
     fullscreenOverlay.view.setContent {
-
-      // todo remove CompositionLocalProvider's
-
-      val haloColour =
-        providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
-      CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-        overlayContent()
-      }
+      overlayContent()
     }
 
     return fullscreenOverlay
