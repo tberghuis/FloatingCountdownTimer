@@ -3,6 +3,7 @@ package xyz.tberghuis.floatingtimer.service
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PixelFormat
+import android.util.Log
 import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
@@ -223,7 +224,12 @@ class OverlayController(val service: FloatingService) {
     y = min(y, ScreenEz.safeHeight - TIMER_SIZE_PX)
     params.x = x
     params.y = y
-    windowManager.updateViewLayout(viewHolder.view, params)
+    try {
+      windowManager.updateViewLayout(viewHolder.view, params)
+    } catch (e: IllegalArgumentException) {
+      // this was happening in prod, can't reproduce
+      Log.e("OverlayController", "IllegalArgumentException: $e")
+    }
     overlayState.timerOffset = IntOffset(params.x, params.y)
   }
 

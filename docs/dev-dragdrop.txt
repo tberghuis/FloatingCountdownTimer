@@ -1,15 +1,4 @@
 
-*final steps
-test oldest and newest api levels
-version
-build
-release
-merge
-github release apk
-
-
-########################
-
 future.txt refactor for clearer code
   step 1. class StopwatchBubble 
     move all stopwatch functions and state to live in this class
