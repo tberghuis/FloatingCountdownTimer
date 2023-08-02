@@ -5,6 +5,7 @@ version
 build
 release
 merge
+github release apk
 
 
 ########################
