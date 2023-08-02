@@ -98,44 +98,6 @@ class OverlayController(val service: FloatingService) {
     )
   }
 
-  @Composable
-  fun tmptmp() {
-    val countdownClickTarget = OverlayViewHolder(
-      WindowManager.LayoutParams(
-        TIMER_SIZE_PX,
-        TIMER_SIZE_PX,
-        0, // todo place default position
-        0,
-        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-        PixelFormat.TRANSLUCENT
-      ), service
-    )
-    TmpClickTarget(
-      service.state, this, countdownState.overlayState, countdownClickTarget,
-      bubbleContent = {
-        CountdownBubble(Modifier, countdownState)
-      },
-      this::exitCountdown, countdownState::resetTimerState
-    ) {
-      logd("click target onclick")
-      when (countdownState.timerState.value) {
-        is TimerStatePaused -> {
-          countdownState.timerState.value = TimerStateRunning
-        }
-
-        is TimerStateRunning -> {
-          countdownState.timerState.value = TimerStatePaused
-        }
-
-        is TimerStateFinished -> {
-          countdownState.resetTimerState(countdownState.durationSeconds)
-        }
-      }
-    }
-  }
-
-
   private fun createTimerBubble(
     overlayState: OverlayState,
     bubble: @Composable () -> Unit,
