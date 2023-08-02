@@ -76,7 +76,7 @@ class OverlayController(val service: FloatingService) {
   private fun createCountdownClickTarget(): OverlayViewHolder {
     return createTimerBubble(
       countdownState.overlayState,
-      bubble = { CountdownBubble(Modifier, countdownState) },
+      bubble = { CountdownBubble(countdownState) },
       exitTimer = { exitCountdown() },
       onDoubleTap = { countdownState.resetTimerState() },
       onTap = {

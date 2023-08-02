@@ -13,11 +13,10 @@ import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 
 @Composable
-fun CountdownBubble(modifier: Modifier, countdownState: CountdownState) {
+fun CountdownBubble(countdownState: CountdownState) {
   val timeLeftFraction = countdownState.countdownSeconds / countdownState.durationSeconds.toFloat()
   Box(
     modifier = Modifier
-      .then(modifier)
       .size(TIMER_SIZE_DP.dp)
       .padding(PROGRESS_ARC_WIDTH / 2)
       .zIndex(1f),
