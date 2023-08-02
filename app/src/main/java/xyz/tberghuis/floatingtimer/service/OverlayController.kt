@@ -75,27 +75,28 @@ class OverlayController(val service: FloatingService) {
   }
 
   private fun createCountdownClickTarget(): OverlayViewHolder {
-    val countdownClickTarget = OverlayViewHolder(
-      WindowManager.LayoutParams(
-        TIMER_SIZE_PX,
-        TIMER_SIZE_PX,
-        0, // todo place default position
-        0,
-        WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-        PixelFormat.TRANSLUCENT
-      ), service
-    )
-    countdownClickTarget.view.setContent {
-      val haloColour =
-        providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
-      CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-        CountdownBubble(Modifier, countdownState)
+    return createTimerBubble(
+      countdownState.overlayState,
+      bubble = { CountdownBubble(Modifier, countdownState) },
+      exitTimer = { exitCountdown() },
+      onDoubleTap = { countdownState.resetTimerState() },
+      onTap = {
+        logd("click target onclick")
+        when (countdownState.timerState.value) {
+          is TimerStatePaused -> {
+            countdownState.timerState.value = TimerStateRunning
+          }
+
+          is TimerStateRunning -> {
+            countdownState.timerState.value = TimerStatePaused
+          }
+
+          is TimerStateFinished -> {
+            countdownState.resetTimerState(countdownState.durationSeconds)
+          }
+        }
       }
-
-
-    }
-    return countdownClickTarget
+    )
   }
 
   @Composable
@@ -139,6 +140,7 @@ class OverlayController(val service: FloatingService) {
   private fun createTimerBubble(
     overlayState: OverlayState,
     bubble: @Composable () -> Unit,
+    exitTimer: () -> Unit,
     onDoubleTap: () -> Unit,
     onTap: () -> Unit
   ): OverlayViewHolder {
@@ -171,6 +173,7 @@ class OverlayController(val service: FloatingService) {
     clickTargetSetOnTouchListener(
       viewHolder,
       service.state.stopwatchState.overlayState,
+      exitTimer,
       onDoubleTap,
       onTap
     )
@@ -178,10 +181,10 @@ class OverlayController(val service: FloatingService) {
   }
 
   private fun createStopwatchClickTarget(): OverlayViewHolder {
-    val bubble: @Composable () -> Unit = { StopwatchBubble(Modifier, stopwatchState) }
     return createTimerBubble(
       stopwatchState.overlayState,
-      bubble,
+      bubble = { StopwatchBubble(Modifier, stopwatchState) },
+      exitTimer = { exitStopwatch() },
       onDoubleTap = { stopwatchState.resetStopwatchState() },
       onTap = { onClickStopwatchClickTarget(stopwatchState) }
     )
@@ -191,6 +194,7 @@ class OverlayController(val service: FloatingService) {
   private fun clickTargetSetOnTouchListener(
     viewHolder: OverlayViewHolder,
     overlayState: OverlayState,
+    exitTimer: () -> Unit,
     onDoubleTap: () -> Unit,
     onTap: () -> Unit
   ) {
@@ -244,7 +248,7 @@ class OverlayController(val service: FloatingService) {
           overlayState.isDragging.value = false
           if (overlayState.isTimerHoverTrash) {
             overlayState.isTimerHoverTrash = false
-            exitStopwatch()
+            exitTimer()
           }
         }
       }
