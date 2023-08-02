@@ -283,7 +283,7 @@ class OverlayController(val service: FloatingService) {
     OverlayViewController(
       {
         createFullscreenOverlay {
-          CountdownOverlay(service.state)
+          IsDraggingOverlay(service.state.countdownState.overlayState)
         }
       },
       service.state.countdownState.overlayState.isDragging,
