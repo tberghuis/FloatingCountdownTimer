@@ -14,13 +14,12 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.util.Log
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
-import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
@@ -51,7 +50,7 @@ class AlarmController(val service: FloatingService) {
   // just call .first in watchState()
   private fun collectPreferences() {
     // doitwrong
-    val preferences = providePreferencesRepository(service)
+    val preferences = service.application.providePreferencesRepository()
 
     service.scope.launch {
       preferences.vibrationFlow.collect {

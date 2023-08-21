@@ -11,8 +11,8 @@ import androidx.lifecycle.viewModelScope
 import com.godaddy.android.colorpicker.HsvColor
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
+import xyz.tberghuis.floatingtimer.providePreferencesRepository
 
 class SettingsViewModel(private val application: Application) : AndroidViewModel(application) {
   var showPurchaseDialog by mutableStateOf(false)
@@ -21,7 +21,7 @@ class SettingsViewModel(private val application: Application) : AndroidViewModel
   var haloColorChangePriceText by mutableStateOf("")
     private set
 
-  private val preferences = providePreferencesRepository(application)
+  private val preferences = application.providePreferencesRepository()
   var haloColourPurchased = false
     private set
 

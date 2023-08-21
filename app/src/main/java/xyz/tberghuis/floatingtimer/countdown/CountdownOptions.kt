@@ -8,13 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @Composable
 fun CountdownOptions() {
-  val vm: HomeViewModel = hiltViewModel()
+  val vm: HomeViewModel = viewModel()
 
   // doitwrong
   val vibration = vm.vibrationFlow.collectAsState(false)

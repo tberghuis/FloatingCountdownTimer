@@ -1,9 +1,9 @@
 buildscript {
     ext {
-        hilt_version = '2.47'
+//        hilt_version = '2.47'
     }
     dependencies {
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+//        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
     }
 
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.

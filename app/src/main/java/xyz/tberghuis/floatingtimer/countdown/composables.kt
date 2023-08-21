@@ -25,7 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.EXTRA_COUNTDOWN_DURATION
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_CREATE
@@ -38,7 +38,7 @@ import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 @Preview
 @Composable
 fun CreateCountdownCard() {
-  val vm: HomeViewModel = hiltViewModel()
+  val vm: HomeViewModel = viewModel()
   val focusManager = LocalFocusManager.current
   val context = LocalContext.current
 

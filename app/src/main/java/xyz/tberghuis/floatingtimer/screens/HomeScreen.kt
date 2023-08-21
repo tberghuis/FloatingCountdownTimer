@@ -48,7 +48,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
 import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
@@ -60,7 +60,7 @@ import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen() {
-  val vm: HomeViewModel = hiltViewModel()
+  val vm: HomeViewModel = viewModel()
   val context = LocalContext.current
   val launcher = rememberLauncherForActivityResult(
       contract = ActivityResultContracts.RequestPermission(),

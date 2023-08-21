@@ -21,8 +21,8 @@ import kotlinx.coroutines.flow.filterNotNull
 import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
-import xyz.tberghuis.floatingtimer.di.SingletonModule.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownBubble
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
@@ -112,7 +112,7 @@ class OverlayController(val service: FloatingService) {
     )
     viewHolder.view.setContent {
       val haloColour =
-        providePreferencesRepository(service.application).haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
+        service.application.providePreferencesRepository().haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
       CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
         bubble()
       }
