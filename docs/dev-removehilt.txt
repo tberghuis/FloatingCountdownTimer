@@ -1,4 +1,0 @@
-
-can i just use extension function ...
-
-onstartcommand always call notification and startforeground
