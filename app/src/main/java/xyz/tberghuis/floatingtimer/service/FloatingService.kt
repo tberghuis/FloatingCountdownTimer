@@ -34,7 +34,7 @@ class FloatingService : Service() {
   private val job = SupervisorJob()
   val scope = CoroutineScope(Dispatchers.Default + job)
   val state = ServiceState(scope)
-  private var isStarted = false
+//  private var isStarted = false
 
   // todo make private
   lateinit var overlayController: OverlayController
@@ -93,11 +93,12 @@ class FloatingService : Service() {
   }
 
   private fun postOngoingActivityNotification() {
-    if (!isStarted) {
-      isStarted = true
-
-      startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification())
-    }
+    // see if this reduces ANR's if I call for every onStartCommand
+    startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification())
+//    if (!isStarted) {
+//      isStarted = true
+//      startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification())
+//    }
   }
 
   private fun buildNotification(): Notification {
