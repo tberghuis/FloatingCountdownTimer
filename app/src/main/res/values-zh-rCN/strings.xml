@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">浮动计时器</string>
+    <string name="create">创建</string>
+    <string name="stopwatch">秒表</string>
+    <string name="countdown">倒计时</string>
+    <string name="minutes">分</string>
+    <string name="seconds">秒</string>
+    <string name="vibration">振动</string>
+    <string name="sound">声音</string>
+    <string name="settings">设置</string>
+    <string name="go_to_settings">前往设置</string>
+    <string name="enable_overlay_permission">启用悬浮窗权限</string>
+    <string name="dialog_enable_overlay_permission">请为应用启用“允许在其他应用上层显示”权限</string>
+    <string name="back">返回</string>
+    <string name="change_timer_color">更改计时器颜色</string>
+    <string name="save">保存</string>
+    <string name="buy">购买</string>
+    <string name="cancel">取消</string>
+    <string name="premium_feature">高级功能</string>
+    <string name="change_timer_halo_color">更改计时器光晕颜色</string>
+</resources>
