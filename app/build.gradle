@@ -11,8 +11,8 @@ android {
         applicationId "xyz.tberghuis.floatingtimer"
         minSdk 26
         targetSdk 33
-        versionCode 34
-        versionName "1.17.1"
+        versionCode 35
+        versionName "1.18.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

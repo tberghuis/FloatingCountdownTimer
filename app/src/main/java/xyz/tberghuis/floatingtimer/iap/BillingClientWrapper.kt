@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.iap
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
@@ -37,7 +38,14 @@ class BillingClientWrapper(
     logd("purchasesUpdatedListener")
 
     // todo await after acknowledgePurchase to resume continuation
-    purchasesUpdatedContinuation?.resume(billingResult)
+
+    try {
+      purchasesUpdatedContinuation?.resume(billingResult)
+    } catch (e: RuntimeException) {
+      // this happens sometimes for some reason ???
+      Log.e("BillingClientWrapper", "error: $e")
+    }
+
     if (billingResult.responseCode != BillingClient.BillingResponseCode.OK || purchases.isNullOrEmpty()) {
       return
     }
