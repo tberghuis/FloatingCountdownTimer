@@ -10,3 +10,4 @@ cull tmp code
 
 xml view official docs
 
+notification - set foreground service behavior IMMEDIATE
