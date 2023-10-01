@@ -32,7 +32,7 @@ import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_CREATE
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.screens.onFocusSelectAll
-import xyz.tberghuis.floatingtimer.tmp2.FloatingService
+import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @Preview

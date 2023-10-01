@@ -22,6 +22,7 @@ import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.IsDraggingOverlay
 import xyz.tberghuis.floatingtimer.service.OverlayState
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownBubble
