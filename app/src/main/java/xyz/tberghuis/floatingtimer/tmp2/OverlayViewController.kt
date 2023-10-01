@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.service
+package xyz.tberghuis.floatingtimer.tmp2
 
 import android.util.Log
 import android.view.WindowManager
@@ -6,10 +6,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.XOverlayViewHolder
 
-class XOverlayViewController(
-  val createOverlayViewHolder: () -> XOverlayViewHolder,
+class OverlayViewController(
+  val createOverlayViewHolder: () -> OverlayViewHolder,
   val isVisible: Flow<Boolean?>,
   val windowManager: WindowManager,
   scope: CoroutineScope
@@ -22,7 +21,7 @@ class XOverlayViewController(
   }
 
   private suspend fun watchIsVisible() {
-    var viewHolder: XOverlayViewHolder? = null
+    var viewHolder: OverlayViewHolder? = null
 
     isVisible.collect { isVisible ->
       when (isVisible) {

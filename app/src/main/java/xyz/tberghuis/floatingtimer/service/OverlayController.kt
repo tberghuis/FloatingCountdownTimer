@@ -19,8 +19,8 @@ import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import xyz.tberghuis.floatingtimer.LocalHaloColour
-import xyz.tberghuis.floatingtimer.OverlayViewHolder
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
+import xyz.tberghuis.floatingtimer.XOverlayViewHolder
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownBubble
@@ -48,8 +48,8 @@ class XOverlayController(val service: XFloatingService) {
     initViewControllers()
   }
 
-  private fun createFullscreenOverlay(overlayContent: @Composable () -> Unit): OverlayViewHolder {
-    val fullscreenOverlay = OverlayViewHolder(
+  private fun createFullscreenOverlay(overlayContent: @Composable () -> Unit): XOverlayViewHolder {
+    val fullscreenOverlay = XOverlayViewHolder(
       WindowManager.LayoutParams(
         WindowManager.LayoutParams.MATCH_PARENT,
         WindowManager.LayoutParams.MATCH_PARENT,
@@ -67,7 +67,7 @@ class XOverlayController(val service: XFloatingService) {
     return fullscreenOverlay
   }
 
-  private fun createCountdownClickTarget(): OverlayViewHolder {
+  private fun createCountdownClickTarget(): XOverlayViewHolder {
     return createTimerBubble(
       countdownState.overlayState,
       bubble = { CountdownBubble(countdownState) },
@@ -98,8 +98,8 @@ class XOverlayController(val service: XFloatingService) {
     exitTimer: () -> Unit,
     onDoubleTap: () -> Unit,
     onTap: () -> Unit
-  ): OverlayViewHolder {
-    val viewHolder = OverlayViewHolder(
+  ): XOverlayViewHolder {
+    val viewHolder = XOverlayViewHolder(
       WindowManager.LayoutParams(
         TIMER_SIZE_PX,
         TIMER_SIZE_PX,
@@ -135,7 +135,7 @@ class XOverlayController(val service: XFloatingService) {
     return viewHolder
   }
 
-  private fun createStopwatchClickTarget(): OverlayViewHolder {
+  private fun createStopwatchClickTarget(): XOverlayViewHolder {
     return createTimerBubble(
       stopwatchState.overlayState,
       bubble = { StopwatchBubble(Modifier, stopwatchState) },
@@ -147,7 +147,7 @@ class XOverlayController(val service: XFloatingService) {
 
   @SuppressLint("ClickableViewAccessibility")
   private fun clickTargetSetOnTouchListener(
-    viewHolder: OverlayViewHolder,
+    viewHolder: XOverlayViewHolder,
     overlayState: OverlayState,
     exitTimer: () -> Unit,
     onDoubleTap: () -> Unit,
@@ -212,7 +212,7 @@ class XOverlayController(val service: XFloatingService) {
   }
 
   private fun updateClickTargetParamsWithinScreenBounds(
-    viewHolder: OverlayViewHolder,
+    viewHolder: XOverlayViewHolder,
     overlayState: OverlayState
   ) {
     val params = viewHolder.params
@@ -234,13 +234,13 @@ class XOverlayController(val service: XFloatingService) {
   }
 
   private fun initViewControllers() {
-    OverlayViewController(
+    XOverlayViewController(
       this::createCountdownClickTarget,
       countdownIsVisible.filterNotNull(),
       windowManager,
       service.scope
     )
-    OverlayViewController(
+    XOverlayViewController(
       {
         createFullscreenOverlay {
           IsDraggingOverlay(service.state.countdownState.overlayState)
@@ -250,13 +250,13 @@ class XOverlayController(val service: XFloatingService) {
       windowManager, service.scope
     )
 
-    OverlayViewController(
+    XOverlayViewController(
       this::createStopwatchClickTarget,
       stopwatchIsVisible.filterNotNull(),
       windowManager,
       service.scope
     )
-    OverlayViewController(
+    XOverlayViewController(
       {
         createFullscreenOverlay {
           IsDraggingOverlay(service.state.stopwatchState.overlayState)

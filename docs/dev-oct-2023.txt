@@ -31,3 +31,5 @@ fix order service onDestroy
 
 XFloatingService
 XOverlayController
+XOverlayViewHolder
+XOverlayViewController
