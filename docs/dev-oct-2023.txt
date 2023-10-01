@@ -18,3 +18,7 @@ update dependencies
 try 
 class YourService() : LifecycleService(), SavedStateRegistryOwner
 see if prod crashes and ANR disapear
+https://stackoverflow.com/questions/76177695/possible-to-use-a-composeview-in-an-android-service
+https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
+
+bound service refactor
