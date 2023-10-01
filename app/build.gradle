@@ -78,7 +78,7 @@ dependencies {
     implementation("com.github.ajalt.colormath:colormath:3.2.0")
 
     // https://github.com/TorryDo/ScreenEasy
-    implementation "io.github.torrydo:screen-easy:0.0.3"
+    implementation "io.github.torrydo:screen-easy:0.1.0"
 }
 
 kapt {
