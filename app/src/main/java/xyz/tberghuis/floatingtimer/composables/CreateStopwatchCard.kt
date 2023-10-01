@@ -22,6 +22,7 @@ import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_CREATE
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.XFloatingService
+import xyz.tberghuis.floatingtimer.tmp2.FloatingService
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @Composable
@@ -60,7 +61,7 @@ fun CreateStopwatchCard() {
 }
 
 fun startStopwatchService(context: Context) {
-  val intent = Intent(context.applicationContext, XFloatingService::class.java)
+  val intent = Intent(context.applicationContext, FloatingService::class.java)
   intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_STOPWATCH_CREATE)
   context.startForegroundService(intent)
 }

@@ -36,13 +36,13 @@ class FloatingService : Service() {
   val scope = CoroutineScope(Dispatchers.Default + job)
   val state = ServiceState(scope)
 
-//  lateinit var overlayController: OverlayController
+  lateinit var overlayController: OverlayController
 //  lateinit var alarmController: AlarmController
 
   override fun onCreate() {
     super.onCreate()
     ScreenEz.with(this.applicationContext)
-//    overlayController = OverlayController(this)
+    overlayController = OverlayController(this)
 //    alarmController = AlarmController(this)
   }
 
@@ -74,10 +74,10 @@ class FloatingService : Service() {
 
         INTENT_COMMAND_EXIT -> {
           if (state.countdownState.overlayState.isVisible.value == true) {
-//            overlayController.exitCountdown()
+            overlayController.exitCountdown()
           }
           if (state.stopwatchState.overlayState.isVisible.value == true) {
-//            overlayController.exitStopwatch()
+            overlayController.exitStopwatch()
           }
           return START_NOT_STICKY
         }

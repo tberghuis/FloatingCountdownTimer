@@ -33,3 +33,8 @@ XFloatingService
 XOverlayController
 XOverlayViewHolder
 XOverlayViewController
+
+
+FloatingService - uncomment AlarmController
+
+find in files tmp
