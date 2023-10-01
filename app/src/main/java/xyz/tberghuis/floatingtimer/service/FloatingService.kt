@@ -37,13 +37,13 @@ class XFloatingService : Service() {
 //  private var isStarted = false
 
   // todo make private
-  lateinit var overlayController: OverlayController
+  lateinit var overlayController: XOverlayController
   lateinit var alarmController: AlarmController
 
   override fun onCreate() {
     super.onCreate()
     ScreenEz.with(this.applicationContext)
-    overlayController = OverlayController(this)
+    overlayController = XOverlayController(this)
     alarmController = AlarmController(this)
   }
 
