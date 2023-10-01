@@ -2,10 +2,10 @@ package xyz.tberghuis.floatingtimer
 
 import android.view.Gravity
 import android.view.WindowManager
-import xyz.tberghuis.floatingtimer.service.FloatingService
+import xyz.tberghuis.floatingtimer.service.XFloatingService
 import xyz.tberghuis.floatingtimer.service.overlayViewFactory
 
-class OverlayViewHolder(val params: WindowManager.LayoutParams, service: FloatingService) {
+class OverlayViewHolder(val params: WindowManager.LayoutParams, service: XFloatingService) {
   val view = overlayViewFactory(service)
 
   init {

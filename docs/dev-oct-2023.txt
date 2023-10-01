@@ -27,3 +27,7 @@ bound service refactor
 notification IMMEDIATE
 
 fix order service onDestroy
+
+
+XFloatingService
+

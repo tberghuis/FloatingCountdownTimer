@@ -30,7 +30,7 @@ import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 
-class FloatingService : Service() {
+class XFloatingService : Service() {
   private val job = SupervisorJob()
   val scope = CoroutineScope(Dispatchers.Default + job)
   val state = ServiceState(scope)
@@ -107,7 +107,7 @@ class FloatingService : Service() {
         PendingIntent.getActivity(this, 0, notificationIntent, FLAG_IMMUTABLE)
       }
 
-    val exitIntent = Intent(applicationContext, FloatingService::class.java)
+    val exitIntent = Intent(applicationContext, XFloatingService::class.java)
     exitIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_EXIT)
     val exitPendingIntent = PendingIntent.getService(
       applicationContext,
@@ -116,7 +116,7 @@ class FloatingService : Service() {
       FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
     )
 
-    val resetIntent = Intent(applicationContext, FloatingService::class.java)
+    val resetIntent = Intent(applicationContext, XFloatingService::class.java)
     resetIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_RESET)
     val resetPendingIntent = PendingIntent.getService(
       applicationContext,
