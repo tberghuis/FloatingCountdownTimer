@@ -24,9 +24,10 @@ import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
+import xyz.tberghuis.floatingtimer.tmp2.FloatingService
 import kotlin.math.roundToInt
 
-class AlarmController(val service: XFloatingService) {
+class AlarmController(val service: FloatingService) {
   private var player: MediaPlayer? = null
   private var pendingAlarm: PendingIntent? = null
   private var vibrate = true

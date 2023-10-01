@@ -32,6 +32,7 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.service.AlarmController
 import xyz.tberghuis.floatingtimer.service.ServiceState
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 
@@ -41,7 +42,7 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
   val state = ServiceState(scope)
 
   lateinit var overlayController: OverlayController
-//  lateinit var alarmController: AlarmController
+  lateinit var alarmController: AlarmController
 
   private val savedStateRegistryController = SavedStateRegistryController.create(this)
 
@@ -56,7 +57,7 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     savedStateRegistryController.performRestore(null)
 
     overlayController = OverlayController(this)
-//    alarmController = AlarmController(this)
+    alarmController = AlarmController(this)
   }
 
 //  override fun onBind(intent: Intent): IBinder? {
