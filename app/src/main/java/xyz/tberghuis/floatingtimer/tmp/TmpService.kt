@@ -3,11 +3,11 @@ package xyz.tberghuis.floatingtimer.tmp
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
-import android.app.Service
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import androidx.lifecycle.LifecycleService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -17,7 +17,7 @@ import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 
-class TmpService : Service() {
+class TmpService : LifecycleService() {
   private val job = SupervisorJob()
   val scope = CoroutineScope(Dispatchers.Default + job)
   private val binder = LocalBinder()
@@ -34,12 +34,13 @@ class TmpService : Service() {
     tmpOverlayController = TmpOverlayController(this)
   }
 
-
-  override fun onBind(intent: Intent?): IBinder? {
+  override fun onBind(intent: Intent): IBinder? {
+    super.onBind(intent)
     return binder
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    super.onStartCommand(intent, flags, startId)
     logd("onStartCommand")
 
     return START_NOT_STICKY
