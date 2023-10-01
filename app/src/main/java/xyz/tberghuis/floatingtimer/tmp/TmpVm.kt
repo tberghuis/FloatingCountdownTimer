@@ -14,8 +14,8 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
     override fun onServiceConnected(className: ComponentName, service: IBinder) {
       val binder = service as TmpService.LocalBinder
       val tmpService = binder.getService()
-      // ...
       logd("onServiceConnected tmpService $tmpService")
+      tmpService.tmpOverlayController.addComposeView()
     }
 
     override fun onServiceDisconnected(arg0: ComponentName) {

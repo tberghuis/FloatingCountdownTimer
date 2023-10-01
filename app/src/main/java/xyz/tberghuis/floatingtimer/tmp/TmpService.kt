@@ -20,17 +20,20 @@ import xyz.tberghuis.floatingtimer.logd
 class TmpService : Service() {
   private val job = SupervisorJob()
   val scope = CoroutineScope(Dispatchers.Default + job)
-
-  override fun onCreate() {
-    super.onCreate()
-  }
-
-
   private val binder = LocalBinder()
 
   inner class LocalBinder : Binder() {
     fun getService(): TmpService = this@TmpService
   }
+
+  lateinit var tmpOverlayController: TmpOverlayController
+
+
+  override fun onCreate() {
+    super.onCreate()
+    tmpOverlayController = TmpOverlayController(this)
+  }
+
 
   override fun onBind(intent: Intent?): IBinder? {
     return binder
