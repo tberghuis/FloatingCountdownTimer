@@ -13,8 +13,6 @@ notification - set foreground service behavior IMMEDIATE
 
 ###############
 
-update dependencies
-
 try 
 class YourService() : LifecycleService(), SavedStateRegistryOwner
 see if prod crashes and ANR disapear
@@ -23,18 +21,3 @@ https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-servi
 https://gist.github.com/KONFeature/2f84436e1c0a1926505cac934d470f90
 
 bound service refactor
-
-notification IMMEDIATE
-
-fix order service onDestroy
-
-
-XFloatingService
-XOverlayController
-XOverlayViewHolder
-XOverlayViewController
-
-
-FloatingService - uncomment AlarmController
-
-find in files tmp
