@@ -116,3 +116,6 @@ set timer text size with dp, not sp
 
 try new lib for compose overlay
   https://github.com/KuhakuPixel/UberAlles/
+
+
+bind service refactor
