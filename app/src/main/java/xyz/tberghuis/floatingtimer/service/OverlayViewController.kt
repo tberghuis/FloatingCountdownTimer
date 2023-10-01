@@ -6,7 +6,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.tmp2.OverlayViewHolder
 
 class OverlayViewController(
   val createOverlayViewHolder: () -> OverlayViewHolder,

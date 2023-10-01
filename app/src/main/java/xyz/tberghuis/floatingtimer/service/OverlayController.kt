@@ -28,7 +28,6 @@ import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchBubble
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
-import xyz.tberghuis.floatingtimer.tmp2.OverlayViewHolder
 import kotlin.math.max
 import kotlin.math.min
 
