@@ -136,8 +136,8 @@ class FloatingService : Service() {
   }
 
   override fun onDestroy() {
-    super.onDestroy()
     job.cancel()
+    super.onDestroy()
   }
 
   override fun onConfigurationChanged(newConfig: Configuration) {
