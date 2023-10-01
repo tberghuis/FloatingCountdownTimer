@@ -13,9 +13,9 @@ fun TmpScreen(
   Column {
     Text("tmp screen ${vm.fsdfsd}")
     Button(onClick = {
-      vm.willitblend()
+      vm.bindService()
     }) {
-      Text("button")
+      Text("bind service")
     }
   }
 }

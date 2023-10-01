@@ -7,7 +7,7 @@ import xyz.tberghuis.floatingtimer.logd
 class TmpVm(application: Application) : AndroidViewModel(application) {
   val fsdfsd = "fsdfsd"
 
-  fun willitblend() {
-    logd("willitblend")
+  fun bindService() {
+    logd("bindService")
   }
 }
