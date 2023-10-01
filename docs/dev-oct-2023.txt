@@ -4,10 +4,17 @@ investigate prod crash stack traces
 
 cull *.txt
 
-update dependencies
 
 cull tmp code
 
 xml view official docs
 
 notification - set foreground service behavior IMMEDIATE
+
+###############
+
+update dependencies
+
+try 
+class YourService() : LifecycleService(), SavedStateRegistryOwner
+see if prod crashes and ANR disapear
