@@ -8,6 +8,9 @@ import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
+import androidx.savedstate.SavedStateRegistry
+import androidx.savedstate.SavedStateRegistryController
+import androidx.savedstate.SavedStateRegistryOwner
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -17,7 +20,7 @@ import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 
-class TmpService : LifecycleService() {
+class TmpService : LifecycleService(), SavedStateRegistryOwner {
   private val job = SupervisorJob()
   val scope = CoroutineScope(Dispatchers.Default + job)
   private val binder = LocalBinder()
@@ -28,9 +31,17 @@ class TmpService : LifecycleService() {
 
   lateinit var tmpOverlayController: TmpOverlayController
 
+  private val savedStateRegistryController = SavedStateRegistryController.create(this)
+
+  override val savedStateRegistry: SavedStateRegistry
+    get() = savedStateRegistryController.savedStateRegistry
 
   override fun onCreate() {
     super.onCreate()
+
+    savedStateRegistryController.performAttach()
+    savedStateRegistryController.performRestore(null)
+
     tmpOverlayController = TmpOverlayController(this)
   }
 
