@@ -57,7 +57,10 @@ class TmpService : Service() {
 
     val notification: Notification =
       NotificationCompat.Builder(this, NOTIFICATION_CHANNEL).setContentTitle("Floating Timer")
-        .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent).build()
+        .setSmallIcon(R.drawable.ic_alarm)
+        .setContentIntent(pendingIntent)
+        .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
+        .build()
     return notification
   }
 

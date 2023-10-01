@@ -15,6 +15,7 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
       val binder = service as TmpService.LocalBinder
       val tmpService = binder.getService()
       logd("onServiceConnected tmpService $tmpService")
+      tmpService.startForeground()
       tmpService.tmpOverlayController.addComposeView()
     }
 

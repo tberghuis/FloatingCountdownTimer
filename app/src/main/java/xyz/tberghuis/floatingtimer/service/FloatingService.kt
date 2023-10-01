@@ -131,7 +131,9 @@ class FloatingService : Service() {
           0, "Reset", resetPendingIntent
         ).addAction(
           0, "Exit", exitPendingIntent
-        ).build()
+        )
+        .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
+        .build()
     return notification
   }
 
