@@ -22,3 +22,5 @@ https://stackoverflow.com/questions/76177695/possible-to-use-a-composeview-in-an
 https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
 
 bound service refactor
+
+notification IMMEDIATE
