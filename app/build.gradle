@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "xyz.tberghuis.floatingtimer"
@@ -63,11 +63,11 @@ dependencies {
     implementation 'androidx.compose.ui:ui-tooling-preview'
     debugImplementation 'androidx.compose.ui:ui-tooling'
 
-    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
 
 
 //    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
 //    implementation 'androidx.activity:activity-compose:1.6.1'
     implementation 'androidx.activity:activity-compose:1.7.2'
 
@@ -81,7 +81,7 @@ dependencies {
     def billing_version = "6.0.1"
     implementation "com.android.billingclient:billing-ktx:$billing_version"
 
-    implementation "androidx.navigation:navigation-compose:2.6.0"
+    implementation "androidx.navigation:navigation-compose:2.7.3"
 
     // todo learn proper gradle tasks for android library
     // forked https://github.com/godaddy/compose-color-picker

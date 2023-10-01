@@ -115,7 +115,7 @@ class AlarmController(val service: FloatingService) {
                 AlarmManager.AlarmClockInfo(
                   System.currentTimeMillis() + (countdownState.countdownSeconds * 1000),
                   pendingAlarm
-                ), pendingAlarm
+                ), pendingAlarm!!
               )
             } catch (e: SecurityException) {
               Log.e("AlarmController", "SecurityException: $e")
