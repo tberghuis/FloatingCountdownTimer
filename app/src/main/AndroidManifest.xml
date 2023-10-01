@@ -35,7 +35,6 @@
         <service android:name=".service.FloatingService" />
         <receiver android:name=".receivers.AlarmReceiver" />
 
-        <!-- todo remove -->
 <!--        <activity-->
 <!--            android:name=".tmp.TmpActivity"-->
 <!--            android:exported="true"-->
