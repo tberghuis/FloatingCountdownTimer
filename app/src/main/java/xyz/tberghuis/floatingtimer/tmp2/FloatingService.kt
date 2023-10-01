@@ -9,6 +9,10 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import androidx.lifecycle.LifecycleService
+import androidx.savedstate.SavedStateRegistry
+import androidx.savedstate.SavedStateRegistryController
+import androidx.savedstate.SavedStateRegistryOwner
 import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +35,7 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.ServiceState
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 
-class FloatingService : Service() {
+class FloatingService : LifecycleService(), SavedStateRegistryOwner {
   private val job = SupervisorJob()
   val scope = CoroutineScope(Dispatchers.Default + job)
   val state = ServiceState(scope)
@@ -39,18 +43,29 @@ class FloatingService : Service() {
   lateinit var overlayController: OverlayController
 //  lateinit var alarmController: AlarmController
 
+  private val savedStateRegistryController = SavedStateRegistryController.create(this)
+
+  override val savedStateRegistry: SavedStateRegistry
+    get() = savedStateRegistryController.savedStateRegistry
+
   override fun onCreate() {
     super.onCreate()
     ScreenEz.with(this.applicationContext)
+
+    savedStateRegistryController.performAttach()
+    savedStateRegistryController.performRestore(null)
+
     overlayController = OverlayController(this)
 //    alarmController = AlarmController(this)
   }
 
-  override fun onBind(intent: Intent?): IBinder? {
-    return null
-  }
+//  override fun onBind(intent: Intent): IBinder? {
+//    super.onBind(intent)
+//    return null
+//  }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    super.onStartCommand(intent, flags, startId)
     logd("FloatingService onStartCommand")
     postOngoingActivityNotification()
 
