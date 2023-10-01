@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.Service
 import android.content.Intent
+import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import kotlinx.coroutines.CoroutineScope
@@ -24,8 +25,15 @@ class TmpService : Service() {
     super.onCreate()
   }
 
+
+  private val binder = LocalBinder()
+
+  inner class LocalBinder : Binder() {
+    fun getService(): TmpService = this@TmpService
+  }
+
   override fun onBind(intent: Intent?): IBinder? {
-    return null
+    return binder
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

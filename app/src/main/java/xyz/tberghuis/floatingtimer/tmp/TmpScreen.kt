@@ -11,7 +11,7 @@ fun TmpScreen(
   vm: TmpVm = viewModel()
 ) {
   Column {
-    Text("tmp screen ${vm.fsdfsd}")
+    Text("tmp screen")
     Button(onClick = {
       vm.bindService()
     }) {

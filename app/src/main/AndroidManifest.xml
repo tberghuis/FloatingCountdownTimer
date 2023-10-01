@@ -32,7 +32,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <service android:name=".service.FloatingService" />
+        <receiver android:name=".receivers.AlarmReceiver" />
 
         <!-- todo remove -->
         <activity
@@ -42,15 +43,10 @@
             android:theme="@style/Theme.FloatingTimer">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name=".tmp.TmpService" />
 
-
-        <!--        <service android:name=".tmp.MaccasService" />-->
-
-        <service android:name=".service.FloatingService" />
-        <receiver android:name=".receivers.AlarmReceiver" />
     </application>
 </manifest>
