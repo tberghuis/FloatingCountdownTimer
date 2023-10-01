@@ -4,10 +4,8 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
-import android.app.Service
 import android.content.Intent
 import android.content.res.Configuration
-import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
 import androidx.savedstate.SavedStateRegistry
@@ -164,5 +162,4 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
       state.configurationChanged.emit(Unit)
     }
   }
-
 }
