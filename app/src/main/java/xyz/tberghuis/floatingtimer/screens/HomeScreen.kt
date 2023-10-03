@@ -4,9 +4,8 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.provider.Settings
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -49,6 +48,10 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.withStyle
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.shouldShowRationale
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
@@ -60,31 +63,23 @@ import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen() {
+  LaunchPostNotificationsPermissionRequest()
+
   val vm: HomeViewModel = viewModel()
   val context = LocalContext.current
-  val launcher = rememberLauncherForActivityResult(
-      contract = ActivityResultContracts.RequestPermission(),
-      onResult = { })
-  LaunchedEffect(Unit) {
-    vm.promptNotificationPermission(context) {
-      launcher.launch(Manifest.permission.POST_NOTIFICATIONS)
-    }
-  }
-
   val navController = LocalNavController.current
 
   Scaffold(topBar = {
-
     TopAppBar(
-        title = { Text(stringResource(R.string.app_name)) },
-        modifier = Modifier,
-        actions = {
-          IconButton(onClick = {
-            navController.navigate("settings")
-          }) {
-            Icon(Icons.Filled.Settings, stringResource(R.string.settings))
-          }
-        },
+      title = { Text(stringResource(R.string.app_name)) },
+      modifier = Modifier,
+      actions = {
+        IconButton(onClick = {
+          navController.navigate("settings")
+        }) {
+          Icon(Icons.Filled.Settings, stringResource(R.string.settings))
+        }
+      },
     )
 
   }, content = {
@@ -98,11 +93,11 @@ fun HomeScreen() {
       Button(onClick = {
         logd("go to settings")
         val intent = Intent(
-            Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + context.packageName)
+          Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + context.packageName)
         )
 
         startActivityForResult(
-            context as Activity, intent, REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION, null
+          context as Activity, intent, REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION, null
         )
         vm.showGrantOverlayDialog = false
 
@@ -128,18 +123,18 @@ fun HomeScreenContent(paddingValues: PaddingValues) {
   val focusManager = LocalFocusManager.current
 
   Column(
-      modifier = Modifier
-          .padding(paddingValues)
-          .fillMaxSize()
-          .verticalScroll(rememberScrollState())
-          .pointerInput(Unit) {
-            detectTapGestures(onTap = {
-              focusManager.clearFocus()
-              logd("on tap")
-            })
-          },
-      verticalArrangement = Arrangement.Center,
-      horizontalAlignment = Alignment.CenterHorizontally
+    modifier = Modifier
+      .padding(paddingValues)
+      .fillMaxSize()
+      .verticalScroll(rememberScrollState())
+      .pointerInput(Unit) {
+        detectTapGestures(onTap = {
+          focusManager.clearFocus()
+          logd("on tap")
+        })
+      },
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally
   ) {
     CreateCountdownCard()
     CreateStopwatchCard()
@@ -148,24 +143,39 @@ fun HomeScreenContent(paddingValues: PaddingValues) {
 
 
 fun Modifier.onFocusSelectAll(textFieldValueState: MutableState<TextFieldValue>): Modifier =
-    composed(inspectorInfo = debugInspectorInfo {
-      name = "textFieldValueState"
-      properties["textFieldValueState"] = textFieldValueState
-    }) {
-      var triggerEffect by remember {
-        mutableStateOf<Boolean?>(null)
-      }
-      if (triggerEffect != null) {
-        LaunchedEffect(triggerEffect) {
-          val tfv = textFieldValueState.value
-          textFieldValueState.value = tfv.copy(selection = TextRange(0, tfv.text.length))
-        }
-      }
-      Modifier.onFocusChanged { focusState ->
-        if (focusState.isFocused) {
-          triggerEffect = triggerEffect?.let { bool ->
-            !bool
-          } ?: true
-        }
+  composed(inspectorInfo = debugInspectorInfo {
+    name = "textFieldValueState"
+    properties["textFieldValueState"] = textFieldValueState
+  }) {
+    var triggerEffect by remember {
+      mutableStateOf<Boolean?>(null)
+    }
+    if (triggerEffect != null) {
+      LaunchedEffect(triggerEffect) {
+        val tfv = textFieldValueState.value
+        textFieldValueState.value = tfv.copy(selection = TextRange(0, tfv.text.length))
       }
     }
+    Modifier.onFocusChanged { focusState ->
+      if (focusState.isFocused) {
+        triggerEffect = triggerEffect?.let { bool ->
+          !bool
+        } ?: true
+      }
+    }
+  }
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun LaunchPostNotificationsPermissionRequest() {
+  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+    return
+  }
+  val notificationsPermissionState =
+    rememberPermissionState(Manifest.permission.POST_NOTIFICATIONS)
+  if (!notificationsPermissionState.status.isGranted && !notificationsPermissionState.status.shouldShowRationale) {
+    LaunchedEffect(Unit) {
+      notificationsPermissionState.launchPermissionRequest()
+    }
+  }
+}
