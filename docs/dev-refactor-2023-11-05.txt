@@ -4,3 +4,4 @@ update dependencies
 work on FloatingCountdownTimer-refactor-tmp
   start simple...
 
+can i remove kapt plugin gradle?
