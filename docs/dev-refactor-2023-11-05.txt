@@ -2,4 +2,8 @@ delete branch dev-refactor, cull txt
 update dependencies
 work on FloatingCountdownTimer-refactor-tmp
   start simple...
-  
+
+git push -d <remote_name> <branchname>
+
+git push -d origin dev-refactor
+git push -d origin dev-refactor-23-07-09
