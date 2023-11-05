@@ -12,7 +12,7 @@ import xyz.tberghuis.floatingtimer.tmp2.FloatingService
 
 class TmpVm(private val application: Application) : AndroidViewModel(application) {
 
-  // init bind then .first()
+  // before use if service not running bindFloatingService then filterNotNull().first()
   private val floatingService = MutableStateFlow<FloatingService?>(null)
 
   fun bindFloatingService() {

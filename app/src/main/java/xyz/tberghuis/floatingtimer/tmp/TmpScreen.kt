@@ -17,5 +17,11 @@ fun TmpScreen(
     }) {
       Text("bind service")
     }
+    Button(onClick = {
+      vm.addStopwatch()
+    }) {
+      Text("addStopwatch")
+    }
+
   }
 }
