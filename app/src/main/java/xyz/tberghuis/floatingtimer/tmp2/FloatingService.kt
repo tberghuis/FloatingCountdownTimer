@@ -31,7 +31,7 @@ import xyz.tberghuis.floatingtimer.logd
 class FloatingService : LifecycleService(), SavedStateRegistryOwner {
   private val job = SupervisorJob()
 
-  // Main.immediate to prevent ANRs user input...
+  // Main.immediate to prevent ANRs user input... ???
   val scope = CoroutineScope(Dispatchers.Default + job)
   lateinit var overlayController: OverlayController
 
