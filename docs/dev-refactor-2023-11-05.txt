@@ -15,3 +15,11 @@ move CountDownTimer out of alarmcontroller
   ???
 
 cull xxx tmp, find in files
+
+step 1, stopwatch add view
+
+feature, button "exit all timers"
+
+step 1, bound service
+
+write a bunch of manual tests for each line of code removed from Xxx classes
