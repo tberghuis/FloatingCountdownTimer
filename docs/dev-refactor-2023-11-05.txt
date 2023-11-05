@@ -14,7 +14,7 @@ use withContext(Main.immediate) to collect flows
 move CountDownTimer out of alarmcontroller
   ???
 
-cull xxx tmp, find in files
+cull xxx, tmp, todo, find in files
 
 step 1, stopwatch add view
 
