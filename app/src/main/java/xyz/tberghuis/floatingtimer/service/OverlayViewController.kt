@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
+// todo remove
 class OverlayViewController(
   val createOverlayViewHolder: () -> OverlayViewHolder,
   val isVisible: Flow<Boolean?>,

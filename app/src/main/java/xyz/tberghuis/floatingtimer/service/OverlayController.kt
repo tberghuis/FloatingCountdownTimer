@@ -31,7 +31,8 @@ import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 import kotlin.math.max
 import kotlin.math.min
 
-class OverlayController(val service: FloatingService) {
+// todo replace
+class XxxOverlayController(val service: FloatingService) {
   private val countdownState = service.state.countdownState
   private val countdownIsVisible: Flow<Boolean?>
     get() = countdownState.overlayState.isVisible
