@@ -7,3 +7,7 @@ work on FloatingCountdownTimer-refactor-tmp
 can i remove kapt plugin gradle?
 
 refactor - bound service
+
+use withContext(Main.immediate) to collect flows
+  will this prevent ANRs
+  
