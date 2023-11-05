@@ -1,14 +1,26 @@
-package xyz.tberghuis.floatingtimer.service
+package xyz.tberghuis.floatingtimer.tmp2
 
+import android.graphics.PixelFormat
 import android.view.Gravity
 import android.view.WindowManager
 import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
+import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
+import xyz.tberghuis.floatingtimer.service.FloatingService
 
-// todo remove
-class OverlayViewHolder(val params: WindowManager.LayoutParams, val service: FloatingService) {
+class TimerViewHolder(val service: FloatingService) {
+  val params = WindowManager.LayoutParams(
+    TIMER_SIZE_PX,
+    TIMER_SIZE_PX,
+    0,
+    0,
+    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+    PixelFormat.TRANSLUCENT
+  )
   val view = createComposeView()
+
   init {
     params.gravity = Gravity.TOP or Gravity.LEFT
   }
