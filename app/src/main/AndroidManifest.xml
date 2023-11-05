@@ -32,7 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".service.FloatingService" />
+<!--        <service android:name=".service.FloatingService" />-->
         <receiver android:name=".receivers.AlarmReceiver" />
 
 <!--     xxx   todo remove-->
@@ -46,7 +46,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <service android:name=".tmp.TmpService" />-->
+        <service android:name=".tmp2.FloatingService" />
 
     </application>
 </manifest>
