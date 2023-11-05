@@ -7,7 +7,7 @@ import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 
 // todo remove
-class OverlayViewHolder(val params: WindowManager.LayoutParams, val service: FloatingService) {
+class OverlayViewHolder(val params: WindowManager.LayoutParams, val service: XxxFloatingService) {
   val view = createComposeView()
   init {
     params.gravity = Gravity.TOP or Gravity.LEFT

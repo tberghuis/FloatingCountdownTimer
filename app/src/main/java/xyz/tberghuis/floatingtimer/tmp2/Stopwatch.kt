@@ -1,6 +1,5 @@
 package xyz.tberghuis.floatingtimer.tmp2
 
-import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.OverlayState
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 

@@ -35,12 +35,12 @@ import xyz.tberghuis.floatingtimer.tmp2.OverlayController
 
 // https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
 
-class FloatingService : LifecycleService(), SavedStateRegistryOwner {
+class XxxFloatingService : LifecycleService(), SavedStateRegistryOwner {
   private val job = SupervisorJob()
   val scope = CoroutineScope(Dispatchers.Default + job)
   val state = ServiceState(scope)
 
-  lateinit var overlayController: OverlayController
+  lateinit var overlayController: XxxOverlayController
   lateinit var alarmController: AlarmController
 
   private val savedStateRegistryController = SavedStateRegistryController.create(this)
@@ -55,7 +55,7 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     savedStateRegistryController.performAttach()
     savedStateRegistryController.performRestore(null)
 
-    overlayController = OverlayController(this)
+    overlayController = XxxOverlayController(this)
     alarmController = AlarmController(this)
   }
 
@@ -121,7 +121,7 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
         PendingIntent.getActivity(this, 0, notificationIntent, FLAG_IMMUTABLE)
       }
 
-    val exitIntent = Intent(applicationContext, FloatingService::class.java)
+    val exitIntent = Intent(applicationContext, XxxFloatingService::class.java)
     exitIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_EXIT)
     val exitPendingIntent = PendingIntent.getService(
       applicationContext,
@@ -130,7 +130,7 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
       FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
     )
 
-    val resetIntent = Intent(applicationContext, FloatingService::class.java)
+    val resetIntent = Intent(applicationContext, XxxFloatingService::class.java)
     resetIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_RESET)
     val resetPendingIntent = PendingIntent.getService(
       applicationContext,

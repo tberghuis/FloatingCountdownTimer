@@ -32,7 +32,7 @@ import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_CREATE
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.screens.onFocusSelectAll
-import xyz.tberghuis.floatingtimer.service.FloatingService
+import xyz.tberghuis.floatingtimer.service.XxxFloatingService
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @Preview
@@ -139,7 +139,7 @@ fun CreateCountdownCard() {
 }
 
 fun createTimer(context: Context, duration: Int) {
-  val intent = Intent(context.applicationContext, FloatingService::class.java)
+  val intent = Intent(context.applicationContext, XxxFloatingService::class.java)
   intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_COUNTDOWN_CREATE)
   intent.putExtra(EXTRA_COUNTDOWN_DURATION, duration)
   context.startForegroundService(intent)

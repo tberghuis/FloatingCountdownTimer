@@ -32,7 +32,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 // todo replace
-class XxxOverlayController(val service: FloatingService) {
+class XxxOverlayController(val service: XxxFloatingService) {
   private val countdownState = service.state.countdownState
   private val countdownIsVisible: Flow<Boolean?>
     get() = countdownState.overlayState.isVisible
