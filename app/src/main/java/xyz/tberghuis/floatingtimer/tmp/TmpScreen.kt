@@ -13,7 +13,7 @@ fun TmpScreen(
   Column {
     Text("tmp screen")
     Button(onClick = {
-      vm.bindService()
+//      vm.bindService()
     }) {
       Text("bind service")
     }
