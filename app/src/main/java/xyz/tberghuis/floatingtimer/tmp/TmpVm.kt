@@ -22,12 +22,18 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
         val binder = service as FloatingService.LocalBinder
         floatingService.value = binder.getService()
       }
+
       override fun onServiceDisconnected(arg0: ComponentName) {
         floatingService.value = null
       }
     }
     application.startForegroundService(floatingServiceIntent)
     application.bindService(floatingServiceIntent, connection, 0)
+  }
+
+
+  fun addStopwatch() {
+    floatingService.value?.overlayController?.addStopwatch()
   }
 
 

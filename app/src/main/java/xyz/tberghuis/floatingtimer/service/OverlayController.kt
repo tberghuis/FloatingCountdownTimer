@@ -127,7 +127,8 @@ class XxxOverlayController(val service: XxxFloatingService) {
     }
     clickTargetSetOnTouchListener(
       viewHolder,
-      service.state.stopwatchState.overlayState,
+//      service.state.stopwatchState.overlayState, // how was this even working???
+      overlayState,
       exitTimer,
       onDoubleTap,
       onTap
