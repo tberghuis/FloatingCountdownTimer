@@ -25,7 +25,7 @@ class OverlayController(val service: FloatingService) {
     Stopwatch(service).also {
       timerOverlaySet.add(it)
       it.viewHolder.view.setContent {
-        // todo compositionlocal it
+        // todo compositionlocal TimerBubble
         StopwatchView(it.stopwatchState)
       }
       clickTargetSetOnTouchListener(it.viewHolder, it.overlayState, {}, {}, {})
