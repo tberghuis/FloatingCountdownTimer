@@ -28,22 +28,30 @@ class OverlayController(val service: FloatingService) {
 
   fun addStopwatch() {
     logd("OverlayController addStopwatch")
-    Stopwatch(service).also {
-      timerOverlaySet.add(it)
-      it.viewHolder.view.setContent {
+    Stopwatch(service).also { stopwatch ->
+      timerOverlaySet.add(stopwatch)
+      stopwatch.viewHolder.view.setContent {
         val haloColour =
           service.application.providePreferencesRepository().haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
         CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
           // todo compositionlocal TimerBubble
-          StopwatchView(it)
+          StopwatchView(stopwatch)
         }
         LaunchedEffect(Unit) {
           // todo configurationChanged collect
           // updateClickTargetParamsWithinScreenBounds
         }
       }
-      clickTargetSetOnTouchListener(it.viewHolder, it.overlayState, {}, {}, {})
-      windowManager.addView(it.viewHolder.view, it.viewHolder.params)
+
+      clickTargetSetOnTouchListener(
+        viewHolder = stopwatch.viewHolder,
+        overlayState = stopwatch.overlayState,
+        exitTimer = {},
+        onDoubleTap = {},
+        onTap = { stopwatch.isRunningStateFlow.value = !stopwatch.isRunningStateFlow.value }
+      )
+
+      windowManager.addView(stopwatch.viewHolder.view, stopwatch.viewHolder.params)
     }
   }
 
