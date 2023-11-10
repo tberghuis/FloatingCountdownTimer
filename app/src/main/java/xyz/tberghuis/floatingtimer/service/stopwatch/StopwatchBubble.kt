@@ -30,6 +30,7 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import androidx.compose.ui.graphics.drawscope.Stroke
 import xyz.tberghuis.floatingtimer.LocalHaloColour
 
+// todo remove xxx
 @Composable
 fun StopwatchBubble(modifier: Modifier, stopwatchState: StopwatchState) {
   Box(

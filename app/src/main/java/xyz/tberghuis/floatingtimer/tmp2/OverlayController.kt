@@ -6,10 +6,16 @@ import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.WindowManager
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.IntOffset
 import com.torrydo.screenez.ScreenEz
+import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.OverlayState
 import kotlin.math.max
 import kotlin.math.min
@@ -25,8 +31,16 @@ class OverlayController(val service: FloatingService) {
     Stopwatch(service).also {
       timerOverlaySet.add(it)
       it.viewHolder.view.setContent {
-        // todo compositionlocal TimerBubble
-        StopwatchView(it.stopwatchState)
+        val haloColour =
+          service.application.providePreferencesRepository().haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
+        CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
+          // todo compositionlocal TimerBubble
+          StopwatchView(it)
+        }
+        LaunchedEffect(Unit) {
+          // todo configurationChanged collect
+          // updateClickTargetParamsWithinScreenBounds
+        }
       }
       clickTargetSetOnTouchListener(it.viewHolder, it.overlayState, {}, {}, {})
       windowManager.addView(it.viewHolder.view, it.viewHolder.params)
