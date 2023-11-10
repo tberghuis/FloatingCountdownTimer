@@ -18,6 +18,12 @@ class Stopwatch(service: FloatingService) {
   val isRunningStateFlow = MutableStateFlow(false)
   var stopwatchIncrementTask: TimerTask? = null
 
+  fun resetStopwatchState() {
+    timeElapsed.value = 0
+    isRunningStateFlow.value = false
+    stopwatchIncrementTask?.cancel()
+    stopwatchIncrementTask = null
+  }
 
   // doitwrong
   init {

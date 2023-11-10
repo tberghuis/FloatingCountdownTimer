@@ -47,7 +47,7 @@ class OverlayController(val service: FloatingService) {
         viewHolder = stopwatch.viewHolder,
         overlayState = stopwatch.overlayState,
         exitTimer = {},
-        onDoubleTap = {},
+        onDoubleTap = { stopwatch.resetStopwatchState() },
         onTap = { stopwatch.isRunningStateFlow.value = !stopwatch.isRunningStateFlow.value }
       )
 
