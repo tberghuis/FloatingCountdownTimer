@@ -14,8 +14,8 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.countdown.ProgressArc
 
 @Composable
-fun CountdownView() {
-//  val timeLeftFraction = countdownState.countdownSeconds / countdownState.durationSeconds.toFloat()
+fun CountdownView(countdown: Countdown) {
+  val timeLeftFraction = countdown.countdownSeconds / countdown.durationSeconds.toFloat()
   Box(
     modifier = Modifier
       .size(TIMER_SIZE_DP.dp)
@@ -23,10 +23,7 @@ fun CountdownView() {
       .zIndex(1f),
     contentAlignment = Alignment.Center
   ) {
-//    ProgressArc(timeLeftFraction)
-    ProgressArc(0.5f)
-//    TimeDisplay(countdownState.countdownSeconds)
-    TimeDisplay(10)
+    ProgressArc(timeLeftFraction)
+    TimeDisplay(countdown.countdownSeconds)
   }
 }
-
