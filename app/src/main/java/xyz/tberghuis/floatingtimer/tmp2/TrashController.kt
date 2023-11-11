@@ -38,7 +38,7 @@ class TrashController(
     isBubbleDragging.collect { isVisible ->
       when (isVisible) {
         true -> {
-          val newOverlay = createComposeView(service)
+          val newOverlay = createTrashView()
           overlay = newOverlay
           windowManager.addView(newOverlay, params)
         }
@@ -58,4 +58,17 @@ class TrashController(
       }
     }
   }
+
+
+  private fun createTrashView(): ComposeView {
+    val view = createComposeView(service)
+    view.setContent {
+
+      // compositionlocal trashcontroller or service
+
+      TrashOverlay()
+    }
+    return view
+  }
+
 }
