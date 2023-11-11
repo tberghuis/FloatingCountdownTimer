@@ -4,16 +4,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.IntOffset
-import kotlinx.coroutines.flow.MutableStateFlow
 
+
+// todo rename to BubbleState
 class OverlayState {
-  val isVisible = MutableStateFlow<Boolean?>(null)
   var timerOffset by mutableStateOf(IntOffset.Zero)
-
   var isTimerHoverTrash = false
-
-  fun reset() {
-    timerOffset = IntOffset.Zero
-    isTimerHoverTrash = false
-  }
 }
