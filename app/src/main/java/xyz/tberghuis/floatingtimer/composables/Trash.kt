@@ -26,10 +26,10 @@ import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.service.OverlayState
+import xyz.tberghuis.floatingtimer.service.XxxOverlayState
 
 @Composable
-fun Trash(overlayState: OverlayState) {
+fun Trash(overlayState: XxxOverlayState) {
   var trashRect by remember { mutableStateOf(Rect.Zero) }
   val isTimerDragHoveringTrash = remember {
     derivedStateOf {
@@ -74,7 +74,7 @@ fun Trash(overlayState: OverlayState) {
 }
 
 fun calcTimerIsHoverTrash(
-  overlayState: OverlayState,
+  overlayState: XxxOverlayState,
   trashRect: Rect
 ): Boolean {
   val halfTimerSize = TIMER_SIZE_PX.toFloat() / 2f

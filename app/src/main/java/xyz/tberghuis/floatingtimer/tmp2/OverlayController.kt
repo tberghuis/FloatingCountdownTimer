@@ -17,7 +17,6 @@ import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.service.OverlayState
 import kotlin.math.max
 import kotlin.math.min
 
@@ -91,7 +90,7 @@ class OverlayController(val service: FloatingService) {
     viewHolder.view.setOnTouchListener { _, event ->
       if (tapDetector.onTouchEvent(event)) {
         // just to be safe
-        overlayState.isDragging.value = false
+        trashController.isBubbleDragging.value = false
         return@setOnTouchListener true
       }
 
@@ -108,14 +107,14 @@ class OverlayController(val service: FloatingService) {
         }
 
         MotionEvent.ACTION_MOVE -> {
-          overlayState.isDragging.value = true
+          trashController.isBubbleDragging.value = true
           params.x = (paramStartDragX + (event.rawX - startDragRawX)).toInt()
           params.y = (paramStartDragY + (event.rawY - startDragRawY)).toInt()
           updateClickTargetParamsWithinScreenBounds(viewHolder, overlayState)
         }
 
         MotionEvent.ACTION_UP -> {
-          overlayState.isDragging.value = false
+          trashController.isBubbleDragging.value = false
           if (overlayState.isTimerHoverTrash) {
             overlayState.isTimerHoverTrash = false
             exitTimer()

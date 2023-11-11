@@ -7,11 +7,11 @@ import kotlin.concurrent.timerTask
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.service.OverlayState
+import xyz.tberghuis.floatingtimer.service.XxxOverlayState
 
 // todo remove xxx
 class StopwatchState(scope: CoroutineScope) {
-  val overlayState = OverlayState()
+  val overlayState = XxxOverlayState()
   val timeElapsed = mutableStateOf(0)
   val isRunningStateFlow = MutableStateFlow(false)
   var stopwatchIncrementTask: TimerTask? = null

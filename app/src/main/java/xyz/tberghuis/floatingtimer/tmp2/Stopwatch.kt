@@ -3,14 +3,11 @@ package xyz.tberghuis.floatingtimer.tmp2
 import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.service.OverlayState
-import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 import java.util.Timer
 import java.util.TimerTask
 import kotlin.concurrent.timerTask
 
 class Stopwatch(service: FloatingService) {
-  //  val stopwatchState = StopwatchState(service.scope)
   val overlayState = OverlayState()
   val viewHolder = TimerViewHolder(service)
 

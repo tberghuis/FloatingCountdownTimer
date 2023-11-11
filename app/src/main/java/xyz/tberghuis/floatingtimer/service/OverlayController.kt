@@ -93,7 +93,7 @@ class XxxOverlayController(val service: XxxFloatingService) {
   }
 
   private fun createTimerBubble(
-    overlayState: OverlayState,
+    overlayState: XxxOverlayState,
     bubble: @Composable () -> Unit,
     exitTimer: () -> Unit,
     onDoubleTap: () -> Unit,
@@ -149,7 +149,7 @@ class XxxOverlayController(val service: XxxFloatingService) {
   @SuppressLint("ClickableViewAccessibility")
   private fun clickTargetSetOnTouchListener(
     viewHolder: OverlayViewHolder,
-    overlayState: OverlayState,
+    overlayState: XxxOverlayState,
     exitTimer: () -> Unit,
     onDoubleTap: () -> Unit,
     onTap: () -> Unit
@@ -214,7 +214,7 @@ class XxxOverlayController(val service: XxxFloatingService) {
 
   private fun updateClickTargetParamsWithinScreenBounds(
     viewHolder: OverlayViewHolder,
-    overlayState: OverlayState
+    overlayState: XxxOverlayState
   ) {
     val params = viewHolder.params
     var x = params.x

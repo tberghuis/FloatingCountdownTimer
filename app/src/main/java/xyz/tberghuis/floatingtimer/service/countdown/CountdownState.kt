@@ -4,10 +4,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.flow.MutableStateFlow
-import xyz.tberghuis.floatingtimer.service.OverlayState
+import xyz.tberghuis.floatingtimer.service.XxxOverlayState
 
 class CountdownState {
-  val overlayState = OverlayState()
+  val overlayState = XxxOverlayState()
 
   var durationSeconds: Int = 10
   var countdownSeconds by mutableStateOf<Int>(10)

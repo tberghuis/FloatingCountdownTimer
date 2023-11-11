@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import xyz.tberghuis.floatingtimer.composables.Trash
 
 @Composable
-fun IsDraggingOverlay(overlayState: OverlayState) {
+fun IsDraggingOverlay(overlayState: XxxOverlayState) {
   Column(
     Modifier.fillMaxSize(),
     verticalArrangement = Arrangement.Bottom,
