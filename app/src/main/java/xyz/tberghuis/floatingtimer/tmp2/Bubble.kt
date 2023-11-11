@@ -7,6 +7,8 @@ abstract class Bubble(private val service: FloatingService) {
   val viewHolder = TimerViewHolder(service)
 
   fun exit() {
+    // todo move logic to overlaycontroller
+    //  bubbleSet empty stop service
     try {
       service.overlayController.windowManager.removeView(viewHolder.view)
     } catch (e: IllegalArgumentException) {
