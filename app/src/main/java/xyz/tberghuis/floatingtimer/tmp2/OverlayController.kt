@@ -7,6 +7,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.WindowManager
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -20,16 +21,15 @@ import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import kotlin.math.max
 import kotlin.math.min
 
-
 class OverlayController(val service: FloatingService) {
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
   val trashController = TrashController(windowManager, service)
 
-//  val timerOverlaySet = mutableSetOf<Stopwatch>()
   val stopwatchSet = mutableSetOf<Stopwatch>()
 
   // todo bubbleSet
+  val bubbleSet = mutableSetOf<Bubble>()
 
   fun addStopwatch() {
     logd("OverlayController addStopwatch")
@@ -50,10 +50,9 @@ class OverlayController(val service: FloatingService) {
 
       clickTargetSetOnTouchListener(
         viewHolder = stopwatch.viewHolder,
-//        overlayState = stopwatch.overlayState,
-        exitTimer = { stopwatch.exitStopwatch() },
-        onDoubleTap = { stopwatch.resetStopwatchState() },
-        onTap = { stopwatch.isRunningStateFlow.value = !stopwatch.isRunningStateFlow.value }
+        exitTimer = { stopwatch.exit() },
+        onDoubleTap = { stopwatch.reset() },
+        onTap = { stopwatch.onTap() }
       )
 
       windowManager.addView(stopwatch.viewHolder.view, stopwatch.viewHolder.params)
@@ -61,13 +60,35 @@ class OverlayController(val service: FloatingService) {
   }
 
 
+  fun addBubble(bubble: Bubble, bubbleView: @Composable () -> Unit) {
+    logd("OverlayController addBubble")
+    bubbleSet.add(bubble)
+
+    bubble.viewHolder.view.setContent {
+      val haloColour =
+        service.application.providePreferencesRepository().haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
+      CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
+        // todo provide bubble
+        bubbleView()
+      }
+      LaunchedEffect(Unit) {
+        // todo configurationChanged collect
+        // updateClickTargetParamsWithinScreenBounds
+      }
+    }
+
+    clickTargetSetOnTouchListener(
+      viewHolder = bubble.viewHolder,
+      exitTimer = { bubble.exit() },
+      onDoubleTap = { bubble.reset() },
+      onTap = { bubble.onTap() }
+    )
+    windowManager.addView(bubble.viewHolder.view, bubble.viewHolder.params)
+
+  }
 
 
   // todo addBubble
-
-
-
-
 
 
   @SuppressLint("ClickableViewAccessibility")
