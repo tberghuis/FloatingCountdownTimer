@@ -1,6 +1,4 @@
 
-update dependencies
-
 work on FloatingCountdownTimer-refactor-tmp
   start simple...
 
@@ -28,3 +26,13 @@ service ondestroy, cancel alarms ???
 
 start stop stopwatch
 drag to trash....
+
+configuration change
+
+countdown timer
+
+Stopwatch, Countdown : Bubble()
+  override exit
+alarm contoller
+
+print code to cull, write tests, cross out safe to cull
