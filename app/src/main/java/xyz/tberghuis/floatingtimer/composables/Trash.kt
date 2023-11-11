@@ -29,7 +29,7 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.XxxOverlayState
 
 @Composable
-fun Trash(overlayState: XxxOverlayState) {
+fun XxxTrash(overlayState: XxxOverlayState) {
   var trashRect by remember { mutableStateOf(Rect.Zero) }
   val isTimerDragHoveringTrash = remember {
     derivedStateOf {

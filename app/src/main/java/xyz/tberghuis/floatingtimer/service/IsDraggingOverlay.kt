@@ -6,7 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import xyz.tberghuis.floatingtimer.composables.Trash
+import xyz.tberghuis.floatingtimer.composables.XxxTrash
 
 @Composable
 fun IsDraggingOverlay(overlayState: XxxOverlayState) {
@@ -15,6 +15,6 @@ fun IsDraggingOverlay(overlayState: XxxOverlayState) {
     verticalArrangement = Arrangement.Bottom,
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
-    Trash(overlayState)
+    XxxTrash(overlayState)
   }
 }
