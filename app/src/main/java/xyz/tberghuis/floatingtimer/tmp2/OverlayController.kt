@@ -26,37 +26,14 @@ class OverlayController(val service: FloatingService) {
 
   val trashController = TrashController(windowManager, service)
 
-  val stopwatchSet = mutableSetOf<Stopwatch>()
-
   // todo bubbleSet
   val bubbleSet = mutableSetOf<Bubble>()
 
   fun addStopwatch() {
     logd("OverlayController addStopwatch")
-    Stopwatch(service).also { stopwatch ->
-      stopwatchSet.add(stopwatch)
-      stopwatch.viewHolder.view.setContent {
-        val haloColour =
-          service.application.providePreferencesRepository().haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
-        CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-          // todo compositionlocal TimerBubble
-          StopwatchView(stopwatch)
-        }
-        LaunchedEffect(Unit) {
-          // todo configurationChanged collect
-          // updateClickTargetParamsWithinScreenBounds
-        }
-      }
-
-      clickTargetSetOnTouchListener(
-        viewHolder = stopwatch.viewHolder,
-        exitTimer = { stopwatch.exit() },
-        onDoubleTap = { stopwatch.reset() },
-        onTap = { stopwatch.onTap() }
-      )
-
-      windowManager.addView(stopwatch.viewHolder.view, stopwatch.viewHolder.params)
-    }
+    val stopwatch = Stopwatch(service)
+    val stopwatchView = @Composable { StopwatchView(stopwatch) }
+    addBubble(stopwatch, stopwatchView)
   }
 
 
