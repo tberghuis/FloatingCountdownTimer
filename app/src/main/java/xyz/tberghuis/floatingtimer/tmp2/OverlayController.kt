@@ -12,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.IntOffset
 import com.torrydo.screenez.ScreenEz
+import kotlinx.coroutines.flow.MutableStateFlow
 import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.logd
@@ -24,7 +25,10 @@ import kotlin.math.min
 class OverlayController(val service: FloatingService) {
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
+  val trashController = TrashController(windowManager, service)
+
   val timerOverlaySet = mutableSetOf<Stopwatch>()
+
 
   fun addStopwatch() {
     logd("OverlayController addStopwatch")

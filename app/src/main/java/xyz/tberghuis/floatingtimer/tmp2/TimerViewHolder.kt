@@ -18,17 +18,19 @@ class TimerViewHolder(val service: FloatingService) {
     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
     PixelFormat.TRANSLUCENT
   )
-  val view = createComposeView()
+  val view = createComposeView(service)
 
   init {
     params.gravity = Gravity.TOP or Gravity.LEFT
   }
+}
 
-  // https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
-  private fun createComposeView(): ComposeView {
-    return ComposeView(service).apply {
-      setViewTreeSavedStateRegistryOwner(service)
-      setViewTreeLifecycleOwner(service)
-    }
+
+// https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
+fun createComposeView(service: FloatingService): ComposeView {
+  return ComposeView(service).apply {
+    setViewTreeSavedStateRegistryOwner(service)
+    setViewTreeLifecycleOwner(service)
   }
 }
+
