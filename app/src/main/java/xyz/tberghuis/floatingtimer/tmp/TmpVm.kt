@@ -36,5 +36,9 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
     floatingService.value?.overlayController?.addStopwatch()
   }
 
+  fun addCountdown() {
+    floatingService.value?.overlayController?.addCountdown()
+  }
+
 
 }

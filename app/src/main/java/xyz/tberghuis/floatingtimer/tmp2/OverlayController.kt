@@ -13,7 +13,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.IntOffset
 import com.torrydo.screenez.ScreenEz
-import kotlinx.coroutines.flow.MutableStateFlow
 import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.logd
@@ -34,6 +33,13 @@ class OverlayController(val service: FloatingService) {
     val stopwatch = Stopwatch(service)
     val stopwatchView = @Composable { StopwatchView(stopwatch) }
     addBubble(stopwatch, stopwatchView)
+  }
+
+  fun addCountdown() {
+    logd("OverlayController addStopwatch")
+    val countdown = Countdown(service)
+    val countdownView = @Composable { CountdownView() }
+    addBubble(countdown, countdownView)
   }
 
 
