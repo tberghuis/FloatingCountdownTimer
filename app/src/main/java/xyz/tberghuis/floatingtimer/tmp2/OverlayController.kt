@@ -48,7 +48,7 @@ class OverlayController(val service: FloatingService) {
 
       clickTargetSetOnTouchListener(
         viewHolder = stopwatch.viewHolder,
-        overlayState = stopwatch.overlayState,
+//        overlayState = stopwatch.overlayState,
         exitTimer = {},
         onDoubleTap = { stopwatch.resetStopwatchState() },
         onTap = { stopwatch.isRunningStateFlow.value = !stopwatch.isRunningStateFlow.value }
@@ -62,7 +62,7 @@ class OverlayController(val service: FloatingService) {
   @SuppressLint("ClickableViewAccessibility")
   private fun clickTargetSetOnTouchListener(
     viewHolder: TimerViewHolder,
-    overlayState: OverlayState,
+//    overlayState: OverlayState,
     exitTimer: () -> Unit,
     onDoubleTap: () -> Unit,
     onTap: () -> Unit
@@ -110,15 +110,16 @@ class OverlayController(val service: FloatingService) {
           trashController.isBubbleDragging.value = true
           params.x = (paramStartDragX + (event.rawX - startDragRawX)).toInt()
           params.y = (paramStartDragY + (event.rawY - startDragRawY)).toInt()
-          updateClickTargetParamsWithinScreenBounds(viewHolder, overlayState)
+          updateClickTargetParamsWithinScreenBounds(viewHolder)
         }
 
         MotionEvent.ACTION_UP -> {
           trashController.isBubbleDragging.value = false
-          if (overlayState.isTimerHoverTrash) {
-            overlayState.isTimerHoverTrash = false
-            exitTimer()
-          }
+          // todo
+//          if (overlayState.isTimerHoverTrash) {
+//            overlayState.isTimerHoverTrash = false
+//            exitTimer()
+//          }
         }
       }
       false
@@ -127,7 +128,7 @@ class OverlayController(val service: FloatingService) {
 
   private fun updateClickTargetParamsWithinScreenBounds(
     viewHolder: TimerViewHolder,
-    overlayState: OverlayState
+//    overlayState: OverlayState
   ) {
     val params = viewHolder.params
     var x = params.x
@@ -144,8 +145,7 @@ class OverlayController(val service: FloatingService) {
       // this was happening in prod, can't reproduce
       Log.e("OverlayController", "IllegalArgumentException: $e")
     }
-    overlayState.timerOffset = IntOffset(params.x, params.y)
+//    overlayState.timerOffset = IntOffset(params.x, params.y)
+    trashController.bubbleDraggingPosition.value = IntOffset(params.x, params.y)
   }
-
-
 }

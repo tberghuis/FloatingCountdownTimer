@@ -7,7 +7,7 @@ import androidx.compose.ui.unit.IntOffset
 
 
 // todo rename to BubbleState
-class OverlayState {
-  var timerOffset by mutableStateOf(IntOffset.Zero)
-  var isTimerHoverTrash = false
-}
+//class OverlayState {
+//  var timerOffset by mutableStateOf(IntOffset.Zero)
+//  var isTimerHoverTrash = false
+//}

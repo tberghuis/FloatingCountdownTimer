@@ -8,7 +8,7 @@ import java.util.TimerTask
 import kotlin.concurrent.timerTask
 
 class Stopwatch(service: FloatingService) {
-  val overlayState = OverlayState()
+//  val overlayState = OverlayState()
   val viewHolder = TimerViewHolder(service)
 
   val timeElapsed = mutableStateOf(0)
