@@ -24,7 +24,7 @@ class TrashController(
   val bubbleDraggingPosition = mutableStateOf(IntOffset.Zero)
 
   // todo make generic
-//  var bubbleHoveringTrash: Stopwatch? = null
+  var isBubbleHoveringTrash = false
 
 
   private var overlay: ComposeView? = null

@@ -49,7 +49,7 @@ class OverlayController(val service: FloatingService) {
       clickTargetSetOnTouchListener(
         viewHolder = stopwatch.viewHolder,
 //        overlayState = stopwatch.overlayState,
-        exitTimer = {},
+        exitTimer = { stopwatch.exitStopwatch() },
         onDoubleTap = { stopwatch.resetStopwatchState() },
         onTap = { stopwatch.isRunningStateFlow.value = !stopwatch.isRunningStateFlow.value }
       )
@@ -116,10 +116,10 @@ class OverlayController(val service: FloatingService) {
         MotionEvent.ACTION_UP -> {
           trashController.isBubbleDragging.value = false
           // todo
-//          if (overlayState.isTimerHoverTrash) {
-//            overlayState.isTimerHoverTrash = false
-//            exitTimer()
-//          }
+          if (trashController.isBubbleHoveringTrash) {
+            trashController.isBubbleHoveringTrash = false
+            exitTimer()
+          }
         }
       }
       false

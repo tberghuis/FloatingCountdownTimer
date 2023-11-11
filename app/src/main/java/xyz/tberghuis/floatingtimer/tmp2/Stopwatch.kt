@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp2
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -7,8 +8,8 @@ import java.util.Timer
 import java.util.TimerTask
 import kotlin.concurrent.timerTask
 
-class Stopwatch(service: FloatingService) {
-//  val overlayState = OverlayState()
+class Stopwatch(private val service: FloatingService) {
+  //  val overlayState = OverlayState()
   val viewHolder = TimerViewHolder(service)
 
   val timeElapsed = mutableStateOf(0)
@@ -20,6 +21,14 @@ class Stopwatch(service: FloatingService) {
     isRunningStateFlow.value = false
     stopwatchIncrementTask?.cancel()
     stopwatchIncrementTask = null
+  }
+
+  fun exitStopwatch() {
+    try {
+      service.overlayController.windowManager.removeView(viewHolder.view)
+    } catch (e: IllegalArgumentException) {
+      Log.e("Stopwatch", "IllegalArgumentException $e")
+    }
   }
 
   // doitwrong
