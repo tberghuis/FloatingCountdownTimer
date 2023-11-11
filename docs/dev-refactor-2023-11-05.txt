@@ -37,3 +37,10 @@ alarm contoller
 print code to cull, write tests, cross out safe to cull
 
 multiple timers paywall UX design
+
+exit timer, MVI... event: exit, data: bubble
+// if no bubbles left stop service
+
+next task, countdown bubble
+refactor abstract class
+MutableSet bubble
