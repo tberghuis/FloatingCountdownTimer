@@ -26,13 +26,15 @@ class OverlayController(val service: FloatingService) {
 
   val trashController = TrashController(windowManager, service)
 
-  val timerOverlaySet = mutableSetOf<Stopwatch>()
+//  val timerOverlaySet = mutableSetOf<Stopwatch>()
+  val stopwatchSet = mutableSetOf<Stopwatch>()
 
+  // todo bubbleSet
 
   fun addStopwatch() {
     logd("OverlayController addStopwatch")
     Stopwatch(service).also { stopwatch ->
-      timerOverlaySet.add(stopwatch)
+      stopwatchSet.add(stopwatch)
       stopwatch.viewHolder.view.setContent {
         val haloColour =
           service.application.providePreferencesRepository().haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
@@ -57,6 +59,15 @@ class OverlayController(val service: FloatingService) {
       windowManager.addView(stopwatch.viewHolder.view, stopwatch.viewHolder.params)
     }
   }
+
+
+
+
+  // todo addBubble
+
+
+
+
 
 
   @SuppressLint("ClickableViewAccessibility")

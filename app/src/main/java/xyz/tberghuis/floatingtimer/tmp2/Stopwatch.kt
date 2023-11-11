@@ -8,9 +8,8 @@ import java.util.Timer
 import java.util.TimerTask
 import kotlin.concurrent.timerTask
 
-class Stopwatch(private val service: FloatingService) {
+class Stopwatch(private val service: FloatingService): Bubble(service) {
   //  val overlayState = OverlayState()
-  val viewHolder = TimerViewHolder(service)
 
   val timeElapsed = mutableStateOf(0)
   val isRunningStateFlow = MutableStateFlow(false)
