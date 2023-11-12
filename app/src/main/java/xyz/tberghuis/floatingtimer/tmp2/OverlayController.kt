@@ -66,17 +66,11 @@ class OverlayController(val service: FloatingService) {
       onTap = { bubble.onTap() }
     )
     windowManager.addView(bubble.viewHolder.view, bubble.viewHolder.params)
-
   }
-
-
-  // todo addBubble
-
 
   @SuppressLint("ClickableViewAccessibility")
   private fun clickTargetSetOnTouchListener(
     viewHolder: TimerViewHolder,
-//    overlayState: OverlayState,
     exitTimer: () -> Unit,
     onDoubleTap: () -> Unit,
     onTap: () -> Unit
@@ -142,7 +136,6 @@ class OverlayController(val service: FloatingService) {
 
   private fun updateClickTargetParamsWithinScreenBounds(
     viewHolder: TimerViewHolder,
-//    overlayState: OverlayState
   ) {
     val params = viewHolder.params
     var x = params.x
