@@ -57,3 +57,5 @@ android 14 permission
 this is going to be such a headache
 
 home screen - button "Cancel All Timers"
+
+remove AlarmReceiver
