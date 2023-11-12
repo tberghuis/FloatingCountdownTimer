@@ -53,4 +53,4 @@ doitwrong
 android 14 permission
   foreground service special use
   ditch alarm permission
-  
+this is going to be such a headache
