@@ -1,21 +1,25 @@
 package xyz.tberghuis.floatingtimer.tmp2
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
+import android.content.Context.VIBRATOR_SERVICE
+import android.media.MediaPlayer
+import android.media.RingtoneManager
+import android.net.Uri
+import android.os.Build
 import android.os.CountDownTimer
 import android.os.VibrationEffect
-import android.util.Log
+import android.os.Vibrator
+import android.os.VibratorManager
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.countdown.TimerState
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
@@ -28,7 +32,15 @@ class Countdown(
 ) : Bubble(service) {
   var countdownSeconds by mutableStateOf(10)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
-  private var pendingAlarm: PendingIntent? = null
+
+  var player: MediaPlayer? = null
+  val vibrator = initVibrator()
+
+  override fun exit() {
+    player?.pause()
+    player?.release()
+    super.exit()
+  }
 
   override fun reset() {
     countdownSeconds = durationSeconds
@@ -53,26 +65,40 @@ class Countdown(
   }
 
   init {
+    val alarmSound: Uri? = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+    // no default alarm sound set
+    if (alarmSound != null) {
+      player = MediaPlayer.create(service, alarmSound)
+    }
+    player?.isLooping = true
     manageAlarm()
     manageCountdownTimer()
   }
 
+  private fun initVibrator(): Vibrator {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      val vibratorManager =
+        service.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+      vibratorManager.defaultVibrator
+    } else {
+      @Suppress("DEPRECATION") service.getSystemService(VIBRATOR_SERVICE) as Vibrator
+    }
+  }
+
   private fun manageAlarm() {
-    val floatingAlarm = service.floatingAlarm
+    val preferences = service.application.providePreferencesRepository()
     service.scope.launch {
       timerState.collectLatest {
-
         logd("timerState collectLatest $it")
-
+        val vibrate = preferences.vibrationFlow.first()
+        val sound = preferences.soundFlow.first()
         when (it) {
           TimerStateFinished -> {
-            logd("does the player start")
-            pendingAlarm?.cancel()
-            if (floatingAlarm.sound) {
-              floatingAlarm.player?.start()
+            if (sound) {
+              player?.start()
             }
-            if (floatingAlarm.vibrate) {
-              floatingAlarm.vibrator.vibrate(
+            if (vibrate) {
+              vibrator.vibrate(
                 VibrationEffect.createWaveform(
                   longArrayOf(1500, 200), intArrayOf(255, 0), 0
                 )
@@ -81,40 +107,13 @@ class Countdown(
           }
 
           TimerStateRunning -> {
-            // set alarm
-            logd("todo: run the timer")
-            val intent = Intent(service, AlarmReceiver::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
-            // todo do i need to save pendingAlarm to state???
-            pendingAlarm = PendingIntent.getBroadcast(
-              service.applicationContext,
-              REQUEST_CODE_PENDING_ALARM,
-              intent,
-              PendingIntent.FLAG_CANCEL_CURRENT or PendingIntent.FLAG_IMMUTABLE
-            )
-            val alarmManager = service.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-            try {
-              alarmManager.setAlarmClock(
-                AlarmManager.AlarmClockInfo(
-                  System.currentTimeMillis() + (countdownSeconds * 1000),
-                  pendingAlarm
-                ), pendingAlarm!!
-              )
-            } catch (e: SecurityException) {
-              Log.e("Countdown", "SecurityException: $e")
-            }
           }
 
           TimerStatePaused -> {
-
-            logd("timerState.collectLatest")
-
-            pendingAlarm?.cancel()
-            if (floatingAlarm.player?.isPlaying == true) {
-              floatingAlarm.player?.pause()
+            if (player?.isPlaying == true) {
+              player?.pause()
             }
-            floatingAlarm.vibrator.cancel()
+            vibrator.cancel()
           }
         }
       }
@@ -139,6 +138,7 @@ class Countdown(
 
               override fun onFinish() {
                 countdownSeconds = 0
+                timerState.value = TimerStateFinished
               }
             }.start()
         }
