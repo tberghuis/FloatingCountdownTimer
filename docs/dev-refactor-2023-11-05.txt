@@ -50,7 +50,10 @@ doitwrong
   future just use a foreground service
     or ditch AlarmReceiver, pendingIntent to floatingservice direct
 
+future
 android 14 permission
   foreground service special use
   ditch alarm permission
 this is going to be such a headache
+
+
