@@ -4,5 +4,6 @@ before deleting old code, write a manual test
 can purchase color
 configuration changed
 
+screen off, alarm still plays
 
 ...
