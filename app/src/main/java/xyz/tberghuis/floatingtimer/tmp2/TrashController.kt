@@ -26,7 +26,6 @@ class TrashController(
   // todo make generic
   var isBubbleHoveringTrash = false
 
-
   private var overlay: ComposeView? = null
   private val params: WindowManager.LayoutParams = WindowManager.LayoutParams(
     WindowManager.LayoutParams.MATCH_PARENT,
@@ -67,7 +66,6 @@ class TrashController(
     }
   }
 
-
   private fun createTrashView(): ComposeView {
     val view = createComposeView(service)
     view.setContent {
@@ -77,9 +75,4 @@ class TrashController(
     }
     return view
   }
-
 }
-
-
-
-

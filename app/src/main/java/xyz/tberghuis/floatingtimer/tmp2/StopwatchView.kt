@@ -2,11 +2,9 @@ package xyz.tberghuis.floatingtimer.tmp2
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -16,17 +14,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
-import xyz.tberghuis.floatingtimer.service.stopwatch.BorderArc
-import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchState
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.runtime.derivedStateOf
 import xyz.tberghuis.floatingtimer.LocalHaloColour
 import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
@@ -35,22 +29,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Size
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
-
 
 @Composable
 fun StopwatchView(stopwatch: Stopwatch) {
-//  Box(
-//    modifier = Modifier
-//      .size(TIMER_SIZE_DP.dp)
-//      .zIndex(1f)
-//      .background(Color.LightGray),
-//    contentAlignment = Alignment.Center
-//  ) {
-//    Text("${stopwatchState.timeElapsed.value}")
-//  }
-
   Box(
     modifier = Modifier
       .size(TIMER_SIZE_DP.dp)
@@ -60,10 +42,7 @@ fun StopwatchView(stopwatch: Stopwatch) {
     StopwatchBorderArc(stopwatch.isRunningStateFlow)
     TimeDisplay(stopwatch.timeElapsed.value)
   }
-
-
 }
-
 
 @Composable
 fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>) {
