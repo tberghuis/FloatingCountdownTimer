@@ -33,12 +33,15 @@ class Countdown(
   var countdownSeconds by mutableStateOf(10)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
 
-  var player: MediaPlayer? = null
-  val vibrator = initVibrator()
+  private var countDownTimer: CountDownTimer? = null
+  private var player: MediaPlayer? = null
+  private val vibrator = initVibrator()
 
   override fun exit() {
     player?.pause()
     player?.release()
+    vibrator.cancel()
+    countDownTimer?.cancel()
     super.exit()
   }
 
@@ -124,7 +127,7 @@ class Countdown(
     logd("manageCountdownTimer")
     // Main + immediate??? prevent ANRs???
     service.scope.launch(Dispatchers.Main) {
-      var countDownTimer: CountDownTimer? = null
+
       timerState.collectLatest {
         countDownTimer?.cancel()
         if (it is TimerStateRunning) {
