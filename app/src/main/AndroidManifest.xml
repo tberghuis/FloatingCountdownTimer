@@ -47,7 +47,6 @@
             </intent-filter>
         </activity>
         <service android:name=".tmp2.FloatingService" />
-        <receiver android:name=".tmp2.AlarmReceiver" />
 
     </application>
 </manifest>
