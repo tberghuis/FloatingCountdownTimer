@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <service android:name=".service.XxxFloatingService" />
-        <receiver android:name=".receivers.AlarmReceiver" />
+        <receiver android:name=".receivers.XxxAlarmReceiver" />
 
 <!--     xxx   todo remove-->
         <activity
@@ -47,6 +47,7 @@
             </intent-filter>
         </activity>
         <service android:name=".tmp2.FloatingService" />
+        <receiver android:name=".tmp2.AlarmReceiver" />
 
     </application>
 </manifest>

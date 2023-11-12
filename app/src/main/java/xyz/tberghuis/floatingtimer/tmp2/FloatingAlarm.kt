@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp2
 
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
 import android.media.MediaPlayer
@@ -13,8 +14,8 @@ import xyz.tberghuis.floatingtimer.providePreferencesRepository
 
 class FloatingAlarm(val service: FloatingService) {
   var player: MediaPlayer? = null
-
   //  private var pendingAlarm: PendingIntent? = null
+
   var vibrate = true
   val vibrator = initVibrator()
   var sound = true

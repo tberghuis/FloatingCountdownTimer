@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_PENDING_ALARM
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.receivers.AlarmReceiver
+import xyz.tberghuis.floatingtimer.receivers.XxxAlarmReceiver
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
 import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
@@ -99,7 +99,7 @@ class AlarmController(val service: XxxFloatingService) {
           TimerStateRunning -> {
             // set alarm
             logd("todo: run the timer")
-            val intent = Intent(context, AlarmReceiver::class.java)
+            val intent = Intent(context, XxxAlarmReceiver::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NO_ANIMATION
             // todo do i need to save pendingAlarm to state???
             pendingAlarm = PendingIntent.getBroadcast(
