@@ -62,6 +62,9 @@ class Countdown(
     val floatingAlarm = service.floatingAlarm
     service.scope.launch {
       timerState.collectLatest {
+
+        logd("timerState collectLatest $it")
+
         when (it) {
           TimerStateFinished -> {
             logd("does the player start")
@@ -105,6 +108,9 @@ class Countdown(
           }
 
           TimerStatePaused -> {
+
+            logd("timerState.collectLatest")
+
             pendingAlarm?.cancel()
             if (floatingAlarm.player?.isPlaying == true) {
               floatingAlarm.player?.pause()
