@@ -6,7 +6,11 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp2.FloatingService
 
@@ -15,7 +19,10 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
   // before use if service not running bindFloatingService then filterNotNull().first()
   private val floatingService = MutableStateFlow<FloatingService?>(null)
 
-  fun bindFloatingService() {
+  private var serviceStarted = false
+
+  private fun bindFloatingService() {
+    serviceStarted = true
     val floatingServiceIntent = Intent(application, FloatingService::class.java)
     val connection = object : ServiceConnection {
       override fun onServiceConnected(className: ComponentName, service: IBinder) {
@@ -33,12 +40,26 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
 
 
   fun addStopwatch() {
-    floatingService.value?.overlayController?.addStopwatch()
+    runFloatingServiceLambda {
+      overlayController.addStopwatch()
+    }
   }
+
+  private fun runFloatingServiceLambda(lambda: FloatingService.() -> Unit) {
+    if (!serviceStarted) {
+      bindFloatingService()
+    }
+    viewModelScope.launch {
+      floatingService.filterNotNull().first().let {
+        it.lambda()
+      }
+    }
+  }
+
 
   fun addCountdown() {
-    floatingService.value?.overlayController?.addCountdown()
+    runFloatingServiceLambda {
+      overlayController.addCountdown()
+    }
   }
-
-
 }

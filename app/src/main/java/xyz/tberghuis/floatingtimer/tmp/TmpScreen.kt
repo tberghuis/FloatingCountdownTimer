@@ -14,12 +14,6 @@ fun TmpScreen(
     Text("tmp screen")
 
     Button(onClick = {
-      vm.bindFloatingService()
-    }) {
-      Text("bind service")
-    }
-
-    Button(onClick = {
       vm.addStopwatch()
     }) {
       Text("addStopwatch")
