@@ -62,4 +62,13 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
       overlayController.addCountdown()
     }
   }
+
+
+  fun exitAll() {
+    runFloatingServiceLambda {
+      overlayController.exitAll()
+    }
+  }
+
+
 }

@@ -24,5 +24,14 @@ fun TmpScreen(
     }) {
       Text("addCountdown")
     }
+
+
+    Button(onClick = {
+      vm.exitAll()
+    }) {
+      Text("exit all timers")
+    }
+
+
   }
 }

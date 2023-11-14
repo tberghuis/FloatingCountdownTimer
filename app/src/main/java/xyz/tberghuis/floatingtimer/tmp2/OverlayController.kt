@@ -155,4 +155,11 @@ class OverlayController(val service: FloatingService) {
 //    overlayState.timerOffset = IntOffset(params.x, params.y)
     trashController.bubbleDraggingPosition.value = IntOffset(params.x, params.y)
   }
+
+  fun exitAll() {
+    bubbleSet.forEach { bubble ->
+      bubble.exit()
+    }
+    bubbleSet.clear()
+  }
 }
