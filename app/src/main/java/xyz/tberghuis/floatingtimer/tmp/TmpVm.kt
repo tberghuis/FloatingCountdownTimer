@@ -31,6 +31,7 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
       }
 
       override fun onServiceDisconnected(arg0: ComponentName) {
+        serviceStarted = false
         floatingService.value = null
       }
     }

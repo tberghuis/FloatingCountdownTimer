@@ -161,5 +161,6 @@ class OverlayController(val service: FloatingService) {
       bubble.exit()
     }
     bubbleSet.clear()
+    service.stopSelf()
   }
 }
