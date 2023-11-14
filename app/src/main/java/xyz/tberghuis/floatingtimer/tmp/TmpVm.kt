@@ -18,7 +18,6 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
 
   // before use if service not running bindFloatingService then filterNotNull().first()
   private val floatingService = MutableStateFlow<FloatingService?>(null)
-
   private var serviceStarted = false
 
   private fun bindFloatingService() {
@@ -39,7 +38,6 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
     application.bindService(floatingServiceIntent, connection, 0)
   }
 
-
   fun addStopwatch() {
     runFloatingServiceLambda {
       overlayController.addStopwatch()
@@ -57,19 +55,15 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
     }
   }
 
-
   fun addCountdown() {
     runFloatingServiceLambda {
       overlayController.addCountdown()
     }
   }
 
-
   fun exitAll() {
     runFloatingServiceLambda {
       overlayController.exitAll()
     }
   }
-
-
 }
