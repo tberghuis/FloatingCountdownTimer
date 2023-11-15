@@ -12,13 +12,6 @@ write a bunch of manual tests for each line of code removed from Xxx classes
 
 print code to cull, write tests, cross out safe to cull
 
-exit timer, MVI... event: exit, data: bubble
-// if no bubbles left stop service
-
-next task, countdown bubble
-refactor abstract class
-MutableSet bubble
-
 doitwrong
   AlarmReceiver
   future just use a foreground service
@@ -34,12 +27,8 @@ home screen - button "Cancel All Timers"
 
 remove AlarmReceiver
 
-
-
-
 ##################
 
 configuration change
-paywall, max 2 simultaneous timers, dialog premium version
 
-on exit timer, stop service if no timers left running
+paywall, max 2 simultaneous timers, dialog premium version
