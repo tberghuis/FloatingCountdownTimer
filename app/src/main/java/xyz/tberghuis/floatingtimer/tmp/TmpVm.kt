@@ -5,19 +5,12 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.tmp2.FloatingService
 import xyz.tberghuis.floatingtimer.tmp2.PremiumVmc
@@ -43,8 +36,13 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
       }
 
       override fun onServiceDisconnected(arg0: ComponentName) {
-        serviceStarted = false
+//        serviceStarted = false
         floatingService.value = null
+      }
+
+      override fun onBindingDied(name: ComponentName?) {
+        super.onBindingDied(name)
+        serviceStarted = false
       }
     }
     application.startForegroundService(floatingServiceIntent)
@@ -59,13 +57,6 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
         provideFloatingService().overlayController.addStopwatch()
       }
     }
-  }
-
-  private suspend fun provideFloatingService(): FloatingService {
-    // todo follow this pattern for BillingLibrary
-    //  in my BillingLibraryWrapper
-    bindFloatingService()
-    return floatingService.filterNotNull().first()
   }
 
   fun addCountdown() {
@@ -89,5 +80,12 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
     viewModelScope.launch {
       provideFloatingService().overlayController.exitAll()
     }
+  }
+
+  private suspend fun provideFloatingService(): FloatingService {
+    // todo follow this pattern for BillingLibrary
+    //  in my BillingLibraryWrapper
+    bindFloatingService()
+    return floatingService.filterNotNull().first()
   }
 }
