@@ -64,6 +64,9 @@ class OverlayController(val service: FloatingService) {
       exitTimer = {
         bubble.exit()
         bubbleSet.remove(bubble)
+        if(bubbleSet.isEmpty()){
+          service.stopSelf()
+        }
       },
       onDoubleTap = { bubble.reset() },
       onTap = { bubble.onTap() }
