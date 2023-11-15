@@ -8,11 +8,16 @@ import androidx.lifecycle.viewModelScope
 import com.godaddy.android.colorpicker.HsvColor
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 
-class SettingsViewModel(private val application: Application) : AndroidViewModel(application) {
+class SettingsViewModel(application: Application) : AndroidViewModel(application) {
   private val preferences = application.providePreferencesRepository()
   var colorPickerColorState = mutableStateOf(HsvColor.from(Color.Blue))
+
+  val premiumVmc = PremiumVmc(application, viewModelScope)
+
+  val premiumFlow = application.providePreferencesRepository().haloColourPurchasedFlow
 
   init {
     viewModelScope.launch {
@@ -23,6 +28,17 @@ class SettingsViewModel(private val application: Application) : AndroidViewModel
   fun saveHaloColor() {
     viewModelScope.launch {
       preferences.updateHaloColour(colorPickerColorState.value.toColor())
+    }
+  }
+
+  fun saveHaloColorClick() {
+    viewModelScope.launch {
+      logd("saveHaloColorClick")
+      if (premiumFlow.first()) {
+        saveHaloColor()
+      } else {
+        premiumVmc.showPurchaseDialog = true
+      }
     }
   }
 }
