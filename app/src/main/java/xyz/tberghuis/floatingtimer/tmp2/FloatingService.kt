@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Binder
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
@@ -33,7 +34,7 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
   // Main.immediate to prevent ANRs user input... ???
   val scope = CoroutineScope(Dispatchers.Default + job)
 
-//  lateinit var floatingAlarm: FloatingAlarm
+  //  lateinit var floatingAlarm: FloatingAlarm
   lateinit var overlayController: OverlayController
 
   private val savedStateRegistryController = SavedStateRegistryController.create(this)
@@ -82,10 +83,6 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
 //    }
 
 
-
-
-
-
     return START_NOT_STICKY
   }
 
@@ -125,5 +122,9 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     return notification
   }
 
-
+  override fun onConfigurationChanged(newConfig: Configuration) {
+    super.onConfigurationChanged(newConfig)
+    ScreenEz.refresh()
+    overlayController.onConfigurationChanged()
+  }
 }

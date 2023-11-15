@@ -64,7 +64,7 @@ class OverlayController(val service: FloatingService) {
       exitTimer = {
         bubble.exit()
         bubbleSet.remove(bubble)
-        if(bubbleSet.isEmpty()){
+        if (bubbleSet.isEmpty()) {
           service.stopSelf()
         }
       },
@@ -160,6 +160,12 @@ class OverlayController(val service: FloatingService) {
     }
 //    overlayState.timerOffset = IntOffset(params.x, params.y)
     trashController.bubbleDraggingPosition.value = IntOffset(params.x, params.y)
+  }
+
+  fun onConfigurationChanged() {
+    bubbleSet.forEach {
+      updateClickTargetParamsWithinScreenBounds(it.viewHolder)
+    }
   }
 
   fun exitAll() {
