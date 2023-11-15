@@ -7,3 +7,4 @@ configuration changed
 screen off, alarm still plays
 
 ...
+can purchase multiple timers
