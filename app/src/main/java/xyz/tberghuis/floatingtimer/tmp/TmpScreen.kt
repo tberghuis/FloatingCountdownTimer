@@ -65,12 +65,16 @@ fun TmpScreen(
       },
       title = { Text(stringResource(R.string.premium_feature)) },
       text = {
-        Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-          Text(stringResource(R.string.change_timer_halo_color))
-          Text("\$X.XX")
+        Column {
+          Text("Running more than 2 timers simultaneously requires premium.")
+          Text("")
+          Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+          ) {
+            Text("Floating Timer Premium")
+            Text("\$X.XX")
+          }
         }
       },
     )
