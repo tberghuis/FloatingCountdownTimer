@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp2.FloatingService
+import xyz.tberghuis.floatingtimer.tmp2.PremiumVmc
 
 class TmpVm(private val application: Application) : AndroidViewModel(application) {
 
@@ -23,8 +24,8 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
   private val floatingService = MutableStateFlow<FloatingService?>(null)
   private var serviceStarted = false
 
-  var showDialog by mutableStateOf(false)
-
+//  var showDialog by mutableStateOf(false)
+  val premiumVmc = PremiumVmc(application, viewModelScope)
 
   private fun bindFloatingService() {
     serviceStarted = true
@@ -71,10 +72,5 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
     runFloatingServiceLambda {
       overlayController.exitAll()
     }
-  }
-
-  fun showDialogFn() {
-    logd("showDialog")
-    showDialog = true
   }
 }
