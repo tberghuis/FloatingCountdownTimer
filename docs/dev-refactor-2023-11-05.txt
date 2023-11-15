@@ -39,3 +39,8 @@ strings xml
   PremiumDialog
   translations
   remove unused
+
+rewrite BillingClientWrapper like bound service with MutableStateFlow<BillingClient?>
+  provideBillingClient
+  BillingClientWrapper Application singleton
+  
