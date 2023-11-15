@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 
-class SettingsViewModel(private val application: Application) : AndroidViewModel(application) {
+class XxxSettingsViewModel(private val application: Application) : AndroidViewModel(application) {
   var showPurchaseDialog by mutableStateOf(false)
 
   // future.txt nullable and a loading spinner

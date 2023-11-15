@@ -44,12 +44,12 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.ProgressArc
-import xyz.tberghuis.floatingtimer.viewmodels.SettingsViewModel
+import xyz.tberghuis.floatingtimer.viewmodels.XxxSettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    vm: SettingsViewModel = viewModel()
+    vm: XxxSettingsViewModel = viewModel()
 ) {
   val navController = LocalNavController.current
   val context = LocalContext.current
