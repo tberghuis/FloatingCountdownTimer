@@ -43,4 +43,14 @@ strings xml
 rewrite BillingClientWrapper like bound service with MutableStateFlow<BillingClient?>
   provideBillingClient
   BillingClientWrapper Application singleton
-  
+
+
+method for culling code
+  print class
+  each line view usages
+  write test case
+  cross out paper tests passes
+  when entire class crossed out paper  
+    comment out whole class
+      build
+      
