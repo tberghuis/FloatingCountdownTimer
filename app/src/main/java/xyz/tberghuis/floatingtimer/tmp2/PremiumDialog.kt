@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import xyz.tberghuis.floatingtimer.R
 
 @Composable
-fun PremiumDialog(premiumVmc: PremiumVmc) {
+fun PremiumDialog(premiumVmc: PremiumVmc, reason: String) {
   if (premiumVmc.showPurchaseDialog) {
     AlertDialog(
       onDismissRequest = {
@@ -34,7 +34,7 @@ fun PremiumDialog(premiumVmc: PremiumVmc) {
       title = { Text(stringResource(R.string.premium_feature)) },
       text = {
         Column {
-          Text("Running more than 2 timers simultaneously requires premium.")
+          Text(reason)
           Text("")
           Row(
             modifier = Modifier.fillMaxWidth(),

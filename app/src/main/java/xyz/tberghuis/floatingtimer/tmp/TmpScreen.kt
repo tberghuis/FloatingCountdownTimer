@@ -38,5 +38,5 @@ fun TmpScreen(
       Text("show dialog")
     }
   }
-  PremiumDialog(vm.premiumVmc)
+  PremiumDialog(vm.premiumVmc, "Running more than 2 timers simultaneously requires premium.")
 }
