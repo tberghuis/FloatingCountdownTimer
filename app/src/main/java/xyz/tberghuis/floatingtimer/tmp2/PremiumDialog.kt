@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp2
 
+import android.app.Activity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,11 +10,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import xyz.tberghuis.floatingtimer.R
 
 @Composable
-fun PremiumDialog(premiumVmc: PremiumVmc, reason: String) {
+fun PremiumDialog(premiumVmc: PremiumVmc, reason: String, purchasedCallback: () -> Unit = {}) {
+  val context = LocalContext.current
+
   if (premiumVmc.showPurchaseDialog) {
     AlertDialog(
       onDismissRequest = {
@@ -21,6 +25,9 @@ fun PremiumDialog(premiumVmc: PremiumVmc, reason: String) {
       },
       confirmButton = {
         TextButton(onClick = {
+          premiumVmc.buy(context as Activity) {
+            purchasedCallback()
+          }
         }) {
           Text(stringResource(R.string.buy).uppercase())
         }
