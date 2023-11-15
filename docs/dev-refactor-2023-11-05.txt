@@ -49,8 +49,9 @@ method for culling code
   print class
   each line view usages
   write test case
-  cross out paper tests passes
+  cross out paper when tests passes
   when entire class crossed out paper  
     comment out whole class
       build
-      
+  repeat
+  
