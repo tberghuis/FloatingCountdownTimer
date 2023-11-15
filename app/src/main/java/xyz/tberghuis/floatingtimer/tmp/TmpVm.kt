@@ -13,8 +13,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.tmp2.FloatingService
 import xyz.tberghuis.floatingtimer.tmp2.PremiumVmc
 
@@ -24,10 +28,12 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
   private val floatingService = MutableStateFlow<FloatingService?>(null)
   private var serviceStarted = false
 
-//  var showDialog by mutableStateOf(false)
   val premiumVmc = PremiumVmc(application, viewModelScope)
 
   private fun bindFloatingService() {
+    if (serviceStarted) {
+      return
+    }
     serviceStarted = true
     val floatingServiceIntent = Intent(application, FloatingService::class.java)
     val connection = object : ServiceConnection {
@@ -46,31 +52,42 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
   }
 
   fun addStopwatch() {
-    runFloatingServiceLambda {
-      overlayController.addStopwatch()
-    }
-  }
-
-  private fun runFloatingServiceLambda(lambda: FloatingService.() -> Unit) {
-    if (!serviceStarted) {
-      bindFloatingService()
-    }
     viewModelScope.launch {
-      floatingService.filterNotNull().first().let {
-        it.lambda()
+      if (shouldShowPremiumDialog()) {
+        premiumVmc.showPurchaseDialog = true
+      } else {
+        provideFloatingService().overlayController.addStopwatch()
       }
     }
   }
 
+  private suspend fun provideFloatingService(): FloatingService {
+    // todo follow this pattern for BillingLibrary
+    //  in my BillingLibraryWrapper
+    bindFloatingService()
+    return floatingService.filterNotNull().first()
+  }
+
   fun addCountdown() {
-    runFloatingServiceLambda {
-      overlayController.addCountdown()
+    viewModelScope.launch {
+      if (shouldShowPremiumDialog()) {
+        premiumVmc.showPurchaseDialog = true
+      } else {
+        provideFloatingService().overlayController.addCountdown()
+      }
     }
   }
 
+  private suspend fun shouldShowPremiumDialog(): Boolean {
+    val premiumPurchased =
+      application.providePreferencesRepository().haloColourPurchasedFlow.first()
+    val floatingService = provideFloatingService()
+    return !premiumPurchased && floatingService.overlayController.getNumberOfBubbles() == 2
+  }
+
   fun exitAll() {
-    runFloatingServiceLambda {
-      overlayController.exitAll()
+    viewModelScope.launch {
+      provideFloatingService().overlayController.exitAll()
     }
   }
 }
