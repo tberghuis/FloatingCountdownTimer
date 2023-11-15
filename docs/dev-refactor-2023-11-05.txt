@@ -31,7 +31,7 @@ manifest.xml
 
 ##################
 
-configuration change
+[X] configuration change
 
 paywall, max 2 simultaneous timers, dialog premium version
 
@@ -39,4 +39,3 @@ strings xml
   PremiumDialog
   translations
   remove unused
-  
