@@ -5,6 +5,9 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,6 +22,9 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
   // before use if service not running bindFloatingService then filterNotNull().first()
   private val floatingService = MutableStateFlow<FloatingService?>(null)
   private var serviceStarted = false
+
+  var showDialog by mutableStateOf(false)
+
 
   private fun bindFloatingService() {
     serviceStarted = true
@@ -65,5 +71,10 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
     runFloatingServiceLambda {
       overlayController.exitAll()
     }
+  }
+
+  fun showDialogFn() {
+    logd("showDialog")
+    showDialog = true
   }
 }

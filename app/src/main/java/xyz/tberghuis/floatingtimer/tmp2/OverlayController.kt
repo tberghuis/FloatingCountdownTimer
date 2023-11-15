@@ -25,8 +25,11 @@ class OverlayController(val service: FloatingService) {
 
   val trashController = TrashController(windowManager, service)
 
-  // todo bubbleSet
-  val bubbleSet = mutableSetOf<Bubble>()
+  private val bubbleSet = mutableSetOf<Bubble>()
+
+  fun getNumberOfBubbles(): Int {
+    return bubbleSet.size
+  }
 
   fun addStopwatch() {
     logd("OverlayController addStopwatch")
