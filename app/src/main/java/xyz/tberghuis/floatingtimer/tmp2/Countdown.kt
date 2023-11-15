@@ -38,7 +38,9 @@ class Countdown(
   private val vibrator = initVibrator()
 
   override fun exit() {
-    player?.pause()
+    if (player?.isPlaying == true) {
+      player?.pause()
+    }
     player?.release()
     vibrator.cancel()
     countDownTimer?.cancel()
