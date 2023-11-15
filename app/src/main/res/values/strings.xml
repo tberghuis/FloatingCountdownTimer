@@ -19,4 +19,9 @@
     <string name="cancel">Cancel</string>
     <string name="premium_feature">Premium Feature</string>
     <string name="change_timer_halo_color">Change Timer halo color</string>
+
+    <string name="ft_premium">Floating Timer Premium</string>
+    <string name="premium_reason_multiple_timers">Running more than 2 timers simultaneously requires premium.</string>
+    <string name="premium_reason_halo_colour">Change of Timer color requires premium.</string>
+
 </resources>

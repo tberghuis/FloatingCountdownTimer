@@ -14,7 +14,7 @@ import xyz.tberghuis.floatingtimer.providePreferencesRepository
 // doitwrong
 class PremiumVmc(private val application: Application, private val scope: CoroutineScope) {
   var showPurchaseDialog by mutableStateOf(false)
-  var haloColorChangePriceText by mutableStateOf("")
+  var premiumPriceText by mutableStateOf("")
     private set
 
   private val preferences = application.providePreferencesRepository()
@@ -27,7 +27,7 @@ class PremiumVmc(private val application: Application, private val scope: Corout
     scope.launch {
       BillingClientWrapper.run(application) { client ->
         val details = client.getHaloColourProductDetails()?.oneTimePurchaseOfferDetails
-        haloColorChangePriceText = details?.formattedPrice ?: ""
+        premiumPriceText = details?.formattedPrice ?: ""
       }
     }
   }

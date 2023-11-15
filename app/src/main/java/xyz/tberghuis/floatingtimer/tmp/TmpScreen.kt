@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
+import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.tmp2.PremiumDialog
 
 @Composable
@@ -38,5 +40,5 @@ fun TmpScreen(
       Text("show dialog")
     }
   }
-  PremiumDialog(vm.premiumVmc, "Running more than 2 timers simultaneously requires premium.")
+  PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_multiple_timers))
 }

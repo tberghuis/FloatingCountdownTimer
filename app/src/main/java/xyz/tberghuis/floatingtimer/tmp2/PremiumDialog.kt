@@ -40,8 +40,8 @@ fun PremiumDialog(premiumVmc: PremiumVmc, reason: String) {
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
           ) {
-            Text("Floating Timer Premium")
-            Text("\$X.XX")
+            Text(stringResource(R.string.ft_premium))
+            Text(premiumVmc.premiumPriceText)
           }
         }
       },
