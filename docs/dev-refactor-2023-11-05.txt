@@ -3,40 +3,14 @@ work on FloatingCountdownTimer-refactor-tmp
   
 can i remove kapt plugin gradle?
 
-refactor - bound service
-
 use withContext(Main.immediate) to collect flows
   will this prevent ANRs
 
-move CountDownTimer out of alarmcontroller
-  ???
-
 cull xxx, tmp, todo, find in files
-
-step 1, stopwatch add view
-
-feature, button "exit all timers"
-
-step 1, bound service
 
 write a bunch of manual tests for each line of code removed from Xxx classes
 
-service ondestroy, cancel alarms ???
-
-start stop stopwatch
-drag to trash....
-
-configuration change
-
-countdown timer
-
-Stopwatch, Countdown : Bubble()
-  override exit
-alarm contoller
-
 print code to cull, write tests, cross out safe to cull
-
-multiple timers paywall UX design
 
 exit timer, MVI... event: exit, data: bubble
 // if no bubbles left stop service
@@ -60,4 +34,12 @@ home screen - button "Cancel All Timers"
 
 remove AlarmReceiver
 
-paywall, max 2 simultaneous timers
+
+
+
+##################
+
+configuration change
+paywall, max 2 simultaneous timers, dialog premium version
+
+on exit timer, stop service if no timers left running

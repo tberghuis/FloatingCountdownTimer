@@ -7,6 +7,10 @@ abstract class Bubble(private val service: FloatingService) {
   val viewHolder = TimerViewHolder(service)
 
   open fun exit() {
+
+//    service.overlayController.bubbleSet.iterator(). remove(this)
+
+
     // todo move logic to overlaycontroller
     //  bubbleSet empty stop service
     try {

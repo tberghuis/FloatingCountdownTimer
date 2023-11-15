@@ -61,7 +61,10 @@ class OverlayController(val service: FloatingService) {
 
     clickTargetSetOnTouchListener(
       viewHolder = bubble.viewHolder,
-      exitTimer = { bubble.exit() },
+      exitTimer = {
+        bubble.exit()
+        bubbleSet.remove(bubble)
+      },
       onDoubleTap = { bubble.reset() },
       onTap = { bubble.onTap() }
     )
@@ -160,7 +163,19 @@ class OverlayController(val service: FloatingService) {
     bubbleSet.forEach { bubble ->
       bubble.exit()
     }
-    bubbleSet.clear()
+//    bubbleSet.clear()
+
+
+//    logd("exitAll bubbleSet size1 ${bubbleSet.size}")
+//
+//    val i = bubbleSet.iterator()
+//    while (i.hasNext()) {
+//      val bubble = i.next()
+//      bubble.exit()
+//    }
+//
+//    logd("exitAll bubbleSet size2 ${bubbleSet.size}")
+
     service.stopSelf()
   }
 }
