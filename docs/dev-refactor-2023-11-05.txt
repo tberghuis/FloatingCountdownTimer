@@ -55,3 +55,9 @@ method for culling code
       build
   repeat
   
+
+
+error snackbar home screen
+  "bad input"  when 0 seconds
+  dialog, need premium if num timers >= 2
+  
