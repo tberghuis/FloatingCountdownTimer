@@ -62,7 +62,7 @@ import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun XxxHomeScreen() {
   LaunchPostNotificationsPermissionRequest()
 
   val vm: HomeViewModel = viewModel()
