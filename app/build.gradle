@@ -36,6 +36,7 @@ android {
     buildFeatures {
         compose true
         viewBinding true
+        buildConfig true
     }
     composeOptions {
         // https://www.jetpackcomposeversion.com/
