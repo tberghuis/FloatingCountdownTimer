@@ -12,3 +12,5 @@ can purchase multiple timers
 test purchase - always approves
 - slow and fails....
 - slow and succeeds
+
+test all api levels
