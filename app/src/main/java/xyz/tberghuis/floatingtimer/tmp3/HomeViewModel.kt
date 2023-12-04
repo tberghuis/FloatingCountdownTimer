@@ -59,6 +59,10 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
 
   fun countdownButtonClick() {
     viewModelScope.launch {
+      if (shouldShowPremiumDialog()) {
+        premiumVmc.showPurchaseDialog = true
+        return@launch
+      }
       val min: Int
       val sec: Int
       try {
