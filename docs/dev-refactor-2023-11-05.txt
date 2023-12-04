@@ -6,7 +6,7 @@ can i remove kapt plugin gradle?
 use withContext(Main.immediate) to collect flows
   will this prevent ANRs
 
-cull xxx, tmp, todo, find in files
+cull Xxx, tmp, todo, find in files
 
 write a bunch of manual tests for each line of code removed from Xxx classes
 

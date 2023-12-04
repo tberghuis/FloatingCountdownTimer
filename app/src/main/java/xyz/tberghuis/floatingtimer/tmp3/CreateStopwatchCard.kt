@@ -1,7 +1,5 @@
-package xyz.tberghuis.floatingtimer.composables
+package xyz.tberghuis.floatingtimer.tmp3
 
-import android.content.Context
-import android.content.Intent
 import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -17,17 +15,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_CREATE
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.service.XxxFloatingService
-import xyz.tberghuis.floatingtimer.viewmodels.XxxHomeViewModel
 
 @Composable
-fun XxxCreateStopwatchCard() {
+fun CreateStopwatchCard() {
   val context = LocalContext.current
-  val vm: XxxHomeViewModel = viewModel()
+  val vm: HomeViewModel = viewModel()
   ElevatedCard(
     modifier = Modifier
       .fillMaxWidth()
@@ -51,16 +45,10 @@ fun XxxCreateStopwatchCard() {
           vm.showGrantOverlayDialog = true
           return@Button
         }
-        startStopwatchService(context)
+//        startStopwatchService(context)
       }) {
         Text(stringResource(id = R.string.create))
       }
     }
   }
-}
-
-fun startStopwatchService(context: Context) {
-  val intent = Intent(context.applicationContext, XxxFloatingService::class.java)
-  intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_STOPWATCH_CREATE)
-  context.startForegroundService(intent)
 }
