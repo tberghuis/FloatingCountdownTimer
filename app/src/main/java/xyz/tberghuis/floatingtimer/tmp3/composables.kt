@@ -13,6 +13,7 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -24,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.countdown.CountdownOptions
 import xyz.tberghuis.floatingtimer.countdown.createTimer
@@ -111,6 +113,14 @@ fun CreateCountdownButton() {
   val vm: HomeViewModel = viewModel()
   val focusManager = LocalFocusManager.current
   val context = LocalContext.current
+  val scope = rememberCoroutineScope()
+  val showSnackbar = { message: String ->
+    scope.launch {
+      vm.snackbarHostState.showSnackbar(
+        message
+      )
+    }
+  }
   Button(onClick = {
     logd("create")
     focusManager.clearFocus()
@@ -130,7 +140,7 @@ fun CreateCountdownButton() {
     }
     val totalSecs = min * 60 + sec
     if (totalSecs == 0) {
-      // todo show dialog
+      showSnackbar("Invalid timer duration. Please set to more than 0 seconds.")
       return@Button
     }
     createTimer(context, totalSecs)
