@@ -66,3 +66,5 @@ cull // todo
 translate strings.xml
 
 #############
+
+notification strings use stings.xml
