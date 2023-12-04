@@ -8,10 +8,14 @@ const val TIMER_SIZE_DP = 60
 val TIMER_SIZE_PX = (TIMER_SIZE_DP * Resources.getSystem().displayMetrics.density).toInt()
 
 const val INTENT_COMMAND = "xyz.tberghuis.floatingtimer.COMMAND"
+
+// todo delete
 const val INTENT_COMMAND_COUNTDOWN_CREATE = "countdown_create"
+
 const val INTENT_COMMAND_COUNTDOWN_COMPLETE = "countdown_complete"
 const val EXTRA_COUNTDOWN_DURATION = "countdown_duration"
 
+// todo delete
 const val INTENT_COMMAND_STOPWATCH_CREATE = "stopwatch_create"
 
 val PROGRESS_ARC_WIDTH = 8.dp
