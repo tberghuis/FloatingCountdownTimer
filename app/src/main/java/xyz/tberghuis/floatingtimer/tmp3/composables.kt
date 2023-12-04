@@ -13,7 +13,6 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -25,10 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.countdown.CountdownOptions
-import xyz.tberghuis.floatingtimer.countdown.createTimer
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.screens.onFocusSelectAll
 

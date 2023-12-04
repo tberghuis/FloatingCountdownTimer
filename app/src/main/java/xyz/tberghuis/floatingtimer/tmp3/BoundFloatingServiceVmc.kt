@@ -27,7 +27,6 @@ class BoundFloatingServiceVmc(private val application: Application) {
       }
 
       override fun onServiceDisconnected(arg0: ComponentName) {
-//        serviceStarted = false
         floatingService.value = null
       }
 
