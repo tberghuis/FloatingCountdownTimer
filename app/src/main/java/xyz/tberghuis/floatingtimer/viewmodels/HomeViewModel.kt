@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 
-class HomeViewModel(application: Application) : AndroidViewModel(application) {
+class XxxHomeViewModel(application: Application) : AndroidViewModel(application) {
   private val preferencesRepository = application.providePreferencesRepository()
 
   var minutes = mutableStateOf(TextFieldValue("0"))

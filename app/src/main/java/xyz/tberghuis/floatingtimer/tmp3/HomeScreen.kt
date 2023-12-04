@@ -34,14 +34,14 @@ import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.screens.HomeScreenContent
 import xyz.tberghuis.floatingtimer.screens.LaunchPostNotificationsPermissionRequest
-import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
+import xyz.tberghuis.floatingtimer.viewmodels.XxxHomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen() {
   LaunchPostNotificationsPermissionRequest()
 
-  val vm: HomeViewModel = viewModel()
+  val vm: XxxHomeViewModel = viewModel()
   val context = LocalContext.current
   val navController = LocalNavController.current
   val snackbarHostState = remember { SnackbarHostState() }

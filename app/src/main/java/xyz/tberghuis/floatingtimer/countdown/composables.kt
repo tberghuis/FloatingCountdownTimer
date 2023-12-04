@@ -33,12 +33,12 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.screens.onFocusSelectAll
 import xyz.tberghuis.floatingtimer.service.XxxFloatingService
-import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
+import xyz.tberghuis.floatingtimer.viewmodels.XxxHomeViewModel
 
 @Preview
 @Composable
 fun CreateCountdownCard() {
-  val vm: HomeViewModel = viewModel()
+  val vm: XxxHomeViewModel = viewModel()
   val focusManager = LocalFocusManager.current
   val context = LocalContext.current
 

@@ -22,12 +22,12 @@ import xyz.tberghuis.floatingtimer.INTENT_COMMAND_STOPWATCH_CREATE
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.XxxFloatingService
-import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
+import xyz.tberghuis.floatingtimer.viewmodels.XxxHomeViewModel
 
 @Composable
 fun CreateStopwatchCard() {
   val context = LocalContext.current
-  val vm: HomeViewModel = viewModel()
+  val vm: XxxHomeViewModel = viewModel()
   ElevatedCard(
     modifier = Modifier
       .fillMaxWidth()
