@@ -85,4 +85,14 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
       boundFloatingServiceVmc.provideFloatingService().overlayController.addCountdown(totalSecs)
     }
   }
+
+  fun stopwatchButtonClick() {
+    viewModelScope.launch {
+      if (shouldShowPremiumDialog()) {
+        premiumVmc.showPurchaseDialog = true
+        return@launch
+      }
+      boundFloatingServiceVmc.provideFloatingService().overlayController.addStopwatch()
+    }
+  }
 }

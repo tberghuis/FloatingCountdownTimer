@@ -45,7 +45,7 @@ fun CreateStopwatchCard() {
           vm.showGrantOverlayDialog = true
           return@Button
         }
-//        startStopwatchService(context)
+        vm.stopwatchButtonClick()
       }) {
         Text(stringResource(id = R.string.create))
       }
