@@ -62,7 +62,6 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     savedStateRegistryController.performAttach()
     savedStateRegistryController.performRestore(null)
 
-//    floatingAlarm = FloatingAlarm(this)
     overlayController = OverlayController(this)
   }
 

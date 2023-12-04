@@ -25,7 +25,6 @@ class TimerViewHolder(val service: FloatingService) {
   }
 }
 
-
 // https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
 fun createComposeView(service: FloatingService): ComposeView {
   return ComposeView(service).apply {
@@ -33,4 +32,3 @@ fun createComposeView(service: FloatingService): ComposeView {
     setViewTreeLifecycleOwner(service)
   }
 }
-

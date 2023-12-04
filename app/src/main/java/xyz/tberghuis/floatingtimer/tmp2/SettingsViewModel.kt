@@ -17,7 +17,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
 
   val premiumVmc = PremiumVmc(application, viewModelScope)
 
-  val premiumFlow = application.providePreferencesRepository().haloColourPurchasedFlow
+  private val premiumFlow = application.providePreferencesRepository().haloColourPurchasedFlow
 
   init {
     viewModelScope.launch {

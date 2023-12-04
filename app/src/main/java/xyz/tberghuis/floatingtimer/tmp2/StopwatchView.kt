@@ -111,5 +111,3 @@ fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>) {
     }
   }
 }
-
-
