@@ -26,4 +26,7 @@
 
     <string name="cancel_all_timers">Cancel all Timers</string>
     <string name="invalid_countdown_duration">Invalid timer duration. Please set to more than 0 seconds.</string>
+
+    <string name="reset">Reset</string>
+    <string name="exit">Exit</string>
 </resources>

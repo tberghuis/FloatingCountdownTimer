@@ -134,11 +134,12 @@ class XxxFloatingService : LifecycleService(), SavedStateRegistryOwner {
     )
 
     val notification: Notification =
-      NotificationCompat.Builder(this, NOTIFICATION_CHANNEL).setContentTitle("Floating Timer")
+      NotificationCompat.Builder(this, NOTIFICATION_CHANNEL)
+        .setContentTitle(application.resources.getString(R.string.app_name))
         .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent).addAction(
-          0, "Reset", resetPendingIntent
+          0, application.resources.getString(R.string.reset), resetPendingIntent
         ).addAction(
-          0, "Exit", exitPendingIntent
+          0, application.resources.getString(R.string.exit), exitPendingIntent
         )
         .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
         .build()
