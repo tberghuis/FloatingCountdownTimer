@@ -56,7 +56,7 @@ import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
 import xyz.tberghuis.floatingtimer.composables.CreateStopwatchCard
-import xyz.tberghuis.floatingtimer.countdown.CreateCountdownCard
+import xyz.tberghuis.floatingtimer.countdown.XxxCreateCountdownCard
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.viewmodels.XxxHomeViewModel
 
@@ -136,7 +136,7 @@ fun HomeScreenContent(paddingValues: PaddingValues) {
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
-    CreateCountdownCard()
+    XxxCreateCountdownCard()
     CreateStopwatchCard()
   }
 }

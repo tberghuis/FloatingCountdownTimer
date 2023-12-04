@@ -1,7 +1,5 @@
-package xyz.tberghuis.floatingtimer.countdown
+package xyz.tberghuis.floatingtimer.tmp3
 
-import android.content.Context
-import android.content.Intent
 import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -26,19 +24,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import xyz.tberghuis.floatingtimer.EXTRA_COUNTDOWN_DURATION
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND
-import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_CREATE
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.countdown.CountdownOptions
+import xyz.tberghuis.floatingtimer.countdown.createTimer
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.screens.onFocusSelectAll
-import xyz.tberghuis.floatingtimer.service.XxxFloatingService
-import xyz.tberghuis.floatingtimer.viewmodels.XxxHomeViewModel
 
 @Preview
 @Composable
-fun XxxCreateCountdownCard() {
-  val vm: XxxHomeViewModel = viewModel()
+fun CreateCountdownCard() {
+  val vm: HomeViewModel = viewModel()
 
   // todo must be an idiomatic way to center without the need
   // to specify Modifier.fillMaxWidth() and Center everywhere
@@ -106,14 +101,14 @@ fun XxxCreateCountdownCard() {
         .fillMaxWidth(),
       horizontalArrangement = Arrangement.Center
     ) {
-      XxxCreateCountdownButton()
+      CreateCountdownButton()
     }
   }
 }
 
 @Composable
-fun XxxCreateCountdownButton() {
-  val vm: XxxHomeViewModel = viewModel()
+fun CreateCountdownButton() {
+  val vm: HomeViewModel = viewModel()
   val focusManager = LocalFocusManager.current
   val context = LocalContext.current
   Button(onClick = {
@@ -142,11 +137,4 @@ fun XxxCreateCountdownButton() {
   }) {
     Text(stringResource(R.string.create))
   }
-}
-
-fun createTimer(context: Context, duration: Int) {
-  val intent = Intent(context.applicationContext, XxxFloatingService::class.java)
-  intent.putExtra(INTENT_COMMAND, INTENT_COMMAND_COUNTDOWN_CREATE)
-  intent.putExtra(EXTRA_COUNTDOWN_DURATION, duration)
-  context.startForegroundService(intent)
 }
