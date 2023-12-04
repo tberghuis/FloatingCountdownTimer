@@ -175,19 +175,12 @@ class OverlayController(val service: FloatingService) {
     bubbleSet.forEach { bubble ->
       bubble.exit()
     }
-//    bubbleSet.clear()
-
-
-//    logd("exitAll bubbleSet size1 ${bubbleSet.size}")
-//
-//    val i = bubbleSet.iterator()
-//    while (i.hasNext()) {
-//      val bubble = i.next()
-//      bubble.exit()
-//    }
-//
-//    logd("exitAll bubbleSet size2 ${bubbleSet.size}")
-
     service.stopSelf()
+  }
+
+  fun resetAll() {
+    bubbleSet.forEach { bubble ->
+      bubble.reset()
+    }
   }
 }

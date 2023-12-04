@@ -8,6 +8,7 @@ import xyz.tberghuis.floatingtimer.INTENT_COMMAND_COUNTDOWN_COMPLETE
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.XxxFloatingService
 
+// todo remove
 class XxxAlarmReceiver : BroadcastReceiver() {
   override fun onReceive(context: Context, intent: Intent?) {
     logd("onReceive start")

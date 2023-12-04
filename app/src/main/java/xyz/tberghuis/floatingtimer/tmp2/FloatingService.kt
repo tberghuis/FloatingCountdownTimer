@@ -71,18 +71,19 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     logd("FloatingService onStartCommand")
     startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification())
 
+    intent?.let {
+      when (intent.getStringExtra(INTENT_COMMAND)) {
+        INTENT_COMMAND_EXIT -> {
+          overlayController.exitAll()
+        }
 
-//    intent?.let {
-//      val command = intent.getStringExtra(INTENT_COMMAND)
-//      when (command) {
-//        INTENT_COMMAND_COUNTDOWN_COMPLETE -> {
-//          logd("onStartCommand INTENT_COMMAND_COUNTDOWN_COMPLETE")
-//          state.countdownState.timerState.value = TimerStateFinished
-//        }
-//      }
-//    }
+        INTENT_COMMAND_RESET -> {
+          overlayController.resetAll()
+        }
 
-
+        else -> {}
+      }
+    }
     return START_NOT_STICKY
   }
 
