@@ -122,6 +122,11 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     return notification
   }
 
+  override fun onDestroy() {
+    job.cancel()
+    super.onDestroy()
+  }
+
   override fun onConfigurationChanged(newConfig: Configuration) {
     super.onConfigurationChanged(newConfig)
     ScreenEz.refresh()
