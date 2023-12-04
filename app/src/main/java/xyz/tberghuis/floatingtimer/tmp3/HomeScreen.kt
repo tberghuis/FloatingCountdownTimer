@@ -12,9 +12,13 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -40,23 +44,27 @@ fun HomeScreen() {
   val vm: HomeViewModel = viewModel()
   val context = LocalContext.current
   val navController = LocalNavController.current
+  val snackbarHostState = remember { SnackbarHostState() }
+  val scope = rememberCoroutineScope()
 
-  Scaffold(topBar = {
-    TopAppBar(
-      title = { Text(stringResource(R.string.app_name)) },
-      modifier = Modifier,
-      actions = {
-        IconButton(onClick = {
-          navController.navigate("settings")
-        }) {
-          Icon(Icons.Filled.Settings, stringResource(R.string.settings))
-        }
-      },
-    )
-
-  }, content = {
+  Scaffold(
+    topBar = {
+      TopAppBar(
+        title = { Text(stringResource(R.string.app_name)) },
+        modifier = Modifier,
+        actions = {
+          IconButton(onClick = {
+            navController.navigate("settings")
+          }) {
+            Icon(Icons.Filled.Settings, stringResource(R.string.settings))
+          }
+        },
+      )
+    },
+    snackbarHost = { SnackbarHost(snackbarHostState) },
+  ) {
     HomeScreenContent(it)
-  })
+  }
 
   if (vm.showGrantOverlayDialog) {
     AlertDialog(onDismissRequest = {
