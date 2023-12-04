@@ -46,6 +46,7 @@ import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
 import xyz.tberghuis.floatingtimer.composables.CreateStopwatchCard
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.screens.LaunchPostNotificationsPermissionRequest
+import xyz.tberghuis.floatingtimer.tmp2.PremiumDialog
 
 @Composable
 fun TmpNavHost() {
@@ -119,6 +120,8 @@ fun HomeScreen() {
       })
     })
   }
+
+  PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_multiple_timers))
 }
 
 @Composable
