@@ -14,3 +14,8 @@ test purchase - always approves
 - slow and succeeds
 
 test all api levels
+
+test billing, mums old phone
+  remixos
+  wise virtual card
+  
