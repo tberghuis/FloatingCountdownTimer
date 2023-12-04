@@ -38,9 +38,9 @@ class OverlayController(val service: FloatingService) {
     addBubble(stopwatch, stopwatchView)
   }
 
-  fun addCountdown() {
+  fun addCountdown(durationSeconds: Int) {
     logd("OverlayController addStopwatch")
-    val countdown = Countdown(service)
+    val countdown = Countdown(service, durationSeconds)
     val countdownView = @Composable { CountdownView(countdown) }
     addBubble(countdown, countdownView)
   }

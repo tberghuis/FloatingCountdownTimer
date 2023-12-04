@@ -113,14 +113,7 @@ fun CreateCountdownButton() {
   val vm: HomeViewModel = viewModel()
   val focusManager = LocalFocusManager.current
   val context = LocalContext.current
-  val scope = rememberCoroutineScope()
-  val showSnackbar = { message: String ->
-    scope.launch {
-      vm.snackbarHostState.showSnackbar(
-        message
-      )
-    }
-  }
+
   Button(onClick = {
     logd("create")
     focusManager.clearFocus()
@@ -128,23 +121,7 @@ fun CreateCountdownButton() {
       vm.showGrantOverlayDialog = true
       return@Button
     }
-    logd("after canDrawOverlays")
-    val min: Int
-    val sec: Int
-    try {
-      min = vm.minutes.value.text.toInt()
-      sec = vm.seconds.value.text.toInt()
-    } catch (e: NumberFormatException) {
-      // todo, use res string for message, translate
-      showSnackbar("Invalid timer duration. Please set to more than 0 seconds.")
-      return@Button
-    }
-    val totalSecs = min * 60 + sec
-    if (totalSecs == 0) {
-      showSnackbar("Invalid timer duration. Please set to more than 0 seconds.")
-      return@Button
-    }
-    createTimer(context, totalSecs)
+    vm.countdownButtonClick()
   }) {
     Text(stringResource(R.string.create))
   }

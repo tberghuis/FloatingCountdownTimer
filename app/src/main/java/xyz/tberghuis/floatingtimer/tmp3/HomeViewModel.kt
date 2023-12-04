@@ -43,8 +43,6 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
   }
 
 
-
-
   fun updateVibration(vibration: Boolean) {
     logd("updateVibration $vibration")
     viewModelScope.launch {
@@ -56,6 +54,31 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
   fun updateSound(sound: Boolean) {
     viewModelScope.launch {
       preferencesRepository.updateSound(sound)
+    }
+  }
+
+  fun countdownButtonClick() {
+    viewModelScope.launch {
+      val min: Int
+      val sec: Int
+      try {
+        min = minutes.value.text.toInt()
+        sec = seconds.value.text.toInt()
+      } catch (e: NumberFormatException) {
+        // todo, use res string for message, translate
+        snackbarHostState.showSnackbar(
+          "Invalid timer duration. Please set to more than 0 seconds."
+        )
+        return@launch
+      }
+      val totalSecs = min * 60 + sec
+      if (totalSecs == 0) {
+        snackbarHostState.showSnackbar(
+          "Invalid timer duration. Please set to more than 0 seconds."
+        )
+        return@launch
+      }
+      boundFloatingServiceVmc.provideFloatingService().overlayController.addCountdown(totalSecs)
     }
   }
 }

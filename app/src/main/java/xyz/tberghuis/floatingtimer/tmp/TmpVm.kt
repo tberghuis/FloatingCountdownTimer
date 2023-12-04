@@ -64,7 +64,7 @@ class TmpVm(private val application: Application) : AndroidViewModel(application
       if (shouldShowPremiumDialog()) {
         premiumVmc.showPurchaseDialog = true
       } else {
-        provideFloatingService().overlayController.addCountdown()
+        provideFloatingService().overlayController.addCountdown(10)
       }
     }
   }

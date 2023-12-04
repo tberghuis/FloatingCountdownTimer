@@ -28,9 +28,9 @@ import kotlin.math.roundToInt
 
 class Countdown(
   private val service: FloatingService,
-  val durationSeconds: Int = 10
+  val durationSeconds: Int
 ) : Bubble(service) {
-  var countdownSeconds by mutableStateOf(10)
+  var countdownSeconds by mutableStateOf(durationSeconds)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
 
   private var countDownTimer: CountDownTimer? = null
