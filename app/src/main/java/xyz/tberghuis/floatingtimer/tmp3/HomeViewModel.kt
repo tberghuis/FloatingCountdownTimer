@@ -95,4 +95,10 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
       boundFloatingServiceVmc.provideFloatingService().overlayController.addStopwatch()
     }
   }
+
+  fun cancelAllTimers() {
+    viewModelScope.launch {
+      boundFloatingServiceVmc.provideFloatingService().overlayController.exitAll()
+    }
+  }
 }

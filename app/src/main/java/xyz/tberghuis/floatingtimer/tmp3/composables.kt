@@ -126,3 +126,26 @@ fun CreateCountdownButton() {
     Text(stringResource(R.string.create))
   }
 }
+
+@Composable
+fun CancelAllTimersCard() {
+  val vm: HomeViewModel = viewModel()
+  ElevatedCard(
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(15.dp),
+  ) {
+    Row(
+      modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth(),
+      horizontalArrangement = Arrangement.Center
+    ) {
+      Button(onClick = {
+        vm.cancelAllTimers()
+      }) {
+        Text(stringResource(R.string.cancel_all_timers))
+      }
+    }
+  }
+}

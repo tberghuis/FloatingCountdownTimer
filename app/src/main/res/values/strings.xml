@@ -24,4 +24,5 @@
     <string name="premium_reason_multiple_timers">Running more than 2 timers simultaneously requires premium.</string>
     <string name="premium_reason_halo_colour">Change of Timer color requires premium.</string>
 
+    <string name="cancel_all_timers">Cancel all Timers</string>
 </resources>

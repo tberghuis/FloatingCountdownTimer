@@ -64,3 +64,5 @@ error snackbar home screen
 play console update halo_colour iap description
 
 cull // todo
+
+translate strings.xml

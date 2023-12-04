@@ -144,6 +144,7 @@ fun HomeScreenContent(paddingValues: PaddingValues) {
   ) {
     CreateCountdownCard()
     CreateStopwatchCard()
+    CancelAllTimersCard()
   }
 }
 
