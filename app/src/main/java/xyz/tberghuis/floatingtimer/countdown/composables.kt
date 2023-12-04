@@ -39,102 +39,108 @@ import xyz.tberghuis.floatingtimer.viewmodels.XxxHomeViewModel
 @Composable
 fun CreateCountdownCard() {
   val vm: XxxHomeViewModel = viewModel()
-  val focusManager = LocalFocusManager.current
-  val context = LocalContext.current
 
   // todo must be an idiomatic way to center without the need
   // to specify Modifier.fillMaxWidth() and Center everywhere
   ElevatedCard(
-      modifier = Modifier
-          .fillMaxWidth()
-          .padding(15.dp),
+    modifier = Modifier
+      .fillMaxWidth()
+      .padding(15.dp),
   ) {
     Row(
-        modifier = Modifier
-            .padding(10.dp)
-            .fillMaxWidth(), horizontalArrangement = Arrangement.Center
+      modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
       Text(
-          stringResource(id = R.string.countdown),
-          modifier = Modifier.fillMaxWidth(),
-          fontSize = 20.sp,
-          textAlign = TextAlign.Center
+        stringResource(id = R.string.countdown),
+        modifier = Modifier.fillMaxWidth(),
+        fontSize = 20.sp,
+        textAlign = TextAlign.Center
       )
     }
     Row(
-        modifier = Modifier
-            .padding(10.dp)
-            .fillMaxWidth(), horizontalArrangement = Arrangement.Center
+      modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
       TextField(
-          modifier = Modifier
-              .width(100.dp)
-              .onFocusSelectAll(vm.minutes),
-          label = { Text(stringResource(R.string.minutes)) },
-          value = vm.minutes.value,
-          onValueChange = { vm.minutes.value = it },
-          keyboardOptions = KeyboardOptions(
-              keyboardType = KeyboardType.Number
-          ),
-          singleLine = true
+        modifier = Modifier
+          .width(100.dp)
+          .onFocusSelectAll(vm.minutes),
+        label = { Text(stringResource(R.string.minutes)) },
+        value = vm.minutes.value,
+        onValueChange = { vm.minutes.value = it },
+        keyboardOptions = KeyboardOptions(
+          keyboardType = KeyboardType.Number
+        ),
+        singleLine = true
       )
       Spacer(Modifier.width(20.dp))
       TextField(
-          modifier = Modifier
-              .width(100.dp)
+        modifier = Modifier
+          .width(100.dp)
 //          .padding(vertical = 20.dp)
-              .onFocusSelectAll(vm.seconds),
-          label = { Text(stringResource(R.string.seconds)) },
-          value = vm.seconds.value,
-          onValueChange = { vm.seconds.value = it },
-          keyboardOptions = KeyboardOptions(
-              keyboardType = KeyboardType.Number
-          ),
-          singleLine = true
+          .onFocusSelectAll(vm.seconds),
+        label = { Text(stringResource(R.string.seconds)) },
+        value = vm.seconds.value,
+        onValueChange = { vm.seconds.value = it },
+        keyboardOptions = KeyboardOptions(
+          keyboardType = KeyboardType.Number
+        ),
+        singleLine = true
       )
     }
     Row(
-        modifier = Modifier
-            .padding(10.dp)
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
+      modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth(),
+      horizontalArrangement = Arrangement.Center,
+      verticalAlignment = Alignment.CenterVertically
     ) {
       CountdownOptions()
     }
     Row(
-        modifier = Modifier
-            .padding(10.dp)
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
+      modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth(),
+      horizontalArrangement = Arrangement.Center
     ) {
-      Button(onClick = {
-        logd("create")
-        focusManager.clearFocus()
-        if (!Settings.canDrawOverlays(context)) {
-          vm.showGrantOverlayDialog = true
-          return@Button
-        }
-        logd("after canDrawOverlays")
-        val min: Int
-        val sec: Int
-        try {
-          min = vm.minutes.value.text.toInt()
-          sec = vm.seconds.value.text.toInt()
-        } catch (e: NumberFormatException) {
-          // todo show dialog
-          return@Button
-        }
-        val totalSecs = min * 60 + sec
-        if (totalSecs == 0) {
-          // todo show dialog
-          return@Button
-        }
-        createTimer(context, totalSecs)
-      }) {
-        Text(stringResource(R.string.create))
-      }
+      CreateCountdownButton()
     }
+  }
+}
+
+@Composable
+fun CreateCountdownButton() {
+  val vm: XxxHomeViewModel = viewModel()
+  val focusManager = LocalFocusManager.current
+  val context = LocalContext.current
+  Button(onClick = {
+    logd("create")
+    focusManager.clearFocus()
+    if (!Settings.canDrawOverlays(context)) {
+      vm.showGrantOverlayDialog = true
+      return@Button
+    }
+    logd("after canDrawOverlays")
+    val min: Int
+    val sec: Int
+    try {
+      min = vm.minutes.value.text.toInt()
+      sec = vm.seconds.value.text.toInt()
+    } catch (e: NumberFormatException) {
+      // todo show dialog
+      return@Button
+    }
+    val totalSecs = min * 60 + sec
+    if (totalSecs == 0) {
+      // todo show dialog
+      return@Button
+    }
+    createTimer(context, totalSecs)
+  }) {
+    Text(stringResource(R.string.create))
   }
 }
 
