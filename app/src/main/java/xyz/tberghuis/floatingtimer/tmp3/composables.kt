@@ -135,7 +135,8 @@ fun CreateCountdownButton() {
       min = vm.minutes.value.text.toInt()
       sec = vm.seconds.value.text.toInt()
     } catch (e: NumberFormatException) {
-      // todo show dialog
+      // todo, use res string for message, translate
+      showSnackbar("Invalid timer duration. Please set to more than 0 seconds.")
       return@Button
     }
     val totalSecs = min * 60 + sec
