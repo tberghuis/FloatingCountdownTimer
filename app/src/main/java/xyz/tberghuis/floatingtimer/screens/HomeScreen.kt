@@ -83,7 +83,7 @@ fun XxxHomeScreen() {
     )
 
   }, content = {
-    HomeScreenContent(it)
+    XxxHomeScreenContent(it)
   })
 
   if (vm.showGrantOverlayDialog) {
@@ -119,7 +119,7 @@ fun XxxHomeScreen() {
 }
 
 @Composable
-fun HomeScreenContent(paddingValues: PaddingValues) {
+fun XxxHomeScreenContent(paddingValues: PaddingValues) {
   val focusManager = LocalFocusManager.current
 
   Column(

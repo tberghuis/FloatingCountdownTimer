@@ -4,6 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AlertDialog
@@ -19,8 +27,11 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -31,8 +42,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
+import xyz.tberghuis.floatingtimer.composables.CreateStopwatchCard
+import xyz.tberghuis.floatingtimer.countdown.XxxCreateCountdownCard
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.screens.HomeScreenContent
 import xyz.tberghuis.floatingtimer.screens.LaunchPostNotificationsPermissionRequest
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,3 +106,27 @@ fun HomeScreen() {
     })
   }
 }
+
+@Composable
+fun HomeScreenContent(paddingValues: PaddingValues) {
+  val focusManager = LocalFocusManager.current
+
+  Column(
+    modifier = Modifier
+      .padding(paddingValues)
+      .fillMaxSize()
+      .verticalScroll(rememberScrollState())
+      .pointerInput(Unit) {
+        detectTapGestures(onTap = {
+          focusManager.clearFocus()
+          logd("on tap")
+        })
+      },
+    verticalArrangement = Arrangement.Center,
+    horizontalAlignment = Alignment.CenterHorizontally
+  ) {
+    CreateCountdownCard()
+    CreateStopwatchCard()
+  }
+}
+
