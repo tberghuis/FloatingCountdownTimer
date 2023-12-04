@@ -10,6 +10,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.tmp2.PremiumVmc
@@ -64,14 +65,14 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
       } catch (e: NumberFormatException) {
         // todo, use res string for message, translate
         snackbarHostState.showSnackbar(
-          "Invalid timer duration. Please set to more than 0 seconds."
+          application.resources.getString(R.string.invalid_countdown_duration)
         )
         return@launch
       }
       val totalSecs = min * 60 + sec
       if (totalSecs == 0) {
         snackbarHostState.showSnackbar(
-          "Invalid timer duration. Please set to more than 0 seconds."
+          application.resources.getString(R.string.invalid_countdown_duration)
         )
         return@launch
       }
