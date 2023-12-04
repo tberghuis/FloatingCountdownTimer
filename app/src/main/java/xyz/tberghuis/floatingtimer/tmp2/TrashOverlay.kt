@@ -98,13 +98,8 @@ fun calcTimerIsHoverTrash(
   val halfTimerSize = TIMER_SIZE_PX.toFloat() / 2f
   val timerCenterX = bubblePosition.x + halfTimerSize
   val timerCenterY = bubblePosition.y + halfTimerSize
-  if (
-    timerCenterX < trashRect.left ||
-    timerCenterX > trashRect.right ||
-    timerCenterY < trashRect.top ||
-    timerCenterY > trashRect.bottom
-  ) {
-    return false
-  }
-  return true
+  return !(timerCenterX < trashRect.left ||
+      timerCenterX > trashRect.right ||
+      timerCenterY < trashRect.top ||
+      timerCenterY > trashRect.bottom)
 }
