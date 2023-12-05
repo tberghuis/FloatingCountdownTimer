@@ -30,6 +30,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Size
 import kotlinx.coroutines.flow.StateFlow
+import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 
 @Composable
 fun StopwatchView(stopwatch: Stopwatch) {

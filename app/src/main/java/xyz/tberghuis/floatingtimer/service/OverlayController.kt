@@ -18,7 +18,7 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
-import xyz.tberghuis.floatingtimer.tmp2.Stopwatch
+import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.tmp2.StopwatchView
 import xyz.tberghuis.floatingtimer.tmp2.TimerViewHolder
 import xyz.tberghuis.floatingtimer.tmp2.TrashController
