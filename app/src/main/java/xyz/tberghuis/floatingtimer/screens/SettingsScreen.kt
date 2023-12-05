@@ -39,7 +39,7 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.service.countdown.ProgressArc
-import xyz.tberghuis.floatingtimer.tmp2.SettingsViewModel
+import xyz.tberghuis.floatingtimer.viewmodels.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
