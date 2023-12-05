@@ -12,8 +12,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.IntOffset
 import com.torrydo.screenez.ScreenEz
-import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
+import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown

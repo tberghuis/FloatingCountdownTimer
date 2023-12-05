@@ -19,7 +19,6 @@ import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.runtime.derivedStateOf
-import xyz.tberghuis.floatingtimer.LocalHaloColour
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
@@ -30,6 +29,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Size
 import kotlinx.coroutines.flow.StateFlow
+import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 
 @Composable
 fun StopwatchView(stopwatch: Stopwatch) {

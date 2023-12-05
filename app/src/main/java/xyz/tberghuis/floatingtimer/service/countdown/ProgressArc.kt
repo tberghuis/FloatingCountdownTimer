@@ -7,8 +7,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
-import xyz.tberghuis.floatingtimer.LocalHaloColour
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
+import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 
 @Composable
 fun ProgressArc(timeLeftFraction: Float) {
