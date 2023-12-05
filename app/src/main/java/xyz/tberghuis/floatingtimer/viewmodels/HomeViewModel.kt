@@ -27,7 +27,6 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
   val premiumVmc = PremiumVmc(application, viewModelScope)
   val boundFloatingServiceVmc = BoundFloatingServiceVmc(application)
 
-
   private suspend fun shouldShowPremiumDialog(): Boolean {
     val premiumPurchased =
       application.providePreferencesRepository().haloColourPurchasedFlow.first()
@@ -35,7 +34,6 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
     val numBubbles = floatingService.overlayController.getNumberOfBubbles()
     return !premiumPurchased && numBubbles == 2
   }
-
 
   fun updateVibration(vibration: Boolean) {
     logd("updateVibration $vibration")
