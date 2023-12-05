@@ -12,8 +12,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -24,10 +22,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.countdown.CountdownOptions
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.screens.onFocusSelectAll
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Checkbox
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
+import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @Preview
@@ -122,5 +124,35 @@ fun CreateCountdownButton() {
     vm.countdownButtonClick()
   }) {
     Text(stringResource(R.string.create))
+  }
+}
+
+@Composable
+fun CountdownOptions() {
+  val vm: HomeViewModel = viewModel()
+
+  // doitwrong
+  val vibration = vm.vibrationFlow.collectAsState(false)
+  val sound = vm.soundFlow.collectAsState(false)
+
+  Column {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+      Checkbox(
+        checked = vibration.value,
+        onCheckedChange = {
+          vm.updateVibration(it)
+        }
+      )
+      Text(stringResource(R.string.vibration))
+    }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+      Checkbox(
+        checked = sound.value,
+        onCheckedChange = {
+          vm.updateSound(it)
+        }
+      )
+      Text(stringResource(R.string.sound))
+    }
   }
 }
