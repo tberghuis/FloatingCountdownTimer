@@ -69,3 +69,5 @@ translate strings.xml
 
 safe to cull
   XxxFloatingService
+  XxxOverlayController
+  
