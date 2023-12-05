@@ -4,16 +4,7 @@ can i remove kapt plugin gradle?
 use withContext(Main.immediate) to collect flows
   will this prevent ANRs
 
-cull Xxx, tmp, todo, find in files
-
-write a bunch of manual tests for each line of code removed from Xxx classes
-
-print code to cull, write tests, cross out safe to cull
-
-doitwrong
-  AlarmReceiver
-  future just use a foreground service
-    or ditch AlarmReceiver, pendingIntent to floatingservice direct
+cull todo, find in files
 
 future
 android 14 permission
@@ -21,18 +12,10 @@ android 14 permission
   ditch alarm permission
 this is going to be such a headache
 
-remove AlarmReceiver
-
-manifest.xml
-
 ##################
 
-[X] configuration change
-
-paywall, max 2 simultaneous timers, dialog premium version
 
 strings xml
-  PremiumDialog
   translations
   remove unused
 
@@ -50,24 +33,12 @@ method for culling code
     comment out whole class
       build
   repeat
-  
-
-
-error snackbar home screen
-  "Invalid input"  when 0 seconds
-  dialog, need premium if num timers >= 2
 
 play console update halo_colour iap description
-
-cull // todo
 
 translate strings.xml
 
 #############
-
-safe to cull
-  XxxFloatingService
-  XxxOverlayController
 
 test api level 34, 26
 
@@ -76,10 +47,12 @@ test iap remixos mum old phone
 update play store screenshots
   description text
 github readme
+version
+build
 release
+test remixos, galaxy A20
 merge
 APK github
-
 
 next release
   api 34 with forground special use permission
