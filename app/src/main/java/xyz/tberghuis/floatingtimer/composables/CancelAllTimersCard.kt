@@ -13,7 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.tmp3.HomeViewModel
+import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @Composable
 fun CancelAllTimersCard() {

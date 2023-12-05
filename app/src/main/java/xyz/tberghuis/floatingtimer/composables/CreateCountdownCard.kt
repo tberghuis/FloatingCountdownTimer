@@ -28,7 +28,7 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.countdown.CountdownOptions
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.screens.onFocusSelectAll
-import xyz.tberghuis.floatingtimer.tmp3.HomeViewModel
+import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @Preview
 @Composable
