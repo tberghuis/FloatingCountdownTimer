@@ -67,4 +67,5 @@ translate strings.xml
 
 #############
 
-notification strings use stings.xml
+safe to cull
+  XxxFloatingService
