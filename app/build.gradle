@@ -11,8 +11,8 @@ android {
         applicationId "xyz.tberghuis.floatingtimer"
         minSdk 26
         targetSdk 33
-        versionCode 38
-        versionName "1.20.0"
+        versionCode 39
+        versionName "1.20.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -72,6 +72,8 @@ dependencies {
 
     def billing_version = "6.1.0"
     implementation "com.android.billingclient:billing-ktx:$billing_version"
+    // https://www.youtube.com/watch?v=meRGGTFZ9Kc
+    constraints.implementation "androidx.fragment:fragment:1.6.2"
 
     implementation "androidx.navigation:navigation-compose:2.7.5"
 
