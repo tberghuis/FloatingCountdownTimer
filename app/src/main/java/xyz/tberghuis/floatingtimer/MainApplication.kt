@@ -6,7 +6,6 @@ import android.app.NotificationManager
 import xyz.tberghuis.floatingtimer.data.PreferencesRepository
 import xyz.tberghuis.floatingtimer.data.dataStore
 
-
 class MainApplication : Application() {
 
   // could i just use Context.dataStore instead for singleton
