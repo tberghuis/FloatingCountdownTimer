@@ -19,7 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
 import xyz.tberghuis.floatingtimer.screens.SettingsScreen
-import xyz.tberghuis.floatingtimer.screens.XxxHomeScreen
+import xyz.tberghuis.floatingtimer.tmp3.HomeScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class MainActivity : ComponentActivity() {
@@ -67,7 +67,7 @@ fun FloatingTimerNavHost(
       navController = navController, startDestination = "home"
     ) {
       composable("home") {
-        XxxHomeScreen()
+        HomeScreen()
       }
       composable("settings") {
         SettingsScreen()

@@ -28,6 +28,7 @@ import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
 import xyz.tberghuis.floatingtimer.logd
 
+// https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
 class FloatingService : LifecycleService(), SavedStateRegistryOwner {
   private val job = SupervisorJob()
 
