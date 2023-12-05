@@ -18,6 +18,7 @@ import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.Bubble
+import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import kotlin.math.max
 import kotlin.math.min
 
