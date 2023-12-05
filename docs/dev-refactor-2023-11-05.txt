@@ -81,3 +81,9 @@ github readme
 release
 merge
 APK github
+
+
+next release
+  api 34 with forground special use permission
+  release after
+    remove permissions SCHEDULE_EXACT_ALARM USE_EXACT_ALARM
