@@ -19,4 +19,11 @@
     <string name="cancel">Membatalkan</string>
     <string name="premium_feature">Fitur Premium</string>
     <string name="change_timer_halo_color">Ubah warna halo Timer</string>
+    <string name="ft_premium">Premium Timer Mengambang</string>
+    <string name="premium_reason_multiple_timers">Menjalankan lebih dari 2 pengatur waktu secara bersamaan memerlukan premium.</string>
+    <string name="premium_reason_halo_colour">Perubahan warna Timer membutuhkan premium.</string>
+    <string name="cancel_all_timers">Batalkan semua Timer</string>
+    <string name="invalid_countdown_duration">Durasi timer tidak valid. Silakan atur ke lebih dari 0 detik.</string>
+    <string name="reset">mengatur ulang</string>
+    <string name="exit">KELUAR</string>
 </resources>

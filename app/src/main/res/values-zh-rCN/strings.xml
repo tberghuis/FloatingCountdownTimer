@@ -19,4 +19,11 @@
     <string name="cancel">取消</string>
     <string name="premium_feature">高级功能</string>
     <string name="change_timer_halo_color">更改计时器光晕颜色</string>
+    <string name="ft_premium">浮动定时器高级版</string>
+    <string name="premium_reason_multiple_timers">同时运行 2 个以上的计时器需要额外费用。</string>
+    <string name="premium_reason_halo_colour">更改计时器颜色需要付费。</string>
+    <string name="cancel_all_timers">取消所有定时器</string>
+    <string name="invalid_countdown_duration">计时器持续时间无效。 请设置为0秒以上。</string>
+    <string name="reset">重置</string>
+    <string name="exit">出口</string>
 </resources>
