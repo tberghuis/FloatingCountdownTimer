@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
 
 class SettingsViewModel(application: Application) : AndroidViewModel(application) {
   private val preferences = application.providePreferencesRepository()

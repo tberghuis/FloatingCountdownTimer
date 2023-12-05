@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.tmp2.PremiumVmc
+import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
 
 @Composable
 fun PremiumDialog(premiumVmc: PremiumVmc, reason: String, purchasedCallback: () -> Unit = {}) {
