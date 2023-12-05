@@ -32,9 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<!--        <service android:name=".service.XxxFloatingService" />-->
-<!--     xxx   todo remove-->
-        <service android:name=".tmp2.FloatingService" />
-
+        <service android:name=".service.FloatingService" />
     </application>
 </manifest>

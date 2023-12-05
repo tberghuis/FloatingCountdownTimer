@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.Bubble
-import xyz.tberghuis.floatingtimer.tmp2.FloatingService
+import xyz.tberghuis.floatingtimer.service.FloatingService
 import kotlin.math.roundToInt
 
 class Countdown(

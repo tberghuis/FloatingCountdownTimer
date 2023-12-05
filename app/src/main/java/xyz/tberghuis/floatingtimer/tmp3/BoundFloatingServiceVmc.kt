@@ -8,7 +8,7 @@ import android.os.IBinder
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
-import xyz.tberghuis.floatingtimer.tmp2.FloatingService
+import xyz.tberghuis.floatingtimer.service.FloatingService
 
 class BoundFloatingServiceVmc(private val application: Application) {
   private val floatingService = MutableStateFlow<FloatingService?>(null)

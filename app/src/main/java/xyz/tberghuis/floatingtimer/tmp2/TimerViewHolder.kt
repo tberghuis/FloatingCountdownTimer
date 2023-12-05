@@ -7,6 +7,7 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
+import xyz.tberghuis.floatingtimer.service.FloatingService
 
 class TimerViewHolder(val service: FloatingService) {
   val params = WindowManager.LayoutParams(
