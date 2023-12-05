@@ -45,6 +45,7 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
 import xyz.tberghuis.floatingtimer.composables.CancelAllTimersCard
 import xyz.tberghuis.floatingtimer.composables.CreateCountdownCard
+import xyz.tberghuis.floatingtimer.composables.CreateStopwatchCard
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.screens.LaunchPostNotificationsPermissionRequest
