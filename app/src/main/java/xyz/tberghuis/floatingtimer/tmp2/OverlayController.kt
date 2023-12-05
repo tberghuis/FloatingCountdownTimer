@@ -56,10 +56,6 @@ class OverlayController(val service: FloatingService) {
         // todo provide bubble
         bubbleView()
       }
-      LaunchedEffect(Unit) {
-        // todo configurationChanged collect
-        // updateClickTargetParamsWithinScreenBounds
-      }
     }
 
     clickTargetSetOnTouchListener(
@@ -161,7 +157,6 @@ class OverlayController(val service: FloatingService) {
       // this was happening in prod, can't reproduce
       Log.e("OverlayController", "IllegalArgumentException: $e")
     }
-//    overlayState.timerOffset = IntOffset(params.x, params.y)
     trashController.bubbleDraggingPosition.value = IntOffset(params.x, params.y)
   }
 
