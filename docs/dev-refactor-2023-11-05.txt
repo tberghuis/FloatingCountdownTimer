@@ -70,4 +70,14 @@ translate strings.xml
 safe to cull
   XxxFloatingService
   XxxOverlayController
-  
+
+test api level 34, 26
+
+test iap remixos mum old phone
+
+update play store screenshots
+  description text
+github readme
+release
+merge
+APK github
