@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.viewmodels.BoundFloatingServiceVmc
 import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
 
 class HomeViewModel(private val application: Application) : AndroidViewModel(application) {
