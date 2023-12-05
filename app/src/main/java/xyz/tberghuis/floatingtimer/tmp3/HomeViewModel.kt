@@ -34,7 +34,8 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
     val premiumPurchased =
       application.providePreferencesRepository().haloColourPurchasedFlow.first()
     val floatingService = boundFloatingServiceVmc.provideFloatingService()
-    return !premiumPurchased && floatingService.overlayController.getNumberOfBubbles() == 2
+    val numBubbles = floatingService.overlayController.getNumberOfBubbles()
+    return !premiumPurchased && numBubbles == 2
   }
 
 
@@ -54,10 +55,6 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
 
   fun countdownButtonClick() {
     viewModelScope.launch {
-      if (shouldShowPremiumDialog()) {
-        premiumVmc.showPurchaseDialog = true
-        return@launch
-      }
       val min: Int
       val sec: Int
       try {
@@ -75,6 +72,10 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         snackbarHostState.showSnackbar(
           application.resources.getString(R.string.invalid_countdown_duration)
         )
+        return@launch
+      }
+      if (shouldShowPremiumDialog()) {
+        premiumVmc.showPurchaseDialog = true
         return@launch
       }
       boundFloatingServiceVmc.provideFloatingService().overlayController.addCountdown(totalSecs)
