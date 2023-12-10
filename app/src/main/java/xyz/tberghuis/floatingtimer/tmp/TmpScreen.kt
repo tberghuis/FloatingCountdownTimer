@@ -10,6 +10,6 @@ fun TmpScreen(
   vm: TmpVm = viewModel()
 ) {
   Column {
-    Text("tmp screen")
+    Text("resize timer demo")
   }
 }
