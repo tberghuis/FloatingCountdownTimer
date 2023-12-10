@@ -18,3 +18,6 @@ read the docs
 test different screen sizes
 
 https://proandroiddev.com/preventing-font-scaling-in-jetpack-compose-8a2cd0f09d23
+
+time display monospace number
+ style = LocalTextStyle.current.copy(fontFeatureSettings = "tnum")
