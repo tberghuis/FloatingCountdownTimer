@@ -7,4 +7,7 @@ release
 ##################3
 step 1, slider
 read https://developer.android.com/jetpack/compose/components/slider
-https://proandroiddev.com/building-custom-sliders-in-jetpack-compose-a-deep-dive-234ced73b54f
+
+size font dp instead of sp
+
+save sizeFactor to datastore
