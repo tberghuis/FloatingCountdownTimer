@@ -25,7 +25,12 @@ import kotlinx.coroutines.flow.StateFlow
 import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 
 @Composable
-fun TmpStopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>) {
+fun TmpStopwatchBorderArc(
+  isRunningStateFlow: StateFlow<Boolean>, scaleFactor: Float
+) {
+
+  val arcWidth = PROGRESS_ARC_WIDTH * (0.9f * scaleFactor + 1)
+
   var pausedAngle by remember { mutableStateOf(210f) }
   var restartAngle by remember { mutableStateOf(0f) }
   val infiniteTransition = rememberInfiniteTransition()
@@ -53,7 +58,7 @@ fun TmpStopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>) {
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
-      style = Stroke(PROGRESS_ARC_WIDTH.toPx()),
+      style = Stroke(arcWidth.toPx()),
       size = Size(size.width, size.height)
     )
 
@@ -62,7 +67,7 @@ fun TmpStopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>) {
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
-      style = Stroke(PROGRESS_ARC_WIDTH.toPx()),
+      style = Stroke(arcWidth.toPx()),
       size = Size(size.width, size.height)
     )
 
@@ -71,7 +76,7 @@ fun TmpStopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>) {
       startAngle = if (!running.value) pausedAngle else drawAnimatedAngle,
       sweepAngle = 120f,
       useCenter = false,
-      style = Stroke(PROGRESS_ARC_WIDTH.toPx()),
+      style = Stroke(arcWidth.toPx()),
       size = Size(size.width, size.height)
     )
   }

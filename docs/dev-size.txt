@@ -21,3 +21,13 @@ https://proandroiddev.com/preventing-font-scaling-in-jetpack-compose-8a2cd0f09d2
 
 time display monospace number
  style = LocalTextStyle.current.copy(fontFeatureSettings = "tnum")
+
+
+test updateClickTargetParamsWithinScreenBounds 
+  on rotate
+  drag out of window bounds...
+
+test all usages TIMER_SIZE_DP TIMER_SIZE_PX
+
+test timer size only changes on Save click
+
