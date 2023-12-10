@@ -11,3 +11,6 @@ read https://developer.android.com/jetpack/compose/components/slider
 size font dp instead of sp
 
 save sizeFactor to datastore
+
+doitwrong next task
+read the docs
