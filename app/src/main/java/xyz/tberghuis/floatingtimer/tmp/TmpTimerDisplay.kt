@@ -18,50 +18,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 
-
-//@Composable
-//fun TmpTimer(
-//  vm: TmpVm = viewModel()
-//) {
-//  CompositionLocalProvider(
-//    LocalDensity provides Density(
-//      LocalDensity.current.density,
-//      1f
-//    )
-//  ) {
-//    Box(
-//      modifier = Modifier.border(1.dp, Color.Black),
-//    ) {
-//      Text("00:59", fontSize = 20.sp * vm.timerSizeFactor)
-//    }
-//  }
-//}
-
-//@Composable
-//fun TmpTimerDisplay(
-//  vm: TmpVm = viewModel()
-//) {
-//  CompositionLocalProvider(
-//    LocalDensity provides Density(
-//      LocalDensity.current.density,
-//      1f
-//    )
-//  ) {
-//    Box(
-//      modifier = Modifier
-//        .size(TIMER_SIZE_DP.dp * vm.timerSizeFactor)
-//        .padding(PROGRESS_ARC_WIDTH / 2)
-//        .border(1.dp, Color.Black),
-//      contentAlignment = Alignment.Center
-//    ) {
-//      Text("00:59", fontSize = 16.sp * vm.timerSizeFactor)
-//    }
-//  }
-//}
-
-
 @Composable
-fun TmpTimerDisplayMaxScale(
+fun TmpTimerDisplay(
   vm: TmpVm = viewModel()
 ) {
   CompositionLocalProvider(
