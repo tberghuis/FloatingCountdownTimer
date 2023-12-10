@@ -30,39 +30,21 @@ fun TmpScreen(
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
     Text("resize timer demo")
-    TmpTimer()
-    TmpSlider()
+    TmpTimerDisplayMaxScale()
+    TmpSliderScale()
   }
 }
 
 @Composable
-fun TmpSlider(
+fun TmpSliderScale(
   vm: TmpVm = viewModel()
 ) {
   Slider(
-    value = vm.timerSizeFactor,
+    value = vm.timerSizeScaleFactor,
     onValueChange = {
-      vm.timerSizeFactor = it
+      vm.timerSizeScaleFactor = it
     },
     modifier = Modifier,
-    valueRange = 1f..2f,
+    valueRange = 0f..1f,
   )
-}
-
-@Composable
-fun TmpTimer(
-  vm: TmpVm = viewModel()
-) {
-  CompositionLocalProvider(
-    LocalDensity provides Density(
-      LocalDensity.current.density,
-      1f
-    )
-  ) {
-    Box(
-      modifier = Modifier.border(1.dp, Color.Black),
-    ) {
-      Text("00:59", fontSize = 20.sp * vm.timerSizeFactor)
-    }
-  }
 }

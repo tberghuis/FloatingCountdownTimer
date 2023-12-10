@@ -8,6 +8,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 
 class TmpVm(private val application: Application) : AndroidViewModel(application) {
-  var timerSizeFactor by mutableFloatStateOf(1f)
+//  var timerSizeFactor by mutableFloatStateOf(1f)
+
+
+  var timerSizeScaleFactor by mutableFloatStateOf(0f)
+
 
 }
