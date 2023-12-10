@@ -6,3 +6,4 @@ release
 
 ##################3
 step 1, slider
+read https://developer.android.com/jetpack/compose/components/slider
