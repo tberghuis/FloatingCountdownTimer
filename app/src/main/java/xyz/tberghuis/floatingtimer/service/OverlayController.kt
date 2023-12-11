@@ -63,7 +63,7 @@ class OverlayController(val service: FloatingService) {
     }
 
     clickTargetSetOnTouchListener(
-      viewHolder = bubble.viewHolder,
+      bubble = bubble,
       exitTimer = {
         bubble.exit()
         bubbleSet.remove(bubble)
@@ -79,10 +79,10 @@ class OverlayController(val service: FloatingService) {
 
   @SuppressLint("ClickableViewAccessibility")
   private fun clickTargetSetOnTouchListener(
-    viewHolder: TimerViewHolder,
+    bubble: Bubble,
     exitTimer: () -> Unit,
     onDoubleTap: () -> Unit,
-    onTap: () -> Unit
+    onTap: () -> Unit,
   ) {
 
     var paramStartDragX: Int = 0
@@ -104,19 +104,17 @@ class OverlayController(val service: FloatingService) {
       }
     })
 
-    viewHolder.view.setOnTouchListener { _, event ->
+    bubble.viewHolder.view.setOnTouchListener { _, event ->
       if (tapDetector.onTouchEvent(event)) {
         // just to be safe
         trashController.isBubbleDragging.value = false
         return@setOnTouchListener true
       }
 
-      val params = viewHolder.params
+      val params = bubble.viewHolder.params
       when (event.action) {
         MotionEvent.ACTION_DOWN -> {
-
           logd("setOnTouchListener ACTION_DOWN")
-
           paramStartDragX = params.x
           paramStartDragY = params.y
           startDragRawX = event.rawX
@@ -124,14 +122,16 @@ class OverlayController(val service: FloatingService) {
         }
 
         MotionEvent.ACTION_MOVE -> {
+          trashController.currentDraggingBubble.value = bubble
           trashController.isBubbleDragging.value = true
           params.x = (paramStartDragX + (event.rawX - startDragRawX)).toInt()
           params.y = (paramStartDragY + (event.rawY - startDragRawY)).toInt()
-          updateClickTargetParamsWithinScreenBounds(viewHolder)
+          updateClickTargetParamsWithinScreenBounds(bubble.viewHolder)
         }
 
         MotionEvent.ACTION_UP -> {
           trashController.isBubbleDragging.value = false
+          trashController.currentDraggingBubble.value = null
           // todo
           if (trashController.isBubbleHoveringTrash) {
             trashController.isBubbleHoveringTrash = false
