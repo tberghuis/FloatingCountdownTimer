@@ -67,7 +67,7 @@ fun ChangeSizeScreenContent(
       .fillMaxSize()
       .verticalScroll(rememberScrollState()),
   ) {
-    SettingsTimerPreview(vm.settingsTimerPreviewVmc)
+    SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
     TmpSliderScale(vm.settingsTimerPreviewVmc)
 
   }

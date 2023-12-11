@@ -32,4 +32,5 @@
 
     <string name="change_size">Change Size</string>
     <string name="change_color">Change Color</string>
+    <string name="preview">Preview</string>
 </resources>
