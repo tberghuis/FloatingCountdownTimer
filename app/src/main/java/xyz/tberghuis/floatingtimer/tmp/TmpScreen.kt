@@ -22,20 +22,20 @@ fun TmpScreen(
   ) {
     Text("resize timer demo")
     TmpTimerDisplay()
-    TmpSliderScale()
+//    TmpSliderScale()
   }
 }
 
-@Composable
-fun TmpSliderScale(
-  vm: TmpVm = viewModel()
-) {
-  Slider(
-    value = vm.timerSizeScaleFactor,
-    onValueChange = {
-      vm.timerSizeScaleFactor = it
-    },
-    modifier = Modifier,
-    valueRange = 0f..1f,
-  )
-}
+//@Composable
+//fun TmpSliderScale(
+//  vm: TmpVm = viewModel()
+//) {
+//  Slider(
+//    value = vm.timerSizeScaleFactor,
+//    onValueChange = {
+//      vm.timerSizeScaleFactor = it
+//    },
+//    modifier = Modifier,
+//    valueRange = 0f..1f,
+//  )
+//}
