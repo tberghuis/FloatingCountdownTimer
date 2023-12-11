@@ -9,21 +9,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.zIndex
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
-import xyz.tberghuis.floatingtimer.service.countdown.ProgressArc
 
+// todo replace CountdownView with this
 @Composable
 fun TmpCountdownBubble(countdown: Countdown) {
   val timeLeftFraction = countdown.countdownSeconds / countdown.durationSeconds.toFloat()
-  Box(
-    modifier = Modifier
-      .size(countdown.bubbleSizeDp)
-      .padding(countdown.arcWidth / 2)
-      .zIndex(1f),
-    contentAlignment = Alignment.Center
-  ) {
-    ProgressArc(timeLeftFraction, countdown)
-    TimeDisplay(countdown.countdownSeconds, countdown.fontSize)
-  }
+  TmpCountdownBubbleDisplay(countdown, timeLeftFraction, countdown.countdownSeconds)
 }
 
 // need better naming conventions
@@ -44,4 +35,3 @@ fun TmpCountdownBubbleDisplay(
     TimeDisplay(countdownSeconds, bubbleProperties.fontSize)
   }
 }
-

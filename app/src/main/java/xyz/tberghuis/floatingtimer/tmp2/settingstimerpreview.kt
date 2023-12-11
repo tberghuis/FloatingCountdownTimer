@@ -6,12 +6,22 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_NO_SCALE
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
+import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 
 interface BubbleProperties {
   val bubbleSizeDp: Dp
@@ -44,4 +54,15 @@ fun SettingsTimerPreview(vmc: SettingsTimerPreviewVmc) {
   Text("bubbleSizeDp ${vmc.bubbleSizeDp}")
   Text("arcWidth ${vmc.arcWidth}")
   Text("fontSize ${vmc.fontSize}")
+
+  CompositionLocalProvider(LocalHaloColour provides MaterialTheme.colorScheme.primary) {
+    CompositionLocalProvider(
+      LocalDensity provides Density(
+        LocalDensity.current.density,
+        1f
+      )
+    ) {
+      TmpCountdownBubbleDisplay(vmc, 0.6f, 10)
+    }
+  }
 }
