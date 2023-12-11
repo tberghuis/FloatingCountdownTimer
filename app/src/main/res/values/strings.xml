@@ -29,4 +29,7 @@
 
     <string name="reset">Reset</string>
     <string name="exit">Exit</string>
+
+    <string name="change_size">Change Size</string>
+    <string name="change_color">Change Color</string>
 </resources>

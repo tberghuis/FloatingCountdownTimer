@@ -42,3 +42,5 @@ or just write more tests
 remove tmp activity manifest.xml
 
 paywall save size change
+
+translations strings.xml
