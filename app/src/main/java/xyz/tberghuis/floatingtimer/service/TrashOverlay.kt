@@ -27,9 +27,9 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
-import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
+import xyz.tberghuis.floatingtimer.composables.LocalTrashController
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
@@ -47,14 +47,21 @@ fun TrashOverlay() {
 fun Trash() {
   val service = LocalFloatingService.current
   var trashRect by remember { mutableStateOf(Rect.Zero) }
-  val isTimerDragHoveringTrash = remember {
+
+  val currentDraggingBubble = LocalTrashController.current.currentDraggingBubble.value
+
+  // this is wack, i need major refactor
+  // get correct architecture from simplified example
+  val isTimerDragHoveringTrash = remember(currentDraggingBubble) {
     derivedStateOf {
       calcTimerIsHoverTrash(
         service.overlayController.trashController.bubbleDraggingPosition.value,
-        trashRect
+        trashRect,
+        currentDraggingBubble
       )
     }
   }
+
   val iconTint by remember {
     derivedStateOf {
       if (isTimerDragHoveringTrash.value) {
@@ -94,9 +101,13 @@ fun Trash() {
 
 fun calcTimerIsHoverTrash(
   bubblePosition: IntOffset,
-  trashRect: Rect
+  trashRect: Rect,
+  bubble: Bubble?
 ): Boolean {
-  val halfTimerSize = TIMER_SIZE_PX.toFloat() / 2f
+  if (bubble == null) {
+    return false
+  }
+  val halfTimerSize = bubble.bubbleSizePx / 2f
   val timerCenterX = bubblePosition.x + halfTimerSize
   val timerCenterY = bubblePosition.y + halfTimerSize
   return !(timerCenterX < trashRect.left ||

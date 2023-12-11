@@ -13,9 +13,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
-import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.runtime.derivedStateOf
@@ -35,17 +32,17 @@ import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 fun StopwatchView(stopwatch: Stopwatch) {
   Box(
     modifier = Modifier
-      .size(TIMER_SIZE_DP.dp)
-      .padding(PROGRESS_ARC_WIDTH / 2),
+      .size(stopwatch.bubbleSizeDp)
+      .padding(stopwatch.arcWidth / 2),
     contentAlignment = Alignment.Center
   ) {
-    StopwatchBorderArc(stopwatch.isRunningStateFlow)
+    StopwatchBorderArc(stopwatch.isRunningStateFlow, stopwatch)
     TimeDisplay(stopwatch.timeElapsed.value)
   }
 }
 
 @Composable
-fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>) {
+fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>, stopwatch: Stopwatch) {
   var pausedAngle by remember { mutableStateOf(210f) }
   var restartAngle by remember { mutableStateOf(0f) }
   val infiniteTransition = rememberInfiniteTransition()
@@ -73,7 +70,7 @@ fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>) {
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
-      style = Stroke(PROGRESS_ARC_WIDTH.toPx()),
+      style = Stroke(stopwatch.arcWidth.toPx()),
       size = Size(size.width, size.height)
     )
 
@@ -82,7 +79,7 @@ fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>) {
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
-      style = Stroke(PROGRESS_ARC_WIDTH.toPx()),
+      style = Stroke(stopwatch.arcWidth.toPx()),
       size = Size(size.width, size.height)
     )
 
@@ -91,7 +88,7 @@ fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>) {
       startAngle = if (!running.value) pausedAngle else drawAnimatedAngle,
       sweepAngle = 120f,
       useCenter = false,
-      style = Stroke(PROGRESS_ARC_WIDTH.toPx()),
+      style = Stroke(stopwatch.arcWidth.toPx()),
       size = Size(size.width, size.height)
     )
   }

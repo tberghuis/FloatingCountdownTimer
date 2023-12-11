@@ -10,9 +10,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import com.torrydo.screenez.ScreenEz
-import xyz.tberghuis.floatingtimer.TIMER_SIZE_PX
 import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
@@ -25,9 +27,7 @@ import kotlin.math.min
 
 class OverlayController(val service: FloatingService) {
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-
   val trashController = TrashController(windowManager, service)
-
   private val bubbleSet = mutableSetOf<Bubble>()
 
   fun getNumberOfBubbles(): Int {
@@ -36,14 +36,15 @@ class OverlayController(val service: FloatingService) {
 
   fun addStopwatch() {
     logd("OverlayController addStopwatch")
-    val stopwatch = Stopwatch(service)
+    val stopwatch = Stopwatch(service, 0f)
     val stopwatchView = @Composable { StopwatchView(stopwatch) }
     addBubble(stopwatch, stopwatchView)
   }
 
   fun addCountdown(durationSeconds: Int) {
     logd("OverlayController addStopwatch")
-    val countdown = Countdown(service, durationSeconds)
+    // todo get bubbleSizeScaleFactor from datastore
+    val countdown = Countdown(service, durationSeconds, 0f)
     val countdownView = @Composable { CountdownView(countdown) }
     addBubble(countdown, countdownView)
   }
@@ -149,9 +150,9 @@ class OverlayController(val service: FloatingService) {
     var x = params.x
     var y = params.y
     x = max(x, 0)
-    x = min(x, ScreenEz.safeWidth - TIMER_SIZE_PX)
+    x = min(x, ScreenEz.safeWidth - viewHolder.timerSizePx)
     y = max(y, 0)
-    y = min(y, ScreenEz.safeHeight - TIMER_SIZE_PX)
+    y = min(y, ScreenEz.safeHeight - viewHolder.timerSizePx)
     params.x = x
     params.y = y
     try {

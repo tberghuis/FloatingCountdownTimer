@@ -9,7 +9,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.animation.core.LinearEasing
@@ -22,6 +21,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Size
 import kotlinx.coroutines.flow.StateFlow
+import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 
 @Composable
@@ -29,7 +29,7 @@ fun TmpStopwatchBorderArc(
   isRunningStateFlow: StateFlow<Boolean>, scaleFactor: Float
 ) {
 
-  val arcWidth = PROGRESS_ARC_WIDTH * (0.9f * scaleFactor + 1)
+  val arcWidth = ARC_WIDTH_NO_SCALE * (0.9f * scaleFactor + 1)
 
   var pausedAngle by remember { mutableStateOf(210f) }
   var restartAngle by remember { mutableStateOf(0f) }

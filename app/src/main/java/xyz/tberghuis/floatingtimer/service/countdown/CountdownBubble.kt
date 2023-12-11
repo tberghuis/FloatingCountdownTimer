@@ -26,8 +26,9 @@ import kotlin.math.roundToInt
 
 class Countdown(
   private val service: FloatingService,
-  val durationSeconds: Int
-) : Bubble(service) {
+  val durationSeconds: Int,
+  bubbleSizeScaleFactor: Float
+) : Bubble(service, bubbleSizeScaleFactor) {
   var countdownSeconds by mutableStateOf(durationSeconds)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
 

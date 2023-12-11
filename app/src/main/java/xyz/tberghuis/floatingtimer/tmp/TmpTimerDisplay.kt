@@ -12,11 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import xyz.tberghuis.floatingtimer.PROGRESS_ARC_WIDTH
-import xyz.tberghuis.floatingtimer.TIMER_SIZE_DP
+import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
+import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
+import xyz.tberghuis.floatingtimer.TIMER_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 
 @Composable
@@ -32,13 +32,13 @@ fun TmpTimerDisplay(
     ) {
       Box(
         modifier = Modifier
-          .size(TIMER_SIZE_DP.dp * (vm.timerSizeScaleFactor + 1))
-          .padding(PROGRESS_ARC_WIDTH / 2),
+          .size(TIMER_SIZE_NO_SCALE * (vm.timerSizeScaleFactor + 1))
+          .padding(ARC_WIDTH_NO_SCALE / 2),
         contentAlignment = Alignment.Center
       ) {
         TmpStopwatchBorderArc(vm.isRunningStateFlow, vm.timerSizeScaleFactor)
         Text(
-          "00:59", fontSize = 16.sp * (1.2 * vm.timerSizeScaleFactor + 1),
+          "00:59", fontSize = TIMER_FONT_SIZE_NO_SCALE * (1.2 * vm.timerSizeScaleFactor + 1),
           style = LocalTextStyle.current.copy(fontFeatureSettings = "tnum"),
         )
       }
