@@ -3,7 +3,6 @@ package xyz.tberghuis.floatingtimer.tmp
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,20 +21,5 @@ fun TmpScreen(
   ) {
     Text("resize timer demo")
     TmpTimerDisplay()
-//    TmpSliderScale()
   }
 }
-
-//@Composable
-//fun TmpSliderScale(
-//  vm: TmpVm = viewModel()
-//) {
-//  Slider(
-//    value = vm.timerSizeScaleFactor,
-//    onValueChange = {
-//      vm.timerSizeScaleFactor = it
-//    },
-//    modifier = Modifier,
-//    valueRange = 0f..1f,
-//  )
-//}

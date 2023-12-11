@@ -10,6 +10,4 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 class TmpVm(private val application: Application) : AndroidViewModel(application) {
   var timerSizeScaleFactor by mutableFloatStateOf(0f) // 0<=x<=1
-
-  val isRunningStateFlow = MutableStateFlow(false)
 }
