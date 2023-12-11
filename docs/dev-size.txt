@@ -38,3 +38,5 @@ bubbleSizeScaleFactor datastore
 refactor trash????
 deal with different size bubbles
 or just write more tests
+
+remove tmp activity manifest.xml
