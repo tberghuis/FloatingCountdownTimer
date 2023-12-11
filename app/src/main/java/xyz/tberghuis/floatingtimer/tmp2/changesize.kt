@@ -16,12 +16,15 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChangeSizeScreen() {
+fun ChangeSizeScreen(
+  vm: ChangeSizeViewModel = viewModel()
+) {
   val navController = LocalNavController.current
 
   Scaffold(
@@ -47,7 +50,7 @@ fun ChangeSizeScreen() {
         .fillMaxSize()
         .verticalScroll(rememberScrollState()),
     ) {
-      Text("ChangeSizeScreen")
+      Text("ChangeSizeScreen ${vm.timerSizeScaleFactor}")
     }
   }
 }
