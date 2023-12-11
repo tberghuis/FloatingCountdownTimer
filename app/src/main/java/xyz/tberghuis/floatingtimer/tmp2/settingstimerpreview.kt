@@ -23,14 +23,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
 import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 
-interface BubbleProperties {
-  val bubbleSizeDp: Dp
-  val arcWidth: Dp
-  val fontSize: TextUnit
 
-  // todo haloColour
-//  val haloColour: Color
-}
 
 // Vmc = View Model Component
 // todo initialHaloColour
