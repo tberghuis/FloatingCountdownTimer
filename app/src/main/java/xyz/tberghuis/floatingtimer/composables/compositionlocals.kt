@@ -13,6 +13,6 @@ val LocalHaloColour = compositionLocalOf<Color> {
   error("CompositionLocal LocalHaloColour not present")
 }
 
-val LocalTrashController = compositionLocalOf<TrashController> {
-  error("CompositionLocal LocalTrashController not present")
-}
+//val LocalTrashController = compositionLocalOf<TrashController> {
+//  error("CompositionLocal LocalTrashController not present")
+//}

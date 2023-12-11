@@ -11,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
-import xyz.tberghuis.floatingtimer.composables.LocalTrashController
 
 // todo move windowManager to service
 class TrashController(
@@ -20,10 +19,10 @@ class TrashController(
 ) {
   val isBubbleDragging = MutableStateFlow(false)
 
-  //  val bubbleDraggingPosition = MutableStateFlow(IntOffset.Zero)
   // todo refactor, use currentDraggingBubble
+  //   put viewHolder params.x params.y in MutableStateFlow
+  //   collect for windowManager.update
   val bubbleDraggingPosition = mutableStateOf(IntOffset.Zero)
-
   val currentDraggingBubble = mutableStateOf<Bubble?>(null)
 
   // todo make generic
@@ -72,10 +71,8 @@ class TrashController(
   private fun createTrashView(): ComposeView {
     val view = createComposeView(service)
     view.setContent {
-      CompositionLocalProvider(LocalTrashController provides this) {
-        CompositionLocalProvider(LocalFloatingService provides service) {
-          TrashOverlay()
-        }
+      CompositionLocalProvider(LocalFloatingService provides service) {
+        TrashOverlay()
       }
     }
     return view

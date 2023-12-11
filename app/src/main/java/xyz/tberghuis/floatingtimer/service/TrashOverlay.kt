@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
-import xyz.tberghuis.floatingtimer.composables.LocalTrashController
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
@@ -48,16 +47,14 @@ fun Trash() {
   val service = LocalFloatingService.current
   var trashRect by remember { mutableStateOf(Rect.Zero) }
 
-  val currentDraggingBubble = LocalTrashController.current.currentDraggingBubble.value
-
   // this is wack, i need major refactor
   // get correct architecture from simplified example
-  val isTimerDragHoveringTrash = remember(currentDraggingBubble) {
+  val isTimerDragHoveringTrash = remember {
     derivedStateOf {
       calcTimerIsHoverTrash(
         service.overlayController.trashController.bubbleDraggingPosition.value,
         trashRect,
-        currentDraggingBubble
+        service.overlayController.trashController.currentDraggingBubble.value
       )
     }
   }
