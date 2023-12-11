@@ -32,6 +32,7 @@ test all usages TIMER_SIZE_DP TIMER_SIZE_PX
 test timer size only changes on Save click
 
 t. settings screen, tmp2
+  label timer: Preview
 bubbleSizeScaleFactor datastore
 
 refactor trash????
