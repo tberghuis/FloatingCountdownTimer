@@ -66,8 +66,7 @@ fun ChangeSizeScreenContent(
       .fillMaxSize()
       .verticalScroll(rememberScrollState()),
   ) {
-    Text("Preview")
-
+    SettingsTimerPreview(vm.settingsTimerPreviewVmc)
 
 
   }

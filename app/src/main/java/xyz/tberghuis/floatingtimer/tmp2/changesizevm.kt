@@ -7,7 +7,8 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 
 class ChangeSizeViewModel(private val application: Application) : AndroidViewModel(application) {
-  var timerSizeScaleFactor by mutableFloatStateOf(0f) // 0<=x<=1
+
+  val settingsTimerPreviewVmc = SettingsTimerPreviewVmc()
 
   // todo datastore
   //  paywall dialog
