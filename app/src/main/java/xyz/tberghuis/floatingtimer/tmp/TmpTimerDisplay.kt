@@ -36,7 +36,7 @@ fun TmpTimerDisplay(
           .padding(ARC_WIDTH_NO_SCALE / 2),
         contentAlignment = Alignment.Center
       ) {
-        TmpStopwatchBorderArc(vm.isRunningStateFlow, vm.timerSizeScaleFactor)
+
         Text(
           "00:59", fontSize = TIMER_FONT_SIZE_NO_SCALE * (1.2 * vm.timerSizeScaleFactor + 1),
           style = LocalTextStyle.current.copy(fontFeatureSettings = "tnum"),

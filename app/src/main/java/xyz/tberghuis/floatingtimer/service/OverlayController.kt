@@ -36,7 +36,7 @@ class OverlayController(val service: FloatingService) {
 
   fun addStopwatch() {
     logd("OverlayController addStopwatch")
-    val stopwatch = Stopwatch(service, 0f)
+    val stopwatch = Stopwatch(service, 1f)
     val stopwatchView = @Composable { StopwatchView(stopwatch) }
     addBubble(stopwatch, stopwatchView)
   }
@@ -44,7 +44,7 @@ class OverlayController(val service: FloatingService) {
   fun addCountdown(durationSeconds: Int) {
     logd("OverlayController addStopwatch")
     // todo get bubbleSizeScaleFactor from datastore
-    val countdown = Countdown(service, durationSeconds, 0f)
+    val countdown = Countdown(service, durationSeconds, 1f)
     val countdownView = @Composable { CountdownView(countdown) }
     addBubble(countdown, countdownView)
   }

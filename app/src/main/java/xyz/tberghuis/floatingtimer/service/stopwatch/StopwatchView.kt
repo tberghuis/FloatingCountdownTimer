@@ -37,7 +37,7 @@ fun StopwatchView(stopwatch: Stopwatch) {
     contentAlignment = Alignment.Center
   ) {
     StopwatchBorderArc(stopwatch.isRunningStateFlow, stopwatch)
-    TimeDisplay(stopwatch.timeElapsed.value)
+    TimeDisplay(stopwatch.timeElapsed.value, stopwatch.fontSize)
   }
 }
 

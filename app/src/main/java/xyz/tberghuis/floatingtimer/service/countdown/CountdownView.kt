@@ -20,6 +20,6 @@ fun CountdownView(countdown: Countdown) {
     contentAlignment = Alignment.Center
   ) {
     ProgressArc(timeLeftFraction, countdown)
-    TimeDisplay(countdown.countdownSeconds)
+    TimeDisplay(countdown.countdownSeconds, countdown.fontSize)
   }
 }
