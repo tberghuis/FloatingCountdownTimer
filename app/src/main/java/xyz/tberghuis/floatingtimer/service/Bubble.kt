@@ -1,9 +1,6 @@
 package xyz.tberghuis.floatingtimer.service
 
 import android.util.Log
-import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
-import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
-import xyz.tberghuis.floatingtimer.TIMER_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.tmp2.BubbleProperties
 
 //  todo : BubbleProperties
@@ -11,10 +8,10 @@ abstract class Bubble(
   private val service: FloatingService,
   bubbleSizeScaleFactor: Float
 ) : BubbleProperties {
-  final override val bubbleSizeDp = TIMER_SIZE_NO_SCALE * (bubbleSizeScaleFactor + 1)
+  final override val bubbleSizeDp = BubbleProperties.calcBubbleSizeDp(bubbleSizeScaleFactor)
   val bubbleSizePx: Int = (bubbleSizeDp.value * service.resources.displayMetrics.density).toInt()
-  override val arcWidth = ARC_WIDTH_NO_SCALE * (0.9f * bubbleSizeScaleFactor + 1)
-  override val fontSize = TIMER_FONT_SIZE_NO_SCALE * (1.2 * bubbleSizeScaleFactor + 1)
+  override val arcWidth = BubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
+  override val fontSize = BubbleProperties.calcFontSize(bubbleSizeScaleFactor)
   val viewHolder = TimerViewHolder(service, bubbleSizePx)
 
   open fun exit() {
