@@ -66,7 +66,10 @@ fun ChangeSizeScreenContent(
       .fillMaxSize()
       .verticalScroll(rememberScrollState()),
   ) {
-    Text("ChangeSizeScreen ${vm.timerSizeScaleFactor}")
+    Text("Preview")
+
+
+
   }
 
 }
