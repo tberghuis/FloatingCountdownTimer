@@ -10,6 +10,8 @@ import androidx.compose.ui.zIndex
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 
+// todo rename file CountdownBubble.kt
+
 // todo replace CountdownView with this
 @Composable
 fun TmpCountdownBubble(countdown: Countdown) {

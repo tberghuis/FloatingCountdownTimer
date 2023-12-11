@@ -29,12 +29,9 @@ class SettingsTimerPreviewVmc(initialScale: Float = 0f) : BubbleProperties {
 
 @Composable
 fun SettingsTimerPreview(vmc: SettingsTimerPreviewVmc) {
+  // todo card
+  //  make card fixed height to accommodate timer max height
   Text("Preview")
-  Text("bubbleSizeScaleFactor ${vmc.bubbleSizeScaleFactor}")
-  Text("bubbleSizeDp ${vmc.bubbleSizeDp}")
-  Text("arcWidth ${vmc.arcWidth}")
-  Text("fontSize ${vmc.fontSize}")
-
   CompositionLocalProvider(LocalHaloColour provides MaterialTheme.colorScheme.primary) {
     CompositionLocalProvider(
       LocalDensity provides Density(
