@@ -57,7 +57,7 @@ class OverlayController(val service: FloatingService) {
       val haloColour =
         service.application.providePreferencesRepository().haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
       CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-        // todo provide bubble
+        // todo CompositionLocalProvider LocalTypography???
         bubbleView()
       }
     }
