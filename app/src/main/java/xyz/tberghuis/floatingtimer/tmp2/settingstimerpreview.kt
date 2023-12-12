@@ -48,7 +48,6 @@ fun SettingsTimerPreviewCard(vmc: SettingsTimerPreviewVmc) {
     modifier = Modifier
       .height(180.dp)
       .fillMaxWidth()
-      .padding(15.dp),
   ) {
     Row(
       modifier = Modifier
