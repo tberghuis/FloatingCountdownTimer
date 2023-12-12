@@ -3,6 +3,7 @@ package xyz.tberghuis.floatingtimer.common
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.TextUnit
 
 @Composable
@@ -12,6 +13,7 @@ fun TimeDisplay(totalSeconds: Int, fontSize: TextUnit) {
   Text(
     "${formatIntTimerDisplay(minutes)}:${formatIntTimerDisplay(seconds)}",
     fontSize = fontSize,
+    fontFamily = FontFamily.Default,
     style = LocalTextStyle.current.copy(fontFeatureSettings = "tnum"),
   )
 }

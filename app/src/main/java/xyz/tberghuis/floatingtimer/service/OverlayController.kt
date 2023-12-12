@@ -57,8 +57,6 @@ class OverlayController(val service: FloatingService) {
       val haloColour =
         service.application.providePreferencesRepository().haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
       CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-        // todo CompositionLocalProvider LocalTypography???
-        //  to ensure timedisplay fontfamily same as preview in settings screens
         bubbleView()
       }
     }
