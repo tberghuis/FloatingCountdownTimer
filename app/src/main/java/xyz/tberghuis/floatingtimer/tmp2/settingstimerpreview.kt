@@ -77,7 +77,7 @@ fun SettingsTimerPreviewBubble(vmc: SettingsTimerPreviewVmc) {
         1f
       )
     ) {
-      TmpCountdownBubbleDisplay(vmc, 0.6f, 10)
+      TmpCountdownBubbleDisplay(vmc, 0.6f, 59)
     }
   }
 }

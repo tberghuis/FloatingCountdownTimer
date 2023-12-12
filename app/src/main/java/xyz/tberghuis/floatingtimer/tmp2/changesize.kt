@@ -5,8 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
@@ -83,10 +85,13 @@ fun ChangeSizeScreenContent(
     Column(
       modifier = Modifier
         .widthIn(0.dp, 350.dp)
-        .padding(15.dp)
+        .padding(15.dp),
+      horizontalAlignment = Alignment.CenterHorizontally,
     ) {
       SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
+      Spacer(Modifier.height(30.dp))
       TmpSliderScale(vm.settingsTimerPreviewVmc)
+      Spacer(Modifier.height(30.dp))
       Button(onClick = {
         vm.saveChangeSize()
       }) {
