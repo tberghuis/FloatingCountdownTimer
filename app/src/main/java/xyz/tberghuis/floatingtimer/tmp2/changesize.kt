@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.tmp2
 
 import android.app.Application
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -66,13 +68,16 @@ fun ChangeSizeScreenContent(
   padding: PaddingValues = PaddingValues(),
   vm: ChangeSizeViewModel = viewModel()
 ) {
-  val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+  if (!vm.initialised) {
+    return
+  }
 
   Column(
     modifier = Modifier
       .padding(padding)
       .fillMaxSize()
       .verticalScroll(rememberScrollState()),
+    verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
     Column(
@@ -82,6 +87,11 @@ fun ChangeSizeScreenContent(
     ) {
       SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
       TmpSliderScale(vm.settingsTimerPreviewVmc)
+      Button(onClick = {
+        vm.saveChangeSize()
+      }) {
+        Text(stringResource(R.string.save).uppercase())
+      }
     }
   }
 }

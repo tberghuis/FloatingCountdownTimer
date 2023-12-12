@@ -6,6 +6,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -87,6 +88,15 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
   suspend fun resetHaloColour() {
     dataStore.edit { preferences ->
       preferences.remove(stringPreferencesKey("halo_colour"))
+    }
+  }
+
+  val bubbleScaleFlow: Flow<Float> = dataStore.data.map { preferences ->
+    preferences[floatPreferencesKey("bubble_scale")] ?: 0f
+  }
+  suspend fun updateBubbleScale(scale: Float) {
+    dataStore.edit { preferences ->
+      preferences[floatPreferencesKey("bubble_scale")] = scale
     }
   }
 }

@@ -29,7 +29,7 @@ import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 
 // Vmc = View Model Component
 // todo initialHaloColour
-class SettingsTimerPreviewVmc(initialScale: Float = 0f) : BubbleProperties {
+class SettingsTimerPreviewVmc(initialScale: Float) : BubbleProperties {
   var bubbleSizeScaleFactor by mutableFloatStateOf(initialScale) // 0<=x<=1
   override val bubbleSizeDp by derivedStateOf {
     BubbleProperties.calcBubbleSizeDp(bubbleSizeScaleFactor)
