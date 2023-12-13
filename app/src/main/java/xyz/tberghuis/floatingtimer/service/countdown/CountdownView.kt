@@ -17,21 +17,6 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 
-//@Composable
-//fun CountdownView(countdown: Countdown) {
-//  val timeLeftFraction = countdown.countdownSeconds / countdown.durationSeconds.toFloat()
-//  Box(
-//    modifier = Modifier
-//      .size(countdown.bubbleSizeDp)
-//      .padding(countdown.arcWidth / 2)
-//      .zIndex(1f),
-//    contentAlignment = Alignment.Center
-//  ) {
-//    ProgressArc(timeLeftFraction, countdown)
-//    TimeDisplay(countdown.countdownSeconds, countdown.fontSize)
-//  }
-//}
-
 @Composable
 fun CountdownView(countdown: Countdown) {
   val timeLeftFraction = countdown.countdownSeconds / countdown.durationSeconds.toFloat()
