@@ -10,7 +10,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.tmp2.SettingsTimerPreviewVmc
 
 class SizeSettingViewModel(private val application: Application) : AndroidViewModel(application) {
   private val preferences = application.providePreferencesRepository()

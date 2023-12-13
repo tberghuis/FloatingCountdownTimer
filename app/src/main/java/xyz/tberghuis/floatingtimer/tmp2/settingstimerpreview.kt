@@ -11,11 +11,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.setValue
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,24 +20,8 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
-import xyz.tberghuis.floatingtimer.service.BubbleProperties
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownViewDisplay
-
-// Vmc = View Model Component
-// todo initialHaloColour
-class SettingsTimerPreviewVmc(initialScale: Float) : BubbleProperties {
-  var bubbleSizeScaleFactor by mutableFloatStateOf(initialScale) // 0<=x<=1
-  override val bubbleSizeDp by derivedStateOf {
-    BubbleProperties.calcBubbleSizeDp(bubbleSizeScaleFactor)
-  }
-  override val arcWidth by derivedStateOf {
-    BubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
-  }
-  override val fontSize by derivedStateOf {
-    BubbleProperties.calcFontSize(bubbleSizeScaleFactor)
-  }
-}
+import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 
 @Composable
 fun SettingsTimerPreviewCard(vmc: SettingsTimerPreviewVmc) {

@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.tmp2.SettingsTimerPreviewVmc
 
 class ColorSettingViewModel(application: Application) : AndroidViewModel(application) {
   private val preferences = application.providePreferencesRepository()
