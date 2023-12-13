@@ -9,7 +9,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp2.TmpNavHost
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class TmpActivity : ComponentActivity() {
@@ -25,8 +24,7 @@ class TmpActivity : ComponentActivity() {
             .fillMaxSize()
             .background(Color.White),
         ) {
-//          TmpScreen()
-          TmpNavHost()
+          TmpScreen()
         }
       }
     }
