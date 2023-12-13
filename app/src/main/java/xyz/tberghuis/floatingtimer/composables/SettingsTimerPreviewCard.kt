@@ -51,12 +51,5 @@ fun SettingsTimerPreviewCard(vmc: SettingsTimerPreviewVmc) {
 
 @Composable
 fun SettingsTimerPreviewBubble(vmc: SettingsTimerPreviewVmc) {
-  CompositionLocalProvider(
-    LocalDensity provides Density(
-      LocalDensity.current.density,
-      1f
-    )
-  ) {
-    CountdownViewDisplay(vmc, 0.6f, 59)
-  }
+  CountdownViewDisplay(vmc, 0.6f, 59)
 }
