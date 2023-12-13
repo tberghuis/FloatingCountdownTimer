@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.LocalNavController
-import xyz.tberghuis.floatingtimer.tmp3.ColorSettingScreen
+import xyz.tberghuis.floatingtimer.screens.ColorSettingScreen
 
 @Composable
 fun TmpNavHost(
