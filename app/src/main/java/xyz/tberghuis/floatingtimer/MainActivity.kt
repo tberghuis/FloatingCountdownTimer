@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
 import xyz.tberghuis.floatingtimer.screens.ColorSettingScreen
 import xyz.tberghuis.floatingtimer.screens.HomeScreen
-import xyz.tberghuis.floatingtimer.tmp2.ChangeSizeScreen
+import xyz.tberghuis.floatingtimer.screens.SizeSettingScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class MainActivity : ComponentActivity() {
@@ -72,7 +72,7 @@ fun FloatingTimerNavHost(
         HomeScreen()
       }
       composable("change_size") {
-        ChangeSizeScreen()
+        SizeSettingScreen()
       }
       composable("change_color") {
         ColorSettingScreen()
