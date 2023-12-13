@@ -14,27 +14,4 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 // todo rename file CountdownBubble.kt
 
 // todo replace CountdownView with this
-@Composable
-fun TmpCountdownBubble(countdown: Countdown) {
-  val timeLeftFraction = countdown.countdownSeconds / countdown.durationSeconds.toFloat()
-  TmpCountdownBubbleDisplay(countdown, timeLeftFraction, countdown.countdownSeconds)
-}
 
-// need better naming conventions
-@Composable
-fun TmpCountdownBubbleDisplay(
-  bubbleProperties: BubbleProperties,
-  timeLeftFraction: Float,
-  countdownSeconds: Int
-) {
-  Box(
-    modifier = Modifier
-      .size(bubbleProperties.bubbleSizeDp)
-      .padding(bubbleProperties.arcWidth / 2)
-      .zIndex(1f),
-    contentAlignment = Alignment.Center
-  ) {
-    TmpProgressArc(timeLeftFraction, bubbleProperties.arcWidth)
-    TimeDisplay(countdownSeconds, bubbleProperties.fontSize)
-  }
-}

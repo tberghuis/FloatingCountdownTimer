@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
+import xyz.tberghuis.floatingtimer.service.countdown.CountdownViewDisplay
 
 // Vmc = View Model Component
 // todo initialHaloColour
@@ -80,6 +81,6 @@ fun SettingsTimerPreviewBubble(vmc: SettingsTimerPreviewVmc) {
       1f
     )
   ) {
-    TmpCountdownBubbleDisplay(vmc, 0.6f, 59)
+    CountdownViewDisplay(vmc, 0.6f, 59)
   }
 }
