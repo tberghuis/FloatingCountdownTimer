@@ -39,18 +39,6 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
     }
   }
 
-  suspend fun checkFirstRun(): Boolean {
-    return dataStore.data.map { preferences ->
-      preferences[booleanPreferencesKey("first_run")] ?: true
-    }.first()
-  }
-
-  suspend fun setFirstRunFalse() {
-    dataStore.edit { preferences ->
-      preferences[booleanPreferencesKey("first_run")] = false
-    }
-  }
-
   val haloColourPurchasedFlow: Flow<Boolean> = dataStore.data.map { preferences ->
     preferences[booleanPreferencesKey("halo_colour_purchased")] ?: false
   }
@@ -106,6 +94,4 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
       preferences.remove(floatPreferencesKey("bubble_scale"))
     }
   }
-
-
 }
