@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.zIndex
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
+import xyz.tberghuis.floatingtimer.service.BubbleProperties
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 
 // todo rename file CountdownBubble.kt

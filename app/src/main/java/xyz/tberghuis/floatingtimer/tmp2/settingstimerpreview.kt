@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
+import xyz.tberghuis.floatingtimer.service.BubbleProperties
 
 // Vmc = View Model Component
 // todo initialHaloColour
