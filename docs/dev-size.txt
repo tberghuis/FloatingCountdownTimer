@@ -9,8 +9,6 @@ release
 
 ##################
 
-translations strings.xml
-
 text.txt
 cull, refactor code
   tmp... xxx, todo etc
