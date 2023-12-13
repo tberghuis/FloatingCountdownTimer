@@ -53,3 +53,10 @@ test ChangeSizeScreen landscape orientation
 doitwrong
 
 reset bubbleScale
+
+refactor settings screen to ChangeColorScreen
+
+text.txt
+cull, refactor code
+  tmp... xxx, etc
+  check all files
