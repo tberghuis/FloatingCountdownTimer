@@ -1,53 +1,54 @@
-package xyz.tberghuis.floatingtimer.tmp2
+package xyz.tberghuis.floatingtimer.tmp3
 
 import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.godaddy.android.colorpicker.HsvColor
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.tmp2.SettingsTimerPreviewVmc
 import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
 
-// rename SizeSettingViewModel
-class ChangeSizeViewModel(private val application: Application) : AndroidViewModel(application) {
+class ColorSettingViewModel(application: Application) : AndroidViewModel(application) {
   private val preferences = application.providePreferencesRepository()
+  var colorPickerColorState = mutableStateOf(HsvColor.from(Color.Blue))
 
-  // doitwrong
+  val premiumVmc = PremiumVmc(application, viewModelScope)
+
+  private val premiumFlow = application.providePreferencesRepository().haloColourPurchasedFlow
+
   var initialised by mutableStateOf(false)
   lateinit var settingsTimerPreviewVmc: SettingsTimerPreviewVmc
 
-  val premiumVmc = PremiumVmc(application, viewModelScope)
-  private val premiumFlow = application.providePreferencesRepository().haloColourPurchasedFlow
 
   init {
     viewModelScope.launch {
+      colorPickerColorState.value = HsvColor.from(preferences.haloColourFlow.first())
       settingsTimerPreviewVmc = SettingsTimerPreviewVmc(preferences.bubbleScaleFlow.first())
       initialised = true
     }
   }
 
-  // todo datastore
-  //  paywall dialog
-
-  fun saveChangeSize() {
+  fun saveHaloColor() {
     viewModelScope.launch {
-      preferences.updateBubbleScale(settingsTimerPreviewVmc.bubbleSizeScaleFactor)
+      preferences.updateHaloColour(colorPickerColorState.value.toColor())
     }
   }
 
-  // doitwrong, lets just repeat myself
-  fun saveChangeSizeClick() {
+  fun saveHaloColorClick() {
     viewModelScope.launch {
+      logd("saveHaloColorClick")
       if (premiumFlow.first()) {
-        saveChangeSize()
+        saveHaloColor()
       } else {
         premiumVmc.showPurchaseDialog = true
       }
     }
   }
-
-
 }

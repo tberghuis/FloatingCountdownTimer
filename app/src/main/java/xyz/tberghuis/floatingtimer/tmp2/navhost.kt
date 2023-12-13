@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.LocalNavController
+import xyz.tberghuis.floatingtimer.tmp3.ColorSettingScreen
 
 @Composable
 fun TmpNavHost(
@@ -20,6 +21,9 @@ fun TmpNavHost(
       }
       composable("change_size") {
         ChangeSizeScreen()
+      }
+      composable("change_color") {
+        ColorSettingScreen()
       }
     }
   }

@@ -45,11 +45,13 @@ fun TmpHome() {
           ) {
             DropdownMenuItem(
               text = { Text("Change color") },
-              onClick = {},
+              onClick = {
+                navController.navigate("change_color")
+              },
             )
             DropdownMenuItem(
               text = { Text("Change size") },
-              onClick = {navController.navigate("change_size")},
+              onClick = { navController.navigate("change_size") },
             )
           }
         },
