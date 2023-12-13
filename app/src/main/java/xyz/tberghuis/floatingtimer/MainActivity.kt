@@ -19,6 +19,8 @@ import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
 import xyz.tberghuis.floatingtimer.screens.SettingsScreen
+import xyz.tberghuis.floatingtimer.tmp2.ChangeSizeScreen
+import xyz.tberghuis.floatingtimer.tmp3.ColorSettingScreen
 import xyz.tberghuis.floatingtimer.tmp3.HomeScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
@@ -70,13 +72,12 @@ fun FloatingTimerNavHost(
       composable("home") {
         HomeScreen()
       }
-      composable("settings") {
-        SettingsScreen()
+      composable("change_size") {
+        ChangeSizeScreen()
       }
-      // future.txt as only one setting at the moment
-//      composable("change_halo_colour") {
-//        ChangeColorScreen()
-//      }
+      composable("change_color") {
+        ColorSettingScreen()
+      }
     }
   }
 }
