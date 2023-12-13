@@ -18,10 +18,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
-import xyz.tberghuis.floatingtimer.screens.SettingsScreen
+import xyz.tberghuis.floatingtimer.screens.HomeScreen
 import xyz.tberghuis.floatingtimer.tmp2.ChangeSizeScreen
 import xyz.tberghuis.floatingtimer.tmp3.ColorSettingScreen
-import xyz.tberghuis.floatingtimer.tmp3.HomeScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class MainActivity : ComponentActivity() {

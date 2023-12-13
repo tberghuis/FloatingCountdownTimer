@@ -30,9 +30,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -65,12 +68,13 @@ import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun XxxHomeScreen() {
+fun HomeScreen() {
   LaunchPostNotificationsPermissionRequest()
 
   val vm: HomeViewModel = viewModel()
   val context = LocalContext.current
   val navController = LocalNavController.current
+  var showMenu by remember { mutableStateOf(false) }
 
   Scaffold(
     topBar = {
@@ -79,9 +83,24 @@ fun XxxHomeScreen() {
         modifier = Modifier,
         actions = {
           IconButton(onClick = {
-            navController.navigate("settings")
+            showMenu = true
           }) {
-            Icon(Icons.Filled.Settings, stringResource(R.string.settings))
+            Icon(Icons.Filled.MoreVert, stringResource(R.string.settings))
+          }
+          DropdownMenu(
+            expanded = showMenu,
+            onDismissRequest = { showMenu = false },
+          ) {
+            DropdownMenuItem(
+              text = { Text(stringResource(R.string.change_color)) },
+              onClick = {
+                navController.navigate("change_color")
+              },
+            )
+            DropdownMenuItem(
+              text = { Text(stringResource(R.string.change_size)) },
+              onClick = { navController.navigate("change_size") },
+            )
           }
         },
       )
@@ -124,6 +143,7 @@ fun XxxHomeScreen() {
 
   PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_multiple_timers))
 }
+
 
 @Composable
 fun HomeScreenContent(paddingValues: PaddingValues) {

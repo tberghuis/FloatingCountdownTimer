@@ -6,7 +6,6 @@ import android.net.Uri
 import android.provider.Settings
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
@@ -41,80 +40,3 @@ import xyz.tberghuis.floatingtimer.screens.HomeScreenContent
 import xyz.tberghuis.floatingtimer.screens.LaunchPostNotificationsPermissionRequest
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun HomeScreen() {
-  LaunchPostNotificationsPermissionRequest()
-
-  val vm: HomeViewModel = viewModel()
-  val context = LocalContext.current
-  val navController = LocalNavController.current
-  var showMenu by remember { mutableStateOf(false) }
-
-  Scaffold(
-    topBar = {
-      TopAppBar(
-        title = { Text(stringResource(R.string.app_name)) },
-        modifier = Modifier,
-        actions = {
-          IconButton(onClick = {
-            showMenu = true
-          }) {
-            Icon(Icons.Filled.MoreVert, stringResource(R.string.settings))
-          }
-          DropdownMenu(
-            expanded = showMenu,
-            onDismissRequest = { showMenu = false },
-          ) {
-            DropdownMenuItem(
-              text = { Text(stringResource(R.string.change_color)) },
-              onClick = {
-                navController.navigate("change_color")
-              },
-            )
-            DropdownMenuItem(
-              text = { Text(stringResource(R.string.change_size)) },
-              onClick = { navController.navigate("change_size") },
-            )
-          }
-        },
-      )
-    },
-    snackbarHost = { SnackbarHost(vm.snackbarHostState) },
-  ) {
-    HomeScreenContent(it)
-  }
-
-  if (vm.showGrantOverlayDialog) {
-    AlertDialog(onDismissRequest = {
-      vm.showGrantOverlayDialog = false
-    }, confirmButton = {
-      Button(onClick = {
-        logd("go to settings")
-        val intent = Intent(
-          Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + context.packageName)
-        )
-
-        startActivityForResult(
-          context as Activity, intent, REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION, null
-        )
-        vm.showGrantOverlayDialog = false
-
-      }) {
-        Text(stringResource(R.string.go_to_settings))
-      }
-    }, title = {
-      Text(stringResource(R.string.enable_overlay_permission))
-    }, text = {
-      Text(buildAnnotatedString {
-        append(stringResource(R.string.dialog_enable_overlay_permission))
-        append(" ")
-        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-          append(stringResource(R.string.app_name))
-        }
-      })
-    })
-  }
-
-  PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_multiple_timers))
-}
