@@ -15,6 +15,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.torrydo.screenez.ScreenEz
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
@@ -36,17 +41,23 @@ class OverlayController(val service: FloatingService) {
 
   fun addStopwatch() {
     logd("OverlayController addStopwatch")
-    val stopwatch = Stopwatch(service, 1f)
+    val stopwatch = Stopwatch(service, 0f)
     val stopwatchView = @Composable { StopwatchView(stopwatch) }
     addBubble(stopwatch, stopwatchView)
   }
 
   fun addCountdown(durationSeconds: Int) {
-    logd("OverlayController addStopwatch")
-    // todo get bubbleSizeScaleFactor from datastore
-    val countdown = Countdown(service, durationSeconds, 1f)
-    val countdownView = @Composable { CountdownView(countdown) }
-    addBubble(countdown, countdownView)
+    service.scope.launch {
+      val bubbleScale = withContext(IO) {
+        service.application.providePreferencesRepository().bubbleScaleFlow.first()
+      }
+      val countdown = Countdown(service, durationSeconds, bubbleScale)
+      val countdownView = @Composable { CountdownView(countdown) }
+      // is this correct coroutine context????
+      withContext(Main) {
+        addBubble(countdown, countdownView)
+      }
+    }
   }
 
   private fun addBubble(bubble: Bubble, bubbleView: @Composable () -> Unit) {
