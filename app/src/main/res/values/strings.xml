@@ -13,7 +13,7 @@
     <string name="enable_overlay_permission">Enable Overlay Permission</string>
     <string name="dialog_enable_overlay_permission">Please enable \"Allow display over other apps\" permission for application </string>
     <string name="back">Back</string>
-    <string name="change_timer_color">Change Timer color</string>
+    <string name="change_timer_color">Change Timer Color</string>
     <string name="save">Save</string>
     <string name="buy">Buy</string>
     <string name="cancel">Cancel</string>

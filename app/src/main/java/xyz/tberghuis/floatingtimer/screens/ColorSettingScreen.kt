@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -41,12 +42,11 @@ fun ColorSettingScreen(
   vm: ColorSettingViewModel = viewModel()
 ) {
   val navController = LocalNavController.current
-
   Scaffold(
     modifier = Modifier,
     topBar = {
       TopAppBar(
-        title = { Text(stringResource(R.string.settings)) },
+        title = { Text(stringResource(R.string.change_timer_color)) },
         navigationIcon = {
           IconButton(onClick = {
             navController.navigateUp()
@@ -59,46 +59,53 @@ fun ColorSettingScreen(
     },
     snackbarHost = {},
   ) { padding ->
-    if (!vm.initialised) {
-      return@Scaffold
-    }
-
-    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
-    val colorPickerWidth =
-      if (screenWidth < 350.dp) Modifier.fillMaxWidth() else Modifier.widthIn(0.dp, 300.dp)
-
-    Column(
-      modifier = Modifier
-        .padding(padding)
-        .fillMaxSize()
-        .verticalScroll(rememberScrollState()),
-      verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
-      horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-      Text(stringResource(R.string.change_timer_color), fontSize = 20.sp)
-
-      val previewHaloColor = vm.colorPickerColorState.value.toColor()
-      CompositionLocalProvider(LocalHaloColour provides previewHaloColor) {
-        SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
-      }
-
-      ClassicColorPicker(
-        modifier = Modifier
-          .height(300.dp)
-          .then(colorPickerWidth),
-        colorState = vm.colorPickerColorState
-      )
-
-      Button(onClick = {
-        vm.saveHaloColorClick()
-      }) {
-        // todo make this an icon
-        Text(stringResource(R.string.save).uppercase())
-      }
-    }
+    ColorSettingScreenContent(padding)
   }
 
   PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_halo_colour)) {
     vm.saveHaloColor()
   }
+}
+
+@Composable
+fun ColorSettingScreenContent(
+  padding: PaddingValues,
+  vm: ColorSettingViewModel = viewModel()
+) {
+  if (!vm.initialised) {
+    return
+  }
+
+  val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+  val colorPickerWidth =
+    if (screenWidth < 350.dp) Modifier.fillMaxWidth() else Modifier.widthIn(0.dp, 300.dp)
+
+  Column(
+    modifier = Modifier
+      .padding(padding)
+      .fillMaxSize()
+      .verticalScroll(rememberScrollState()),
+    verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
+    horizontalAlignment = Alignment.CenterHorizontally,
+  ) {
+    val previewHaloColor = vm.colorPickerColorState.value.toColor()
+    CompositionLocalProvider(LocalHaloColour provides previewHaloColor) {
+      SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
+    }
+
+    ClassicColorPicker(
+      modifier = Modifier
+        .height(300.dp)
+        .then(colorPickerWidth),
+      colorState = vm.colorPickerColorState
+    )
+
+    Button(onClick = {
+      vm.saveHaloColorClick()
+    }) {
+      // todo make this an icon
+      Text(stringResource(R.string.save).uppercase())
+    }
+  }
+
 }
