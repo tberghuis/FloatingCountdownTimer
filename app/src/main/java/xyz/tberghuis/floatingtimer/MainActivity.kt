@@ -36,6 +36,7 @@ class MainActivity : ComponentActivity() {
         preferencesRepository.updateHaloColourPurchased(purchased)
         if (!purchased) {
           preferencesRepository.resetHaloColour()
+          preferencesRepository.resetBubbleScale()
         }
       }
     }

@@ -51,3 +51,5 @@ CompositionLocalProvider density for bubble in overlaycontroller
 test ChangeSizeScreen landscape orientation
 
 doitwrong
+
+reset bubbleScale
