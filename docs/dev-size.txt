@@ -1,6 +1,11 @@
 
-v1.20.1 full rollout
 release
+  version
+  build
+  upload
+  test a20, poco
+  tag apk github
+  merge
 
 ##################
 
