@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
 
 class ChangeSizeViewModel(private val application: Application) : AndroidViewModel(application) {
   private val preferences = application.providePreferencesRepository()
@@ -16,6 +17,9 @@ class ChangeSizeViewModel(private val application: Application) : AndroidViewMod
   // doitwrong
   var initialised by mutableStateOf(false)
   lateinit var settingsTimerPreviewVmc: SettingsTimerPreviewVmc
+
+  val premiumVmc = PremiumVmc(application, viewModelScope)
+  private val premiumFlow = application.providePreferencesRepository().haloColourPurchasedFlow
 
   init {
     viewModelScope.launch {
@@ -32,5 +36,17 @@ class ChangeSizeViewModel(private val application: Application) : AndroidViewMod
       preferences.updateBubbleScale(settingsTimerPreviewVmc.bubbleSizeScaleFactor)
     }
   }
+
+  // doitwrong, lets just repeat myself
+  fun saveChangeSizeClick() {
+    viewModelScope.launch {
+      if (premiumFlow.first()) {
+        saveChangeSize()
+      } else {
+        premiumVmc.showPurchaseDialog = true
+      }
+    }
+  }
+
 
 }

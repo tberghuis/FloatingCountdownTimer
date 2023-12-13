@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -62,6 +63,10 @@ fun ChangeSizeScreen(
     snackbarHost = {},
   ) { padding ->
     ChangeSizeScreenContent(padding)
+  }
+
+  PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_bubble_scale)) {
+    vm.saveChangeSize()
   }
 }
 
@@ -93,7 +98,7 @@ fun ChangeSizeScreenContent(
       TmpSliderScale(vm.settingsTimerPreviewVmc)
       Spacer(Modifier.height(30.dp))
       Button(onClick = {
-        vm.saveChangeSize()
+        vm.saveChangeSizeClick()
       }) {
         Text(stringResource(R.string.save).uppercase())
       }
