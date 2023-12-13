@@ -40,10 +40,17 @@ class OverlayController(val service: FloatingService) {
   }
 
   fun addStopwatch() {
-    logd("OverlayController addStopwatch")
-    val stopwatch = Stopwatch(service, 0f)
-    val stopwatchView = @Composable { StopwatchView(stopwatch) }
-    addBubble(stopwatch, stopwatchView)
+    service.scope.launch {
+      val bubbleScale = withContext(IO) {
+        service.application.providePreferencesRepository().bubbleScaleFlow.first()
+      }
+      val stopwatch = Stopwatch(service, bubbleScale)
+      val stopwatchView = @Composable { StopwatchView(stopwatch) }
+      // does coroutine dispatcher matter here???
+      withContext(Main) {
+        addBubble(stopwatch, stopwatchView)
+      }
+    }
   }
 
   fun addCountdown(durationSeconds: Int) {
@@ -53,7 +60,6 @@ class OverlayController(val service: FloatingService) {
       }
       val countdown = Countdown(service, durationSeconds, bubbleScale)
       val countdownView = @Composable { CountdownView(countdown) }
-      // is this correct coroutine context????
       withContext(Main) {
         addBubble(countdown, countdownView)
       }
