@@ -23,10 +23,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.godaddy.android.colorpicker.ClassicColorPicker
 import xyz.tberghuis.floatingtimer.LocalNavController
@@ -75,37 +73,41 @@ fun ColorSettingScreenContent(
   if (!vm.initialised) {
     return
   }
-
-  val screenWidth = LocalConfiguration.current.screenWidthDp.dp
-  val colorPickerWidth =
-    if (screenWidth < 350.dp) Modifier.fillMaxWidth() else Modifier.widthIn(0.dp, 300.dp)
+  val previewHaloColor = vm.colorPickerColorState.value.toColor()
 
   Column(
     modifier = Modifier
       .padding(padding)
       .fillMaxSize()
       .verticalScroll(rememberScrollState()),
-    verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
+    verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-    val previewHaloColor = vm.colorPickerColorState.value.toColor()
-    CompositionLocalProvider(LocalHaloColour provides previewHaloColor) {
-      SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
-    }
 
-    ClassicColorPicker(
+    Column(
       modifier = Modifier
-        .height(300.dp)
-        .then(colorPickerWidth),
-      colorState = vm.colorPickerColorState
-    )
+        .widthIn(0.dp, 350.dp)
+        .padding(15.dp),
+      verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
+      horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+      CompositionLocalProvider(LocalHaloColour provides previewHaloColor) {
+        SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
+      }
 
-    Button(onClick = {
-      vm.saveHaloColorClick()
-    }) {
-      // todo make this an icon
-      Text(stringResource(R.string.save).uppercase())
+      ClassicColorPicker(
+        modifier = Modifier
+          .height(300.dp)
+          .fillMaxWidth(),
+        colorState = vm.colorPickerColorState
+      )
+
+      Button(onClick = {
+        vm.saveHaloColorClick()
+      }) {
+        // todo make this an icon
+        Text(stringResource(R.string.save).uppercase())
+      }
     }
   }
-
 }
