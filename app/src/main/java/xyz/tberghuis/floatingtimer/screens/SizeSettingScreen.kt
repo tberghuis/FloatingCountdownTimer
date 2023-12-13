@@ -32,7 +32,7 @@ import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
-import xyz.tberghuis.floatingtimer.tmp2.SettingsTimerPreviewCard
+import xyz.tberghuis.floatingtimer.composables.SettingsTimerPreviewCard
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 import xyz.tberghuis.floatingtimer.viewmodels.SizeSettingViewModel
 
