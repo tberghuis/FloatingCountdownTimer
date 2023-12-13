@@ -32,14 +32,14 @@ import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
-import xyz.tberghuis.floatingtimer.tmp2.ChangeSizeViewModel
 import xyz.tberghuis.floatingtimer.tmp2.SettingsTimerPreviewCard
 import xyz.tberghuis.floatingtimer.tmp2.SettingsTimerPreviewVmc
+import xyz.tberghuis.floatingtimer.viewmodels.SizeSettingViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SizeSettingScreen(
-  vm: ChangeSizeViewModel = viewModel()
+  vm: SizeSettingViewModel = viewModel()
 ) {
   val navController = LocalNavController.current
 
@@ -71,7 +71,7 @@ fun SizeSettingScreen(
 @Composable
 fun SizeSettingScreenContent(
   padding: PaddingValues = PaddingValues(),
-  vm: ChangeSizeViewModel = viewModel()
+  vm: SizeSettingViewModel = viewModel()
 ) {
   if (!vm.initialised) {
     return
