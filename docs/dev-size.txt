@@ -1,47 +1,8 @@
 
-work in tmp
-...
 v1.20.1 full rollout
 release
 
-##################3
-step 1, slider
-read https://developer.android.com/jetpack/compose/components/slider
-
-size font dp instead of sp
-
-save sizeFactor to datastore
-
-doitwrong next task
-read the docs
-
-test different screen sizes
-
-https://proandroiddev.com/preventing-font-scaling-in-jetpack-compose-8a2cd0f09d23
-
-time display monospace number
- style = LocalTextStyle.current.copy(fontFeatureSettings = "tnum")
-
-
-test updateClickTargetParamsWithinScreenBounds 
-  on rotate
-  drag out of window bounds...
-
-test all usages TIMER_SIZE_DP TIMER_SIZE_PX
-
-test timer size only changes on Save click
-
-t. settings screen, tmp2
-  label timer: Preview
-bubbleSizeScaleFactor datastore
-
-refactor trash????
-deal with different size bubbles
-or just write more tests
-
-remove tmp activity manifest.xml
-
-paywall save size change
+##################
 
 translations strings.xml
 
