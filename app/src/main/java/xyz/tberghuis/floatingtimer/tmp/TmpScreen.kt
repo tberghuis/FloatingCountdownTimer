@@ -19,7 +19,6 @@ fun TmpScreen(
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-    Text("resize timer demo")
-    TmpTimerDisplay()
+    Text("tmp screen")
   }
 }
