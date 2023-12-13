@@ -12,4 +12,6 @@ release
 
 snackbar on successful setting save  
   or pop backstack back to home screen
-  
+
+play store screenshots + description
+reply to all reviews when no crashes after release
