@@ -31,9 +31,6 @@ class SizeSettingViewModel(private val application: Application) : AndroidViewMo
     }
   }
 
-  // todo datastore
-  //  paywall dialog
-
   fun saveChangeSize() {
     viewModelScope.launch {
       preferences.updateBubbleScale(settingsTimerPreviewVmc.bubbleSizeScaleFactor)
@@ -50,6 +47,4 @@ class SizeSettingViewModel(private val application: Application) : AndroidViewMo
       }
     }
   }
-
-
 }
