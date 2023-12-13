@@ -58,5 +58,5 @@ refactor settings screen to ChangeColorScreen
 
 text.txt
 cull, refactor code
-  tmp... xxx, etc
+  tmp... xxx, todo etc
   check all files
