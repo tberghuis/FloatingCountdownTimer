@@ -9,8 +9,7 @@ release
 
 ##################
 
-text.txt
-cull, refactor code
-  tmp... xxx, todo etc
 
 snackbar on successful setting save  
+  or pop backstack back to home screen
+  
