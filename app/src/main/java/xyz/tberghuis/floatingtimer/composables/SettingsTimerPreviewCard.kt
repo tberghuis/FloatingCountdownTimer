@@ -11,12 +11,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.R
@@ -43,13 +40,8 @@ fun SettingsTimerPreviewCard(vmc: SettingsTimerPreviewVmc) {
           .width(140.dp),
         contentAlignment = Alignment.Center,
       ) {
-        SettingsTimerPreviewBubble(vmc)
+        CountdownViewDisplay(vmc, 0.6f, 59)
       }
     }
   }
-}
-
-@Composable
-fun SettingsTimerPreviewBubble(vmc: SettingsTimerPreviewVmc) {
-  CountdownViewDisplay(vmc, 0.6f, 59)
 }
