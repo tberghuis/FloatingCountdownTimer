@@ -10,12 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
 import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -150,7 +145,7 @@ class OverlayController(val service: FloatingService) {
         MotionEvent.ACTION_UP -> {
           trashController.isBubbleDragging.value = false
           trashController.currentDraggingBubble.value = null
-          // todo
+          // refactor how trash works???
           if (trashController.isBubbleHoveringTrash) {
             trashController.isBubbleHoveringTrash = false
             exitTimer()

@@ -14,7 +14,7 @@ import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
 
 // todo move windowManager to service
 class TrashController(
-  val windowManager: WindowManager,
+  private val windowManager: WindowManager,
   private val service: FloatingService,
 ) {
   val isBubbleDragging = MutableStateFlow(false)
@@ -25,7 +25,6 @@ class TrashController(
   val bubbleDraggingPosition = mutableStateOf(IntOffset.Zero)
   val currentDraggingBubble = mutableStateOf<Bubble?>(null)
 
-  // todo make generic
   var isBubbleHoveringTrash = false
 
   private var overlay: ComposeView? = null
