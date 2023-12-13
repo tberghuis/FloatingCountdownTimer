@@ -26,4 +26,8 @@
     <string name="invalid_countdown_duration">Durasi timer tidak valid. Silakan atur ke lebih dari 0 detik.</string>
     <string name="reset">mengatur ulang</string>
     <string name="exit">KELUAR</string>
+    <string name="change_size">Ubah Ukuran</string>
+    <string name="change_color">Ubah Warna</string>
+    <string name="preview">Pratinjau</string>
+    <string name="premium_reason_bubble_scale">Perubahan ukuran Timer membutuhkan premium.</string>
 </resources>

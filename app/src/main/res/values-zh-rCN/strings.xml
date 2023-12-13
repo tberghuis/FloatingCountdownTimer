@@ -26,4 +26,8 @@
     <string name="invalid_countdown_duration">计时器持续时间无效。 请设置为0秒以上。</string>
     <string name="reset">重置</string>
     <string name="exit">出口</string>
+    <string name="change_size">改变尺寸</string>
+    <string name="change_color">换颜色</string>
+    <string name="preview">预览</string>
+    <string name="premium_reason_bubble_scale">更改计时器大小需要额外费用。</string>
 </resources>
