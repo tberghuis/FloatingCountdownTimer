@@ -9,6 +9,5 @@ translations strings.xml
 text.txt
 cull, refactor code
   tmp... xxx, todo etc
-  check all files
 
 snackbar on successful setting save  
