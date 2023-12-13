@@ -70,14 +70,15 @@ fun SettingsTimerPreviewCard(vmc: SettingsTimerPreviewVmc) {
 
 @Composable
 fun SettingsTimerPreviewBubble(vmc: SettingsTimerPreviewVmc) {
-  CompositionLocalProvider(LocalHaloColour provides MaterialTheme.colorScheme.primary) {
-    CompositionLocalProvider(
-      LocalDensity provides Density(
-        LocalDensity.current.density,
-        1f
-      )
-    ) {
-      TmpCountdownBubbleDisplay(vmc, 0.6f, 59)
-    }
+//  CompositionLocalProvider(LocalHaloColour provides MaterialTheme.colorScheme.primary) {
+//  }
+
+  CompositionLocalProvider(
+    LocalDensity provides Density(
+      LocalDensity.current.density,
+      1f
+    )
+  ) {
+    TmpCountdownBubbleDisplay(vmc, 0.6f, 59)
   }
 }

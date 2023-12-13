@@ -25,6 +25,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
@@ -93,7 +95,11 @@ fun ChangeSizeScreenContent(
         .padding(15.dp),
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-      SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
+
+      CompositionLocalProvider(LocalHaloColour provides vm.previewHaloColor!!) {
+        SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
+      }
+
       Spacer(Modifier.height(30.dp))
       TmpSliderScale(vm.settingsTimerPreviewVmc)
       Spacer(Modifier.height(30.dp))
