@@ -1,0 +1,2 @@
+reference fdroid countdown milliseconds
+official docs compose animation
