@@ -1,2 +1,9 @@
+update gradle dependencies
+
+release target sdk 34
+get correct permissions working demo project
+  foreground service type - special use,
+  release to play store and await approval
+
 reference fdroid countdown milliseconds
 official docs compose animation
