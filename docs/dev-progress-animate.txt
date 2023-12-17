@@ -7,3 +7,6 @@ get correct permissions working demo project
 
 reference fdroid countdown milliseconds
 official docs compose animation
+
+move startForeground to oncreate
+remove alarm permission manifest
