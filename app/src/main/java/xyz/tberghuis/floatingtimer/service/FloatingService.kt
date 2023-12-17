@@ -5,8 +5,10 @@ import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Intent
+import android.content.pm.ServiceInfo
 import android.content.res.Configuration
 import android.os.Binder
+import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
@@ -55,7 +57,6 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     return binder
   }
 
-
   override fun onCreate() {
     super.onCreate()
     ScreenEz.with(this.applicationContext)
@@ -64,12 +65,12 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     savedStateRegistryController.performRestore(null)
 
     overlayController = OverlayController(this)
+    startInForeground()
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     super.onStartCommand(intent, flags, startId)
     logd("FloatingService onStartCommand")
-    startForeground(FOREGROUND_SERVICE_NOTIFICATION_ID, buildNotification())
 
     intent?.let {
       when (intent.getStringExtra(INTENT_COMMAND)) {
@@ -85,6 +86,22 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
       }
     }
     return START_NOT_STICKY
+  }
+
+  private fun startInForeground() {
+    val notification = buildNotification()
+    if (Build.VERSION.SDK_INT >= 34) {
+      startForeground(
+        FOREGROUND_SERVICE_NOTIFICATION_ID,
+        notification,
+        ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE,
+      )
+    } else {
+      startForeground(
+        FOREGROUND_SERVICE_NOTIFICATION_ID,
+        notification,
+      )
+    }
   }
 
   private fun buildNotification(): Notification {
