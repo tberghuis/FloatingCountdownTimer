@@ -10,3 +10,13 @@ official docs compose animation
 
 move startForeground to oncreate
 remove alarm permission manifest
+
+test
+full rollout v1.21.0
+version
+build
+  aab
+  apk
+release
+merge
+github tag APK v1.22.0

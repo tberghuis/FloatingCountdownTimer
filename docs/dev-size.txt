@@ -1,15 +1,3 @@
-
-release
-  version
-  build
-  upload
-  test a20, poco
-  tag apk github
-  merge
-
-##################
-
-
 snackbar on successful setting save  
   or pop backstack back to home screen
 
