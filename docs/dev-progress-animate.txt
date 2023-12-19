@@ -1,30 +1,14 @@
-update gradle dependencies
-
-release target sdk 34
-get correct permissions working demo project
-  foreground service type - special use,
-  release to play store and await approval
-
 reference fdroid countdown milliseconds
 official docs compose animation
 
-move startForeground to oncreate
-remove alarm permission manifest
+#############################3
 
-test
-full rollout v1.21.0
-version
-build
-  aab
-  apk
-release
-merge
-github tag APK v1.22.0
+progress animation hello world
+straight line
+circle
+button press pause
+button press resume
+combined pause/resume button
+...
 
-
-update target sdk to 34 (android 14)
-
-https://youtu.be/jE59dNqZoiI
-
-Special Use permission is required for the functionality of floating timers to be shown on top of other apps.
-Task cannot be paused or restarted as user expects stopwatch and countdown timer to show whilst using other apps and to measure time accurately.
+https://developer.android.com/jetpack/compose/animation/introduction

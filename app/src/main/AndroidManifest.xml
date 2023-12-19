@@ -6,13 +6,6 @@
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
-    <!--    https://support.google.com/googleplay/android-developer/answer/12253906#exact_alarm_preview -->
-<!--    <uses-permission-->
-<!--        android:name="android.permission.SCHEDULE_EXACT_ALARM"-->
-<!--        android:maxSdkVersion="32" />-->
-<!--    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />-->
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
