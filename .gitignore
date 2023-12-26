@@ -16,3 +16,4 @@ local.properties
 
 /app/release/
 /.idea/misc.xml
+/.idea/other.xml
