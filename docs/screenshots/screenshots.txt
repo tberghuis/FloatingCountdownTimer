@@ -4,8 +4,9 @@ Change color
 Change Size
 
 cd /home/tom/Desktop/tmp
+
 adb exec-out screencap -p > screen.png
-inkscape --export-type="png" playstore_screenshot.svg
+inkscape --export-type="png" screen_change_size.svg
 mv playstore_screenshot.png screen_change_size.png
 
 adb command to change language
