@@ -2,3 +2,6 @@ Multiple Timers
 Float over other apps
 Change color
 Change Size
+
+cd /home/tom/Desktop/tmp
+adb exec-out screencap -p > screenX.png
