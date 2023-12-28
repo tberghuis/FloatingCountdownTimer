@@ -11,3 +11,4 @@ adb exec-out screencap -p > screenX.png
  inkscape --export-type="png" playstore_screenshot.svg
 
 adb command to change language
+adb command current language code
