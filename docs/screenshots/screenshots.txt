@@ -5,3 +5,7 @@ Change Size
 
 cd /home/tom/Desktop/tmp
 adb exec-out screencap -p > screenX.png
+
+1200 x 2541
+
+ inkscape --export-type="png" playstore_screenshot.svg
