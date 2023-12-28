@@ -25,6 +25,14 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'Boolean', 'DEFAULT_PURCHASED', "false"
+        }
+        debug {
+            buildConfigField 'Boolean', 'DEFAULT_PURCHASED', "false"
+        }
+        unlockTmp {
+            initWith(buildTypes.debug)
+            buildConfigField 'Boolean', 'DEFAULT_PURCHASED', "true"
         }
     }
     compileOptions {

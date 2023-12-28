@@ -7,7 +7,20 @@ cd /home/tom/Desktop/tmp
 
 adb exec-out screencap -p > screen.png
 inkscape --export-type="png" screen_change_size.svg
-mv playstore_screenshot.png screen_change_size.png
+inkscape --export-type="png" screen_float.svg
+inkscape --export-type="png" screen_multiple.svg
+inkscape --export-type="png" screen_change_color.svg
 
 adb command to change language
 adb command current language code
+
+
+adb devices
+adb root
+adb shell "setprop persist.sys.locale id-ID; setprop ctl.restart zygote"
+adb shell "setprop persist.sys.locale en-US; setprop ctl.restart zygote"
+
+adb shell getprop | grep locale
+
+update playstore description
+  use cases:

@@ -11,6 +11,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import xyz.tberghuis.floatingtimer.BuildConfig
 import xyz.tberghuis.floatingtimer.logd
 
 val Context.dataStore by preferencesDataStore(
@@ -39,7 +40,7 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
   }
 
   val haloColourPurchasedFlow: Flow<Boolean> = dataStore.data.map { preferences ->
-    preferences[booleanPreferencesKey("halo_colour_purchased")] ?: false
+    preferences[booleanPreferencesKey("halo_colour_purchased")] ?: BuildConfig.DEFAULT_PURCHASED
   }
 
   suspend fun updateHaloColourPurchased(purchased: Boolean) {
