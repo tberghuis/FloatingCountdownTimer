@@ -7,14 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun TmpNavigateResult(
-  vm: TmpNavigateResultVm = viewModel()
+fun TmpChangeColor(
+  vm: TmpChangeColorVm = viewModel()
 ) {
   Column {
-    Text("tmp nav result ${vm.fdfsd}")
+    Text("tmp change color")
   }
 }
 
-class TmpNavigateResultVm : ViewModel() {
+class TmpChangeColorVm : ViewModel() {
   val fdfsd = "fdsfs"
 }
