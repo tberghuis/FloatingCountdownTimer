@@ -21,13 +21,23 @@ import xyz.tberghuis.floatingtimer.logd
 @Composable
 fun Tmp4NavigateResult(
   navController: NavHostController = LocalNavController.current,
-  vm: Tmp4NavigateResultVm = viewModel(key = navController.currentBackStackEntry.toString())
+  vm: Tmp4NavigateResultVm = viewModel()
 ) {
 
-  val customColor by vm.customColor.collectAsState()
+  // this is a hack
+  LaunchedEffect(Unit) {
+    navController.currentBackStackEntry!!.savedStateHandle.getStateFlow(
+      "custom_color",
+      "initial custom color"
+    ).collect {
+      vm.customColor = it
+    }
+  }
+
+
 
   Column {
-    Text("custom color ${customColor}")
+    Text("custom color ${vm.customColor}")
 
     Button(onClick = {
       navController.navigate("change_color")
@@ -48,5 +58,11 @@ fun Tmp4NavigateResult(
 }
 
 class Tmp4NavigateResultVm(val state: SavedStateHandle) : ViewModel() {
-  val customColor = state.getStateFlow("custom_color", "initial val")
+
+  var customColor by mutableStateOf("initial mutable state")
+
+  init {
+    logd("Tmp4NavigateResultVm init")
+  }
+
 }
