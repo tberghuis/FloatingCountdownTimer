@@ -1,0 +1,8 @@
+update gradle dependencies
+build variant tmpDebug
+play around savedStateHandle
+  navigation result
+
+update color picker lib
+
+###############
