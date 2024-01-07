@@ -20,6 +20,8 @@ fun TmpNavHost(
       }
 
       composable("change_color") {
+
+
         TmpChangeColor()
       }
     }
