@@ -12,4 +12,24 @@ import xyz.tberghuis.floatingtimer.logd
 @Composable
 fun Tmp4NavHost(
 ) {
+
+
+  val navController = rememberNavController()
+  CompositionLocalProvider(LocalNavController provides navController) {
+    NavHost(
+      navController = navController, startDestination = "home"
+    ) {
+      composable("home") {
+
+        Tmp4NavigateResult()
+      }
+
+      composable("change_color") {
+
+        Tmp4ChangeColor()
+      }
+    }
+  }
+
+
 }
