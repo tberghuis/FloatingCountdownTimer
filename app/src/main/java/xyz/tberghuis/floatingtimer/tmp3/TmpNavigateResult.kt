@@ -28,6 +28,18 @@ fun TmpNavigateResult(
     }) {
       Text("nav for result")
     }
+
+
+    Button(onClick = {
+      val _customColor =
+        navController.currentBackStackEntry?.savedStateHandle?.get<String>(
+          "custom_color"
+        )
+      logd("_customColor $_customColor")
+    }) {
+      Text("check change color")
+    }
+
   }
 }
 
