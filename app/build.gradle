@@ -1,7 +1,6 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-//    id "org.jetbrains.kotlin.kapt"
 }
 
 android {
@@ -10,7 +9,6 @@ android {
     defaultConfig {
         applicationId "xyz.tberghuis.floatingtimer"
         minSdk 26
-        //noinspection EditedTargetSdkVersion
         targetSdk 34
         versionCode 41
         versionName "1.22.0"
@@ -71,7 +69,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.12.0'
 
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.6.2'
-    implementation 'androidx.activity:activity-compose:1.8.1'
+    implementation 'androidx.activity:activity-compose:1.8.2'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -84,7 +82,7 @@ dependencies {
     // https://www.youtube.com/watch?v=meRGGTFZ9Kc
     constraints.implementation "androidx.fragment:fragment:1.6.2"
 
-    implementation "androidx.navigation:navigation-compose:2.7.5"
+    implementation "androidx.navigation:navigation-compose:2.7.6"
 
     // todo learn proper gradle tasks for android library
     // forked https://github.com/godaddy/compose-color-picker
@@ -98,7 +96,3 @@ dependencies {
 
     implementation "com.google.accompanist:accompanist-permissions:0.32.0"
 }
-
-//kapt {
-//    correctErrorTypes true
-//}
