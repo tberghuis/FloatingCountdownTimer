@@ -2,10 +2,12 @@ package xyz.tberghuis.floatingtimer.tmp3
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.LocalNavController
+import xyz.tberghuis.floatingtimer.logd
 
 @Composable
 fun TmpNavHost(
@@ -16,11 +18,21 @@ fun TmpNavHost(
       navController = navController, startDestination = "home"
     ) {
       composable("home") {
+        LaunchedEffect(Unit) {
+          logd("nav home")
+          it.savedStateHandle["change_color"] =
+            navController.currentBackStackEntry?.savedStateHandle?.get<String>(
+              "custom_color"
+            )
+        }
+
         TmpNavigateResult()
       }
 
       composable("change_color") {
-
+        LaunchedEffect(Unit) {
+          logd("nav change_color")
+        }
 
         TmpChangeColor()
       }

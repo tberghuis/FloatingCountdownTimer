@@ -36,6 +36,7 @@ class TmpChangeColorVm(private val state: SavedStateHandle) : ViewModel() {
     logd("setResultAndPopHome bse $bse")
     bse?.savedStateHandle?.set("custom_color", "willitblend")
     navController.popBackStack()
+//    navController.popBackStack("home", false, true)
   }
 
 }
