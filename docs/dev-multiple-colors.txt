@@ -14,5 +14,7 @@ nav arguments
 /change_color/countdown
 /change_color/stopwatch
 
-
+rename overflow menu entries
+  default color
+  timer size
 
