@@ -28,7 +28,7 @@ class TmpActivity : ComponentActivity() {
             .fillMaxSize()
             .background(Color.White),
         ) {
-          Tmp5NavHost()
+          TmpNavHost()
         }
       }
     }

@@ -16,10 +16,17 @@ fun TmpChangeColor(
   vm: TmpChangeColorVm = viewModel()
 ) {
   val navController = LocalNavController.current
+
+  val homeVm: TmpNavigateResultVm = viewModel(navController.previousBackStackEntry!!)
+
+
   Column {
     Text("tmp change color")
     Button(onClick = {
-      vm.setResultAndPopHome(navController)
+
+      homeVm.state["custom_color"] = "will it blend"
+      navController.popBackStack()
+
     }) {
       Text("button")
     }
@@ -27,16 +34,5 @@ fun TmpChangeColor(
 }
 
 class TmpChangeColorVm(private val state: SavedStateHandle) : ViewModel() {
-  val fdfsd = "fdsfs"
-
-
-  fun setResultAndPopHome(navController: NavHostController) {
-    logd("setResultAndPopHome")
-    val bse = navController.previousBackStackEntry
-    logd("setResultAndPopHome bse $bse")
-    bse?.savedStateHandle?.set("custom_color", "willitblend")
-    navController.popBackStack()
-//    navController.popBackStack("home", false, true)
-  }
 
 }

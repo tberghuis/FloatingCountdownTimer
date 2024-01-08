@@ -18,22 +18,9 @@ fun TmpNavHost(
       navController = navController, startDestination = "home"
     ) {
       composable("home") {
-        LaunchedEffect(Unit) {
-          logd("nav home")
-          it.savedStateHandle["change_color"] =
-            navController.currentBackStackEntry?.savedStateHandle?.get<String>(
-              "custom_color"
-            )
-        }
-
         TmpNavigateResult()
       }
-
       composable("change_color") {
-        LaunchedEffect(Unit) {
-          logd("nav change_color")
-        }
-
         TmpChangeColor()
       }
     }
