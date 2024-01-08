@@ -21,6 +21,9 @@ fun MyNavHost(
       composable("login") {
         Login()
       }
+      composable("tmp_change_color") {
+        TmpChangeColor()
+      }
     }
   }
 }

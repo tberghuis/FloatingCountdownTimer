@@ -28,6 +28,14 @@ fun Home(
     }) {
       Text("login")
     }
+
+    Button(onClick = {
+      navController.navigate("tmp_change_color")
+    }) {
+      Text("change color")
+    }
+
+
   }
 }
 
