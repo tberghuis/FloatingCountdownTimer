@@ -10,7 +10,7 @@ update color picker lib
 git tag
 
 nav arguments
-/change_color/default
+/change_color
 /change_color/countdown
 /change_color/stopwatch
 
