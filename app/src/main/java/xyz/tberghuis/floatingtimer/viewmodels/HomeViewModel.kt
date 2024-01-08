@@ -99,7 +99,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         premiumVmc.showPurchaseDialog = true
         return@launch
       }
-      boundFloatingServiceVmc.provideFloatingService().overlayController.addStopwatch(Color.Gray)
+      boundFloatingServiceVmc.provideFloatingService().overlayController.addStopwatch(stopwatchHaloColor)
     }
   }
 
