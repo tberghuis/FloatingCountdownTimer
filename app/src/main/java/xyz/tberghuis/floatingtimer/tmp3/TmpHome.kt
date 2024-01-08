@@ -15,7 +15,7 @@ import xyz.tberghuis.floatingtimer.LocalNavController
 @Composable
 fun Home(
   navController: NavHostController = LocalNavController.current,
-  vm: HomeVm = viewModel(navController.currentBackStackEntry!!)
+  vm: HomeVm = viewModel()
 ) {
   val username by vm.usernameStateFlow.collectAsState()
   Column {
