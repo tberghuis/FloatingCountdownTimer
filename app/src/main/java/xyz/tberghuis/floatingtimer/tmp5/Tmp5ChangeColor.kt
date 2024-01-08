@@ -17,12 +17,11 @@ fun Tmp5ChangeColor(
   vm: Tmp5ChangeColorVm = viewModel(),
   ) {
   val navController = LocalNavController.current
-  val homeBackStackEntry = navController.previousBackStackEntry!!
 
   Column {
     Text("tmp change color")
     Button(onClick = {
-      homeBackStackEntry.savedStateHandle["custom_color"] = "will it blend"
+      navController.previousBackStackEntry!!.savedStateHandle["custom_color"] = "will it blend"
       navController.popBackStack()
     }) {
       Text("button")

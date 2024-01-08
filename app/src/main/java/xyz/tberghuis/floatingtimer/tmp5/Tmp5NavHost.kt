@@ -21,7 +21,17 @@ fun Tmp5NavHost(
     NavHost(
       navController = navController, startDestination = "home"
     ) {
-      composable("home") {
+      composable("home") { entry ->
+        // this is wack
+        val color = entry.savedStateHandle.get<String>("custom_color")
+        val vm: Tmp5NavigateResultVm = viewModel()
+        if (color != null) {
+          LaunchedEffect(Unit) {
+            // or i could run vm.onResult(color)
+            vm.color = color
+            entry.savedStateHandle["custom_color"] = null
+          }
+        }
 
         Tmp5NavigateResult()
       }

@@ -6,6 +6,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -16,13 +18,8 @@ fun Tmp5NavigateResult(
   navController: NavHostController = LocalNavController.current,
   vm: Tmp5NavigateResultVm = viewModel()
 ) {
-  val customColor by navController.currentBackStackEntry!!.savedStateHandle.getStateFlow<String?>(
-    "custom_color",
-    null
-  ).collectAsState()
-
   Column {
-    Text("custom color $customColor")
+    Text("custom color ${vm.color}")
     Button(onClick = {
       navController.navigate("change_color")
     }) {
@@ -32,5 +29,5 @@ fun Tmp5NavigateResult(
 }
 
 class Tmp5NavigateResultVm() : ViewModel() {
-
+  var color by mutableStateOf<String?>(null)
 }
