@@ -11,12 +11,13 @@ import com.godaddy.android.colorpicker.HsvColor
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 
 class ColorSettingViewModel(application: Application) : AndroidViewModel(application) {
   private val preferences = application.providePreferencesRepository()
-  var colorPickerColorState = mutableStateOf(HsvColor.from(Color.Blue))
+  var colorPickerColorState = mutableStateOf(HsvColor.from(DEFAULT_HALO_COLOR))
 
   val premiumVmc = PremiumVmc(application, viewModelScope)
 

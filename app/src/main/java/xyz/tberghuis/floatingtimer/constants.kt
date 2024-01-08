@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer
 
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -23,3 +24,6 @@ const val REQUEST_CODE_RESET = 3
 
 const val INTENT_COMMAND_EXIT = "command_exit"
 const val INTENT_COMMAND_RESET = "command_reset"
+
+// this is same as MaterialTheme.colorScheme.primary outside of FloatingTimerTheme
+val DEFAULT_HALO_COLOR = Color(red = 103, green = 80, blue = 164)

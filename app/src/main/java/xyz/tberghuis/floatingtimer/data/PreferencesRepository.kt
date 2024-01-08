@@ -12,6 +12,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import xyz.tberghuis.floatingtimer.BuildConfig
+import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.logd
 
 val Context.dataStore by preferencesDataStore(
@@ -52,12 +53,7 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
   val haloColourFlow: Flow<Color> = dataStore.data.map { preferences ->
     val haloColourString = preferences[stringPreferencesKey("halo_colour")]
     val haloColor = if (haloColourString == null)
-    // this is same as MaterialTheme.colorScheme.primary outside of FloatingTimerTheme
-      Color(
-        red = 103,
-        green = 80,
-        blue = 164
-      )
+      DEFAULT_HALO_COLOR
     else
       Color(haloColourString.toULong())
     logd("haloColourFlow halocolor $haloColor")
