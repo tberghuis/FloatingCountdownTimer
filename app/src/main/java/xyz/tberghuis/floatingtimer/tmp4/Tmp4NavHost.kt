@@ -22,13 +22,11 @@ fun Tmp4NavHost(
       navController = navController, startDestination = "home"
     ) {
       composable("home") {
-//        Tmp4NavigateResult()
-        Tmp4Home()
+        Tmp4NavigateResult()
       }
 
       composable("change_color") {
-//        Tmp4ChangeColor()
-        Tmp4SetColor()
+        Tmp4ChangeColor()
       }
     }
   }
