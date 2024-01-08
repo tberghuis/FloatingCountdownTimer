@@ -24,6 +24,9 @@ fun MyNavHost(
       composable("tmp_change_color") {
         TmpChangeColor()
       }
+      composable("tmp_change_color/{timerType}") {
+        TmpChangeColor()
+      }
     }
   }
 }

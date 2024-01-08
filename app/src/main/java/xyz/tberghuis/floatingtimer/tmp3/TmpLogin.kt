@@ -25,7 +25,5 @@ fun Login() {
     }) {
       Text("set password")
     }
-
-
   }
 }

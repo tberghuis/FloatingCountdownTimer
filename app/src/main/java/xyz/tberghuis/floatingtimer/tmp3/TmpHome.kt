@@ -28,14 +28,16 @@ fun Home(
     }) {
       Text("login")
     }
-
+    Button(onClick = {
+      navController.navigate("tmp_change_color/stopwatch")
+    }) {
+      Text("change color stopwatch")
+    }
     Button(onClick = {
       navController.navigate("tmp_change_color")
     }) {
-      Text("change color")
+      Text("change color default")
     }
-
-
   }
 }
 
@@ -44,8 +46,5 @@ class HomeVm(private val savedStateHandle: SavedStateHandle) : ViewModel() {
   fun setUsername(username: String) {
     savedStateHandle["username_key"] = username
   }
-
   var password by mutableStateOf("123456")
-
-
 }
