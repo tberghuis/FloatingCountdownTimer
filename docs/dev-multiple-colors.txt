@@ -8,7 +8,7 @@ update color picker lib
 ###############
 
 git tag
-  dev-last-good
+  last-good
 
 nav arguments
 /change_color
