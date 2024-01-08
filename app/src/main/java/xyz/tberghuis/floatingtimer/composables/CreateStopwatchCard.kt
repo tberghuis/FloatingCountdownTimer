@@ -29,7 +29,7 @@ import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 @Composable
 fun CreateStopwatchCard() {
   val context = LocalContext.current
-  val navController = LocalNavController.current
+
   val vm: HomeViewModel = viewModel()
   ElevatedCard(
     modifier = Modifier
@@ -48,23 +48,7 @@ fun CreateStopwatchCard() {
         .padding(10.dp)
         .fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
-
-      Row(Modifier.clickable {
-        navController.navigate("change_color/stopwatch")
-      }
-      ) {
-        Box(
-          Modifier
-            .size(50.dp)
-            .background(vm.stopwatchHaloColor)
-        )
-        Image(
-          painterResource(R.drawable.palette_icon),
-          contentDescription = "",
-        )
-      }
-
-
+      ChangeTimerColorButton("change_color/stopwatch", vm.stopwatchHaloColor)
 
       Button(modifier = Modifier.padding(top = 10.dp), onClick = {
         logd("start stopwatch")
