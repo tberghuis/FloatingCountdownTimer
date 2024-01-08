@@ -1,9 +1,11 @@
 package xyz.tberghuis.floatingtimer.tmp5
 
+import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -15,6 +17,7 @@ import xyz.tberghuis.floatingtimer.logd
 fun Tmp5NavHost(
 ) {
 
+  val colorSharedVm: ColorSharedVm = viewModel(LocalContext.current as ComponentActivity)
 
   val navController = rememberNavController()
   CompositionLocalProvider(LocalNavController provides navController) {
@@ -36,7 +39,9 @@ fun Tmp5NavHost(
         Tmp5NavigateResult()
       }
 
-      composable("change_color") {
+      composable("change_color") { entry ->
+        val homeVm: Tmp5NavigateResultVm = viewModel(navController.previousBackStackEntry!!)
+
         Tmp5ChangeColor()
       }
     }

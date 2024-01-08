@@ -18,6 +18,9 @@ fun Tmp5ChangeColor(
   ) {
   val navController = LocalNavController.current
 
+
+
+
   Column {
     Text("tmp change color")
     Button(onClick = {
