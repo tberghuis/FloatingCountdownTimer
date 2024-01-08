@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.godaddy.android.colorpicker.HsvColor
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
@@ -27,8 +28,8 @@ class ColorSettingViewModel(application: Application) : AndroidViewModel(applica
 
   init {
     viewModelScope.launch {
-      colorPickerColorState.value = HsvColor.from(preferences.haloColourFlow.first())
       val haloColor = preferences.haloColourFlow.first()
+      colorPickerColorState.value = HsvColor.from(haloColor)
       val scale = preferences.bubbleScaleFlow.first()
       settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor)
       initialised = true

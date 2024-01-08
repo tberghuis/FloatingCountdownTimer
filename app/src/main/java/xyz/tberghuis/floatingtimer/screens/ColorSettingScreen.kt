@@ -20,7 +20,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -72,8 +73,6 @@ fun ColorSettingScreenContent(
   if (!vm.initialised) {
     return
   }
-  // todo use this
-  val previewHaloColor = vm.colorPickerColorState.value.toColor()
 
   Column(
     modifier = Modifier
@@ -104,6 +103,15 @@ fun ColorSettingScreenContent(
         // todo make this an icon
         Text(stringResource(R.string.save).uppercase())
       }
+    }
+  }
+
+  // this is wack
+  LaunchedEffect(vm) {
+    snapshotFlow {
+      vm.colorPickerColorState.value
+    }.collect {
+      vm.settingsTimerPreviewVmc.haloColor = it.toColor()
     }
   }
 }
