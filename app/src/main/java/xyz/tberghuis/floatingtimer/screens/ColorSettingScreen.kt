@@ -47,7 +47,7 @@ fun ColorSettingScreen(
   val topBarTitle = when (vm.timerType) {
     "stopwatch" -> "Stopwatch Timer Color"
     "countdown" -> "Countdown Timer Color"
-    else -> stringResource(R.string.change_timer_color)
+    else -> "Default Timer Color"
   }
 
   Scaffold(
