@@ -34,4 +34,5 @@
     <string name="change_color">Change Color</string>
     <string name="preview">Preview</string>
     <string name="premium_reason_bubble_scale">Change of Timer size requires premium.</string>
+    <string name="default_color">Default Color</string>
 </resources>

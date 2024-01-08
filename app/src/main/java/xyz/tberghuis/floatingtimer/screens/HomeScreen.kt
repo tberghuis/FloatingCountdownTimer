@@ -91,7 +91,7 @@ fun HomeScreen() {
             onDismissRequest = { showMenu = false },
           ) {
             DropdownMenuItem(
-              text = { Text(stringResource(R.string.change_color)) },
+              text = { Text(stringResource(R.string.default_color)) },
               onClick = {
                 navController.navigate("change_color")
               },

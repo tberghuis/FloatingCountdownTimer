@@ -146,6 +146,9 @@ fun ColorSettingScreenActions(
     else -> {
       {
         vm.saveDefaultHaloColor()
+        // doitwrong
+        homeVm.countdownHaloColor = vm.settingsTimerPreviewVmc.haloColor
+        homeVm.stopwatchHaloColor = vm.settingsTimerPreviewVmc.haloColor
         nav.popBackStack()
       }
     }
