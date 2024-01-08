@@ -21,12 +21,14 @@ class SizeSettingViewModel(private val application: Application) : AndroidViewMo
   val premiumVmc = PremiumVmc(application, viewModelScope)
   private val premiumFlow = application.providePreferencesRepository().haloColourPurchasedFlow
 
-  var previewHaloColor: Color? = null
+//  var previewHaloColor: Color? = null
 
   init {
     viewModelScope.launch {
-      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(preferences.bubbleScaleFlow.first())
-      previewHaloColor = preferences.haloColourFlow.first()
+      val haloColor = preferences.haloColourFlow.first()
+      val scale = preferences.bubbleScaleFlow.first()
+      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor)
+//      previewHaloColor = preferences.haloColourFlow.first()
       initialised = true
     }
   }

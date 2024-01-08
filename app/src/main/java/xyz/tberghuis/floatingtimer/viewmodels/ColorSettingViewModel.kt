@@ -28,7 +28,9 @@ class ColorSettingViewModel(application: Application) : AndroidViewModel(applica
   init {
     viewModelScope.launch {
       colorPickerColorState.value = HsvColor.from(preferences.haloColourFlow.first())
-      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(preferences.bubbleScaleFlow.first())
+      val haloColor = preferences.haloColourFlow.first()
+      val scale = preferences.bubbleScaleFlow.first()
+      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor)
       initialised = true
     }
   }
