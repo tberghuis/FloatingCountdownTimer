@@ -26,7 +26,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Size
 import kotlinx.coroutines.flow.StateFlow
-import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 
 @Composable
 fun StopwatchView(stopwatch: Stopwatch) {
@@ -46,7 +45,6 @@ fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>, stopwatch: Stopwa
   var pausedAngle by remember { mutableStateOf(210f) }
   var restartAngle by remember { mutableStateOf(0f) }
   val infiniteTransition = rememberInfiniteTransition()
-  val haloColor = LocalHaloColour.current
 
   val animatedAngle by infiniteTransition.animateFloat(
     initialValue = 0f, targetValue = 360f, animationSpec = infiniteRepeatable(
@@ -75,7 +73,7 @@ fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>, stopwatch: Stopwa
     )
 
     drawArc(
-      color = haloColor.copy(alpha = .1f),
+      color = stopwatch.haloColor.copy(alpha = .1f),
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
@@ -84,7 +82,7 @@ fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>, stopwatch: Stopwa
     )
 
     drawArc(
-      color = haloColor,
+      color = stopwatch.haloColor,
       startAngle = if (!running.value) pausedAngle else drawAnimatedAngle,
       sweepAngle = 120f,
       useCenter = false,

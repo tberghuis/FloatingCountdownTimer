@@ -15,7 +15,6 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
-import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 
 @Composable
 fun CountdownView(countdown: Countdown) {
@@ -37,15 +36,14 @@ fun CountdownViewDisplay(
       .zIndex(1f),
     contentAlignment = Alignment.Center
   ) {
-    CountdownProgressArc(timeLeftFraction, bubbleProperties.arcWidth)
+    CountdownProgressArc(timeLeftFraction, bubbleProperties.arcWidth, bubbleProperties.haloColor)
     TimeDisplay(countdownSeconds, bubbleProperties.fontSize)
   }
 }
 
 @Composable
-fun CountdownProgressArc(timeLeftFraction: Float, arcWidth: Dp) {
+fun CountdownProgressArc(timeLeftFraction: Float, arcWidth: Dp, haloColor: Color) {
   val sweepAngle = 360 * timeLeftFraction
-  val haloColour = LocalHaloColour.current
 
   Canvas(
     Modifier.fillMaxSize()
@@ -65,7 +63,7 @@ fun CountdownProgressArc(timeLeftFraction: Float, arcWidth: Dp) {
     )
 
     drawArc(
-      color = haloColour.copy(alpha = .1f),
+      color = haloColor.copy(alpha = .1f),
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
@@ -74,7 +72,7 @@ fun CountdownProgressArc(timeLeftFraction: Float, arcWidth: Dp) {
     )
 
     drawArc(
-      color = haloColour,
+      color = haloColor,
       -90f,
       sweepAngle,
       false,

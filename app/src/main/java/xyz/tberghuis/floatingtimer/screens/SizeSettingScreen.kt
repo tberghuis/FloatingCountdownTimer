@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SettingsTimerPreviewCard
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
@@ -91,11 +90,7 @@ fun SizeSettingScreenContent(
         .padding(15.dp),
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
-      CompositionLocalProvider(LocalHaloColour provides vm.previewHaloColor!!) {
-        SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
-      }
-
+      SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
       Spacer(Modifier.height(30.dp))
       SliderScale(vm.settingsTimerPreviewVmc)
       Spacer(Modifier.height(30.dp))

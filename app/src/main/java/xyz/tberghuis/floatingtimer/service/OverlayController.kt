@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntOffset
 import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.Dispatchers.IO
@@ -17,7 +18,6 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
@@ -41,7 +41,7 @@ class OverlayController(val service: FloatingService) {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
-      val stopwatch = Stopwatch(service, bubbleScale)
+      val stopwatch = Stopwatch(service, bubbleScale, Color.Gray)
       val stopwatchView = @Composable { StopwatchView(stopwatch) }
       // does coroutine dispatcher matter here???
       withContext(Main) {
@@ -55,7 +55,7 @@ class OverlayController(val service: FloatingService) {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
-      val countdown = Countdown(service, durationSeconds, bubbleScale)
+      val countdown = Countdown(service, durationSeconds, bubbleScale, Color.Gray)
       val countdownView = @Composable { CountdownView(countdown) }
       withContext(Main) {
         addBubble(countdown, countdownView)
@@ -70,9 +70,7 @@ class OverlayController(val service: FloatingService) {
     bubble.viewHolder.view.setContent {
       val haloColour =
         service.application.providePreferencesRepository().haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
-      CompositionLocalProvider(LocalHaloColour provides haloColour.value) {
-        bubbleView()
-      }
+      bubbleView()
     }
 
     clickTargetSetOnTouchListener(

@@ -29,7 +29,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.godaddy.android.colorpicker.ClassicColorPicker
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.composables.LocalHaloColour
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SettingsTimerPreviewCard
 import xyz.tberghuis.floatingtimer.viewmodels.ColorSettingViewModel
@@ -73,6 +72,7 @@ fun ColorSettingScreenContent(
   if (!vm.initialised) {
     return
   }
+  // todo use this
   val previewHaloColor = vm.colorPickerColorState.value.toColor()
 
   Column(
@@ -91,17 +91,13 @@ fun ColorSettingScreenContent(
       verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-      CompositionLocalProvider(LocalHaloColour provides previewHaloColor) {
-        SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
-      }
-
+      SettingsTimerPreviewCard(vm.settingsTimerPreviewVmc)
       ClassicColorPicker(
         modifier = Modifier
           .height(300.dp)
           .fillMaxWidth(),
         colorState = vm.colorPickerColorState
       )
-
       Button(onClick = {
         vm.saveHaloColorClick()
       }) {

@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.service.stopwatch
 
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.service.Bubble
@@ -11,8 +12,9 @@ import kotlin.concurrent.timerTask
 
 class Stopwatch(
   private val service: FloatingService,
-  bubbleSizeScaleFactor: Float
-) : Bubble(service, bubbleSizeScaleFactor) {
+  bubbleSizeScaleFactor: Float,
+  haloColor: Color
+) : Bubble(service, bubbleSizeScaleFactor, haloColor) {
   val timeElapsed = mutableStateOf(0)
   val isRunningStateFlow = MutableStateFlow(false)
   var stopwatchIncrementTask: TimerTask? = null

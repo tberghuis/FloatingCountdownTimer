@@ -8,6 +8,6 @@ val LocalFloatingService = compositionLocalOf<FloatingService> {
   error("CompositionLocal LocalFloatingService not present")
 }
 
-val LocalHaloColour = compositionLocalOf<Color> {
-  error("CompositionLocal LocalHaloColour not present")
-}
+//val LocalHaloColour = compositionLocalOf<Color> {
+//  error("CompositionLocal LocalHaloColour not present")
+//}

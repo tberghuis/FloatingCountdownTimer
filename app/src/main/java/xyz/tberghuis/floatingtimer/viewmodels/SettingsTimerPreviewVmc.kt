@@ -3,7 +3,9 @@ package xyz.tberghuis.floatingtimer.viewmodels
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
 
 // Vmc = View Model Component
@@ -18,4 +20,8 @@ class SettingsTimerPreviewVmc(initialScale: Float) : BubbleProperties {
   override val fontSize by derivedStateOf {
     BubbleProperties.calcFontSize(bubbleSizeScaleFactor)
   }
+
+  override var haloColor by mutableStateOf(Color.Gray)
+
+
 }

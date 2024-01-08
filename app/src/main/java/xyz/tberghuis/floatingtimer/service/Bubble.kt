@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.service
 
 import android.util.Log
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
@@ -12,6 +13,9 @@ interface BubbleProperties {
   val arcWidth: Dp
   val fontSize: TextUnit
 
+  // var or val
+  val haloColor: Color
+
   companion object {
     fun calcBubbleSizeDp(scaleFactor: Float) = TIMER_SIZE_NO_SCALE * (scaleFactor + 1)
     fun calcArcWidth(scaleFactor: Float) = ARC_WIDTH_NO_SCALE * (0.9f * scaleFactor + 1)
@@ -21,7 +25,8 @@ interface BubbleProperties {
 
 abstract class Bubble(
   private val service: FloatingService,
-  bubbleSizeScaleFactor: Float
+  bubbleSizeScaleFactor: Float,
+  override val haloColor: Color
 ) : BubbleProperties {
   final override val bubbleSizeDp = BubbleProperties.calcBubbleSizeDp(bubbleSizeScaleFactor)
   val bubbleSizePx: Int = (bubbleSizeDp.value * service.resources.displayMetrics.density).toInt()
