@@ -8,6 +8,7 @@ update color picker lib
 ###############
 
 git tag
+  dev-last-good
 
 nav arguments
 /change_color
@@ -18,3 +19,5 @@ rename overflow menu entries
   default color
   timer size
 
+rename "change timer color" screen title
+  "default timer color"
