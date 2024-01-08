@@ -6,6 +6,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -20,6 +22,7 @@ fun Home(
   val username by vm.usernameStateFlow.collectAsState()
   Column {
     Text("username: $username")
+    Text("username: ${vm.password}")
     Button(onClick = {
       navController.navigate("login")
     }) {
@@ -33,4 +36,8 @@ class HomeVm(private val savedStateHandle: SavedStateHandle) : ViewModel() {
   fun setUsername(username: String) {
     savedStateHandle["username_key"] = username
   }
+
+  var password by mutableStateOf("123456")
+
+
 }

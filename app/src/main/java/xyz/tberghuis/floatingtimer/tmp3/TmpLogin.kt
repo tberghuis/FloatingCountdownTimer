@@ -19,5 +19,13 @@ fun Login() {
     }) {
       Text("set username")
     }
+
+    Button(onClick = {
+      homeVm.password = "set password"
+    }) {
+      Text("set password")
+    }
+
+
   }
 }
