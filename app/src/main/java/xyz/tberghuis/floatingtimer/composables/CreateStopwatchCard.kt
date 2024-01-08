@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.composables
 
 import android.provider.Settings
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,15 +49,21 @@ fun CreateStopwatchCard() {
         .fillMaxWidth(), horizontalArrangement = Arrangement.Center
     ) {
 
+      Row(Modifier.clickable {
+        navController.navigate("change_color/stopwatch")
+      }
+      ) {
+        Box(
+          Modifier
+            .size(50.dp)
+            .background(vm.stopwatchHaloColor)
+        )
+        Image(
+          painterResource(R.drawable.palette_icon),
+          contentDescription = "",
+        )
+      }
 
-      Box(
-        Modifier
-          .size(50.dp)
-          .background(vm.stopwatchHaloColor)
-          .clickable {
-            navController.navigate("change_color/stopwatch")
-          }
-      )
 
 
       Button(modifier = Modifier.padding(top = 10.dp), onClick = {
