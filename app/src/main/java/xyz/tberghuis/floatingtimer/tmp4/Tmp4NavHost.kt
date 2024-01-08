@@ -22,6 +22,7 @@ fun Tmp4NavHost(
       navController = navController, startDestination = "home"
     ) {
       composable("home") {
+
         Tmp4NavigateResult()
       }
 
