@@ -77,6 +77,9 @@ fun FloatingTimerNavHost(
       composable("change_color") {
         ColorSettingScreen()
       }
+      composable("change_color/{timerType}") {
+        ColorSettingScreen()
+      }
     }
   }
 }

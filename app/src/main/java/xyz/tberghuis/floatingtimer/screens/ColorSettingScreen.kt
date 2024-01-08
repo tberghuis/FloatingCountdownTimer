@@ -3,6 +3,7 @@ package xyz.tberghuis.floatingtimer.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -33,6 +34,7 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SettingsTimerPreviewCard
 import xyz.tberghuis.floatingtimer.viewmodels.ColorSettingViewModel
+import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -40,11 +42,19 @@ fun ColorSettingScreen(
   vm: ColorSettingViewModel = viewModel()
 ) {
   val navController = LocalNavController.current
+
+  // todo translate
+  val topBarTitle = when (vm.timerType) {
+    "stopwatch" -> "Stopwatch Timer Color"
+    "countdown" -> "Countdown Timer Color"
+    else -> stringResource(R.string.change_timer_color)
+  }
+
   Scaffold(
     modifier = Modifier,
     topBar = {
       TopAppBar(
-        title = { Text(stringResource(R.string.change_timer_color)) },
+        title = { Text(topBarTitle) },
         navigationIcon = {
           IconButton(onClick = {
             navController.navigateUp()
@@ -60,9 +70,7 @@ fun ColorSettingScreen(
     ColorSettingScreenContent(padding)
   }
 
-  PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_halo_colour)) {
-    vm.saveHaloColor()
-  }
+
 }
 
 @Composable
@@ -97,12 +105,7 @@ fun ColorSettingScreenContent(
           .fillMaxWidth(),
         colorState = vm.colorPickerColorState
       )
-      Button(onClick = {
-        vm.saveHaloColorClick()
-      }) {
-        // todo make this an icon
-        Text(stringResource(R.string.save).uppercase())
-      }
+      ColorSettingScreenActions()
     }
   }
 
@@ -113,5 +116,59 @@ fun ColorSettingScreenContent(
     }.collect {
       vm.settingsTimerPreviewVmc.haloColor = it.toColor()
     }
+  }
+}
+
+@Composable
+fun ColorSettingScreenActions(
+  vm: ColorSettingViewModel = viewModel()
+) {
+
+  val nav = LocalNavController.current
+  // safe: no other way to get to this screen
+  val homeVm: HomeViewModel = viewModel(nav.previousBackStackEntry!!)
+
+  val ifPremiumCallback = when (vm.timerType) {
+    "stopwatch" -> {
+      {
+        homeVm.stopwatchHaloColor = vm.settingsTimerPreviewVmc.haloColor
+        nav.popBackStack()
+      }
+    }
+
+    "countdown" -> {
+      {
+        homeVm.countdownHaloColor = vm.settingsTimerPreviewVmc.haloColor
+        nav.popBackStack()
+      }
+    }
+
+    else -> {
+      {
+        vm.saveDefaultHaloColor()
+        nav.popBackStack()
+      }
+    }
+  }
+
+  Row {
+    Button(onClick = {
+      nav.popBackStack()
+    }) {
+      // todo translate
+      Text("CANCEL")
+    }
+    Button(onClick = {
+      vm.okButtonClick {
+        ifPremiumCallback()
+      }
+    }) {
+      // todo translate
+      Text("OK")
+    }
+  }
+
+  PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_halo_colour)) {
+    ifPremiumCallback()
   }
 }

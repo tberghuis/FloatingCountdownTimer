@@ -11,6 +11,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
@@ -27,6 +28,16 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
 
   val premiumVmc = PremiumVmc(application, viewModelScope)
   val boundFloatingServiceVmc = BoundFloatingServiceVmc(application)
+
+  var countdownHaloColor by mutableStateOf(DEFAULT_HALO_COLOR)
+  var stopwatchHaloColor by mutableStateOf(DEFAULT_HALO_COLOR)
+
+  init {
+    viewModelScope.launch {
+      countdownHaloColor = preferencesRepository.haloColourFlow.first()
+      stopwatchHaloColor = countdownHaloColor
+    }
+  }
 
   private suspend fun shouldShowPremiumDialog(): Boolean {
     val premiumPurchased =
