@@ -67,8 +67,6 @@ class OverlayController(val service: FloatingService) {
     bubbleSet.add(bubble)
 
     bubble.viewHolder.view.setContent {
-      val haloColour =
-        service.application.providePreferencesRepository().haloColourFlow.collectAsState(initial = MaterialTheme.colorScheme.primary)
       bubbleView()
     }
 
