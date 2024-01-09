@@ -24,3 +24,8 @@ rename "change timer color" screen title
 
 translate all added hardcoded strings
 cull unused translations
+
+update screenshots
+  play store description
+
+reply emails, reviews, issues

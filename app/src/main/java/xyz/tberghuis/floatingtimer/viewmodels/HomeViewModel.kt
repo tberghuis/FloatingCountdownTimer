@@ -88,7 +88,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
       }
       boundFloatingServiceVmc.provideFloatingService().overlayController.addCountdown(
         totalSecs,
-        Color.Gray
+        countdownHaloColor
       )
     }
   }
@@ -99,7 +99,9 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         premiumVmc.showPurchaseDialog = true
         return@launch
       }
-      boundFloatingServiceVmc.provideFloatingService().overlayController.addStopwatch(stopwatchHaloColor)
+      boundFloatingServiceVmc.provideFloatingService().overlayController.addStopwatch(
+        stopwatchHaloColor
+      )
     }
   }
 
