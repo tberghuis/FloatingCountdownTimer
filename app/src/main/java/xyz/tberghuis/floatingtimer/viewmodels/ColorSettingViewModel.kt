@@ -4,12 +4,10 @@ import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.godaddy.android.colorpicker.HsvColor
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
@@ -48,17 +46,6 @@ class ColorSettingViewModel(application: Application, savedStateHandle: SavedSta
       preferences.updateHaloColour(colorPickerColorState.value.toColor())
     }
   }
-
-//  fun saveHaloColorClick() {
-//    viewModelScope.launch {
-//      logd("saveHaloColorClick")
-//      if (premiumFlow.first()) {
-//        saveHaloColor()
-//      } else {
-//        premiumVmc.showPurchaseDialog = true
-//      }
-//    }
-//  }
 
   fun okButtonClick(ifPremiumCallback: () -> Unit) {
     viewModelScope.launch {

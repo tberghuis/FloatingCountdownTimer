@@ -5,7 +5,6 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,7 +26,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
   val snackbarHostState = SnackbarHostState()
 
   val premiumVmc = PremiumVmc(application, viewModelScope)
-  val boundFloatingServiceVmc = BoundFloatingServiceVmc(application)
+  private val boundFloatingServiceVmc = BoundFloatingServiceVmc(application)
 
   var countdownHaloColor by mutableStateOf(DEFAULT_HALO_COLOR)
   var stopwatchHaloColor by mutableStateOf(DEFAULT_HALO_COLOR)

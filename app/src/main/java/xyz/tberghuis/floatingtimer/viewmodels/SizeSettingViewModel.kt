@@ -4,14 +4,13 @@ import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 
-class SizeSettingViewModel(private val application: Application) : AndroidViewModel(application) {
+class SizeSettingViewModel(application: Application) : AndroidViewModel(application) {
   private val preferences = application.providePreferencesRepository()
 
   // doitwrong
@@ -21,14 +20,11 @@ class SizeSettingViewModel(private val application: Application) : AndroidViewMo
   val premiumVmc = PremiumVmc(application, viewModelScope)
   private val premiumFlow = application.providePreferencesRepository().haloColourPurchasedFlow
 
-//  var previewHaloColor: Color? = null
-
   init {
     viewModelScope.launch {
       val haloColor = preferences.haloColourFlow.first()
       val scale = preferences.bubbleScaleFlow.first()
       settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor)
-//      previewHaloColor = preferences.haloColourFlow.first()
       initialised = true
     }
   }
@@ -39,18 +35,7 @@ class SizeSettingViewModel(private val application: Application) : AndroidViewMo
     }
   }
 
-
-//  fun saveChangeSizeClick() {
-//    viewModelScope.launch {
-//      if (premiumFlow.first()) {
-//        saveChangeSize()
-//      } else {
-//        premiumVmc.showPurchaseDialog = true
-//      }
-//    }
-//  }
-
-// move to premiumVmc
+  // move to premiumVmc
   fun okButtonClick(ifPremiumCallback: () -> Unit) {
     viewModelScope.launch {
          if (premiumFlow.first()) {
@@ -60,6 +45,4 @@ class SizeSettingViewModel(private val application: Application) : AndroidViewMo
       }
     }
   }
-
-
 }
