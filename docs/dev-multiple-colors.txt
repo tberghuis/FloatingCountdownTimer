@@ -1,3 +1,11 @@
+reply emails, reviews, issues
+update screenshots
+  play store description
+
+
+
+###############################
+
 update gradle dependencies
 build variant tmpDebug
 play around savedStateHandle
@@ -25,12 +33,3 @@ rename "change timer color" screen title
 translate all added hardcoded strings
 cull unused translations
 
-update screenshots
-  play store description
-
-reply emails, reviews, issues
-
-custom modifier compiler warning onFocusSelectAll
-
-change size screen
-  buttons - cancel, ok instead of save
