@@ -48,7 +48,7 @@ fun CreateStopwatchCard() {
     ) {
       ChangeTimerColorButton("change_color/stopwatch", vm.stopwatchHaloColor)
       Spacer(Modifier.width(40.dp))
-      Button(modifier = Modifier.padding(top = 10.dp), onClick = {
+      Button(modifier = Modifier, onClick = {
         logd("start stopwatch")
         if (!Settings.canDrawOverlays(context)) {
           vm.showGrantOverlayDialog = true

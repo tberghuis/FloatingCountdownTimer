@@ -101,8 +101,11 @@ fun CreateCountdownCard() {
       modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth(),
-      horizontalArrangement = Arrangement.Center
+      horizontalArrangement = Arrangement.Center,
+      verticalAlignment = Alignment.CenterVertically,
     ) {
+      ChangeTimerColorButton("change_color/countdown", vm.countdownHaloColor)
+      Spacer(Modifier.width(40.dp))
       CreateCountdownButton()
     }
   }
