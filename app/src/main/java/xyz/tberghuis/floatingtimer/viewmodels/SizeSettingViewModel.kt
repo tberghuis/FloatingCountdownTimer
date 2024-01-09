@@ -33,20 +33,33 @@ class SizeSettingViewModel(private val application: Application) : AndroidViewMo
     }
   }
 
-  fun saveChangeSize() {
+  fun saveDefaultSize() {
     viewModelScope.launch {
       preferences.updateBubbleScale(settingsTimerPreviewVmc.bubbleSizeScaleFactor)
     }
   }
 
-  // doitwrong, lets just repeat myself
-  fun saveChangeSizeClick() {
+
+//  fun saveChangeSizeClick() {
+//    viewModelScope.launch {
+//      if (premiumFlow.first()) {
+//        saveChangeSize()
+//      } else {
+//        premiumVmc.showPurchaseDialog = true
+//      }
+//    }
+//  }
+
+// move to premiumVmc
+  fun okButtonClick(ifPremiumCallback: () -> Unit) {
     viewModelScope.launch {
-      if (premiumFlow.first()) {
-        saveChangeSize()
+         if (premiumFlow.first()) {
+        ifPremiumCallback()
       } else {
         premiumVmc.showPurchaseDialog = true
       }
     }
   }
+
+
 }

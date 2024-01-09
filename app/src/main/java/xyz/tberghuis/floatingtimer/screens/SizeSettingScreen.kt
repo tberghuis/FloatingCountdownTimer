@@ -3,6 +3,7 @@ package xyz.tberghuis.floatingtimer.screens
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -63,7 +64,7 @@ fun SizeSettingScreen(
   }
 
   PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_bubble_scale)) {
-    vm.saveChangeSize()
+    vm.saveDefaultSize()
   }
 }
 
@@ -94,11 +95,8 @@ fun SizeSettingScreenContent(
       Spacer(Modifier.height(30.dp))
       SliderScale(vm.settingsTimerPreviewVmc)
       Spacer(Modifier.height(30.dp))
-      Button(onClick = {
-        vm.saveChangeSizeClick()
-      }) {
-        Text(stringResource(R.string.save).uppercase())
-      }
+      SizeSettingScreenActions()
+
     }
   }
 }
@@ -115,4 +113,30 @@ fun SliderScale(
     modifier = Modifier.fillMaxWidth(),
     valueRange = 0f..1f,
   )
+}
+
+@Composable
+fun SizeSettingScreenActions(
+  vm: SizeSettingViewModel = viewModel()
+) {
+  val nav = LocalNavController.current
+  Row(
+    horizontalArrangement = Arrangement.spacedBy(10.dp),
+  ) {
+    Button(onClick = {
+      nav.popBackStack()
+    }) {
+      // todo translate
+      Text("CANCEL")
+    }
+    Button(onClick = {
+      vm.okButtonClick {
+        vm.saveDefaultSize()
+        nav.popBackStack()
+      }
+    }) {
+      // todo translate
+      Text("OK")
+    }
+  }
 }

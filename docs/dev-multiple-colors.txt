@@ -31,3 +31,6 @@ update screenshots
 reply emails, reviews, issues
 
 custom modifier compiler warning onFocusSelectAll
+
+change size screen
+  buttons - cancel, ok instead of save
