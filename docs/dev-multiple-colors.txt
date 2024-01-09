@@ -2,33 +2,11 @@ reply emails, reviews, issues
 update screenshots
   play store description
 
-
-
-###############################
-
-update gradle dependencies
-build variant tmpDebug
-play around savedStateHandle
-  navigation result
-
-update color picker lib
-
-###############
-
-git tag
-  last-good
-
-nav arguments
-/change_color
-/change_color/countdown
-/change_color/stopwatch
-
-rename overflow menu entries
-  default color
-  timer size
-
-rename "change timer color" screen title
-  "default timer color"
-
-translate all added hardcoded strings
-
+release
+  version
+  build apk aab
+  upload
+  release
+  merge
+  tag
+  
