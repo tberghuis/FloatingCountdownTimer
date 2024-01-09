@@ -154,7 +154,9 @@ fun ColorSettingScreenActions(
     }
   }
 
-  Row {
+  Row(
+    horizontalArrangement = Arrangement.spacedBy(10.dp),
+  ) {
     Button(onClick = {
       nav.popBackStack()
     }) {
