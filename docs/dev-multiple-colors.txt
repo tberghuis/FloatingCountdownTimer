@@ -30,4 +30,4 @@ update screenshots
 
 reply emails, reviews, issues
 
-custom modifier compiler warning ontapselectall
+custom modifier compiler warning onFocusSelectAll
