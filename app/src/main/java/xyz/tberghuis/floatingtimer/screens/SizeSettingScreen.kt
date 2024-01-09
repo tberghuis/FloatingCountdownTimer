@@ -23,7 +23,6 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -126,8 +125,7 @@ fun SizeSettingScreenActions(
     Button(onClick = {
       nav.popBackStack()
     }) {
-      // todo translate
-      Text("CANCEL")
+      Text(stringResource(R.string.cancel).uppercase())
     }
     Button(onClick = {
       vm.okButtonClick {
@@ -135,8 +133,7 @@ fun SizeSettingScreenActions(
         nav.popBackStack()
       }
     }) {
-      // todo translate
-      Text("OK")
+      Text(stringResource(R.string.save).uppercase())
     }
   }
 }
