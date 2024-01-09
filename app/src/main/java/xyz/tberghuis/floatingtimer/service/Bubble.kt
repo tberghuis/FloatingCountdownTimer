@@ -12,8 +12,6 @@ interface BubbleProperties {
   val bubbleSizeDp: Dp
   val arcWidth: Dp
   val fontSize: TextUnit
-
-  // var or val
   val haloColor: Color
 
   companion object {
