@@ -11,7 +11,7 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.Dispatchers
@@ -31,7 +31,7 @@ class Countdown(
   bubbleSizeScaleFactor: Float,
   haloColor: Color
 ) : Bubble(service, bubbleSizeScaleFactor, haloColor) {
-  var countdownSeconds by mutableStateOf(durationSeconds)
+  var countdownSeconds by mutableIntStateOf(durationSeconds)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
 
   private var countDownTimer: CountDownTimer? = null
