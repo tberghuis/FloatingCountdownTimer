@@ -13,12 +13,10 @@
     <string name="enable_overlay_permission">Aktifkan Izin Hamparan</string>
     <string name="dialog_enable_overlay_permission">Harap aktifkan izin \"Tampilkan di atas aplikasi lain\" untuk aplikasi</string>
     <string name="back">Kembali</string>
-    <string name="change_timer_color">Ubah warna Timer</string>
     <string name="save">Menyimpan</string>
     <string name="buy">Membeli</string>
     <string name="cancel">Membatalkan</string>
     <string name="premium_feature">Fitur Premium</string>
-    <string name="change_timer_halo_color">Ubah warna halo Timer</string>
     <string name="ft_premium">Premium Timer Mengambang</string>
     <string name="premium_reason_multiple_timers">Menjalankan lebih dari 2 pengatur waktu secara bersamaan memerlukan premium.</string>
     <string name="premium_reason_halo_colour">Perubahan warna Timer membutuhkan premium.</string>
@@ -27,7 +25,6 @@
     <string name="reset">mengatur ulang</string>
     <string name="exit">KELUAR</string>
     <string name="change_size">Ubah Ukuran</string>
-    <string name="change_color">Ubah Warna</string>
     <string name="preview">Pratinjau</string>
     <string name="premium_reason_bubble_scale">Perubahan ukuran Timer membutuhkan premium.</string>
 </resources>

@@ -13,12 +13,11 @@
     <string name="enable_overlay_permission">Enable Overlay Permission</string>
     <string name="dialog_enable_overlay_permission">Please enable \"Allow display over other apps\" permission for application </string>
     <string name="back">Back</string>
-    <string name="change_timer_color">Change Timer Color</string>
+
     <string name="save">Save</string>
     <string name="buy">Buy</string>
     <string name="cancel">Cancel</string>
     <string name="premium_feature">Premium Feature</string>
-    <string name="change_timer_halo_color">Change Timer halo color</string>
 
     <string name="ft_premium">Floating Timer Premium</string>
     <string name="premium_reason_multiple_timers">Running more than 2 timers simultaneously requires premium.</string>
@@ -31,7 +30,6 @@
     <string name="exit">Exit</string>
 
     <string name="change_size">Change Size</string>
-    <string name="change_color">Change Color</string>
     <string name="preview">Preview</string>
     <string name="premium_reason_bubble_scale">Change of Timer size requires premium.</string>
     <string name="default_color">Default Color</string>

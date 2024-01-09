@@ -13,12 +13,10 @@
     <string name="enable_overlay_permission">启用悬浮窗权限</string>
     <string name="dialog_enable_overlay_permission">请为应用启用“允许在其他应用上层显示”权限</string>
     <string name="back">返回</string>
-    <string name="change_timer_color">更改计时器颜色</string>
     <string name="save">保存</string>
     <string name="buy">购买</string>
     <string name="cancel">取消</string>
     <string name="premium_feature">高级功能</string>
-    <string name="change_timer_halo_color">更改计时器光晕颜色</string>
     <string name="ft_premium">浮动定时器高级版</string>
     <string name="premium_reason_multiple_timers">同时运行 2 个以上的计时器需要额外费用。</string>
     <string name="premium_reason_halo_colour">更改计时器颜色需要付费。</string>
@@ -27,7 +25,6 @@
     <string name="reset">重置</string>
     <string name="exit">出口</string>
     <string name="change_size">改变尺寸</string>
-    <string name="change_color">换颜色</string>
     <string name="preview">预览</string>
     <string name="premium_reason_bubble_scale">更改计时器大小需要额外费用。</string>
 </resources>
