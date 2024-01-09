@@ -31,5 +31,4 @@ rename "change timer color" screen title
   "default timer color"
 
 translate all added hardcoded strings
-cull unused translations
 

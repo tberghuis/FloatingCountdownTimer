@@ -27,4 +27,10 @@
     <string name="change_size">改变尺寸</string>
     <string name="preview">预览</string>
     <string name="premium_reason_bubble_scale">更改计时器大小需要额外费用。</string>
+
+    <string name="default_color">默认颜色</string>
+    <string name="stopwatch_timer_color">秒表颜色</string>
+    <string name="countdown_timer_color">倒计时颜色</string>
+    <string name="default_timer_color">默认计时器颜色</string>
+
 </resources>

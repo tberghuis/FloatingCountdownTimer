@@ -27,4 +27,10 @@
     <string name="change_size">Ubah Ukuran</string>
     <string name="preview">Pratinjau</string>
     <string name="premium_reason_bubble_scale">Perubahan ukuran Timer membutuhkan premium.</string>
+
+    <string name="default_color">Warna Default</string>
+    <string name="stopwatch_timer_color">Warna Stopwatch</string>
+    <string name="countdown_timer_color">Warna Hitung Mundur</string>
+    <string name="default_timer_color">Warna Timer Default</string>
+
 </resources>
