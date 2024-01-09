@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -23,6 +22,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Size
 import kotlinx.coroutines.flow.StateFlow
@@ -36,14 +36,14 @@ fun StopwatchView(stopwatch: Stopwatch) {
     contentAlignment = Alignment.Center
   ) {
     StopwatchBorderArc(stopwatch.isRunningStateFlow, stopwatch)
-    TimeDisplay(stopwatch.timeElapsed.value, stopwatch.fontSize)
+    TimeDisplay(stopwatch.timeElapsed.intValue, stopwatch.fontSize)
   }
 }
 
 @Composable
 fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>, stopwatch: Stopwatch) {
-  var pausedAngle by remember { mutableStateOf(210f) }
-  var restartAngle by remember { mutableStateOf(0f) }
+  var pausedAngle by remember { mutableFloatStateOf(210f) }
+  var restartAngle by remember { mutableFloatStateOf(0f) }
   val infiniteTransition = rememberInfiniteTransition()
 
   val animatedAngle by infiniteTransition.animateFloat(
