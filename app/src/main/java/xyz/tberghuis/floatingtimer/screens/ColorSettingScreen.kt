@@ -26,6 +26,7 @@ import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.godaddy.android.colorpicker.ClassicColorPicker
@@ -43,11 +44,10 @@ fun ColorSettingScreen(
 ) {
   val navController = LocalNavController.current
 
-  // todo translate
   val topBarTitle = when (vm.timerType) {
-    "stopwatch" -> "Stopwatch Timer Color"
-    "countdown" -> "Countdown Timer Color"
-    else -> "Default Timer Color"
+    "stopwatch" -> stringResource(R.string.stopwatch_timer_color)
+    "countdown" -> stringResource(R.string.countdown_timer_color)
+    else -> stringResource(R.string.default_timer_color)
   }
 
   Scaffold(
@@ -69,8 +69,6 @@ fun ColorSettingScreen(
   ) { padding ->
     ColorSettingScreenContent(padding)
   }
-
-
 }
 
 @Composable
@@ -160,16 +158,14 @@ fun ColorSettingScreenActions(
     Button(onClick = {
       nav.popBackStack()
     }) {
-      // todo translate
-      Text("CANCEL")
+      Text(stringResource(R.string.cancel).uppercase())
     }
     Button(onClick = {
       vm.okButtonClick {
         ifPremiumCallback()
       }
     }) {
-      // todo translate
-      Text("OK")
+      Text(stringResource(R.string.save).uppercase())
     }
   }
 

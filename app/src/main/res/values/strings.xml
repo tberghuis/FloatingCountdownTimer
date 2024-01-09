@@ -35,5 +35,8 @@
     <string name="preview">Preview</string>
     <string name="premium_reason_bubble_scale">Change of Timer size requires premium.</string>
     <string name="default_color">Default Color</string>
+    <string name="stopwatch_timer_color">Stopwatch Timer Color</string>
+    <string name="countdown_timer_color">Countdown Timer Color</string>
+    <string name="default_timer_color">Default Timer Color</string>
 
 </resources>
