@@ -95,7 +95,6 @@ fun SizeSettingScreenContent(
       SliderScale(vm.settingsTimerPreviewVmc)
       Spacer(Modifier.height(30.dp))
       SizeSettingScreenActions()
-
     }
   }
 }
