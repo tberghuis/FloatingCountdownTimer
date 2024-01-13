@@ -20,10 +20,6 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.Bubble
 import xyz.tberghuis.floatingtimer.service.FloatingService
-import xyz.tberghuis.floatingtimer.service.countdown.TimerState
-import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
-import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
-import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
 import kotlin.math.roundToInt
 
 class Countdown(
