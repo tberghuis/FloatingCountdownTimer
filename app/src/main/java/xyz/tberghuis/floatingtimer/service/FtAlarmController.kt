@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp
+package xyz.tberghuis.floatingtimer.service
 
 import android.media.Ringtone
 import android.media.RingtoneManager
@@ -6,10 +6,9 @@ import android.os.Build
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 
-class TmpFtAlarmController(
+class FtAlarmController(
   floatingService: FloatingService
 ) {
   private var ringtone: Ringtone? = null

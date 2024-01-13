@@ -29,7 +29,6 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp.TmpFtAlarmController
 
 // https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
 class FloatingService : LifecycleService(), SavedStateRegistryOwner {
@@ -41,7 +40,7 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
   //  lateinit var floatingAlarm: FloatingAlarm
   lateinit var overlayController: OverlayController
 
-  lateinit var alarmController: TmpFtAlarmController
+  lateinit var alarmController: FtAlarmController
 
 
   private val savedStateRegistryController = SavedStateRegistryController.create(this)
@@ -69,7 +68,7 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     savedStateRegistryController.performRestore(null)
 
     overlayController = OverlayController(this)
-    alarmController = TmpFtAlarmController(this)
+    alarmController = FtAlarmController(this)
     startInForeground()
   }
 
