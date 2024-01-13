@@ -19,10 +19,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
+import xyz.tberghuis.floatingtimer.tmp.TmpCountdown
 import kotlin.math.max
 import kotlin.math.min
 
@@ -54,7 +54,7 @@ class OverlayController(val service: FloatingService) {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
-      val countdown = Countdown(service, durationSeconds, bubbleScale, haloColor)
+      val countdown = TmpCountdown(service, durationSeconds, bubbleScale, haloColor)
       val countdownView = @Composable { CountdownView(countdown) }
       withContext(Main) {
         addBubble(countdown, countdownView)

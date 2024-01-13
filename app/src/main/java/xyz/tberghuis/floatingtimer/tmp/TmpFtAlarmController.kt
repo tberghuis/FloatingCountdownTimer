@@ -1,15 +1,12 @@
 package xyz.tberghuis.floatingtimer.tmp
 
-import android.app.Application
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.os.Build
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.service.FloatingService
-import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 
 class TmpFtAlarmController(
   floatingService: FloatingService

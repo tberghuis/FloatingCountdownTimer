@@ -25,7 +25,7 @@ import xyz.tberghuis.floatingtimer.service.Bubble
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import kotlin.math.roundToInt
 
-class Countdown(
+class XxxCountdown(
   private val service: FloatingService,
   val durationSeconds: Int,
   bubbleSizeScaleFactor: Float,
