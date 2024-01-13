@@ -2,9 +2,6 @@ package xyz.tberghuis.floatingtimer.tmp
 
 import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
-import android.media.MediaPlayer
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
 import android.os.CountDownTimer
 import android.os.VibrationEffect
@@ -37,16 +34,11 @@ class TmpCountdown(
 ) : Bubble(service, bubbleSizeScaleFactor, haloColor) {
   var countdownSeconds by mutableIntStateOf(durationSeconds)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
-
   private var countDownTimer: CountDownTimer? = null
-  private var player: MediaPlayer? = null
   private val vibrator = initVibrator()
 
   override fun exit() {
-    if (player?.isPlaying == true) {
-      player?.pause()
-    }
-    player?.release()
+    service.alarmController.stopAlarm(this)
     vibrator.cancel()
     countDownTimer?.cancel()
     super.exit()
@@ -75,12 +67,6 @@ class TmpCountdown(
   }
 
   init {
-    val alarmSound: Uri? = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-    // no default alarm sound set
-    if (alarmSound != null) {
-      player = MediaPlayer.create(service, alarmSound)
-    }
-    player?.isLooping = true
     manageAlarm()
     manageCountdownTimer()
   }
@@ -105,7 +91,7 @@ class TmpCountdown(
         when (it) {
           TimerStateFinished -> {
             if (sound) {
-              player?.start()
+              service.alarmController.startAlarm(this@TmpCountdown)
             }
             if (vibrate) {
               vibrator.vibrate(
@@ -120,9 +106,7 @@ class TmpCountdown(
           }
 
           TimerStatePaused -> {
-            if (player?.isPlaying == true) {
-              player?.pause()
-            }
+            service.alarmController.stopAlarm(this@TmpCountdown)
             vibrator.cancel()
           }
         }
