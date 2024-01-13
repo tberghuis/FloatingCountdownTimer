@@ -1,2 +1,5 @@
 read official docs
 work in unlockTmp variant
+
+update gradle
+why is AndroidViewModel allowing application without error
