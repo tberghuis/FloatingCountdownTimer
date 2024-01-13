@@ -94,11 +94,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-service:2.6.2"
     implementation "com.google.accompanist:accompanist-permissions:0.32.0"
 
-    def media3_version = "1.2.0"
-    implementation "androidx.media3:media3-exoplayer:$media3_version"
-//    implementation "androidx.media3:media3-exoplayer-dash:$media3_version"
-//    implementation "androidx.media3:media3-exoplayer-hls:$media3_version"
-//    implementation "androidx.media3:media3-exoplayer-rtsp:$media3_version"
-//    implementation "androidx.media3:media3-datasource:$media3_version"
-//    implementation "androidx.media3:media3-common:$media3_version"
+//    def media3_version = "1.2.0"
+//    implementation "androidx.media3:media3-exoplayer:$media3_version"
+
 }
