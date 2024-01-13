@@ -43,10 +43,11 @@ class TmpFtAlarmController(
   }
 
   fun startAlarm(c: Countdown) {
-    finishedCountdowns.value += setOf(c)
+//    finishedCountdowns.value += setOf(c)
+    finishedCountdowns.value += c
   }
 
   fun stopAlarm(c: Countdown) {
-    finishedCountdowns.value -= setOf(c)
+    finishedCountdowns.value -= c
   }
 }
