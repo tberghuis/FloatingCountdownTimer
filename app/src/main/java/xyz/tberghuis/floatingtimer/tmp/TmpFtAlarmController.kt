@@ -7,12 +7,13 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.service.FloatingService
+import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 
 class TmpFtAlarmController(
   floatingService: FloatingService
 ) {
   private var ringtone: Ringtone? = null
-  private val finishedCountdowns = MutableStateFlow(setOf<TmpCountdown>())
+  private val finishedCountdowns = MutableStateFlow(setOf<Countdown>())
 
   init {
     val notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
@@ -44,12 +45,12 @@ class TmpFtAlarmController(
     }
   }
 
-  fun startAlarm(c: TmpCountdown) {
+  fun startAlarm(c: Countdown) {
 //    finishedCountdowns.value += setOf(c)
     finishedCountdowns.value += c
   }
 
-  fun stopAlarm(c: TmpCountdown) {
+  fun stopAlarm(c: Countdown) {
     finishedCountdowns.value -= c
   }
 }

@@ -15,10 +15,9 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
-import xyz.tberghuis.floatingtimer.tmp.TmpCountdown
 
 @Composable
-fun CountdownView(countdown: TmpCountdown) {
+fun CountdownView(countdown: Countdown) {
   val timeLeftFraction = countdown.countdownSeconds / countdown.durationSeconds.toFloat()
   CountdownViewDisplay(countdown, timeLeftFraction, countdown.countdownSeconds)
 }

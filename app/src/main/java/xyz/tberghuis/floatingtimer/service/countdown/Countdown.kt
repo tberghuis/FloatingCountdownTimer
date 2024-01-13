@@ -2,9 +2,6 @@ package xyz.tberghuis.floatingtimer.service.countdown
 
 import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
-import android.media.MediaPlayer
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
 import android.os.CountDownTimer
 import android.os.VibrationEffect
@@ -23,9 +20,13 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.Bubble
 import xyz.tberghuis.floatingtimer.service.FloatingService
+import xyz.tberghuis.floatingtimer.service.countdown.TimerState
+import xyz.tberghuis.floatingtimer.service.countdown.TimerStateFinished
+import xyz.tberghuis.floatingtimer.service.countdown.TimerStatePaused
+import xyz.tberghuis.floatingtimer.service.countdown.TimerStateRunning
 import kotlin.math.roundToInt
 
-class XxxCountdown(
+class Countdown(
   private val service: FloatingService,
   val durationSeconds: Int,
   bubbleSizeScaleFactor: Float,
@@ -33,16 +34,11 @@ class XxxCountdown(
 ) : Bubble(service, bubbleSizeScaleFactor, haloColor) {
   var countdownSeconds by mutableIntStateOf(durationSeconds)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
-
   private var countDownTimer: CountDownTimer? = null
-  private var player: MediaPlayer? = null
   private val vibrator = initVibrator()
 
   override fun exit() {
-    if (player?.isPlaying == true) {
-      player?.pause()
-    }
-    player?.release()
+    service.alarmController.stopAlarm(this)
     vibrator.cancel()
     countDownTimer?.cancel()
     super.exit()
@@ -71,12 +67,6 @@ class XxxCountdown(
   }
 
   init {
-    val alarmSound: Uri? = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-    // no default alarm sound set
-    if (alarmSound != null) {
-      player = MediaPlayer.create(service, alarmSound)
-    }
-    player?.isLooping = true
     manageAlarm()
     manageCountdownTimer()
   }
@@ -101,7 +91,7 @@ class XxxCountdown(
         when (it) {
           TimerStateFinished -> {
             if (sound) {
-              player?.start()
+              service.alarmController.startAlarm(this@Countdown)
             }
             if (vibrate) {
               vibrator.vibrate(
@@ -116,9 +106,7 @@ class XxxCountdown(
           }
 
           TimerStatePaused -> {
-            if (player?.isPlaying == true) {
-              player?.pause()
-            }
+            service.alarmController.stopAlarm(this@Countdown)
             vibrator.cancel()
           }
         }
