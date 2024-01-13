@@ -29,8 +29,8 @@ class FtAlarmController(
                 ringtone?.stop()
               }
             }
-
-            1 -> {
+            // allow for single play ringtone on older apilevels < 28
+            else -> {
               if (ringtone?.isPlaying == false) {
                 ringtone?.play()
               }
