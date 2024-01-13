@@ -5,3 +5,4 @@ update gradle
 why is AndroidViewModel allowing application without error
 
 https://developer.android.com/media/media3
+https://developer.android.com/media/media3/exoplayer
