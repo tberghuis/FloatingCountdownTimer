@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import xyz.tberghuis.floatingtimer.tmp2.TmpTimerRect
 
 @Composable
 fun TmpScreen(
@@ -19,5 +20,6 @@ fun TmpScreen(
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
     Text("tmp screen")
+    TmpTimerRect()
   }
 }
