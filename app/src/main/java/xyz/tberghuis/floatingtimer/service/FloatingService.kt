@@ -37,8 +37,8 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
   // Main.immediate to prevent ANRs user input... ???
   val scope = CoroutineScope(Dispatchers.Default + job)
 
-  lateinit var overlayController: OverlayController
   lateinit var alarmController: FtAlarmController
+  lateinit var overlayController: OverlayController
 
   private val savedStateRegistryController = SavedStateRegistryController.create(this)
 
@@ -64,8 +64,8 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     savedStateRegistryController.performAttach()
     savedStateRegistryController.performRestore(null)
 
-    overlayController = OverlayController(this)
     alarmController = FtAlarmController(this)
+    overlayController = OverlayController(this)
     startInForeground()
   }
 
