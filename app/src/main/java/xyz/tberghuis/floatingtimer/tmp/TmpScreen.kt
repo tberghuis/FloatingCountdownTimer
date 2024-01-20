@@ -19,7 +19,7 @@ fun TmpScreen(
     verticalArrangement = Arrangement.Center,
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-    Text("tmp screen")
+//    Text("tmp screen")
     TmpTimerRect()
   }
 }
