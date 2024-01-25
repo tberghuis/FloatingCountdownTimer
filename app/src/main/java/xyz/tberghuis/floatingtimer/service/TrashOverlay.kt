@@ -30,6 +30,8 @@ import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
 import xyz.tberghuis.floatingtimer.logd
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 @Composable
 fun TrashOverlay() {
@@ -104,11 +106,10 @@ fun calcTimerIsHoverTrash(
   if (bubble == null) {
     return false
   }
-  val halfTimerSize = bubble.bubbleSizePx / 2f
-  val timerCenterX = bubblePosition.x + halfTimerSize
-  val timerCenterY = bubblePosition.y + halfTimerSize
-  return !(timerCenterX < trashRect.left ||
-      timerCenterX > trashRect.right ||
-      timerCenterY < trashRect.top ||
-      timerCenterY > trashRect.bottom)
+  val timerCenterX = bubblePosition.x + (bubble.bubbleSizePx / 2)
+  val timerCenterY = bubblePosition.y + (bubble.bubbleSizePx / 2)
+  val trashCenterX = trashRect.center.x
+  val trashCenterY = trashRect.center.y
+  // circle collision test
+  return sqrt((timerCenterX - trashCenterX).pow(2F) + (timerCenterY - trashCenterY).pow(2F)) < (bubble.bubbleSizePx / 2) + (trashRect.size.width / 2)
 }
