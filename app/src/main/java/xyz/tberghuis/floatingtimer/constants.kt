@@ -7,7 +7,7 @@ import androidx.compose.ui.unit.sp
 const val TRASH_SIZE_DP = 80
 
 val TIMER_SIZE_NO_SCALE = 60.dp
-val TIMER_FONT_SIZE_NO_SCALE = 16.sp
+val TIMER_FONT_SIZE_NO_SCALE = 15.5.sp
 
 const val INTENT_COMMAND = "xyz.tberghuis.floatingtimer.COMMAND"
 
