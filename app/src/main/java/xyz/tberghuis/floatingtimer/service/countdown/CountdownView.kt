@@ -37,7 +37,7 @@ fun CountdownViewDisplay(
     contentAlignment = Alignment.Center
   ) {
     CountdownProgressArc(timeLeftFraction, bubbleProperties.arcWidth, bubbleProperties.haloColor)
-    TimeDisplay(countdownSeconds, bubbleProperties.fontSize)
+    TimeDisplay(countdownSeconds, bubbleProperties.fontSize, Color(0xFF888888))
   }
 }
 

@@ -17,6 +17,7 @@ class Stopwatch(
 ) : Bubble(service, bubbleSizeScaleFactor, haloColor) {
   val timeElapsed = mutableIntStateOf(0)
   val isRunningStateFlow = MutableStateFlow(false)
+  val fontColor = MutableStateFlow(Color(0xFF888888))
   private var stopwatchIncrementTask: TimerTask? = null
 
   // doitwrong
@@ -25,6 +26,7 @@ class Stopwatch(
       isRunningStateFlow.collect { running ->
         when (running) {
           true -> {
+            fontColor.value = Color(0xFF000000)
             stopwatchIncrementTask = timerTask {
               timeElapsed.intValue++
             }
@@ -32,6 +34,7 @@ class Stopwatch(
           }
 
           false -> {
+            fontColor.value = Color(0xFF888888)
             stopwatchIncrementTask?.cancel()
             stopwatchIncrementTask = null
           }

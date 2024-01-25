@@ -4,13 +4,14 @@ import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.TextUnit
 
 @Composable
-fun TimeDisplay(totalSeconds: Int, fontSize: TextUnit) {
+fun TimeDisplay(totalSeconds: Int, fontSize: TextUnit, fontColor: Color) {
   val minutes = totalSeconds / 60
   val seconds = totalSeconds % 60
 
@@ -22,6 +23,7 @@ fun TimeDisplay(totalSeconds: Int, fontSize: TextUnit) {
       fontSize = fontSize,
       fontFamily = FontFamily.Default,
       style = LocalTextStyle.current.copy(fontFeatureSettings = "tnum"),
+      color = fontColor
     )
   }
 }
