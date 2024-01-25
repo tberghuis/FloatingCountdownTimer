@@ -76,7 +76,7 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
   }
 
   val bubbleScaleFlow: Flow<Float> = dataStore.data.map { preferences ->
-    preferences[floatPreferencesKey("bubble_scale")] ?: 0f
+    preferences[floatPreferencesKey("bubble_scale")] ?: 1f
   }
 
   suspend fun updateBubbleScale(scale: Float) {

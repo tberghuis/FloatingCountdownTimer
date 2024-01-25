@@ -109,7 +109,7 @@ fun SliderScale(
       vmc.bubbleSizeScaleFactor = it
     },
     modifier = Modifier.fillMaxWidth(),
-    valueRange = 0f..1f,
+    valueRange = 0f..5f,
   )
 }
 
