@@ -11,6 +11,7 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -19,7 +20,7 @@ import androidx.compose.ui.unit.Dp
 @Composable
 fun CountdownView(countdown: Countdown) {
   val timeLeftFraction = countdown.countdownSeconds / countdown.durationSeconds.toFloat()
-  CountdownViewDisplay(countdown, timeLeftFraction, countdown.countdownSeconds)
+  CountdownViewDisplay(countdown, timeLeftFraction, countdown.countdownSeconds, countdown.fontColor.collectAsState().value)
 }
 
 // need better naming conventions
@@ -27,7 +28,8 @@ fun CountdownView(countdown: Countdown) {
 fun CountdownViewDisplay(
   bubbleProperties: BubbleProperties,
   timeLeftFraction: Float,
-  countdownSeconds: Int
+  countdownSeconds: Int,
+  fontColor: Color
 ) {
   Box(
     modifier = Modifier
@@ -37,7 +39,7 @@ fun CountdownViewDisplay(
     contentAlignment = Alignment.Center
   ) {
     CountdownProgressArc(timeLeftFraction, bubbleProperties.arcWidth, bubbleProperties.haloColor)
-    TimeDisplay(countdownSeconds, bubbleProperties.fontSize, Color(0xFF888888))
+    TimeDisplay(countdownSeconds, bubbleProperties.fontSize, fontColor)
   }
 }
 
