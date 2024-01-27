@@ -30,6 +30,7 @@ class Countdown(
 ) : Bubble(service, bubbleSizeScaleFactor, haloColor) {
   var countdownSeconds by mutableIntStateOf(durationSeconds)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
+  val fontColor = MutableStateFlow(Color(0xFF888888))
   private var countDownTimer: CountDownTimer? = null
   private val vibrator = initVibrator()
 
@@ -49,10 +50,12 @@ class Countdown(
     logd("click target onclick")
     when (timerState.value) {
       is TimerStatePaused -> {
+        fontColor.value = Color(0xFF000000)
         timerState.value = TimerStateRunning
       }
 
       is TimerStateRunning -> {
+        fontColor.value = Color(0xFF888888)
         timerState.value = TimerStatePaused
       }
 
