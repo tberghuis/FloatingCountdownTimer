@@ -1,10 +1,18 @@
 package xyz.tberghuis.floatingtimer
 
 import android.graphics.Bitmap
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onAllNodesWithText
+import androidx.compose.ui.test.onNodeWithText
+import androidx.compose.ui.test.performClick
 import androidx.test.core.app.takeScreenshot
 import androidx.test.core.graphics.writeToTestStorage
 import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.rule.GrantPermissionRule
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestName
@@ -19,6 +27,13 @@ class ScreenshotTest {
   @get:Rule
   val composeTestRule = createAndroidComposeRule<MainActivity>()
 
+  @Rule
+  @JvmField
+  var mGrantPermissionRule =
+    GrantPermissionRule.grant(
+      "android.permission.POST_NOTIFICATIONS"
+    )
+
 
   @Test
   @Throws(IOException::class)
@@ -30,14 +45,33 @@ class ScreenshotTest {
 
   @Test
   @Throws(IOException::class)
-  fun willitblend() {
-    composeTestRule.apply {
-//      val bitmap = onRoot().captureToImage().asAndroidBitmap()
-//      saveScreenshot("willitblend", bitmap)
+  fun willitblend() = runTest {
 
-      takeScreenshot()
-        .writeToTestStorage("${javaClass.simpleName}_${nameRule.methodName}")
-    }
+//    composeTestRule.onNodeWithText("Create").performClick()
+
+//    composeTestRule.onAllNodesWithText("Create", useUnmergedTree = true)[1].assertIsDisplayed()
+//      .performClick()
+
+    val button = composeTestRule.onNode(hasTestTag("stopwatch_create"), useUnmergedTree = true)
+    button.assertIsDisplayed()
+    button.performClick()
+
+    delay(10000)
+
+
+
+
+    takeScreenshot()
+      .writeToTestStorage("${javaClass.simpleName}_${nameRule.methodName}")
+
+
+//    composeTestRule.apply {
+////      val bitmap = onRoot().captureToImage().asAndroidBitmap()
+////      saveScreenshot("willitblend", bitmap)
+//
+//      takeScreenshot()
+//        .writeToTestStorage("${javaClass.simpleName}_${nameRule.methodName}")
+//    }
   }
 
 
