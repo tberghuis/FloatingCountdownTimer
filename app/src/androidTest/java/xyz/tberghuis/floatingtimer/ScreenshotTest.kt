@@ -19,6 +19,7 @@ class ScreenshotTest {
   @get:Rule
   val composeTestRule = createAndroidComposeRule<MainActivity>()
 
+
   @Test
   @Throws(IOException::class)
   fun saveDeviceScreenBitmap() {
@@ -40,8 +41,16 @@ class ScreenshotTest {
   }
 
 
+//  @Test
+//  @Throws(IOException::class)
+//  fun runTestDemo() = runTest {
+//    delay(5000)
+//    composeTestRule.apply {
+//      this.onRoot().captureToImage()
+//    }
+//    delay(5000)
+//  }
 }
-
 
 private fun saveScreenshot(filename: String, bmp: Bitmap) {
   val path = InstrumentationRegistry.getInstrumentation().targetContext.filesDir.canonicalPath
