@@ -13,7 +13,6 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.outlined.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
@@ -28,14 +27,11 @@ import androidx.compose.ui.unit.Dp
 fun CountdownView(countdown: Countdown) {
   val timeLeftFraction = countdown.countdownSeconds / countdown.durationSeconds.toFloat()
   val timerState = countdown.timerState.collectAsState()
-//  val isPaused = timerState.value == TimerStatePaused
-
   val isPaused by remember {
     derivedStateOf {
       timerState.value == TimerStatePaused
     }
   }
-
   CountdownViewDisplay(countdown, timeLeftFraction, countdown.countdownSeconds, isPaused)
 }
 

@@ -20,6 +20,9 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableFloatStateOf
@@ -29,6 +32,12 @@ import kotlinx.coroutines.flow.StateFlow
 
 @Composable
 fun StopwatchView(stopwatch: Stopwatch) {
+  val isRunning = stopwatch.isRunningStateFlow.collectAsState()
+  val isPaused by remember {
+    derivedStateOf {
+      !isRunning.value
+    }
+  }
   Box(
     modifier = Modifier
       .size(stopwatch.bubbleSizeDp)
@@ -36,6 +45,14 @@ fun StopwatchView(stopwatch: Stopwatch) {
     contentAlignment = Alignment.Center
   ) {
     StopwatchBorderArc(stopwatch.isRunningStateFlow, stopwatch)
+    if (isPaused) {
+      Icon(
+        Icons.Filled.PlayArrow,
+        contentDescription = "resume",
+        modifier = Modifier.fillMaxSize(),
+        tint = Color.LightGray
+      )
+    }
     TimeDisplay(stopwatch.timeElapsed.intValue, stopwatch.fontSize)
   }
 }
