@@ -40,7 +40,7 @@ fun SettingsTimerPreviewCard(vmc: SettingsTimerPreviewVmc) {
           .width(140.dp),
         contentAlignment = Alignment.Center,
       ) {
-        CountdownViewDisplay(vmc, 0.6f, 59)
+        CountdownViewDisplay(vmc, 0.6f, 59, false)
       }
     }
   }
