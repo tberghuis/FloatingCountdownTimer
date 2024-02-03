@@ -53,7 +53,7 @@ fun CountdownViewDisplay(
     if (isPaused) {
       Icon(
         Icons.Filled.PlayArrow,
-        contentDescription = "resume",
+        contentDescription = "paused",
         modifier = Modifier.fillMaxSize(),
         tint = Color.LightGray
       )
