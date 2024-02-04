@@ -15,7 +15,9 @@ fun TmpHomeScreen() {
   Scaffold(
     modifier = Modifier,
     topBar = {},
-    bottomBar = {},
+    bottomBar = {
+      TmpBottomBar(TmpScreenTypeHome)
+    },
   ) { padding ->
     Column(
       modifier = Modifier.padding(padding),
