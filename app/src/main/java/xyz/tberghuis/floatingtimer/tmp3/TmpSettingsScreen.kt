@@ -20,6 +20,9 @@ import xyz.tberghuis.floatingtimer.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TmpSettingsScreen() {
+
+
+
   Scaffold(
     modifier = Modifier,
     topBar = {
@@ -46,7 +49,7 @@ fun TmpSettingsScreen() {
       Text("draw overlay setting")
       Text("battery settings")
       Text("dontkillmyapp.com")
-      Text("github issues")
+      Text("support (github new issue)")
       Text("app version")
     }
   }
