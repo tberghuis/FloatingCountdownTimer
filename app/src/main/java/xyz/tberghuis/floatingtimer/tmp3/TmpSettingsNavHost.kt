@@ -17,9 +17,12 @@ fun TmpSettingsNavHost() {
       TmpSettingsScreen()
     }
     composable("change_color/default") {
+      // todo pass in settingsNavController as argument
+      // or provide via compositionlocal
       Text("change default color")
     }
     composable("change_size/default") {
+      // todo pass in settingsNavController as argument
       Text("change default size")
     }
   }
