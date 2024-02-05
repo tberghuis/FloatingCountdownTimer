@@ -16,10 +16,10 @@ fun TmpSettingsNavHost() {
     composable("settings") {
       TmpSettingsScreen()
     }
-    composable("change_color") {
+    composable("change_color/default") {
       Text("change default color")
     }
-    composable("change_size") {
+    composable("change_size/default") {
       Text("change default size")
     }
   }
