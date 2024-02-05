@@ -40,7 +40,14 @@ fun TmpSettingsScreen() {
       verticalArrangement = Arrangement.Top,
       horizontalAlignment = Alignment.Start,
     ) {
-      Text("hello settings")
+      Text("Default Color")
+      Text("Default Size")
+      Text("notification settings")
+      Text("draw overlay setting")
+      Text("battery settings")
+      Text("dontkillmyapp.com")
+      Text("github issues")
+      Text("app version")
     }
   }
 }
