@@ -18,7 +18,7 @@ fun TmpNavHost() {
         TmpHomeScreen()
       }
       composable("settings") {
-        TmpSettingsScreen()
+        TmpSettingsNavHost()
       }
     }
   }

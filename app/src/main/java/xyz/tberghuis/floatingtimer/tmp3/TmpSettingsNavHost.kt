@@ -14,7 +14,7 @@ fun TmpSettingsNavHost() {
     startDestination = "settings",
   ) {
     composable("settings") {
-      TmpSettingsScreen()
+      TmpSettingsScreen(settingsNavController)
     }
     composable("change_color/default") {
       // todo pass in settingsNavController as argument
