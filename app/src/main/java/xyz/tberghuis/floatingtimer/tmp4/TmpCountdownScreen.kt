@@ -20,7 +20,9 @@ fun TmpCountdownScreen() {
         modifier = Modifier,
       )
     },
-    bottomBar = {},
+    bottomBar = {
+      TmpBottomBar(TmpScreenTypeCountdown)
+    },
   ) { padding ->
     Column(modifier = Modifier.padding(padding)) {
       Text("hello countdown screen")

@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp3
+package xyz.tberghuis.floatingtimer.tmp4
 
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -12,30 +12,21 @@ fun TmpBottomBar(currentScreen: TmpScreenType) {
 
   ) {
     NavigationBarItem(
-      selected = currentScreen is TmpScreenTypeHome,
+      selected = currentScreen is TmpScreenTypeCountdown,
       onClick = {},
       icon = {},
       modifier = Modifier,
       label = {
-        Text(text = "Home")
+        Text(text = "Countdown")
       },
     )
     NavigationBarItem(
-      selected = currentScreen is TmpScreenTypeSaved,
+      selected = currentScreen is TmpScreenTypeStopwatch,
       onClick = {},
       icon = {},
       modifier = Modifier,
       label = {
-        Text(text = "Saved")
-      },
-    )
-    NavigationBarItem(
-      selected = currentScreen is TmpScreenTypeSettings,
-      onClick = {},
-      icon = {},
-      modifier = Modifier,
-      label = {
-        Text(text = "Settings")
+        Text(text = "Stopwatch")
       },
     )
   }
