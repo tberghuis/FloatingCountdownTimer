@@ -1,6 +1,10 @@
 package xyz.tberghuis.floatingtimer.tmp3
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.PowerManager
+import android.provider.Settings
 import androidx.compose.foundation.clickable
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,7 +20,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.getSystemService
 import androidx.navigation.NavHostController
 import xyz.tberghuis.floatingtimer.R
 
@@ -48,11 +55,11 @@ fun TmpSettingsScreen(nav: NavHostController) {
       DefaultColor(nav)
       DefaultSize(nav)
 
+      Text("change system alarm ringtone")
       Text("notification settings")
       Text("draw overlay setting")
 
-      Text("battery settings")
-
+      BatterySettings()
 
       Text("dontkillmyapp.com")
       Text("support (github new issue)")
@@ -82,3 +89,28 @@ fun DefaultSize(nav: NavHostController) {
 }
 
 
+@Composable
+fun BatterySettings() {
+  val context = LocalContext.current
+
+  Text(
+    "battery settings",
+    modifier = Modifier.clickable {
+
+//                                  i heard stories of being banned for having this
+      // ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+
+//      val intent = Intent()
+//      val pm = context.getSystemService<PowerManager>()
+//      if (pm?.isIgnoringBatteryOptimizations(context.packageName) == true) {
+//        intent.action = Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS
+//      } else {
+//        intent.action = Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS
+//        intent.data = Uri.parse("package:${context.packageName}")
+//      }
+//      context.startActivity(intent)
+
+
+    },
+  )
+}
