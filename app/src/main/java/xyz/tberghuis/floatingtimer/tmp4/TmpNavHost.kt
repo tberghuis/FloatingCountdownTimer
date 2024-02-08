@@ -16,7 +16,7 @@ fun TmpNavHost() {
       navController = navController, startDestination = "countdown"
     ) {
       composable("countdown") {
-        Text("countdown screen")
+        TmpCountdownScreen()
       }
       composable("stopwatch") {
         Text("stopwatch screen")
