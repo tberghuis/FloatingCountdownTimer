@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,8 +33,11 @@ fun TmpCountdownScreen() {
 @Composable
 fun TmpCountdownScreenContent(padding: PaddingValues) {
   Column(modifier = Modifier.padding(padding)) {
-    Text("Countdown")
+    TmpCreateCountdownCard()
   }
-
 }
 
+@Composable
+fun ColumnScope.TmpCreateCountdownCard() {
+  Text("Countdown")
+}
