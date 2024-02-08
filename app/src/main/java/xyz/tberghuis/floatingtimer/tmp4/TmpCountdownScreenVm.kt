@@ -5,4 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 
 class TmpCountdownScreenVm(private val application: Application) : AndroidViewModel(application) {
 
+  fun addToSaved(){
+
+  }
 }
