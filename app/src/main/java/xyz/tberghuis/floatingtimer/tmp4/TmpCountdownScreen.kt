@@ -50,4 +50,15 @@ fun ColumnScope.TmpCreateCountdownCard(
   Button(onClick = {}) {
     Text("create")
   }
+
+  Button(onClick = {
+    vm.tmp1()
+  }) {
+    Text("tmp1")
+  }
+  Button(onClick = {
+    vm.tmp2()
+  }) {
+    Text("tmp2")
+  }
 }

@@ -27,3 +27,5 @@ const val INTENT_COMMAND_RESET = "command_reset"
 
 // this is same as MaterialTheme.colorScheme.primary outside of FloatingTimerTheme
 val DEFAULT_HALO_COLOR = Color(red = 103, green = 80, blue = 164)
+
+const val DB_FILENAME = "ft.db"
