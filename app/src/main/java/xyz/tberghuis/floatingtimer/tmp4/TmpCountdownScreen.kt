@@ -94,6 +94,7 @@ fun ColumnScope.TmpSavedCountdownCard(
           },
           onLongClick = {
             logd("onLongClick")
+            vm.showDeleteDialog = savedTimer
           },
         ),
       ) {
@@ -107,11 +108,22 @@ fun ColumnScope.TmpSavedCountdownCard(
 fun ConfirmDeleteSavedTimerDialog(
   vm: TmpCountdownScreenVm = viewModel()
 ) {
+
+  if (vm.showDeleteDialog == null) {
+    return
+  }
+
   AlertDialog(
-    onDismissRequest = {},
+    onDismissRequest = {
+      vm.showDeleteDialog = null
+    },
     confirmButton = {
       TextButton(
         onClick = {
+          vm.showDeleteDialog?.let {
+            vm.deleteSavedTimer(it)
+          }
+          vm.showDeleteDialog = null
         }
       ) {
         Text("OK")
@@ -121,13 +133,13 @@ fun ConfirmDeleteSavedTimerDialog(
     dismissButton = {
       TextButton(
         onClick = {
+          vm.showDeleteDialog = null
         }
       ) {
         Text("Cancel")
       }
     },
     title = { Text("Delete Saved Timer?") },
-//    text = { Text("text") },
   )
 }
 

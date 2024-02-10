@@ -17,7 +17,7 @@ class TmpCountdownScreenVm(private val application: Application) : AndroidViewMo
   private val savedTimerDao = application.provideDatabase().tmpSavedTimerDao()
 
   // store savedTimer.id
-  var showDeleteDialog by mutableStateOf<Int?>(null)
+  var showDeleteDialog by mutableStateOf<TmpSavedTimer?>(null)
 
 
   init {
@@ -47,6 +47,13 @@ class TmpCountdownScreenVm(private val application: Application) : AndroidViewMo
     viewModelScope.launch(IO) {
       val all = savedTimerDao.getAll()
       logd("timers all: $all")
+    }
+  }
+
+  fun deleteSavedTimer(timer: TmpSavedTimer) {
+    logd("deleteSavedTimer")
+    viewModelScope.launch(IO) {
+      savedTimerDao.delete(timer)
     }
   }
 }
