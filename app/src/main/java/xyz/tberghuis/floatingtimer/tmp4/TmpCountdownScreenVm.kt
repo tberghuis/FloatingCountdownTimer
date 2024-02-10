@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
@@ -11,6 +12,14 @@ import xyz.tberghuis.floatingtimer.provideDatabase
 class TmpCountdownScreenVm(private val application: Application) : AndroidViewModel(application) {
 
   private val savedTimerDao = application.provideDatabase().tmpSavedTimerDao()
+
+  init {
+  }
+
+  fun savedTimerFlow(): Flow<List<TmpSavedTimer>> {
+    return savedTimerDao.getAll()
+  }
+
 
   fun addToSaved() {
     tmp1()

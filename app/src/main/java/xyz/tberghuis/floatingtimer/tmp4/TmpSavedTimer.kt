@@ -7,6 +7,7 @@ import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.PrimaryKey
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Entity
 data class TmpSavedTimer(
@@ -19,7 +20,7 @@ data class TmpSavedTimer(
 @Dao
 interface TmpSavedTimerDao {
   @Query("SELECT * FROM TmpSavedTimer")
-  fun getAll(): List<TmpSavedTimer>
+  fun getAll(): Flow<List<TmpSavedTimer>>
 
   @Insert
   fun insertAll(vararg timers: TmpSavedTimer)
