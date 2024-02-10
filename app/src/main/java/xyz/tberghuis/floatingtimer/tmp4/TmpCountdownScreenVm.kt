@@ -1,6 +1,9 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
 import android.app.Application
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -12,6 +15,10 @@ import xyz.tberghuis.floatingtimer.provideDatabase
 class TmpCountdownScreenVm(private val application: Application) : AndroidViewModel(application) {
 
   private val savedTimerDao = application.provideDatabase().tmpSavedTimerDao()
+
+  // store savedTimer.id
+  var showDeleteDialog by mutableStateOf<Int?>(null)
+
 
   init {
   }
