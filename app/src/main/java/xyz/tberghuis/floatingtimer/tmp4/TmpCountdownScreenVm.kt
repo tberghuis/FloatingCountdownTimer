@@ -13,13 +13,14 @@ class TmpCountdownScreenVm(private val application: Application) : AndroidViewMo
   private val savedTimerDao = application.provideDatabase().tmpSavedTimerDao()
 
   fun addToSaved() {
-
+    tmp1()
   }
 
   fun tmp1() {
     val t1 = TmpSavedTimer(
       timerType = "countdown",
-      timerShape = "circle"
+      timerShape = "circle",
+      timerColor = "ffffffff"
     )
     viewModelScope.launch(IO) {
       savedTimerDao.insertAll(t1)

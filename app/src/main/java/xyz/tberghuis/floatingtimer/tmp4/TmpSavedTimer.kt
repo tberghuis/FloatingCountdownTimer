@@ -11,8 +11,9 @@ import androidx.room.Query
 @Entity
 data class TmpSavedTimer(
   @PrimaryKey(autoGenerate = true) val id: Int = 0,
-  @ColumnInfo(name = "timer_type") val timerType: String,
-  @ColumnInfo(name = "timer_shape") val timerShape: String
+  @ColumnInfo(name = "type") val timerType: String,
+  @ColumnInfo(name = "shape") val timerShape: String,
+  @ColumnInfo(name = "color") val timerColor: String
 )
 
 @Dao

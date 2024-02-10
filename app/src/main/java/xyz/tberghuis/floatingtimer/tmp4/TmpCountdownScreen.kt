@@ -36,6 +36,7 @@ fun TmpCountdownScreen() {
 fun TmpCountdownScreenContent(padding: PaddingValues) {
   Column(modifier = Modifier.padding(padding)) {
     TmpCreateCountdownCard()
+    TmpSavedCountdownCard()
   }
 }
 
@@ -44,21 +45,34 @@ fun ColumnScope.TmpCreateCountdownCard(
   vm: TmpCountdownScreenVm = viewModel()
 ) {
   Text("Countdown")
-  Button(onClick = {}) {
+  Button(onClick = {
+    vm.addToSaved()
+  }) {
     Text("save")
   }
   Button(onClick = {}) {
     Text("create")
   }
 
-  Button(onClick = {
-    vm.tmp1()
-  }) {
-    Text("tmp1")
-  }
-  Button(onClick = {
-    vm.tmp2()
-  }) {
-    Text("tmp2")
-  }
 }
+
+
+@Composable
+fun ColumnScope.TmpSavedCountdownCard(
+  vm: TmpCountdownScreenVm = viewModel()
+) {
+  Text("Saved")
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
