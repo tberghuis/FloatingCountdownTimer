@@ -11,8 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.service.countdown.CountdownViewDisplay
+import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
@@ -25,25 +28,37 @@ fun ColumnScope.TmpSavedCountdownCard(
     initial = listOf()
   )
 
+// tmp
+  val settingsTimerPreviewVmc = SettingsTimerPreviewVmc(0f, Color.Blue)
+
+
+
   Text("Saved")
 
   FlowRow(
     modifier = Modifier,
   ) {
-    savedTimers.forEach { savedTimer ->
-      Box(
-        modifier = Modifier.combinedClickable(
-          onClick = {
-            logd("onClick")
-          },
-          onLongClick = {
-            logd("onLongClick")
-            vm.showDeleteDialog = savedTimer
-          },
-        ),
-      ) {
-        Text("id: ${savedTimer.id}")
-      }
-    }
+//    savedTimers.forEach { savedTimer ->
+//      Box(
+//        modifier = Modifier.combinedClickable(
+//          onClick = {
+//            logd("onClick")
+//          },
+//          onLongClick = {
+//            logd("onLongClick")
+//            vm.showDeleteDialog = savedTimer
+//          },
+//        ),
+//      ) {
+//        Text("id: ${savedTimer.id}")
+//      }
+//    }
+
+
+    CountdownViewDisplay(settingsTimerPreviewVmc, 0.6f, 59, false)
+    CountdownViewDisplay(settingsTimerPreviewVmc, 0.6f, 59, false)
+    CountdownViewDisplay(settingsTimerPreviewVmc, 0.6f, 59, false)
+
+
   }
 }
