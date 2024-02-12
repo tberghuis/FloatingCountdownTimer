@@ -55,21 +55,21 @@ fun TmpCountdownScreenContent(padding: PaddingValues) {
   ConfirmDeleteSavedTimerDialog()
 }
 
-@Composable
-fun ColumnScope.TmpCreateCountdownCard(
-  vm: TmpCountdownScreenVm = viewModel()
-) {
-  Text("Countdown")
-  Button(onClick = {
-    vm.addToSaved()
-  }) {
-    Text("save")
-  }
-  Button(onClick = {}) {
-    Text("create")
-  }
-
-}
+//@Composable
+//fun ColumnScope.TmpCreateCountdownCard(
+//  vm: TmpCountdownScreenVm = viewModel()
+//) {
+//  Text("Countdown")
+//  Button(onClick = {
+//    vm.addToSaved()
+//  }) {
+//    Text("save")
+//  }
+//  Button(onClick = {}) {
+//    Text("create")
+//  }
+//
+//}
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
 @Composable
