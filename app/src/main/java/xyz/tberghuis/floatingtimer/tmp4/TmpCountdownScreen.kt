@@ -1,5 +1,9 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
+import android.provider.Settings
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
@@ -24,12 +28,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
+import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.lifecycle.viewmodel.compose.viewModel
+import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
 import xyz.tberghuis.floatingtimer.logd
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TmpCountdownScreen() {
+fun TmpCountdownScreen(
+  vm: TmpCountdownScreenVm = viewModel()
+) {
+  val context = LocalContext.current
+
   Scaffold(
     modifier = Modifier,
     topBar = {
@@ -44,6 +61,39 @@ fun TmpCountdownScreen() {
   ) { padding ->
     TmpCountdownScreenContent(padding)
   }
+
+  if (vm.grantOverlayVmc.showGrantOverlayDialog) {
+    AlertDialog(onDismissRequest = {
+      vm.grantOverlayVmc.showGrantOverlayDialog = false
+    }, confirmButton = {
+      Button(onClick = {
+        logd("go to settings")
+        val intent = Intent(
+          Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + context.packageName)
+        )
+
+        startActivityForResult(
+          context as Activity, intent, REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION, null
+        )
+        vm.grantOverlayVmc.showGrantOverlayDialog = false
+
+      }) {
+        Text(stringResource(R.string.go_to_settings))
+      }
+    }, title = {
+      Text(stringResource(R.string.enable_overlay_permission))
+    }, text = {
+      Text(buildAnnotatedString {
+        append(stringResource(R.string.dialog_enable_overlay_permission))
+        append(" ")
+        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+          append(stringResource(R.string.app_name))
+        }
+      })
+    })
+  }
+
+
 }
 
 @Composable

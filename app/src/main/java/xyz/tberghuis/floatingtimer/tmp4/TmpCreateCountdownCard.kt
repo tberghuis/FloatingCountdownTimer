@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
+import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -20,17 +22,20 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.ChangeTimerColorButton
 import xyz.tberghuis.floatingtimer.composables.CountdownOptions
 import xyz.tberghuis.floatingtimer.composables.CreateCountdownButton
 import xyz.tberghuis.floatingtimer.composables.onFocusSelectAll
+import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @Preview
 @Composable
 fun TmpCreateCountdownCard() {
-  val vm: HomeViewModel = viewModel()
+  val vm: TmpCountdownScreenVm = viewModel()
 
   // todo must be an idiomatic way to center without the need
   // to specify Modifier.fillMaxWidth() and Center everywhere
@@ -99,10 +104,33 @@ fun TmpCreateCountdownCard() {
       horizontalArrangement = Arrangement.Center,
       verticalAlignment = Alignment.CenterVertically,
     ) {
-      ChangeTimerColorButton("change_color/countdown", vm.countdownHaloColor)
+      ChangeTimerColorButton("change_color/countdown", vm.haloColor)
       TmpCountdownAddSaved()
 //      Spacer(Modifier.width(40.dp))
-      CreateCountdownButton()
+      TmpCreateCountdownButton()
     }
   }
 }
+
+@Composable
+fun TmpCreateCountdownButton() {
+  val vm: TmpCountdownScreenVm = viewModel()
+  val focusManager = LocalFocusManager.current
+  val context = LocalContext.current
+
+  Button(onClick = {
+    logd("create")
+    focusManager.clearFocus()
+    if (!Settings.canDrawOverlays(context)) {
+      vm.grantOverlayVmc.showGrantOverlayDialog = true
+      return@Button
+    }
+    vm.countdownButtonClick()
+  }) {
+    Text(stringResource(R.string.create))
+  }
+}
+
+
+
+
