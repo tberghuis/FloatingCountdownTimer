@@ -14,7 +14,10 @@ data class TmpSavedTimer(
   @PrimaryKey(autoGenerate = true) val id: Int = 0,
   @ColumnInfo(name = "type") val timerType: String,
   @ColumnInfo(name = "shape") val timerShape: String,
-  @ColumnInfo(name = "color") val timerColor: String
+  // Color.toArgb
+  @ColumnInfo(name = "color") val timerColor: Int,
+  // stores as seconds
+  @ColumnInfo(name = "duration") val durationSeconds: Int? = null
 )
 
 @Dao

@@ -5,6 +5,8 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -74,26 +76,8 @@ class TmpCountdownScreenVm(private val application: Application) : AndroidViewMo
   }
 
   fun countdownButtonClick() {
+    val totalSecs = calcTotalDurationSeconds() ?: return
     viewModelScope.launch {
-      val min: Int
-      val sec: Int
-      try {
-        min = minutes.value.text.toInt()
-        sec = seconds.value.text.toInt()
-      } catch (e: NumberFormatException) {
-        // todo, use res string for message, translate
-        snackbarHostState.showSnackbar(
-          application.resources.getString(R.string.invalid_countdown_duration)
-        )
-        return@launch
-      }
-      val totalSecs = min * 60 + sec
-      if (totalSecs == 0) {
-        snackbarHostState.showSnackbar(
-          application.resources.getString(R.string.invalid_countdown_duration)
-        )
-        return@launch
-      }
       if (shouldShowPremiumDialog()) {
         premiumVmc.showPurchaseDialog = true
         return@launch
@@ -105,28 +89,54 @@ class TmpCountdownScreenVm(private val application: Application) : AndroidViewMo
     }
   }
 
-
-  fun addToSaved() {
-    tmp1()
+  private fun calcTotalDurationSeconds(): Int? {
+    val min: Int
+    val sec: Int
+    try {
+      min = minutes.value.text.toInt()
+      sec = seconds.value.text.toInt()
+    } catch (e: NumberFormatException) {
+      showSnackbar(application.resources.getString(R.string.invalid_countdown_duration))
+      return null
+    }
+    val totalSecs = min * 60 + sec
+    if (totalSecs == 0) {
+      showSnackbar(application.resources.getString(R.string.invalid_countdown_duration))
+      return null
+    }
+    return totalSecs
   }
 
-  fun tmp1() {
-    val t1 = TmpSavedTimer(
+  private fun showSnackbar(message: String) {
+    viewModelScope.launch {
+      snackbarHostState.showSnackbar(
+        message
+      )
+    }
+  }
+
+  // doitwrong
+  fun addToSaved() {
+    val durationSeconds = calcTotalDurationSeconds() ?: return
+    val timer = TmpSavedTimer(
       timerType = "countdown",
       timerShape = "circle",
-      timerColor = "ffffffff"
+      timerColor = haloColor.toArgb(),
+      durationSeconds = durationSeconds
     )
+
     viewModelScope.launch(IO) {
-      savedTimerDao.insertAll(t1)
+      savedTimerDao.insertAll(timer)
     }
   }
 
-  fun tmp2() {
-    viewModelScope.launch(IO) {
-      val all = savedTimerDao.getAll()
-      logd("timers all: $all")
-    }
-  }
+
+//  fun tmp2() {
+//    viewModelScope.launch(IO) {
+//      val all = savedTimerDao.getAll()
+//      logd("timers all: $all")
+//    }
+//  }
 
   fun deleteSavedTimer(timer: TmpSavedTimer) {
     logd("deleteSavedTimer")
