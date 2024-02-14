@@ -32,6 +32,9 @@ fun TmpNavHost() {
       composable("change_color/{timerType}") {
         ColorSettingScreen()
       }
+      composable("change_color") {
+        ColorSettingScreen()
+      }
     }
   }
 }
