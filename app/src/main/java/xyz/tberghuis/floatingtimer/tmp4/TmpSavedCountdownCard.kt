@@ -59,8 +59,6 @@ fun ColumnScope.TmpSavedCountdownCard(
       savedTimers.forEach { savedTimer ->
         val c = Color(savedTimer.timerColor)
         val settingsTimerPreviewVmc = SettingsTimerPreviewVmc(0f, c)
-
-
         Box(
           modifier = Modifier.combinedClickable(
             onClick = {
@@ -72,18 +70,9 @@ fun ColumnScope.TmpSavedCountdownCard(
             },
           ),
         ) {
-//        Text("id: ${savedTimer.id}")
           CountdownViewDisplay(settingsTimerPreviewVmc, 1f, savedTimer.durationSeconds, false)
-
         }
       }
-
-
-//      CountdownViewDisplay(settingsTimerPreviewVmc, 0.6f, 59, false)
-//      CountdownViewDisplay(settingsTimerPreviewVmc, 0.6f, 59, false)
-
     }
-
-
   }
 }
