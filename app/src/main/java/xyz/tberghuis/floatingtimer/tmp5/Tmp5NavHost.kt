@@ -21,58 +21,6 @@ import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.logd
 
-//// nav for result demo
-//@Composable
-//fun Tmp5NavHost() {
-//  val navController = rememberNavController()
-//  CompositionLocalProvider(LocalNavController provides navController) {
-//    NavHost(
-//      navController = navController, startDestination = "start"
-//    ) {
-//      composable("start") { entry ->
-//
-//        val vm: TmpVm = viewModel()
-//
-//        LaunchedEffect(Unit) {
-//          logd("start LaunchedEffect")
-//          val nr = entry.savedStateHandle.get<String>("nav_result")
-//          logd("get nav_result $nr")
-//          nr?.let {
-//            vm.navResult = it
-//            // ensure vm update only once (configuration change)
-//            entry.savedStateHandle["nav_result"] = null
-//          }
-//        }
-//
-//        Column {
-//          Text("Start nav_result ${vm.navResult}")
-//          Button(onClick = {
-//            navController.navigate("change_color/for_result")
-//          }) {
-//            Text("nav change color")
-//          }
-//        }
-//
-//      }
-//      composable("change_color/for_result") {
-//        Column {
-//          Text("change color")
-//          Button(onClick = {
-//            navController.previousBackStackEntry
-//              ?.savedStateHandle
-//              ?.set("nav_result", "willitblend")
-//            navController.popBackStack()
-//          }) {
-//            Text("pop with result")
-//          }
-//        }
-//      }
-//    }
-//  }
-//}
-
-
-
 // nav for result demo
 @Composable
 fun Tmp5NavHost() {
