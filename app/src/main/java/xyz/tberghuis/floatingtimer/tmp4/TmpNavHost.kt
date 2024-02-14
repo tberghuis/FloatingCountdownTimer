@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.screens.ColorSettingScreen
+import xyz.tberghuis.floatingtimer.screens.LaunchPostNotificationsPermissionRequest
 import xyz.tberghuis.floatingtimer.tmp5.OnNavResult
 
 @Composable
@@ -37,4 +38,6 @@ fun TmpNavHost() {
       }
     }
   }
+
+  LaunchPostNotificationsPermissionRequest()
 }
