@@ -29,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.logd
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -82,6 +83,7 @@ fun TmpCountdownScreen(
     TmpCountdownScreenContent(padding)
   }
   TmpGrantOverlayDialog(vm.grantOverlayVmc)
+  PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_multiple_timers))
 }
 
 @Composable
