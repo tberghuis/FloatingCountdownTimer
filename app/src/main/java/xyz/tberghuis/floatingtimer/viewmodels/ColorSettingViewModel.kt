@@ -27,6 +27,9 @@ class ColorSettingViewModel(application: Application, savedStateHandle: SavedSta
   lateinit var settingsTimerPreviewVmc: SettingsTimerPreviewVmc
 
   // null == default color
+
+  // todo instead of timerType, constructor(forResult=true)
+  // popyulate in navhost
   val timerType: String? = savedStateHandle["timerType"]
 
   init {
