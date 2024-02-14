@@ -15,13 +15,31 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.LocalNavController
-import xyz.tberghuis.floatingtimer.logd
 
 // nav for result demo
+
+class TmpVm(private val application: Application, private val state: SavedStateHandle) :
+  AndroidViewModel(application) {
+  var navResult by mutableStateOf(Color.Red)
+}
+
+@Composable
+fun <T> NavBackStackEntry.OnNavResult(savedStateHandleKey: String, onResult: (T) -> Unit) {
+  LaunchedEffect(Unit) {
+    val result = savedStateHandle.get<T>(savedStateHandleKey)
+    result?.let {
+      onResult(it)
+      // ensure onResult only once (configuration change)
+      savedStateHandle[savedStateHandleKey] = null
+    }
+  }
+}
+
 @Composable
 fun Tmp5NavHost() {
   val navController = rememberNavController()
@@ -30,20 +48,10 @@ fun Tmp5NavHost() {
       navController = navController, startDestination = "start"
     ) {
       composable("start") { entry ->
-
         val vm: TmpVm = viewModel()
-
-        LaunchedEffect(Unit) {
-          logd("start LaunchedEffect")
-          val nr = entry.savedStateHandle.get<Int>("nav_result")
-          logd("get nav_result $nr")
-          nr?.let {
-            vm.navResult = Color(it)
-            // ensure vm update only once (configuration change)
-            entry.savedStateHandle["nav_result"] = null
-          }
+        entry.OnNavResult<Int>(savedStateHandleKey = "nav_result") { result ->
+          vm.navResult = Color(result)
         }
-
         Column {
           Text("Start nav_result ${vm.navResult}")
           Button(onClick = {
@@ -52,7 +60,6 @@ fun Tmp5NavHost() {
             Text("nav change color")
           }
         }
-
       }
       composable("change_color/for_result") {
         Column {
@@ -69,14 +76,4 @@ fun Tmp5NavHost() {
       }
     }
   }
-}
-
-
-
-
-class TmpVm(private val application: Application, private val state: SavedStateHandle) :
-  AndroidViewModel(application) {
-
-//  var navResult by mutableStateOf("")
-  var navResult by mutableStateOf(Color.Red)
 }
