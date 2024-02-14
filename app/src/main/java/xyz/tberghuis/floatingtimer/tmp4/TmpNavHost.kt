@@ -3,13 +3,10 @@ package xyz.tberghuis.floatingtimer.tmp4
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.LocalNavController
-import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.screens.ColorSettingScreen
 
 @Composable
