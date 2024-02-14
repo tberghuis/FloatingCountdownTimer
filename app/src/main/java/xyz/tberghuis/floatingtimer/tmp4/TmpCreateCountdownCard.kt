@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.tmp4
 
 import android.provider.Settings
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -21,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
@@ -95,7 +98,7 @@ fun TmpCreateCountdownCard() {
       horizontalArrangement = Arrangement.Center,
       verticalAlignment = Alignment.CenterVertically
     ) {
-      CountdownOptions()
+      TmpCountdownOptions()
     }
     Row(
       modifier = Modifier
@@ -130,6 +133,32 @@ fun TmpCreateCountdownButton() {
   }
 }
 
+@Composable
+fun TmpCountdownOptions() {
+  val vm: TmpCountdownScreenVm = viewModel()
 
+  // doitwrong
+  val vibration = vm.vibrationFlow.collectAsState(false)
+  val sound = vm.soundFlow.collectAsState(false)
 
-
+  Column {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+      Checkbox(
+        checked = vibration.value,
+        onCheckedChange = {
+          vm.updateVibration(it)
+        }
+      )
+      Text(stringResource(R.string.vibration))
+    }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+      Checkbox(
+        checked = sound.value,
+        onCheckedChange = {
+          vm.updateSound(it)
+        }
+      )
+      Text(stringResource(R.string.sound))
+    }
+  }
+}
