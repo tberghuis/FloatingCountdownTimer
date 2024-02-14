@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
@@ -22,7 +23,10 @@ import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.viewmodels.BoundFloatingServiceVmc
 import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
 
-class TmpCountdownScreenVm(private val application: Application) : AndroidViewModel(application) {
+class TmpCountdownScreenVm(
+  private val application: Application,
+//  private val state: SavedStateHandle
+) : AndroidViewModel(application),TmpHaloColorOwner {
 
   private val savedTimerDao = application.provideDatabase().tmpSavedCountdownDao()
 
@@ -41,12 +45,21 @@ class TmpCountdownScreenVm(private val application: Application) : AndroidViewMo
   val premiumVmc = PremiumVmc(application, viewModelScope)
   private val boundFloatingServiceVmc = BoundFloatingServiceVmc(application)
 
-  var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
+  override var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
+
 
   init {
     viewModelScope.launch {
       haloColor = preferencesRepository.haloColourFlow.first()
     }
+
+//    viewModelScope.launch {
+//      val sf = state.getStateFlow<Color?>("color_result", null)
+//      sf.collect {
+//        logd("collect color_result $it")
+//      }
+//    }
+
   }
 
   fun savedCountdownFlow(): Flow<List<TmpSavedCountdown>> {

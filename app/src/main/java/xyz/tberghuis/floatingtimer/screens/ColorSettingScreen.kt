@@ -33,6 +33,7 @@ import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SettingsTimerPreviewCard
+import xyz.tberghuis.floatingtimer.tmp4.TmpColorSettingScreenActions
 import xyz.tberghuis.floatingtimer.viewmodels.ColorSettingViewModel
 import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
@@ -102,7 +103,9 @@ fun ColorSettingScreenContent(
           .fillMaxWidth(),
         colorState = vm.colorPickerColorState
       )
-      ColorSettingScreenActions()
+      // todo
+//      ColorSettingScreenActions()
+      TmpColorSettingScreenActions()
     }
   }
 
