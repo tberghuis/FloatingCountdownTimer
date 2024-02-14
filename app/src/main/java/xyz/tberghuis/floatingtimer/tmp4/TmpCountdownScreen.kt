@@ -61,7 +61,7 @@ fun ConfirmDeleteSavedTimerDialog(
       TextButton(
         onClick = {
           vm.showDeleteDialog?.let {
-            vm.deleteSavedTimer(it)
+            vm.deleteSavedCountdown(it)
           }
           vm.showDeleteDialog = null
         }

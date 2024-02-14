@@ -10,24 +10,23 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Entity
-data class TmpSavedTimer(
+data class TmpSavedCountdown(
   @PrimaryKey(autoGenerate = true) val id: Int = 0,
-  @ColumnInfo(name = "type") val timerType: String,
   @ColumnInfo(name = "shape") val timerShape: String,
   // Color.toArgb
   @ColumnInfo(name = "color") val timerColor: Int,
   // stores as seconds
-  @ColumnInfo(name = "duration") val durationSeconds: Int? = null
+  @ColumnInfo(name = "duration") val durationSeconds: Int
 )
 
 @Dao
-interface TmpSavedTimerDao {
-  @Query("SELECT * FROM TmpSavedTimer")
-  fun getAll(): Flow<List<TmpSavedTimer>>
+interface TmpSavedCountdownDao {
+  @Query("SELECT * FROM TmpSavedCountdown")
+  fun getAll(): Flow<List<TmpSavedCountdown>>
 
   @Insert
-  fun insertAll(vararg timers: TmpSavedTimer)
+  fun insertAll(vararg timers: TmpSavedCountdown)
 
   @Delete
-  fun delete(timer: TmpSavedTimer)
+  fun delete(timer: TmpSavedCountdown)
 }

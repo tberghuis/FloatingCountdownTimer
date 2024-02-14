@@ -24,10 +24,10 @@ import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
 
 class TmpCountdownScreenVm(private val application: Application) : AndroidViewModel(application) {
 
-  private val savedTimerDao = application.provideDatabase().tmpSavedTimerDao()
+  private val savedTimerDao = application.provideDatabase().tmpSavedCountdownDao()
 
   // store savedTimer.id
-  var showDeleteDialog by mutableStateOf<TmpSavedTimer?>(null)
+  var showDeleteDialog by mutableStateOf<TmpSavedCountdown?>(null)
 
   private val preferencesRepository = application.providePreferencesRepository()
   val vibrationFlow = preferencesRepository.vibrationFlow
@@ -49,7 +49,7 @@ class TmpCountdownScreenVm(private val application: Application) : AndroidViewMo
     }
   }
 
-  fun savedTimerFlow(): Flow<List<TmpSavedTimer>> {
+  fun savedCountdownFlow(): Flow<List<TmpSavedCountdown>> {
     return savedTimerDao.getAll()
   }
 
@@ -118,8 +118,7 @@ class TmpCountdownScreenVm(private val application: Application) : AndroidViewMo
   // doitwrong
   fun addToSaved() {
     val durationSeconds = calcTotalDurationSeconds() ?: return
-    val timer = TmpSavedTimer(
-      timerType = "countdown",
+    val timer = TmpSavedCountdown(
       timerShape = "circle",
       timerColor = haloColor.toArgb(),
       durationSeconds = durationSeconds
@@ -138,7 +137,7 @@ class TmpCountdownScreenVm(private val application: Application) : AndroidViewMo
 //    }
 //  }
 
-  fun deleteSavedTimer(timer: TmpSavedTimer) {
+  fun deleteSavedCountdown(timer: TmpSavedCountdown) {
     logd("deleteSavedTimer")
     viewModelScope.launch(IO) {
       savedTimerDao.delete(timer)
