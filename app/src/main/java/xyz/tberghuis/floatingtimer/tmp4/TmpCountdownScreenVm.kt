@@ -27,7 +27,7 @@ import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
 class TmpCountdownScreenVm(
   private val application: Application,
 //  private val state: SavedStateHandle
-) : AndroidViewModel(application), TmpHaloColorOwner {
+) : AndroidViewModel(application) {
 
   private val savedTimerDao = application.provideDatabase().tmpSavedCountdownDao()
 
@@ -46,7 +46,7 @@ class TmpCountdownScreenVm(
   val premiumVmc = PremiumVmc(application, viewModelScope)
   private val boundFloatingServiceVmc = BoundFloatingServiceVmc(application)
 
-  override var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
+  var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
 
   init {
     viewModelScope.launch {
