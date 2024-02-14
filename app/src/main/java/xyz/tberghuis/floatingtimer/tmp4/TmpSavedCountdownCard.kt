@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,7 +31,7 @@ import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 fun ColumnScope.TmpSavedCountdownCard(
   vm: TmpCountdownScreenVm = viewModel()
 ) {
-
+  val focusManager = LocalFocusManager.current
   val savedTimers by vm.savedCountdownFlow().collectAsState(
     initial = listOf()
   )
@@ -63,9 +64,13 @@ fun ColumnScope.TmpSavedCountdownCard(
           modifier = Modifier.combinedClickable(
             onClick = {
               logd("onClick")
+              // remove focus from TextField
+              focusManager.clearFocus()
             },
             onLongClick = {
               logd("onLongClick")
+              // remove focus from TextField
+              focusManager.clearFocus()
               vm.showDeleteDialog = savedTimer
             },
           ),

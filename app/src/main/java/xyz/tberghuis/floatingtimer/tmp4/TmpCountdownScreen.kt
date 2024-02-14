@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -12,15 +13,24 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.viewmodel.compose.viewModel
+import xyz.tberghuis.floatingtimer.logd
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TmpCountdownScreen(
   vm: TmpCountdownScreenVm = viewModel()
 ) {
+  val focusManager = LocalFocusManager.current
   Scaffold(
-    modifier = Modifier,
+    modifier = Modifier.pointerInput(Unit) {
+      detectTapGestures(onTap = {
+        focusManager.clearFocus()
+        logd("on tap")
+      })
+    },
     topBar = {
       TopAppBar(
         title = { Text("Floating Timer") },
