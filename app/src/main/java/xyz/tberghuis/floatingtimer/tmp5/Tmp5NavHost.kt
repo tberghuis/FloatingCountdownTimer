@@ -28,6 +28,8 @@ class TmpVm(private val application: Application, private val state: SavedStateH
   var navResult by mutableStateOf(Color.Red)
 }
 
+// inspired from
+// https://stackoverflow.com/questions/66837132/jetpack-compose-navigate-for-result
 @Composable
 fun <T> NavBackStackEntry.OnNavResult(savedStateHandleKey: String, onResult: (T) -> Unit) {
   LaunchedEffect(Unit) {
