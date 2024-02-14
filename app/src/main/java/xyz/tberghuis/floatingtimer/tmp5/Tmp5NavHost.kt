@@ -35,7 +35,7 @@ fun <T> NavBackStackEntry.OnNavResult(savedStateHandleKey: String, onResult: (T)
     result?.let {
       onResult(it)
       // ensure onResult only once (configuration change)
-      savedStateHandle[savedStateHandleKey] = null
+      savedStateHandle.remove<T>(savedStateHandleKey)
     }
   }
 }
