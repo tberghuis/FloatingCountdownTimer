@@ -4,11 +4,11 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.logd
 
 class TmpSharedVm(private val application: Application) : AndroidViewModel(application) {
-//  private val boundFloatingServiceVmc = BoundFloatingServiceVmc(application)
-
+  private val boundFloatingService = (application as MainApplication).boundFloatingService
 
   init {
     logd("TmpSharedVm init, test, does it re-init on screen rotate")
@@ -16,11 +16,7 @@ class TmpSharedVm(private val application: Application) : AndroidViewModel(appli
 
   fun cancelAllTimers() {
     viewModelScope.launch {
-      // todo
-      // application.boundFloatingService.provideFloatingService().overlayController.exitAll()
-
+      boundFloatingService.provideFloatingService().overlayController.exitAll()
     }
   }
-
-
 }

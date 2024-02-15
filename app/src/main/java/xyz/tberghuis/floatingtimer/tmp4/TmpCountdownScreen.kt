@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -26,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -39,6 +41,7 @@ import xyz.tberghuis.floatingtimer.logd
 fun TmpCountdownScreen(
   vm: TmpCountdownScreenVm = viewModel()
 ) {
+  val sharedVm: TmpSharedVm = viewModel(LocalContext.current as ComponentActivity)
   val focusManager = LocalFocusManager.current
   val navController = LocalNavController.current
   var showMenu by remember { mutableStateOf(false) }
@@ -72,6 +75,12 @@ fun TmpCountdownScreen(
             DropdownMenuItem(
               text = { Text(stringResource(R.string.change_size)) },
               onClick = { navController.navigate("change_size") },
+            )
+            DropdownMenuItem(
+              text = { Text(stringResource(R.string.cancel_all_timers)) },
+              onClick = {
+                sharedVm.cancelAllTimers()
+              },
             )
           }
         },
