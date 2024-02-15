@@ -9,12 +9,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.MainApplication
@@ -22,7 +19,6 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.viewmodels.BoundFloatingServiceVmc
 import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
 
 class TmpCountdownScreenVm(
@@ -38,6 +34,7 @@ class TmpCountdownScreenVm(
   var seconds = mutableStateOf(TextFieldValue("0"))
 
   val snackbarHostState = SnackbarHostState()
+  // future.txt refactor premiumVmc into sharedVm
   val premiumVmc = PremiumVmc(application, viewModelScope)
   private val boundFloatingService = (application as MainApplication).boundFloatingService
 
@@ -54,14 +51,6 @@ class TmpCountdownScreenVm(
   fun savedCountdownFlow(): Flow<List<TmpSavedCountdown>> {
     return savedCountdownDao.getAll()
   }
-
-//  private suspend fun shouldShowPremiumDialog(): Boolean {
-//    val premiumPurchased =
-//      application.providePreferencesRepository().haloColourPurchasedFlow.first()
-//    val floatingService = boundFloatingService.provideFloatingService()
-//    val numBubbles = floatingService.overlayController.getNumberOfBubbles()
-//    return !premiumPurchased && numBubbles == 2
-//  }
 
   fun updateVibration(vibration: Boolean) {
     logd("updateVibration $vibration")
@@ -125,7 +114,6 @@ class TmpCountdownScreenVm(
     }
   }
 
-  // doitwrong
   fun addToSaved() {
     val durationSeconds = calcTotalDurationSeconds() ?: return
     val timer = TmpSavedCountdown(
@@ -133,19 +121,10 @@ class TmpCountdownScreenVm(
       timerColor = haloColor.toArgb(),
       durationSeconds = durationSeconds
     )
-
     viewModelScope.launch(IO) {
       savedCountdownDao.insertAll(timer)
     }
   }
-
-
-//  fun tmp2() {
-//    viewModelScope.launch(IO) {
-//      val all = savedTimerDao.getAll()
-//      logd("timers all: $all")
-//    }
-//  }
 
   fun deleteSavedCountdown(timer: TmpSavedCountdown) {
     logd("deleteSavedTimer")
