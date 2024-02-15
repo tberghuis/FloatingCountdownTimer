@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
+import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
@@ -44,7 +45,8 @@ class TmpCountdownScreenVm(
 
   val snackbarHostState = SnackbarHostState()
   val premiumVmc = PremiumVmc(application, viewModelScope)
-  private val boundFloatingServiceVmc = BoundFloatingServiceVmc(application)
+//  private val boundFloatingServiceVmc = BoundFloatingServiceVmc(application)
+  private val boundFloatingService = (application as MainApplication).boundFloatingService
 
   var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
 
@@ -64,7 +66,7 @@ class TmpCountdownScreenVm(
   private suspend fun shouldShowPremiumDialog(): Boolean {
     val premiumPurchased =
       application.providePreferencesRepository().haloColourPurchasedFlow.first()
-    val floatingService = boundFloatingServiceVmc.provideFloatingService()
+    val floatingService = boundFloatingService.provideFloatingService()
     val numBubbles = floatingService.overlayController.getNumberOfBubbles()
     return !premiumPurchased && numBubbles == 2
   }
@@ -90,7 +92,7 @@ class TmpCountdownScreenVm(
         premiumVmc.showPurchaseDialog = true
         return@launch
       }
-      boundFloatingServiceVmc.provideFloatingService().overlayController.addCountdown(
+      boundFloatingService.provideFloatingService().overlayController.addCountdown(
         totalSecs,
         haloColor
       )
@@ -103,7 +105,7 @@ class TmpCountdownScreenVm(
         premiumVmc.showPurchaseDialog = true
         return@launch
       }
-      boundFloatingServiceVmc.provideFloatingService().overlayController.addCountdown(
+      boundFloatingService.provideFloatingService().overlayController.addCountdown(
         timer.durationSeconds,
         Color(timer.timerColor)
       )

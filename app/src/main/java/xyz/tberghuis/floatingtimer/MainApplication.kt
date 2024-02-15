@@ -7,22 +7,22 @@ import androidx.room.Room
 import xyz.tberghuis.floatingtimer.data.PreferencesRepository
 import xyz.tberghuis.floatingtimer.data.dataStore
 import xyz.tberghuis.floatingtimer.tmp4.TmpAppDatabase
+import xyz.tberghuis.floatingtimer.viewmodels.BoundFloatingServiceVmc
 
 class MainApplication : Application() {
-
   // could i just use Context.dataStore instead for singleton
   // i could write some tests to see if singleton across application
   // and activities
   // doitwrong
   lateinit var preferencesRepository: PreferencesRepository
-
   lateinit var appDatabase: TmpAppDatabase
-
+  lateinit var boundFloatingService: BoundFloatingServiceVmc
 
   override fun onCreate() {
     super.onCreate()
     appDatabase = provideDatabase()
     preferencesRepository = PreferencesRepository(dataStore)
+    boundFloatingService = BoundFloatingServiceVmc(this)
     createNotificationChannel()
   }
 
