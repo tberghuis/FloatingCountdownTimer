@@ -55,13 +55,13 @@ class TmpCountdownScreenVm(
     return savedCountdownDao.getAll()
   }
 
-  private suspend fun shouldShowPremiumDialog(): Boolean {
-    val premiumPurchased =
-      application.providePreferencesRepository().haloColourPurchasedFlow.first()
-    val floatingService = boundFloatingService.provideFloatingService()
-    val numBubbles = floatingService.overlayController.getNumberOfBubbles()
-    return !premiumPurchased && numBubbles == 2
-  }
+//  private suspend fun shouldShowPremiumDialog(): Boolean {
+//    val premiumPurchased =
+//      application.providePreferencesRepository().haloColourPurchasedFlow.first()
+//    val floatingService = boundFloatingService.provideFloatingService()
+//    val numBubbles = floatingService.overlayController.getNumberOfBubbles()
+//    return !premiumPurchased && numBubbles == 2
+//  }
 
   fun updateVibration(vibration: Boolean) {
     logd("updateVibration $vibration")
@@ -79,8 +79,12 @@ class TmpCountdownScreenVm(
 
   fun countdownButtonClick() {
     val totalSecs = calcTotalDurationSeconds() ?: return
+    addCountdown(totalSecs, haloColor)
+  }
+
+  private fun addCountdown(totalSecs: Int, haloColor: Color) {
     viewModelScope.launch {
-      if (shouldShowPremiumDialog()) {
+      if (shouldShowPremiumDialogMultipleTimers(application)) {
         premiumVmc.showPurchaseDialog = true
         return@launch
       }
@@ -92,16 +96,7 @@ class TmpCountdownScreenVm(
   }
 
   fun savedCountdownClick(timer: TmpSavedCountdown) {
-    viewModelScope.launch {
-      if (shouldShowPremiumDialog()) {
-        premiumVmc.showPurchaseDialog = true
-        return@launch
-      }
-      boundFloatingService.provideFloatingService().overlayController.addCountdown(
-        timer.durationSeconds,
-        Color(timer.timerColor)
-      )
-    }
+    addCountdown(timer.durationSeconds, Color(timer.timerColor))
   }
 
   private fun calcTotalDurationSeconds(): Int? {

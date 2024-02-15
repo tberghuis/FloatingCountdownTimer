@@ -12,7 +12,7 @@ class TmpStopwatchScreenVm(
 
   // move premiumVmc to sharedVm
 
-//  fun stopwatchButtonClick() {
+  fun stopwatchButtonClick() {
 //    viewModelScope.launch {
 //      if (shouldShowPremiumDialog()) {
 //        premiumVmc.showPurchaseDialog = true
@@ -22,6 +22,6 @@ class TmpStopwatchScreenVm(
 //        stopwatchHaloColor
 //      )
 //    }
-//  }
+  }
 
 }
