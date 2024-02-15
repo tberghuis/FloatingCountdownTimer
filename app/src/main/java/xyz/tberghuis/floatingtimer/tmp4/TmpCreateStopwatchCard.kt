@@ -27,9 +27,9 @@ import xyz.tberghuis.floatingtimer.logd
 @Composable
 fun TmpCreateStopwatchCard() {
   val context = LocalContext.current
+  val sharedVm: TmpSharedVm = viewModel(context as ComponentActivity)
+  val vm: TmpStopwatchScreenVm = viewModel()
 
-  val sharedVm: TmpSharedVm = viewModel(LocalContext.current as ComponentActivity)
-//  val vm: HomeViewModel = viewModel()
   ElevatedCard(
     modifier = Modifier
       .fillMaxWidth()
@@ -49,8 +49,7 @@ fun TmpCreateStopwatchCard() {
       horizontalArrangement = Arrangement.Center,
       verticalAlignment = Alignment.CenterVertically,
     ) {
-      // todo
-//      ChangeTimerColorButton("change_color/stopwatch", vm.stopwatchHaloColor)
+      ChangeTimerColorButton("change_color/stopwatch", vm.haloColor)
       Spacer(Modifier.width(40.dp))
       Button(modifier = Modifier.testTag("stopwatch_create"), onClick = {
         logd("start stopwatch")
@@ -58,8 +57,7 @@ fun TmpCreateStopwatchCard() {
           sharedVm.showGrantOverlayDialog = true
           return@Button
         }
-        // todo
-//        vm.stopwatchButtonClick()
+        vm.stopwatchButtonClick()
       }) {
         Text(stringResource(id = R.string.create))
       }
