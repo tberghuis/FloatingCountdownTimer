@@ -4,6 +4,8 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.AlertDialog
@@ -88,7 +90,11 @@ fun TmpCountdownScreen(
 
 @Composable
 fun TmpCountdownScreenContent(padding: PaddingValues) {
-  Column(modifier = Modifier.padding(padding)) {
+  Column(
+    modifier = Modifier
+      .padding(padding)
+      .verticalScroll(rememberScrollState())
+  ) {
     TmpCreateCountdownCard()
     TmpSavedCountdownCard()
   }

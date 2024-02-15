@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.tmp4
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -25,7 +26,6 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownViewDisplay
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 
-
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun ColumnScope.TmpSavedCountdownCard(
@@ -35,10 +35,6 @@ fun ColumnScope.TmpSavedCountdownCard(
   val savedTimers by vm.savedCountdownFlow().collectAsState(
     initial = listOf()
   )
-
-// tmp
-
-
   ElevatedCard(
     modifier = Modifier
       .fillMaxWidth()
@@ -55,26 +51,31 @@ fun ColumnScope.TmpSavedCountdownCard(
     )
 
     FlowRow(
-      modifier = Modifier,
+      modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth(),
+      horizontalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterHorizontally),
+      verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
       savedTimers.forEach { savedTimer ->
         val c = Color(savedTimer.timerColor)
         val settingsTimerPreviewVmc = SettingsTimerPreviewVmc(0f, c)
         Box(
-          modifier = Modifier.combinedClickable(
-            onClick = {
-              logd("onClick")
-              // remove focus from TextField
-              focusManager.clearFocus()
-              vm.savedCountdownClick(savedTimer)
-            },
-            onLongClick = {
-              logd("onLongClick")
-              // remove focus from TextField
-              focusManager.clearFocus()
-              vm.showDeleteDialog = savedTimer
-            },
-          ),
+          modifier = Modifier
+            .combinedClickable(
+              onClick = {
+                logd("onClick")
+                // remove focus from TextField
+                focusManager.clearFocus()
+                vm.savedCountdownClick(savedTimer)
+              },
+              onLongClick = {
+                logd("onLongClick")
+                // remove focus from TextField
+                focusManager.clearFocus()
+                vm.showDeleteDialog = savedTimer
+              },
+            ),
         ) {
           CountdownViewDisplay(settingsTimerPreviewVmc, 1f, savedTimer.durationSeconds, false)
         }
