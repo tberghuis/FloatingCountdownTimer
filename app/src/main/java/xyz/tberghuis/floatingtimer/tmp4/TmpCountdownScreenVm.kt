@@ -29,7 +29,7 @@ class TmpCountdownScreenVm(
 //  private val state: SavedStateHandle
 ) : AndroidViewModel(application) {
 
-  private val savedTimerDao = application.provideDatabase().tmpSavedCountdownDao()
+  private val savedCountdownDao = application.provideDatabase().tmpSavedCountdownDao()
 
   // store savedTimer.id
   var showDeleteDialog by mutableStateOf<TmpSavedCountdown?>(null)
@@ -58,7 +58,7 @@ class TmpCountdownScreenVm(
   }
 
   fun savedCountdownFlow(): Flow<List<TmpSavedCountdown>> {
-    return savedTimerDao.getAll()
+    return savedCountdownDao.getAll()
   }
 
   private suspend fun shouldShowPremiumDialog(): Boolean {
@@ -93,6 +93,19 @@ class TmpCountdownScreenVm(
       boundFloatingServiceVmc.provideFloatingService().overlayController.addCountdown(
         totalSecs,
         haloColor
+      )
+    }
+  }
+
+  fun savedCountdownClick(timer: TmpSavedCountdown) {
+    viewModelScope.launch {
+      if (shouldShowPremiumDialog()) {
+        premiumVmc.showPurchaseDialog = true
+        return@launch
+      }
+      boundFloatingServiceVmc.provideFloatingService().overlayController.addCountdown(
+        timer.durationSeconds,
+        Color(timer.timerColor)
       )
     }
   }
@@ -133,7 +146,7 @@ class TmpCountdownScreenVm(
     )
 
     viewModelScope.launch(IO) {
-      savedTimerDao.insertAll(timer)
+      savedCountdownDao.insertAll(timer)
     }
   }
 
@@ -148,7 +161,7 @@ class TmpCountdownScreenVm(
   fun deleteSavedCountdown(timer: TmpSavedCountdown) {
     logd("deleteSavedTimer")
     viewModelScope.launch(IO) {
-      savedTimerDao.delete(timer)
+      savedCountdownDao.delete(timer)
     }
   }
 }

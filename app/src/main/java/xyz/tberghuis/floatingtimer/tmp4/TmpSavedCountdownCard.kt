@@ -66,6 +66,7 @@ fun ColumnScope.TmpSavedCountdownCard(
               logd("onClick")
               // remove focus from TextField
               focusManager.clearFocus()
+              vm.savedCountdownClick(savedTimer)
             },
             onLongClick = {
               logd("onLongClick")
