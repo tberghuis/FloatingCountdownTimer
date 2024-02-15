@@ -29,10 +29,7 @@ class TmpCountdownScreenVm(
   private val application: Application,
 //  private val state: SavedStateHandle
 ) : AndroidViewModel(application) {
-
   private val savedCountdownDao = application.provideDatabase().tmpSavedCountdownDao()
-
-  // store savedTimer.id
   var showDeleteDialog by mutableStateOf<TmpSavedCountdown?>(null)
 
   private val preferencesRepository = application.providePreferencesRepository()
@@ -40,19 +37,14 @@ class TmpCountdownScreenVm(
   var minutes = mutableStateOf(TextFieldValue("0"))
   var seconds = mutableStateOf(TextFieldValue("0"))
 
-  // todo GrantOverlayVmc
-//  val grantOverlayVmc = TmpGrantOverlayVmc()
-
   val snackbarHostState = SnackbarHostState()
   val premiumVmc = PremiumVmc(application, viewModelScope)
-//  private val boundFloatingServiceVmc = BoundFloatingServiceVmc(application)
   private val boundFloatingService = (application as MainApplication).boundFloatingService
 
   var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
 
   init {
     viewModelScope.launch {
-//      haloColor = preferencesRepository.haloColourFlow.first()
       preferencesRepository.haloColourFlow.collect {
         haloColor = it
       }
