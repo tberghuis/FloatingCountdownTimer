@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
 import android.provider.Settings
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -119,12 +120,12 @@ fun TmpCreateCountdownButton() {
   val vm: TmpCountdownScreenVm = viewModel()
   val focusManager = LocalFocusManager.current
   val context = LocalContext.current
-
+  val sharedVm: TmpSharedVm = viewModel(LocalContext.current as ComponentActivity)
   Button(onClick = {
     logd("create")
     focusManager.clearFocus()
     if (!Settings.canDrawOverlays(context)) {
-      vm.grantOverlayVmc.showGrantOverlayDialog = true
+      sharedVm.showGrantOverlayDialog = true
       return@Button
     }
     vm.countdownButtonClick()

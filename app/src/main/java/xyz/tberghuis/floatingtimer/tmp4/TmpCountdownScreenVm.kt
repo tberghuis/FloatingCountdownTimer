@@ -41,7 +41,7 @@ class TmpCountdownScreenVm(
   var seconds = mutableStateOf(TextFieldValue("0"))
 
   // todo GrantOverlayVmc
-  val grantOverlayVmc = TmpGrantOverlayVmc()
+//  val grantOverlayVmc = TmpGrantOverlayVmc()
 
   val snackbarHostState = SnackbarHostState()
   val premiumVmc = PremiumVmc(application, viewModelScope)

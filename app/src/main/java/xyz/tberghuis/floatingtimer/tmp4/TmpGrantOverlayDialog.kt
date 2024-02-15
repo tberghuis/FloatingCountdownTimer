@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import androidx.activity.ComponentActivity
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -15,18 +16,19 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
 fun TmpGrantOverlayDialog(
-  grantOverlayVmc: TmpGrantOverlayVmc
+  vm: TmpSharedVm = viewModel(LocalContext.current as ComponentActivity)
 ) {
   val context = LocalContext.current
-  if (grantOverlayVmc.showGrantOverlayDialog) {
+  if (vm.showGrantOverlayDialog) {
     AlertDialog(onDismissRequest = {
-      grantOverlayVmc.showGrantOverlayDialog = false
+      vm.showGrantOverlayDialog = false
     }, confirmButton = {
       Button(onClick = {
         logd("go to settings")
@@ -37,7 +39,7 @@ fun TmpGrantOverlayDialog(
         startActivityForResult(
           context as Activity, intent, REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION, null
         )
-        grantOverlayVmc.showGrantOverlayDialog = false
+        vm.showGrantOverlayDialog = false
 
       }) {
         Text(stringResource(R.string.go_to_settings))

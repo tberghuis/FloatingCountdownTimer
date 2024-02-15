@@ -42,7 +42,7 @@ fun TmpCountdownScreen(
   ) { padding ->
     TmpCountdownScreenContent(padding)
   }
-  TmpGrantOverlayDialog(vm.grantOverlayVmc)
+
   PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_multiple_timers))
 }
 

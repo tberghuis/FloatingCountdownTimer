@@ -43,5 +43,6 @@ fun TmpNavHost() {
     }
   }
 
+  TmpGrantOverlayDialog()
   LaunchPostNotificationsPermissionRequest()
 }
