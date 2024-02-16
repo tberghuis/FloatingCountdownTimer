@@ -109,7 +109,9 @@ fun TmpCreateCountdownCard() {
       verticalAlignment = Alignment.CenterVertically,
     ) {
       ChangeTimerColorButton("change_color/countdown", vm.haloColor)
-      TmpCountdownAddSaved()
+      TmpAddSavedButton {
+        vm.addToSaved()
+      }
       TmpCreateCountdownButton()
     }
   }
