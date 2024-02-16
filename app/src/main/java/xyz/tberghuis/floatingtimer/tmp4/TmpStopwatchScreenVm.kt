@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -64,6 +65,16 @@ class TmpStopwatchScreenVm(
   fun deleteSavedStopwatch(timer: TmpSavedStopwatch) {
     viewModelScope.launch(IO) {
       savedStopwatchDao.delete(timer)
+    }
+  }
+
+  fun addToSaved() {
+    val timer = TmpSavedStopwatch(
+      timerShape = "circle",
+      timerColor = haloColor.toArgb(),
+    )
+    viewModelScope.launch(IO) {
+      savedStopwatchDao.insertAll(timer)
     }
   }
 }

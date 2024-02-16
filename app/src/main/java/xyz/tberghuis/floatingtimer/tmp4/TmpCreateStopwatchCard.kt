@@ -46,11 +46,13 @@ fun TmpCreateStopwatchCard() {
       modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth(),
-      horizontalArrangement = Arrangement.Center,
+      horizontalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterHorizontally),
       verticalAlignment = Alignment.CenterVertically,
     ) {
       ChangeTimerColorButton("change_color/stopwatch", vm.haloColor)
-      Spacer(Modifier.width(40.dp))
+      TmpAddSavedButton {
+        vm.addToSaved()
+      }
       Button(modifier = Modifier.testTag("stopwatch_create"), onClick = {
         logd("start stopwatch")
         if (!Settings.canDrawOverlays(context)) {
