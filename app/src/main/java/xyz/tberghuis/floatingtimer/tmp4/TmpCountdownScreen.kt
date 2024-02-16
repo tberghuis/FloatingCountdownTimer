@@ -47,7 +47,10 @@ fun TmpCountdownScreen(
 }
 
 @Composable
-fun TmpCountdownScreenContent(padding: PaddingValues) {
+fun TmpCountdownScreenContent(
+  padding: PaddingValues,
+  vm: TmpCountdownScreenVm = viewModel()
+) {
   Column(
     modifier = Modifier
       .padding(padding)
@@ -56,42 +59,51 @@ fun TmpCountdownScreenContent(padding: PaddingValues) {
     TmpCreateCountdownCard()
     TmpSavedCountdownCard()
   }
-  ConfirmDeleteSavedTimerDialog()
-}
-
-@Composable
-fun ConfirmDeleteSavedTimerDialog(
-  vm: TmpCountdownScreenVm = viewModel()
-) {
-  if (vm.showDeleteDialog == null) {
-    return
-  }
-  AlertDialog(
-    onDismissRequest = {
+  ConfirmDeleteSavedTimerDialog(
+    showDialog = vm.showDeleteDialog != null,
+    onDismiss = { vm.showDeleteDialog = null },
+    onConfirm = {
+      vm.showDeleteDialog?.let {
+        vm.deleteSavedCountdown(it)
+      }
       vm.showDeleteDialog = null
-    },
-    confirmButton = {
-      TextButton(
-        onClick = {
-          vm.showDeleteDialog?.let {
-            vm.deleteSavedCountdown(it)
-          }
-          vm.showDeleteDialog = null
-        }
-      ) {
-        Text("OK")
-      }
-    },
-    modifier = Modifier,
-    dismissButton = {
-      TextButton(
-        onClick = {
-          vm.showDeleteDialog = null
-        }
-      ) {
-        Text("Cancel")
-      }
-    },
-    title = { Text("Delete Saved Timer?") },
+    }
   )
 }
+
+//@Composable
+//fun ConfirmDeleteSavedTimerDialog(
+//  vm: TmpCountdownScreenVm = viewModel()
+//) {
+//  if (vm.showDeleteDialog == null) {
+//    return
+//  }
+//  AlertDialog(
+//    onDismissRequest = {
+//      vm.showDeleteDialog = null
+//    },
+//    confirmButton = {
+//      TextButton(
+//        onClick = {
+//          vm.showDeleteDialog?.let {
+//            vm.deleteSavedCountdown(it)
+//          }
+//          vm.showDeleteDialog = null
+//        }
+//      ) {
+//        Text("OK")
+//      }
+//    },
+//    modifier = Modifier,
+//    dismissButton = {
+//      TextButton(
+//        onClick = {
+//          vm.showDeleteDialog = null
+//        }
+//      ) {
+//        Text("Cancel")
+//      }
+//    },
+//    title = { Text("Delete Saved Timer?") },
+//  )
+//}
