@@ -24,15 +24,40 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
-fun StopwatchView(stopwatch: Stopwatch) {
-  val isRunning = stopwatch.isRunningStateFlow.collectAsState()
+fun StopwatchView(
+  stopwatch: Stopwatch
+) {
+  StopwatchView(
+    isRunningStateFlow = stopwatch.isRunningStateFlow,
+    bubbleSizeDp = stopwatch.bubbleSizeDp,
+    arcWidth = stopwatch.arcWidth,
+    haloColor = stopwatch.haloColor,
+    timeElapsed = stopwatch.timeElapsed,
+    fontSize = stopwatch.fontSize
+  )
+}
+
+@Composable
+fun StopwatchView(
+  isRunningStateFlow: MutableStateFlow<Boolean>,
+  bubbleSizeDp: Dp,
+  arcWidth: Dp,
+  haloColor: Color,
+  timeElapsed: MutableIntState,
+  fontSize: TextUnit
+) {
+  val isRunning = isRunningStateFlow.collectAsState()
   val isPaused by remember {
     derivedStateOf {
       !isRunning.value
@@ -40,11 +65,11 @@ fun StopwatchView(stopwatch: Stopwatch) {
   }
   Box(
     modifier = Modifier
-      .size(stopwatch.bubbleSizeDp)
-      .padding(stopwatch.arcWidth / 2),
+      .size(bubbleSizeDp)
+      .padding(arcWidth / 2),
     contentAlignment = Alignment.Center
   ) {
-    StopwatchBorderArc(stopwatch.isRunningStateFlow, stopwatch)
+    StopwatchBorderArc(isRunningStateFlow, arcWidth, haloColor)
     if (isPaused) {
       Icon(
         Icons.Filled.PlayArrow,
@@ -53,12 +78,16 @@ fun StopwatchView(stopwatch: Stopwatch) {
         tint = Color.LightGray
       )
     }
-    TimeDisplay(stopwatch.timeElapsed.intValue, stopwatch.fontSize)
+    TimeDisplay(timeElapsed.intValue, fontSize)
   }
 }
 
 @Composable
-fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>, stopwatch: Stopwatch) {
+fun StopwatchBorderArc(
+  isRunningStateFlow: StateFlow<Boolean>,
+  arcWidth: Dp,
+  haloColor: Color
+) {
   var pausedAngle by remember { mutableFloatStateOf(210f) }
   var restartAngle by remember { mutableFloatStateOf(0f) }
   val infiniteTransition = rememberInfiniteTransition()
@@ -85,25 +114,25 @@ fun StopwatchBorderArc(isRunningStateFlow: StateFlow<Boolean>, stopwatch: Stopwa
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
-      style = Stroke(stopwatch.arcWidth.toPx()),
+      style = Stroke(arcWidth.toPx()),
       size = Size(size.width, size.height)
     )
 
     drawArc(
-      color = stopwatch.haloColor.copy(alpha = .1f),
+      color = haloColor.copy(alpha = .1f),
       startAngle = 0f,
       sweepAngle = 360f,
       useCenter = false,
-      style = Stroke(stopwatch.arcWidth.toPx()),
+      style = Stroke(arcWidth.toPx()),
       size = Size(size.width, size.height)
     )
 
     drawArc(
-      color = stopwatch.haloColor,
+      color = haloColor,
       startAngle = if (!running.value) pausedAngle else drawAnimatedAngle,
       sweepAngle = 120f,
       useCenter = false,
-      style = Stroke(stopwatch.arcWidth.toPx()),
+      style = Stroke(arcWidth.toPx()),
       size = Size(size.width, size.height)
     )
   }
