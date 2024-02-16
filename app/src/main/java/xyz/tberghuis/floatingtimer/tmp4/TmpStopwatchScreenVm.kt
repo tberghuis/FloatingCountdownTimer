@@ -4,9 +4,11 @@ import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.MainApplication
@@ -35,7 +37,15 @@ class TmpStopwatchScreenVm(
     }
   }
 
-  fun stopwatchButtonClick() {
+  fun savedStopwatchFlow(): Flow<List<TmpSavedStopwatch>> {
+    return savedStopwatchDao.getAll()
+  }
+
+  fun savedStopwatchClick(timer: TmpSavedStopwatch) {
+    addStopwatch(Color(timer.timerColor))
+  }
+
+  private fun addStopwatch(haloColor: Color) {
     viewModelScope.launch {
       if (shouldShowPremiumDialogMultipleTimers(application)) {
         premiumVmc.showPurchaseDialog = true
@@ -45,6 +55,10 @@ class TmpStopwatchScreenVm(
         haloColor
       )
     }
+  }
+
+  fun stopwatchButtonClick() {
+    addStopwatch(haloColor)
   }
 
   fun deleteSavedStopwatch(timer: TmpSavedStopwatch) {

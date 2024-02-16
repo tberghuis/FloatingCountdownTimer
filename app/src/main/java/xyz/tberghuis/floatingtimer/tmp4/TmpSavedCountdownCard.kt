@@ -23,7 +23,7 @@ import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
 @Composable
-fun <T : SavedTimer> ColumnScope.TmpSavedCountdownCard(
+fun <T : SavedTimer> ColumnScope.TmpSavedTimersCard(
   savedTimers: List<T>,
   timerOnClick: (T) -> Unit,
   timerOnLongClick: (T) -> Unit,

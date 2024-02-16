@@ -63,7 +63,7 @@ fun TmpCountdownScreenContent(
       .verticalScroll(rememberScrollState())
   ) {
     TmpCreateCountdownCard()
-    TmpSavedCountdownCard(
+    TmpSavedTimersCard(
       savedTimers = savedTimers,
       timerOnClick = { savedTimer ->
         // remove focus from TextField
