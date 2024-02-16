@@ -15,6 +15,11 @@ import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
 class TmpStopwatchScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
+
+
+//  var showDeleteDialog by mutableStateOf<TmpSavedStopwatch?>(null)
+
+
   private val preferencesRepository = application.providePreferencesRepository()
   val premiumVmc = PremiumVmc(application, viewModelScope)
   private val boundFloatingService = (application as MainApplication).boundFloatingService

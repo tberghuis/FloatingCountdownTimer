@@ -8,7 +8,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
@@ -18,8 +17,6 @@ import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 fun TmpStopwatchScreen(
   vm: TmpStopwatchScreenVm = viewModel()
 ) {
-  val focusManager = LocalFocusManager.current
-
   Scaffold(
     modifier = Modifier,
     topBar = { TmpFtTopAppBar() },
@@ -33,7 +30,10 @@ fun TmpStopwatchScreen(
 }
 
 @Composable
-fun TmpStopwatchScreenContent(padding: PaddingValues) {
+fun TmpStopwatchScreenContent(
+  padding: PaddingValues,
+  vm: TmpStopwatchScreenVm = viewModel()
+) {
   Column(
     modifier = Modifier
       .padding(padding)
@@ -42,5 +42,14 @@ fun TmpStopwatchScreenContent(padding: PaddingValues) {
     TmpCreateStopwatchCard()
 //    TmpSavedCountdownCard()
   }
-//  ConfirmDeleteSavedTimerDialog()
+//  ConfirmDeleteSavedTimerDialog(
+//    showDialog = vm.showDeleteDialog != null,
+//    onDismiss = { vm.showDeleteDialog = null },
+//    onConfirm = {
+//      vm.showDeleteDialog?.let {
+//        vm.deleteSavedStopwatch(it)
+//      }
+//      vm.showDeleteDialog = null
+//    }
+//  )
 }
