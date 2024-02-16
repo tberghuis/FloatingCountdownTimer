@@ -28,8 +28,12 @@ fun TmpNavHost() {
         }
         TmpCountdownScreen()
       }
-      composable("stopwatch") {
-        Text("stopwatch screen")
+      composable("stopwatch") {entry ->
+        val vm: TmpStopwatchScreenVm = viewModel()
+        entry.OnNavResult<Int>(savedStateHandleKey = "color_result") { result ->
+          vm.haloColor = Color(result)
+        }
+        TmpStopwatchScreen()
       }
       composable("change_color/{timerType}") {
         ColorSettingScreen()
