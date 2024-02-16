@@ -6,9 +6,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.MainApplication
+import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
@@ -45,4 +47,9 @@ class TmpStopwatchScreenVm(
     }
   }
 
+  fun deleteSavedStopwatch(timer: TmpSavedStopwatch) {
+    viewModelScope.launch(IO) {
+      savedStopwatchDao.delete(timer)
+    }
+  }
 }

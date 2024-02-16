@@ -42,14 +42,14 @@ fun TmpStopwatchScreenContent(
     TmpCreateStopwatchCard()
 //    TmpSavedCountdownCard()
   }
-//  ConfirmDeleteSavedTimerDialog(
-//    showDialog = vm.showDeleteDialog != null,
-//    onDismiss = { vm.showDeleteDialog = null },
-//    onConfirm = {
-//      vm.showDeleteDialog?.let {
-//        vm.deleteSavedStopwatch(it)
-//      }
-//      vm.showDeleteDialog = null
-//    }
-//  )
+  ConfirmDeleteSavedTimerDialog(
+    showDialog = vm.showDeleteDialog != null,
+    onDismiss = { vm.showDeleteDialog = null },
+    onConfirm = {
+      vm.showDeleteDialog?.let {
+        vm.deleteSavedStopwatch(it)
+      }
+      vm.showDeleteDialog = null
+    }
+  )
 }
