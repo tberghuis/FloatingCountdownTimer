@@ -14,8 +14,8 @@ data class TmpSavedStopwatch(
   @PrimaryKey(autoGenerate = true) val id: Int = 0,
   @ColumnInfo(name = "shape") val timerShape: String,
   // Color.toArgb
-  @ColumnInfo(name = "color") val timerColor: Int,
-)
+  @ColumnInfo(name = "color") override val timerColor: Int,
+) : SavedTimer
 
 @Dao
 interface TmpSavedStopwatchDao {

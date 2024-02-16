@@ -28,13 +28,17 @@ import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
 @Composable
-fun ColumnScope.TmpSavedCountdownCard(
-  vm: TmpCountdownScreenVm = viewModel()
+fun <T : SavedTimer> ColumnScope.TmpSavedCountdownCard(
+//  vm: TmpCountdownScreenVm = viewModel(),
+//  controller: TmpSavedTimerController
+  savedTimers: List<T>,
+  timerOnClick: (T) -> Unit,
+  timerOnLongClick: (T) -> Unit,
 ) {
-  val focusManager = LocalFocusManager.current
-  val savedTimers by vm.savedCountdownFlow().collectAsState(
-    initial = listOf()
-  )
+//  val focusManager = LocalFocusManager.current
+//  val savedTimers by vm.savedCountdownFlow().collectAsState(
+//    initial = listOf()
+//  )
   ElevatedCard(
     modifier = Modifier
       .fillMaxWidth()
@@ -63,21 +67,30 @@ fun ColumnScope.TmpSavedCountdownCard(
         Box(
           modifier = Modifier
             .combinedClickable(
-              onClick = {
-                logd("onClick")
-                // remove focus from TextField
-                focusManager.clearFocus()
-                vm.savedCountdownClick(savedTimer)
-              },
-              onLongClick = {
-                logd("onLongClick")
-                // remove focus from TextField
-                focusManager.clearFocus()
-                vm.showDeleteDialog = savedTimer
-              },
+              onClick = { timerOnClick(savedTimer) },
+              onLongClick = { timerOnLongClick(savedTimer) },
+//              onClick = {
+//                logd("onClick")
+//                // remove focus from TextField
+//                focusManager.clearFocus()
+//                vm.savedCountdownClick(savedTimer)
+//              },
+//              onLongClick = {
+//                logd("onLongClick")
+//                // remove focus from TextField
+//                focusManager.clearFocus()
+//                vm.showDeleteDialog = savedTimer
+//              },
             ),
         ) {
-          CountdownViewDisplay(settingsTimerPreviewVmc, 1f, savedTimer.durationSeconds, false)
+          when (savedTimer) {
+            is TmpSavedCountdown -> {
+              CountdownViewDisplay(settingsTimerPreviewVmc, 1f, savedTimer.durationSeconds, false)
+            }
+            is TmpSavedStopwatch -> {
+              // todo
+            }
+          }
         }
       }
     }

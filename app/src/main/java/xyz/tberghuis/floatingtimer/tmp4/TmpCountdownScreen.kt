@@ -12,6 +12,8 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
@@ -51,13 +53,29 @@ fun TmpCountdownScreenContent(
   padding: PaddingValues,
   vm: TmpCountdownScreenVm = viewModel()
 ) {
+  val focusManager = LocalFocusManager.current
+  val savedTimers by vm.savedCountdownFlow().collectAsState(
+    initial = listOf()
+  )
   Column(
     modifier = Modifier
       .padding(padding)
       .verticalScroll(rememberScrollState())
   ) {
     TmpCreateCountdownCard()
-    TmpSavedCountdownCard()
+    TmpSavedCountdownCard(
+      savedTimers = savedTimers,
+      timerOnClick = { savedTimer ->
+        // remove focus from TextField
+        focusManager.clearFocus()
+        vm.savedCountdownClick(savedTimer)
+      },
+      timerOnLongClick = {savedTimer ->
+        // remove focus from TextField
+        focusManager.clearFocus()
+        vm.showDeleteDialog = savedTimer
+      },
+    )
   }
   ConfirmDeleteSavedTimerDialog(
     showDialog = vm.showDeleteDialog != null,
