@@ -30,11 +30,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.ChangeTimerColorButton
-import xyz.tberghuis.floatingtimer.composables.CountdownOptions
-import xyz.tberghuis.floatingtimer.composables.CreateCountdownButton
 import xyz.tberghuis.floatingtimer.composables.onFocusSelectAll
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @Preview
 @Composable
