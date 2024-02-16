@@ -9,16 +9,15 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.MainApplication
+import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
 
 class TmpStopwatchScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
-
-
-//  var showDeleteDialog by mutableStateOf<TmpSavedStopwatch?>(null)
-
+  private val savedStopwatchDao = application.provideDatabase().savedStopwatchDao()
+  var showDeleteDialog by mutableStateOf<TmpSavedStopwatch?>(null)
 
   private val preferencesRepository = application.providePreferencesRepository()
   val premiumVmc = PremiumVmc(application, viewModelScope)
