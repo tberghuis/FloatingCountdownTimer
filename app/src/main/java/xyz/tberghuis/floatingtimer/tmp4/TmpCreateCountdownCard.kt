@@ -40,6 +40,7 @@ import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 @Composable
 fun TmpCreateCountdownCard() {
   val vm: TmpCountdownScreenVm = viewModel()
+  val focusManager = LocalFocusManager.current
 
   // todo must be an idiomatic way to center without the need
   // to specify Modifier.fillMaxWidth() and Center everywhere
@@ -110,6 +111,7 @@ fun TmpCreateCountdownCard() {
     ) {
       ChangeTimerColorButton("change_color/countdown", vm.haloColor)
       TmpAddSavedButton {
+        focusManager.clearFocus()
         vm.addToSaved()
       }
       TmpCreateCountdownButton()
