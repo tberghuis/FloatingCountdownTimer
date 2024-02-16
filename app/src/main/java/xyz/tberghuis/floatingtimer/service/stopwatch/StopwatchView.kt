@@ -24,7 +24,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -50,19 +49,15 @@ fun StopwatchView(
 
 @Composable
 fun StopwatchView(
-  isRunningStateFlow: MutableStateFlow<Boolean>,
+  // when isRunningStateFlow null, showing preview in saved timers
+  isRunningStateFlow: MutableStateFlow<Boolean>?,
   bubbleSizeDp: Dp,
   arcWidth: Dp,
   haloColor: Color,
   timeElapsed: Int,
   fontSize: TextUnit
 ) {
-  val isRunning = isRunningStateFlow.collectAsState()
-  val isPaused by remember {
-    derivedStateOf {
-      !isRunning.value
-    }
-  }
+  val isRunning = isRunningStateFlow?.collectAsState()?.value
   Box(
     modifier = Modifier
       .size(bubbleSizeDp)
@@ -70,7 +65,7 @@ fun StopwatchView(
     contentAlignment = Alignment.Center
   ) {
     StopwatchBorderArc(isRunningStateFlow, arcWidth, haloColor)
-    if (isPaused) {
+    if (isRunning == false) {
       Icon(
         Icons.Filled.PlayArrow,
         contentDescription = "paused",
@@ -84,7 +79,7 @@ fun StopwatchView(
 
 @Composable
 fun StopwatchBorderArc(
-  isRunningStateFlow: StateFlow<Boolean>,
+  isRunningStateFlow: StateFlow<Boolean>?,
   arcWidth: Dp,
   haloColor: Color
 ) {
@@ -101,7 +96,7 @@ fun StopwatchBorderArc(
     derivedStateOf { pausedAngle + animatedAngle - restartAngle }
   }
 
-  val running = isRunningStateFlow.collectAsState()
+  val running = isRunningStateFlow?.collectAsState()?.value ?: false
 
   Canvas(
     Modifier.fillMaxSize()
@@ -129,7 +124,7 @@ fun StopwatchBorderArc(
 
     drawArc(
       color = haloColor,
-      startAngle = if (!running.value) pausedAngle else drawAnimatedAngle,
+      startAngle = if (!running) pausedAngle else drawAnimatedAngle,
       sweepAngle = 120f,
       useCenter = false,
       style = Stroke(arcWidth.toPx()),
@@ -139,7 +134,7 @@ fun StopwatchBorderArc(
 
   // should learn to write my own delegate for angle instead
   LaunchedEffect(Unit) {
-    isRunningStateFlow.collect {
+    isRunningStateFlow?.collect {
       when (it) {
         true -> {
           restartAngle = animatedAngle
