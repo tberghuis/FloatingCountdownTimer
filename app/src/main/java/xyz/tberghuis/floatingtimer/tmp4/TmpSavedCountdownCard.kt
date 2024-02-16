@@ -12,13 +12,20 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.flow.MutableStateFlow
+import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
+import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
+import xyz.tberghuis.floatingtimer.TIMER_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownViewDisplay
+import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
@@ -65,7 +72,16 @@ fun <T : SavedTimer> ColumnScope.TmpSavedTimersCard(
             }
 
             is TmpSavedStopwatch -> {
-              // todo
+              // this is bad
+              val isRunningStateFlow = MutableStateFlow(false)
+              StopwatchView(
+                isRunningStateFlow = isRunningStateFlow,
+                bubbleSizeDp = TIMER_SIZE_NO_SCALE,
+                arcWidth = ARC_WIDTH_NO_SCALE,
+                haloColor = Color(savedTimer.timerColor),
+                timeElapsed = 0,
+                fontSize = TIMER_FONT_SIZE_NO_SCALE
+              )
             }
           }
         }

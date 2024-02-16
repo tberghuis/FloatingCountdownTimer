@@ -43,7 +43,7 @@ fun StopwatchView(
     bubbleSizeDp = stopwatch.bubbleSizeDp,
     arcWidth = stopwatch.arcWidth,
     haloColor = stopwatch.haloColor,
-    timeElapsed = stopwatch.timeElapsed,
+    timeElapsed = stopwatch.timeElapsed.intValue,
     fontSize = stopwatch.fontSize
   )
 }
@@ -54,7 +54,7 @@ fun StopwatchView(
   bubbleSizeDp: Dp,
   arcWidth: Dp,
   haloColor: Color,
-  timeElapsed: MutableIntState,
+  timeElapsed: Int,
   fontSize: TextUnit
 ) {
   val isRunning = isRunningStateFlow.collectAsState()
@@ -78,7 +78,7 @@ fun StopwatchView(
         tint = Color.LightGray
       )
     }
-    TimeDisplay(timeElapsed.intValue, fontSize)
+    TimeDisplay(timeElapsed, fontSize)
   }
 }
 
