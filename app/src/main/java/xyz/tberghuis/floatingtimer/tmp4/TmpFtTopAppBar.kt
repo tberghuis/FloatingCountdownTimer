@@ -54,6 +54,7 @@ fun TmpFtTopAppBar() {
         DropdownMenuItem(
           text = { Text(stringResource(R.string.cancel_all_timers)) },
           onClick = {
+            showMenu = false
             sharedVm.cancelAllTimers()
           },
         )
