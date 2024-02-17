@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,10 +15,12 @@ import xyz.tberghuis.floatingtimer.screens.ColorSettingScreen
 import xyz.tberghuis.floatingtimer.screens.CountdownScreen
 import xyz.tberghuis.floatingtimer.screens.LaunchPostNotificationsPermissionRequest
 import xyz.tberghuis.floatingtimer.screens.SizeSettingScreen
+import xyz.tberghuis.floatingtimer.tmp4.TmpStopwatchScreen
+import xyz.tberghuis.floatingtimer.tmp4.TmpStopwatchScreenVm
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 
 @Composable
-fun TmpNavHost() {
+fun FtNavHost() {
   val navController = rememberNavController()
   CompositionLocalProvider(LocalNavController provides navController) {
     NavHost(

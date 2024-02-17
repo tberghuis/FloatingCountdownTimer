@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
-import xyz.tberghuis.floatingtimer.tmp4.TmpNavHost
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,7 +41,7 @@ class MainActivity : ComponentActivity() {
             .fillMaxSize()
             .background(Color.White),
         ) {
-          TmpNavHost()
+          FtNavHost()
         }
       }
     }
