@@ -31,11 +31,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.godaddy.android.colorpicker.ClassicColorPicker
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SettingsTimerPreviewCard
 import xyz.tberghuis.floatingtimer.tmp4.TmpColorSettingScreenActions
 import xyz.tberghuis.floatingtimer.viewmodels.ColorSettingViewModel
-import xyz.tberghuis.floatingtimer.viewmodels.HomeViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -116,62 +114,5 @@ fun ColorSettingScreenContent(
     }.collect {
       vm.settingsTimerPreviewVmc.haloColor = it.toColor()
     }
-  }
-}
-
-@Composable
-fun ColorSettingScreenActions(
-  vm: ColorSettingViewModel = viewModel()
-) {
-
-  val nav = LocalNavController.current
-  // safe: no other way to get to this screen
-  val homeVm: HomeViewModel = viewModel(nav.previousBackStackEntry!!)
-
-  val ifPremiumCallback = when (vm.timerType) {
-    "stopwatch" -> {
-      {
-        homeVm.stopwatchHaloColor = vm.settingsTimerPreviewVmc.haloColor
-        nav.popBackStack()
-      }
-    }
-
-    "countdown" -> {
-      {
-        homeVm.countdownHaloColor = vm.settingsTimerPreviewVmc.haloColor
-        nav.popBackStack()
-      }
-    }
-
-    else -> {
-      {
-        vm.saveDefaultHaloColor()
-        // doitwrong
-        homeVm.countdownHaloColor = vm.settingsTimerPreviewVmc.haloColor
-        homeVm.stopwatchHaloColor = vm.settingsTimerPreviewVmc.haloColor
-        nav.popBackStack()
-      }
-    }
-  }
-
-  Row(
-    horizontalArrangement = Arrangement.spacedBy(10.dp),
-  ) {
-    Button(onClick = {
-      nav.popBackStack()
-    }) {
-      Text(stringResource(R.string.cancel).uppercase())
-    }
-    Button(onClick = {
-      vm.okButtonClick {
-        ifPremiumCallback()
-      }
-    }) {
-      Text(stringResource(R.string.save).uppercase())
-    }
-  }
-
-  PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_halo_colour)) {
-    ifPremiumCallback()
   }
 }

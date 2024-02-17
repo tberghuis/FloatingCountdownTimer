@@ -6,21 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
-import xyz.tberghuis.floatingtimer.screens.ColorSettingScreen
-import xyz.tberghuis.floatingtimer.screens.HomeScreen
-import xyz.tberghuis.floatingtimer.screens.SizeSettingScreen
+import xyz.tberghuis.floatingtimer.tmp4.TmpNavHost
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class MainActivity : ComponentActivity() {
@@ -49,7 +42,7 @@ class MainActivity : ComponentActivity() {
             .fillMaxSize()
             .background(Color.White),
         ) {
-          FloatingTimerNavHost()
+          TmpNavHost()
         }
       }
     }
@@ -58,28 +51,4 @@ class MainActivity : ComponentActivity() {
 
 val LocalNavController = compositionLocalOf<NavHostController> {
   error("CompositionLocal LocalNavController not present")
-}
-
-@Composable
-fun FloatingTimerNavHost(
-) {
-  val navController = rememberNavController()
-  CompositionLocalProvider(LocalNavController provides navController) {
-    NavHost(
-      navController = navController, startDestination = "home"
-    ) {
-      composable("home") {
-        HomeScreen()
-      }
-      composable("change_size") {
-        SizeSettingScreen()
-      }
-      composable("change_color") {
-        ColorSettingScreen()
-      }
-      composable("change_color/{timerType}") {
-        ColorSettingScreen()
-      }
-    }
-  }
 }
