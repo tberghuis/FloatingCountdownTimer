@@ -45,14 +45,14 @@ fun CountdownScreen(
     },
     snackbarHost = { SnackbarHost(vm.snackbarHostState) },
   ) { padding ->
-    TmpCountdownScreenContent(padding)
+    CountdownScreenContent(padding)
   }
 
   PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_multiple_timers))
 }
 
 @Composable
-fun TmpCountdownScreenContent(
+fun CountdownScreenContent(
   padding: PaddingValues,
   vm: CountdownScreenVm = viewModel()
 ) {
