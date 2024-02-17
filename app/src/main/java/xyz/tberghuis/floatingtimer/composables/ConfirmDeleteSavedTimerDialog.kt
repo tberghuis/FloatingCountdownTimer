@@ -5,6 +5,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import xyz.tberghuis.floatingtimer.R
 
 @Composable
 fun ConfirmDeleteSavedTimerDialog(
@@ -21,7 +23,7 @@ fun ConfirmDeleteSavedTimerDialog(
       TextButton(
         onClick = onConfirm
       ) {
-        Text("OK")
+        Text(stringResource(R.string.delete))
       }
     },
     modifier = Modifier,
@@ -29,9 +31,9 @@ fun ConfirmDeleteSavedTimerDialog(
       TextButton(
         onClick = onDismiss
       ) {
-        Text("Cancel")
+        Text(stringResource(R.string.cancel))
       }
     },
-    title = { Text("Delete Saved Timer?") },
+    title = { Text(stringResource(R.string.delete_saved_timer)) },
   )
 }

@@ -32,5 +32,7 @@
     <string name="stopwatch_timer_color">Warna Stopwatch</string>
     <string name="countdown_timer_color">Warna Hitung Mundur</string>
     <string name="default_timer_color">Warna Timer Default</string>
+    <string name="delete_saved_timer">Hapus Timer Tersimpan?</string>
+    <string name="delete">Hapus</string>
 
 </resources>
