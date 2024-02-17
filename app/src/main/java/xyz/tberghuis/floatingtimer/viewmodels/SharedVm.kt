@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.viewmodels
 
 import android.app.Application
 import androidx.compose.runtime.getValue
@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.logd
 
-class TmpSharedVm(private val application: Application) : AndroidViewModel(application) {
+class SharedVm(private val application: Application) : AndroidViewModel(application) {
   private val boundFloatingService = (application as MainApplication).boundFloatingService
 
   var showGrantOverlayDialog by mutableStateOf(false)

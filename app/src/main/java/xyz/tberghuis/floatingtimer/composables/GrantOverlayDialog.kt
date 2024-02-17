@@ -20,11 +20,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp4.TmpSharedVm
+import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
 @Composable
 fun GrantOverlayDialog(
-  vm: TmpSharedVm = viewModel(LocalContext.current as ComponentActivity)
+  vm: SharedVm = viewModel(LocalContext.current as ComponentActivity)
 ) {
   val context = LocalContext.current
   if (vm.showGrantOverlayDialog) {

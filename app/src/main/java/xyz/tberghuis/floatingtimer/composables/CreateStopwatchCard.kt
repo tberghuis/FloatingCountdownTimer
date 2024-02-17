@@ -20,13 +20,13 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp4.TmpSharedVm
 import xyz.tberghuis.floatingtimer.tmp4.TmpStopwatchScreenVm
+import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
 @Composable
 fun CreateStopwatchCard() {
   val context = LocalContext.current
-  val sharedVm: TmpSharedVm = viewModel(context as ComponentActivity)
+  val sharedVm: SharedVm = viewModel(context as ComponentActivity)
   val vm: TmpStopwatchScreenVm = viewModel()
 
   ElevatedCard(

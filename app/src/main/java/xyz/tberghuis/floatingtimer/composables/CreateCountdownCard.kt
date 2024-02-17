@@ -29,12 +29,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.composables.AddSavedButton
-import xyz.tberghuis.floatingtimer.composables.ChangeTimerColorButton
-import xyz.tberghuis.floatingtimer.composables.onFocusSelectAll
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp4.TmpSharedVm
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
+import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
 @Preview
 @Composable
@@ -124,7 +121,7 @@ fun TmpCreateCountdownButton() {
   val vm: CountdownScreenVm = viewModel()
   val focusManager = LocalFocusManager.current
   val context = LocalContext.current
-  val sharedVm: TmpSharedVm = viewModel(LocalContext.current as ComponentActivity)
+  val sharedVm: SharedVm = viewModel(LocalContext.current as ComponentActivity)
   Button(onClick = {
     logd("create")
     focusManager.clearFocus()
