@@ -1,5 +1,7 @@
 package xyz.tberghuis.floatingtimer.screens
 
+import android.provider.Settings
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,6 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -25,6 +28,7 @@ import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SavedTimersCard
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
+import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
 @Composable
 fun CountdownScreen(
@@ -57,6 +61,8 @@ fun CountdownScreenContent(
   vm: CountdownScreenVm = viewModel()
 ) {
   val focusManager = LocalFocusManager.current
+  val context = LocalContext.current
+  val sharedVm: SharedVm = viewModel(context as ComponentActivity)
   val savedTimers by vm.savedCountdownFlow().collectAsState(
     initial = listOf()
   )
@@ -71,9 +77,13 @@ fun CountdownScreenContent(
       timerOnClick = { savedTimer ->
         // remove focus from TextField
         focusManager.clearFocus()
+        if (!Settings.canDrawOverlays(context)) {
+          sharedVm.showGrantOverlayDialog = true
+          return@SavedTimersCard
+        }
         vm.savedCountdownClick(savedTimer)
       },
-      timerOnLongClick = {savedTimer ->
+      timerOnLongClick = { savedTimer ->
         // remove focus from TextField
         focusManager.clearFocus()
         vm.showDeleteDialog = savedTimer

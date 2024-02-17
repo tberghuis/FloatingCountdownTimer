@@ -121,7 +121,7 @@ fun CreateCountdownButton() {
   val vm: CountdownScreenVm = viewModel()
   val focusManager = LocalFocusManager.current
   val context = LocalContext.current
-  val sharedVm: SharedVm = viewModel(LocalContext.current as ComponentActivity)
+  val sharedVm: SharedVm = viewModel(context as ComponentActivity)
   Button(onClick = {
     logd("create")
     focusManager.clearFocus()

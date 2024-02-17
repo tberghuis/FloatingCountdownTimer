@@ -1,5 +1,7 @@
 package xyz.tberghuis.floatingtimer.screens
 
+import android.provider.Settings
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -10,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
@@ -19,6 +22,7 @@ import xyz.tberghuis.floatingtimer.composables.FtBottomBar
 import xyz.tberghuis.floatingtimer.composables.FtTopAppBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SavedTimersCard
+import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 import xyz.tberghuis.floatingtimer.viewmodels.StopwatchScreenVm
 
 @Composable
@@ -42,6 +46,8 @@ fun StopwatchScreenContent(
   padding: PaddingValues,
   vm: StopwatchScreenVm = viewModel()
 ) {
+  val context = LocalContext.current
+  val sharedVm: SharedVm = viewModel(context as ComponentActivity)
   val savedTimers by vm.savedStopwatchFlow().collectAsState(
     initial = listOf()
   )
@@ -54,6 +60,12 @@ fun StopwatchScreenContent(
     SavedTimersCard(
       savedTimers = savedTimers,
       timerOnClick = { savedTimer ->
+        // how to DRY??? that is the question... meh
+        // write a plain function that take sharedVm, context ....
+        if (!Settings.canDrawOverlays(context)) {
+          sharedVm.showGrantOverlayDialog = true
+          return@SavedTimersCard
+        }
         vm.savedStopwatchClick(savedTimer)
       },
       timerOnLongClick = { savedTimer ->
