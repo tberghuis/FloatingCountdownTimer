@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.composables.AddSavedButton
 import xyz.tberghuis.floatingtimer.composables.ChangeTimerColorButton
 import xyz.tberghuis.floatingtimer.logd
 
@@ -50,7 +51,7 @@ fun TmpCreateStopwatchCard() {
       verticalAlignment = Alignment.CenterVertically,
     ) {
       ChangeTimerColorButton("change_color/stopwatch", vm.haloColor)
-      TmpAddSavedButton {
+      AddSavedButton {
         vm.addToSaved()
       }
       Button(modifier = Modifier.testTag("stopwatch_create"), onClick = {

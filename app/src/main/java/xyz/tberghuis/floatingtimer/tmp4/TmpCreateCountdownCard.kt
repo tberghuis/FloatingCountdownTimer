@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.composables.AddSavedButton
 import xyz.tberghuis.floatingtimer.composables.ChangeTimerColorButton
 import xyz.tberghuis.floatingtimer.composables.onFocusSelectAll
 import xyz.tberghuis.floatingtimer.logd
@@ -107,7 +108,7 @@ fun TmpCreateCountdownCard() {
       verticalAlignment = Alignment.CenterVertically,
     ) {
       ChangeTimerColorButton("change_color/countdown", vm.haloColor)
-      TmpAddSavedButton {
+      AddSavedButton {
         focusManager.clearFocus()
         vm.addToSaved()
       }
