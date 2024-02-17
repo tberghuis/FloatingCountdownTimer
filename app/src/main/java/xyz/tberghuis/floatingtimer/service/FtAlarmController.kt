@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 
 class FtAlarmController(
@@ -52,10 +53,9 @@ class FtAlarmController(
         }
       } finally {
         // scope is cancelled
-        withContext(Main.immediate) {
-          if (ringtone?.isPlaying == true) {
-            ringtone?.stop()
-          }
+        // lesson, don't call withContext in finally block
+        if (ringtone?.isPlaying == true) {
+          ringtone?.stop()
         }
       }
     }
