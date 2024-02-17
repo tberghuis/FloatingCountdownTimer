@@ -24,7 +24,6 @@ import xyz.tberghuis.floatingtimer.composables.FtTopAppBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SavedTimersCard
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp4.TmpScreenTypeCountdown
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 
 @Composable
@@ -42,7 +41,7 @@ fun CountdownScreen(
     },
     topBar = { FtTopAppBar() },
     bottomBar = {
-      FtBottomBar(TmpScreenTypeCountdown)
+      FtBottomBar(ScreenTypeCountdown)
     },
     snackbarHost = { SnackbarHost(vm.snackbarHostState) },
   ) { padding ->

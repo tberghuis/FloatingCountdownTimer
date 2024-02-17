@@ -11,20 +11,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.tmp4.TmpScreenType
-import xyz.tberghuis.floatingtimer.tmp4.TmpScreenTypeCountdown
-import xyz.tberghuis.floatingtimer.tmp4.TmpScreenTypeStopwatch
+import xyz.tberghuis.floatingtimer.screens.ScreenType
+import xyz.tberghuis.floatingtimer.screens.ScreenTypeCountdown
+import xyz.tberghuis.floatingtimer.screens.ScreenTypeStopwatch
 
 @Composable
-fun FtBottomBar(currentScreen: TmpScreenType) {
+fun FtBottomBar(currentScreen: ScreenType) {
   val nav = LocalNavController.current
   NavigationBar(
 
   ) {
     NavigationBarItem(
-      selected = currentScreen is TmpScreenTypeCountdown,
+      selected = currentScreen is ScreenTypeCountdown,
       onClick = {
-        if (currentScreen is TmpScreenTypeCountdown) {
+        if (currentScreen is ScreenTypeCountdown) {
           return@NavigationBarItem
         }
         nav.navigate("countdown")
@@ -38,9 +38,9 @@ fun FtBottomBar(currentScreen: TmpScreenType) {
       },
     )
     NavigationBarItem(
-      selected = currentScreen is TmpScreenTypeStopwatch,
+      selected = currentScreen is ScreenTypeStopwatch,
       onClick = {
-        if (currentScreen is TmpScreenTypeStopwatch) {
+        if (currentScreen is ScreenTypeStopwatch) {
           return@NavigationBarItem
         }
         nav.navigate("stopwatch")

@@ -19,6 +19,7 @@ import xyz.tberghuis.floatingtimer.composables.FtBottomBar
 import xyz.tberghuis.floatingtimer.composables.FtTopAppBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SavedTimersCard
+import xyz.tberghuis.floatingtimer.screens.ScreenTypeStopwatch
 
 @Composable
 fun TmpStopwatchScreen(
@@ -28,7 +29,7 @@ fun TmpStopwatchScreen(
     modifier = Modifier,
     topBar = { FtTopAppBar() },
     bottomBar = {
-      FtBottomBar(TmpScreenTypeStopwatch)
+      FtBottomBar(ScreenTypeStopwatch)
     },
   ) { padding ->
     TmpStopwatchScreenContent(padding)
