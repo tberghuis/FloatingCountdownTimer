@@ -32,13 +32,13 @@ fun StopwatchScreen(
       FtBottomBar(ScreenTypeStopwatch)
     },
   ) { padding ->
-    TmpStopwatchScreenContent(padding)
+    StopwatchScreenContent(padding)
   }
   PremiumDialog(vm.premiumVmc, stringResource(R.string.premium_reason_multiple_timers))
 }
 
 @Composable
-fun TmpStopwatchScreenContent(
+fun StopwatchScreenContent(
   padding: PaddingValues,
   vm: StopwatchScreenVm = viewModel()
 ) {
