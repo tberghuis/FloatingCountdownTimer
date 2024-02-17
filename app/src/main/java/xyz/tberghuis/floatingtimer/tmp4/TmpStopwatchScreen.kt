@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.ConfirmDeleteSavedTimerDialog
+import xyz.tberghuis.floatingtimer.composables.CreateStopwatchCard
 import xyz.tberghuis.floatingtimer.composables.FtBottomBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 
@@ -46,7 +47,7 @@ fun TmpStopwatchScreenContent(
       .padding(padding)
       .verticalScroll(rememberScrollState())
   ) {
-    TmpCreateStopwatchCard()
+    CreateStopwatchCard()
     TmpSavedTimersCard(
       savedTimers = savedTimers,
       timerOnClick = { savedTimer ->

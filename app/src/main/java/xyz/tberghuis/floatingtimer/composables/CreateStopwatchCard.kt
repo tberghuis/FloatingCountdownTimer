@@ -1,13 +1,11 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.composables
 
 import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
@@ -21,12 +19,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.composables.AddSavedButton
-import xyz.tberghuis.floatingtimer.composables.ChangeTimerColorButton
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp4.TmpSharedVm
+import xyz.tberghuis.floatingtimer.tmp4.TmpStopwatchScreenVm
 
 @Composable
-fun TmpCreateStopwatchCard() {
+fun CreateStopwatchCard() {
   val context = LocalContext.current
   val sharedVm: TmpSharedVm = viewModel(context as ComponentActivity)
   val vm: TmpStopwatchScreenVm = viewModel()
