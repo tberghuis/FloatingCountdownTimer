@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_SIZE_NO_SCALE
+import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownViewDisplay
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
@@ -64,7 +65,7 @@ fun <T : SavedTimer> ColumnScope.TmpSavedTimersCard(
             ),
         ) {
           when (savedTimer) {
-            is TmpSavedCountdown -> {
+            is SavedCountdown -> {
               CountdownViewDisplay(settingsTimerPreviewVmc, 1f, savedTimer.durationSeconds, false)
             }
 

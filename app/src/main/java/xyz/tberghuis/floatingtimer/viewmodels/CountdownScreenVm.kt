@@ -16,10 +16,10 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.tmp4.TmpSavedCountdown
 import xyz.tberghuis.floatingtimer.tmp4.shouldShowPremiumDialogMultipleTimers
 
 class CountdownScreenVm(
@@ -27,7 +27,7 @@ class CountdownScreenVm(
 //  private val state: SavedStateHandle
 ) : AndroidViewModel(application) {
   private val savedCountdownDao = application.provideDatabase().savedCountdownDao()
-  var showDeleteDialog by mutableStateOf<TmpSavedCountdown?>(null)
+  var showDeleteDialog by mutableStateOf<SavedCountdown?>(null)
 
   private val preferencesRepository = application.providePreferencesRepository()
   val vibrationFlow = preferencesRepository.vibrationFlow
@@ -49,7 +49,7 @@ class CountdownScreenVm(
     }
   }
 
-  fun savedCountdownFlow(): Flow<List<TmpSavedCountdown>> {
+  fun savedCountdownFlow(): Flow<List<SavedCountdown>> {
     return savedCountdownDao.getAll()
   }
 
@@ -85,7 +85,7 @@ class CountdownScreenVm(
     }
   }
 
-  fun savedCountdownClick(timer: TmpSavedCountdown) {
+  fun savedCountdownClick(timer: SavedCountdown) {
     addCountdown(timer.durationSeconds, Color(timer.timerColor))
   }
 
@@ -117,7 +117,7 @@ class CountdownScreenVm(
 
   fun addToSaved() {
     val durationSeconds = calcTotalDurationSeconds() ?: return
-    val timer = TmpSavedCountdown(
+    val timer = SavedCountdown(
       timerShape = "circle",
       timerColor = haloColor.toArgb(),
       durationSeconds = durationSeconds
@@ -127,7 +127,7 @@ class CountdownScreenVm(
     }
   }
 
-  fun deleteSavedCountdown(timer: TmpSavedCountdown) {
+  fun deleteSavedCountdown(timer: SavedCountdown) {
     logd("deleteSavedTimer")
     viewModelScope.launch(IO) {
       savedCountdownDao.delete(timer)
