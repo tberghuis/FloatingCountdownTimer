@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.composables
 
 import androidx.compose.runtime.Composable
 import android.app.Activity
@@ -20,9 +20,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_ACTION_MANAGE_OVERLAY_PERMISSION
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp4.TmpSharedVm
 
 @Composable
-fun TmpGrantOverlayDialog(
+fun GrantOverlayDialog(
   vm: TmpSharedVm = viewModel(LocalContext.current as ComponentActivity)
 ) {
   val context = LocalContext.current

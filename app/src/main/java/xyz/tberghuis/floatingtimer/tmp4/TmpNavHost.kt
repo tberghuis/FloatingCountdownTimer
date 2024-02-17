@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.OnNavResult
+import xyz.tberghuis.floatingtimer.composables.GrantOverlayDialog
 import xyz.tberghuis.floatingtimer.screens.ColorSettingScreen
 import xyz.tberghuis.floatingtimer.screens.CountdownScreen
 import xyz.tberghuis.floatingtimer.screens.LaunchPostNotificationsPermissionRequest
@@ -49,6 +50,6 @@ fun TmpNavHost() {
     }
   }
 
-  TmpGrantOverlayDialog()
+  GrantOverlayDialog()
   LaunchPostNotificationsPermissionRequest()
 }
