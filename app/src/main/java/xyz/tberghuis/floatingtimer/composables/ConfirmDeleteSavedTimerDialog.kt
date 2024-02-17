@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.composables
 
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
