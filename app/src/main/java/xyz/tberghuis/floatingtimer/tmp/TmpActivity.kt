@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp4.TmpNavHost
-import xyz.tberghuis.floatingtimer.tmp5.Tmp5NavHost
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class TmpActivity : ComponentActivity() {
@@ -27,7 +26,6 @@ class TmpActivity : ComponentActivity() {
             .background(Color.White),
         ) {
           TmpNavHost()
-//          Tmp5NavHost()
         }
       }
     }
