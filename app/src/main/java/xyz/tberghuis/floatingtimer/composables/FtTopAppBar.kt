@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.composables
 
 import androidx.activity.ComponentActivity
 import androidx.compose.material.icons.Icons
@@ -21,10 +21,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.tmp4.TmpSharedVm
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TmpFtTopAppBar() {
+fun FtTopAppBar() {
   val sharedVm: TmpSharedVm = viewModel(LocalContext.current as ComponentActivity)
   val navController = LocalNavController.current
   var showMenu by remember { mutableStateOf(false) }

@@ -16,6 +16,7 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.ConfirmDeleteSavedTimerDialog
 import xyz.tberghuis.floatingtimer.composables.CreateStopwatchCard
 import xyz.tberghuis.floatingtimer.composables.FtBottomBar
+import xyz.tberghuis.floatingtimer.composables.FtTopAppBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 
 @Composable
@@ -24,7 +25,7 @@ fun TmpStopwatchScreen(
 ) {
   Scaffold(
     modifier = Modifier,
-    topBar = { TmpFtTopAppBar() },
+    topBar = { FtTopAppBar() },
     bottomBar = {
       FtBottomBar(TmpScreenTypeStopwatch)
     },

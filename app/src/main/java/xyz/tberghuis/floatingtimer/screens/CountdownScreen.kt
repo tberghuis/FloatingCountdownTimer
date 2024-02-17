@@ -20,9 +20,9 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.ConfirmDeleteSavedTimerDialog
 import xyz.tberghuis.floatingtimer.composables.CreateCountdownCard
 import xyz.tberghuis.floatingtimer.composables.FtBottomBar
+import xyz.tberghuis.floatingtimer.composables.FtTopAppBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp4.TmpFtTopAppBar
 import xyz.tberghuis.floatingtimer.tmp4.TmpSavedTimersCard
 import xyz.tberghuis.floatingtimer.tmp4.TmpScreenTypeCountdown
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
@@ -40,7 +40,7 @@ fun CountdownScreen(
         logd("on tap")
       })
     },
-    topBar = { TmpFtTopAppBar() },
+    topBar = { FtTopAppBar() },
     bottomBar = {
       FtBottomBar(TmpScreenTypeCountdown)
     },
