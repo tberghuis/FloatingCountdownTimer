@@ -20,7 +20,7 @@ data class SavedCountdown(
 ) : SavedTimer
 
 @Dao
-interface TmpSavedCountdownDao {
+interface SavedCountdownDao {
   @Query("SELECT * FROM SavedCountdown")
   fun getAll(): Flow<List<SavedCountdown>>
 

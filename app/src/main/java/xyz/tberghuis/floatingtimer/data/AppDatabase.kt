@@ -10,6 +10,6 @@ import androidx.room.RoomDatabase
   ]
 )
 abstract class AppDatabase : RoomDatabase() {
-  abstract fun savedCountdownDao(): TmpSavedCountdownDao
-  abstract fun savedStopwatchDao(): TmpSavedStopwatchDao
+  abstract fun savedCountdownDao(): SavedCountdownDao
+  abstract fun savedStopwatchDao(): SavedStopwatchDao
 }

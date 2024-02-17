@@ -18,7 +18,7 @@ data class SavedStopwatch(
 ) : SavedTimer
 
 @Dao
-interface TmpSavedStopwatchDao {
+interface SavedStopwatchDao {
   @Query("SELECT * FROM SavedStopwatch")
   fun getAll(): Flow<List<SavedStopwatch>>
 
