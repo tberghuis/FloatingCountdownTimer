@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.composables
 
 import android.provider.Settings
 import androidx.activity.ComponentActivity
@@ -33,11 +33,12 @@ import xyz.tberghuis.floatingtimer.composables.AddSavedButton
 import xyz.tberghuis.floatingtimer.composables.ChangeTimerColorButton
 import xyz.tberghuis.floatingtimer.composables.onFocusSelectAll
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp4.TmpSharedVm
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 
 @Preview
 @Composable
-fun TmpCreateCountdownCard() {
+fun CreateCountdownCard() {
   val vm: CountdownScreenVm = viewModel()
   val focusManager = LocalFocusManager.current
 

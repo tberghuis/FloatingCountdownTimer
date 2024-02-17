@@ -18,10 +18,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.ConfirmDeleteSavedTimerDialog
+import xyz.tberghuis.floatingtimer.composables.CreateCountdownCard
 import xyz.tberghuis.floatingtimer.composables.FtBottomBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp4.TmpCreateCountdownCard
 import xyz.tberghuis.floatingtimer.tmp4.TmpFtTopAppBar
 import xyz.tberghuis.floatingtimer.tmp4.TmpSavedTimersCard
 import xyz.tberghuis.floatingtimer.tmp4.TmpScreenTypeCountdown
@@ -66,7 +66,7 @@ fun TmpCountdownScreenContent(
       .padding(padding)
       .verticalScroll(rememberScrollState())
   ) {
-    TmpCreateCountdownCard()
+    CreateCountdownCard()
     TmpSavedTimersCard(
       savedTimers = savedTimers,
       timerOnClick = { savedTimer ->
