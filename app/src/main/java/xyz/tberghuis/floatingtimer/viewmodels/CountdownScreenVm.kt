@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.viewmodels
 
 import android.app.Application
 import androidx.compose.material3.SnackbarHostState
@@ -19,9 +19,10 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
+import xyz.tberghuis.floatingtimer.tmp4.TmpSavedCountdown
+import xyz.tberghuis.floatingtimer.tmp4.shouldShowPremiumDialogMultipleTimers
 
-class TmpCountdownScreenVm(
+class CountdownScreenVm(
   private val application: Application,
 //  private val state: SavedStateHandle
 ) : AndroidViewModel(application) {

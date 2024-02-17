@@ -14,6 +14,7 @@ import xyz.tberghuis.floatingtimer.screens.ColorSettingScreen
 import xyz.tberghuis.floatingtimer.screens.CountdownScreen
 import xyz.tberghuis.floatingtimer.screens.LaunchPostNotificationsPermissionRequest
 import xyz.tberghuis.floatingtimer.screens.SizeSettingScreen
+import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 
 @Composable
 fun TmpNavHost() {
@@ -23,7 +24,7 @@ fun TmpNavHost() {
       navController = navController, startDestination = "countdown"
     ) {
       composable("countdown") { entry ->
-        val vm: TmpCountdownScreenVm = viewModel()
+        val vm: CountdownScreenVm = viewModel()
         entry.OnNavResult<Int>(savedStateHandleKey = "color_result") { result ->
           vm.haloColor = Color(result)
         }

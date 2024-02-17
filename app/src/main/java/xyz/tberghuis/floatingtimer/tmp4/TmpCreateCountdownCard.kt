@@ -33,11 +33,12 @@ import xyz.tberghuis.floatingtimer.composables.AddSavedButton
 import xyz.tberghuis.floatingtimer.composables.ChangeTimerColorButton
 import xyz.tberghuis.floatingtimer.composables.onFocusSelectAll
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 
 @Preview
 @Composable
 fun TmpCreateCountdownCard() {
-  val vm: TmpCountdownScreenVm = viewModel()
+  val vm: CountdownScreenVm = viewModel()
   val focusManager = LocalFocusManager.current
 
   // todo must be an idiomatic way to center without the need
@@ -119,7 +120,7 @@ fun TmpCreateCountdownCard() {
 
 @Composable
 fun TmpCreateCountdownButton() {
-  val vm: TmpCountdownScreenVm = viewModel()
+  val vm: CountdownScreenVm = viewModel()
   val focusManager = LocalFocusManager.current
   val context = LocalContext.current
   val sharedVm: TmpSharedVm = viewModel(LocalContext.current as ComponentActivity)
@@ -138,7 +139,7 @@ fun TmpCreateCountdownButton() {
 
 @Composable
 fun TmpCountdownOptions() {
-  val vm: TmpCountdownScreenVm = viewModel()
+  val vm: CountdownScreenVm = viewModel()
 
   // doitwrong
   val vibration = vm.vibrationFlow.collectAsState(false)
