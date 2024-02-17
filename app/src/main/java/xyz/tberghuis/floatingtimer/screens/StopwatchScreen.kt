@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -19,10 +19,10 @@ import xyz.tberghuis.floatingtimer.composables.FtBottomBar
 import xyz.tberghuis.floatingtimer.composables.FtTopAppBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SavedTimersCard
-import xyz.tberghuis.floatingtimer.screens.ScreenTypeStopwatch
+import xyz.tberghuis.floatingtimer.tmp4.TmpStopwatchScreenVm
 
 @Composable
-fun TmpStopwatchScreen(
+fun StopwatchScreen(
   vm: TmpStopwatchScreenVm = viewModel()
 ) {
   Scaffold(

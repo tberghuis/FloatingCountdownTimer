@@ -15,7 +15,7 @@ import xyz.tberghuis.floatingtimer.screens.ColorSettingScreen
 import xyz.tberghuis.floatingtimer.screens.CountdownScreen
 import xyz.tberghuis.floatingtimer.screens.LaunchPostNotificationsPermissionRequest
 import xyz.tberghuis.floatingtimer.screens.SizeSettingScreen
-import xyz.tberghuis.floatingtimer.tmp4.TmpStopwatchScreen
+import xyz.tberghuis.floatingtimer.screens.StopwatchScreen
 import xyz.tberghuis.floatingtimer.tmp4.TmpStopwatchScreenVm
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 
@@ -38,7 +38,7 @@ fun FtNavHost() {
         entry.OnNavResult<Int>(savedStateHandleKey = "color_result") { result ->
           vm.haloColor = Color(result)
         }
-        TmpStopwatchScreen()
+        StopwatchScreen()
       }
       composable("change_color/{timerType}") {
         ColorSettingScreen()
