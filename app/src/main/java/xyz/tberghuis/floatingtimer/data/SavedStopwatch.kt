@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.data
 
 import androidx.room.ColumnInfo
 import androidx.room.Dao
@@ -8,9 +8,10 @@ import androidx.room.Insert
 import androidx.room.PrimaryKey
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
+import xyz.tberghuis.floatingtimer.tmp4.SavedTimer
 
 @Entity
-data class TmpSavedStopwatch(
+data class SavedStopwatch(
   @PrimaryKey(autoGenerate = true) val id: Int = 0,
   @ColumnInfo(name = "shape") val timerShape: String,
   // Color.toArgb
@@ -19,12 +20,12 @@ data class TmpSavedStopwatch(
 
 @Dao
 interface TmpSavedStopwatchDao {
-  @Query("SELECT * FROM TmpSavedStopwatch")
-  fun getAll(): Flow<List<TmpSavedStopwatch>>
+  @Query("SELECT * FROM SavedStopwatch")
+  fun getAll(): Flow<List<SavedStopwatch>>
 
   @Insert
-  fun insertAll(vararg timers: TmpSavedStopwatch)
+  fun insertAll(vararg timers: SavedStopwatch)
 
   @Delete
-  fun delete(timer: TmpSavedStopwatch)
+  fun delete(timer: SavedStopwatch)
 }

@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.MainApplication
+import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
@@ -22,7 +23,7 @@ class TmpStopwatchScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
   private val savedStopwatchDao = application.provideDatabase().savedStopwatchDao()
-  var showDeleteDialog by mutableStateOf<TmpSavedStopwatch?>(null)
+  var showDeleteDialog by mutableStateOf<SavedStopwatch?>(null)
 
   private val preferencesRepository = application.providePreferencesRepository()
   val premiumVmc = PremiumVmc(application, viewModelScope)
@@ -38,11 +39,11 @@ class TmpStopwatchScreenVm(
     }
   }
 
-  fun savedStopwatchFlow(): Flow<List<TmpSavedStopwatch>> {
+  fun savedStopwatchFlow(): Flow<List<SavedStopwatch>> {
     return savedStopwatchDao.getAll()
   }
 
-  fun savedStopwatchClick(timer: TmpSavedStopwatch) {
+  fun savedStopwatchClick(timer: SavedStopwatch) {
     addStopwatch(Color(timer.timerColor))
   }
 
@@ -62,14 +63,14 @@ class TmpStopwatchScreenVm(
     addStopwatch(haloColor)
   }
 
-  fun deleteSavedStopwatch(timer: TmpSavedStopwatch) {
+  fun deleteSavedStopwatch(timer: SavedStopwatch) {
     viewModelScope.launch(IO) {
       savedStopwatchDao.delete(timer)
     }
   }
 
   fun addToSaved() {
-    val timer = TmpSavedStopwatch(
+    val timer = SavedStopwatch(
       timerShape = "circle",
       timerColor = haloColor.toArgb(),
     )
