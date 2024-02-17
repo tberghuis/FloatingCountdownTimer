@@ -8,7 +8,6 @@ import androidx.room.Insert
 import androidx.room.PrimaryKey
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
-import xyz.tberghuis.floatingtimer.tmp4.SavedTimer
 
 @Entity
 data class SavedCountdown(
