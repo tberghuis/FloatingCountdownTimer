@@ -8,7 +8,9 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import xyz.tberghuis.floatingtimer.LocalNavController
+import xyz.tberghuis.floatingtimer.R
 
 @Composable
 fun TmpBottomBar(currentScreen: TmpScreenType) {
@@ -25,11 +27,11 @@ fun TmpBottomBar(currentScreen: TmpScreenType) {
         nav.navigate("countdown")
       },
       icon = {
-        Icon(Icons.Default.Timer, contentDescription = "Countdown")
+        Icon(Icons.Default.Timer, contentDescription = stringResource(R.string.countdown))
       },
       modifier = Modifier,
       label = {
-        Text(text = "Countdown")
+        Text(text = stringResource(R.string.countdown))
       },
     )
     NavigationBarItem(
@@ -41,11 +43,11 @@ fun TmpBottomBar(currentScreen: TmpScreenType) {
         nav.navigate("stopwatch")
       },
       icon = {
-        Icon(Icons.Default.Timer, contentDescription = "Stopwatch")
+        Icon(Icons.Default.Timer, contentDescription = stringResource(R.string.stopwatch))
       },
       modifier = Modifier,
       label = {
-        Text(text = "Stopwatch")
+        Text(text = stringResource(R.string.stopwatch))
       },
     )
   }
