@@ -29,8 +29,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.godaddy.android.colorpicker.ClassicColorPicker
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.composables.ColorSettingScreenActions
 import xyz.tberghuis.floatingtimer.composables.SettingsTimerPreviewCard
-import xyz.tberghuis.floatingtimer.tmp4.TmpColorSettingScreenActions
 import xyz.tberghuis.floatingtimer.viewmodels.ColorSettingViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -99,7 +99,7 @@ fun ColorSettingScreenContent(
           .fillMaxWidth(),
         colorState = vm.colorPickerColorState
       )
-      TmpColorSettingScreenActions()
+      ColorSettingScreenActions()
     }
   }
 

@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -11,11 +11,10 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.viewmodels.ColorSettingViewModel
 
 @Composable
-fun TmpColorSettingScreenActions(
+fun ColorSettingScreenActions(
   vm: ColorSettingViewModel = viewModel()
 ) {
   val nav = LocalNavController.current
@@ -32,9 +31,6 @@ fun TmpColorSettingScreenActions(
     else -> {
       {
         vm.saveDefaultHaloColor()
-        // todo, just collect default in each screen VM
-//        homeVm.countdownHaloColor = vm.settingsTimerPreviewVmc.haloColor
-//        homeVm.stopwatchHaloColor = vm.settingsTimerPreviewVmc.haloColor
         nav.popBackStack()
       }
     }
