@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.composables
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Timer
@@ -11,9 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.tmp4.TmpScreenType
+import xyz.tberghuis.floatingtimer.tmp4.TmpScreenTypeCountdown
+import xyz.tberghuis.floatingtimer.tmp4.TmpScreenTypeStopwatch
 
 @Composable
-fun TmpBottomBar(currentScreen: TmpScreenType) {
+fun FtBottomBar(currentScreen: TmpScreenType) {
   val nav = LocalNavController.current
   NavigationBar(
 

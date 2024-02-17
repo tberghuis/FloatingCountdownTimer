@@ -20,6 +20,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.composables.FtBottomBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.logd
 
@@ -38,7 +39,7 @@ fun TmpCountdownScreen(
     },
     topBar = { TmpFtTopAppBar() },
     bottomBar = {
-      TmpBottomBar(TmpScreenTypeCountdown)
+      FtBottomBar(TmpScreenTypeCountdown)
     },
     snackbarHost = { SnackbarHost(vm.snackbarHostState) },
   ) { padding ->
