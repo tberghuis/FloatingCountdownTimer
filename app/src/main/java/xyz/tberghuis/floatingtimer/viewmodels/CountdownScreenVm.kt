@@ -20,7 +20,6 @@ import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.tmp4.shouldShowPremiumDialogMultipleTimers
 
 class CountdownScreenVm(
   private val application: Application,

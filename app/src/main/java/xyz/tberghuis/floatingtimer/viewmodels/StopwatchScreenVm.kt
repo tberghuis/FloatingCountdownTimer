@@ -16,7 +16,6 @@ import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.tmp4.shouldShowPremiumDialogMultipleTimers
 
 class StopwatchScreenVm(
   private val application: Application,

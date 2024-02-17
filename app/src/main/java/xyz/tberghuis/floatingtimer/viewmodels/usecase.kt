@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.viewmodels
 
 import android.app.Application
 import kotlinx.coroutines.flow.first
