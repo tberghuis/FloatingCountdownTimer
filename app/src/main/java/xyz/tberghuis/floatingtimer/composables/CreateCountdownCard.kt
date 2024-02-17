@@ -97,7 +97,7 @@ fun CreateCountdownCard() {
       horizontalArrangement = Arrangement.Center,
       verticalAlignment = Alignment.CenterVertically
     ) {
-      TmpCountdownOptions()
+      CountdownOptions()
     }
     Row(
       modifier = Modifier
@@ -111,13 +111,13 @@ fun CreateCountdownCard() {
         focusManager.clearFocus()
         vm.addToSaved()
       }
-      TmpCreateCountdownButton()
+      CreateCountdownButton()
     }
   }
 }
 
 @Composable
-fun TmpCreateCountdownButton() {
+fun CreateCountdownButton() {
   val vm: CountdownScreenVm = viewModel()
   val focusManager = LocalFocusManager.current
   val context = LocalContext.current
@@ -136,7 +136,7 @@ fun TmpCreateCountdownButton() {
 }
 
 @Composable
-fun TmpCountdownOptions() {
+fun CountdownOptions() {
   val vm: CountdownScreenVm = viewModel()
 
   // doitwrong
