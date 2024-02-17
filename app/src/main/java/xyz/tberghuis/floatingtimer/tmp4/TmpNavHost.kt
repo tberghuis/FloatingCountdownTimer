@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.OnNavResult
 import xyz.tberghuis.floatingtimer.screens.ColorSettingScreen
+import xyz.tberghuis.floatingtimer.screens.CountdownScreen
 import xyz.tberghuis.floatingtimer.screens.LaunchPostNotificationsPermissionRequest
 import xyz.tberghuis.floatingtimer.screens.SizeSettingScreen
 
@@ -26,7 +27,7 @@ fun TmpNavHost() {
         entry.OnNavResult<Int>(savedStateHandleKey = "color_result") { result ->
           vm.haloColor = Color(result)
         }
-        TmpCountdownScreen()
+        CountdownScreen()
       }
       composable("stopwatch") {entry ->
         val vm: TmpStopwatchScreenVm = viewModel()
