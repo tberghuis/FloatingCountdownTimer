@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.viewmodels
 
 import android.app.Application
 import androidx.compose.runtime.getValue
@@ -14,12 +14,11 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
-import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.viewmodels.PremiumVmc
+import xyz.tberghuis.floatingtimer.tmp4.shouldShowPremiumDialogMultipleTimers
 
-class TmpStopwatchScreenVm(
+class StopwatchScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
   private val savedStopwatchDao = application.provideDatabase().savedStopwatchDao()

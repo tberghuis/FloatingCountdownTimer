@@ -19,11 +19,11 @@ import xyz.tberghuis.floatingtimer.composables.FtBottomBar
 import xyz.tberghuis.floatingtimer.composables.FtTopAppBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SavedTimersCard
-import xyz.tberghuis.floatingtimer.tmp4.TmpStopwatchScreenVm
+import xyz.tberghuis.floatingtimer.viewmodels.StopwatchScreenVm
 
 @Composable
 fun StopwatchScreen(
-  vm: TmpStopwatchScreenVm = viewModel()
+  vm: StopwatchScreenVm = viewModel()
 ) {
   Scaffold(
     modifier = Modifier,
@@ -40,7 +40,7 @@ fun StopwatchScreen(
 @Composable
 fun TmpStopwatchScreenContent(
   padding: PaddingValues,
-  vm: TmpStopwatchScreenVm = viewModel()
+  vm: StopwatchScreenVm = viewModel()
 ) {
   val savedTimers by vm.savedStopwatchFlow().collectAsState(
     initial = listOf()
