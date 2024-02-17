@@ -18,6 +18,7 @@ import xyz.tberghuis.floatingtimer.composables.CreateStopwatchCard
 import xyz.tberghuis.floatingtimer.composables.FtBottomBar
 import xyz.tberghuis.floatingtimer.composables.FtTopAppBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
+import xyz.tberghuis.floatingtimer.composables.SavedTimersCard
 
 @Composable
 fun TmpStopwatchScreen(
@@ -49,7 +50,7 @@ fun TmpStopwatchScreenContent(
       .verticalScroll(rememberScrollState())
   ) {
     CreateStopwatchCard()
-    TmpSavedTimersCard(
+    SavedTimersCard(
       savedTimers = savedTimers,
       timerOnClick = { savedTimer ->
         vm.savedStopwatchClick(savedTimer)

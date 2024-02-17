@@ -22,8 +22,8 @@ import xyz.tberghuis.floatingtimer.composables.CreateCountdownCard
 import xyz.tberghuis.floatingtimer.composables.FtBottomBar
 import xyz.tberghuis.floatingtimer.composables.FtTopAppBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
+import xyz.tberghuis.floatingtimer.composables.SavedTimersCard
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp4.TmpSavedTimersCard
 import xyz.tberghuis.floatingtimer.tmp4.TmpScreenTypeCountdown
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 
@@ -67,7 +67,7 @@ fun TmpCountdownScreenContent(
       .verticalScroll(rememberScrollState())
   ) {
     CreateCountdownCard()
-    TmpSavedTimersCard(
+    SavedTimersCard(
       savedTimers = savedTimers,
       timerOnClick = { savedTimer ->
         // remove focus from TextField

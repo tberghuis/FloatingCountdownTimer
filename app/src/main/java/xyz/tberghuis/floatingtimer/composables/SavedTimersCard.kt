@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.composables
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.combinedClickable
@@ -24,11 +24,13 @@ import xyz.tberghuis.floatingtimer.TIMER_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownViewDisplay
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
+import xyz.tberghuis.floatingtimer.tmp4.SavedTimer
+import xyz.tberghuis.floatingtimer.tmp4.TmpSavedStopwatch
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
 @Composable
-fun <T : SavedTimer> ColumnScope.TmpSavedTimersCard(
+fun <T : SavedTimer> ColumnScope.SavedTimersCard(
   savedTimers: List<T>,
   timerOnClick: (T) -> Unit,
   timerOnLongClick: (T) -> Unit,
