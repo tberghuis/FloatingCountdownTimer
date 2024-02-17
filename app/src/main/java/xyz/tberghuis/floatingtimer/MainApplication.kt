@@ -7,7 +7,6 @@ import androidx.room.Room
 import xyz.tberghuis.floatingtimer.data.AppDatabase
 import xyz.tberghuis.floatingtimer.data.PreferencesRepository
 import xyz.tberghuis.floatingtimer.data.dataStore
-import xyz.tberghuis.floatingtimer.viewmodels.BoundFloatingServiceVmc
 
 class MainApplication : Application() {
   // could i just use Context.dataStore instead for singleton
@@ -16,13 +15,13 @@ class MainApplication : Application() {
   // doitwrong
   lateinit var preferencesRepository: PreferencesRepository
   lateinit var appDatabase: AppDatabase
-  lateinit var boundFloatingService: BoundFloatingServiceVmc
+  lateinit var boundFloatingService: BoundFloatingService
 
   override fun onCreate() {
     super.onCreate()
     appDatabase = provideDatabase()
     preferencesRepository = PreferencesRepository(dataStore)
-    boundFloatingService = BoundFloatingServiceVmc(this)
+    boundFloatingService = BoundFloatingService(this)
     createNotificationChannel()
   }
 
@@ -43,8 +42,6 @@ class MainApplication : Application() {
     )
       .build()
   }
-
-
 }
 
 // doitwrong

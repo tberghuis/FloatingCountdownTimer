@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.viewmodels
+package xyz.tberghuis.floatingtimer
 
 import android.app.Application
 import android.content.ComponentName
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.first
 import xyz.tberghuis.floatingtimer.service.FloatingService
 
 // todo rename to BoundFloatingService
-class BoundFloatingServiceVmc(private val application: Application) {
+class BoundFloatingService(private val application: Application) {
   private val floatingService = MutableStateFlow<FloatingService?>(null)
   private var serviceStarted = false
 
