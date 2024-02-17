@@ -4,9 +4,9 @@ import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import androidx.room.Room
+import xyz.tberghuis.floatingtimer.data.AppDatabase
 import xyz.tberghuis.floatingtimer.data.PreferencesRepository
 import xyz.tberghuis.floatingtimer.data.dataStore
-import xyz.tberghuis.floatingtimer.tmp4.TmpAppDatabase
 import xyz.tberghuis.floatingtimer.viewmodels.BoundFloatingServiceVmc
 
 class MainApplication : Application() {
@@ -15,7 +15,7 @@ class MainApplication : Application() {
   // and activities
   // doitwrong
   lateinit var preferencesRepository: PreferencesRepository
-  lateinit var appDatabase: TmpAppDatabase
+  lateinit var appDatabase: AppDatabase
   lateinit var boundFloatingService: BoundFloatingServiceVmc
 
   override fun onCreate() {
@@ -35,10 +35,10 @@ class MainApplication : Application() {
     manager.createNotificationChannel(notificationChannel)
   }
 
-  private fun provideDatabase(): TmpAppDatabase {
+  private fun provideDatabase(): AppDatabase {
     return Room.databaseBuilder(
       this,
-      TmpAppDatabase::class.java,
+      AppDatabase::class.java,
       DB_FILENAME
     )
       .build()
@@ -52,6 +52,6 @@ fun Application.providePreferencesRepository(): PreferencesRepository {
   return (this as MainApplication).preferencesRepository
 }
 
-fun Application.provideDatabase(): TmpAppDatabase {
+fun Application.provideDatabase(): AppDatabase {
   return (this as MainApplication).appDatabase
 }

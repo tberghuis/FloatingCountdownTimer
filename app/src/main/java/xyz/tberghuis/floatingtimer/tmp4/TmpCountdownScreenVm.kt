@@ -25,7 +25,7 @@ class TmpCountdownScreenVm(
   private val application: Application,
 //  private val state: SavedStateHandle
 ) : AndroidViewModel(application) {
-  private val savedCountdownDao = application.provideDatabase().tmpSavedCountdownDao()
+  private val savedCountdownDao = application.provideDatabase().savedCountdownDao()
   var showDeleteDialog by mutableStateOf<TmpSavedCountdown?>(null)
 
   private val preferencesRepository = application.providePreferencesRepository()
