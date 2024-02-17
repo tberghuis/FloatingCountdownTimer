@@ -10,11 +10,17 @@ import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.composables.GrantOverlayDialog
 import xyz.tberghuis.floatingtimer.screens.ColorSettingScreen
 import xyz.tberghuis.floatingtimer.screens.CountdownScreen
-import xyz.tberghuis.floatingtimer.screens.LaunchPostNotificationsPermissionRequest
 import xyz.tberghuis.floatingtimer.screens.SizeSettingScreen
 import xyz.tberghuis.floatingtimer.screens.StopwatchScreen
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 import xyz.tberghuis.floatingtimer.viewmodels.StopwatchScreenVm
+import android.Manifest
+import android.os.Build
+import androidx.compose.runtime.LaunchedEffect
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
+import com.google.accompanist.permissions.shouldShowRationale
 
 @Composable
 fun FtNavHost() {
@@ -30,7 +36,7 @@ fun FtNavHost() {
         }
         CountdownScreen()
       }
-      composable("stopwatch") {entry ->
+      composable("stopwatch") { entry ->
         val vm: StopwatchScreenVm = viewModel()
         entry.OnNavResult<Int>(savedStateHandleKey = "color_result") { result ->
           vm.haloColor = Color(result)
@@ -51,4 +57,19 @@ fun FtNavHost() {
 
   GrantOverlayDialog()
   LaunchPostNotificationsPermissionRequest()
+}
+
+@OptIn(ExperimentalPermissionsApi::class)
+@Composable
+fun LaunchPostNotificationsPermissionRequest() {
+  if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+    return
+  }
+  val notificationsPermissionState =
+    rememberPermissionState(Manifest.permission.POST_NOTIFICATIONS)
+  if (!notificationsPermissionState.status.isGranted && !notificationsPermissionState.status.shouldShowRationale) {
+    LaunchedEffect(Unit) {
+      notificationsPermissionState.launchPermissionRequest()
+    }
+  }
 }
