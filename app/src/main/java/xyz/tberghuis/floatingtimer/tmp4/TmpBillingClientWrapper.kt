@@ -43,10 +43,11 @@ class TmpBillingClientWrapper(
   override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
     try {
       purchasesUpdatedContinuation?.resume(billingResult)
-      purchasesUpdatedContinuation = null
     } catch (e: RuntimeException) {
       // this happens sometimes for some reason ???
       Log.e("BillingClientWrapper", "error: $e")
+    } finally {
+      purchasesUpdatedContinuation = null
     }
 
     if (billingResult.responseCode != BillingClient.BillingResponseCode.OK || purchases.isNullOrEmpty()) {
