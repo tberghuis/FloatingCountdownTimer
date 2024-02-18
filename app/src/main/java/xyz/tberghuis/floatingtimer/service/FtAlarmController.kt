@@ -20,7 +20,7 @@ class FtAlarmController(
 
   init {
     val notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-    ringtone = RingtoneManager.getRingtone(floatingService, notification).apply {
+    ringtone = RingtoneManager.getRingtone(floatingService, notification)?.apply {
       audioAttributes = AudioAttributes.Builder()
         .setUsage(AudioAttributes.USAGE_ALARM)
         .setLegacyStreamType(AudioManager.STREAM_ALARM)
