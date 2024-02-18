@@ -33,13 +33,48 @@ private const val RECONNECT_TIMER_MAX_TIME_MILLISECONDS = 1000L * 60L * 15L // 1
 
 class TmpBillingClientWrapper(
   private val context: Context,
-//  private val scope: CoroutineScope
 ) : PurchasesUpdatedListener {
   private var reconnectMilliseconds = RECONNECT_TIMER_START_MILLISECONDS
 
   private val billingClientStateFlow = MutableStateFlow<BillingClient?>(null)
 
   private var purchasesUpdatedContinuation: CancellableContinuation<BillingResult>? = null
+
+  // do not use as need to wait for onBillingSetupFinished
+  private val internalBillingClient = BillingClient.newBuilder(context)
+    .setListener(this)
+    .enablePendingPurchases()
+    .build()
+
+  private fun startConnection() {
+    // reference
+    // https://github.com/android/play-billing-samples/tree/main/TrivialDriveKotlin
+    val billingClientStateListener = object : BillingClientStateListener {
+      override fun onBillingServiceDisconnected() {
+        billingClientStateFlow.value = null
+        internalBillingClient.startConnection(this)
+      }
+
+      override fun onBillingSetupFinished(billingResult: BillingResult) {
+        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+          billingClientStateFlow.value = internalBillingClient
+          reconnectMilliseconds = RECONNECT_TIMER_START_MILLISECONDS
+        } else {
+          val listener = this
+          // Retries the billing service connection with exponential backoff
+          CoroutineScope(IO).launch {
+            delay(reconnectMilliseconds)
+            internalBillingClient.startConnection(listener)
+            reconnectMilliseconds = min(
+              reconnectMilliseconds * 2,
+              RECONNECT_TIMER_MAX_TIME_MILLISECONDS
+            )
+          }
+        }
+      }
+    }
+    internalBillingClient.startConnection(billingClientStateListener)
+  }
 
   override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
     try {
@@ -73,38 +108,7 @@ class TmpBillingClientWrapper(
     if (billingClientStateFlow.value != null) {
       return billingClientStateFlow.value!!
     }
-    val billingClient = BillingClient.newBuilder(context)
-      .setListener(this)
-      .enablePendingPurchases()
-      .build()
-
-    // reference
-    // https://github.com/android/play-billing-samples/tree/main/TrivialDriveKotlin
-    val billingClientStateListener = object : BillingClientStateListener {
-      override fun onBillingServiceDisconnected() {
-        billingClientStateFlow.value = null
-        billingClient.startConnection(this)
-      }
-
-      override fun onBillingSetupFinished(billingResult: BillingResult) {
-        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-          billingClientStateFlow.value = billingClient
-          reconnectMilliseconds = RECONNECT_TIMER_START_MILLISECONDS
-        } else {
-          val listener = this
-          // Retries the billing service connection with exponential backoff
-          CoroutineScope(IO).launch {
-            delay(reconnectMilliseconds)
-            billingClient.startConnection(listener)
-            reconnectMilliseconds = min(
-              reconnectMilliseconds * 2,
-              RECONNECT_TIMER_MAX_TIME_MILLISECONDS
-            )
-          }
-        }
-      }
-    }
-    billingClient.startConnection(billingClientStateListener)
+    startConnection()
     return billingClientStateFlow.filterNotNull().first()
   }
 
