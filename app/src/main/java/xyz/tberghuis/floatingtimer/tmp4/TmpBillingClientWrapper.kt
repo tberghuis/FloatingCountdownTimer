@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.tmp4
 
 import android.app.Activity
 import android.content.Context
+import android.util.Log
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
@@ -14,6 +15,7 @@ import com.android.billingclient.api.PurchasesResponseListener
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
+import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -36,13 +38,17 @@ class TmpBillingClientWrapper(
 
   private val billingClientStateFlow = MutableStateFlow<BillingClient?>(null)
 
-  // this is probably bad practice
-  // after read filterNotNull().first(), consume by setting to null.
-  // basically using like a channel for BillingResult from PurchasesUpdatedListener
-  private val purchasesUpdatedBillingResultStateFlow = MutableStateFlow<BillingResult?>(null)
+  private var purchasesUpdatedContinuation: CancellableContinuation<BillingResult>? = null
 
   override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
-    purchasesUpdatedBillingResultStateFlow.value = billingResult
+    try {
+      purchasesUpdatedContinuation?.resume(billingResult)
+      purchasesUpdatedContinuation = null
+    } catch (e: RuntimeException) {
+      // this happens sometimes for some reason ???
+      Log.e("BillingClientWrapper", "error: $e")
+    }
+
     if (billingResult.responseCode != BillingClient.BillingResponseCode.OK || purchases.isNullOrEmpty()) {
       return
     }
@@ -155,17 +161,16 @@ class TmpBillingClientWrapper(
 
   suspend fun purchaseHaloColourChange(activity: Activity): BillingResult? {
     val productDetails = getHaloColourProductDetails() ?: return null
-    val productDetailsParams =
-      BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
+    val bc = provideBillingClient()
+    return suspendCancellableCoroutine { cont ->
+      purchasesUpdatedContinuation = cont
+      val productDetailsParams =
+        BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
+          .build()
+      val params = BillingFlowParams.newBuilder()
+        .setProductDetailsParamsList(listOf(productDetailsParams))
         .build()
-    val params = BillingFlowParams.newBuilder()
-      .setProductDetailsParamsList(listOf(productDetailsParams))
-      .build()
-    purchasesUpdatedBillingResultStateFlow.value = null
-    provideBillingClient().launchBillingFlow(activity, params)
-    // br should be set in onPurchasesUpdated, should I use a channel?
-    val br = purchasesUpdatedBillingResultStateFlow.filterNotNull().first()
-    purchasesUpdatedBillingResultStateFlow.value = null
-    return br
+      bc.launchBillingFlow(activity, params)
+    }
   }
 }
