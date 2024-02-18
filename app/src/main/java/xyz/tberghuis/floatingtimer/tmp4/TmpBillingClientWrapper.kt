@@ -15,7 +15,6 @@ import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -41,7 +40,6 @@ class TmpBillingClientWrapper(
   // after read filterNotNull().first(), consume by setting to null.
   // basically using like a channel for BillingResult from PurchasesUpdatedListener
   private val purchasesUpdatedBillingResultStateFlow = MutableStateFlow<BillingResult?>(null)
-
 
   override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
     purchasesUpdatedBillingResultStateFlow.value = billingResult
@@ -125,40 +123,34 @@ class TmpBillingClientWrapper(
 
   suspend fun checkHaloColourPurchased(
   ): Boolean? {
-    val channel = Channel<Boolean?>()
+    val bc = provideBillingClient()
+    return suspendCancellableCoroutine { cont ->
+      val queryPurchasesParams =
+        QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build()
 
-    val queryPurchasesParams =
-      QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build()
-
-    val purchasesResponseListener =
-      PurchasesResponseListener { billingResult: BillingResult, purchases: MutableList<Purchase> ->
-        logd("purchasesResponseListener")
-        logd("billingResult $billingResult")
-        logd("purchases $purchases")
-        var purchased: Boolean? = false
-        when (billingResult.responseCode) {
-          BillingClient.BillingResponseCode.OK -> {
-            for (purchase in purchases) {
-              if (purchase.products.contains("halo_colour")) {
-                purchased = true
-                break
+      val purchasesResponseListener =
+        PurchasesResponseListener { billingResult: BillingResult, purchases: MutableList<Purchase> ->
+          logd("purchasesResponseListener $billingResult $purchases")
+          var purchased: Boolean? = false
+          when (billingResult.responseCode) {
+            BillingClient.BillingResponseCode.OK -> {
+              for (purchase in purchases) {
+                if (purchase.products.contains("halo_colour")) {
+                  purchased = true
+                  break
+                }
               }
             }
-          }
 
-          else -> {
-            // some sort of error
-            purchased = null
+            else -> {
+              // some sort of error
+              purchased = null
+            }
           }
+          cont.resume(purchased)
         }
-        scope.launch {
-          channel.send(purchased)
-          channel.close()
-        }
-
-      }
-    provideBillingClient().queryPurchasesAsync(queryPurchasesParams, purchasesResponseListener)
-    return channel.receive()
+      bc.queryPurchasesAsync(queryPurchasesParams, purchasesResponseListener)
+    }
   }
 
   suspend fun purchaseHaloColourChange(activity: Activity): BillingResult? {
