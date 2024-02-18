@@ -17,6 +17,7 @@ import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -32,7 +33,7 @@ private const val RECONNECT_TIMER_MAX_TIME_MILLISECONDS = 1000L * 60L * 15L // 1
 
 class TmpBillingClientWrapper(
   private val context: Context,
-  private val scope: CoroutineScope
+//  private val scope: CoroutineScope
 ) : PurchasesUpdatedListener {
   private var reconnectMilliseconds = RECONNECT_TIMER_START_MILLISECONDS
 
@@ -92,7 +93,7 @@ class TmpBillingClientWrapper(
         } else {
           val listener = this
           // Retries the billing service connection with exponential backoff
-          scope.launch {
+          CoroutineScope(IO).launch {
             delay(reconnectMilliseconds)
             billingClient.startConnection(listener)
             reconnectMilliseconds = min(
