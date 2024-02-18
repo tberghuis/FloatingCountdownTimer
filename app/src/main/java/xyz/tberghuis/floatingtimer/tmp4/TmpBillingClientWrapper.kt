@@ -38,11 +38,11 @@ class TmpBillingClientWrapper(
   // this is probably bad practice
   // after read filterNotNull().first(), consume by setting to null.
   // basically using like a channel for BillingResult from PurchasesUpdatedListener
-  private val billingResultStateFlow = MutableStateFlow<BillingResult?>(null)
+  private val purchasesUpdatedBillingResultStateFlow = MutableStateFlow<BillingResult?>(null)
 
 
   override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
-    billingResultStateFlow.value = billingResult
+    purchasesUpdatedBillingResultStateFlow.value = billingResult
     if (billingResult.responseCode != BillingClient.BillingResponseCode.OK || purchases.isNullOrEmpty()) {
       return
     }
@@ -162,7 +162,6 @@ class TmpBillingClientWrapper(
   }
 
   suspend fun purchaseHaloColourChange(activity: Activity): BillingResult? {
-    // todo show error snackbar
     val productDetails = getHaloColourProductDetails() ?: return null
     val productDetailsParams =
       BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
@@ -170,11 +169,11 @@ class TmpBillingClientWrapper(
     val params = BillingFlowParams.newBuilder()
       .setProductDetailsParamsList(listOf(productDetailsParams))
       .build()
-    billingResultStateFlow.value = null
+    purchasesUpdatedBillingResultStateFlow.value = null
     provideBillingClient().launchBillingFlow(activity, params)
     // br should be set in onPurchasesUpdated, should I use a channel?
-    val br = billingResultStateFlow.filterNotNull().first()
-    billingResultStateFlow.value = null
+    val br = purchasesUpdatedBillingResultStateFlow.filterNotNull().first()
+    purchasesUpdatedBillingResultStateFlow.value = null
     return br
   }
 }
