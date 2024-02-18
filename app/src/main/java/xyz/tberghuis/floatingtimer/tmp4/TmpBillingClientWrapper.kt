@@ -5,6 +5,7 @@ import android.content.Context
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
+import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.ProductDetailsResponseListener
@@ -161,7 +162,19 @@ class TmpBillingClientWrapper(
   }
 
   suspend fun purchaseHaloColourChange(activity: Activity): BillingResult? {
-    TODO()
+    // todo show error snackbar
+    val productDetails = getHaloColourProductDetails() ?: return null
+    val productDetailsParams =
+      BillingFlowParams.ProductDetailsParams.newBuilder().setProductDetails(productDetails)
+        .build()
+    val params = BillingFlowParams.newBuilder()
+      .setProductDetailsParamsList(listOf(productDetailsParams))
+      .build()
+    billingResultStateFlow.value = null
+    provideBillingClient().launchBillingFlow(activity, params)
+    // br should be set in onPurchasesUpdated, should I use a channel?
+    val br = billingResultStateFlow.filterNotNull().first()
+    billingResultStateFlow.value = null
+    return br
   }
-
 }
