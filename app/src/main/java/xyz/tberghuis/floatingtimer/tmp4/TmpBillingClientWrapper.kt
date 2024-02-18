@@ -1,13 +1,18 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
+import android.app.Activity
 import android.content.Context
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.ProductDetails
+import com.android.billingclient.api.ProductDetailsResponseListener
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
+import com.android.billingclient.api.QueryProductDetailsParams
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -91,9 +96,36 @@ class TmpBillingClientWrapper(
     return billingClientStateFlow.filterNotNull().first()
   }
 
+  suspend fun getHaloColourProductDetails(): ProductDetails? {
+    val channel = Channel<ProductDetails?>()
+    val productId = "halo_colour"
+    val product = QueryProductDetailsParams.Product.newBuilder()
+      .setProductId(productId)
+      .setProductType(BillingClient.ProductType.INAPP)
+      .build()
+    val params = QueryProductDetailsParams.newBuilder().setProductList(listOf(product)).build()
+    val productDetailsResponseListener =
+      ProductDetailsResponseListener { billingResult, productDetailsList ->
+        logd("productDetailsResponseListener $billingResult $productDetailsList")
+        val productDetails = productDetailsList.find {
+          it.productId == "halo_colour"
+        }
+        scope.launch {
+          channel.send(productDetails)
+          channel.close()
+        }
+      }
+    provideBillingClient().queryProductDetailsAsync(params, productDetailsResponseListener)
+    return channel.receive()
+  }
 
+  suspend fun checkHaloColourPurchased(
+  ): Boolean {
+    TODO()
+  }
 
-
-
+  suspend fun purchaseHaloColourChange(activity: Activity): BillingResult? {
+    TODO()
+  }
 
 }
