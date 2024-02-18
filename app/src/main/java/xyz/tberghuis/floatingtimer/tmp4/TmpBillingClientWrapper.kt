@@ -9,8 +9,10 @@ import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.ProductDetailsResponseListener
 import com.android.billingclient.api.Purchase
+import com.android.billingclient.api.PurchasesResponseListener
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
+import com.android.billingclient.api.QueryPurchasesParams
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
@@ -34,7 +36,7 @@ class TmpBillingClientWrapper(
 
   // this is probably bad practice
   // after read filterNotNull().first(), consume by setting to null.
-  // basically using like a channel
+  // basically using like a channel for BillingResult from PurchasesUpdatedListener
   private val billingResultStateFlow = MutableStateFlow<BillingResult?>(null)
 
 
@@ -121,8 +123,41 @@ class TmpBillingClientWrapper(
   }
 
   suspend fun checkHaloColourPurchased(
-  ): Boolean {
-    TODO()
+  ): Boolean? {
+    val channel = Channel<Boolean?>()
+
+    val queryPurchasesParams =
+      QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build()
+
+    val purchasesResponseListener =
+      PurchasesResponseListener { billingResult: BillingResult, purchases: MutableList<Purchase> ->
+        logd("purchasesResponseListener")
+        logd("billingResult $billingResult")
+        logd("purchases $purchases")
+        var purchased: Boolean? = false
+        when (billingResult.responseCode) {
+          BillingClient.BillingResponseCode.OK -> {
+            for (purchase in purchases) {
+              if (purchase.products.contains("halo_colour")) {
+                purchased = true
+                break
+              }
+            }
+          }
+
+          else -> {
+            // some sort of error
+            purchased = null
+          }
+        }
+        scope.launch {
+          channel.send(purchased)
+          channel.close()
+        }
+
+      }
+    provideBillingClient().queryPurchasesAsync(queryPurchasesParams, purchasesResponseListener)
+    return channel.receive()
   }
 
   suspend fun purchaseHaloColourChange(activity: Activity): BillingResult? {
