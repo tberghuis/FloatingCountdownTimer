@@ -34,6 +34,7 @@ class TmpBillingClientWrapper(
 
   // this is probably bad practice
   // after read filterNotNull().first(), consume by setting to null.
+  // basically using like a channel
   private val billingResultStateFlow = MutableStateFlow<BillingResult?>(null)
 
 
