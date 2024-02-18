@@ -21,7 +21,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import xyz.tberghuis.floatingtimer.logd
+import kotlin.coroutines.resume
 import kotlin.math.min
 
 private const val RECONNECT_TIMER_START_MILLISECONDS = 1L * 1000L
@@ -101,26 +103,24 @@ class TmpBillingClientWrapper(
   }
 
   suspend fun getHaloColourProductDetails(): ProductDetails? {
-    val channel = Channel<ProductDetails?>()
-    val productId = "halo_colour"
-    val product = QueryProductDetailsParams.Product.newBuilder()
-      .setProductId(productId)
-      .setProductType(BillingClient.ProductType.INAPP)
-      .build()
-    val params = QueryProductDetailsParams.newBuilder().setProductList(listOf(product)).build()
-    val productDetailsResponseListener =
-      ProductDetailsResponseListener { billingResult, productDetailsList ->
-        logd("productDetailsResponseListener $billingResult $productDetailsList")
-        val productDetails = productDetailsList.find {
-          it.productId == "halo_colour"
+    val bc = provideBillingClient()
+    return suspendCancellableCoroutine { cont ->
+      val productId = "halo_colour"
+      val product = QueryProductDetailsParams.Product.newBuilder()
+        .setProductId(productId)
+        .setProductType(BillingClient.ProductType.INAPP)
+        .build()
+      val params = QueryProductDetailsParams.newBuilder().setProductList(listOf(product)).build()
+      val productDetailsResponseListener =
+        ProductDetailsResponseListener { billingResult, productDetailsList ->
+          logd("productDetailsResponseListener $billingResult $productDetailsList")
+          val productDetails = productDetailsList.find {
+            it.productId == "halo_colour"
+          }
+          cont.resume(productDetails)
         }
-        scope.launch {
-          channel.send(productDetails)
-          channel.close()
-        }
-      }
-    provideBillingClient().queryProductDetailsAsync(params, productDetailsResponseListener)
-    return channel.receive()
+      bc.queryProductDetailsAsync(params, productDetailsResponseListener)
+    }
   }
 
   suspend fun checkHaloColourPurchased(
