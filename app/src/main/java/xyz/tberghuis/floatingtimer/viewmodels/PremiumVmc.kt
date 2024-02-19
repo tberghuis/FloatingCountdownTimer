@@ -6,8 +6,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
+import kotlinx.coroutines.withContext
+import xyz.tberghuis.floatingtimer.provideBillingClientWrapper
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 
 // is there a better pattern to share code multiple viewmodels?
@@ -19,14 +22,17 @@ class PremiumVmc(private val application: Application, private val scope: Corout
 
   private val preferences = application.providePreferencesRepository()
 
+  private val billingClientWrapper = application.provideBillingClientWrapper()
+
   init {
     updateHaloColorChangePriceText()
   }
 
   fun updateHaloColorChangePriceText() {
-    scope.launch {
-      BillingClientWrapper.run(application) { client ->
-        val details = client.getHaloColourProductDetails()?.oneTimePurchaseOfferDetails
+    scope.launch(IO) {
+      val details = billingClientWrapper.getHaloColourProductDetails()?.oneTimePurchaseOfferDetails
+      // is this needed???
+      withContext(Main) {
         premiumPriceText = details?.formattedPrice ?: ""
       }
     }
@@ -34,17 +40,13 @@ class PremiumVmc(private val application: Application, private val scope: Corout
 
   fun buy(activity: Activity, purchasedCallback: () -> Unit) {
     showPurchaseDialog = false
-
-    // future.txt exit running timers because buy method will not work....
-    // only if complaints
-    scope.launch {
-      BillingClientWrapper.run(application) { client ->
-        val billingResult = client.purchaseHaloColourChange(activity)
-        // todo error snackbar
-        val purchased = client.checkHaloColourPurchased()
-        preferences.updateHaloColourPurchased(purchased)
-        // assume user wants to save (they did click save button)
-        if (purchased) {
+    scope.launch(IO) {
+      billingClientWrapper.purchaseHaloColourChange(activity)
+      val purchased = billingClientWrapper.checkHaloColourPurchased() ?: return@launch
+      preferences.updateHaloColourPurchased(purchased)
+      if (purchased) {
+        // is the context switch needed???
+        withContext(Main) {
           purchasedCallback()
         }
       }

@@ -11,29 +11,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class MainActivity : ComponentActivity() {
+  private fun checkPremium() {
+    val preferencesRepository = application.providePreferencesRepository()
+    lifecycleScope.launch(IO) {
+      val purchased = application.provideBillingClientWrapper().checkHaloColourPurchased()
+      if (purchased == false) {
+        preferencesRepository.resetHaloColour()
+        preferencesRepository.resetBubbleScale()
+      }
+    }
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     logd("onCreate")
-
-    val preferencesRepository = application.providePreferencesRepository()
-    lifecycleScope.launch {
-      BillingClientWrapper.run(application) {
-        val purchased = it.checkHaloColourPurchased()
-        logd("MainActivity onCreate purchased $purchased")
-        preferencesRepository.updateHaloColourPurchased(purchased)
-        if (!purchased) {
-          preferencesRepository.resetHaloColour()
-          preferencesRepository.resetBubbleScale()
-        }
-      }
-    }
-
+    checkPremium()
     setContent {
       FloatingTimerTheme {
         Surface(

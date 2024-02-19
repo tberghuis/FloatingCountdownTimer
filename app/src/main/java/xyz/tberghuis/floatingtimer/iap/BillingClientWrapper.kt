@@ -21,7 +21,7 @@ import kotlin.coroutines.suspendCoroutine
 import kotlinx.coroutines.flow.MutableSharedFlow
 import xyz.tberghuis.floatingtimer.logd
 
-class BillingClientWrapper(
+class XxxBillingClientWrapper(
   context: Context
 ) : PurchasesUpdatedListener {
 
@@ -177,9 +177,9 @@ class BillingClientWrapper(
     suspend fun run(
       context: Context,
       errorMessageFlow: MutableSharedFlow<String>? = null,
-      callback: suspend (BillingClientWrapper) -> Unit
+      callback: suspend (XxxBillingClientWrapper) -> Unit
     ) {
-      val client = BillingClientWrapper(context)
+      val client = XxxBillingClientWrapper(context)
       val result = client.startBillingConnection()
       if (result.responseCode == BillingClient.BillingResponseCode.OK) {
         callback(client)
