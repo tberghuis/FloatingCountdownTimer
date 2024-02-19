@@ -18,7 +18,7 @@ class MainApplication : Application() {
   lateinit var appDatabase: AppDatabase
   lateinit var boundFloatingService: BoundFloatingService
 
-  lateinit var tmpBillingClientWrapper: BillingClientWrapper
+  lateinit var billingClientWrapper: BillingClientWrapper
 
   override fun onCreate() {
     super.onCreate()
@@ -26,7 +26,7 @@ class MainApplication : Application() {
     preferencesRepository = PreferencesRepository(dataStore)
     boundFloatingService = BoundFloatingService(this)
     createNotificationChannel()
-    tmpBillingClientWrapper = BillingClientWrapper(this)
+    billingClientWrapper = BillingClientWrapper(this)
   }
 
   private fun createNotificationChannel() {
@@ -58,5 +58,5 @@ fun Application.provideDatabase(): AppDatabase {
 }
 
 fun Application.provideBillingClientWrapper(): BillingClientWrapper {
-  return (this as MainApplication).tmpBillingClientWrapper
+  return (this as MainApplication).billingClientWrapper
 }
