@@ -7,7 +7,7 @@ import androidx.room.Room
 import xyz.tberghuis.floatingtimer.data.AppDatabase
 import xyz.tberghuis.floatingtimer.data.PreferencesRepository
 import xyz.tberghuis.floatingtimer.data.dataStore
-import xyz.tberghuis.floatingtimer.tmp4.TmpBillingClientWrapper
+import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
 
 class MainApplication : Application() {
   // could i just use Context.dataStore instead for singleton
@@ -18,7 +18,7 @@ class MainApplication : Application() {
   lateinit var appDatabase: AppDatabase
   lateinit var boundFloatingService: BoundFloatingService
 
-  lateinit var tmpBillingClientWrapper: TmpBillingClientWrapper
+  lateinit var tmpBillingClientWrapper: BillingClientWrapper
 
   override fun onCreate() {
     super.onCreate()
@@ -26,7 +26,7 @@ class MainApplication : Application() {
     preferencesRepository = PreferencesRepository(dataStore)
     boundFloatingService = BoundFloatingService(this)
     createNotificationChannel()
-    tmpBillingClientWrapper = TmpBillingClientWrapper(this)
+    tmpBillingClientWrapper = BillingClientWrapper(this)
   }
 
   private fun createNotificationChannel() {
@@ -57,6 +57,6 @@ fun Application.provideDatabase(): AppDatabase {
   return (this as MainApplication).appDatabase
 }
 
-fun Application.provideBillingClientWrapper(): TmpBillingClientWrapper {
+fun Application.provideBillingClientWrapper(): BillingClientWrapper {
   return (this as MainApplication).tmpBillingClientWrapper
 }
