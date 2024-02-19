@@ -32,15 +32,12 @@ private const val RECONNECT_TIMER_START_MILLISECONDS = 1L * 1000L
 private const val RECONNECT_TIMER_MAX_TIME_MILLISECONDS = 1000L * 60L * 15L // 15 minutes
 
 class TmpBillingClientWrapper(
-  private val context: Context,
+  context: Context,
 ) : PurchasesUpdatedListener {
   private var reconnectMilliseconds = RECONNECT_TIMER_START_MILLISECONDS
-
-  private val billingClientStateFlow = MutableStateFlow<BillingClient?>(null)
-
+  private val connectedBillingClientStateFlow = MutableStateFlow<BillingClient?>(null)
   private var purchasesUpdatedContinuation: CancellableContinuation<BillingResult>? = null
-
-  // do not use as need to wait for onBillingSetupFinished
+  // do not use outside startConnection(), use provideBillingClient
   private val internalBillingClient = BillingClient.newBuilder(context)
     .setListener(this)
     .enablePendingPurchases()
@@ -51,13 +48,13 @@ class TmpBillingClientWrapper(
     // https://github.com/android/play-billing-samples/tree/main/TrivialDriveKotlin
     val billingClientStateListener = object : BillingClientStateListener {
       override fun onBillingServiceDisconnected() {
-        billingClientStateFlow.value = null
+        connectedBillingClientStateFlow.value = null
         internalBillingClient.startConnection(this)
       }
 
       override fun onBillingSetupFinished(billingResult: BillingResult) {
         if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-          billingClientStateFlow.value = internalBillingClient
+          connectedBillingClientStateFlow.value = internalBillingClient
           reconnectMilliseconds = RECONNECT_TIMER_START_MILLISECONDS
         } else {
           val listener = this
@@ -95,7 +92,7 @@ class TmpBillingClientWrapper(
         val params = AcknowledgePurchaseParams.newBuilder()
           .setPurchaseToken(purchase.purchaseToken)
           .build()
-        billingClientStateFlow.value?.acknowledgePurchase(
+        connectedBillingClientStateFlow.value?.acknowledgePurchase(
           params
         ) { acknowledgePurchaseResult ->
           logd("acknowledgePurchaseResult $acknowledgePurchaseResult")
@@ -105,11 +102,12 @@ class TmpBillingClientWrapper(
   }
 
   private suspend fun provideBillingClient(): BillingClient {
-    if (billingClientStateFlow.value != null) {
-      return billingClientStateFlow.value!!
+    val bc = connectedBillingClientStateFlow.value
+    if (bc != null) {
+      return bc
     }
     startConnection()
-    return billingClientStateFlow.filterNotNull().first()
+    return connectedBillingClientStateFlow.filterNotNull().first()
   }
 
   suspend fun getHaloColourProductDetails(): ProductDetails? {
