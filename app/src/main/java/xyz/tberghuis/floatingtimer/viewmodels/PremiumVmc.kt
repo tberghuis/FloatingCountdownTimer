@@ -41,6 +41,7 @@ class PremiumVmc(private val application: Application, private val scope: Corout
   fun buy(activity: Activity, purchasedCallback: () -> Unit) {
     showPurchaseDialog = false
     scope.launch(IO) {
+      // this awaits billingResult in onPurchasesUpdated
       billingClientWrapper.purchaseHaloColourChange(activity)
       val purchased = billingClientWrapper.checkHaloColourPurchased() ?: return@launch
       preferences.updateHaloColourPurchased(purchased)
