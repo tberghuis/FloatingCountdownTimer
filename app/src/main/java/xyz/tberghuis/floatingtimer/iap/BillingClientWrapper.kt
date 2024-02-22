@@ -37,40 +37,45 @@ class BillingClientWrapper(
   private var reconnectMilliseconds = RECONNECT_TIMER_START_MILLISECONDS
   private val connectedBillingClientStateFlow = MutableStateFlow<BillingClient?>(null)
   private var purchasesUpdatedContinuation: CancellableContinuation<BillingResult>? = null
+
   // do not use outside startConnection(), use provideBillingClient
   private val internalBillingClient = BillingClient.newBuilder(context)
     .setListener(this)
     .enablePendingPurchases()
     .build()
 
-  private fun startConnection() {
-    // reference
-    // https://github.com/android/play-billing-samples/tree/main/TrivialDriveKotlin
-    val billingClientStateListener = object : BillingClientStateListener {
-      override fun onBillingServiceDisconnected() {
-        connectedBillingClientStateFlow.value = null
-        internalBillingClient.startConnection(this)
-      }
+  // reference
+  // https://github.com/android/play-billing-samples/tree/main/TrivialDriveKotlin
+  private val billingClientStateListener = object : BillingClientStateListener {
+    override fun onBillingServiceDisconnected() {
+      connectedBillingClientStateFlow.value = null
+      retryStartConnection()
+    }
 
-      override fun onBillingSetupFinished(billingResult: BillingResult) {
-        if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-          connectedBillingClientStateFlow.value = internalBillingClient
-          reconnectMilliseconds = RECONNECT_TIMER_START_MILLISECONDS
-        } else {
-          val listener = this
-          // Retries the billing service connection with exponential backoff
-          CoroutineScope(IO).launch {
-            delay(reconnectMilliseconds)
-            internalBillingClient.startConnection(listener)
-            reconnectMilliseconds = min(
-              reconnectMilliseconds * 2,
-              RECONNECT_TIMER_MAX_TIME_MILLISECONDS
-            )
-          }
-        }
+    override fun onBillingSetupFinished(billingResult: BillingResult) {
+      if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+        connectedBillingClientStateFlow.value = internalBillingClient
+        reconnectMilliseconds = RECONNECT_TIMER_START_MILLISECONDS
+      } else {
+        retryStartConnection()
       }
     }
+  }
+
+  private fun startConnection() {
     internalBillingClient.startConnection(billingClientStateListener)
+  }
+
+  private fun retryStartConnection() {
+    // Retries the billing service connection with exponential backoff
+    CoroutineScope(IO).launch {
+      delay(reconnectMilliseconds)
+      internalBillingClient.startConnection(billingClientStateListener)
+      reconnectMilliseconds = min(
+        reconnectMilliseconds * 2,
+        RECONNECT_TIMER_MAX_TIME_MILLISECONDS
+      )
+    }
   }
 
   override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
