@@ -62,14 +62,14 @@ class BillingClientWrapper(
     }
   }
 
-  private fun startConnection() {
-    internalBillingClient.startConnection(billingClientStateListener)
-  }
-
   private fun retryStartConnection() {
     // Retries the billing service connection with exponential backoff
     CoroutineScope(IO).launch {
       delay(reconnectMilliseconds)
+      // already connected
+      if (connectedBillingClientStateFlow.value != null) {
+        return@launch
+      }
       internalBillingClient.startConnection(billingClientStateListener)
       reconnectMilliseconds = min(
         reconnectMilliseconds * 2,
@@ -111,7 +111,7 @@ class BillingClientWrapper(
     if (bc != null) {
       return bc
     }
-    startConnection()
+    internalBillingClient.startConnection(billingClientStateListener)
     return connectedBillingClientStateFlow.filterNotNull().first()
   }
 
