@@ -80,7 +80,9 @@ class BillingClientWrapper(
 
   override fun onPurchasesUpdated(billingResult: BillingResult, purchases: MutableList<Purchase>?) {
     try {
-      purchasesUpdatedContinuation?.resume(billingResult)
+      if (purchasesUpdatedContinuation?.isActive == true) {
+        purchasesUpdatedContinuation?.resume(billingResult)
+      }
     } catch (e: RuntimeException) {
       // this happens sometimes for some reason ???
       Log.e("BillingClientWrapper", "error: $e")
@@ -130,7 +132,10 @@ class BillingClientWrapper(
           val productDetails = productDetailsList.find {
             it.productId == "halo_colour"
           }
-          cont.resume(productDetails)
+          // https://stackoverflow.com/questions/48227346/kotlin-coroutine-throws-java-lang-illegalstateexception-already-resumed-but-go
+          if (cont.isActive) {
+            cont.resume(productDetails)
+          }
         }
       bc.queryProductDetailsAsync(params, productDetailsResponseListener)
     }
@@ -162,7 +167,9 @@ class BillingClientWrapper(
               purchased = null
             }
           }
-          cont.resume(purchased)
+          if (cont.isActive) {
+            cont.resume(purchased)
+          }
         }
       bc.queryPurchasesAsync(queryPurchasesParams, purchasesResponseListener)
     }
