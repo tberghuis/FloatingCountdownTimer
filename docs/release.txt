@@ -1,7 +1,0 @@
-
-test oldest and newest api levels
-version build.gradle
-build
-release
-merge
-github release apk, tag

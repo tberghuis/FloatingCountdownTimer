@@ -1,6 +1,0 @@
-update target sdk to 34 (android 14)
-
-https://youtu.be/jE59dNqZoiI
-
-Special Use permission is required for the functionality of floating timers to be shown on top of other apps.
-Task cannot be paused or restarted as user expects stopwatch and countdown timer to show whilst using other apps and to measure time accurately.
