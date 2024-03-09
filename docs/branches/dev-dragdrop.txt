@@ -1,6 +1,0 @@
-
-future.txt refactor for clearer code
-  step 1. class StopwatchBubble 
-    move all stopwatch functions and state to live in this class
-  2. interface Bubble
-  3. class CountdownBubble
