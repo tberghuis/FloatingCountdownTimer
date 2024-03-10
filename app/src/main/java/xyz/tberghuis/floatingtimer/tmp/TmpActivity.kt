@@ -24,7 +24,7 @@ class TmpActivity : ComponentActivity() {
             .fillMaxSize()
             .background(Color.White),
         ) {
-//          FtNavHost()
+          TmpScreen()
         }
       }
     }
