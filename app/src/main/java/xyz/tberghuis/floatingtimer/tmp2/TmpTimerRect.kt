@@ -3,8 +3,10 @@ package xyz.tberghuis.floatingtimer.tmp2
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -37,17 +39,23 @@ fun TmpTimerRect(
     ) {
       Column(
         modifier = Modifier
-          .size(vm.settingsTimerPreviewVmc.bubbleSizeDp),
+//          .height(vm.settingsTimerPreviewVmc.bubbleSizeDp)
+          .width(vm.settingsTimerPreviewVmc.bubbleSizeDp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
       ) {
         Text("00:59")
 
-        CountdownProgressLine(
-          0.5f,
-          vm.settingsTimerPreviewVmc.arcWidth,
-          vm.settingsTimerPreviewVmc.haloColor
-        )
+        Box(
+          modifier = Modifier.padding(5.dp),
+          contentAlignment = Alignment.TopStart,
+        ) {
+          CountdownProgressLine(
+            0.5f,
+            vm.settingsTimerPreviewVmc.arcWidth,
+            vm.settingsTimerPreviewVmc.haloColor
+          )
+        }
 
 
       }
