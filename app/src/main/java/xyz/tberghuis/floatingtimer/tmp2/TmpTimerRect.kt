@@ -11,7 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 
 @Composable
 fun TmpTimerRect() {
@@ -34,6 +36,10 @@ fun TmpTimerRect() {
         horizontalAlignment = Alignment.CenterHorizontally,
       ) {
         Text("00:59")
+
+        CountdownProgressLine(0.5f, 10.dp, Color.Green)
+
+
       }
     }
   }

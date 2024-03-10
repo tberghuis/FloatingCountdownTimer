@@ -23,6 +23,6 @@ fun TmpScreen(
 //    Text("tmp screen")
     TmpTimerRect()
 
-    CountdownProgressLine(.5f, 10.dp, Color.Green)
+
   }
 }
