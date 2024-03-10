@@ -14,9 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
+import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp.TmpVm
 import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 
@@ -26,11 +30,19 @@ fun TmpTimerRect(
 ) {
   // represents window.addView size....
 
+  val density = LocalDensity.current
+
   Box(
     modifier = Modifier
       .width(vm.settingsTimerPreviewVmc.bubbleSizeDp)
-//      .height(vm.settingsTimerPreviewVmc.bubbleSizeDp * .6f)
-      .padding(5.dp),
+      .height(72.dp)
+      .padding(5.dp)
+      .onGloballyPositioned { layoutCoords ->
+        logd("onGloballyPositioned layoutCoords.size ${layoutCoords.size}")
+        val dpValue = with(density) { layoutCoords.size.height.toDp() }
+
+        logd("height dpValue $dpValue")
+      },
     contentAlignment = Alignment.Center,
   ) {
 
@@ -40,7 +52,8 @@ fun TmpTimerRect(
       shadowElevation = 5.dp,
     ) {
       Column(
-        modifier = Modifier.background(Color.White),
+        modifier = Modifier.background(Color.White)
+          .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
       ) {

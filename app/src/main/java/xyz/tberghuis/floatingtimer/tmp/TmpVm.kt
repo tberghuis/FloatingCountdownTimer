@@ -9,6 +9,6 @@ import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 class TmpVm(private val application: Application) : AndroidViewModel(application) {
 
   val haloColor = Color.Green
-  val settingsTimerPreviewVmc = SettingsTimerPreviewVmc(0f, haloColor)
+  val settingsTimerPreviewVmc = SettingsTimerPreviewVmc(1f, haloColor)
 
 }
