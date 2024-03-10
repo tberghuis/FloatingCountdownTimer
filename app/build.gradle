@@ -34,6 +34,7 @@ android {
         unlockTmp {
             initWith(buildTypes.debug)
             buildConfigField 'Boolean', 'DEFAULT_PURCHASED', "true"
+            signingConfig signingConfigs.debug
         }
     }
     // todo read

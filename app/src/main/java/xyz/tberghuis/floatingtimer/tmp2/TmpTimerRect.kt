@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp2
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
@@ -68,3 +70,38 @@ fun TmpTimerRect(
     }
   }
 }
+
+@Preview(showBackground = true)
+@Composable
+fun PaddingSizeDemo() {
+
+  Column(modifier = Modifier.size(100.dp)) {
+    Box(
+      Modifier
+        .padding(5.dp)
+        .width(50.dp)
+        .background(Color.Green)
+    ) {
+      Text("hello")
+    }
+
+    Box(
+      Modifier
+        .width(50.dp)
+        .padding(5.dp)
+
+        .background(Color.Green)
+    ) {
+      Text("hello")
+    }
+
+
+
+    Box(Modifier) {
+      Text("hello")
+    }
+  }
+
+
+}
+
