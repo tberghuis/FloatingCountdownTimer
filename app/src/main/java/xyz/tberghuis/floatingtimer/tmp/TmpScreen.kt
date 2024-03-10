@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.tmp2.TmpTimerRect
+import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 
 @Composable
 fun TmpScreen(
@@ -20,5 +22,7 @@ fun TmpScreen(
   ) {
 //    Text("tmp screen")
     TmpTimerRect()
+
+    CountdownProgressLine(.5f, 10.dp, Color.Green)
   }
 }
