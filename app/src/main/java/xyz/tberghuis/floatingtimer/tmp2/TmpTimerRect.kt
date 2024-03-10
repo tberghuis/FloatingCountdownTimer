@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.tmp.TmpVm
 import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 
@@ -28,6 +29,7 @@ fun TmpTimerRect(
 
   Box(
     modifier = Modifier
+      .width(vm.settingsTimerPreviewVmc.bubbleSizeDp)
       .padding(5.dp),
     contentAlignment = Alignment.Center,
   ) {
@@ -38,16 +40,20 @@ fun TmpTimerRect(
       shadowElevation = 5.dp,
     ) {
       Column(
-        modifier = Modifier
-//          .height(vm.settingsTimerPreviewVmc.bubbleSizeDp)
-          .width(vm.settingsTimerPreviewVmc.bubbleSizeDp),
+        modifier = Modifier,
+//          .width(vm.settingsTimerPreviewVmc.bubbleSizeDp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
       ) {
-        Text("00:59")
+//        Text("00:59")
+        TimeDisplay(59, vm.settingsTimerPreviewVmc.fontSize)
 
         Box(
-          modifier = Modifier.padding(5.dp),
+          modifier = Modifier.padding(
+            start = 5.dp,
+            end = 5.dp,
+            bottom = 5.dp
+          ),
           contentAlignment = Alignment.TopStart,
         ) {
           CountdownProgressLine(
