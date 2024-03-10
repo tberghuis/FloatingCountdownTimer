@@ -13,11 +13,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import xyz.tberghuis.floatingtimer.tmp.TmpVm
 import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 
 @Composable
-fun TmpTimerRect() {
+fun TmpTimerRect(
+  vm: TmpVm = viewModel()
+) {
   // represents window.addView size....
+
+
   Box(
     modifier = Modifier
       .padding(5.dp),
@@ -31,13 +37,17 @@ fun TmpTimerRect() {
     ) {
       Column(
         modifier = Modifier
-          .size(100.dp),
+          .size(vm.settingsTimerPreviewVmc.bubbleSizeDp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
       ) {
         Text("00:59")
 
-        CountdownProgressLine(0.5f, 10.dp, Color.Green)
+        CountdownProgressLine(
+          0.5f,
+          vm.settingsTimerPreviewVmc.arcWidth,
+          vm.settingsTimerPreviewVmc.haloColor
+        )
 
 
       }
