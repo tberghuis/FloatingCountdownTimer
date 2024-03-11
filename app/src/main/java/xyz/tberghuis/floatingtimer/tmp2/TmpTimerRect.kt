@@ -34,8 +34,8 @@ fun TmpTimerRect(
 
   Box(
     modifier = Modifier
-      .width(vm.settingsTimerPreviewVmc.bubbleSizeDp)
-      .height(72.dp)
+      .width(vm.settingsTimerPreviewVmc.widthDp)
+      .height(vm.settingsTimerPreviewVmc.heightDp)
       .padding(5.dp)
       .onGloballyPositioned { layoutCoords ->
         logd("onGloballyPositioned layoutCoords.size ${layoutCoords.size}")

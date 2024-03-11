@@ -14,6 +14,7 @@ import xyz.tberghuis.floatingtimer.screens.SliderScale
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownViewDisplay
 import xyz.tberghuis.floatingtimer.tmp2.TmpTimerRect
 import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
+import xyz.tberghuis.floatingtimer.tmp4.TmpSliderScale
 
 @Composable
 fun TmpScreen(
@@ -28,11 +29,11 @@ fun TmpScreen(
   ) {
 
     Row {
-      CountdownViewDisplay(vm.settingsTimerPreviewVmc, 0.6f, 59, false)
+//      CountdownViewDisplay(vm.settingsTimerPreviewVmc, 0.6f, 59, false)
       TmpTimerRect()
     }
 
-    SliderScale(vm.settingsTimerPreviewVmc)
+    TmpSliderScale(vm.settingsTimerPreviewVmc)
 
   }
 }
