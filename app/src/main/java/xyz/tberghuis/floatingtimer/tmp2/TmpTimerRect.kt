@@ -36,13 +36,13 @@ fun TmpTimerRect(
     modifier = Modifier
       .width(vm.settingsTimerPreviewVmc.widthDp)
       .height(vm.settingsTimerPreviewVmc.heightDp)
-      .padding(5.dp)
-      .onGloballyPositioned { layoutCoords ->
-        logd("onGloballyPositioned layoutCoords.size ${layoutCoords.size}")
-        val dpValue = with(density) { layoutCoords.size.height.toDp() }
-
-        logd("height dpValue $dpValue")
-      },
+      .padding(5.dp),
+//      .onGloballyPositioned { layoutCoords ->
+//        logd("onGloballyPositioned layoutCoords.size ${layoutCoords.size}")
+//        val dpValue = with(density) { layoutCoords.size.height.toDp() }
+//
+//        logd("height dpValue $dpValue")
+//      },
     contentAlignment = Alignment.Center,
   ) {
 
