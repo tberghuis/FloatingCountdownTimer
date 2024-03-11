@@ -20,7 +20,7 @@ interface TmpBubbleProperties {
 
   companion object {
     fun calcWidthDp(scaleFactor: Float) = TIMER_WIDTH_NO_SCALE * (scaleFactor + 1)
-    // todo calcHeightDp, but not here as only valid for rect bubbles
+    // todo calcRectHeightDp
 
     fun calcArcWidth(scaleFactor: Float) = ARC_WIDTH_NO_SCALE * (0.9f * scaleFactor + 1)
     fun calcFontSize(scaleFactor: Float) = TIMER_FONT_SIZE_NO_SCALE * (1.2 * scaleFactor + 1)
