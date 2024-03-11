@@ -9,8 +9,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 
-// todo take argument of timer shape
-class TmpSettingsTimerPreviewVmc(initialScale: Float, initialHaloColor: Color) :
+// todo take argument of timer shape, make timerShape sealed class or enum with room typeconverter
+class TmpSettingsTimerPreviewVmc(initialScale: Float, initialHaloColor: Color, timerShape: String) :
   TmpBubbleProperties {
   var bubbleSizeScaleFactor by mutableFloatStateOf(initialScale) // 0<=x<=1
   override var haloColor by mutableStateOf(initialHaloColor)
@@ -23,7 +23,18 @@ class TmpSettingsTimerPreviewVmc(initialScale: Float, initialHaloColor: Color) :
   // m = 22, b=50
   // todo when(timerShape)
   override val heightDp by derivedStateOf {
-    TmpBubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
+    when (timerShape) {
+      "circle" -> {
+        TmpBubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
+      }
+      "rectangle" -> {
+        TmpBubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
+      }
+      // todo this should throw
+      else -> {
+        TmpBubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
+      }
+    }
   }
 
   override val arcWidth by derivedStateOf {
