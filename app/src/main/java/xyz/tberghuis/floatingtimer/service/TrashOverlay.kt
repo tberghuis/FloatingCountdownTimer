@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp5.Bubble
 
 @Composable
 fun TrashOverlay() {
@@ -104,9 +105,10 @@ fun calcTimerIsHoverTrash(
   if (bubble == null) {
     return false
   }
-  val halfTimerSize = bubble.bubbleSizePx / 2f
-  val timerCenterX = bubblePosition.x + halfTimerSize
-  val timerCenterY = bubblePosition.y + halfTimerSize
+  val halfTimerWidth = bubble.widthPx / 2f
+  val halfTimerHeight = bubble.heightPx / 2f
+  val timerCenterX = bubblePosition.x + halfTimerWidth
+  val timerCenterY = bubblePosition.y + halfTimerHeight
   return !(timerCenterX < trashRect.left ||
       timerCenterX > trashRect.right ||
       timerCenterY < trashRect.top ||

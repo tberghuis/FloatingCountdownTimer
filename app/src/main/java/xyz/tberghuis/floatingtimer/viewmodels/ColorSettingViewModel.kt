@@ -13,6 +13,7 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.tmp5.SettingsTimerPreviewVmc
 
 class ColorSettingViewModel(application: Application, savedStateHandle: SavedStateHandle) :
   AndroidViewModel(application) {
@@ -37,7 +38,7 @@ class ColorSettingViewModel(application: Application, savedStateHandle: SavedSta
       val haloColor = preferences.haloColourFlow.first()
       colorPickerColorState.value = HsvColor.from(haloColor)
       val scale = preferences.bubbleScaleFlow.first()
-      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor)
+      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor, "circle")
       initialised = true
     }
   }

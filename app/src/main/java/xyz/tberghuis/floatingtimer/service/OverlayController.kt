@@ -21,6 +21,8 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
+import xyz.tberghuis.floatingtimer.tmp5.Bubble
+import xyz.tberghuis.floatingtimer.tmp5.TimerViewHolder
 import kotlin.math.max
 import kotlin.math.min
 
@@ -156,9 +158,9 @@ class OverlayController(val service: FloatingService) {
     var x = params.x
     var y = params.y
     x = max(x, 0)
-    x = min(x, ScreenEz.safeWidth - viewHolder.timerSizePx)
+    x = min(x, ScreenEz.safeWidth - viewHolder.widthPx)
     y = max(y, 0)
-    y = min(y, ScreenEz.safeHeight - viewHolder.timerSizePx)
+    y = min(y, ScreenEz.safeHeight - viewHolder.heightPx)
     params.x = x
     params.y = y
     try {

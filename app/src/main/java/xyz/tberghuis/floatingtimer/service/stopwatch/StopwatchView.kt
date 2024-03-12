@@ -39,7 +39,8 @@ fun StopwatchView(
 ) {
   StopwatchView(
     isRunningStateFlow = stopwatch.isRunningStateFlow,
-    bubbleSizeDp = stopwatch.bubbleSizeDp,
+    // todo
+    bubbleSizeDp = stopwatch.widthDp,
     arcWidth = stopwatch.arcWidth,
     haloColor = stopwatch.haloColor,
     timeElapsed = stopwatch.timeElapsed.intValue,

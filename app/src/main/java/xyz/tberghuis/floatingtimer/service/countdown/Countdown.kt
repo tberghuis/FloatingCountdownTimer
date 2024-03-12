@@ -18,16 +18,16 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.service.Bubble
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import kotlin.math.roundToInt
+import xyz.tberghuis.floatingtimer.tmp5.Bubble
 
 class Countdown(
   private val service: FloatingService,
   val durationSeconds: Int,
   bubbleSizeScaleFactor: Float,
   haloColor: Color
-) : Bubble(service, bubbleSizeScaleFactor, haloColor) {
+) : Bubble(service, bubbleSizeScaleFactor, haloColor, "circle") {
   var countdownSeconds by mutableIntStateOf(durationSeconds)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
   private var countDownTimer: CountDownTimer? = null

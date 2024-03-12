@@ -8,7 +8,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.zIndex
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
-import xyz.tberghuis.floatingtimer.service.BubbleProperties
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
@@ -22,6 +21,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
+import xyz.tberghuis.floatingtimer.tmp5.BubbleProperties
 
 @Composable
 fun CountdownView(countdown: Countdown) {
@@ -44,7 +44,8 @@ fun CountdownViewDisplay(
 ) {
   Box(
     modifier = Modifier
-      .size(bubbleProperties.bubbleSizeDp)
+      // todo check everywhere widthDp or widthPx is referenced, implement when(timerShape)
+      .size(bubbleProperties.widthDp)
       .padding(bubbleProperties.arcWidth / 2)
       .zIndex(1f),
     contentAlignment = Alignment.Center
