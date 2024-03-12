@@ -3,11 +3,16 @@ package xyz.tberghuis.floatingtimer.tmp5
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
-import xyz.tberghuis.floatingtimer.tmp4.RECT_TIMER_HEIGHT_MAX_SCALE
-import xyz.tberghuis.floatingtimer.tmp4.RECT_TIMER_HEIGHT_NO_SCALE
-import xyz.tberghuis.floatingtimer.tmp4.TIMER_WIDTH_NO_SCALE
+
+// put in constants
+val TIMER_WIDTH_NO_SCALE = 60.dp
+
+val RECT_TIMER_HEIGHT_NO_SCALE = 50.dp
+val RECT_TIMER_HEIGHT_MAX_SCALE = 72.dp
+
 
 interface BubbleProperties {
   val widthDp: Dp

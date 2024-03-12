@@ -4,10 +4,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Slider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import xyz.tberghuis.floatingtimer.tmp5.SettingsTimerPreviewVmc
 
 @Composable
 fun TmpSliderScale(
-  vmc: TmpSettingsTimerPreviewVmc
+  vmc: SettingsTimerPreviewVmc
 ) {
   Slider(
     value = vmc.bubbleSizeScaleFactor,
