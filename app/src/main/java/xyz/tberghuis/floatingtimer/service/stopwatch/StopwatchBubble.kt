@@ -13,8 +13,9 @@ import kotlin.concurrent.timerTask
 class Stopwatch(
   service: FloatingService,
   bubbleSizeScaleFactor: Float,
-  haloColor: Color
-) : Bubble(service, bubbleSizeScaleFactor, haloColor, "circle") {
+  haloColor: Color,
+  timerShape: String
+) : Bubble(service, bubbleSizeScaleFactor, haloColor, timerShape) {
   val timeElapsed = mutableIntStateOf(0)
   val isRunningStateFlow = MutableStateFlow(false)
   private var stopwatchIncrementTask: TimerTask? = null
