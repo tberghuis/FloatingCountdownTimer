@@ -26,41 +26,35 @@ fun TmpStopwatchView(
   Box(
     modifier = Modifier
       .size(stopwatch.widthDp, stopwatch.heightDp)
-      .padding(5.dp),
+      .padding(5.dp)
+      .graphicsLayer(
+        shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
+        shape = RoundedCornerShape(10.dp),
+        clip = true
+      ),
     contentAlignment = Alignment.Center,
   ) {
-    Box(
+    Column(
       modifier = Modifier
-        .graphicsLayer(
-          shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
-          shape = RoundedCornerShape(10.dp),
-          clip = true
-        )
+        .background(Color.White)
+        .fillMaxSize(),
+      verticalArrangement = Arrangement.Center,
+      horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-      Column(
-        modifier = Modifier
-          .background(Color.White)
-          .fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+      TimeDisplay(59, stopwatch.fontSize)
+      Box(
+        modifier = Modifier.padding(
+          start = 5.dp,
+          end = 5.dp,
+          bottom = 5.dp
+        ),
+        contentAlignment = Alignment.TopStart,
       ) {
-
-        TimeDisplay(59, stopwatch.fontSize)
-
-        Box(
-          modifier = Modifier.padding(
-            start = 5.dp,
-            end = 5.dp,
-            bottom = 5.dp
-          ),
-          contentAlignment = Alignment.TopStart,
-        ) {
-          CountdownProgressLine(
-            0.5f,
-            stopwatch.arcWidth,
-            stopwatch.haloColor
-          )
-        }
+        CountdownProgressLine(
+          0.5f,
+          stopwatch.arcWidth,
+          stopwatch.haloColor
+        )
       }
     }
   }
