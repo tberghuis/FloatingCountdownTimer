@@ -37,9 +37,9 @@ fun TmpStopwatchView(
         .graphicsLayer(
           shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
           shape = RoundedCornerShape(10.dp),
-          clip = false
+          clip = true
         )
-        .clip(RoundedCornerShape(10.dp)),
+//        .clip(RoundedCornerShape(10.dp)),
     ) {
 
 
