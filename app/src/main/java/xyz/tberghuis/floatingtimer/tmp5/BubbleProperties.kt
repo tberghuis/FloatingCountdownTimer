@@ -25,6 +25,8 @@ interface BubbleProperties {
   val fontSize: TextUnit
   val haloColor: Color
 
+  val timerShape: String
+
   companion object {
     fun calcWidthDp(scaleFactor: Float) = TIMER_WIDTH_NO_SCALE * (scaleFactor + 1)
     // todo calcRectHeightDp

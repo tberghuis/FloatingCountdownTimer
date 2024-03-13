@@ -8,10 +8,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 
 // todo take argument of timer shape, make timerShape sealed class or enum with room typeconverter
-class SettingsTimerPreviewVmc(initialScale: Float, initialHaloColor: Color, timerShape: String) :
+class SettingsTimerPreviewVmc(
+  initialScale: Float,
+  initialHaloColor: Color,
+  override val timerShape: String
+) :
   BubbleProperties {
   var bubbleSizeScaleFactor by mutableFloatStateOf(initialScale) // 0<=x<=1
   override var haloColor by mutableStateOf(initialHaloColor)
+
 
   override val widthDp by derivedStateOf {
     BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
@@ -25,6 +30,7 @@ class SettingsTimerPreviewVmc(initialScale: Float, initialHaloColor: Color, time
       "circle" -> {
         BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
       }
+
       "rectangle" -> {
         BubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
       }

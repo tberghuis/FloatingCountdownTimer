@@ -9,7 +9,7 @@ abstract class Bubble(
   private val service: FloatingService,
   bubbleSizeScaleFactor: Float,
   override val haloColor: Color,
-  timerShape: String
+  final override val timerShape: String
 ) : BubbleProperties {
   final override val widthDp = BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
 
