@@ -41,7 +41,7 @@ fun StopwatchRectView(
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-      TimeDisplay(59, stopwatch.fontSize)
+      TimeDisplay(stopwatch.timeElapsed.intValue, stopwatch.fontSize)
       Box(
         modifier = Modifier.padding(
           start = 5.dp,
@@ -51,7 +51,7 @@ fun StopwatchRectView(
         contentAlignment = Alignment.TopStart,
       ) {
         CountdownProgressLine(
-          0.5f,
+          1f,
           stopwatch.arcWidth,
           stopwatch.haloColor
         )
