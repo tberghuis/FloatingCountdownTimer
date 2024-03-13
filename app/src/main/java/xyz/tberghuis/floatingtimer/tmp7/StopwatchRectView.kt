@@ -27,10 +27,7 @@ import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 fun StopwatchRectView(
   stopwatch: Stopwatch
 ) {
-
   val isRunning = stopwatch.isRunningStateFlow.collectAsState().value
-
-
 
   Box(
     modifier = Modifier
@@ -82,10 +79,6 @@ fun StopwatchRectView(
           )
         }
       }
-
-
     }
-
-
   }
 }
