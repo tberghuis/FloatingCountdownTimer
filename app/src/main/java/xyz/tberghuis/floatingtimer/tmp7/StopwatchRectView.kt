@@ -43,40 +43,47 @@ fun StopwatchRectView(
       ),
     contentAlignment = Alignment.Center,
   ) {
-    Column(
+
+    Box(
       modifier = Modifier
         .background(Color.White)
         .fillMaxSize(),
-      verticalArrangement = Arrangement.Center,
-      horizontalAlignment = Alignment.CenterHorizontally,
+      contentAlignment = Alignment.Center,
     ) {
-      TimeDisplay(stopwatch.timeElapsed.intValue, stopwatch.fontSize)
-      Box(
-        modifier = Modifier.padding(
-          start = 5.dp,
-          end = 5.dp,
-          bottom = 5.dp
-        ),
-        contentAlignment = Alignment.TopStart,
-      ) {
-        CountdownProgressLine(
-          1f,
-          stopwatch.arcWidth,
-          stopwatch.haloColor
+
+      if (!isRunning) {
+        Icon(
+          Icons.Filled.PlayArrow,
+          contentDescription = "paused",
+          modifier = Modifier.fillMaxSize(),
+          tint = Color.LightGray
         )
       }
-    }
+
+      Column(
+        modifier = Modifier
+          .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+      ) {
+        TimeDisplay(stopwatch.timeElapsed.intValue, stopwatch.fontSize)
+        Box(
+          modifier = Modifier.padding(
+            start = 5.dp,
+            end = 5.dp,
+            bottom = 5.dp
+          ),
+          contentAlignment = Alignment.TopStart,
+        ) {
+          CountdownProgressLine(
+            1f,
+            stopwatch.arcWidth,
+            stopwatch.haloColor
+          )
+        }
+      }
 
 
-
-
-    if (!isRunning) {
-      Icon(
-        Icons.Filled.PlayArrow,
-        contentDescription = "paused",
-        modifier = Modifier.fillMaxSize(),
-        tint = Color.LightGray
-      )
     }
 
 
