@@ -54,7 +54,18 @@ fun StopwatchView(
     }
 
     "rectangle" -> {
-      StopwatchRectView(stopwatch)
+//      StopwatchRectView(stopwatch)
+
+      StopwatchView(
+        isRunningStateFlow = stopwatch.isRunningStateFlow,
+        // todo
+        bubbleSizeDp = stopwatch.widthDp,
+        arcWidth = stopwatch.arcWidth,
+        haloColor = stopwatch.haloColor,
+        timeElapsed = stopwatch.timeElapsed.intValue,
+        fontSize = stopwatch.fontSize
+      )
+
     }
 
     else -> {

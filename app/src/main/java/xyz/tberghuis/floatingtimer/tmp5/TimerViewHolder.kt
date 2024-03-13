@@ -6,6 +6,7 @@ import android.view.WindowManager
 import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
+import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.createComposeView
 
@@ -23,5 +24,8 @@ class TimerViewHolder(val service: FloatingService, val widthPx: Int, val height
 
   init {
     params.gravity = Gravity.TOP or Gravity.LEFT
+
+    logd("TimerViewHolder params $params")
+
   }
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
@@ -25,8 +26,9 @@ fun StopwatchRectView(
 ) {
   Box(
     modifier = Modifier
-      .width(stopwatch.widthDp)
-      .height(stopwatch.heightDp)
+//      .width(stopwatch.widthDp)
+//      .height(stopwatch.heightDp)
+      .size(stopwatch.widthDp, stopwatch.heightDp)
       .padding(5.dp),
     contentAlignment = Alignment.Center,
   ) {
@@ -44,7 +46,7 @@ fun StopwatchRectView(
         horizontalAlignment = Alignment.CenterHorizontally,
       ) {
 
-        TimeDisplay(59,  stopwatch.fontSize)
+        TimeDisplay(59, stopwatch.fontSize)
 
         Box(
           modifier = Modifier.padding(
