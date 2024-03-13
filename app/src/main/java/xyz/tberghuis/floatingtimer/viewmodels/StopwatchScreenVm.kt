@@ -16,11 +16,11 @@ import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.tmp6.BubbleShapeChoiceVm
+import xyz.tberghuis.floatingtimer.tmp6.TimerShapeChoiceVm
 
 class StopwatchScreenVm(
   private val application: Application,
-) : AndroidViewModel(application), BubbleShapeChoiceVm {
+) : AndroidViewModel(application), TimerShapeChoiceVm {
   private val savedStopwatchDao = application.provideDatabase().savedStopwatchDao()
   var showDeleteDialog by mutableStateOf<SavedStopwatch?>(null)
 
@@ -30,7 +30,7 @@ class StopwatchScreenVm(
 
   var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
 
-  override var bubbleShapeChoice by mutableStateOf("circle")
+  override var timerShape by mutableStateOf("circle")
 
   init {
     viewModelScope.launch {
@@ -45,23 +45,24 @@ class StopwatchScreenVm(
   }
 
   fun savedStopwatchClick(timer: SavedStopwatch) {
-    addStopwatch(Color(timer.timerColor))
+    // todo
+    addStopwatch(Color(timer.timerColor), "circle")
   }
 
-  private fun addStopwatch(haloColor: Color) {
+  private fun addStopwatch(haloColor: Color, timerShape: String) {
     viewModelScope.launch {
       if (shouldShowPremiumDialogMultipleTimers(application)) {
         premiumVmc.showPurchaseDialog = true
         return@launch
       }
       boundFloatingService.provideFloatingService().overlayController.addStopwatch(
-        haloColor
+        haloColor, timerShape
       )
     }
   }
 
   fun stopwatchButtonClick() {
-    addStopwatch(haloColor)
+    addStopwatch(haloColor, timerShape)
   }
 
   fun deleteSavedStopwatch(timer: SavedStopwatch) {

@@ -35,7 +35,8 @@ class OverlayController(val service: FloatingService) {
     return bubbleSet.size
   }
 
-  fun addStopwatch(haloColor: Color) {
+  // doitwrong
+  fun addStopwatch(haloColor: Color, timerShape: String) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()

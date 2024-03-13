@@ -7,18 +7,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun BubbleShapeChoice(vm: BubbleShapeChoiceVm) {
+fun TimerShapeChoice(vm: TimerShapeChoiceVm) {
   Row {
     RadioButton(
-      selected = vm.bubbleShapeChoice == "circle",
-      onClick = { vm.bubbleShapeChoice = "circle" },
+      selected = vm.timerShape == "circle",
+      onClick = { vm.timerShape = "circle" },
       modifier = Modifier,
     )
     Text("circle")
 
     RadioButton(
-      selected = vm.bubbleShapeChoice == "rectangle",
-      onClick = { vm.bubbleShapeChoice = "rectangle" },
+      selected = vm.timerShape == "rectangle",
+      onClick = { vm.timerShape = "rectangle" },
       modifier = Modifier,
     )
     Text("rectangle")
