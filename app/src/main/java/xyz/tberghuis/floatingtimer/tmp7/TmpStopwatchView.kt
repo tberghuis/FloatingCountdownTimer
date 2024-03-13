@@ -1,49 +1,64 @@
 package xyz.tberghuis.floatingtimer.tmp7
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Icon
-import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
-import kotlinx.coroutines.flow.MutableStateFlow
-import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchBorderArc
+import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
+import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 
 @Composable
 fun TmpStopwatchView(
-  // when isRunningStateFlow null, showing preview in saved timers card
-  isRunningStateFlow: MutableStateFlow<Boolean>?,
-  bubbleSizeDp: Dp,
-  arcWidth: Dp,
-  haloColor: Color,
-  timeElapsed: Int,
-  fontSize: TextUnit
+  stopwatch: Stopwatch
 ) {
-  val isRunning = isRunningStateFlow?.collectAsState()?.value
   Box(
     modifier = Modifier
-      .size(bubbleSizeDp)
-      .padding(arcWidth / 2),
-    contentAlignment = Alignment.Center
+      .size(stopwatch.widthDp, stopwatch.heightDp)
+      .padding(5.dp),
+    contentAlignment = Alignment.Center,
   ) {
-    StopwatchBorderArc(isRunningStateFlow, arcWidth, haloColor)
-    if (isRunning == false) {
-      Icon(
-        Icons.Filled.PlayArrow,
-        contentDescription = "paused",
-        modifier = Modifier.fillMaxSize(),
-        tint = Color.LightGray
-      )
+
+    Surface(
+      modifier = Modifier,
+      shape = RoundedCornerShape(10.dp),
+      shadowElevation = 5.dp,
+    ) {
+      Column(
+        modifier = Modifier
+          .background(Color.White)
+          .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+      ) {
+
+        TimeDisplay(59, stopwatch.fontSize)
+
+        Box(
+          modifier = Modifier.padding(
+            start = 5.dp,
+            end = 5.dp,
+            bottom = 5.dp
+          ),
+          contentAlignment = Alignment.TopStart,
+        ) {
+          CountdownProgressLine(
+            0.5f,
+            stopwatch.arcWidth,
+            stopwatch.haloColor
+          )
+        }
+      }
     }
-    TimeDisplay(timeElapsed, fontSize)
   }
 }
