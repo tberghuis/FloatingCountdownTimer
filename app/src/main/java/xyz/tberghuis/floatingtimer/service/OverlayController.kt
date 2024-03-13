@@ -94,6 +94,8 @@ class OverlayController(val service: FloatingService) {
     onTap: () -> Unit,
   ) {
 
+    logd("clickTargetSetOnTouchListener bubble $bubble")
+
     var paramStartDragX: Int = 0
     var paramStartDragY: Int = 0
     var startDragRawX: Float = 0F
@@ -114,6 +116,9 @@ class OverlayController(val service: FloatingService) {
     })
 
     bubble.viewHolder.view.setOnTouchListener { _, event ->
+
+      logd("bubble.viewHolder.view.setOnTouchListener")
+
       if (tapDetector.onTouchEvent(event)) {
         // just to be safe
         trashController.isBubbleDragging.value = false
