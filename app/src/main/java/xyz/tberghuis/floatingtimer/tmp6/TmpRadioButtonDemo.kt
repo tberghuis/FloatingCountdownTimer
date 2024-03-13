@@ -5,12 +5,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 class TmpRadioButtonVm(private val application: Application) : AndroidViewModel(application) {
-
+  var bubbleShape by mutableStateOf("circle")
 }
 
 @Composable
@@ -21,18 +25,17 @@ fun TmpRadioButtonDemo(
 
   Row {
     RadioButton(
-      selected = true,
-      onClick = {},
+      selected = vm.bubbleShape == "circle",
+      onClick = { vm.bubbleShape = "circle" },
       modifier = Modifier,
     )
     Text("circle")
+
     RadioButton(
-      selected = false,
-      onClick = {},
+      selected = vm.bubbleShape == "rectangle",
+      onClick = { vm.bubbleShape = "rectangle" },
       modifier = Modifier,
     )
     Text("rectangle")
   }
-
-
 }
