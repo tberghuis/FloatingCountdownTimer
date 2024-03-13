@@ -16,9 +16,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 class TmpRadioButtonVm(private val application: Application) : AndroidViewModel(application),
   BubbleShapeChoiceVm {
   override var bubbleShapeChoice by mutableStateOf("circle")
-//  override var bubbleShapeChoice: String
-//    get() = TODO("Not yet implemented")
-//    set(value) {}
 }
 
 @Composable
@@ -26,27 +23,5 @@ fun TmpRadioButtonDemo(
   vm: TmpRadioButtonVm = viewModel()
 ) {
   Text("hello radio button")
-  TmpRadioButtonDemoContent(vm)
-}
-
-
-@Composable
-fun TmpRadioButtonDemoContent(
-  vm: BubbleShapeChoiceVm
-) {
-  Row {
-    RadioButton(
-      selected = vm.bubbleShapeChoice == "circle",
-      onClick = { vm.bubbleShapeChoice = "circle" },
-      modifier = Modifier,
-    )
-    Text("circle")
-
-    RadioButton(
-      selected = vm.bubbleShapeChoice == "rectangle",
-      onClick = { vm.bubbleShapeChoice = "rectangle" },
-      modifier = Modifier,
-    )
-    Text("rectangle")
-  }
+  BubbleShapeChoice(vm)
 }
