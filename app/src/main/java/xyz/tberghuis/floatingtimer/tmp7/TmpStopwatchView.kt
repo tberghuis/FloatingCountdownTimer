@@ -36,69 +36,69 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 
-@Composable
-fun TmpStopwatchView(
-  stopwatch: Stopwatch
-) {
-  Box(
-    modifier = Modifier
-      .size(stopwatch.widthDp, stopwatch.heightDp)
-      .padding(5.dp),
-    contentAlignment = Alignment.Center,
-  ) {
-
-
-    val absoluteElevation = LocalAbsoluteTonalElevation.current
-    val color = MaterialTheme.colorScheme.surface
-    CompositionLocalProvider(
-      LocalContentColor provides contentColorFor(color),
-      LocalAbsoluteTonalElevation provides absoluteElevation
-    ) {
-
-      Box(
-        modifier = Modifier
-          .surface(
-            shape = RoundedCornerShape(10.dp),
-            backgroundColor = surfaceColorAtElevation(
-              color = color,
-              elevation = absoluteElevation
-            ),
-            border = null,
-            shadowElevation = with(LocalDensity.current) { 5.dp.toPx() }
-          ),
-        ) {
-        Column(
-          modifier = Modifier
-            .background(Color.White)
-            .fillMaxSize(),
-          verticalArrangement = Arrangement.Center,
-          horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-
-          TimeDisplay(59, stopwatch.fontSize)
-
-          Box(
-            modifier = Modifier.padding(
-              start = 5.dp,
-              end = 5.dp,
-              bottom = 5.dp
-            ),
-            contentAlignment = Alignment.TopStart,
-          ) {
-            CountdownProgressLine(
-              0.5f,
-              stopwatch.arcWidth,
-              stopwatch.haloColor
-            )
-          }
-        }
-
-      }
-    }
-
-
-  }
-}
+//@Composable
+//fun TmpStopwatchView(
+//  stopwatch: Stopwatch
+//) {
+//  Box(
+//    modifier = Modifier
+//      .size(stopwatch.widthDp, stopwatch.heightDp)
+//      .padding(5.dp),
+//    contentAlignment = Alignment.Center,
+//  ) {
+//
+//
+//    val absoluteElevation = LocalAbsoluteTonalElevation.current
+//    val color = MaterialTheme.colorScheme.surface
+//    CompositionLocalProvider(
+//      LocalContentColor provides contentColorFor(color),
+//      LocalAbsoluteTonalElevation provides absoluteElevation
+//    ) {
+//
+//      Box(
+//        modifier = Modifier
+//          .surface(
+//            shape = RoundedCornerShape(10.dp),
+//            backgroundColor = surfaceColorAtElevation(
+//              color = color,
+//              elevation = absoluteElevation
+//            ),
+//            border = null,
+//            shadowElevation = with(LocalDensity.current) { 5.dp.toPx() }
+//          ),
+//        ) {
+//        Column(
+//          modifier = Modifier
+//            .background(Color.White)
+//            .fillMaxSize(),
+//          verticalArrangement = Arrangement.Center,
+//          horizontalAlignment = Alignment.CenterHorizontally,
+//        ) {
+//
+//          TimeDisplay(59, stopwatch.fontSize)
+//
+//          Box(
+//            modifier = Modifier.padding(
+//              start = 5.dp,
+//              end = 5.dp,
+//              bottom = 5.dp
+//            ),
+//            contentAlignment = Alignment.TopStart,
+//          ) {
+//            CountdownProgressLine(
+//              0.5f,
+//              stopwatch.arcWidth,
+//              stopwatch.haloColor
+//            )
+//          }
+//        }
+//
+//      }
+//    }
+//
+//
+//  }
+//}
 
 
 @Stable
@@ -128,5 +128,62 @@ internal fun ColorScheme.applyTonalElevation(backgroundColor: Color, elevation: 
     surfaceColorAtElevation(elevation)
   } else {
     backgroundColor
+  }
+}
+
+
+@Composable
+fun TmpStopwatchView(
+  stopwatch: Stopwatch
+) {
+  Box(
+    modifier = Modifier
+      .size(stopwatch.widthDp, stopwatch.heightDp)
+      .padding(5.dp),
+    contentAlignment = Alignment.Center,
+  ) {
+
+
+    Box(
+      modifier = Modifier
+        .graphicsLayer(
+          shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
+          shape = RoundedCornerShape(10.dp),
+          clip = false
+        )
+        .clip(RoundedCornerShape(10.dp)),
+    ) {
+
+
+
+      Column(
+        modifier = Modifier
+          .background(Color.White)
+          .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+      ) {
+
+        TimeDisplay(59, stopwatch.fontSize)
+
+        Box(
+          modifier = Modifier.padding(
+            start = 5.dp,
+            end = 5.dp,
+            bottom = 5.dp
+          ),
+          contentAlignment = Alignment.TopStart,
+        ) {
+          CountdownProgressLine(
+            0.5f,
+            stopwatch.arcWidth,
+            stopwatch.haloColor
+          )
+        }
+      }
+
+    }
+
+
   }
 }
