@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
@@ -30,8 +29,6 @@ fun TmpStopwatchView(
       .padding(5.dp),
     contentAlignment = Alignment.Center,
   ) {
-
-
     Box(
       modifier = Modifier
         .graphicsLayer(
@@ -39,11 +36,7 @@ fun TmpStopwatchView(
           shape = RoundedCornerShape(10.dp),
           clip = true
         )
-//        .clip(RoundedCornerShape(10.dp)),
     ) {
-
-
-
       Column(
         modifier = Modifier
           .background(Color.White)
@@ -69,9 +62,6 @@ fun TmpStopwatchView(
           )
         }
       }
-
     }
-
-
   }
 }
