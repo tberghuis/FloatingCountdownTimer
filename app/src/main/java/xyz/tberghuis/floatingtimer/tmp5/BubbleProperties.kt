@@ -15,6 +15,8 @@ val RECT_TIMER_HEIGHT_MAX_SCALE = 72.dp
 
 // future data class implements this, use composition over inheritance
 // make update method a single method interface, does calcs and returns copy instance
+
+// state that is static for lifetime of bubble goes here
 interface BubbleProperties {
   val widthDp: Dp
   val heightDp: Dp
