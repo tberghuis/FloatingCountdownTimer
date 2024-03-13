@@ -13,7 +13,8 @@ val TIMER_WIDTH_NO_SCALE = 60.dp
 val RECT_TIMER_HEIGHT_NO_SCALE = 50.dp
 val RECT_TIMER_HEIGHT_MAX_SCALE = 72.dp
 
-
+// future data class implements this, use composition over inheritance
+// make update method a single method interface, does calcs and returns copy instance
 interface BubbleProperties {
   val widthDp: Dp
   val heightDp: Dp
