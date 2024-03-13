@@ -16,10 +16,11 @@ import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.tmp6.BubbleShapeChoiceVm
 
 class StopwatchScreenVm(
   private val application: Application,
-) : AndroidViewModel(application) {
+) : AndroidViewModel(application), BubbleShapeChoiceVm {
   private val savedStopwatchDao = application.provideDatabase().savedStopwatchDao()
   var showDeleteDialog by mutableStateOf<SavedStopwatch?>(null)
 
@@ -28,6 +29,8 @@ class StopwatchScreenVm(
   private val boundFloatingService = (application as MainApplication).boundFloatingService
 
   var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
+
+  override var bubbleShapeChoice by mutableStateOf("circle")
 
   init {
     viewModelScope.launch {
