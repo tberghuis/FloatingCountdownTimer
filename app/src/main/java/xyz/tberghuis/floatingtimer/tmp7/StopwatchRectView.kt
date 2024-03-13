@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.Icon
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,6 +27,11 @@ import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 fun StopwatchRectView(
   stopwatch: Stopwatch
 ) {
+
+  val isRunning = stopwatch.isRunningStateFlow.collectAsState().value
+
+
+
   Box(
     modifier = Modifier
       .size(stopwatch.widthDp, stopwatch.heightDp)
@@ -57,5 +66,19 @@ fun StopwatchRectView(
         )
       }
     }
+
+
+
+
+    if (!isRunning) {
+      Icon(
+        Icons.Filled.PlayArrow,
+        contentDescription = "paused",
+        modifier = Modifier.fillMaxSize(),
+        tint = Color.LightGray
+      )
+    }
+
+
   }
 }
