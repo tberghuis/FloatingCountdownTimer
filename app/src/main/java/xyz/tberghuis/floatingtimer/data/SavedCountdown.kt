@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Entity
 data class SavedCountdown(
   @PrimaryKey(autoGenerate = true) val id: Int = 0,
-  @ColumnInfo(name = "shape") val timerShape: String,
+  @ColumnInfo(name = "shape") override val timerShape: String,
   // Color.toArgb
   @ColumnInfo(name = "color") override val timerColor: Int,
   // stores as seconds

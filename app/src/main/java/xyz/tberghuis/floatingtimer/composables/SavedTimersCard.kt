@@ -60,7 +60,8 @@ fun <T : SavedTimer> ColumnScope.SavedTimersCard(
     ) {
       savedTimers.forEach { savedTimer ->
         val c = Color(savedTimer.timerColor)
-        val settingsTimerPreviewVmc = SettingsTimerPreviewVmc(0f, c, "circle")
+
+        val settingsTimerPreviewVmc = SettingsTimerPreviewVmc(0f, c, savedTimer.timerShape)
         Box(
           modifier = Modifier
             .combinedClickable(
