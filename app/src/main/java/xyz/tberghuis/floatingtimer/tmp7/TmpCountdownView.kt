@@ -10,7 +10,6 @@ fun TmpCountdownView(
   countdownSeconds: Int,
   isPaused: Boolean
 ) {
-
   when (bubbleProperties.timerShape) {
     "circle" -> {
       CountdownCircleView(
@@ -22,19 +21,14 @@ fun TmpCountdownView(
     }
 
     "rectangle" -> {
-
-
-//       TimerRectView(
-//  isRunningStateFlow=!isPaused,
-//  widthDp: Dp,
-//  heightDp: Dp,
-//  arcWidth: Dp,
-//  haloColor: Color,
-//  timeElapsed: Int,
-//  timeLeftFraction: Float,
-//  fontSize: TextUnit,
-//)
+      CountdownRectView(
+        bubbleProperties = bubbleProperties,
+        timeLeftFraction = timeLeftFraction,
+        countdownSeconds = countdownSeconds,
+        isPaused = isPaused
+      )
     }
+
     else -> TODO()
   }
 
