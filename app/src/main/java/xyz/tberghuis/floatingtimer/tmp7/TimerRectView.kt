@@ -27,7 +27,7 @@ import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 
 @Composable
 fun TimerRectView(
-  isRunningStateFlow: MutableStateFlow<Boolean>?,
+  isPaused: Boolean,
   widthDp: Dp,
   heightDp: Dp,
   arcWidth: Dp,
@@ -36,8 +36,6 @@ fun TimerRectView(
   timeLeftFraction: Float,
   fontSize: TextUnit,
 ) {
-  val isRunning = isRunningStateFlow?.collectAsState()?.value
-
   Box(
     modifier = Modifier
       .size(widthDp, heightDp)
@@ -57,7 +55,7 @@ fun TimerRectView(
       contentAlignment = Alignment.Center,
     ) {
 
-      if (isRunning == false) {
+      if (isPaused) {
         Icon(
           Icons.Filled.PlayArrow,
           contentDescription = "paused",

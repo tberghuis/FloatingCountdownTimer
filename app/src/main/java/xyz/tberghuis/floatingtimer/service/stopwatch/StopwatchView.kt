@@ -68,8 +68,9 @@ fun StopwatchView(
     }
 
     "rectangle" -> {
+      val isPaused = isRunningStateFlow?.collectAsState()?.value?.not() ?: false
       TimerRectView(
-        isRunningStateFlow = isRunningStateFlow,
+        isPaused = isPaused,
         widthDp = widthDp,
         heightDp = heightDp,
         arcWidth = arcWidth,
