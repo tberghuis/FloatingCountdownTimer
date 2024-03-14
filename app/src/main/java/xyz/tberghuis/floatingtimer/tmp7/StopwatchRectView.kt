@@ -26,13 +26,14 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 
 @Composable
-fun StopwatchRectView(
+fun TimerRectView(
   isRunningStateFlow: MutableStateFlow<Boolean>?,
   widthDp: Dp,
   heightDp: Dp,
   arcWidth: Dp,
   haloColor: Color,
   timeElapsed: Int,
+  timeLeftFraction: Float,
   fontSize: TextUnit,
 ) {
   val isRunning = isRunningStateFlow?.collectAsState()?.value
@@ -81,7 +82,7 @@ fun StopwatchRectView(
           contentAlignment = Alignment.TopStart,
         ) {
           CountdownProgressLine(
-            1f,
+            timeLeftFraction,
             arcWidth,
             haloColor
           )

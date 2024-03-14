@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import xyz.tberghuis.floatingtimer.tmp7.StopwatchCircleView
-import xyz.tberghuis.floatingtimer.tmp7.StopwatchRectView
+import xyz.tberghuis.floatingtimer.tmp7.TimerRectView
 
 @Composable
 fun StopwatchView(
@@ -68,13 +68,14 @@ fun StopwatchView(
     }
 
     "rectangle" -> {
-      StopwatchRectView(
+      TimerRectView(
         isRunningStateFlow = isRunningStateFlow,
         widthDp = widthDp,
         heightDp = heightDp,
         arcWidth = arcWidth,
         haloColor = haloColor,
         timeElapsed = timeElapsed,
+        timeLeftFraction = 1f,
         fontSize = fontSize,
       )
     }
