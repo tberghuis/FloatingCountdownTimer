@@ -11,14 +11,14 @@ fun CountdownRectView(
   countdownSeconds: Int,
   isPaused: Boolean
 ) {
-//  TimerRectView(
-//    isPaused = isPaused,
-//    widthDp =,
-//    heightDp =,
-//    arcWidth =,
-//    haloColor =,
-//    timeElapsed =,
-//    timeLeftFraction =,
-//    fontSize =,
-//  )
+  TimerRectView(
+    isPaused = isPaused,
+    widthDp = bubbleProperties.widthDp,
+    heightDp = bubbleProperties.heightDp,
+    arcWidth = bubbleProperties.arcWidth,
+    haloColor = bubbleProperties.haloColor,
+    timeElapsed = countdownSeconds,
+    timeLeftFraction = timeLeftFraction,
+    fontSize = bubbleProperties.fontSize,
+  )
 }
