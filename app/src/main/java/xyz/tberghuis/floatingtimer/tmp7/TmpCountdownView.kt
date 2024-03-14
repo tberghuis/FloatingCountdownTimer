@@ -21,11 +21,15 @@ fun TmpCountdownView(
     }
 
     "rectangle" -> {
-      CountdownRectView(
-        bubbleProperties = bubbleProperties,
+      TimerRectView(
+        isPaused = isPaused,
+        widthDp = bubbleProperties.widthDp,
+        heightDp = bubbleProperties.heightDp,
+        arcWidth = bubbleProperties.arcWidth,
+        haloColor = bubbleProperties.haloColor,
+        timeElapsed = countdownSeconds,
         timeLeftFraction = timeLeftFraction,
-        countdownSeconds = countdownSeconds,
-        isPaused = isPaused
+        fontSize = bubbleProperties.fontSize,
       )
     }
 
