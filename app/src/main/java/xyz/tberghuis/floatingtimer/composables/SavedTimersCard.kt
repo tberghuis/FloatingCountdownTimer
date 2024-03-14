@@ -26,7 +26,9 @@ import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownViewDisplay
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
+import xyz.tberghuis.floatingtimer.tmp5.RECT_TIMER_HEIGHT_NO_SCALE
 import xyz.tberghuis.floatingtimer.tmp5.SettingsTimerPreviewVmc
+import xyz.tberghuis.floatingtimer.tmp5.TIMER_WIDTH_NO_SCALE
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
 @Composable
@@ -74,11 +76,13 @@ fun <T : SavedTimer> ColumnScope.SavedTimersCard(
             is SavedStopwatch -> {
               StopwatchView(
                 isRunningStateFlow = null,
-                bubbleSizeDp = TIMER_SIZE_NO_SCALE,
+                widthDp = TIMER_WIDTH_NO_SCALE,
+                heightDp = RECT_TIMER_HEIGHT_NO_SCALE, // ignored if rectangle, need refactoring
                 arcWidth = ARC_WIDTH_NO_SCALE,
                 haloColor = Color(savedTimer.timerColor),
                 timeElapsed = 0,
-                fontSize = TIMER_FONT_SIZE_NO_SCALE
+                fontSize = TIMER_FONT_SIZE_NO_SCALE,
+                timerShape = savedTimer.timerShape
               )
             }
           }

@@ -2,17 +2,12 @@ package xyz.tberghuis.floatingtimer.service.stopwatch
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.animation.core.LinearEasing
@@ -20,9 +15,6 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableFloatStateOf
@@ -32,66 +24,64 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import xyz.tberghuis.floatingtimer.tmp7.StopwatchCircleView
 import xyz.tberghuis.floatingtimer.tmp7.StopwatchRectView
 
 @Composable
 fun StopwatchView(
   stopwatch: Stopwatch
 ) {
-
-  when (stopwatch.timerShape) {
-    "circle" -> {
-      StopwatchView(
-        isRunningStateFlow = stopwatch.isRunningStateFlow,
-        // todo
-        bubbleSizeDp = stopwatch.widthDp,
-        arcWidth = stopwatch.arcWidth,
-        haloColor = stopwatch.haloColor,
-        timeElapsed = stopwatch.timeElapsed.intValue,
-        fontSize = stopwatch.fontSize
-      )
-
-    }
-
-    "rectangle" -> {
-      StopwatchRectView(stopwatch)
-    }
-
-    else -> {
-      TODO()
-    }
-  }
-
-
+  StopwatchView(
+    isRunningStateFlow = stopwatch.isRunningStateFlow,
+    widthDp = stopwatch.widthDp,
+    heightDp = stopwatch.heightDp,
+    arcWidth = stopwatch.arcWidth,
+    haloColor = stopwatch.haloColor,
+    timeElapsed = stopwatch.timeElapsed.intValue,
+    fontSize = stopwatch.fontSize,
+    timerShape = stopwatch.timerShape,
+  )
 }
 
 @Composable
 fun StopwatchView(
   // when isRunningStateFlow null, showing preview in saved timers card
   isRunningStateFlow: MutableStateFlow<Boolean>?,
-  bubbleSizeDp: Dp,
+  widthDp: Dp,
+  heightDp: Dp,
   arcWidth: Dp,
   haloColor: Color,
   timeElapsed: Int,
-  fontSize: TextUnit
+  fontSize: TextUnit,
+  timerShape: String
 ) {
-  val isRunning = isRunningStateFlow?.collectAsState()?.value
-  Box(
-    modifier = Modifier
-      .size(bubbleSizeDp)
-      .padding(arcWidth / 2),
-    contentAlignment = Alignment.Center
-  ) {
-    StopwatchBorderArc(isRunningStateFlow, arcWidth, haloColor)
-    if (isRunning == false) {
-      Icon(
-        Icons.Filled.PlayArrow,
-        contentDescription = "paused",
-        modifier = Modifier.fillMaxSize(),
-        tint = Color.LightGray
+  when (timerShape) {
+    "circle" -> {
+      StopwatchCircleView(
+        isRunningStateFlow = isRunningStateFlow,
+        bubbleSizeDp = widthDp,
+        arcWidth = arcWidth,
+        haloColor = haloColor,
+        timeElapsed = timeElapsed,
+        fontSize = fontSize
       )
     }
-    TimeDisplay(timeElapsed, fontSize)
+
+    "rectangle" -> {
+      StopwatchRectView(
+        isRunningStateFlow = isRunningStateFlow,
+        widthDp = widthDp,
+        heightDp = heightDp,
+        arcWidth = arcWidth,
+        haloColor = haloColor,
+        timeElapsed = timeElapsed,
+        fontSize = fontSize,
+      )
+    }
+
+    else -> {
+      TODO()
+    }
   }
 }
 

@@ -26,20 +26,20 @@ import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 
-@Composable
-fun StopwatchRectView(
-  stopwatch: Stopwatch
-) {
-  StopwatchRectView(
-    isRunningStateFlow = stopwatch.isRunningStateFlow,
-    widthDp = stopwatch.widthDp,
-    heightDp = stopwatch.heightDp,
-    arcWidth = stopwatch.arcWidth,
-    haloColor = stopwatch.haloColor,
-    timeElapsed = stopwatch.timeElapsed.intValue,
-    fontSize = stopwatch.fontSize,
-  )
-}
+//@Composable
+//fun StopwatchRectView(
+//  stopwatch: Stopwatch
+//) {
+//  StopwatchRectView(
+//    isRunningStateFlow = stopwatch.isRunningStateFlow,
+//    widthDp = stopwatch.widthDp,
+//    heightDp = stopwatch.heightDp,
+//    arcWidth = stopwatch.arcWidth,
+//    haloColor = stopwatch.haloColor,
+//    timeElapsed = stopwatch.timeElapsed.intValue,
+//    fontSize = stopwatch.fontSize,
+//  )
+//}
 
 @Composable
 fun StopwatchRectView(
