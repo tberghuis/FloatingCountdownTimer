@@ -20,11 +20,12 @@ import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.tmp6.TimerShapeChoiceVm
 
 class CountdownScreenVm(
   private val application: Application,
 //  private val state: SavedStateHandle
-) : AndroidViewModel(application) {
+) : AndroidViewModel(application), TimerShapeChoiceVm {
   private val savedCountdownDao = application.provideDatabase().savedCountdownDao()
   var showDeleteDialog by mutableStateOf<SavedCountdown?>(null)
 
@@ -34,11 +35,14 @@ class CountdownScreenVm(
   var seconds = mutableStateOf(TextFieldValue("0"))
 
   val snackbarHostState = SnackbarHostState()
+
   // future.txt refactor premiumVmc into sharedVm
   val premiumVmc = PremiumVmc(application, viewModelScope)
   private val boundFloatingService = (application as MainApplication).boundFloatingService
 
   var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
+
+  override var timerShape by mutableStateOf("circle")
 
   init {
     viewModelScope.launch {
@@ -68,10 +72,10 @@ class CountdownScreenVm(
 
   fun countdownButtonClick() {
     val totalSecs = calcTotalDurationSeconds() ?: return
-    addCountdown(totalSecs, haloColor)
+    addCountdown(totalSecs, haloColor, timerShape)
   }
 
-  private fun addCountdown(totalSecs: Int, haloColor: Color) {
+  private fun addCountdown(totalSecs: Int, haloColor: Color, timerShape: String) {
     viewModelScope.launch {
       if (shouldShowPremiumDialogMultipleTimers(application)) {
         premiumVmc.showPurchaseDialog = true
@@ -79,13 +83,14 @@ class CountdownScreenVm(
       }
       boundFloatingService.provideFloatingService().overlayController.addCountdown(
         totalSecs,
-        haloColor
+        haloColor,
+        timerShape
       )
     }
   }
 
   fun savedCountdownClick(timer: SavedCountdown) {
-    addCountdown(timer.durationSeconds, Color(timer.timerColor))
+    addCountdown(timer.durationSeconds, Color(timer.timerColor), timer.timerShape)
   }
 
   private fun calcTotalDurationSeconds(): Int? {
@@ -117,7 +122,7 @@ class CountdownScreenVm(
   fun addToSaved() {
     val durationSeconds = calcTotalDurationSeconds() ?: return
     val timer = SavedCountdown(
-      timerShape = "circle",
+      timerShape = timerShape,
       timerColor = haloColor.toArgb(),
       durationSeconds = durationSeconds
     )
