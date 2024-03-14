@@ -46,7 +46,7 @@ class StopwatchScreenVm(
 
   fun savedStopwatchClick(timer: SavedStopwatch) {
     // todo
-    addStopwatch(Color(timer.timerColor), "circle")
+    addStopwatch(Color(timer.timerColor), timer.timerShape)
   }
 
   private fun addStopwatch(haloColor: Color, timerShape: String) {
@@ -73,7 +73,7 @@ class StopwatchScreenVm(
 
   fun addToSaved() {
     val timer = SavedStopwatch(
-      timerShape = "circle",
+      timerShape = timerShape,
       timerColor = haloColor.toArgb(),
     )
     viewModelScope.launch(IO) {
