@@ -18,7 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.flow.MutableStateFlow
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
@@ -27,11 +30,32 @@ import xyz.tberghuis.floatingtimer.tmp4.CountdownProgressLine
 fun StopwatchRectView(
   stopwatch: Stopwatch
 ) {
-  val isRunning = stopwatch.isRunningStateFlow.collectAsState().value
+  StopwatchRectView(
+    isRunningStateFlow = stopwatch.isRunningStateFlow,
+    widthDp = stopwatch.widthDp,
+    heightDp = stopwatch.heightDp,
+    arcWidth = stopwatch.arcWidth,
+    haloColor = stopwatch.haloColor,
+    timeElapsed = stopwatch.timeElapsed.intValue,
+    fontSize = stopwatch.fontSize,
+  )
+}
+
+@Composable
+fun StopwatchRectView(
+  isRunningStateFlow: MutableStateFlow<Boolean>?,
+  widthDp: Dp,
+  heightDp: Dp,
+  arcWidth: Dp,
+  haloColor: Color,
+  timeElapsed: Int,
+  fontSize: TextUnit,
+) {
+  val isRunning = isRunningStateFlow?.collectAsState()?.value
 
   Box(
     modifier = Modifier
-      .size(stopwatch.widthDp, stopwatch.heightDp)
+      .size(widthDp, heightDp)
       .padding(5.dp)
       .graphicsLayer(
         shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
@@ -48,7 +72,7 @@ fun StopwatchRectView(
       contentAlignment = Alignment.Center,
     ) {
 
-      if (!isRunning) {
+      if (isRunning == false) {
         Icon(
           Icons.Filled.PlayArrow,
           contentDescription = "paused",
@@ -63,7 +87,7 @@ fun StopwatchRectView(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
       ) {
-        TimeDisplay(stopwatch.timeElapsed.intValue, stopwatch.fontSize)
+        TimeDisplay(timeElapsed, fontSize)
         Box(
           modifier = Modifier.padding(
             start = 5.dp,
@@ -74,8 +98,8 @@ fun StopwatchRectView(
         ) {
           CountdownProgressLine(
             1f,
-            stopwatch.arcWidth,
-            stopwatch.haloColor
+            arcWidth,
+            haloColor
           )
         }
       }
