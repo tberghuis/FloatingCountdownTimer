@@ -1,18 +1,9 @@
 package xyz.tberghuis.floatingtimer.service.countdown
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.zIndex
-import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -21,7 +12,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
-import xyz.tberghuis.floatingtimer.tmp5.BubbleProperties
+import xyz.tberghuis.floatingtimer.tmp7.TmpCountdownView
 
 @Composable
 fun CountdownView(countdown: Countdown) {
@@ -32,36 +23,36 @@ fun CountdownView(countdown: Countdown) {
       timerState.value == TimerStatePaused
     }
   }
-  CountdownViewDisplay(countdown, timeLeftFraction, countdown.countdownSeconds, isPaused)
+  TmpCountdownView(countdown, timeLeftFraction, countdown.countdownSeconds, isPaused)
 }
 
-@Composable
-fun CountdownViewDisplay(
-  bubbleProperties: BubbleProperties,
-  timeLeftFraction: Float,
-  countdownSeconds: Int,
-  isPaused: Boolean
-) {
-  Box(
-    modifier = Modifier
-      // todo check everywhere widthDp or widthPx is referenced, implement when(timerShape)
-      .size(bubbleProperties.widthDp)
-      .padding(bubbleProperties.arcWidth / 2)
-      .zIndex(1f),
-    contentAlignment = Alignment.Center
-  ) {
-    CountdownProgressArc(timeLeftFraction, bubbleProperties.arcWidth, bubbleProperties.haloColor)
-    if (isPaused) {
-      Icon(
-        Icons.Filled.PlayArrow,
-        contentDescription = "paused",
-        modifier = Modifier.fillMaxSize(),
-        tint = Color.LightGray
-      )
-    }
-    TimeDisplay(countdownSeconds, bubbleProperties.fontSize)
-  }
-}
+//@Composable
+//fun CountdownViewDisplay(
+//  bubbleProperties: BubbleProperties,
+//  timeLeftFraction: Float,
+//  countdownSeconds: Int,
+//  isPaused: Boolean
+//) {
+//  Box(
+//    modifier = Modifier
+//      // todo check everywhere widthDp or widthPx is referenced, implement when(timerShape)
+//      .size(bubbleProperties.widthDp)
+//      .padding(bubbleProperties.arcWidth / 2)
+//      .zIndex(1f),
+//    contentAlignment = Alignment.Center
+//  ) {
+//    CountdownProgressArc(timeLeftFraction, bubbleProperties.arcWidth, bubbleProperties.haloColor)
+//    if (isPaused) {
+//      Icon(
+//        Icons.Filled.PlayArrow,
+//        contentDescription = "paused",
+//        modifier = Modifier.fillMaxSize(),
+//        tint = Color.LightGray
+//      )
+//    }
+//    TimeDisplay(countdownSeconds, bubbleProperties.fontSize)
+//  }
+//}
 
 
 @Composable
