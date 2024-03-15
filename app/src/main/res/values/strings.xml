@@ -40,5 +40,8 @@
     <string name="default_timer_color">Default Timer Color</string>
     <string name="delete_saved_timer">Delete Saved Timer?</string>
     <string name="delete">Delete</string>
+    <string name="circle">circle</string>
+    <string name="rectangle">rectangle</string>
+    <string name="shape_label">Shape:</string>
 
 </resources>

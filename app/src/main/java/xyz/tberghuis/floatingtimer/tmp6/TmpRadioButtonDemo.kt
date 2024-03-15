@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.tmp6
 
 import android.app.Application
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
@@ -19,7 +20,7 @@ class TmpRadioButtonVm(private val application: Application) : AndroidViewModel(
 }
 
 @Composable
-fun TmpRadioButtonDemo(
+fun ColumnScope.TmpRadioButtonDemo(
   vm: TmpRadioButtonVm = viewModel()
 ) {
   Text("hello radio button")
