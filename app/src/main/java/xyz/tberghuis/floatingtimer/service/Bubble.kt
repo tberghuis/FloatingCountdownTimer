@@ -29,8 +29,11 @@ interface BubbleProperties {
   companion object {
     fun calcWidthDp(scaleFactor: Float) = TIMER_WIDTH_NO_SCALE * (scaleFactor + 1)
     fun calcRectHeightDp(scaleFactor: Float): Dp {
+      // y= mx + b
+      // m = 22, b=50
       return (RECT_TIMER_HEIGHT_MAX_SCALE - RECT_TIMER_HEIGHT_NO_SCALE) * scaleFactor + RECT_TIMER_HEIGHT_NO_SCALE
     }
+
     fun calcArcWidth(scaleFactor: Float) = ARC_WIDTH_NO_SCALE * (0.9f * scaleFactor + 1)
     fun calcFontSize(scaleFactor: Float) = TIMER_FONT_SIZE_NO_SCALE * (1.2 * scaleFactor + 1)
   }
@@ -52,6 +55,7 @@ abstract class Bubble(
     "rectangle" -> {
       BubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
     }
+
     else -> {
       throw RuntimeException("invalid timer shape")
     }
