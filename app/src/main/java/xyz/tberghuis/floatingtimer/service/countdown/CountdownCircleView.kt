@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp7
+package xyz.tberghuis.floatingtimer.service.countdown
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -14,7 +14,6 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.ui.graphics.Color
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
-import xyz.tberghuis.floatingtimer.service.countdown.CountdownProgressArc
 
 @Composable
 fun CountdownCircleView(
