@@ -25,7 +25,6 @@ fun CountdownCircleView(
 ) {
   Box(
     modifier = Modifier
-      // todo check everywhere widthDp or widthPx is referenced, implement when(timerShape)
       .size(bubbleProperties.widthDp)
       .padding(bubbleProperties.arcWidth / 2)
       .zIndex(1f),

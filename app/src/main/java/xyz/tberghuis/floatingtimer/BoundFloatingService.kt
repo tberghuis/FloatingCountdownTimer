@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import xyz.tberghuis.floatingtimer.service.FloatingService
 
-// todo rename to BoundFloatingService
 class BoundFloatingService(private val application: Application) {
   private val floatingService = MutableStateFlow<FloatingService?>(null)
   private var serviceStarted = false
@@ -41,8 +40,6 @@ class BoundFloatingService(private val application: Application) {
   }
 
   suspend fun provideFloatingService(): FloatingService {
-    // todo follow this pattern for BillingLibrary
-    //  in my BillingLibraryWrapper
     bindFloatingService()
     return floatingService.filterNotNull().first()
   }

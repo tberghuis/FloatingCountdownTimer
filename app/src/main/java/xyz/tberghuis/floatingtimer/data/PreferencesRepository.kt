@@ -68,7 +68,6 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
     }
   }
 
-  // todo test this
   suspend fun resetHaloColour() {
     dataStore.edit { preferences ->
       preferences.remove(stringPreferencesKey("halo_colour"))

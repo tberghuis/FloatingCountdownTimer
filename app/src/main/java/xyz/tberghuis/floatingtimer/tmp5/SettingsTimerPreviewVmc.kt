@@ -22,9 +22,8 @@ class SettingsTimerPreviewVmc(
     BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
   }
 
-  // todo y= mx + b
+  // y= mx + b
   // m = 22, b=50
-  // todo when(timerShape)
   override val heightDp by derivedStateOf {
     when (timerShape) {
       "circle" -> {
@@ -34,7 +33,7 @@ class SettingsTimerPreviewVmc(
       "rectangle" -> {
         BubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
       }
-      // todo this should throw
+
       else -> {
         BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
       }

@@ -45,7 +45,6 @@ class StopwatchScreenVm(
   }
 
   fun savedStopwatchClick(timer: SavedStopwatch) {
-    // todo
     addStopwatch(Color(timer.timerColor), timer.timerShape)
   }
 
