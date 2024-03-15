@@ -17,8 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.tmp5.SettingsTimerPreviewVmc
 import xyz.tberghuis.floatingtimer.tmp7.TmpCountdownView
+import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 
 @Composable
 fun SettingsTimerPreviewCard(vmc: SettingsTimerPreviewVmc) {

@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.tmp5.SettingsTimerPreviewVmc
 
 class ColorSettingViewModel(application: Application, savedStateHandle: SavedStateHandle) :
   AndroidViewModel(application) {
