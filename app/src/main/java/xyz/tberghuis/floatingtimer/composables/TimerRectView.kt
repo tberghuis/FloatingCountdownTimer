@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp7
+package xyz.tberghuis.floatingtimer.composables
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
