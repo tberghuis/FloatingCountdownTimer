@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import xyz.tberghuis.floatingtimer.tmp7.StopwatchCircleView
 import xyz.tberghuis.floatingtimer.tmp7.TimerRectView
 
 @Composable

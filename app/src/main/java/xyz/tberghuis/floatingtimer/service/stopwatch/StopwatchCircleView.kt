@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp7
+package xyz.tberghuis.floatingtimer.service.stopwatch
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
@@ -16,7 +16,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
-import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchBorderArc
 
 @Composable
 fun StopwatchCircleView(
