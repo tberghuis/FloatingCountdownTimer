@@ -25,8 +25,8 @@ import xyz.tberghuis.floatingtimer.TIMER_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
+import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
-import xyz.tberghuis.floatingtimer.tmp7.TmpCountdownView
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
@@ -70,7 +70,7 @@ fun <T : SavedTimer> ColumnScope.SavedTimersCard(
         ) {
           when (savedTimer) {
             is SavedCountdown -> {
-              TmpCountdownView(settingsTimerPreviewVmc, 1f, savedTimer.durationSeconds, false)
+              CountdownView(settingsTimerPreviewVmc, 1f, savedTimer.durationSeconds, false)
             }
 
             is SavedStopwatch -> {

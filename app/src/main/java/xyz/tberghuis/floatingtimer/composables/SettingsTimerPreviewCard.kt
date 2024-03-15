@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.tmp7.TmpCountdownView
+import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 
 @Composable
@@ -40,7 +40,7 @@ fun SettingsTimerPreviewCard(vmc: SettingsTimerPreviewVmc) {
           .width(140.dp),
         contentAlignment = Alignment.Center,
       ) {
-        TmpCountdownView(vmc, 0.6f, 59, false)
+        CountdownView(vmc, 0.6f, 59, false)
       }
     }
   }
