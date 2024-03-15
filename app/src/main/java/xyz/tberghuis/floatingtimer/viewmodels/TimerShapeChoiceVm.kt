@@ -1,6 +1,5 @@
-package xyz.tberghuis.floatingtimer.tmp6
+package xyz.tberghuis.floatingtimer.viewmodels
 
 interface TimerShapeChoiceVm {
   var timerShape: String
 }
-

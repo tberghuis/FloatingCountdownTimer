@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.tmp6.TimerShapeChoiceVm
+import xyz.tberghuis.floatingtimer.viewmodels.TimerShapeChoiceVm
 
 @Composable
 fun ColumnScope.TimerShapeChoice(vm: TimerShapeChoiceVm) {
