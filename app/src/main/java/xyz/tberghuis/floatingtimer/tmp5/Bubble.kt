@@ -13,7 +13,6 @@ abstract class Bubble(
 ) : BubbleProperties {
   final override val widthDp = BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
 
-  // todo when
   final override val heightDp = when (timerShape) {
     "circle" -> {
       BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
@@ -22,9 +21,8 @@ abstract class Bubble(
     "rectangle" -> {
       BubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
     }
-    // todo
     else -> {
-      TODO()
+      throw RuntimeException("invalid timer shape")
     }
   }
 

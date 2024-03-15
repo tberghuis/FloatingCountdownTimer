@@ -82,7 +82,7 @@ fun StopwatchView(
     }
 
     else -> {
-      TODO()
+      throw RuntimeException("invalid timer shape")
     }
   }
 }

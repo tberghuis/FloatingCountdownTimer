@@ -33,7 +33,9 @@ fun TmpCountdownView(
       )
     }
 
-    else -> TODO()
+    else -> {
+      throw RuntimeException("invalid timer shape")
+    }
   }
 
 }
