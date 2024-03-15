@@ -10,7 +10,6 @@ import xyz.tberghuis.floatingtimer.RECT_TIMER_HEIGHT_MAX_SCALE
 import xyz.tberghuis.floatingtimer.RECT_TIMER_HEIGHT_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_WIDTH_NO_SCALE
-import xyz.tberghuis.floatingtimer.tmp5.TimerViewHolder
 
 // future data class implements this, use composition over inheritance
 // make update method a single method interface, does calcs and returns copy instance
