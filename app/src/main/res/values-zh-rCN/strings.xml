@@ -34,5 +34,8 @@
     <string name="default_timer_color">默认计时器颜色</string>
     <string name="delete_saved_timer">删除保存的定时器？</string>
     <string name="delete">删除</string>
+    <string name="circle">圆圈</string>
+    <string name="rectangle">长方形</string>
+    <string name="shape_label">形状</string>
 
 </resources>
