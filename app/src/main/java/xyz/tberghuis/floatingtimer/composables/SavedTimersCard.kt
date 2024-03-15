@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
-import xyz.tberghuis.floatingtimer.TIMER_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
@@ -60,10 +59,10 @@ fun <T : SavedTimer> ColumnScope.SavedTimersCard(
     ) {
       savedTimers.forEach { savedTimer ->
         val c = Color(savedTimer.timerColor)
-
         val settingsTimerPreviewVmc = SettingsTimerPreviewVmc(0f, c, savedTimer.timerShape)
         Box(
           modifier = Modifier
+            .align(Alignment.CenterVertically)
             .combinedClickable(
               onClick = { timerOnClick(savedTimer) },
               onLongClick = { timerOnLongClick(savedTimer) },
