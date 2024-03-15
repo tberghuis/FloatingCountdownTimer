@@ -13,8 +13,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.ui.graphics.Color
+import xyz.tberghuis.floatingtimer.service.BubbleProperties
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownProgressArc
-import xyz.tberghuis.floatingtimer.tmp5.BubbleProperties
 
 @Composable
 fun CountdownCircleView(

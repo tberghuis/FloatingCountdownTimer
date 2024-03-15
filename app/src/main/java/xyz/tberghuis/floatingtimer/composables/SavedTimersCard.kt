@@ -19,14 +19,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
+import xyz.tberghuis.floatingtimer.RECT_TIMER_HEIGHT_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
+import xyz.tberghuis.floatingtimer.TIMER_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
-import xyz.tberghuis.floatingtimer.tmp5.RECT_TIMER_HEIGHT_NO_SCALE
 import xyz.tberghuis.floatingtimer.tmp5.SettingsTimerPreviewVmc
-import xyz.tberghuis.floatingtimer.tmp5.TIMER_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.tmp7.TmpCountdownView
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)

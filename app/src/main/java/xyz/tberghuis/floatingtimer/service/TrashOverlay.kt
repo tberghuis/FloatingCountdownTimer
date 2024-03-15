@@ -30,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp5.Bubble
 
 @Composable
 fun TrashOverlay() {

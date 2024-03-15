@@ -11,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
-import xyz.tberghuis.floatingtimer.tmp5.Bubble
 
 // todo move windowManager to service
 class TrashController(
