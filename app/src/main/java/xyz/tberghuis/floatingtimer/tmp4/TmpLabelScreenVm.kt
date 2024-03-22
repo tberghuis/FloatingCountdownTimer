@@ -3,15 +3,19 @@ package xyz.tberghuis.floatingtimer.tmp4
 import android.app.Application
 import android.content.Context
 import android.graphics.PixelFormat
+import android.view.Gravity
 import android.view.WindowManager
+import android.view.WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
@@ -26,19 +30,19 @@ class TmpLabelScreenVm(
 ) : AndroidViewModel(application) {
   val sizePx: Int = 60.dpToPx(application)
 
-
-//  private val params: WindowManager.LayoutParams = WindowManager.LayoutParams(
-//    WindowManager.LayoutParams.MATCH_PARENT,
-//    WindowManager.LayoutParams.MATCH_PARENT,
+//  val params = WindowManager.LayoutParams(
+//    sizePx,
+//    sizePx,
+//    0,
+//    0,
 //    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
 //    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
 //    PixelFormat.TRANSLUCENT
 //  )
 
-
   val params = WindowManager.LayoutParams(
-    sizePx,
-    sizePx,
+    WindowManager.LayoutParams.MATCH_PARENT,
+    WindowManager.LayoutParams.MATCH_PARENT,
     0,
     0,
     WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
@@ -53,6 +57,10 @@ class TmpLabelScreenVm(
   fun createOverlay(activity: ComponentActivity) {
     logd("createOverlay")
     view = createView(activity)
+
+    params.gravity = Gravity.START or Gravity.TOP
+
+
     windowManager.addView(view, params)
   }
 
@@ -78,10 +86,11 @@ fun createView(activity: ComponentActivity): ComposeView {
     setContent {
       Box(
         modifier = Modifier
-          .size(120.dp)
+          .requiredSize(120.dp)
           .background(Color.Red)
           .onGloballyPositioned {
             logd("outer box layout coords ${it.size}")
+
           },
         contentAlignment = Alignment.TopStart,
       ) {
