@@ -105,6 +105,7 @@ fun createView(activity: ComponentActivity, updateSize: () -> Unit): ComposeView
           },
       ) {
         Row(
+          // todo runOnceOnGloballyPositioned
           modifier = Modifier.onGloballyPositioned {
             logd("inner row layout coords ${it.size}")
           },

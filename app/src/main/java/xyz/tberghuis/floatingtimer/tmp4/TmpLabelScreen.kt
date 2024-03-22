@@ -53,28 +53,13 @@ fun TmpLabelScreen(
   }
 }
 
-
 @Composable
-fun RunOnceOnGloballyPositioned() {
-
-  var size: IntSize? by remember { mutableStateOf(null) }
-
-  LaunchedEffect(Unit) {
-    val s = snapshotFlow {
-      size
-    }.filterNotNull().first()
-
-//    updateWidth(s)
-//      ...
+fun Modifier.runOnceOnGloballyPositioned(runOnce: (LayoutCoordinates) -> Unit): Modifier {
+  var hasRun by remember { mutableStateOf(false) }
+  return this then Modifier.onGloballyPositioned {
+    if (!hasRun) {
+      hasRun = true
+      runOnce(it)
+    }
   }
-
-  Box(modifier = Modifier.onGloballyPositioned {
-    if (size == null)
-      size = it.size
-  }
-  ) {
-
-  }
-
-
 }
