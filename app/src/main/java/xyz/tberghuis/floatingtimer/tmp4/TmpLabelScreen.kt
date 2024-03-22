@@ -29,5 +29,12 @@ fun TmpLabelScreen(
     Button(onClick = { vm.createOverlay(context as ComponentActivity) }) {
       Text("create overlay")
     }
+
+
+    Button(onClick = { vm.updateSize() }) {
+      Text("update size")
+    }
+
+
   }
 }
