@@ -24,6 +24,17 @@ class TmpLabelScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
   val sizePx: Int = 60.dpToPx(application)
+
+
+//  private val params: WindowManager.LayoutParams = WindowManager.LayoutParams(
+//    WindowManager.LayoutParams.MATCH_PARENT,
+//    WindowManager.LayoutParams.MATCH_PARENT,
+//    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
+//    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+//    PixelFormat.TRANSLUCENT
+//  )
+
+
   val params = WindowManager.LayoutParams(
     sizePx,
     sizePx,
@@ -33,6 +44,8 @@ class TmpLabelScreenVm(
     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
     PixelFormat.TRANSLUCENT
   )
+
+
   val windowManager = application.getSystemService(Context.WINDOW_SERVICE) as WindowManager
   var view: ComposeView? = null
 
@@ -44,8 +57,13 @@ class TmpLabelScreenVm(
 
 
   fun updateSize() {
-    params.x = 120.dpToPx(application)
-    params.y = 120.dpToPx(application)
+//    params.x = 120.dpToPx(application)
+//    params.y = 120.dpToPx(application)
+
+    params.width = 120.dpToPx(application)
+    params.height = 120.dpToPx(application)
+
+
     windowManager.updateViewLayout(view, params)
   }
 }
