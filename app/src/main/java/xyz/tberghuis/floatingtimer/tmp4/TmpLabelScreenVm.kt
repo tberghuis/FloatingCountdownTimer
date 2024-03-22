@@ -60,7 +60,7 @@ class TmpLabelScreenVm(
     logd("createOverlay")
     view = createView(activity, ::updateSize)
 
-    params.gravity = Gravity.START or Gravity.TOP
+//    params.gravity = Gravity.START or Gravity.TOP
 
 
     windowManager.addView(view, params)
