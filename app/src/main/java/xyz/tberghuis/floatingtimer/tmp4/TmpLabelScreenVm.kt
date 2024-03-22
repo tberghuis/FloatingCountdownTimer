@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.AndroidViewModel
@@ -78,13 +79,19 @@ fun createView(activity: ComponentActivity): ComposeView {
       Box(
         modifier = Modifier
           .size(120.dp)
-          .background(Color.Red),
+          .background(Color.Red)
+          .onGloballyPositioned {
+            logd("outer box layout coords ${it.size}")
+          },
         contentAlignment = Alignment.TopStart,
       ) {
         Box(
           modifier = Modifier
             .size(60.dp)
-            .background(Color.Green),
+            .background(Color.Green)
+            .onGloballyPositioned {
+              logd("inner box layout coords ${it.size}")
+            },
           contentAlignment = Alignment.TopStart,
         ) {
           Text("hello overlay")
