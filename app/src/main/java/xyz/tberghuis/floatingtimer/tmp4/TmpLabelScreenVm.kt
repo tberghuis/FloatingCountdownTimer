@@ -17,6 +17,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.boundsInParent
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.ComposeView
@@ -95,9 +96,13 @@ fun createView(activity: ComponentActivity, updateSize: () -> Unit): ComposeView
 
 
       Row(
-        modifier = Modifier.onGloballyPositioned {
-          logd("row layout coords ${it.size}")
-        },
+        modifier = Modifier
+          .onGloballyPositioned {
+            logd("row layout coords ${it.size}")
+          }
+          .graphicsLayer {
+            this.alpha = .5f
+          },
       ) {
         Row(
           modifier = Modifier.onGloballyPositioned {
