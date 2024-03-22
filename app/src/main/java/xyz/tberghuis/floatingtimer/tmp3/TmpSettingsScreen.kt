@@ -91,7 +91,7 @@ fun DefaultSize(nav: NavHostController) {
 
 @Composable
 fun BatterySettings() {
-  val context = LocalContext.current
+//  val context = LocalContext.current
 
   Text(
     "battery settings",
