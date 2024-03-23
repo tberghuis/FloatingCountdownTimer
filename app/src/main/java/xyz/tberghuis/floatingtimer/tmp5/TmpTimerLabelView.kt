@@ -43,23 +43,10 @@ import xyz.tberghuis.floatingtimer.tmp4.runOnceOnGloballyPositioned
 //  }
 //}
 
+// hardcoded from scratch
+// TimerRectView as reference
+
 @Composable
 fun TmpTimerLabelView() {
-  Box {
-    Row(modifier = Modifier
-      .runOnceOnGloballyPositioned {
-        // see commented code above
-      }
-      .border(1.dp, Color.Black))
-    {
-      Text("this is label")
-      Box(
-        modifier = Modifier
-          .size(60.dp)
-          .background(Color.Green)
-      ) {
-        Text("00:59")
-      }
-    }
-  }
+  Text("hello label view")
 }
