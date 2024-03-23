@@ -19,7 +19,7 @@ class TmpStopwatchScreenVm(
   var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
 
   // todo label
-  override var timerShape by mutableStateOf("circle")
+  override var timerShape by mutableStateOf("label")
 
   private fun addStopwatch(haloColor: Color, timerShape: String) {
     viewModelScope.launch {

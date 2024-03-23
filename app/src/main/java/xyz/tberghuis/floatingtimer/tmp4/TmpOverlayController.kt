@@ -7,6 +7,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.WindowManager
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntOffset
 import com.torrydo.screenez.ScreenEz
@@ -25,13 +26,16 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
+import xyz.tberghuis.floatingtimer.tmp5.TmpBubble
+import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatch
+import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchView
 import kotlin.math.max
 import kotlin.math.min
 
 class TmpOverlayController(val service: FloatingService) {
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
   val trashController = TrashController(windowManager, service)
-  private val bubbleSet = mutableSetOf<Bubble>()
+  private val bubbleSet = mutableSetOf<TmpBubble>()
 
   fun getNumberOfBubbles(): Int {
     return bubbleSet.size
@@ -43,8 +47,12 @@ class TmpOverlayController(val service: FloatingService) {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
-      val stopwatch = Stopwatch(service, bubbleScale, haloColor, timerShape)
-      val stopwatchView = @Composable { StopwatchView(stopwatch) }
+      val stopwatch = TmpStopwatch(service, bubbleScale, haloColor, timerShape)
+      val stopwatchView = @Composable {
+        CompositionLocalProvider(LocalTimerViewHolder provides stopwatch.viewHolder) {
+          TmpStopwatchView(stopwatch)
+        }
+      }
       // does coroutine dispatcher matter here???
       withContext(Main) {
         addBubble(stopwatch, stopwatchView)
@@ -53,19 +61,19 @@ class TmpOverlayController(val service: FloatingService) {
   }
 
   fun addCountdown(durationSeconds: Int, haloColor: Color, timerShape: String) {
-    service.scope.launch {
-      val bubbleScale = withContext(IO) {
-        service.application.providePreferencesRepository().bubbleScaleFlow.first()
-      }
-      val countdown = Countdown(service, durationSeconds, bubbleScale, haloColor, timerShape)
-      val countdownView = @Composable { CountdownView(countdown) }
-      withContext(Main) {
-        addBubble(countdown, countdownView)
-      }
-    }
+//    service.scope.launch {
+//      val bubbleScale = withContext(IO) {
+//        service.application.providePreferencesRepository().bubbleScaleFlow.first()
+//      }
+//      val countdown = Countdown(service, durationSeconds, bubbleScale, haloColor, timerShape)
+//      val countdownView = @Composable { CountdownView(countdown) }
+//      withContext(Main) {
+//        addBubble(countdown, countdownView)
+//      }
+//    }
   }
 
-  private fun addBubble(bubble: Bubble, bubbleView: @Composable () -> Unit) {
+  private fun addBubble(bubble: TmpBubble, bubbleView: @Composable () -> Unit) {
     logd("OverlayController addBubble")
     bubbleSet.add(bubble)
 
@@ -90,7 +98,7 @@ class TmpOverlayController(val service: FloatingService) {
 
   @SuppressLint("ClickableViewAccessibility")
   private fun clickTargetSetOnTouchListener(
-    bubble: Bubble,
+    bubble: TmpBubble,
     exitTimer: () -> Unit,
     onDoubleTap: () -> Unit,
     onTap: () -> Unit,
@@ -138,8 +146,8 @@ class TmpOverlayController(val service: FloatingService) {
         }
 
         MotionEvent.ACTION_MOVE -> {
-          trashController.currentDraggingBubble.value = bubble
-          trashController.isBubbleDragging.value = true
+//          trashController.currentDraggingBubble.value = bubble
+//          trashController.isBubbleDragging.value = true
           params.x = (paramStartDragX + (event.rawX - startDragRawX)).toInt()
           params.y = (paramStartDragY + (event.rawY - startDragRawY)).toInt()
           updateClickTargetParamsWithinScreenBounds(bubble.viewHolder)
