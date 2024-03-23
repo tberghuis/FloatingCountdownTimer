@@ -25,8 +25,8 @@ fun createViewRow(activity: ComponentActivity, params: WindowManager.LayoutParam
         Row(modifier = Modifier
           .runOnceOnGloballyPositioned {
             logd("runOnceOnGloballyPositioned ${it.size}")
-            params.width = it.size.width.dpToPx(activity)
-            params.height = it.size.height.dpToPx(activity)
+            params.width = it.size.width
+            params.height = it.size.height
             windowManager.updateViewLayout(this@apply, params)
           }
           .border(1.dp, Color.Black))
