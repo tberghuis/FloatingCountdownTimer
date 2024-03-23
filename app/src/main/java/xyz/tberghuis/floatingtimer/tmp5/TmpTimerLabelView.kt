@@ -29,8 +29,13 @@ fun TmpTimerLabelView() {
       .runOnceOnGloballyPositioned {
         logd("runOnceOnGloballyPositioned ${it.size}")
         // todo move to function in tvh???
-        tvh.params.width = it.size.width.dpToPx(tvh.service)
-        tvh.params.height = it.size.height.dpToPx(tvh.service)
+//        tvh.params.width = it.size.width.dpToPx(tvh.service)
+//        tvh.params.height = it.size.height.dpToPx(tvh.service)
+
+        tvh.params.width = it.size.width
+        tvh.params.height = it.size.height
+
+
         windowManager.updateViewLayout(tvh.view, tvh.params)
       }
       .border(1.dp, Color.Black))

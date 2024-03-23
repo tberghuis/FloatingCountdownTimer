@@ -127,7 +127,7 @@ class TmpOverlayController(val service: FloatingService) {
 
     bubble.viewHolder.view.setOnTouchListener { _, event ->
 
-      logd("bubble.viewHolder.view.setOnTouchListener")
+//      logd("bubble.viewHolder.view.setOnTouchListener")
 
       if (tapDetector.onTouchEvent(event)) {
         // just to be safe
