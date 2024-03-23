@@ -16,18 +16,39 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp4.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.tmp4.runOnceOnGloballyPositioned
 
+//@Composable
+//fun TmpTimerLabelView() {
+//  val tvh = LocalTimerViewHolder.current
+//  val windowManager = tvh.service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+//
+//  Box {
+//    Row(modifier = Modifier
+//      .runOnceOnGloballyPositioned {
+//        logd("runOnceOnGloballyPositioned ${it.size}")
+//        tvh.params.width = it.size.width
+//        tvh.params.height = it.size.height
+//        windowManager.updateViewLayout(tvh.view, tvh.params)
+//      }
+//      .border(1.dp, Color.Black))
+//    {
+//      Text("this is label")
+//      Box(
+//        modifier = Modifier
+//          .size(60.dp)
+//          .background(Color.Green)
+//      ) {
+//        Text("00:59")
+//      }
+//    }
+//  }
+//}
+
 @Composable
 fun TmpTimerLabelView() {
-  val tvh = LocalTimerViewHolder.current
-  val windowManager = tvh.service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-
   Box {
     Row(modifier = Modifier
       .runOnceOnGloballyPositioned {
-        logd("runOnceOnGloballyPositioned ${it.size}")
-        tvh.params.width = it.size.width
-        tvh.params.height = it.size.height
-        windowManager.updateViewLayout(tvh.view, tvh.params)
+        // see commented code above
       }
       .border(1.dp, Color.Black))
     {
