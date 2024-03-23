@@ -3,9 +3,11 @@ package xyz.tberghuis.floatingtimer.tmp4
 import android.content.Context
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,7 +32,9 @@ fun createViewRow(activity: ComponentActivity, params: WindowManager.LayoutParam
           .border(1.dp, Color.Black))
         {
           Text("this is label")
-          Box {
+          Box(modifier = Modifier
+            .size(60.dp)
+            .background(Color.Green)) {
             Text("00:59")
           }
         }
