@@ -14,28 +14,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp4.LocalTimerViewHolder
-import xyz.tberghuis.floatingtimer.tmp4.dpToPx
 import xyz.tberghuis.floatingtimer.tmp4.runOnceOnGloballyPositioned
 
 @Composable
 fun TmpTimerLabelView() {
-
   val tvh = LocalTimerViewHolder.current
   val windowManager = tvh.service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-
 
   Box {
     Row(modifier = Modifier
       .runOnceOnGloballyPositioned {
         logd("runOnceOnGloballyPositioned ${it.size}")
-        // todo move to function in tvh???
-//        tvh.params.width = it.size.width.dpToPx(tvh.service)
-//        tvh.params.height = it.size.height.dpToPx(tvh.service)
-
         tvh.params.width = it.size.width
         tvh.params.height = it.size.height
-
-
         windowManager.updateViewLayout(tvh.view, tvh.params)
       }
       .border(1.dp, Color.Black))
@@ -50,6 +41,4 @@ fun TmpTimerLabelView() {
       }
     }
   }
-
-
 }
