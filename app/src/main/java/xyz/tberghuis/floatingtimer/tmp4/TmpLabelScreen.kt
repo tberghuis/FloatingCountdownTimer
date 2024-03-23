@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import xyz.tberghuis.floatingtimer.logd
 
 @Composable
 fun TmpLabelScreen(
@@ -49,6 +50,12 @@ fun TmpLabelScreen(
       Text("update size")
     }
 
+
+    Button(onClick = {
+      logd("press me")
+    }) {
+      Text("press me")
+    }
 
   }
 }

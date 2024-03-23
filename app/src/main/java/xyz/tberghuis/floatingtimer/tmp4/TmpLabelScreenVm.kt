@@ -51,7 +51,8 @@ class TmpLabelScreenVm(
 
   fun createOverlay(activity: ComponentActivity) {
     logd("createOverlay")
-    view = createView(activity, ::updateSize)
+//    view = createView(activity, ::updateSize)
+    view = createViewRow(activity, params)
     windowManager.addView(view, params)
   }
 
