@@ -32,5 +32,13 @@ fun TmpStopwatchScreen(
     }) {
       Text("create stopwatch with label")
     }
+
+
+    Button(onClick = {
+      logd("press me")
+    }) {
+      Text("press me")
+    }
+
   }
 }
