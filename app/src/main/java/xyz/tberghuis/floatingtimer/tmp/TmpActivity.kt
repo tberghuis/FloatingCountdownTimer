@@ -27,8 +27,8 @@ class TmpActivity : ComponentActivity() {
             .background(Color.White),
         ) {
 //          TmpScreen()
-//          TmpLabelScreen()
-          TmpStopwatchScreen()
+          TmpLabelScreen()
+//          TmpStopwatchScreen()
         }
       }
     }

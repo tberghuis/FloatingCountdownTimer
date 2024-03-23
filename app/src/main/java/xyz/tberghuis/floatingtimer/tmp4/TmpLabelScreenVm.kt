@@ -3,6 +3,7 @@ package xyz.tberghuis.floatingtimer.tmp4
 import android.app.Application
 import android.content.Context
 import android.graphics.PixelFormat
+import android.view.Gravity
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
@@ -45,6 +46,11 @@ class TmpLabelScreenVm(
     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
     PixelFormat.TRANSLUCENT
   )
+
+  init {
+    params.gravity = Gravity.TOP or Gravity.LEFT
+    logd("TimerViewHolder params $params")
+  }
 
   val windowManager = application.getSystemService(Context.WINDOW_SERVICE) as WindowManager
   var view: ComposeView? = null
