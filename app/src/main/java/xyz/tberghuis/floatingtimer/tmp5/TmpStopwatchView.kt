@@ -67,7 +67,7 @@ fun TmpStopwatchView(
     }
 
     "label" -> {
-      Text("hello label")
+      TmpTimerLabelView()
     }
 
     else -> {
