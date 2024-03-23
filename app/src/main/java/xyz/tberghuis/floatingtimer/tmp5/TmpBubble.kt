@@ -15,7 +15,6 @@ abstract class TmpBubble(
   override val haloColor: Color,
   final override val timerShape: String
 ) : BubbleProperties {
-  //  final override val widthDp = BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
   final override val widthDp = when (timerShape) {
     "label" -> {
       Dp.Unspecified
@@ -44,9 +43,7 @@ abstract class TmpBubble(
     }
   }
 
-//  val widthPx: Int = (widthDp.value * service.resources.displayMetrics.density).roundToInt()
   val widthPx: Int = dimensionDpToPx(widthDp, service.resources.displayMetrics.density)
-//  val heightPx: Int = (heightDp.value * service.resources.displayMetrics.density).roundToInt()
   val heightPx: Int = dimensionDpToPx(heightDp, service.resources.displayMetrics.density)
 
   override val arcWidth = BubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
