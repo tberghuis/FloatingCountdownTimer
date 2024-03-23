@@ -88,27 +88,31 @@ fun createView(activity: ComponentActivity, updateSize: () -> Unit): ComposeView
   return ComposeView(activity).apply {
     setContent {
 
-      LaunchedEffect(Unit) {
-        delay(5000)
-        updateSize()
-      }
-
+//      LaunchedEffect(Unit) {
+//        delay(5000)
+//        updateSize()
+//      }
 
 
       Row(
         modifier = Modifier
-          .onGloballyPositioned {
-            logd("row layout coords ${it.size}")
-          }
+//          .onGloballyPositioned {
+//            logd("row layout coords ${it.size}")
+//          }
           .graphicsLayer {
             this.alpha = .5f
           },
       ) {
         Row(
           // todo runOnceOnGloballyPositioned
-          modifier = Modifier.onGloballyPositioned {
-            logd("inner row layout coords ${it.size}")
-          },
+          modifier = Modifier
+//            .onGloballyPositioned {
+//              logd("inner row layout coords ${it.size}")
+//            }
+            .runOnceOnGloballyPositioned {
+              logd("runOnceOnGloballyPositioned")
+              updateSize()
+            },
         ) {
           Box(
             modifier = Modifier
