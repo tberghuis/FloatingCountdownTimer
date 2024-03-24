@@ -74,8 +74,6 @@ import xyz.tberghuis.floatingtimer.tmp4.runOnceOnGloballyPositioned
 fun TmpTimerLabelView(
 ) {
   val isPaused = false
-  val widthDp = Dp.Unspecified
-  val heightDp = Dp.Unspecified
   val arcWidth = ARC_WIDTH_NO_SCALE
   val haloColor = Color.Green
   val timeElapsed = 59
@@ -94,17 +92,15 @@ fun TmpTimerLabelView(
   )
 }
 
-
-//@Preview(showBackground = true)
 @Composable
 fun TimerLabelView(
-  isPaused: Boolean = false,
-  arcWidth: Dp = ARC_WIDTH_NO_SCALE,
-  haloColor: Color = Color.Green,
-  timeElapsed: Int = 59,
-  timeLeftFraction: Float = 1f,
-  fontSize: TextUnit = TIMER_FONT_SIZE_NO_SCALE,
-  label: String = "label"
+  isPaused: Boolean,
+  arcWidth: Dp,
+  haloColor: Color,
+  timeElapsed: Int,
+  timeLeftFraction: Float,
+  fontSize: TextUnit,
+  label: String
 ) {
   Box(
     modifier = Modifier
