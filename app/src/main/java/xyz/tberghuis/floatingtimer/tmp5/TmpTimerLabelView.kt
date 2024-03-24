@@ -16,11 +16,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
@@ -96,17 +99,35 @@ fun TmpTimerLabelView(
   ) {
     Box(
       modifier = Modifier
+        .onGloballyPositioned {
+          logd("box size ${it.size}")
+        }
         .runOnceOnGloballyPositioned {
           // todo
-        },
+        }
+        .padding(5.dp)
+        .graphicsLayer(
+          shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
+          shape = RoundedCornerShape(10.dp),
+          clip = true
+        ),
     ) {
       Column(
         modifier = Modifier
+          .background(Color.White)
           .width(IntrinsicSize.Max)
+          .onGloballyPositioned {
+            logd("Column size before padding ${it.size}")
+          }
+          .padding(5.dp)
+          .onGloballyPositioned {
+            logd("Column size after padding ${it.size}")
+          }
       ) {
         Row(
           modifier = Modifier,
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
+          // should this spacing scale???
+          horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
 
           CompositionLocalProvider(
