@@ -72,17 +72,7 @@ import xyz.tberghuis.floatingtimer.tmp4.runOnceOnGloballyPositioned
 @Preview(showBackground = true)
 @Composable
 fun TmpTimerLabelView(
-//  isPaused: Boolean,
-//  widthDp: Dp,
-//  heightDp: Dp,
-//  arcWidth: Dp,
-//  haloColor: Color,
-//  timeElapsed: Int,
-//  timeLeftFraction: Float,
-//  fontSize: TextUnit,
 ) {
-
-
   val isPaused = false
   val widthDp = Dp.Unspecified
   val heightDp = Dp.Unspecified
@@ -93,7 +83,29 @@ fun TmpTimerLabelView(
   val fontSize = TIMER_FONT_SIZE_NO_SCALE
   val label = "label"
 
+  TimerLabelView(
+    isPaused,
+    arcWidth,
+    haloColor,
+    timeElapsed,
+    timeLeftFraction,
+    fontSize,
+    label
+  )
+}
 
+
+//@Preview(showBackground = true)
+@Composable
+fun TimerLabelView(
+  isPaused: Boolean = false,
+  arcWidth: Dp = ARC_WIDTH_NO_SCALE,
+  haloColor: Color = Color.Green,
+  timeElapsed: Int = 59,
+  timeLeftFraction: Float = 1f,
+  fontSize: TextUnit = TIMER_FONT_SIZE_NO_SCALE,
+  label: String = "label"
+) {
   Box(
     modifier = Modifier
   ) {
@@ -129,7 +141,6 @@ fun TmpTimerLabelView(
           // should this spacing scale???
           horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-
           CompositionLocalProvider(
             LocalDensity provides Density(LocalDensity.current.density, 1f)
           ) {
@@ -142,7 +153,6 @@ fun TmpTimerLabelView(
               ),
             )
           }
-
           TimeDisplay(timeElapsed, fontSize)
         }
         CountdownProgressLine(
@@ -154,9 +164,3 @@ fun TmpTimerLabelView(
     }
   }
 }
-
-
-
-
-
-
