@@ -29,6 +29,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
@@ -120,18 +121,15 @@ fun TimerLabelView(
   timeLeftFraction: Float,
   fontSize: TextUnit,
   label: String,
-// todo runOnGloballyPositioned
+  updateViewLayout: ((IntSize) -> Unit)? = null
 ) {
   Box(
     modifier = Modifier
   ) {
     Box(
       modifier = Modifier
-        .onGloballyPositioned {
-          logd("box size ${it.size}")
-        }
         .runOnceOnGloballyPositioned {
-          // todo
+          updateViewLayout?.invoke(it.size)
         }
         .padding(5.dp)
         .graphicsLayer(
@@ -144,13 +142,7 @@ fun TimerLabelView(
         modifier = Modifier
           .background(Color.White)
           .width(IntrinsicSize.Max)
-          .onGloballyPositioned {
-            logd("Column size before padding ${it.size}")
-          }
           .padding(5.dp)
-          .onGloballyPositioned {
-            logd("Column size after padding ${it.size}")
-          }
       ) {
         Row(
           modifier = Modifier,
