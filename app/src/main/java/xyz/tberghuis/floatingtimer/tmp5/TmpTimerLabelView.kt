@@ -15,10 +15,15 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -82,6 +87,7 @@ fun TmpTimerLabelView(
   val timeElapsed = 59
   val timeLeftFraction = 1f
   val fontSize = TIMER_FONT_SIZE_NO_SCALE
+  val label = "label"
 
 
   Box(
@@ -97,8 +103,23 @@ fun TmpTimerLabelView(
         modifier = Modifier
           .width(IntrinsicSize.Max)
       ) {
-        Row() {
-          Text("label")
+        Row(
+          modifier = Modifier,
+        ) {
+
+          CompositionLocalProvider(
+            LocalDensity provides Density(LocalDensity.current.density, 1f)
+          ) {
+            Text(
+              label,
+              fontSize = fontSize,
+              fontFamily = FontFamily.Default,
+              style = LocalTextStyle.current.copy(
+                color = Color.Black,
+              ),
+            )
+          }
+
           TimeDisplay(timeElapsed, fontSize)
         }
         CountdownProgressLine(
@@ -110,3 +131,9 @@ fun TmpTimerLabelView(
     }
   }
 }
+
+
+
+
+
+
