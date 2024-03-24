@@ -18,17 +18,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.service.Bubble
 import xyz.tberghuis.floatingtimer.service.FloatingService
-import xyz.tberghuis.floatingtimer.service.TimerViewHolder
 import xyz.tberghuis.floatingtimer.service.TrashController
-import xyz.tberghuis.floatingtimer.service.countdown.Countdown
-import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
-import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
-import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
 import xyz.tberghuis.floatingtimer.tmp5.TmpBubble
 import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatch
 import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchView
+import xyz.tberghuis.floatingtimer.tmp5.TmpTimerViewHolder
 import kotlin.math.max
 import kotlin.math.min
 
@@ -168,15 +163,15 @@ class TmpOverlayController(val service: FloatingService) {
   }
 
   private fun updateClickTargetParamsWithinScreenBounds(
-    viewHolder: TimerViewHolder,
+    viewHolder: TmpTimerViewHolder,
   ) {
     val params = viewHolder.params
     var x = params.x
     var y = params.y
     x = max(x, 0)
-    x = min(x, ScreenEz.safeWidth - viewHolder.widthPx)
+    x = min(x, ScreenEz.safeWidth - params.width)
     y = max(y, 0)
-    y = min(y, ScreenEz.safeHeight - viewHolder.heightPx)
+    y = min(y, ScreenEz.safeHeight - params.height)
     params.x = x
     params.y = y
     try {
