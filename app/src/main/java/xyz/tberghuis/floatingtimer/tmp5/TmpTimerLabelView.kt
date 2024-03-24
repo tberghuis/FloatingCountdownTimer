@@ -138,7 +138,7 @@ fun TimerLabelView(
         Row(
           modifier = Modifier,
           // should this spacing scale???
-          horizontalArrangement = Arrangement.spacedBy(10.dp),
+//          horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
           CompositionLocalProvider(
             LocalDensity provides Density(LocalDensity.current.density, 1f)
