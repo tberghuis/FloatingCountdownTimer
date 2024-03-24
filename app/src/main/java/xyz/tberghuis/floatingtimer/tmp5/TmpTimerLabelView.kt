@@ -1,11 +1,8 @@
 package xyz.tberghuis.floatingtimer.tmp5
 
-import android.content.Context
-import android.view.WindowManager
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -36,45 +33,19 @@ import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.composables.CountdownProgressLine
-import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp4.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.tmp4.runOnceOnGloballyPositioned
-
-// hardcoded from scratch
-// TimerRectView as reference
 
 @Preview(showBackground = true)
 @Composable
 fun TmpTimerLabelView(
 ) {
-//  val isPaused = false
-//  val arcWidth = ARC_WIDTH_NO_SCALE
-//  val haloColor = Color.Green
-//  val timeElapsed = 59
-//  val timeLeftFraction = 1f
-//  val fontSize = TIMER_FONT_SIZE_NO_SCALE
-//  val label = "label"
-//
-//  TimerLabelView(
-//    isPaused,
-//    arcWidth,
-//    haloColor,
-//    timeElapsed,
-//    timeLeftFraction,
-//    fontSize,
-//    label
-//  )
-
   val isPaused = true
   val arcWidth = ARC_WIDTH_NO_SCALE * (0.9f * 1f + 1)
   val haloColor = Color.Green
   val timeElapsed = 59
   val timeLeftFraction = 1f
   val fontSize = TIMER_FONT_SIZE_NO_SCALE * (1.2 * 1f + 1)
-  val label = "label"
-
-  val tvh = LocalTimerViewHolder.current
-  val windowManager = tvh.service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+  val label = "label - "
 
   TimerLabelView(
     isPaused,
@@ -84,12 +55,7 @@ fun TmpTimerLabelView(
     timeLeftFraction,
     fontSize,
     label
-  ) {
-    logd("runOnceOnGloballyPositioned ${it}")
-    tvh.params.width = it.width
-    tvh.params.height = it.height
-    windowManager.updateViewLayout(tvh.view, tvh.params)
-  }
+  )
 }
 
 @Composable
