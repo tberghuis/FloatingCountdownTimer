@@ -101,6 +101,11 @@ fun TmpTimerLabelView(
   val fontSize = TIMER_FONT_SIZE_NO_SCALE * (1.2 * 1f + 1)
   val label = "label"
 
+
+  val tvh = LocalTimerViewHolder.current
+  val windowManager = tvh.service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+
   TimerLabelView(
     isPaused,
     arcWidth,
@@ -109,7 +114,12 @@ fun TmpTimerLabelView(
     timeLeftFraction,
     fontSize,
     label
-  )
+  ) {
+    logd("runOnceOnGloballyPositioned ${it}")
+    tvh.params.width = it.width
+    tvh.params.height = it.height
+    windowManager.updateViewLayout(tvh.view, tvh.params)
+  }
 }
 
 @Composable
