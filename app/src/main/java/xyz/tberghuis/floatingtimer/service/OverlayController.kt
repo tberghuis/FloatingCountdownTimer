@@ -7,6 +7,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.WindowManager
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntOffset
 import com.torrydo.screenez.ScreenEz
@@ -21,6 +22,9 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
+import xyz.tberghuis.floatingtimer.tmp4.LocalTimerViewHolder
+import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatch
+import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchView
 import kotlin.math.max
 import kotlin.math.min
 
@@ -39,8 +43,12 @@ class OverlayController(val service: FloatingService) {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
-      val stopwatch = Stopwatch(service, bubbleScale, haloColor, timerShape)
-      val stopwatchView = @Composable { StopwatchView(stopwatch) }
+      val stopwatch = TmpStopwatch(service, bubbleScale, haloColor, timerShape)
+      val stopwatchView = @Composable {
+        CompositionLocalProvider(LocalTimerViewHolder provides stopwatch.viewHolder) {
+          TmpStopwatchView(stopwatch)
+        }
+      }
       // does coroutine dispatcher matter here???
       withContext(Main) {
         addBubble(stopwatch, stopwatchView)
