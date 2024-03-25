@@ -32,7 +32,6 @@ fun ColumnScope.TmpTimerShapeChoice(vm: TimerShapeChoiceVm) {
     modifier = Modifier
       .align(Alignment.CenterHorizontally)
       .padding(10.dp),
-//    horizontalArrangement = Arrangement.Center,
     verticalAlignment = Alignment.CenterVertically,
   ) {
     Text(stringResource(R.string.shape_label))
