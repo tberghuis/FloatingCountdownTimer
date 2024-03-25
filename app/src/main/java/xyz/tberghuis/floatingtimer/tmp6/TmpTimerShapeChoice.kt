@@ -46,5 +46,16 @@ fun ColumnScope.TmpTimerShapeChoice(vm: TimerShapeChoiceVm) {
       contentDescription = stringResource(R.string.rectangle),
       modifier = Modifier.size(40.dp)
     )
+
+
+
+    RadioButton(
+      selected = vm.timerShape == "label",
+      onClick = { vm.timerShape = "label" },
+      modifier = Modifier,
+    )
+    Text(stringResource(R.string.label))
+
+
   }
 }

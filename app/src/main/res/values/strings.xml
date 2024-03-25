@@ -43,5 +43,6 @@
     <string name="circle">circle</string>
     <string name="rectangle">rectangle</string>
     <string name="shape_label">Shape:</string>
+    <string name="label">label</string>
 
 </resources>
