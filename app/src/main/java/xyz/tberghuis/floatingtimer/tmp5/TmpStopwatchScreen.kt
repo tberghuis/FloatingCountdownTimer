@@ -13,10 +13,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.viewmodels.StopwatchScreenVm
 
 @Composable
 fun TmpStopwatchScreen(
-  vm: TmpStopwatchScreenVm = viewModel()
+  vm: StopwatchScreenVm = viewModel()
 ) {
   val context = LocalContext.current
 
