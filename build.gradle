@@ -9,8 +9,6 @@ plugins {
     id 'com.android.library' version '8.3.1' apply false
     // https://developer.android.com/jetpack/androidx/releases/compose-kotlin
     id 'org.jetbrains.kotlin.android' version '1.9.23' apply false
-
-
 }
 
 //task clean(type: Delete) {

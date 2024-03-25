@@ -17,12 +17,8 @@ data class SavedCountdown(
   @ColumnInfo(name = "color") override val timerColor: Int,
   // stores as seconds
   @ColumnInfo(name = "duration") val durationSeconds: Int,
-
-
-//  @ColumnInfo(defaultValue = "null") val label: String? = null,
   @ColumnInfo() val label: String? = null,
-
-  ) : SavedTimer
+) : SavedTimer
 
 @Dao
 interface SavedCountdownDao {
