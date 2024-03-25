@@ -76,12 +76,15 @@ abstract class Bubble(
     }
   }
 
-  val widthPx: Int = dimensionDpToPx(widthDp, service.resources.displayMetrics.density)
-  val heightPx: Int = dimensionDpToPx(heightDp, service.resources.displayMetrics.density)
-
   override val arcWidth = BubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
   override val fontSize = BubbleProperties.calcFontSize(bubbleSizeScaleFactor)
-  val viewHolder = TimerViewHolder(service, widthPx, heightPx)
+  val viewHolder: TimerViewHolder
+
+  init {
+    val widthPx: Int = dimensionDpToPx(widthDp, service.resources.displayMetrics.density)
+    val heightPx: Int = dimensionDpToPx(heightDp, service.resources.displayMetrics.density)
+    viewHolder = TimerViewHolder(service, widthPx, heightPx)
+  }
 
   open fun exit() {
     try {

@@ -104,8 +104,8 @@ fun calcTimerIsHoverTrash(
   if (bubble == null) {
     return false
   }
-  val halfTimerWidth = bubble.widthPx / 2f
-  val halfTimerHeight = bubble.heightPx / 2f
+  val halfTimerWidth =  bubble.viewHolder.params.width / 2f
+  val halfTimerHeight = bubble.viewHolder.params.height / 2f
   val timerCenterX = bubblePosition.x + halfTimerWidth
   val timerCenterY = bubblePosition.y + halfTimerHeight
   return !(timerCenterX < trashRect.left ||
