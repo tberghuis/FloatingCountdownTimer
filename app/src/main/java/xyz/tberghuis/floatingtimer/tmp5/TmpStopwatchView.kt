@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
 import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchCircleView
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
 import xyz.tberghuis.floatingtimer.tmp4.LocalTimerViewHolder
@@ -18,7 +19,7 @@ import xyz.tberghuis.floatingtimer.tmp4.LocalTimerViewHolder
 
 @Composable
 fun TmpStopwatchView(
-  stopwatch: TmpStopwatch
+  stopwatch: Stopwatch
 ) {
   TmpStopwatchView(
     isRunningStateFlow = stopwatch.isRunningStateFlow,
