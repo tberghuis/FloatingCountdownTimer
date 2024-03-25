@@ -9,6 +9,7 @@ import androidx.compose.material.icons.outlined.Rectangle
 import androidx.compose.material3.Icon
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,15 +48,17 @@ fun ColumnScope.TmpTimerShapeChoice(vm: TimerShapeChoiceVm) {
       modifier = Modifier.size(40.dp)
     )
 
-
-
     RadioButton(
       selected = vm.timerShape == "label",
       onClick = { vm.timerShape = "label" },
       modifier = Modifier,
     )
     Text(stringResource(R.string.label))
-
-
   }
+
+  TextField(
+    value = vm.label,
+    onValueChange = { vm.label = it },
+    label = { Text(stringResource(R.string.label)) }
+  )
 }

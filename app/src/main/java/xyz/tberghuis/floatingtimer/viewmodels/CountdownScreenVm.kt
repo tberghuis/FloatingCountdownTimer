@@ -42,6 +42,7 @@ class CountdownScreenVm(
   var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
 
   override var timerShape by mutableStateOf("circle")
+  override var label by mutableStateOf("")
 
   init {
     viewModelScope.launch {
