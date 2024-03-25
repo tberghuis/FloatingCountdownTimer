@@ -8,7 +8,7 @@ import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import xyz.tberghuis.floatingtimer.logd
 
-class TimerViewHolder(val service: FloatingService, val widthPx: Int, val heightPx: Int) {
+class TimerViewHolder(val service: FloatingService, widthPx: Int, heightPx: Int) {
   val params = WindowManager.LayoutParams(
     widthPx,
     heightPx,

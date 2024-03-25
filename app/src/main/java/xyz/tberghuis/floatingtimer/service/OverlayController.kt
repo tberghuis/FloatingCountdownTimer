@@ -162,9 +162,9 @@ class OverlayController(val service: FloatingService) {
     var x = params.x
     var y = params.y
     x = max(x, 0)
-    x = min(x, ScreenEz.safeWidth - viewHolder.widthPx)
+    x = min(x, ScreenEz.safeWidth - params.width)
     y = max(y, 0)
-    y = min(y, ScreenEz.safeHeight - viewHolder.heightPx)
+    y = min(y, ScreenEz.safeHeight - params.height)
     params.x = x
     params.y = y
     try {

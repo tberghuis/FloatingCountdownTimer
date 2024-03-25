@@ -7,6 +7,7 @@ import androidx.compose.ui.unit.Dp
 import kotlin.math.roundToInt
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
 import xyz.tberghuis.floatingtimer.service.FloatingService
+import xyz.tberghuis.floatingtimer.service.TimerViewHolder
 
 abstract class TmpBubble(
   private val service: FloatingService,
@@ -47,7 +48,7 @@ abstract class TmpBubble(
 
   override val arcWidth = BubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
   override val fontSize = BubbleProperties.calcFontSize(bubbleSizeScaleFactor)
-  val viewHolder = TmpTimerViewHolder(service, widthPx, heightPx)
+  val viewHolder = TimerViewHolder(service, widthPx, heightPx)
 
   open fun exit() {
     try {

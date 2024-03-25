@@ -19,11 +19,11 @@ import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.FloatingService
+import xyz.tberghuis.floatingtimer.service.TimerViewHolder
 import xyz.tberghuis.floatingtimer.service.TrashController
 import xyz.tberghuis.floatingtimer.tmp5.TmpBubble
 import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatch
 import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchView
-import xyz.tberghuis.floatingtimer.tmp5.TmpTimerViewHolder
 import kotlin.math.max
 import kotlin.math.min
 
@@ -163,7 +163,7 @@ class TmpOverlayController(val service: FloatingService) {
   }
 
   private fun updateClickTargetParamsWithinScreenBounds(
-    viewHolder: TmpTimerViewHolder,
+    viewHolder: TimerViewHolder,
   ) {
     val params = viewHolder.params
     var x = params.x
