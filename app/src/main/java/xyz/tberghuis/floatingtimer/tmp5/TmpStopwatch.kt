@@ -15,7 +15,7 @@ class TmpStopwatch(
   bubbleSizeScaleFactor: Float,
   haloColor: Color,
   timerShape: String
-) : TmpBubble(service, bubbleSizeScaleFactor, haloColor, timerShape) {
+) : Bubble(service, bubbleSizeScaleFactor, haloColor, timerShape) {
   val timeElapsed = mutableIntStateOf(0)
   val isRunningStateFlow = MutableStateFlow(false)
   private var stopwatchIncrementTask: TimerTask? = null

@@ -10,6 +10,7 @@ import xyz.tberghuis.floatingtimer.RECT_TIMER_HEIGHT_MAX_SCALE
 import xyz.tberghuis.floatingtimer.RECT_TIMER_HEIGHT_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_WIDTH_NO_SCALE
+import xyz.tberghuis.floatingtimer.tmp5.dimensionDpToPx
 
 // future data class implements this, use composition over inheritance
 // make update method a single method interface, does calcs and returns copy instance
@@ -44,7 +45,15 @@ abstract class Bubble(
   override val haloColor: Color,
   final override val timerShape: String
 ) : BubbleProperties {
-  final override val widthDp = BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
+  final override val widthDp = when (timerShape) {
+    "label" -> {
+      Dp.Unspecified
+    }
+
+    else -> {
+      BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
+    }
+  }
 
   final override val heightDp = when (timerShape) {
     "circle" -> {
@@ -55,13 +64,17 @@ abstract class Bubble(
       BubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
     }
 
+    "label" -> {
+      Dp.Unspecified
+    }
+
     else -> {
       throw RuntimeException("invalid timer shape")
     }
   }
 
-  val widthPx: Int = (widthDp.value * service.resources.displayMetrics.density).roundToInt()
-  val heightPx: Int = (heightDp.value * service.resources.displayMetrics.density).roundToInt()
+  val widthPx: Int = dimensionDpToPx(widthDp, service.resources.displayMetrics.density)
+  val heightPx: Int = dimensionDpToPx(heightDp, service.resources.displayMetrics.density)
 
   override val arcWidth = BubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
   override val fontSize = BubbleProperties.calcFontSize(bubbleSizeScaleFactor)

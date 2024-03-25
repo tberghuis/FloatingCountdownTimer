@@ -21,16 +21,16 @@ import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.TimerViewHolder
 import xyz.tberghuis.floatingtimer.service.TrashController
-import xyz.tberghuis.floatingtimer.tmp5.TmpBubble
 import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatch
 import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchView
 import kotlin.math.max
 import kotlin.math.min
+import xyz.tberghuis.floatingtimer.service.Bubble
 
 class TmpOverlayController(val service: FloatingService) {
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
   val trashController = TrashController(windowManager, service)
-  private val bubbleSet = mutableSetOf<TmpBubble>()
+  private val bubbleSet = mutableSetOf<Bubble>()
 
   fun getNumberOfBubbles(): Int {
     return bubbleSet.size
@@ -68,7 +68,7 @@ class TmpOverlayController(val service: FloatingService) {
 //    }
   }
 
-  private fun addBubble(bubble: TmpBubble, bubbleView: @Composable () -> Unit) {
+  private fun addBubble(bubble: Bubble, bubbleView: @Composable () -> Unit) {
     logd("OverlayController addBubble")
     bubbleSet.add(bubble)
 
@@ -93,7 +93,7 @@ class TmpOverlayController(val service: FloatingService) {
 
   @SuppressLint("ClickableViewAccessibility")
   private fun clickTargetSetOnTouchListener(
-    bubble: TmpBubble,
+    bubble: Bubble,
     exitTimer: () -> Unit,
     onDoubleTap: () -> Unit,
     onTap: () -> Unit,
