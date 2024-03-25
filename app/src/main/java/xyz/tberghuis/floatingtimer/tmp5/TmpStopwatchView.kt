@@ -29,6 +29,7 @@ fun TmpStopwatchView(
     timeElapsed = stopwatch.timeElapsed.intValue,
     fontSize = stopwatch.fontSize,
     timerShape = stopwatch.timerShape,
+    label = stopwatch.label,
   )
 }
 
@@ -42,7 +43,8 @@ fun TmpStopwatchView(
   haloColor: Color,
   timeElapsed: Int,
   fontSize: TextUnit,
-  timerShape: String
+  timerShape: String,
+  label: String?
 ) {
   val isPaused = isRunningStateFlow?.collectAsState()?.value?.not() ?: false
 
@@ -81,7 +83,7 @@ fun TmpStopwatchView(
         timeElapsed,
         1f,
         fontSize,
-        "tmp label - "
+        label
       ) {
         logd("runOnceOnGloballyPositioned ${it}")
         tvh.params.width = it.width

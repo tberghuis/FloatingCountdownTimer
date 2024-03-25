@@ -71,10 +71,11 @@ class CountdownScreenVm(
 
   fun countdownButtonClick() {
     val totalSecs = calcTotalDurationSeconds() ?: return
-    addCountdown(totalSecs, haloColor, timerShape)
+    // todo label
+    addCountdown(totalSecs, haloColor, timerShape, null)
   }
 
-  private fun addCountdown(totalSecs: Int, haloColor: Color, timerShape: String) {
+  private fun addCountdown(totalSecs: Int, haloColor: Color, timerShape: String, label: String?) {
     viewModelScope.launch {
       if (shouldShowPremiumDialogMultipleTimers(application)) {
         premiumVmc.showPurchaseDialog = true
@@ -83,13 +84,14 @@ class CountdownScreenVm(
       boundFloatingService.provideFloatingService().overlayController.addCountdown(
         totalSecs,
         haloColor,
-        timerShape
+        timerShape,
+        label
       )
     }
   }
 
   fun savedCountdownClick(timer: SavedCountdown) {
-    addCountdown(timer.durationSeconds, Color(timer.timerColor), timer.timerShape)
+    addCountdown(timer.durationSeconds, Color(timer.timerColor), timer.timerShape, timer.label)
   }
 
   private fun calcTotalDurationSeconds(): Int? {

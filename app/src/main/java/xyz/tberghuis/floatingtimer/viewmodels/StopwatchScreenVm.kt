@@ -54,7 +54,7 @@ class StopwatchScreenVm(
         return@launch
       }
       boundFloatingService.provideFloatingService().overlayController.addStopwatch(
-        haloColor, timerShape
+        haloColor, timerShape, "tmp label"
       )
     }
   }

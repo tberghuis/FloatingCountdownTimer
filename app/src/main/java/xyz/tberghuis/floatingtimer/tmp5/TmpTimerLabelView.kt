@@ -66,7 +66,7 @@ fun TimerLabelView(
   timeElapsed: Int,
   timeLeftFraction: Float,
   fontSize: TextUnit,
-  label: String,
+  label: String?,
   updateViewLayout: ((IntSize) -> Unit)? = null
 ) {
   Box(
@@ -106,17 +106,19 @@ fun TimerLabelView(
           // should this spacing scale???
 //          horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-          CompositionLocalProvider(
-            LocalDensity provides Density(LocalDensity.current.density, 1f)
-          ) {
-            Text(
-              label,
-              fontSize = fontSize,
-              fontFamily = FontFamily.Default,
-              style = LocalTextStyle.current.copy(
-                color = Color.Black,
-              ),
-            )
+          label?.let {
+            CompositionLocalProvider(
+              LocalDensity provides Density(LocalDensity.current.density, 1f)
+            ) {
+              Text(
+                "$label - ",
+                fontSize = fontSize,
+                fontFamily = FontFamily.Default,
+                style = LocalTextStyle.current.copy(
+                  color = Color.Black,
+                ),
+              )
+            }
           }
           TimeDisplay(timeElapsed, fontSize)
         }

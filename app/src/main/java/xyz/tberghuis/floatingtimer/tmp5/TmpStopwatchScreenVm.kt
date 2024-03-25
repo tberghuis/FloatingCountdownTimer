@@ -24,7 +24,7 @@ class TmpStopwatchScreenVm(
   private fun addStopwatch(haloColor: Color, timerShape: String) {
     viewModelScope.launch {
       boundFloatingService.provideFloatingService().overlayController.addStopwatch(
-        haloColor, timerShape
+        haloColor, timerShape, "tmp label"
       )
     }
   }

@@ -12,7 +12,8 @@ import xyz.tberghuis.floatingtimer.service.BubbleProperties
 class SettingsTimerPreviewVmc(
   initialScale: Float,
   initialHaloColor: Color,
-  override val timerShape: String
+  override val timerShape: String,
+  override val label: String? = null
 ) : BubbleProperties {
   var bubbleSizeScaleFactor by mutableFloatStateOf(initialScale) // 0<=x<=1
   override var haloColor by mutableStateOf(initialHaloColor)

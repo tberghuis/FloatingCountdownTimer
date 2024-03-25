@@ -26,6 +26,8 @@ interface BubbleProperties {
 
   val timerShape: String
 
+  val label: String?
+
   companion object {
     fun calcWidthDp(scaleFactor: Float) = TIMER_WIDTH_NO_SCALE * (scaleFactor + 1)
     fun calcRectHeightDp(scaleFactor: Float): Dp {
@@ -43,7 +45,8 @@ abstract class Bubble(
   private val service: FloatingService,
   bubbleSizeScaleFactor: Float,
   override val haloColor: Color,
-  final override val timerShape: String
+  final override val timerShape: String,
+  final override val label: String? = null
 ) : BubbleProperties {
   final override val widthDp = when (timerShape) {
     "label" -> {
