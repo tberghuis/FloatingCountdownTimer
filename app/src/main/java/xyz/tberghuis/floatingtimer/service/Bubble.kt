@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.service
 
 import android.util.Log
+import android.view.WindowManager
 import androidx.compose.ui.graphics.Color
 import kotlin.math.roundToInt
 import androidx.compose.ui.unit.Dp
@@ -10,7 +11,6 @@ import xyz.tberghuis.floatingtimer.RECT_TIMER_HEIGHT_MAX_SCALE
 import xyz.tberghuis.floatingtimer.RECT_TIMER_HEIGHT_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_WIDTH_NO_SCALE
-import xyz.tberghuis.floatingtimer.tmp5.dimensionDpToPx
 
 // future data class implements this, use composition over inheritance
 // make update method a single method interface, does calcs and returns copy instance
@@ -90,4 +90,11 @@ abstract class Bubble(
 
   abstract fun reset()
   abstract fun onTap()
+}
+
+fun dimensionDpToPx(dp: Dp, density: Float): Int {
+  if (dp == Dp.Unspecified) {
+    return WindowManager.LayoutParams.MATCH_PARENT
+  }
+  return (dp.value * density).roundToInt()
 }
