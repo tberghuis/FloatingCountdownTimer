@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
@@ -115,6 +116,8 @@ fun TimerLabelView(
                 "$label - ",
                 fontSize = fontSize,
                 fontFamily = FontFamily.Default,
+                overflow = TextOverflow.Clip,
+                maxLines = 1,
                 style = LocalTextStyle.current.copy(
                   color = Color.Black,
                 ),

@@ -88,7 +88,7 @@ fun ColumnScope.TmpTimerShapeChoice(vm: TimerShapeChoiceVm) {
           value = vm.label,
           onValueChange = { vm.label = it },
           modifier = Modifier
-            .widthIn(max = 200.dp)
+            .widthIn(max = 150.dp)
             .focusRequester(focusRequester)
             .clickable {
               vm.timerShape = "label"
