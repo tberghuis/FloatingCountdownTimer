@@ -37,5 +37,6 @@
     <string name="circle">lingkaran</string>
     <string name="rectangle">persegi panjang</string>
     <string name="shape_label">Membentuk:</string>
+    <string name="label">label</string>
 
 </resources>
