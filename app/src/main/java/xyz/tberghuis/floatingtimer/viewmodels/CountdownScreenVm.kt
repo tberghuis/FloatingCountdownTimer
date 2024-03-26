@@ -123,10 +123,12 @@ class CountdownScreenVm(
 
   fun addToSaved() {
     val durationSeconds = calcTotalDurationSeconds() ?: return
+    val label = if (label == "") null else label
     val timer = SavedCountdown(
       timerShape = timerShape,
       timerColor = haloColor.toArgb(),
-      durationSeconds = durationSeconds
+      durationSeconds = durationSeconds,
+      label = label
     )
     viewModelScope.launch(IO) {
       savedCountdownDao.insertAll(timer)

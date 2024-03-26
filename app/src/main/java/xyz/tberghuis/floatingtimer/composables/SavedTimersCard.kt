@@ -59,7 +59,7 @@ fun <T : SavedTimer> ColumnScope.SavedTimersCard(
     ) {
       savedTimers.forEach { savedTimer ->
         val c = Color(savedTimer.timerColor)
-        val settingsTimerPreviewVmc = SettingsTimerPreviewVmc(0f, c, savedTimer.timerShape)
+        val settingsTimerPreviewVmc = SettingsTimerPreviewVmc(0f, c, savedTimer.timerShape, savedTimer.label)
         Box(
           modifier = Modifier
             .align(Alignment.CenterVertically)

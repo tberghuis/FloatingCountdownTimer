@@ -15,7 +15,7 @@ data class SavedStopwatch(
   @ColumnInfo(name = "shape") override val timerShape: String,
   // Color.toArgb
   @ColumnInfo(name = "color") override val timerColor: Int,
-  @ColumnInfo() val label: String? = null,
+  @ColumnInfo() override val label: String? = null,
 ) : SavedTimer
 
 @Dao
