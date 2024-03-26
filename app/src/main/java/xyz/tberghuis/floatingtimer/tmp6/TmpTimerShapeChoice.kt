@@ -115,7 +115,9 @@ fun PreviewTmpTimerShapeChoice() {
     Modifier
       .fillMaxSize()
       .pointerInput(Unit) {
+        logd("pointerInput")
         detectTapGestures(onTap = {
+          logd("detectTapGestures")
           localFocusManager.clearFocus()
         })
       }) {
