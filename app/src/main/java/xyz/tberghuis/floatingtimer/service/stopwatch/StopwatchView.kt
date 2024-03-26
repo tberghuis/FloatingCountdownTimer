@@ -1,5 +1,7 @@
 package xyz.tberghuis.floatingtimer.service.stopwatch
 
+import android.content.Context
+import android.view.WindowManager
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.runtime.Composable
@@ -21,10 +23,14 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import xyz.tberghuis.floatingtimer.composables.TimerRectView
+import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp4.LocalTimerViewHolder
+import xyz.tberghuis.floatingtimer.tmp5.TimerLabelView
 
 @Composable
 fun StopwatchView(
@@ -39,6 +45,7 @@ fun StopwatchView(
     timeElapsed = stopwatch.timeElapsed.intValue,
     fontSize = stopwatch.fontSize,
     timerShape = stopwatch.timerShape,
+    label = stopwatch.label,
   )
 }
 
@@ -52,8 +59,11 @@ fun StopwatchView(
   haloColor: Color,
   timeElapsed: Int,
   fontSize: TextUnit,
-  timerShape: String
+  timerShape: String,
+  label: String?
 ) {
+  val isPaused = isRunningStateFlow?.collectAsState()?.value?.not() ?: false
+
   when (timerShape) {
     "circle" -> {
       StopwatchCircleView(
@@ -67,7 +77,6 @@ fun StopwatchView(
     }
 
     "rectangle" -> {
-      val isPaused = isRunningStateFlow?.collectAsState()?.value?.not() ?: false
       TimerRectView(
         isPaused = isPaused,
         widthDp = widthDp,
@@ -77,6 +86,29 @@ fun StopwatchView(
         timeElapsed = timeElapsed,
         timeLeftFraction = 1f,
         fontSize = fontSize,
+      )
+    }
+
+    "label" -> {
+      val tvh = LocalTimerViewHolder.current
+      val updateViewLayout = tvh?.let {
+        { size: IntSize ->
+          val windowManager = tvh.service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+          logd("runOnceOnGloballyPositioned $size")
+          tvh.params.width = size.width
+          tvh.params.height = size.height
+          windowManager.updateViewLayout(tvh.view, tvh.params)
+        }
+      }
+      TimerLabelView(
+        isPaused,
+        arcWidth,
+        haloColor,
+        timeElapsed,
+        1f,
+        fontSize,
+        label,
+        updateViewLayout
       )
     }
 

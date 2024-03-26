@@ -23,7 +23,6 @@ import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
 import xyz.tberghuis.floatingtimer.tmp4.LocalTimerViewHolder
-import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchView
 import kotlin.math.max
 import kotlin.math.min
 
@@ -45,7 +44,7 @@ class OverlayController(val service: FloatingService) {
       val stopwatch = Stopwatch(service, bubbleScale, haloColor, timerShape, label)
       val stopwatchView = @Composable {
         CompositionLocalProvider(LocalTimerViewHolder provides stopwatch.viewHolder) {
-          TmpStopwatchView(stopwatch)
+          StopwatchView(stopwatch)
         }
       }
       // does coroutine dispatcher matter here???

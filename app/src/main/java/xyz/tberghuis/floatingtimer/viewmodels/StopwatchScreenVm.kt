@@ -75,6 +75,7 @@ class StopwatchScreenVm(
     val timer = SavedStopwatch(
       timerShape = timerShape,
       timerColor = haloColor.toArgb(),
+      label = label
     )
     viewModelScope.launch(IO) {
       savedStopwatchDao.insertAll(timer)

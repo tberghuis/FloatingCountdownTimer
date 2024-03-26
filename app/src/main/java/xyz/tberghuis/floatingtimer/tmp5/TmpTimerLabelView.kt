@@ -69,6 +69,7 @@ fun TimerLabelView(
   label: String?,
   updateViewLayout: ((IntSize) -> Unit)? = null
 ) {
+  val label = if (label == "") null else label
   Box(
     modifier = Modifier
   ) {
