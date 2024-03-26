@@ -72,8 +72,8 @@ class CountdownScreenVm(
 
   fun countdownButtonClick() {
     val totalSecs = calcTotalDurationSeconds() ?: return
-    // todo label
-    addCountdown(totalSecs, haloColor, timerShape, null)
+    val label = if (label == "") null else label
+    addCountdown(totalSecs, haloColor, timerShape, label)
   }
 
   private fun addCountdown(totalSecs: Int, haloColor: Color, timerShape: String, label: String?) {

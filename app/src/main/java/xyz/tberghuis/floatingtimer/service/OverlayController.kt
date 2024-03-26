@@ -60,7 +60,11 @@ class OverlayController(val service: FloatingService) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
       val countdown = Countdown(service, durationSeconds, bubbleScale, haloColor, timerShape, label)
-      val countdownView = @Composable { CountdownView(countdown) }
+      val countdownView = @Composable {
+        CompositionLocalProvider(LocalTimerViewHolder provides countdown.viewHolder) {
+          CountdownView(countdown)
+        }
+      }
       withContext(Main) {
         addBubble(countdown, countdownView)
       }

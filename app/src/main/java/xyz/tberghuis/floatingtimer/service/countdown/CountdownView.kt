@@ -1,12 +1,18 @@
 package xyz.tberghuis.floatingtimer.service.countdown
 
+import android.content.Context
+import android.view.WindowManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.unit.IntSize
 import xyz.tberghuis.floatingtimer.composables.TimerRectView
+import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
+import xyz.tberghuis.floatingtimer.tmp4.LocalTimerViewHolder
+import xyz.tberghuis.floatingtimer.tmp5.TimerLabelView
 
 @Composable
 fun CountdownView(countdown: Countdown) {
@@ -47,6 +53,29 @@ fun CountdownView(
         timeElapsed = countdownSeconds,
         timeLeftFraction = timeLeftFraction,
         fontSize = bubbleProperties.fontSize,
+      )
+    }
+
+    "label" -> {
+      val tvh = LocalTimerViewHolder.current
+      val updateViewLayout = tvh?.let {
+        { size: IntSize ->
+          val windowManager = tvh.service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+          logd("runOnceOnGloballyPositioned $size")
+          tvh.params.width = size.width
+          tvh.params.height = size.height
+          windowManager.updateViewLayout(tvh.view, tvh.params)
+        }
+      }
+      TimerLabelView(
+        isPaused,
+        bubbleProperties.arcWidth,
+        bubbleProperties.haloColor,
+        countdownSeconds,
+        timeLeftFraction,
+        bubbleProperties.fontSize,
+        bubbleProperties.label,
+        updateViewLayout
       )
     }
 

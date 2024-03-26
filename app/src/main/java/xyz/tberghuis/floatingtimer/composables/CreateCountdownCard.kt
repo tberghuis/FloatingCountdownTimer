@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp6.TmpTimerShapeChoice
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
@@ -90,7 +91,8 @@ fun CreateCountdownCard() {
         singleLine = true
       )
     }
-    TimerShapeChoice(vm)
+//    TimerShapeChoice(vm)
+    TmpTimerShapeChoice(vm)
     Row(
       modifier = Modifier
         .padding(10.dp)
