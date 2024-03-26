@@ -103,7 +103,7 @@ fun ColumnScope.TimerShapeChoice(vm: TimerShapeChoiceVm) {
 
 @Preview
 @Composable
-fun PreviewTmpTimerShapeChoice() {
+fun PreviewTimerShapeChoice() {
   val vm = remember {
     object : TimerShapeChoiceVm {
       override var timerShape by mutableStateOf("circle")
