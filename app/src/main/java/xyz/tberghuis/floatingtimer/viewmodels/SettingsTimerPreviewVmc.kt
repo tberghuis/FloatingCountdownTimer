@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
 
 // todo make timerShape sealed class or enum with room typeconverter
@@ -29,9 +30,9 @@ class SettingsTimerPreviewVmc(
       "rectangle" -> {
         BubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
       }
-
+      // not used for timerShape "label"
       else -> {
-        BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
+        Dp.Unspecified
       }
     }
   }
