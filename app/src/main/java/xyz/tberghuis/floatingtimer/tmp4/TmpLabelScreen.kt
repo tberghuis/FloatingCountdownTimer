@@ -42,13 +42,3 @@ fun TmpLabelScreen(
   }
 }
 
-@Composable
-fun Modifier.runOnceOnGloballyPositioned(runOnce: (LayoutCoordinates) -> Unit): Modifier {
-  var hasRun by remember { mutableStateOf(false) }
-  return this then Modifier.onGloballyPositioned {
-    if (!hasRun) {
-      hasRun = true
-      runOnce(it)
-    }
-  }
-}

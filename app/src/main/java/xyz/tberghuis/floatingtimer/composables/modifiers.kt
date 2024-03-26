@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.composables
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
@@ -9,6 +10,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
@@ -38,3 +41,14 @@ fun Modifier.onFocusSelectAll(textFieldValueState: MutableState<TextFieldValue>)
       }
     }
   }
+
+@Composable
+fun Modifier.runOnceOnGloballyPositioned(runOnce: (LayoutCoordinates) -> Unit): Modifier {
+  var hasRun by remember { mutableStateOf(false) }
+  return this then Modifier.onGloballyPositioned {
+    if (!hasRun) {
+      hasRun = true
+      runOnce(it)
+    }
+  }
+}

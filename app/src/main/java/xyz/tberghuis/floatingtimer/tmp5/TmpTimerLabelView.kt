@@ -34,7 +34,7 @@ import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import xyz.tberghuis.floatingtimer.composables.CountdownProgressLine
-import xyz.tberghuis.floatingtimer.tmp4.runOnceOnGloballyPositioned
+import xyz.tberghuis.floatingtimer.composables.runOnceOnGloballyPositioned
 
 @Preview(showBackground = true)
 @Composable
