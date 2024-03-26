@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp6.TmpTimerShapeChoice
 import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 import xyz.tberghuis.floatingtimer.viewmodels.StopwatchScreenVm
 
@@ -42,10 +41,7 @@ fun CreateStopwatchCard() {
     ) {
       Text(stringResource(id = R.string.stopwatch), fontSize = 20.sp)
     }
-
-//    TimerShapeChoice(vm)
-    TmpTimerShapeChoice(vm)
-
+    TimerShapeChoice(vm)
     Row(
       modifier = Modifier
         .padding(10.dp)
