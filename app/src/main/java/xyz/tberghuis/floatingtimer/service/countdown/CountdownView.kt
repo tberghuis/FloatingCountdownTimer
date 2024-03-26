@@ -8,11 +8,11 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.IntSize
+import xyz.tberghuis.floatingtimer.composables.TimerLabelView
 import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
 import xyz.tberghuis.floatingtimer.tmp4.LocalTimerViewHolder
-import xyz.tberghuis.floatingtimer.tmp5.TimerLabelView
 
 @Composable
 fun CountdownView(countdown: Countdown) {

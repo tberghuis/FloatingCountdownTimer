@@ -27,10 +27,10 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import xyz.tberghuis.floatingtimer.composables.TimerLabelView
 import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp4.LocalTimerViewHolder
-import xyz.tberghuis.floatingtimer.tmp5.TimerLabelView
 
 @Composable
 fun StopwatchView(
