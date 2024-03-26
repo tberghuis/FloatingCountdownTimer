@@ -120,7 +120,8 @@ fun PreviewTmpTimerShapeChoice() {
           logd("detectTapGestures")
           localFocusManager.clearFocus()
         })
-      }) {
+      }
+  ) {
     TmpTimerShapeChoice(vm)
   }
 }

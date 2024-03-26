@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.screens
 
 import android.provider.Settings
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -12,7 +13,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
@@ -29,8 +32,13 @@ import xyz.tberghuis.floatingtimer.viewmodels.StopwatchScreenVm
 fun StopwatchScreen(
   vm: StopwatchScreenVm = viewModel()
 ) {
+  val localFocusManager = LocalFocusManager.current
   Scaffold(
-    modifier = Modifier,
+    modifier = Modifier.pointerInput(Unit) {
+      detectTapGestures(onTap = {
+        localFocusManager.clearFocus()
+      })
+    },
     topBar = { FtTopAppBar() },
     bottomBar = {
       FtBottomBar(ScreenTypeStopwatch)
