@@ -72,7 +72,7 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.5.0'
 
     // https://developer.android.com/jetpack/compose/bom/bom-mapping
-    def composeBom = platform('androidx.compose:compose-bom:2024.03.00')
+    def composeBom = platform('androidx.compose:compose-bom:2024.04.00')
     implementation composeBom
     androidTestImplementation composeBom
     implementation 'androidx.compose.material3:material3'
