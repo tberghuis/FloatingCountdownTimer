@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -32,11 +33,14 @@ fun TmpTextShadow() {
     Box {
       Box(
         Modifier
-          .background(Color.Red)
-          .size(100.dp)
+          .background(Color.Green)
+          .size(200.dp)
       )
-      TextShadow()
-      TextShadowWhite()
+      Column {
+        OutlinedTextWithShadow("00:59")
+        OutlinedTextWithShadow("00:59")
+      }
+
     }
   }
 }
@@ -75,5 +79,39 @@ fun TextShadowWhite() {
 }
 
 
+// text min and max font sizes
 
+@Composable
+fun OutlinedTextWithShadow(
+  text: String,
+  fontSize: TextUnit = 64.sp,
+) {
+  Box {
+    Text(
+      text = text,
+      style = TextStyle.Default.copy(
+        fontSize = fontSize,
+        drawStyle = Stroke(
+          miter = 10f,
+          width = 5f,
+          join = StrokeJoin.Round
+        ),
+        shadow = Shadow(
+          color = Color.Gray,
+          offset = Offset(-5f, 5f),
+          blurRadius = 8f
+        )
+      )
+    )
+
+    Text(
+      text = text,
+      style = TextStyle.Default.copy(
+        color = Color.White,
+        fontSize = fontSize,
+        drawStyle = Fill
+      )
+    )
+  }
+}
 
