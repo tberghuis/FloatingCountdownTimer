@@ -17,12 +17,14 @@ import androidx.compose.ui.graphics.StrokeJoin
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
+import xyz.tberghuis.floatingtimer.common.formatIntTimerDisplay
 
 @Preview
 @Composable
@@ -39,19 +41,18 @@ fun TmpTextShadow() {
           .size(200.dp)
       )
       Column {
-        OutlinedTextWithShadow("00:59", 16.sp)
+        TmpTimeDisplay(59, 16.sp, true)
         // 35.2.sp
-        OutlinedTextWithShadow("00:59", TIMER_FONT_SIZE_NO_SCALE * (1.2 * 1f + 1))
+        TmpTimeDisplay(59, TIMER_FONT_SIZE_NO_SCALE * (1.2 * 1f + 1), true)
       }
     }
   }
 }
 
-// test min and max font sizes
 @Composable
 fun OutlinedTextWithShadow(
   text: String,
-  fontSize: TextUnit = 64.sp,
+  fontSize: TextUnit,
 ) {
   val textStyleFill = LocalTextStyle.current.copy(
     fontSize = fontSize,
@@ -67,19 +68,47 @@ fun OutlinedTextWithShadow(
       join = StrokeJoin.Round
     )
   )
+  Box {
+    Text(
+      text = text,
+      fontFamily = FontFamily.Default,
+      maxLines = 1,
+      style = textStyleOutline,
+    )
+    Text(
+      text = text,
+      fontFamily = FontFamily.Default,
+      maxLines = 1,
+      style = textStyleFill,
+    )
+  }
+}
 
-  // i should refactor, lock density at higher level....
+@Composable
+fun TmpTimeDisplay(
+  totalSeconds: Int,
+  fontSize: TextUnit,
+  isBackgroundTransparent: Boolean
+) {
+  val minutes = totalSeconds / 60
+  val seconds = totalSeconds % 60
+  val text = "${formatIntTimerDisplay(minutes)}:${formatIntTimerDisplay(seconds)}"
+
   CompositionLocalProvider(
     LocalDensity provides Density(LocalDensity.current.density, 1f)
   ) {
-    Box {
+    if (isBackgroundTransparent) {
+      OutlinedTextWithShadow(text, fontSize)
+    } else {
       Text(
-        text = text,
-        style = textStyleOutline,
-      )
-      Text(
-        text = text,
-        style = textStyleFill,
+        text,
+        fontSize = fontSize,
+        fontFamily = FontFamily.Default,
+        maxLines = 1,
+        style = LocalTextStyle.current.copy(
+          color = Color.Black,
+          fontFeatureSettings = "tnum"
+        ),
       )
     }
   }
