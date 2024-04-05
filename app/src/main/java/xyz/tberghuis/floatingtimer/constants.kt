@@ -6,7 +6,6 @@ import androidx.compose.ui.unit.sp
 
 const val TRASH_SIZE_DP = 80
 
-val TIMER_SIZE_NO_SCALE = 60.dp
 val TIMER_FONT_SIZE_NO_SCALE = 16.sp
 
 const val INTENT_COMMAND = "xyz.tberghuis.floatingtimer.COMMAND"
@@ -30,5 +29,4 @@ val DEFAULT_HALO_COLOR = Color(red = 103, green = 80, blue = 164)
 
 const val DB_FILENAME = "ft.db"
 
-//val TIMER_WIDTH_NO_SCALE = 60.dp
 val COUNTDOWN_TIMER_SIZE_NO_SCALE = 60.dp
