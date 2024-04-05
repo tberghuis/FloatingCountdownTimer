@@ -29,7 +29,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.composables.TimerLabelView
-import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
@@ -76,20 +75,20 @@ fun StopwatchView(
       )
     }
 
-    "rectangle" -> {
-      TimerRectView(
-        isPaused = isPaused,
-        widthDp = widthDp,
-        heightDp = heightDp,
-        arcWidth = arcWidth,
-        haloColor = haloColor,
-        timeElapsed = timeElapsed,
-        timeLeftFraction = 1f,
-        fontSize = fontSize,
-      )
-    }
+//    "rectangle" -> {
+//      TimerRectView(
+//        isPaused = isPaused,
+//        widthDp = widthDp,
+//        heightDp = heightDp,
+//        arcWidth = arcWidth,
+//        haloColor = haloColor,
+//        timeElapsed = timeElapsed,
+//        timeLeftFraction = 1f,
+//        fontSize = fontSize,
+//      )
+//    }
 
-    "label" -> {
+    "label", "rectangle" -> {
       val tvh = LocalTimerViewHolder.current
       val updateViewLayout = tvh?.let {
         { size: IntSize ->
