@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
-import xyz.tberghuis.floatingtimer.composables.TimerLabelView
+import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
 
 @Composable
@@ -38,7 +38,6 @@ fun StopwatchView(
   StopwatchView(
     isRunningStateFlow = stopwatch.isRunningStateFlow,
     widthDp = stopwatch.widthDp,
-//    heightDp = stopwatch.heightDp,
     arcWidth = stopwatch.arcWidth,
     haloColor = stopwatch.haloColor,
     timeElapsed = stopwatch.timeElapsed.intValue,
@@ -53,7 +52,6 @@ fun StopwatchView(
   // when isRunningStateFlow null, showing preview in saved timers card
   isRunningStateFlow: MutableStateFlow<Boolean>?,
   widthDp: Dp,
-//  heightDp: Dp,
   arcWidth: Dp,
   haloColor: Color,
   timeElapsed: Int,
@@ -86,7 +84,7 @@ fun StopwatchView(
           windowManager.updateViewLayout(tvh.view, tvh.params)
         }
       }
-      TimerLabelView(
+      TimerRectView(
         isPaused,
         arcWidth,
         haloColor,
