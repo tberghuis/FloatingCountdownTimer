@@ -19,8 +19,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
+import xyz.tberghuis.floatingtimer.COUNTDOWN_TIMER_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
-import xyz.tberghuis.floatingtimer.TIMER_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
@@ -75,8 +75,7 @@ fun <T : SavedTimer> ColumnScope.SavedTimersCard(
             is SavedStopwatch -> {
               StopwatchView(
                 isRunningStateFlow = null,
-                widthDp = TIMER_WIDTH_NO_SCALE,
-//                heightDp = RECT_TIMER_HEIGHT_NO_SCALE, // ignored if rectangle, need refactoring
+                widthDp = COUNTDOWN_TIMER_SIZE_NO_SCALE,
                 arcWidth = ARC_WIDTH_NO_SCALE,
                 haloColor = Color(savedTimer.timerColor),
                 timeElapsed = 0,

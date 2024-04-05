@@ -7,8 +7,8 @@ import kotlin.math.roundToInt
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
+import xyz.tberghuis.floatingtimer.COUNTDOWN_TIMER_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
-import xyz.tberghuis.floatingtimer.TIMER_WIDTH_NO_SCALE
 
 // future data class implements this, use composition over inheritance
 // make update method a single method interface, does calcs and returns copy instance
@@ -17,17 +17,16 @@ import xyz.tberghuis.floatingtimer.TIMER_WIDTH_NO_SCALE
 interface BubbleProperties {
   val widthDp: Dp
   val heightDp: Dp
-
   val arcWidth: Dp
   val fontSize: TextUnit
   val haloColor: Color
-
   val timerShape: String
-
   val label: String?
 
   companion object {
-    fun calcWidthDp(scaleFactor: Float) = TIMER_WIDTH_NO_SCALE * (scaleFactor + 1)
+    fun calcCountdownTimerSizeDp(scaleFactor: Float) =
+      COUNTDOWN_TIMER_SIZE_NO_SCALE * (scaleFactor + 1)
+
 //    fun calcRectHeightDp(scaleFactor: Float): Dp {
 //      // y= mx + b
 //      // m = 22, b=50
@@ -51,19 +50,19 @@ abstract class Bubble(
       Dp.Unspecified
     }
 
+    "circle" -> {
+      BubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
+    }
+
     else -> {
-      BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
+      throw RuntimeException("invalid timer shape")
     }
   }
 
   final override val heightDp = when (timerShape) {
     "circle" -> {
-      BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
+      BubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
     }
-
-//    "rectangle" -> {
-//      BubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
-//    }
 
     "label", "rectangle" -> {
       Dp.Unspecified

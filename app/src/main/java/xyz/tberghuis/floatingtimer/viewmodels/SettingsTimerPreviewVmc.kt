@@ -19,24 +19,27 @@ class SettingsTimerPreviewVmc(
   var bubbleSizeScaleFactor by mutableFloatStateOf(initialScale) // 0<=x<=1
   override var haloColor by mutableStateOf(initialHaloColor)
   override val widthDp by derivedStateOf {
-    BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
-  }
-  override val heightDp by derivedStateOf {
     when (timerShape) {
       "circle" -> {
-        BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
+        BubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
       }
 
-//      "rectangle" -> {
-//        BubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
-//      }
-      // not used for timerShape "label"
       else -> {
         Dp.Unspecified
       }
     }
   }
+  override val heightDp by derivedStateOf {
+    when (timerShape) {
+      "circle" -> {
+        BubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
+      }
 
+      else -> {
+        Dp.Unspecified
+      }
+    }
+  }
   override val arcWidth by derivedStateOf {
     BubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
   }
