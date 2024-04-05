@@ -24,70 +24,70 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 
-//@Composable
-//fun TimerRectView(
-//  isPaused: Boolean,
-//  widthDp: Dp,
-//  heightDp: Dp,
-//  arcWidth: Dp,
-//  haloColor: Color,
-//  timeElapsed: Int,
-//  timeLeftFraction: Float,
-//  fontSize: TextUnit,
-//) {
-//  Box(
-//    modifier = Modifier
-//      .size(widthDp, heightDp)
-//      .padding(5.dp)
-//      .graphicsLayer(
-//        shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
-//        shape = RoundedCornerShape(10.dp),
-//        clip = true
-//      ),
-//    contentAlignment = Alignment.Center,
-//  ) {
-//
-//    Box(
-//      modifier = Modifier
-//        .background(Color.White)
-//        .fillMaxSize(),
-//      contentAlignment = Alignment.Center,
-//    ) {
-//
-//      if (isPaused) {
-//        Icon(
-//          Icons.Filled.PlayArrow,
-//          contentDescription = "paused",
-//          modifier = Modifier.fillMaxSize(),
-//          tint = Color.LightGray
-//        )
-//      }
-//
-//      Column(
-//        modifier = Modifier
-//          .fillMaxSize(),
-//        verticalArrangement = Arrangement.Center,
-//        horizontalAlignment = Alignment.CenterHorizontally,
-//      ) {
-//        TimeDisplay(timeElapsed, fontSize)
-//        Box(
-//          modifier = Modifier.padding(
-//            start = 5.dp,
-//            end = 5.dp,
-//            bottom = 5.dp
-//          ),
-//          contentAlignment = Alignment.TopStart,
-//        ) {
-//          CountdownProgressLine(
-//            timeLeftFraction,
-//            arcWidth,
-//            haloColor
-//          )
-//        }
-//      }
-//    }
-//  }
-//}
+@Composable
+fun TimerRectView(
+  isPaused: Boolean,
+  widthDp: Dp,
+  heightDp: Dp,
+  arcWidth: Dp,
+  haloColor: Color,
+  timeElapsed: Int,
+  timeLeftFraction: Float,
+  fontSize: TextUnit,
+) {
+  Box(
+    modifier = Modifier
+      .size(widthDp, heightDp)
+      .padding(5.dp)
+      .graphicsLayer(
+        shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
+        shape = RoundedCornerShape(10.dp),
+        clip = true
+      ),
+    contentAlignment = Alignment.Center,
+  ) {
+
+    Box(
+      modifier = Modifier
+        .background(Color.White)
+        .fillMaxSize(),
+      contentAlignment = Alignment.Center,
+    ) {
+
+      if (isPaused) {
+        Icon(
+          Icons.Filled.PlayArrow,
+          contentDescription = "paused",
+          modifier = Modifier.fillMaxSize(),
+          tint = Color.LightGray
+        )
+      }
+
+      Column(
+        modifier = Modifier
+          .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+      ) {
+        TimeDisplay(timeElapsed, fontSize)
+        Box(
+          modifier = Modifier.padding(
+            start = 5.dp,
+            end = 5.dp,
+            bottom = 5.dp
+          ),
+          contentAlignment = Alignment.TopStart,
+        ) {
+          CountdownProgressLine(
+            timeLeftFraction,
+            arcWidth,
+            haloColor
+          )
+        }
+      }
+    }
+  }
+}
 
 @Composable
 fun CountdownProgressLine(timeLeftFraction: Float, arcWidth: Dp, haloColor: Color) {
