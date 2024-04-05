@@ -12,7 +12,6 @@ import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.composables.TimerLabelView
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
-import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectView
 
 @Composable
 fun CountdownView(countdown: Countdown) {
@@ -43,19 +42,6 @@ fun CountdownView(
       )
     }
 
-//    "rectangle" -> {
-//      TimerRectView(
-//        isPaused = isPaused,
-//        widthDp = bubbleProperties.widthDp,
-//        heightDp = bubbleProperties.heightDp,
-//        arcWidth = bubbleProperties.arcWidth,
-//        haloColor = bubbleProperties.haloColor,
-//        timeElapsed = countdownSeconds,
-//        timeLeftFraction = timeLeftFraction,
-//        fontSize = bubbleProperties.fontSize,
-//      )
-//    }
-
     "label", "rectangle" -> {
       val tvh = LocalTimerViewHolder.current
       val updateViewLayout = tvh?.let {
@@ -67,6 +53,8 @@ fun CountdownView(
           windowManager.updateViewLayout(tvh.view, tvh.params)
         }
       }
+      // this is redundant, unless bad data in DB
+      val label = if (bubbleProperties.timerShape == "label") bubbleProperties.label else null
       TimerLabelView(
         isPaused,
         bubbleProperties.arcWidth,
@@ -74,7 +62,7 @@ fun CountdownView(
         countdownSeconds,
         timeLeftFraction,
         bubbleProperties.fontSize,
-        bubbleProperties.label,
+        label,
         updateViewLayout
       )
     }

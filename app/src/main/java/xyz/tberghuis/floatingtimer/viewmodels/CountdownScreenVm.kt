@@ -72,7 +72,8 @@ class CountdownScreenVm(
 
   fun countdownButtonClick() {
     val totalSecs = calcTotalDurationSeconds() ?: return
-    val label = if (label == "") null else label
+    // no warning about var name shadowed???
+    val label = if (timerShape == "label") label else null
     addCountdown(totalSecs, haloColor, timerShape, label)
   }
 
@@ -123,7 +124,7 @@ class CountdownScreenVm(
 
   fun addToSaved() {
     val durationSeconds = calcTotalDurationSeconds() ?: return
-    val label = if (label == "") null else label
+    val label = if (label == "" || timerShape != "label") null else label
     val timer = SavedCountdown(
       timerShape = timerShape,
       timerColor = haloColor.toArgb(),

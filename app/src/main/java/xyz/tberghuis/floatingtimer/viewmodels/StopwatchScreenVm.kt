@@ -61,7 +61,7 @@ class StopwatchScreenVm(
   }
 
   fun stopwatchButtonClick() {
-    val label = if (label == "") null else label
+    val label = if (timerShape == "label") label else null
     addStopwatch(haloColor, timerShape, label)
   }
 
@@ -72,6 +72,7 @@ class StopwatchScreenVm(
   }
 
   fun addToSaved() {
+    val label = if (label == "" || timerShape != "label") null else label
     val timer = SavedStopwatch(
       timerShape = timerShape,
       timerColor = haloColor.toArgb(),
