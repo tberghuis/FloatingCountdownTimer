@@ -22,6 +22,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -31,6 +32,10 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.skip
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.viewmodels.TimerShapeChoiceVm
@@ -38,8 +43,13 @@ import xyz.tberghuis.floatingtimer.viewmodels.TimerShapeChoiceVm
 @Composable
 fun ColumnScope.TimerShapeChoice(vm: TimerShapeChoiceVm) {
   val focusRequester = remember { FocusRequester() }
-  if (vm.timerShape == "label") {
-    LaunchedEffect(Unit) {
+
+  // this is a hack....
+  // https://stackoverflow.com/questions/70654829/enable-and-focus-textfield-at-once-in-jetpack-compose
+  LaunchedEffect(Unit) {
+    // drop(1) is to prevent focus after pop backstack of setting screen
+    snapshotFlow { vm.timerShape }.drop(1).filter { it == "label" }.collect {
+      delay(50)
       focusRequester.requestFocus()
     }
   }
