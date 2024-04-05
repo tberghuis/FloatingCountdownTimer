@@ -27,9 +27,9 @@ class SettingsTimerPreviewVmc(
         BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
       }
 
-      "rectangle" -> {
-        BubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
-      }
+//      "rectangle" -> {
+//        BubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
+//      }
       // not used for timerShape "label"
       else -> {
         Dp.Unspecified

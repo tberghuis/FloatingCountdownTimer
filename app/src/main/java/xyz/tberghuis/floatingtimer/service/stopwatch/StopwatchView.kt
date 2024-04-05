@@ -29,8 +29,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.composables.TimerLabelView
-import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectView
 
 @Composable
 fun StopwatchView(
@@ -39,7 +39,7 @@ fun StopwatchView(
   StopwatchView(
     isRunningStateFlow = stopwatch.isRunningStateFlow,
     widthDp = stopwatch.widthDp,
-    heightDp = stopwatch.heightDp,
+//    heightDp = stopwatch.heightDp,
     arcWidth = stopwatch.arcWidth,
     haloColor = stopwatch.haloColor,
     timeElapsed = stopwatch.timeElapsed.intValue,
@@ -54,7 +54,7 @@ fun StopwatchView(
   // when isRunningStateFlow null, showing preview in saved timers card
   isRunningStateFlow: MutableStateFlow<Boolean>?,
   widthDp: Dp,
-  heightDp: Dp,
+//  heightDp: Dp,
   arcWidth: Dp,
   haloColor: Color,
   timeElapsed: Int,
@@ -77,16 +77,21 @@ fun StopwatchView(
     }
 
     "rectangle" -> {
-      TimerRectView(
-        isPaused = isPaused,
-        widthDp = widthDp,
-        heightDp = heightDp,
+      TmpTimerRectView(
         arcWidth = arcWidth,
         haloColor = haloColor,
-        timeElapsed = timeElapsed,
         timeLeftFraction = 1f,
-        fontSize = fontSize,
       )
+//      TimerRectView(
+//        isPaused = isPaused,
+//        widthDp = widthDp,
+//        heightDp = heightDp,
+//        arcWidth = arcWidth,
+//        haloColor = haloColor,
+//        timeElapsed = timeElapsed,
+//        timeLeftFraction = 1f,
+//        fontSize = fontSize,
+//      )
     }
 
     "label" -> {

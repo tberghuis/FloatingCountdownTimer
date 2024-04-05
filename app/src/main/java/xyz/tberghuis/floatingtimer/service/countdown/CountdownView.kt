@@ -10,9 +10,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.IntSize
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.composables.TimerLabelView
-import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
+import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectView
 
 @Composable
 fun CountdownView(countdown: Countdown) {
@@ -43,20 +43,20 @@ fun CountdownView(
       )
     }
 
-    "rectangle" -> {
-      TimerRectView(
-        isPaused = isPaused,
-        widthDp = bubbleProperties.widthDp,
-        heightDp = bubbleProperties.heightDp,
-        arcWidth = bubbleProperties.arcWidth,
-        haloColor = bubbleProperties.haloColor,
-        timeElapsed = countdownSeconds,
-        timeLeftFraction = timeLeftFraction,
-        fontSize = bubbleProperties.fontSize,
-      )
-    }
+//    "rectangle" -> {
+//      TimerRectView(
+//        isPaused = isPaused,
+//        widthDp = bubbleProperties.widthDp,
+//        heightDp = bubbleProperties.heightDp,
+//        arcWidth = bubbleProperties.arcWidth,
+//        haloColor = bubbleProperties.haloColor,
+//        timeElapsed = countdownSeconds,
+//        timeLeftFraction = timeLeftFraction,
+//        fontSize = bubbleProperties.fontSize,
+//      )
+//    }
 
-    "label" -> {
+    "label", "rectangle" -> {
       val tvh = LocalTimerViewHolder.current
       val updateViewLayout = tvh?.let {
         { size: IntSize ->

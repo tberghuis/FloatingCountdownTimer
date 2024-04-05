@@ -31,5 +31,5 @@ val DEFAULT_HALO_COLOR = Color(red = 103, green = 80, blue = 164)
 const val DB_FILENAME = "ft.db"
 
 val TIMER_WIDTH_NO_SCALE = 60.dp
-val RECT_TIMER_HEIGHT_NO_SCALE = 50.dp
-val RECT_TIMER_HEIGHT_MAX_SCALE = 72.dp
+//val RECT_TIMER_HEIGHT_NO_SCALE = 50.dp
+//val RECT_TIMER_HEIGHT_MAX_SCALE = 72.dp

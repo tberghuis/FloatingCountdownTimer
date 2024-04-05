@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.common.TimeDisplay
 
 @Composable
-fun TimerRectView(
+fun XxxTimerRectView(
   isPaused: Boolean,
   widthDp: Dp,
   heightDp: Dp,

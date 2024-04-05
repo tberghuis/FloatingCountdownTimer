@@ -7,8 +7,6 @@ import kotlin.math.roundToInt
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
-import xyz.tberghuis.floatingtimer.RECT_TIMER_HEIGHT_MAX_SCALE
-import xyz.tberghuis.floatingtimer.RECT_TIMER_HEIGHT_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_WIDTH_NO_SCALE
 
@@ -30,11 +28,11 @@ interface BubbleProperties {
 
   companion object {
     fun calcWidthDp(scaleFactor: Float) = TIMER_WIDTH_NO_SCALE * (scaleFactor + 1)
-    fun calcRectHeightDp(scaleFactor: Float): Dp {
-      // y= mx + b
-      // m = 22, b=50
-      return (RECT_TIMER_HEIGHT_MAX_SCALE - RECT_TIMER_HEIGHT_NO_SCALE) * scaleFactor + RECT_TIMER_HEIGHT_NO_SCALE
-    }
+//    fun calcRectHeightDp(scaleFactor: Float): Dp {
+//      // y= mx + b
+//      // m = 22, b=50
+//      return (RECT_TIMER_HEIGHT_MAX_SCALE - RECT_TIMER_HEIGHT_NO_SCALE) * scaleFactor + RECT_TIMER_HEIGHT_NO_SCALE
+//    }
 
     fun calcArcWidth(scaleFactor: Float) = ARC_WIDTH_NO_SCALE * (0.9f * scaleFactor + 1)
     fun calcFontSize(scaleFactor: Float) = TIMER_FONT_SIZE_NO_SCALE * (1.2 * scaleFactor + 1)
@@ -49,7 +47,7 @@ abstract class Bubble(
   final override val label: String? = null
 ) : BubbleProperties {
   final override val widthDp = when (timerShape) {
-    "label" -> {
+    "label", "rectangle" -> {
       Dp.Unspecified
     }
 
@@ -63,11 +61,11 @@ abstract class Bubble(
       BubbleProperties.calcWidthDp(bubbleSizeScaleFactor)
     }
 
-    "rectangle" -> {
-      BubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
-    }
+//    "rectangle" -> {
+//      BubbleProperties.calcRectHeightDp(bubbleSizeScaleFactor)
+//    }
 
-    "label" -> {
+    "label", "rectangle" -> {
       Dp.Unspecified
     }
 
