@@ -82,7 +82,8 @@ fun <T : SavedTimer> ColumnScope.SavedTimersCard(
                 timeElapsed = 0,
                 fontSize = TIMER_FONT_SIZE_NO_SCALE,
                 timerShape = savedTimer.timerShape,
-                label = savedTimer.label
+                label = savedTimer.label,
+                isBackgroundTransparent = savedTimer.isBackgroundTransparent
               )
             }
           }

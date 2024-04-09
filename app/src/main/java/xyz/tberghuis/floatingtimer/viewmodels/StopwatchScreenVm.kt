@@ -14,12 +14,14 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
+import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.tmp5.BackgroundTransCheckboxVm
 
 class StopwatchScreenVm(
   private val application: Application,
-) : AndroidViewModel(application), TimerShapeChoiceVm {
+) : AndroidViewModel(application), TimerShapeChoiceVm, BackgroundTransCheckboxVm {
   private val savedStopwatchDao = application.provideDatabase().savedStopwatchDao()
   var showDeleteDialog by mutableStateOf<SavedStopwatch?>(null)
 
@@ -31,6 +33,7 @@ class StopwatchScreenVm(
 
   override var timerShape by mutableStateOf("circle")
   override var label by mutableStateOf("")
+  override var isBackgroundTransparent by mutableStateOf(false)
 
   init {
     viewModelScope.launch {
@@ -45,7 +48,12 @@ class StopwatchScreenVm(
   }
 
   fun savedStopwatchClick(timer: SavedStopwatch) {
-    addStopwatch(Color(timer.timerColor), timer.timerShape, timer.label, false)
+    addStopwatch(
+      Color(timer.timerColor),
+      timer.timerShape,
+      timer.label,
+      timer.isBackgroundTransparent
+    )
   }
 
   private fun addStopwatch(
@@ -67,7 +75,10 @@ class StopwatchScreenVm(
 
   fun stopwatchButtonClick() {
     val label = if (timerShape == "label") label else null
-    addStopwatch(haloColor, timerShape, label, false)
+
+    logd("stopwatchButtonClick isBackgroundTransparent $isBackgroundTransparent")
+
+    addStopwatch(haloColor, timerShape, label, isBackgroundTransparent)
   }
 
   fun deleteSavedStopwatch(timer: SavedStopwatch) {
@@ -81,7 +92,8 @@ class StopwatchScreenVm(
     val timer = SavedStopwatch(
       timerShape = timerShape,
       timerColor = haloColor.toArgb(),
-      label = label
+      label = label,
+      isBackgroundTransparent = isBackgroundTransparent
     )
     viewModelScope.launch(IO) {
       savedStopwatchDao.insertAll(timer)

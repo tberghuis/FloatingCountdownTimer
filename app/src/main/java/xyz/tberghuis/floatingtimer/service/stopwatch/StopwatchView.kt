@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.StateFlow
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectViewTrans
 
 @Composable
 fun StopwatchView(
@@ -44,6 +45,7 @@ fun StopwatchView(
     fontSize = stopwatch.fontSize,
     timerShape = stopwatch.timerShape,
     label = stopwatch.label,
+    isBackgroundTransparent = stopwatch.isBackgroundTransparent
   )
 }
 
@@ -57,7 +59,8 @@ fun StopwatchView(
   timeElapsed: Int,
   fontSize: TextUnit,
   timerShape: String,
-  label: String?
+  label: String?,
+  isBackgroundTransparent: Boolean
 ) {
   val isPaused = isRunningStateFlow?.collectAsState()?.value?.not() ?: false
 
@@ -70,7 +73,7 @@ fun StopwatchView(
         haloColor = haloColor,
         timeElapsed = timeElapsed,
         fontSize = fontSize,
-        false
+        isBackgroundTransparent
       )
     }
 
@@ -85,7 +88,7 @@ fun StopwatchView(
           windowManager.updateViewLayout(tvh.view, tvh.params)
         }
       }
-      TimerRectView(
+      TmpTimerRectViewTrans(
         isPaused,
         arcWidth,
         haloColor,
@@ -93,6 +96,7 @@ fun StopwatchView(
         1f,
         fontSize,
         if (timerShape == "label") label else null,
+        isBackgroundTransparent,
         updateViewLayout
       )
     }
