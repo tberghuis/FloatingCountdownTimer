@@ -22,6 +22,7 @@ interface BubbleProperties {
   val haloColor: Color
   val timerShape: String
   val label: String?
+  val isBackgroundTransparent: Boolean
 
   companion object {
     fun calcCountdownTimerSizeDp(scaleFactor: Float) =
@@ -43,7 +44,8 @@ abstract class Bubble(
   bubbleSizeScaleFactor: Float,
   override val haloColor: Color,
   final override val timerShape: String,
-  final override val label: String? = null
+  final override val label: String? = null,
+  final override val isBackgroundTransparent: Boolean
 ) : BubbleProperties {
   final override val widthDp = when (timerShape) {
     "label", "rectangle" -> {

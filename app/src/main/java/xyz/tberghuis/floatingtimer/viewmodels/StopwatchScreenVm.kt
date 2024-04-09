@@ -45,24 +45,29 @@ class StopwatchScreenVm(
   }
 
   fun savedStopwatchClick(timer: SavedStopwatch) {
-    addStopwatch(Color(timer.timerColor), timer.timerShape, timer.label)
+    addStopwatch(Color(timer.timerColor), timer.timerShape, timer.label, false)
   }
 
-  private fun addStopwatch(haloColor: Color, timerShape: String, label: String?) {
+  private fun addStopwatch(
+    haloColor: Color,
+    timerShape: String,
+    label: String?,
+    isBackgroundTransparent: Boolean
+  ) {
     viewModelScope.launch {
       if (shouldShowPremiumDialogMultipleTimers(application)) {
         premiumVmc.showPurchaseDialog = true
         return@launch
       }
       boundFloatingService.provideFloatingService().overlayController.addStopwatch(
-        haloColor, timerShape, label
+        haloColor, timerShape, label, isBackgroundTransparent
       )
     }
   }
 
   fun stopwatchButtonClick() {
     val label = if (timerShape == "label") label else null
-    addStopwatch(haloColor, timerShape, label)
+    addStopwatch(haloColor, timerShape, label, false)
   }
 
   fun deleteSavedStopwatch(timer: SavedStopwatch) {

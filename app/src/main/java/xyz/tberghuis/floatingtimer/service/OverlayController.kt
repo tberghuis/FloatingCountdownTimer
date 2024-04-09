@@ -36,12 +36,12 @@ class OverlayController(val service: FloatingService) {
   }
 
   // doitwrong
-  fun addStopwatch(haloColor: Color, timerShape: String, label: String?) {
+  fun addStopwatch(haloColor: Color, timerShape: String, label: String?, isBackgroundTransparent: Boolean) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
-      val stopwatch = Stopwatch(service, bubbleScale, haloColor, timerShape, label)
+      val stopwatch = Stopwatch(service, bubbleScale, haloColor, timerShape, label, isBackgroundTransparent)
       val stopwatchView = @Composable {
         CompositionLocalProvider(LocalTimerViewHolder provides stopwatch.viewHolder) {
           StopwatchView(stopwatch)
@@ -54,12 +54,12 @@ class OverlayController(val service: FloatingService) {
     }
   }
 
-  fun addCountdown(durationSeconds: Int, haloColor: Color, timerShape: String, label: String?) {
+  fun addCountdown(durationSeconds: Int, haloColor: Color, timerShape: String, label: String?, isBackgroundTransparent: Boolean) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
-      val countdown = Countdown(service, durationSeconds, bubbleScale, haloColor, timerShape, label)
+      val countdown = Countdown(service, durationSeconds, bubbleScale, haloColor, timerShape, label, isBackgroundTransparent)
       val countdownView = @Composable {
         CompositionLocalProvider(LocalTimerViewHolder provides countdown.viewHolder) {
           CountdownView(countdown)

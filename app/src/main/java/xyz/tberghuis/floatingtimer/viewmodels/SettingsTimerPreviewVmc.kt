@@ -14,7 +14,8 @@ class SettingsTimerPreviewVmc(
   initialScale: Float,
   initialHaloColor: Color,
   override val timerShape: String,
-  override val label: String? = null
+  override val label: String? = null,
+  override val isBackgroundTransparent: Boolean
 ) : BubbleProperties {
   var bubbleSizeScaleFactor by mutableFloatStateOf(initialScale) // 0<=x<=1
   override var haloColor by mutableStateOf(initialHaloColor)

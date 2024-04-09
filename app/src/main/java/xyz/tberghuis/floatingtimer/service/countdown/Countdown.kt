@@ -28,8 +28,9 @@ class Countdown(
   bubbleSizeScaleFactor: Float,
   haloColor: Color,
   timerShape: String,
-  label: String?
-) : Bubble(service, bubbleSizeScaleFactor, haloColor, timerShape, label) {
+  label: String?,
+  isBackgroundTransparent: Boolean
+) : Bubble(service, bubbleSizeScaleFactor, haloColor, timerShape, label, isBackgroundTransparent) {
   var countdownSeconds by mutableIntStateOf(durationSeconds)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
   private var countDownTimer: CountDownTimer? = null

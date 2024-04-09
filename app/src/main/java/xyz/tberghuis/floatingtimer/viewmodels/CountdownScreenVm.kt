@@ -74,10 +74,10 @@ class CountdownScreenVm(
     val totalSecs = calcTotalDurationSeconds() ?: return
     // no warning about var name shadowed???
     val label = if (timerShape == "label") label else null
-    addCountdown(totalSecs, haloColor, timerShape, label)
+    addCountdown(totalSecs, haloColor, timerShape, label, false)
   }
 
-  private fun addCountdown(totalSecs: Int, haloColor: Color, timerShape: String, label: String?) {
+  private fun addCountdown(totalSecs: Int, haloColor: Color, timerShape: String, label: String?, isBackgroundTransparent: Boolean) {
     viewModelScope.launch {
       if (shouldShowPremiumDialogMultipleTimers(application)) {
         premiumVmc.showPurchaseDialog = true
@@ -87,13 +87,14 @@ class CountdownScreenVm(
         totalSecs,
         haloColor,
         timerShape,
-        label
+        label,
+        isBackgroundTransparent
       )
     }
   }
 
   fun savedCountdownClick(timer: SavedCountdown) {
-    addCountdown(timer.durationSeconds, Color(timer.timerColor), timer.timerShape, timer.label)
+    addCountdown(timer.durationSeconds, Color(timer.timerColor), timer.timerShape, timer.label, false)
   }
 
   private fun calcTotalDurationSeconds(): Int? {

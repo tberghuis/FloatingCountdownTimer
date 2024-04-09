@@ -37,7 +37,7 @@ class ColorSettingViewModel(application: Application, savedStateHandle: SavedSta
       val haloColor = preferences.haloColourFlow.first()
       colorPickerColorState.value = HsvColor.from(haloColor)
       val scale = preferences.bubbleScaleFlow.first()
-      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor, "circle")
+      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor, "circle", null, false)
       initialised = true
     }
   }
