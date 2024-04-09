@@ -44,5 +44,6 @@
     <string name="rectangle">rectangle</string>
     <string name="shape_label">Shape:</string>
     <string name="label">label</string>
+    <string name="transparent_background">transparent background</string>
 
 </resources>
