@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp5
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
@@ -13,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -44,6 +46,7 @@ fun PreviewBackgroundTransCheckbox() {
   Column(
     Modifier
       .fillMaxSize()
+      .border(3.dp, Color.Red)
   ) {
     BackgroundTransCheckbox(vm)
   }
