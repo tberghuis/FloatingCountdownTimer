@@ -9,9 +9,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.IntSize
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
+import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
-import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectViewTrans
 
 @Composable
 fun CountdownView(countdown: Countdown) {
@@ -56,7 +56,7 @@ fun CountdownView(
       }
       // this is redundant, unless bad data in DB
       val label = if (bubbleProperties.timerShape == "label") bubbleProperties.label else null
-      TmpTimerRectViewTrans(
+      TimerRectView(
         isPaused,
         bubbleProperties.arcWidth,
         bubbleProperties.haloColor,

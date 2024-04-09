@@ -30,7 +30,6 @@ import kotlinx.coroutines.flow.StateFlow
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectViewTrans
 
 @Composable
 fun StopwatchView(
@@ -88,7 +87,7 @@ fun StopwatchView(
           windowManager.updateViewLayout(tvh.view, tvh.params)
         }
       }
-      TmpTimerRectViewTrans(
+      TimerRectView(
         isPaused,
         arcWidth,
         haloColor,

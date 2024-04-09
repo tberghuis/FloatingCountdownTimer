@@ -31,6 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import xyz.tberghuis.floatingtimer.tmp4.TmpTimeDisplay
+import xyz.tberghuis.floatingtimer.tmp5.TimerText
 
 @Composable
 fun TimerRectView(
@@ -41,9 +43,23 @@ fun TimerRectView(
   timeLeftFraction: Float,
   fontSize: TextUnit,
   label: String?,
+  isBackgroundTransparent: Boolean,
   updateViewLayout: ((IntSize) -> Unit)? = null
 ) {
   @Suppress("NAME_SHADOWING") val label = if (label == "") null else label
+
+  val bubbleModifier = if (isBackgroundTransparent)
+    Modifier
+  else
+    Modifier
+      .padding(5.dp)
+      .graphicsLayer(
+        shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
+        shape = RoundedCornerShape(10.dp),
+        clip = true
+      )
+      .background(Color.White)
+
   Box(
     modifier = Modifier
   ) {
@@ -54,13 +70,7 @@ fun TimerRectView(
         }
         .height(IntrinsicSize.Min)
         .width(IntrinsicSize.Min)
-        .padding(5.dp)
-        .graphicsLayer(
-          shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
-          shape = RoundedCornerShape(10.dp),
-          clip = true
-        )
-        .background(Color.White),
+        .then(bubbleModifier),
       contentAlignment = Alignment.Center,
     ) {
       if (isPaused) {
@@ -78,26 +88,11 @@ fun TimerRectView(
       ) {
         Row(
           modifier = Modifier,
-          // should this spacing scale???
-//          horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
           label?.let {
-            CompositionLocalProvider(
-              LocalDensity provides Density(LocalDensity.current.density, 1f)
-            ) {
-              Text(
-                "$label - ",
-                fontSize = fontSize,
-                fontFamily = FontFamily.Default,
-                overflow = TextOverflow.Clip,
-                maxLines = 1,
-                style = LocalTextStyle.current.copy(
-                  color = Color.Black,
-                ),
-              )
-            }
+            TimerText("$label - ", fontSize = fontSize, isBackgroundTransparent)
           }
-          TimeDisplay(timeElapsed, fontSize)
+          TmpTimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
         }
         CountdownProgressLine(
           timeLeftFraction,
