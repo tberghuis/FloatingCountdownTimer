@@ -16,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
+import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchBorderArc
 
 @Composable
 fun StopwatchCircleView(
@@ -34,7 +35,7 @@ fun StopwatchCircleView(
       .padding(arcWidth / 2),
     contentAlignment = Alignment.Center
   ) {
-    StopwatchBorderArc(isRunningStateFlow, arcWidth, haloColor)
+    TmpStopwatchBorderArc(isRunningStateFlow, arcWidth, haloColor)
     if (isRunning == false) {
       Icon(
         Icons.Filled.PlayArrow,
