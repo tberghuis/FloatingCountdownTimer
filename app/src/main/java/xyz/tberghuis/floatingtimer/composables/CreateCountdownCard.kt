@@ -4,6 +4,7 @@ import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,7 +31,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp5.TmpCountdownOptions
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
@@ -92,21 +92,7 @@ fun CreateCountdownCard() {
       )
     }
     TimerShapeChoice(vm)
-//    BackgroundTransCheckbox(vm)
-//    Row(
-//      modifier = Modifier
-//        .padding(10.dp)
-//        .fillMaxWidth(),
-//      horizontalArrangement = Arrangement.Center,
-//      verticalAlignment = Alignment.CenterVertically
-//    ) {
-//      CountdownOptions()
-//    }
-
-    TmpCountdownOptions()
-
-
-
+    CountdownOptions()
     Row(
       modifier = Modifier
         .padding(10.dp)
@@ -144,14 +130,15 @@ fun CreateCountdownButton() {
 }
 
 @Composable
-fun CountdownOptions() {
+fun ColumnScope.CountdownOptions() {
   val vm: CountdownScreenVm = viewModel()
 
   // doitwrong
   val vibration = vm.vibrationFlow.collectAsState(false)
   val sound = vm.soundFlow.collectAsState(false)
 
-  Column {
+  Column(modifier = Modifier.align(Alignment.CenterHorizontally)) {
+    BackgroundTransCheckbox(vm)
     Row(verticalAlignment = Alignment.CenterVertically) {
       Checkbox(
         checked = vibration.value,
