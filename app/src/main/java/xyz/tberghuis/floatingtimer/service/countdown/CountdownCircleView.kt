@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.zIndex
-import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
@@ -18,13 +17,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
+import xyz.tberghuis.floatingtimer.tmp4.TmpTimeDisplay
 
 @Composable
 fun CountdownCircleView(
   bubbleProperties: BubbleProperties,
   timeLeftFraction: Float,
   countdownSeconds: Int,
-  isPaused: Boolean
+  isPaused: Boolean,
+  isBackgroundTransparent: Boolean
 ) {
   Box(
     modifier = Modifier
@@ -33,7 +34,12 @@ fun CountdownCircleView(
       .zIndex(1f),
     contentAlignment = Alignment.Center
   ) {
-    CountdownProgressArc(timeLeftFraction, bubbleProperties.arcWidth, bubbleProperties.haloColor)
+    CountdownProgressArc(
+      timeLeftFraction,
+      bubbleProperties.arcWidth,
+      bubbleProperties.haloColor,
+      isBackgroundTransparent
+    )
     if (isPaused) {
       Icon(
         Icons.Filled.PlayArrow,
@@ -42,31 +48,32 @@ fun CountdownCircleView(
         tint = Color.LightGray
       )
     }
-    TimeDisplay(countdownSeconds, bubbleProperties.fontSize)
+    TmpTimeDisplay(countdownSeconds, bubbleProperties.fontSize, isBackgroundTransparent)
   }
 }
 
 @Composable
-fun CountdownProgressArc(timeLeftFraction: Float, arcWidth: Dp, haloColor: Color) {
+fun CountdownProgressArc(
+  timeLeftFraction: Float, arcWidth: Dp, haloColor: Color,
+  isBackgroundTransparent: Boolean
+) {
   val sweepAngle = 360 * timeLeftFraction
-
   Canvas(
     Modifier.fillMaxSize()
   ) {
-    // background
-    // todo make partial transparent
-    drawCircle(
-      color = Color.White,
-    )
-    drawArc(
-      color = Color.White,
-      startAngle = 0f,
-      sweepAngle = 360f,
-      useCenter = false,
-      style = Stroke(arcWidth.toPx()),
-      size = Size(size.width, size.height)
-    )
-
+    if (!isBackgroundTransparent) {
+      drawCircle(
+        color = Color.White,
+      )
+      drawArc(
+        color = Color.White,
+        startAngle = 0f,
+        sweepAngle = 360f,
+        useCenter = false,
+        style = Stroke(arcWidth.toPx()),
+        size = Size(size.width, size.height)
+      )
+    }
     drawArc(
       color = haloColor.copy(alpha = .1f),
       startAngle = 0f,
@@ -75,7 +82,6 @@ fun CountdownProgressArc(timeLeftFraction: Float, arcWidth: Dp, haloColor: Color
       style = Stroke(arcWidth.toPx()),
       size = Size(size.width, size.height)
     )
-
     drawArc(
       color = haloColor,
       -90f,

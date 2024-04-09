@@ -9,10 +9,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.unit.IntSize
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
-import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
-import xyz.tberghuis.floatingtimer.tmp5.TmpCountdownCircleView
 import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectViewTrans
 
 @Composable
@@ -36,7 +34,7 @@ fun CountdownView(
 ) {
   when (bubbleProperties.timerShape) {
     "circle" -> {
-      TmpCountdownCircleView(
+      CountdownCircleView(
         bubbleProperties = bubbleProperties,
         timeLeftFraction = timeLeftFraction,
         countdownSeconds = countdownSeconds,
