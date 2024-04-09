@@ -149,7 +149,8 @@ class CountdownScreenVm(
       timerShape = timerShape,
       timerColor = haloColor.toArgb(),
       durationSeconds = durationSeconds,
-      label = label
+      label = label,
+      isBackgroundTransparent = isBackgroundTransparent
     )
     viewModelScope.launch(IO) {
       savedCountdownDao.insertAll(timer)
