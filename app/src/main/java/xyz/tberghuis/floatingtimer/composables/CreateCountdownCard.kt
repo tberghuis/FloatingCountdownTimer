@@ -31,6 +31,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp5.BackgroundTransCheckbox
+import xyz.tberghuis.floatingtimer.tmp5.TmpCountdownOptions
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
@@ -92,16 +93,21 @@ fun CreateCountdownCard() {
       )
     }
     TimerShapeChoice(vm)
-    BackgroundTransCheckbox(vm)
-    Row(
-      modifier = Modifier
-        .padding(10.dp)
-        .fillMaxWidth(),
-      horizontalArrangement = Arrangement.Center,
-      verticalAlignment = Alignment.CenterVertically
-    ) {
-      CountdownOptions()
-    }
+//    BackgroundTransCheckbox(vm)
+//    Row(
+//      modifier = Modifier
+//        .padding(10.dp)
+//        .fillMaxWidth(),
+//      horizontalArrangement = Arrangement.Center,
+//      verticalAlignment = Alignment.CenterVertically
+//    ) {
+//      CountdownOptions()
+//    }
+
+    TmpCountdownOptions()
+
+
+
     Row(
       modifier = Modifier
         .padding(10.dp)
