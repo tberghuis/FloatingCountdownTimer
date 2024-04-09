@@ -69,7 +69,8 @@ fun StopwatchView(
         arcWidth = arcWidth,
         haloColor = haloColor,
         timeElapsed = timeElapsed,
-        fontSize = fontSize
+        fontSize = fontSize,
+        false
       )
     }
 

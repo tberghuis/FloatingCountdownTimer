@@ -28,7 +28,7 @@ fun TmpStopwatchBorderArc(
   isRunningStateFlow: StateFlow<Boolean>?,
   arcWidth: Dp,
   haloColor: Color,
-  isBackgroundTransparent: Boolean = true
+  isBackgroundTransparent: Boolean
 ) {
   var pausedAngle by remember { mutableFloatStateOf(210f) }
   var restartAngle by remember { mutableFloatStateOf(0f) }
@@ -48,17 +48,19 @@ fun TmpStopwatchBorderArc(
   Canvas(
     Modifier.fillMaxSize()
   ) {
-    drawCircle(
-      color = Color.White,
-    )
-    drawArc(
-      color = Color.White,
-      startAngle = 0f,
-      sweepAngle = 360f,
-      useCenter = false,
-      style = Stroke(arcWidth.toPx()),
-      size = Size(size.width, size.height)
-    )
+    if(!isBackgroundTransparent){
+      drawCircle(
+        color = Color.White,
+      )
+      drawArc(
+        color = Color.White,
+        startAngle = 0f,
+        sweepAngle = 360f,
+        useCenter = false,
+        style = Stroke(arcWidth.toPx()),
+        size = Size(size.width, size.height)
+      )
+    }
 
     drawArc(
       color = haloColor.copy(alpha = .1f),

@@ -16,6 +16,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
+import xyz.tberghuis.floatingtimer.tmp4.TmpTimeDisplay
 import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchBorderArc
 
 @Composable
@@ -26,7 +27,8 @@ fun StopwatchCircleView(
   arcWidth: Dp,
   haloColor: Color,
   timeElapsed: Int,
-  fontSize: TextUnit
+  fontSize: TextUnit,
+  isBackgroundTransparent: Boolean
 ) {
   val isRunning = isRunningStateFlow?.collectAsState()?.value
   Box(
@@ -35,7 +37,7 @@ fun StopwatchCircleView(
       .padding(arcWidth / 2),
     contentAlignment = Alignment.Center
   ) {
-    TmpStopwatchBorderArc(isRunningStateFlow, arcWidth, haloColor)
+    TmpStopwatchBorderArc(isRunningStateFlow, arcWidth, haloColor, isBackgroundTransparent)
     if (isRunning == false) {
       Icon(
         Icons.Filled.PlayArrow,
@@ -44,6 +46,7 @@ fun StopwatchCircleView(
         tint = Color.LightGray
       )
     }
-    TimeDisplay(timeElapsed, fontSize)
+//    TimeDisplay(timeElapsed, fontSize)
+    TmpTimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
   }
 }
