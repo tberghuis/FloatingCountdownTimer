@@ -38,5 +38,6 @@
     <string name="rectangle">长方形</string>
     <string name="shape_label">形状</string>
     <string name="label">标签</string>
+    <string name="transparent_background">透明背景</string>
 
 </resources>

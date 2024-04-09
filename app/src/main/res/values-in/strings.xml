@@ -38,5 +38,6 @@
     <string name="rectangle">persegi panjang</string>
     <string name="shape_label">Membentuk:</string>
     <string name="label">label</string>
+    <string name="transparent_background">latar transparan</string>
 
 </resources>
