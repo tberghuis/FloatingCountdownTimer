@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.zIndex
-import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
@@ -25,7 +24,8 @@ fun TmpCountdownCircleView(
   bubbleProperties: BubbleProperties,
   timeLeftFraction: Float,
   countdownSeconds: Int,
-  isPaused: Boolean
+  isPaused: Boolean,
+  isBackgroundTransparent: Boolean
 ) {
   Box(
     modifier = Modifier
@@ -38,7 +38,7 @@ fun TmpCountdownCircleView(
       timeLeftFraction,
       bubbleProperties.arcWidth,
       bubbleProperties.haloColor,
-      true
+      isBackgroundTransparent
     )
     if (isPaused) {
       Icon(
@@ -48,7 +48,7 @@ fun TmpCountdownCircleView(
         tint = Color.LightGray
       )
     }
-    TmpTimeDisplay(countdownSeconds, bubbleProperties.fontSize, true)
+    TmpTimeDisplay(countdownSeconds, bubbleProperties.fontSize, isBackgroundTransparent)
   }
 }
 

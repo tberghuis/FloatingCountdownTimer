@@ -47,7 +47,8 @@ fun CountdownView(
         bubbleProperties = bubbleProperties,
         timeLeftFraction = timeLeftFraction,
         countdownSeconds = countdownSeconds,
-        isPaused = isPaused
+        isPaused = isPaused,
+        true
       )
     }
 
