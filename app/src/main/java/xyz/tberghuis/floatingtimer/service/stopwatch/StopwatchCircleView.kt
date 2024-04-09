@@ -15,7 +15,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
-import xyz.tberghuis.floatingtimer.tmp4.TmpTimeDisplay
+import xyz.tberghuis.floatingtimer.composables.TimeDisplay
 
 @Composable
 fun StopwatchCircleView(
@@ -44,7 +44,6 @@ fun StopwatchCircleView(
         tint = Color.LightGray
       )
     }
-//    TimeDisplay(timeElapsed, fontSize)
-    TmpTimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
+    TimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
   }
 }

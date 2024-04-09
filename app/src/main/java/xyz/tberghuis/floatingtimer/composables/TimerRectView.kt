@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
-import xyz.tberghuis.floatingtimer.tmp4.TmpTimeDisplay
 
 @Composable
 fun TimerRectView(
@@ -84,7 +83,7 @@ fun TimerRectView(
           label?.let {
             TimerText("$label - ", fontSize = fontSize, isBackgroundTransparent)
           }
-          TmpTimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
+          TimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
         }
         CountdownProgressLine(
           timeLeftFraction,
