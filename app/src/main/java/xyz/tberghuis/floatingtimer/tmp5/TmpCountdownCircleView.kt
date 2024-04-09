@@ -33,7 +33,12 @@ fun TmpCountdownCircleView(
       .zIndex(1f),
     contentAlignment = Alignment.Center
   ) {
-    TmpCountdownProgressArc(timeLeftFraction, bubbleProperties.arcWidth, bubbleProperties.haloColor)
+    TmpCountdownProgressArc(
+      timeLeftFraction,
+      bubbleProperties.arcWidth,
+      bubbleProperties.haloColor,
+      true
+    )
     if (isPaused) {
       Icon(
         Icons.Filled.PlayArrow,
@@ -47,26 +52,27 @@ fun TmpCountdownCircleView(
 }
 
 @Composable
-fun TmpCountdownProgressArc(timeLeftFraction: Float, arcWidth: Dp, haloColor: Color) {
+fun TmpCountdownProgressArc(
+  timeLeftFraction: Float, arcWidth: Dp, haloColor: Color,
+  isBackgroundTransparent: Boolean
+) {
   val sweepAngle = 360 * timeLeftFraction
-
   Canvas(
     Modifier.fillMaxSize()
   ) {
-    // background
-    // todo make partial transparent
-    drawCircle(
-      color = Color.White,
-    )
-    drawArc(
-      color = Color.White,
-      startAngle = 0f,
-      sweepAngle = 360f,
-      useCenter = false,
-      style = Stroke(arcWidth.toPx()),
-      size = Size(size.width, size.height)
-    )
-
+    if (!isBackgroundTransparent) {
+      drawCircle(
+        color = Color.White,
+      )
+      drawArc(
+        color = Color.White,
+        startAngle = 0f,
+        sweepAngle = 360f,
+        useCenter = false,
+        style = Stroke(arcWidth.toPx()),
+        size = Size(size.width, size.height)
+      )
+    }
     drawArc(
       color = haloColor.copy(alpha = .1f),
       startAngle = 0f,
@@ -75,7 +81,6 @@ fun TmpCountdownProgressArc(timeLeftFraction: Float, arcWidth: Dp, haloColor: Co
       style = Stroke(arcWidth.toPx()),
       size = Size(size.width, size.height)
     )
-
     drawArc(
       color = haloColor,
       -90f,

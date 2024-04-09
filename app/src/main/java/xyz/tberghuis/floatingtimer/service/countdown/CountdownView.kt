@@ -42,7 +42,7 @@ fun CountdownView(
 //        countdownSeconds = countdownSeconds,
 //        isPaused = isPaused
 //      )
-      
+
       TmpCountdownCircleView(
         bubbleProperties = bubbleProperties,
         timeLeftFraction = timeLeftFraction,
