@@ -30,8 +30,8 @@ interface BackgroundTransCheckboxVm {
 fun ColumnScope.BackgroundTransCheckbox(vm: BackgroundTransCheckboxVm) {
   Row(
     modifier = Modifier
-      .align(Alignment.CenterHorizontally)
-      .padding(10.dp),
+      .align(Alignment.CenterHorizontally),
+//      .padding(10.dp),
     verticalAlignment = Alignment.CenterVertically,
   ) {
     Checkbox(

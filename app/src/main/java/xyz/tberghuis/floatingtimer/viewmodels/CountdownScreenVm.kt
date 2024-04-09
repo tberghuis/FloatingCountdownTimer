@@ -20,11 +20,12 @@ import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.tmp5.BackgroundTransCheckboxVm
 
 class CountdownScreenVm(
   private val application: Application,
 //  private val state: SavedStateHandle
-) : AndroidViewModel(application), TimerShapeChoiceVm {
+) : AndroidViewModel(application), TimerShapeChoiceVm, BackgroundTransCheckboxVm {
   private val savedCountdownDao = application.provideDatabase().savedCountdownDao()
   var showDeleteDialog by mutableStateOf<SavedCountdown?>(null)
 
@@ -43,6 +44,8 @@ class CountdownScreenVm(
 
   override var timerShape by mutableStateOf("circle")
   override var label by mutableStateOf("")
+
+  override var isBackgroundTransparent by mutableStateOf(false)
 
   init {
     viewModelScope.launch {
@@ -74,10 +77,16 @@ class CountdownScreenVm(
     val totalSecs = calcTotalDurationSeconds() ?: return
     // no warning about var name shadowed???
     val label = if (timerShape == "label") label else null
-    addCountdown(totalSecs, haloColor, timerShape, label, false)
+    addCountdown(totalSecs, haloColor, timerShape, label, isBackgroundTransparent)
   }
 
-  private fun addCountdown(totalSecs: Int, haloColor: Color, timerShape: String, label: String?, isBackgroundTransparent: Boolean) {
+  private fun addCountdown(
+    totalSecs: Int,
+    haloColor: Color,
+    timerShape: String,
+    label: String?,
+    isBackgroundTransparent: Boolean
+  ) {
     viewModelScope.launch {
       if (shouldShowPremiumDialogMultipleTimers(application)) {
         premiumVmc.showPurchaseDialog = true
@@ -94,7 +103,13 @@ class CountdownScreenVm(
   }
 
   fun savedCountdownClick(timer: SavedCountdown) {
-    addCountdown(timer.durationSeconds, Color(timer.timerColor), timer.timerShape, timer.label, false)
+    addCountdown(
+      timer.durationSeconds,
+      Color(timer.timerColor),
+      timer.timerShape,
+      timer.label,
+      timer.isBackgroundTransparent
+    )
   }
 
   private fun calcTotalDurationSeconds(): Int? {
