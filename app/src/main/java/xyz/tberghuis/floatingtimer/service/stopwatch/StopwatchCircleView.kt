@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
@@ -17,7 +16,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
 import xyz.tberghuis.floatingtimer.tmp4.TmpTimeDisplay
-import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchBorderArc
 
 @Composable
 fun StopwatchCircleView(
@@ -37,7 +35,7 @@ fun StopwatchCircleView(
       .padding(arcWidth / 2),
     contentAlignment = Alignment.Center
   ) {
-    TmpStopwatchBorderArc(isRunningStateFlow, arcWidth, haloColor, isBackgroundTransparent)
+    StopwatchBorderArc(isRunningStateFlow, arcWidth, haloColor, isBackgroundTransparent)
     if (isRunning == false) {
       Icon(
         Icons.Filled.PlayArrow,
