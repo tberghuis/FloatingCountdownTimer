@@ -17,11 +17,9 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import xyz.tberghuis.floatingtimer.common.TimeDisplay
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -32,6 +30,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import xyz.tberghuis.floatingtimer.composables.CountdownProgressLine
 import xyz.tberghuis.floatingtimer.composables.runOnceOnGloballyPositioned
+import xyz.tberghuis.floatingtimer.tmp4.OutlinedTextWithShadow
+import xyz.tberghuis.floatingtimer.tmp4.TmpTimeDisplay
 
 @Composable
 fun TmpTimerRectViewTrans(
@@ -42,9 +42,23 @@ fun TmpTimerRectViewTrans(
   timeLeftFraction: Float,
   fontSize: TextUnit,
   label: String?,
+  isBackgroundTransparent: Boolean,
   updateViewLayout: ((IntSize) -> Unit)? = null
 ) {
   @Suppress("NAME_SHADOWING") val label = if (label == "") null else label
+
+  val bubbleModifier = if (isBackgroundTransparent)
+    Modifier
+  else
+    Modifier
+      .padding(5.dp)
+      .graphicsLayer(
+        shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
+        shape = RoundedCornerShape(10.dp),
+        clip = true
+      )
+      .background(Color.White)
+
   Box(
     modifier = Modifier
   ) {
@@ -55,13 +69,7 @@ fun TmpTimerRectViewTrans(
         }
         .height(IntrinsicSize.Min)
         .width(IntrinsicSize.Min)
-        .padding(5.dp)
-        .graphicsLayer(
-          shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
-          shape = RoundedCornerShape(10.dp),
-          clip = true
-        )
-        .background(Color.White),
+        .then(bubbleModifier),
       contentAlignment = Alignment.Center,
     ) {
       if (isPaused) {
@@ -79,26 +87,11 @@ fun TmpTimerRectViewTrans(
       ) {
         Row(
           modifier = Modifier,
-          // should this spacing scale???
-//          horizontalArrangement = Arrangement.spacedBy(10.dp),
         ) {
           label?.let {
-            CompositionLocalProvider(
-              LocalDensity provides Density(LocalDensity.current.density, 1f)
-            ) {
-              Text(
-                "$label - ",
-                fontSize = fontSize,
-                fontFamily = FontFamily.Default,
-                overflow = TextOverflow.Clip,
-                maxLines = 1,
-                style = LocalTextStyle.current.copy(
-                  color = Color.Black,
-                ),
-              )
-            }
+            TimerText("$label - ", fontSize = fontSize, isBackgroundTransparent)
           }
-          TimeDisplay(timeElapsed, fontSize)
+          TmpTimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
         }
         CountdownProgressLine(
           timeLeftFraction,
@@ -106,6 +99,32 @@ fun TmpTimerRectViewTrans(
           haloColor
         )
       }
+    }
+  }
+}
+
+@Composable
+fun TimerText(
+  text: String,
+  fontSize: TextUnit,
+  isBackgroundTransparent: Boolean
+) {
+  CompositionLocalProvider(
+    LocalDensity provides Density(LocalDensity.current.density, 1f)
+  ) {
+    if (isBackgroundTransparent) {
+      OutlinedTextWithShadow(text, fontSize)
+    } else {
+      Text(
+        text,
+        fontSize = fontSize,
+        fontFamily = FontFamily.Default,
+        maxLines = 1,
+        style = LocalTextStyle.current.copy(
+          color = Color.Black,
+          fontFeatureSettings = "tnum"
+        ),
+      )
     }
   }
 }

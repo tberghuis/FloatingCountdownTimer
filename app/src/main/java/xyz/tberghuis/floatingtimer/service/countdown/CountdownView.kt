@@ -74,6 +74,7 @@ fun CountdownView(
         timeLeftFraction,
         bubbleProperties.fontSize,
         label,
+        true,
         updateViewLayout
       )
     }
