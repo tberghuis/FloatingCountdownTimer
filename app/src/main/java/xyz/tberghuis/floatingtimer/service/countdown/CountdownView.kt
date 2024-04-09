@@ -48,7 +48,7 @@ fun CountdownView(
         timeLeftFraction = timeLeftFraction,
         countdownSeconds = countdownSeconds,
         isPaused = isPaused,
-        true
+        false
       )
     }
 
