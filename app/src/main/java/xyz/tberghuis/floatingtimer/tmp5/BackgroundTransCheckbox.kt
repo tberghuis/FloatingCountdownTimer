@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.tmp5
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
@@ -31,7 +32,6 @@ fun ColumnScope.BackgroundTransCheckbox(vm: BackgroundTransCheckboxVm) {
     verticalAlignment = Alignment.CenterVertically,
   ) {
     Text("checkbox")
-
   }
 }
 
@@ -46,7 +46,8 @@ fun PreviewBackgroundTransCheckbox() {
   Column(
     Modifier
       .fillMaxSize()
-      .border(3.dp, Color.Red)
+      .border(3.dp, Color.Red),
+    verticalArrangement = Arrangement.Center,
   ) {
     BackgroundTransCheckbox(vm)
   }
