@@ -36,19 +36,12 @@ fun CountdownView(
 ) {
   when (bubbleProperties.timerShape) {
     "circle" -> {
-//      CountdownCircleView(
-//        bubbleProperties = bubbleProperties,
-//        timeLeftFraction = timeLeftFraction,
-//        countdownSeconds = countdownSeconds,
-//        isPaused = isPaused
-//      )
-
       TmpCountdownCircleView(
         bubbleProperties = bubbleProperties,
         timeLeftFraction = timeLeftFraction,
         countdownSeconds = countdownSeconds,
         isPaused = isPaused,
-        false
+        bubbleProperties.isBackgroundTransparent
       )
     }
 
@@ -65,16 +58,6 @@ fun CountdownView(
       }
       // this is redundant, unless bad data in DB
       val label = if (bubbleProperties.timerShape == "label") bubbleProperties.label else null
-//      TimerRectView(
-//        isPaused,
-//        bubbleProperties.arcWidth,
-//        bubbleProperties.haloColor,
-//        countdownSeconds,
-//        timeLeftFraction,
-//        bubbleProperties.fontSize,
-//        label,
-//        updateViewLayout
-//      )
       TmpTimerRectViewTrans(
         isPaused,
         bubbleProperties.arcWidth,
@@ -83,7 +66,7 @@ fun CountdownView(
         timeLeftFraction,
         bubbleProperties.fontSize,
         label,
-        false,
+        bubbleProperties.isBackgroundTransparent,
         updateViewLayout
       )
     }
