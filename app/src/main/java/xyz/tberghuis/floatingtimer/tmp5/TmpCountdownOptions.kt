@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.composables.BackgroundTransCheckbox
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 
 @Composable
