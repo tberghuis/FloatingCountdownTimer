@@ -39,9 +39,6 @@ import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 fun CreateCountdownCard() {
   val vm: CountdownScreenVm = viewModel()
   val focusManager = LocalFocusManager.current
-
-  // todo must be an idiomatic way to center without the need
-  // to specify Modifier.fillMaxWidth() and Center everywhere
   ElevatedCard(
     modifier = Modifier
       .fillMaxWidth()
