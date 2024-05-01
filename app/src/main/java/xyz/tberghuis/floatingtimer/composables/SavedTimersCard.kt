@@ -15,11 +15,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.COUNTDOWN_TIMER_SIZE_NO_SCALE
+import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
@@ -41,7 +43,7 @@ fun <T : SavedTimer> ColumnScope.SavedTimersCard(
       .padding(15.dp),
   ) {
     Text(
-      "Saved",
+      stringResource(R.string.saved),
       modifier = Modifier
         .padding(10.dp)
         .align(Alignment.CenterHorizontally),

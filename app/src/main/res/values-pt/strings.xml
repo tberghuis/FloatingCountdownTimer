@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Temporizador Flutuante</string>
+    <string name="create">Criar</string>
+    <string name="stopwatch">Cronômetro</string>
+    <string name="countdown">Contagem regressiva</string>
+    <string name="minutes">minutos</string>
+    <string name="seconds">segundos</string>
+    <string name="vibration">Vibração</string>
+    <string name="sound">Som</string>
+    <string name="settings">Configurações</string>
+    <string name="go_to_settings">Vá para configurações</string>
+    <string name="enable_overlay_permission">Habilitar permissão de sobreposição</string>
+    <string name="dialog_enable_overlay_permission">Ative \"Sobrepor a outros apps\" permissão para aplicação </string>
+
+    <string name="back">Voltar</string>
+
+    <string name="save">Salvar</string>
+    <string name="buy">Comprar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="premium_feature">Recurso Premium</string>
+
+    <string name="ft_premium">Temporizador Flutuante Premium</string>
+    <string name="premium_reason_multiple_timers">Executar mais de 2 temporizadores simultaneamente requer premium.</string>
+    <string name="premium_reason_halo_colour">A mudança da cor do temporizador requer premium.</string>
+
+    <string name="cancel_all_timers">Cancelar todos os temporizadores</string>
+    <string name="invalid_countdown_duration">Duração do temporizador inválida. Defina para mais de 0 segundos.</string>
+
+    <string name="reset">Reiniciar</string>
+    <string name="exit">Saída</string>
+
+    <string name="change_size">Alterar tamanho</string>
+    <string name="preview">Visualização</string>
+    <string name="premium_reason_bubble_scale">A alteração do tamanho do temporizador requer premium.</string>
+
+
+    <string name="default_color">Cor padrão</string>
+    <string name="stopwatch_timer_color">Cor do cronômetro</string>
+    <string name="countdown_timer_color">Cor da contagem regressiva</string>
+    <string name="default_timer_color">Cor padrão do temporizador</string>
+    <string name="delete_saved_timer">Excluir temporizador salvo?</string>
+    <string name="delete">Excluir</string>
+    <string name="circle">círculo</string>
+    <string name="rectangle">retângulo</string>
+    <string name="shape_label">Forma:</string>
+    <string name="label">rótulo</string>
+    <string name="transparent_background">fundo transparente</string>
+    <string name="saved">Salvos</string>
+</resources>
