@@ -1,0 +1,1 @@
+Features both a countdown timer and stopwatch that will float over other apps.

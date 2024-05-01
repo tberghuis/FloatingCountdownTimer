@@ -1,0 +1,13 @@
+Menampilkan penghitung waktu mundur dan stopwatch yang akan mengapung di atas aplikasi lain.
+
+Penggunaan:
+- Seret untuk memindahkan posisi pengatur waktu
+- Ketuk untuk memulai / menjeda
+- Ketuk dua kali untuk mengatur ulang
+- Seret ke sampah untuk keluar
+
+Versi premium terbuka:
+- Menjalankan lebih dari 2 pengatur waktu secara bersamaan (beberapa pengatur waktu)
+- Ubah ukuran dan warna pengatur waktu
+
+Sumber terbuka: https://github.com/tberghuis/FloatingCountdownTimer
