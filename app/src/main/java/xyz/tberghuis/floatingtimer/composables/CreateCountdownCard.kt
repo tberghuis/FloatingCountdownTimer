@@ -27,8 +27,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
@@ -107,21 +111,28 @@ fun CreateCountdownCard() {
   }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CreateCountdownButton() {
   val vm: CountdownScreenVm = viewModel()
   val focusManager = LocalFocusManager.current
   val context = LocalContext.current
   val sharedVm: SharedVm = viewModel(context as ComponentActivity)
-  Button(onClick = {
-    logd("create")
-    focusManager.clearFocus()
-    if (!Settings.canDrawOverlays(context)) {
-      sharedVm.showGrantOverlayDialog = true
-      return@Button
-    }
-    vm.countdownButtonClick()
-  }) {
+  Button(
+    onClick = {
+      logd("create")
+      focusManager.clearFocus()
+      if (!Settings.canDrawOverlays(context)) {
+        sharedVm.showGrantOverlayDialog = true
+        return@Button
+      }
+      vm.countdownButtonClick()
+    },
+    modifier = Modifier
+      .semantics { testTagsAsResourceId = true }
+      .testTag("CreateCountdownButton"),
+
+    ) {
     Text(stringResource(R.string.create))
   }
 }
