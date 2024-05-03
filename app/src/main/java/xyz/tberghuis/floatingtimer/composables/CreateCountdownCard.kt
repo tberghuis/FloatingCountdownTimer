@@ -38,6 +38,7 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Preview
 @Composable
 fun CreateCountdownCard() {
@@ -68,7 +69,11 @@ fun CreateCountdownCard() {
       TextField(
         modifier = Modifier
           .width(100.dp)
-          .onFocusSelectAll(vm.minutes),
+          .onFocusSelectAll(vm.minutes)
+          .semantics { testTagsAsResourceId = true }
+          .testTag("CountdownMinutes"),
+
+
         label = { Text(stringResource(R.string.minutes)) },
         value = vm.minutes.value,
         onValueChange = { vm.minutes.value = it },

@@ -24,12 +24,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
@@ -39,6 +43,7 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.viewmodels.TimerShapeChoiceVm
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ColumnScope.TimerShapeChoice(vm: TimerShapeChoiceVm) {
   val focusRequester = remember { FocusRequester() }
@@ -97,6 +102,8 @@ fun ColumnScope.TimerShapeChoice(vm: TimerShapeChoiceVm) {
           value = vm.label,
           onValueChange = { vm.label = it },
           modifier = Modifier
+            .semantics { testTagsAsResourceId = true }
+            .testTag("Label")
             .widthIn(max = 150.dp)
             .focusRequester(focusRequester)
             .clickable {
