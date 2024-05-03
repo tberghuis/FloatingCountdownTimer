@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
@@ -47,7 +48,9 @@ import xyz.tberghuis.floatingtimer.viewmodels.TimerShapeChoiceVm
 @Composable
 fun ColumnScope.TimerShapeChoice(vm: TimerShapeChoiceVm) {
   val focusRequester = remember { FocusRequester() }
-
+  val labelTfvState = remember {
+    mutableStateOf(TextFieldValue(vm.label))
+  }
   // this is a hack....
   // https://stackoverflow.com/questions/70654829/enable-and-focus-textfield-at-once-in-jetpack-compose
   LaunchedEffect(Unit) {
@@ -99,8 +102,11 @@ fun ColumnScope.TimerShapeChoice(vm: TimerShapeChoiceVm) {
           modifier = Modifier,
         )
         TextField(
-          value = vm.label,
-          onValueChange = { vm.label = it },
+          value = labelTfvState.value,
+          onValueChange = {
+            labelTfvState.value = it
+            vm.label = it.text
+          },
           modifier = Modifier
             .semantics { testTagsAsResourceId = true }
             .testTag("Label")
@@ -108,7 +114,8 @@ fun ColumnScope.TimerShapeChoice(vm: TimerShapeChoiceVm) {
             .focusRequester(focusRequester)
             .clickable {
               vm.timerShape = "label"
-            },
+            }
+            .onFocusSelectAll(labelTfvState),
           enabled = vm.timerShape == "label",
           label = { Text(stringResource(R.string.label)) }
         )
