@@ -7,14 +7,19 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.screens.ScreenType
 import xyz.tberghuis.floatingtimer.screens.ScreenTypeCountdown
 import xyz.tberghuis.floatingtimer.screens.ScreenTypeStopwatch
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun FtBottomBar(currentScreen: ScreenType) {
   val nav = LocalNavController.current
@@ -32,7 +37,9 @@ fun FtBottomBar(currentScreen: ScreenType) {
       icon = {
         Icon(Icons.Default.Timer, contentDescription = stringResource(R.string.countdown))
       },
-      modifier = Modifier,
+      modifier = Modifier
+        .semantics { testTagsAsResourceId = true }
+        .testTag("NavCountdown"),
       label = {
         Text(text = stringResource(R.string.countdown))
       },
@@ -48,7 +55,9 @@ fun FtBottomBar(currentScreen: ScreenType) {
       icon = {
         Icon(Icons.Default.Timer, contentDescription = stringResource(R.string.stopwatch))
       },
-      modifier = Modifier,
+      modifier = Modifier
+        .semantics { testTagsAsResourceId = true }
+        .testTag("NavStopwatch"),
       label = {
         Text(text = stringResource(R.string.stopwatch))
       },
