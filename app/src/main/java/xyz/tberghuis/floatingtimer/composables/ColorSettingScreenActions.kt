@@ -5,14 +5,20 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.viewmodels.ColorSettingViewModel
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ColorSettingScreenActions(
   vm: ColorSettingViewModel = viewModel()
@@ -44,11 +50,16 @@ fun ColorSettingScreenActions(
     }) {
       Text(stringResource(R.string.cancel).uppercase())
     }
-    Button(onClick = {
-      vm.okButtonClick {
-        ifPremiumCallback()
-      }
-    }) {
+    Button(
+      onClick = {
+        vm.okButtonClick {
+          ifPremiumCallback()
+        }
+      },
+      modifier = Modifier
+        .semantics { testTagsAsResourceId = true }
+        .testTag("save_color"),
+      ) {
       Text(stringResource(R.string.save).uppercase())
     }
   }
