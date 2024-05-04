@@ -24,8 +24,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
@@ -113,6 +117,7 @@ fun SliderScale(
   )
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SizeSettingScreenActions(
   vm: SizeSettingViewModel = viewModel()
@@ -126,12 +131,17 @@ fun SizeSettingScreenActions(
     }) {
       Text(stringResource(R.string.cancel).uppercase())
     }
-    Button(onClick = {
-      vm.okButtonClick {
-        vm.saveDefaultSize()
-        nav.popBackStack()
-      }
-    }) {
+    Button(
+      onClick = {
+        vm.okButtonClick {
+          vm.saveDefaultSize()
+          nav.popBackStack()
+        }
+      },
+      modifier = Modifier
+        .semantics { testTagsAsResourceId = true }
+        .testTag("change_size_save"),
+    ) {
       Text(stringResource(R.string.save).uppercase())
     }
   }
