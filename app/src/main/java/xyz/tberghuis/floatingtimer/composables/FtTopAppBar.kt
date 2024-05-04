@@ -56,6 +56,9 @@ fun FtTopAppBar() {
           onClick = {
             navController.navigate("change_color")
           },
+          modifier = Modifier
+            .semantics { testTagsAsResourceId = true }
+            .testTag("change_color_menu_item"),
         )
         DropdownMenuItem(
           text = { Text(stringResource(R.string.change_size)) },
