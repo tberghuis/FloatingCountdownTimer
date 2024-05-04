@@ -15,15 +15,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 fun FtTopAppBar() {
   val sharedVm: SharedVm = viewModel(LocalContext.current as ComponentActivity)
@@ -33,9 +37,14 @@ fun FtTopAppBar() {
     title = { Text(stringResource(R.string.app_name)) },
     modifier = Modifier,
     actions = {
-      IconButton(onClick = {
-        showMenu = true
-      }) {
+      IconButton(
+        onClick = {
+          showMenu = true
+        },
+        modifier = Modifier
+          .semantics { testTagsAsResourceId = true }
+          .testTag("overflow_menu"),
+      ) {
         Icon(Icons.Filled.MoreVert, stringResource(R.string.settings))
       }
       DropdownMenu(
