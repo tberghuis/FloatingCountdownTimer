@@ -84,7 +84,9 @@ fun ColumnScope.TimerShapeChoice(vm: TimerShapeChoiceVm) {
         RadioButton(
           selected = vm.timerShape == "rectangle",
           onClick = { vm.timerShape = "rectangle" },
-          modifier = Modifier,
+          modifier = Modifier
+            .semantics { testTagsAsResourceId = true }
+            .testTag("RectangleRadio"),
         )
         Icon(
           Icons.Outlined.Rectangle,
