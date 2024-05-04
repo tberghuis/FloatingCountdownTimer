@@ -11,10 +11,13 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -23,6 +26,7 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 import xyz.tberghuis.floatingtimer.viewmodels.StopwatchScreenVm
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CreateStopwatchCard() {
   val context = LocalContext.current
@@ -54,14 +58,17 @@ fun CreateStopwatchCard() {
       AddSavedButton {
         vm.addToSaved()
       }
-      Button(modifier = Modifier.testTag("stopwatch_create"), onClick = {
-        logd("start stopwatch")
-        if (!Settings.canDrawOverlays(context)) {
-          sharedVm.showGrantOverlayDialog = true
-          return@Button
-        }
-        vm.stopwatchButtonClick()
-      }) {
+      Button(modifier = Modifier
+        .semantics { testTagsAsResourceId = true }
+        .testTag("create_stopwatch"),
+        onClick = {
+          logd("start stopwatch")
+          if (!Settings.canDrawOverlays(context)) {
+            sharedVm.showGrantOverlayDialog = true
+            return@Button
+          }
+          vm.stopwatchButtonClick()
+        }) {
         Text(stringResource(id = R.string.create))
       }
     }
