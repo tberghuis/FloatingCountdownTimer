@@ -13,27 +13,20 @@
     <string name="enable_overlay_permission">Enable Overlay Permission</string>
     <string name="dialog_enable_overlay_permission">Please enable \"Allow display over other apps\" permission for application </string>
     <string name="back">Back</string>
-
     <string name="save">Save</string>
     <string name="buy">Buy</string>
     <string name="cancel">Cancel</string>
     <string name="premium_feature">Premium Feature</string>
-
     <string name="ft_premium">Floating Timer Premium</string>
     <string name="premium_reason_multiple_timers">Running more than 2 timers simultaneously requires premium.</string>
     <string name="premium_reason_halo_colour">Change of Timer color requires premium.</string>
-
     <string name="cancel_all_timers">Cancel all Timers</string>
     <string name="invalid_countdown_duration">Invalid timer duration. Please set to more than 0 seconds.</string>
-
     <string name="reset">Reset</string>
     <string name="exit">Exit</string>
-
     <string name="change_size">Change Size</string>
     <string name="preview">Preview</string>
     <string name="premium_reason_bubble_scale">Change of Timer size requires premium.</string>
-
-
     <string name="default_color">Default Color</string>
     <string name="stopwatch_timer_color">Stopwatch Color</string>
     <string name="countdown_timer_color">Countdown Color</string>
@@ -46,5 +39,14 @@
     <string name="label">label</string>
     <string name="transparent_background">transparent background</string>
     <string name="saved">Saved</string>
-
+    <string name="more_info">more info</string>
+    <string name="premium">Premium</string>
+    <string name="invalid">invalid</string>
+    <string name="premium_screen_text1">Purchase \"Premium\" to unlock the following features:</string>
+    <string name="premium_screen_features">" - Run more than 2 timers simultaneously.\n - Change Timer Color.\n - Change Timer Size."</string>
+    <string name="upgrade_to_premium">Upgrade to Premium</string>
+    <string name="discount_code">discount code</string>
+    <string name="apply">Apply</string>
+    <string name="premium_screen_text2">Thank you for purchasing premium. 🙏\n\nYou have unlocked the following features:</string>
+    <string name="discount_code_applied">discount code applied!</string>
 </resources>

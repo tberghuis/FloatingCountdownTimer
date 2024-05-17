@@ -27,7 +27,6 @@
     <string name="change_size">改变尺寸</string>
     <string name="preview">预览</string>
     <string name="premium_reason_bubble_scale">更改计时器大小需要额外费用。</string>
-
     <string name="default_color">默认颜色</string>
     <string name="stopwatch_timer_color">秒表颜色</string>
     <string name="countdown_timer_color">倒计时颜色</string>
@@ -40,5 +39,14 @@
     <string name="label">标签</string>
     <string name="transparent_background">透明背景</string>
     <string name="saved">已保存</string>
-
+    <string name="more_info">更多信息</string>
+    <string name="premium">高级版</string>
+    <string name="invalid">无效</string>
+    <string name="premium_screen_text1">购买“高级版”以解锁以下功能：</string>
+    <string name="premium_screen_features">" - 同时运行超过两个计时器。\n - 更改计时器颜色。\n - 更改计时器大小。"</string>
+    <string name="upgrade_to_premium">升级到高级版</string>
+    <string name="discount_code">折扣码</string>
+    <string name="apply">应用</string>
+    <string name="premium_screen_text2">感谢您购买高级版。🙏\n\n您已解锁以下功能：</string>
+    <string name="discount_code_applied">折扣码已应用！</string>
 </resources>

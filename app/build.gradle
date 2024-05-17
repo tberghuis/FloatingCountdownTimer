@@ -4,6 +4,7 @@ plugins {
 
     // https://github.com/google/ksp/releases
     id 'com.google.devtools.ksp' version '1.9.23-1.0.19'
+    id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
 android {
@@ -13,8 +14,8 @@ android {
         applicationId "xyz.tberghuis.floatingtimer"
         minSdk 26
         targetSdk 34
-        versionCode 59
-        versionName "1.31.0"
+        versionCode 60
+        versionName "1.32.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -57,7 +58,7 @@ android {
     }
     composeOptions {
         // https://www.jetpackcomposeversion.com/
-        kotlinCompilerExtensionVersion "1.5.11"
+        kotlinCompilerExtensionVersion "1.5.13"
     }
     packagingOptions {
         resources {
@@ -72,7 +73,7 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.5.0'
 
     // https://developer.android.com/jetpack/compose/bom/bom-mapping
-    def composeBom = platform('androidx.compose:compose-bom:2024.04.00')
+    def composeBom = platform('androidx.compose:compose-bom:2024.05.00')
     implementation composeBom
     androidTestImplementation composeBom
     implementation 'androidx.compose.material3:material3'
@@ -81,10 +82,10 @@ dependencies {
 
     implementation "androidx.compose.material:material-icons-extended"
 
-    implementation 'androidx.core:core-ktx:1.12.0'
+    implementation 'androidx.core:core-ktx:1.13.1'
 
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
-    implementation 'androidx.activity:activity-compose:1.8.2'
+    implementation 'androidx.activity:activity-compose:1.9.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
@@ -96,9 +97,9 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-test-manifest"
 
 
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation "androidx.datastore:datastore-preferences:1.1.1"
 
-    def billing_version = "6.2.0"
+    def billing_version = "6.2.1"
     implementation "com.android.billingclient:billing-ktx:$billing_version"
     // https://www.youtube.com/watch?v=meRGGTFZ9Kc
     constraints.implementation "androidx.fragment:fragment:1.6.2"
@@ -121,6 +122,14 @@ dependencies {
     // is annotationProcessor needed???
 //    annotationProcessor "androidx.room:room-compiler:$room_version"
     ksp "androidx.room:room-compiler:$room_version"
+
+    def ktor_version = "2.3.10"
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+//    implementation("io.ktor:ktor-client-android:$ktor_version")
+    implementation("io.ktor:ktor-client-okhttp:$ktor_version")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+//    implementation "io.ktor:ktor-client-logging:$ktor_version"
 }
 
 ksp {

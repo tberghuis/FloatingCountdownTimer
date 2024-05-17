@@ -27,7 +27,6 @@
     <string name="change_size">Ubah Ukuran</string>
     <string name="preview">Pratinjau</string>
     <string name="premium_reason_bubble_scale">Perubahan ukuran Timer membutuhkan premium.</string>
-
     <string name="default_color">Warna Default</string>
     <string name="stopwatch_timer_color">Warna Stopwatch</string>
     <string name="countdown_timer_color">Warna Hitung Mundur</string>
@@ -40,5 +39,14 @@
     <string name="label">label</string>
     <string name="transparent_background">latar transparan</string>
     <string name="saved">Tersimpan</string>
-
+    <string name="more_info">Info lebih lanjut</string>
+    <string name="premium">Premium</string>
+    <string name="invalid">tidak valid</string>
+    <string name="premium_screen_text1">Beli \"Premium\" untuk membuka fitur berikut:</string>
+    <string name="premium_screen_features">" - Menjalankan lebih dari 2 timer secara bersamaan.\n - Mengubah Warna Timer.\n - Mengubah Ukuran Timer."</string>
+    <string name="upgrade_to_premium">Upgrade ke Premium</string>
+    <string name="discount_code">kode diskon</string>
+    <string name="apply">Terapkan</string>
+    <string name="premium_screen_text2">Terima kasih telah membeli premium. 🙏\n\nAnda telah membuka fitur berikut:</string>
+    <string name="discount_code_applied">kode diskon diterapkan!</string>
 </resources>

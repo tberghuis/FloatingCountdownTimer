@@ -30,7 +30,7 @@ class PremiumVmc(private val application: Application, private val scope: Corout
 
   fun updateHaloColorChangePriceText() {
     scope.launch(IO) {
-      val details = billingClientWrapper.getHaloColourProductDetails()?.oneTimePurchaseOfferDetails
+      val details = billingClientWrapper.getProductDetails("halo_colour")?.oneTimePurchaseOfferDetails
       // is this needed???
       withContext(Main) {
         premiumPriceText = details?.formattedPrice ?: ""
@@ -42,8 +42,8 @@ class PremiumVmc(private val application: Application, private val scope: Corout
     showPurchaseDialog = false
     scope.launch(IO) {
       // this awaits billingResult in onPurchasesUpdated
-      billingClientWrapper.purchaseHaloColourChange(activity)
-      val purchased = billingClientWrapper.checkHaloColourPurchased() ?: return@launch
+      billingClientWrapper.purchaseProduct(activity, "halo_colour")
+      val purchased = billingClientWrapper.checkPremiumPurchased() ?: return@launch
       preferences.updateHaloColourPurchased(purchased)
       if (purchased) {
         // is the context switch needed???

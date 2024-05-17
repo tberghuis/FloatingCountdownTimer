@@ -36,6 +36,8 @@ class BillingClientWrapper(
 ) : PurchasesUpdatedListener {
   private var reconnectMilliseconds = RECONNECT_TIMER_START_MILLISECONDS
   private val connectedBillingClientStateFlow = MutableStateFlow<BillingClient?>(null)
+
+  // future.txt rewrite with publishing purchasesUpdated BillingResult to SharedFlow???
   private var purchasesUpdatedContinuation: CancellableContinuation<BillingResult>? = null
 
   // do not use outside startConnection(), use provideBillingClient
@@ -117,48 +119,21 @@ class BillingClientWrapper(
     return connectedBillingClientStateFlow.filterNotNull().first()
   }
 
-  suspend fun getHaloColourProductDetails(): ProductDetails? {
-    val bc = provideBillingClient()
-    return suspendCancellableCoroutine { cont ->
-      val productId = "halo_colour"
-      val product = QueryProductDetailsParams.Product.newBuilder()
-        .setProductId(productId)
-        .setProductType(BillingClient.ProductType.INAPP)
-        .build()
-      val params = QueryProductDetailsParams.newBuilder().setProductList(listOf(product)).build()
-      val productDetailsResponseListener =
-        ProductDetailsResponseListener { billingResult, productDetailsList ->
-          logd("productDetailsResponseListener $billingResult $productDetailsList")
-          val productDetails = productDetailsList.find {
-            it.productId == "halo_colour"
-          }
-          // https://stackoverflow.com/questions/48227346/kotlin-coroutine-throws-java-lang-illegalstateexception-already-resumed-but-go
-          if (cont.isActive) {
-            cont.resume(productDetails)
-          }
-        }
-      bc.queryProductDetailsAsync(params, productDetailsResponseListener)
-    }
-  }
-
-  suspend fun checkHaloColourPurchased(
-  ): Boolean? {
+  suspend fun checkPremiumPurchased(): Boolean? {
     val bc = provideBillingClient()
     return suspendCancellableCoroutine { cont ->
       val queryPurchasesParams =
         QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.INAPP).build()
-
       val purchasesResponseListener =
         PurchasesResponseListener { billingResult: BillingResult, purchases: MutableList<Purchase> ->
           logd("purchasesResponseListener $billingResult $purchases")
           var purchased: Boolean? = false
           when (billingResult.responseCode) {
             BillingClient.BillingResponseCode.OK -> {
-              for (purchase in purchases) {
-                if (purchase.products.contains("halo_colour")) {
-                  purchased = true
-                  break
-                }
+              if (purchases.any {
+                  it.products.contains("halo_colour") || it.products.contains("premium_discount")
+                }) {
+                purchased = true
               }
             }
 
@@ -175,8 +150,8 @@ class BillingClientWrapper(
     }
   }
 
-  suspend fun purchaseHaloColourChange(activity: Activity): BillingResult? {
-    val productDetails = getHaloColourProductDetails() ?: return null
+  suspend fun purchaseProduct(activity: Activity, productId: String): BillingResult? {
+    val productDetails = getProductDetails(productId) ?: return null
     val bc = provideBillingClient()
     return suspendCancellableCoroutine { cont ->
       purchasesUpdatedContinuation = cont
@@ -187,6 +162,34 @@ class BillingClientWrapper(
         .setProductDetailsParamsList(listOf(productDetailsParams))
         .build()
       bc.launchBillingFlow(activity, params)
+    }
+  }
+
+  suspend fun getProductDetails(productId: String): ProductDetails? {
+    val pdList = getProductDetailsList(productId)
+    return pdList.find {
+      it.productId == productId
+    }
+  }
+
+  private suspend fun getProductDetailsList(productId: String): List<ProductDetails> {
+    val product = QueryProductDetailsParams.Product.newBuilder()
+      .setProductId(productId)
+      .setProductType(BillingClient.ProductType.INAPP)
+      .build()
+    val bc = provideBillingClient()
+    val params = QueryProductDetailsParams.newBuilder()
+      .setProductList(listOf(product))
+      .build()
+    return suspendCancellableCoroutine { cont ->
+      logd("suspendCancellableCoroutine")
+      val productDetailsResponseListener =
+        ProductDetailsResponseListener { billingResult, productDetailsList ->
+          if (cont.isActive) {
+            cont.resume(productDetailsList)
+          }
+        }
+      bc.queryProductDetailsAsync(params, productDetailsResponseListener)
     }
   }
 }

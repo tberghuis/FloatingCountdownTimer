@@ -12,29 +12,21 @@
     <string name="go_to_settings">Vá para configurações</string>
     <string name="enable_overlay_permission">Habilitar permissão de sobreposição</string>
     <string name="dialog_enable_overlay_permission">Ative \"Sobrepor a outros apps\" permissão para aplicação </string>
-
     <string name="back">Voltar</string>
-
     <string name="save">Salvar</string>
     <string name="buy">Comprar</string>
     <string name="cancel">Cancelar</string>
     <string name="premium_feature">Recurso Premium</string>
-
     <string name="ft_premium">Temporizador Flutuante Premium</string>
     <string name="premium_reason_multiple_timers">Executar mais de 2 temporizadores simultaneamente requer premium.</string>
     <string name="premium_reason_halo_colour">A mudança da cor do temporizador requer premium.</string>
-
     <string name="cancel_all_timers">Cancelar todos os temporizadores</string>
     <string name="invalid_countdown_duration">Duração do temporizador inválida. Defina para mais de 0 segundos.</string>
-
     <string name="reset">Reiniciar</string>
     <string name="exit">Saída</string>
-
     <string name="change_size">Alterar tamanho</string>
     <string name="preview">Visualização</string>
     <string name="premium_reason_bubble_scale">A alteração do tamanho do temporizador requer premium.</string>
-
-
     <string name="default_color">Cor padrão</string>
     <string name="stopwatch_timer_color">Cor do cronômetro</string>
     <string name="countdown_timer_color">Cor da contagem regressiva</string>
@@ -47,4 +39,14 @@
     <string name="label">rótulo</string>
     <string name="transparent_background">fundo transparente</string>
     <string name="saved">Salvos</string>
+    <string name="more_info">mais info</string>
+    <string name="premium">Premium</string>
+    <string name="invalid">inválido</string>
+    <string name="premium_screen_text1">Compre "Premium" para desbloquear os seguintes recursos:</string>
+    <string name="premium_screen_features">" - Executar mais de 2 cronômetros simultaneamente.\n - Alterar a Cor do Cronômetro.\n - Alterar o Tamanho do Cronômetro."</string>
+    <string name="upgrade_to_premium">Atualizar para Premium</string>
+    <string name="discount_code">código de desconto</string>
+    <string name="apply">Aplicar</string>
+    <string name="premium_screen_text2">Obrigado por comprar premium. 🙏\n\nVocê desbloqueou os seguintes recursos:</string>
+    <string name="discount_code_applied">código de desconto aplicado!</string>
 </resources>

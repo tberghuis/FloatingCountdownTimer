@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
   private fun checkPremium() {
     val preferencesRepository = application.providePreferencesRepository()
     lifecycleScope.launch(IO) {
-      val purchased = application.provideBillingClientWrapper().checkHaloColourPurchased() ?: return@launch
+      val purchased = application.provideBillingClientWrapper().checkPremiumPurchased() ?: return@launch
       preferencesRepository.updateHaloColourPurchased(purchased)
       logd("MainActivity checkPremium purchased $purchased")
       if (!purchased) {

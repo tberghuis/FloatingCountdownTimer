@@ -21,6 +21,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
+import xyz.tberghuis.floatingtimer.screens.PremiumScreen
 
 @Composable
 fun FtNavHost() {
@@ -51,6 +52,9 @@ fun FtNavHost() {
       }
       composable("change_size") {
         SizeSettingScreen()
+      }
+      composable("premium") {
+        PremiumScreen()
       }
     }
   }

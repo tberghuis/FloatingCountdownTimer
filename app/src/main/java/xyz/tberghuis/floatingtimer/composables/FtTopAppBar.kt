@@ -74,6 +74,13 @@ fun FtTopAppBar() {
             sharedVm.cancelAllTimers()
           },
         )
+        DropdownMenuItem(
+          text = { Text("Premium") },
+          onClick = {
+//            showMenu = false
+            navController.navigate("premium")
+          },
+        )
       }
     },
   )
