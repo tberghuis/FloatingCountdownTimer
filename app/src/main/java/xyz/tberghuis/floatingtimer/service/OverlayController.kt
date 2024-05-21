@@ -36,12 +36,18 @@ class OverlayController(val service: FloatingService) {
   }
 
   // doitwrong
-  fun addStopwatch(haloColor: Color, timerShape: String, label: String?, isBackgroundTransparent: Boolean) {
+  fun addStopwatch(
+    haloColor: Color,
+    timerShape: String,
+    label: String?,
+    isBackgroundTransparent: Boolean
+  ) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
-      val stopwatch = Stopwatch(service, bubbleScale, haloColor, timerShape, label, isBackgroundTransparent)
+      val stopwatch =
+        Stopwatch(service, bubbleScale, haloColor, timerShape, label, isBackgroundTransparent)
       val stopwatchView = @Composable {
         CompositionLocalProvider(LocalTimerViewHolder provides stopwatch.viewHolder) {
           StopwatchView(stopwatch)
@@ -54,12 +60,26 @@ class OverlayController(val service: FloatingService) {
     }
   }
 
-  fun addCountdown(durationSeconds: Int, haloColor: Color, timerShape: String, label: String?, isBackgroundTransparent: Boolean) {
+  fun addCountdown(
+    durationSeconds: Int,
+    haloColor: Color,
+    timerShape: String,
+    label: String?,
+    isBackgroundTransparent: Boolean
+  ) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
-      val countdown = Countdown(service, durationSeconds, bubbleScale, haloColor, timerShape, label, isBackgroundTransparent)
+      val countdown = Countdown(
+        service,
+        durationSeconds,
+        bubbleScale,
+        haloColor,
+        timerShape,
+        label,
+        isBackgroundTransparent
+      )
       val countdownView = @Composable {
         CompositionLocalProvider(LocalTimerViewHolder provides countdown.viewHolder) {
           CountdownView(countdown)
@@ -125,7 +145,7 @@ class OverlayController(val service: FloatingService) {
 
     bubble.viewHolder.view.setOnTouchListener { _, event ->
 
-//      logd("bubble.viewHolder.view.setOnTouchListener")
+      logd("bubble.viewHolder.view.setOnTouchListener event $event")
 
       if (tapDetector.onTouchEvent(event)) {
         // just to be safe
@@ -151,7 +171,7 @@ class OverlayController(val service: FloatingService) {
           updateClickTargetParamsWithinScreenBounds(bubble.viewHolder)
         }
 
-        MotionEvent.ACTION_UP -> {
+        MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
           trashController.isBubbleDragging.value = false
           trashController.currentDraggingBubble.value = null
           // refactor how trash works???
