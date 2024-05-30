@@ -35,5 +35,23 @@ fun TmpRingtone(
     }) {
       Text("button")
     }
+
+//    RingtonePicker()
+  }
+}
+
+@Composable
+fun RingtonePicker() {
+  val launcher =
+    rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+      logd("rememberLauncherForActivityResult")
+    }
+  Button(onClick = {
+    val ringtonePickerIntent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER)
+    launcher.launch(
+      ringtonePickerIntent
+    )
+  }) {
+    Text("ringtone picker")
   }
 }
