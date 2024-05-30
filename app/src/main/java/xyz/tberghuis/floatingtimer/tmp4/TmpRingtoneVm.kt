@@ -6,6 +6,7 @@ import android.media.RingtoneManager.TYPE_ALARM
 import androidx.lifecycle.AndroidViewModel
 import xyz.tberghuis.floatingtimer.logd
 
+
 class TmpRingtoneVm(private val application: Application) : AndroidViewModel(application) {
   fun getRingtoneList() {
     logd("getRingtoneList")
@@ -21,8 +22,18 @@ class TmpRingtoneVm(private val application: Application) : AndroidViewModel(app
         val titleColumnIndex = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX)
         val uriColumnIndex = cursor.getString(RingtoneManager.URI_COLUMN_INDEX)
         val idColumnIndex = cursor.getString(RingtoneManager.ID_COLUMN_INDEX)
-        logd("titleColumnIndex $titleColumnIndex uriColumnIndex $uriColumnIndex idColumnIndex $idColumnIndex")
+
+        val ringtoneURI = manager.getRingtoneUri(cursor.position)
+
+
+        logd("titleColumnIndex $titleColumnIndex uriColumnIndex $uriColumnIndex idColumnIndex $idColumnIndex ringtoneURI $ringtoneURI")
       } while (cursor.moveToNext())
     }
   }
+
+
+  fun getDefaultRingtone() {
+
+  }
+
 }
