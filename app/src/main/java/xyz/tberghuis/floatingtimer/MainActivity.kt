@@ -14,6 +14,7 @@ import androidx.navigation.NavHostController
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.tmp4.TmpRingtone
+import xyz.tberghuis.floatingtimer.tmp5.Tmp5RingtoneScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class MainActivity : ComponentActivity() {
@@ -42,7 +43,8 @@ class MainActivity : ComponentActivity() {
             .background(Color.White),
         ) {
 //          FtNavHost()
-          TmpRingtone()
+//          TmpRingtone()
+          Tmp5RingtoneScreen()
         }
       }
     }
