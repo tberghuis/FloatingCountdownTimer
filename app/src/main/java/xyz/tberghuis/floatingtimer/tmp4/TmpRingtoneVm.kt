@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
 import android.app.Application
+import android.media.Ringtone
 import android.media.RingtoneManager
 import android.media.RingtoneManager.TYPE_ALARM
 import androidx.lifecycle.AndroidViewModel
@@ -8,6 +9,10 @@ import xyz.tberghuis.floatingtimer.logd
 
 
 class TmpRingtoneVm(private val application: Application) : AndroidViewModel(application) {
+
+
+  var ringtone: Ringtone? = null
+
   fun getRingtoneList() {
     logd("getRingtoneList")
 
@@ -31,9 +36,38 @@ class TmpRingtoneVm(private val application: Application) : AndroidViewModel(app
     }
   }
 
+  fun getActualDefaultRingtoneUri() {
+    val defaultRingtoneUri = RingtoneManager.getActualDefaultRingtoneUri(
+      application,
+      RingtoneManager.TYPE_ALARM
+    )
 
-  fun getDefaultRingtone() {
+    // getActualDefaultRingtoneUri file:///system/media/audio/ringtones/DigitalUniverse.ogg
+    logd("getActualDefaultRingtoneUri $defaultRingtoneUri")
 
+    ringtone = RingtoneManager.getRingtone(application, defaultRingtoneUri)
+  }
+
+  fun getDefaultUri() {
+    val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+
+    // getDefaultUri content://settings/system/alarm_alert
+    logd("getDefaultUri $uri")
+
+    ringtone = RingtoneManager.getRingtone(application, uri)
+  }
+
+
+  fun playRingtone() {
+    ringtone?.play()
+  }
+
+  fun stopRingtone() {
+    ringtone?.stop()
+  }
+
+  fun ringtoneGetTitle() {
+    logd("ringtoneGetTitle ${ringtone?.getTitle(application)}")
   }
 
 }

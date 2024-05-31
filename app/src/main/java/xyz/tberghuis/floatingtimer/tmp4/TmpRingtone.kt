@@ -31,9 +31,35 @@ fun TmpRingtone(
     Text("hello ringtone")
     Button(onClick = {
       vm.getRingtoneList()
-
     }) {
-      Text("button")
+      Text("getRingtoneList")
+    }
+    Button(onClick = {
+      vm.getActualDefaultRingtoneUri()
+    }) {
+      Text("getActualDefaultRingtoneUri")
+    }
+    Button(onClick = {
+      vm.playRingtone()
+    }) {
+      Text("play")
+    }
+    Button(onClick = {
+      vm.stopRingtone()
+    }) {
+      Text("stop")
+    }
+
+    Button(onClick = {
+      vm.getDefaultUri()
+    }) {
+      Text("getDefaultUri")
+    }
+
+    Button(onClick = {
+      vm.ringtoneGetTitle()
+    }) {
+      Text("get title")
     }
 
 //    RingtonePicker()
