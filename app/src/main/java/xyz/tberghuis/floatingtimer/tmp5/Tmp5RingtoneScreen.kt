@@ -11,6 +11,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.LocalNavController
@@ -42,13 +43,20 @@ fun Tmp5RingtoneScreenContent(
   vm: Tmp5RingtoneVm = viewModel(),
 ) {
 
-  val currentRingtoneTitle by vm.ringtoneTitleFlow.collectAsState(initial = "")
+//  val currentRingtoneTitle by vm.ringtoneTitleFlow.collectAsState(initial = "")
+
+  val currentRingtone = vm.currentRingtone.collectAsState(null).value
+  val context = LocalContext.current
+
 
   Column(modifier = Modifier.padding(padding)) {
     Text("hello ringtone screen")
     Row {
+      // todo outlined text field
       Text("current")
-      Text(currentRingtoneTitle)
+      currentRingtone?.let {
+        Text(it.getTitle(context))
+      }
     }
   }
 }
