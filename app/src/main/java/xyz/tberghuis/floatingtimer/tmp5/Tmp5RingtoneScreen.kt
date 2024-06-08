@@ -42,12 +42,8 @@ fun Tmp5RingtoneScreenContent(
   padding: PaddingValues,
   vm: Tmp5RingtoneVm = viewModel(),
 ) {
-
-//  val currentRingtoneTitle by vm.ringtoneTitleFlow.collectAsState(initial = "")
-
-  val currentRingtone = vm.currentRingtone.collectAsState(null).value
+  val currentRingtone = vm.currentRingtoneFlow.collectAsState(null).value
   val context = LocalContext.current
-
 
   Column(modifier = Modifier.padding(padding)) {
     Text("hello ringtone screen")

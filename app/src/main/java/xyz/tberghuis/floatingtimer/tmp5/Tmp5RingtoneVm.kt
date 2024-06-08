@@ -16,27 +16,11 @@ class Tmp5RingtoneVm(private val application: Application) : AndroidViewModel(ap
   // todo get singleton from MainApplication
   private val prefRepo = Tmp5PrefRepo(application, application.dataStore)
 
-//  var previewRingtone: Ringtone? = null
+  val currentRingtoneFlow = prefRepo.alarmRingtoneFlow
 
-  val currentRingtone = prefRepo.alarmRingtoneFlow
-
-
-  init {
-    // doitwrong
-//    viewModelScope.launch {
-//      prefRepo.alarmRingtoneUriFlow.collect { uri ->
-//        val r = RingtoneManager.getRingtone(application, Uri.parse(uri))
-//        currentRingtone.value = r
-//      }
-//    }
-  }
-
-
-  // shared flow, preview uri...
+  // shared flow, preview uri... (emit uri string when click event)
   // if playing same uri just stop
-
-//  val ringtoneTitleFlow = prefRepo.alarmRingtoneUriFlow.map {
-//    ringtoneTitleFromUri(application, it)
-//  }
+  // stop playing before start playing another ringtone
+  // process in init block
 
 }
