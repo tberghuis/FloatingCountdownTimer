@@ -1,5 +1,9 @@
 package xyz.tberghuis.floatingtimer.tmp5
 
+import android.content.Context
+import android.media.Ringtone
+import android.media.RingtoneManager
+import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -9,11 +13,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.flow.map
 import xyz.tberghuis.floatingtimer.LocalNavController
 
 
@@ -42,17 +49,29 @@ fun Tmp5RingtoneScreenContent(
   padding: PaddingValues,
   vm: Tmp5RingtoneVm = viewModel(),
 ) {
-  val currentRingtone = vm.currentRingtoneFlow.collectAsState(null).value
+
   val context = LocalContext.current
+  val currentRingtoneUri = vm.currentRingtoneUri.collectAsState()
+
+  val currentRingtone = remember {
+    derivedStateOf {
+      currentRingtoneUri.value?.let { ringtoneFromUri(context, it) }
+    }
+  }.value
 
   Column(modifier = Modifier.padding(padding)) {
     Text("hello ringtone screen")
     Row {
       // todo outlined text field
-      Text("current")
+      Text("current: ")
       currentRingtone?.let {
         Text(it.getTitle(context))
       }
     }
   }
+}
+
+
+fun ringtoneFromUri(context: Context, uri: String): Ringtone? {
+  return RingtoneManager.getRingtone(context, Uri.parse(uri))
 }

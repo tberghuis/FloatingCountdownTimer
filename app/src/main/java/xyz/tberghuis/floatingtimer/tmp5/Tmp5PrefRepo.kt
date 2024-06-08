@@ -15,15 +15,25 @@ class Tmp5PrefRepo(
   private val application: Application,
   private val dataStore: DataStore<Preferences>
 ) {
-  val alarmRingtoneFlow: Flow<Ringtone?> = dataStore.data.map { preferences ->
+//  val alarmRingtoneFlow: Flow<Ringtone?> = dataStore.data.map { preferences ->
+//    // todo get default alarm uri
+//    // if null
+//    // use "" empty string to represent none.
+//    preferences[stringPreferencesKey("alarm_ringtone_uri")]
+//      ?: "content://settings/system/alarm_alert"
+//  }.map {
+//    RingtoneManager.getRingtone(application, Uri.parse(it))
+//  }
+
+
+  val alarmRingtoneUriFlow: Flow<String?> = dataStore.data.map { preferences ->
     // todo get default alarm uri
     // if null
     // use "" empty string to represent none.
     preferences[stringPreferencesKey("alarm_ringtone_uri")]
       ?: "content://settings/system/alarm_alert"
-  }.map {
-    RingtoneManager.getRingtone(application, Uri.parse(it))
   }
+
 
   suspend fun updateAlarmRingtoneUri(uri: String) {
     dataStore.edit { preferences ->
