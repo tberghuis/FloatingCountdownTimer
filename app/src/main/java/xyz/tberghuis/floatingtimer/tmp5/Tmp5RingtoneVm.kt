@@ -27,10 +27,13 @@ class Tmp5RingtoneVm(private val application: Application) : AndroidViewModel(ap
   // stop playing before start playing another ringtone
   // process in init block
 
-  val ringtoneClickFlow = MutableSharedFlow<String?>()
+//  val ringtoneClickFlow = MutableSharedFlow<String?>()
+
+  val ringtonePreviewVmc = TmpRingtonePreviewVmc(application)
+
 
   init {
-    processRingtoneClick()
+//    processRingtoneClick()
     viewModelScope.launch {
       prefRepo.alarmRingtoneUriFlow.collect {
         currentRingtoneUri.value = it
@@ -38,13 +41,13 @@ class Tmp5RingtoneVm(private val application: Application) : AndroidViewModel(ap
     }
   }
 
-  private fun processRingtoneClick() {
-    val previousRingtoneUri: String? = null
-    viewModelScope.launch {
-      ringtoneClickFlow.collect {
-        logd("ringtoneClickFlow.collect $it")
-      }
-    }
-  }
+//  private fun processRingtoneClick() {
+//    val previousRingtoneUri: String? = null
+//    viewModelScope.launch {
+//      ringtoneClickFlow.collect {
+//        logd("ringtoneClickFlow.collect $it")
+//      }
+//    }
+//  }
 
 }

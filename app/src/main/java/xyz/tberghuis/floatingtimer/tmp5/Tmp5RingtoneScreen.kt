@@ -52,7 +52,6 @@ fun Tmp5RingtoneScreenContent(
   padding: PaddingValues,
   vm: Tmp5RingtoneVm = viewModel(),
 ) {
-  val scope = rememberCoroutineScope()
   val context = LocalContext.current
   val currentRingtoneUri = vm.currentRingtoneUri.collectAsState()
 
@@ -71,8 +70,8 @@ fun Tmp5RingtoneScreenContent(
         Text(
           it.getTitle(context),
           modifier = Modifier.clickable {
-            scope.launch {
-              vm.ringtoneClickFlow.emit(currentRingtoneUri.value)
+            currentRingtoneUri.value?.let { uri ->
+              vm.ringtonePreviewVmc.ringtoneClick(uri)
             }
           },
         )
