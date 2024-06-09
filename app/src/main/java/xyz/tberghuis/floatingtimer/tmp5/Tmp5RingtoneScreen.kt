@@ -53,29 +53,40 @@ fun Tmp5RingtoneScreenContent(
   vm: Tmp5RingtoneVm = viewModel(),
 ) {
   val context = LocalContext.current
-  val currentRingtoneUri = vm.currentRingtoneUri.collectAsState()
+//  val currentRingtoneUri = vm.currentRingtoneUri.collectAsState()
 
-  val currentRingtone = remember {
-    derivedStateOf {
-      currentRingtoneUri.value?.let { ringtoneFromUri(context, it) }
-    }
-  }.value
+//  val currentRingtone = remember {
+//    derivedStateOf {
+//      currentRingtoneUri.value?.let { ringtoneFromUri(context, it) }
+//    }
+//  }.value
 
   Column(modifier = Modifier.padding(padding)) {
     Text("hello ringtone screen")
     Row {
       // todo outlined text field
       Text("current: ")
-      currentRingtone?.let {
-        Text(
-          it.getTitle(context),
-          modifier = Modifier.clickable {
-            currentRingtoneUri.value?.let { uri ->
-              vm.ringtonePreviewVmc.ringtoneClick(uri)
-            }
-          },
-        )
-      }
+
+      Text(
+        vm.currentRingtoneVmc.currentRingtoneTitle,
+        modifier = Modifier.clickable {
+          vm.currentRingtoneVmc.currentRingtoneUri?.let {
+            vm.ringtonePreviewVmc.ringtoneClick(it)
+          }
+        },
+      )
+
+
+//      currentRingtone?.let {
+//        Text(
+//          it.getTitle(context),
+//          modifier = Modifier.clickable {
+//            currentRingtoneUri.value?.let { uri ->
+//              vm.ringtonePreviewVmc.ringtoneClick(uri)
+//            }
+//          },
+//        )
+//      }
     }
   }
 }
