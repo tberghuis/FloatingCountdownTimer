@@ -4,6 +4,7 @@ import android.content.Context
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -16,11 +17,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.LocalNavController
 
 
@@ -49,7 +52,7 @@ fun Tmp5RingtoneScreenContent(
   padding: PaddingValues,
   vm: Tmp5RingtoneVm = viewModel(),
 ) {
-
+  val scope = rememberCoroutineScope()
   val context = LocalContext.current
   val currentRingtoneUri = vm.currentRingtoneUri.collectAsState()
 
@@ -65,7 +68,14 @@ fun Tmp5RingtoneScreenContent(
       // todo outlined text field
       Text("current: ")
       currentRingtone?.let {
-        Text(it.getTitle(context))
+        Text(
+          it.getTitle(context),
+          modifier = Modifier.clickable {
+            scope.launch {
+              vm.ringtoneClickFlow.emit(currentRingtoneUri.value)
+            }
+          },
+        )
       }
     }
   }
