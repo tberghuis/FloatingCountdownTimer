@@ -18,36 +18,15 @@ import xyz.tberghuis.floatingtimer.logd
 class Tmp5RingtoneVm(private val application: Application) : AndroidViewModel(application) {
   // todo get singleton from MainApplication
   private val prefRepo = Tmp5PrefRepo(application.dataStore)
-
   val currentRingtoneUri = MutableStateFlow<String?>(null)
-
-
-  // shared flow, preview uri... (emit uri string when click event)
-  // if playing same uri just stop
-  // stop playing before start playing another ringtone
-  // process in init block
-
-//  val ringtoneClickFlow = MutableSharedFlow<String?>()
 
   val ringtonePreviewVmc = TmpRingtonePreviewVmc(application)
 
-
   init {
-//    processRingtoneClick()
     viewModelScope.launch {
       prefRepo.alarmRingtoneUriFlow.collect {
         currentRingtoneUri.value = it
       }
     }
   }
-
-//  private fun processRingtoneClick() {
-//    val previousRingtoneUri: String? = null
-//    viewModelScope.launch {
-//      ringtoneClickFlow.collect {
-//        logd("ringtoneClickFlow.collect $it")
-//      }
-//    }
-//  }
-
 }
