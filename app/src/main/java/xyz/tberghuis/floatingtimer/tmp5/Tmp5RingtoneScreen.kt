@@ -79,8 +79,3 @@ fun Tmp5RingtoneScreenContent(
     }
   }
 }
-
-
-fun ringtoneFromUri(context: Context, uri: String): Ringtone? {
-  return RingtoneManager.getRingtone(context, Uri.parse(uri))
-}
