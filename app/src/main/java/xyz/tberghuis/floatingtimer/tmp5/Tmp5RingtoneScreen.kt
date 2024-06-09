@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,19 +39,22 @@ fun Tmp5RingtoneScreenContent(
   padding: PaddingValues,
   vm: Tmp5RingtoneVm = viewModel(),
 ) {
-  Column(modifier = Modifier.padding(padding)) {
-    Text("hello ringtone screen")
-    Row {
-      // todo outlined text field
-      Text("current: ")
-      Text(
-        vm.currentRingtoneVmc.currentRingtoneTitle,
-        modifier = Modifier.clickable {
-          vm.currentRingtoneVmc.currentRingtoneUri?.let {
-            vm.ringtonePreviewVmc.ringtoneClick(it)
-          }
-        },
-      )
+  LazyColumn(modifier = Modifier.padding(padding)) {
+    item {
+      Row {
+        // todo outlined text field
+        Text("current: ")
+        Text(
+          vm.currentRingtoneVmc.currentRingtoneTitle,
+          modifier = Modifier.clickable {
+            vm.currentRingtoneVmc.currentRingtoneUri?.let {
+              vm.ringtonePreviewVmc.ringtoneClick(it)
+            }
+          },
+        )
+      }
     }
   }
+
+
 }
