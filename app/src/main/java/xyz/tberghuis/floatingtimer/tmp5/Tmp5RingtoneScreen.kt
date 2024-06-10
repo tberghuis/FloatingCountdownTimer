@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Divider
@@ -45,7 +46,6 @@ fun Tmp5RingtoneScreen() {
   }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Tmp5RingtoneScreenContent(
   padding: PaddingValues,
@@ -76,26 +76,59 @@ fun Tmp5RingtoneScreenContent(
       )
 
     }
-    item {
-      Column {
-        // todo strings.xml
-        Text(
-          "Alarms",
-          fontWeight = FontWeight.Bold
-        )
-        HorizontalDivider()
-      }
-    }
 
-    items(vm.alarmListVmc.alarmList) { ringtoneData ->
-      Text(ringtoneData.title,
-        modifier = Modifier.clickable {
-          vm.ringtonePreviewVmc.ringtoneClick(ringtoneData.uri)
-        }
-      )
-    }
+
+    ringtoneList("Alarms", vm.alarmListVmc.alarmList,
+      ringtoneClick = { uri ->
+        vm.ringtonePreviewVmc.ringtoneClick(uri)
+      }
+    )
+
+//    item {
+//      Column {
+//        // todo strings.xml
+//        Text(
+//          "Alarms",
+//          fontWeight = FontWeight.Bold
+//        )
+//        HorizontalDivider()
+//      }
+//    }
+//    items(vm.alarmListVmc.alarmList) { ringtoneData ->
+//      Text(ringtoneData.title,
+//        modifier = Modifier.clickable {
+//          vm.ringtonePreviewVmc.ringtoneClick(ringtoneData.uri)
+//        }
+//      )
+//    }
+
 
   }
 
 
+}
+
+
+fun LazyListScope.ringtoneList(
+  type: String, list: List<TmpRingtoneData>,
+  ringtoneClick: (String) -> Unit,
+) {
+  item {
+    Column {
+      // todo strings.xml
+      Text(
+        type,
+        fontWeight = FontWeight.Bold
+      )
+      HorizontalDivider()
+    }
+  }
+  items(list) { ringtoneData ->
+    Text(ringtoneData.title,
+      modifier = Modifier.clickable {
+        ringtoneClick(ringtoneData.uri)
+//        vm.ringtonePreviewVmc.ringtoneClick(ringtoneData.uri)
+      }
+    )
+  }
 }
