@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -75,9 +76,7 @@ fun Tmp5RingtoneScreenContent(
       )
     }
 
-    ringtoneList(
-      "Alarms", vm.alarmListVmc.alarmList, ringtoneClick = vm.ringtonePreviewVmc::ringtoneClick
-    )
+    ringtoneList("Alarms", vm.alarmListVmc.alarmList, vm)
 
   }
 }
@@ -86,7 +85,7 @@ fun Tmp5RingtoneScreenContent(
 fun LazyListScope.ringtoneList(
   type: String,
   list: List<TmpRingtoneData>,
-  ringtoneClick: (String) -> Unit,
+  vm: Tmp5RingtoneVm,
 ) {
   item {
     Column {
@@ -99,10 +98,17 @@ fun LazyListScope.ringtoneList(
     }
   }
   items(list) { ringtoneData ->
-    Text(ringtoneData.title,
-      modifier = Modifier.clickable {
-        ringtoneClick(ringtoneData.uri)
+    Row {
+      Text(ringtoneData.title,
+        modifier = Modifier.clickable {
+          vm.ringtonePreviewVmc.ringtoneClick(ringtoneData.uri)
+        }
+      )
+      Button(onClick = {
+        vm.setRingtone(ringtoneData.uri)
+      }) {
+        Text("Apply")
       }
-    )
+    }
   }
 }

@@ -3,6 +3,7 @@ package xyz.tberghuis.floatingtimer.tmp5
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.data.dataStore
 
 class Tmp5RingtoneVm(private val application: Application) : AndroidViewModel(application) {
@@ -16,5 +17,11 @@ class Tmp5RingtoneVm(private val application: Application) : AndroidViewModel(ap
 
   init {
     alarmListVmc.getAlarmList()
+  }
+
+  fun setRingtone(uri: String) {
+    viewModelScope.launch {
+      prefRepo.updateAlarmRingtoneUri(uri)
+    }
   }
 }
