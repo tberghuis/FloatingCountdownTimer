@@ -2,7 +2,6 @@ package xyz.tberghuis.floatingtimer.tmp5
 
 import android.app.Application
 import android.media.RingtoneManager
-import android.media.RingtoneManager.TYPE_ALARM
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,10 +13,10 @@ class RingtoneListController(
   var ringtoneList by mutableStateOf(listOf<TmpRingtoneData>())
 
   init {
-    getAlarmList()
+    getRingtoneList()
   }
 
-  private fun getAlarmList() {
+  private fun getRingtoneList() {
     val rl = mutableListOf<TmpRingtoneData>()
     val manager = RingtoneManager(application)
     manager.setType(ringtoneType.type)
