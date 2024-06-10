@@ -76,8 +76,9 @@ fun Tmp5RingtoneScreenContent(
       )
     }
 
-    ringtoneList("Alarms", vm.alarmListVmc.alarmList, vm)
-
+    ringtoneList("Alarms", vm.alarmList.ringtoneList, vm)
+    ringtoneList("Ringtones", vm.ringtoneList.ringtoneList, vm)
+    ringtoneList("Notifications", vm.notificationList.ringtoneList, vm)
   }
 }
 

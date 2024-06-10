@@ -7,23 +7,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
-class TmpAlarmListVmc(private val application: Application) {
+class RingtoneListController(
+  private val application: Application,
+  private val ringtoneType: TmpRingtoneType,
+) {
+  var ringtoneList by mutableStateOf(listOf<TmpRingtoneData>())
 
-  var alarmList by mutableStateOf(listOf<TmpRingtoneData>())
+  init {
+    getAlarmList()
+  }
 
-  fun getAlarmList() {
-    val al = mutableListOf<TmpRingtoneData>()
+  private fun getAlarmList() {
+    val rl = mutableListOf<TmpRingtoneData>()
     val manager = RingtoneManager(application)
-    manager.setType(TYPE_ALARM)
+    manager.setType(ringtoneType.type)
     val cursor = manager.cursor
     val count = cursor.count
     if (count > 0 && cursor.moveToFirst()) {
       do {
         val title = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX)
         val uri = manager.getRingtoneUri(cursor.position)
-        al.add(TmpRingtoneData(title, uri.toString()))
+        rl.add(TmpRingtoneData(title, uri.toString()))
       } while (cursor.moveToNext())
-      alarmList = al
+      ringtoneList = rl
     }
   }
 }
