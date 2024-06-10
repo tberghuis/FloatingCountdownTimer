@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.LocalNavController
@@ -76,7 +77,14 @@ fun Tmp5RingtoneScreenContent(
 
     }
     item {
-      HorizontalDivider()
+      Column {
+        // todo strings.xml
+        Text(
+          "Alarms",
+          fontWeight = FontWeight.Bold
+        )
+        HorizontalDivider()
+      }
     }
 
     items(vm.alarmListVmc.alarmList) { ringtoneData ->
