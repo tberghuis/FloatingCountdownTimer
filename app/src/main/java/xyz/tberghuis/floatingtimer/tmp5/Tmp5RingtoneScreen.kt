@@ -53,7 +53,6 @@ fun Tmp5RingtoneScreenContent(
 ) {
   LazyColumn(modifier = Modifier.padding(padding)) {
     item {
-
       OutlinedTextField(
         value = vm.currentRingtoneVmc.currentRingtoneTitle,
         onValueChange = {},
@@ -74,9 +73,7 @@ fun Tmp5RingtoneScreenContent(
           disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
         )
       )
-
     }
-
 
     ringtoneList("Alarms", vm.alarmListVmc.alarmList,
       ringtoneClick = { uri ->
@@ -84,33 +81,12 @@ fun Tmp5RingtoneScreenContent(
       }
     )
 
-//    item {
-//      Column {
-//        // todo strings.xml
-//        Text(
-//          "Alarms",
-//          fontWeight = FontWeight.Bold
-//        )
-//        HorizontalDivider()
-//      }
-//    }
-//    items(vm.alarmListVmc.alarmList) { ringtoneData ->
-//      Text(ringtoneData.title,
-//        modifier = Modifier.clickable {
-//          vm.ringtonePreviewVmc.ringtoneClick(ringtoneData.uri)
-//        }
-//      )
-//    }
-
-
   }
-
-
 }
 
-
 fun LazyListScope.ringtoneList(
-  type: String, list: List<TmpRingtoneData>,
+  type: String,
+  list: List<TmpRingtoneData>,
   ringtoneClick: (String) -> Unit,
 ) {
   item {
@@ -127,7 +103,6 @@ fun LazyListScope.ringtoneList(
     Text(ringtoneData.title,
       modifier = Modifier.clickable {
         ringtoneClick(ringtoneData.uri)
-//        vm.ringtonePreviewVmc.ringtoneClick(ringtoneData.uri)
       }
     )
   }
