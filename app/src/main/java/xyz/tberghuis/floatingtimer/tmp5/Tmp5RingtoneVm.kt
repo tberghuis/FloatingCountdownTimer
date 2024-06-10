@@ -11,6 +11,10 @@ class Tmp5RingtoneVm(private val application: Application) : AndroidViewModel(ap
   val ringtonePreviewVmc = TmpRingtonePreviewVmc(application)
   val currentRingtoneVmc =
     TmpCurrentRingtoneVmc(prefRepo.alarmRingtoneUriFlow, viewModelScope, application)
+
+  val alarmListVmc = TmpAlarmListVmc(application)
+
   init {
+    alarmListVmc.getAlarmList()
   }
 }
