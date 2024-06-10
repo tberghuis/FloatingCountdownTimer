@@ -52,19 +52,6 @@ fun Tmp5RingtoneScreenContent(
 ) {
   LazyColumn(modifier = Modifier.padding(padding)) {
     item {
-//      Row {
-//        // todo outlined text field
-//        Text("current: ")
-//        Text(
-//          vm.currentRingtoneVmc.currentRingtoneTitle,
-//          modifier = Modifier.clickable {
-//            vm.currentRingtoneVmc.currentRingtoneUri?.let {
-//              vm.ringtonePreviewVmc.ringtoneClick(it)
-//            }
-//          },
-//        )
-//      }
-
 
       OutlinedTextField(
         value = vm.currentRingtoneVmc.currentRingtoneTitle,
@@ -79,19 +66,13 @@ fun Tmp5RingtoneScreenContent(
         label = {
           Text("current")
         },
-
         colors = OutlinedTextFieldDefaults.colors(
           disabledTextColor = MaterialTheme.colorScheme.onSurface,
           disabledContainerColor = Color.Transparent,
           disabledBorderColor = MaterialTheme.colorScheme.outline,
           disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
         )
-
-
       )
-
-
-
 
     }
     item {
