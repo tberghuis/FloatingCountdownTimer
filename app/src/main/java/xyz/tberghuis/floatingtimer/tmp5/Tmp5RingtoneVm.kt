@@ -13,9 +13,11 @@ class Tmp5RingtoneVm(private val application: Application) : AndroidViewModel(ap
   val currentRingtoneVmc =
     TmpCurrentRingtoneVmc(prefRepo.alarmRingtoneUriFlow, viewModelScope, application)
 
-  val alarmList = RingtoneListController(application, TmpRingtoneType.ALARM)
-  val ringtoneList = RingtoneListController(application, TmpRingtoneType.RINGTONE)
-  val notificationList = RingtoneListController(application, TmpRingtoneType.NOTIFICATION)
+  val systemDefaultAlarmVmc = TmpSystemDefaultAlarmVmc(application)
+
+  val alarmList = RingtoneListVmc(application, TmpRingtoneType.ALARM)
+  val ringtoneList = RingtoneListVmc(application, TmpRingtoneType.RINGTONE)
+  val notificationList = RingtoneListVmc(application, TmpRingtoneType.NOTIFICATION)
 
   init {
   }

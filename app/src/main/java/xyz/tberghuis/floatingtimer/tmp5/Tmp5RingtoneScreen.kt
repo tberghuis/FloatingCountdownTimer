@@ -92,8 +92,26 @@ fun Tmp5RingtoneScreenContent(
 fun LazyListScope.systemDefault(
   vm: Tmp5RingtoneVm,
 ) {
+  if (vm.systemDefaultAlarmVmc.systemDefaultRingtoneUri == null) {
+    return
+  }
   item {
-    Text("todo system default")
+    Row {
+      Text(vm.systemDefaultAlarmVmc.systemDefaultRingtoneTitle,
+        modifier = Modifier.clickable {
+          vm.systemDefaultAlarmVmc.systemDefaultRingtoneUri?.let { uri ->
+            vm.ringtonePreviewVmc.ringtoneClick(uri)
+          }
+        }
+      )
+      Button(onClick = {
+        vm.systemDefaultAlarmVmc.systemDefaultRingtoneUri?.let { uri ->
+          vm.setRingtone(uri)
+        }
+      }) {
+        Text("Apply")
+      }
+    }
   }
 }
 

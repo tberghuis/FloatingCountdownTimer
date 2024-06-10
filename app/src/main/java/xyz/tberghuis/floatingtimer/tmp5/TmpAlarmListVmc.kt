@@ -6,7 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
-class RingtoneListController(
+class RingtoneListVmc(
   private val application: Application,
   private val ringtoneType: TmpRingtoneType,
 ) {
