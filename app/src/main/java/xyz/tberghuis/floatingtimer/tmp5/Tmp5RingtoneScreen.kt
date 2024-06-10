@@ -57,7 +57,11 @@ fun Tmp5RingtoneScreenContent(
     }
 
     items(vm.alarmListVmc.alarmList) { ringtoneData ->
-      Text(ringtoneData.title)
+      Text(ringtoneData.title,
+        modifier = Modifier.clickable {
+          vm.ringtonePreviewVmc.ringtoneClick(ringtoneData.uri)
+        }
+      )
     }
 
   }
