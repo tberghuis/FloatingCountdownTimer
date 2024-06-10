@@ -75,15 +75,14 @@ fun Tmp5RingtoneScreenContent(
       )
     }
 
-    ringtoneList("Alarms", vm.alarmListVmc.alarmList,
-      ringtoneClick = { uri ->
-        vm.ringtonePreviewVmc.ringtoneClick(uri)
-      }
+    ringtoneList(
+      "Alarms", vm.alarmListVmc.alarmList, ringtoneClick = vm.ringtonePreviewVmc::ringtoneClick
     )
 
   }
 }
 
+// doitwrong future.txt enum class for type
 fun LazyListScope.ringtoneList(
   type: String,
   list: List<TmpRingtoneData>,
