@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -69,8 +70,11 @@ fun Tmp5RingtoneScreenContent(
     currentRingtone(widthConstraint, vm)
     item { Spacer(Modifier.height(5.dp)) }
     systemDefault(widthConstraint, vm)
+    item { Spacer(Modifier.height(5.dp)) }
     ringtoneList(widthConstraint, "Alarms", vm.alarmList.ringtoneList, vm)
+    item { Spacer(Modifier.height(5.dp)) }
     ringtoneList(widthConstraint, "Ringtones", vm.ringtoneList.ringtoneList, vm)
+    item { Spacer(Modifier.height(5.dp)) }
     ringtoneList(widthConstraint, "Notifications", vm.notificationList.ringtoneList, vm)
     item { Spacer(Modifier.height(5.dp)) }
   }
@@ -129,11 +133,19 @@ fun LazyListScope.systemDefault(
             }
           }
       )
-      Button(onClick = {
-        vm.systemDefaultAlarmVmc.systemDefaultRingtoneUri?.let { uri ->
-          vm.setRingtone(uri)
-        }
-      }) {
+      Button(
+        onClick = {
+          vm.systemDefaultAlarmVmc.systemDefaultRingtoneUri?.let { uri ->
+            vm.setRingtone(uri)
+          }
+        },
+        contentPadding = PaddingValues(
+          start = 20.dp,
+          top = 4.dp,
+          end = 20.dp,
+          bottom = 4.dp
+        ),
+      ) {
         Text("Apply")
       }
     }
@@ -168,9 +180,17 @@ fun LazyListScope.ringtoneList(
           vm.ringtonePreviewVmc.ringtoneClick(ringtoneData.uri)
         }
       )
-      Button(onClick = {
-        vm.setRingtone(ringtoneData.uri)
-      }) {
+      Button(
+        onClick = {
+          vm.setRingtone(ringtoneData.uri)
+        },
+        contentPadding = PaddingValues(
+          start = 20.dp,
+          top = 4.dp,
+          end = 20.dp,
+          bottom = 4.dp
+        ),
+      ) {
         Text("Apply")
       }
     }
