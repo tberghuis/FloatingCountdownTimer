@@ -24,25 +24,46 @@ import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 @Composable
 fun TmpColumnScroll() {
+
+  val widthConstraint = Modifier
+    .widthIn(0.dp, 232.dp)
+    .fillMaxWidth()
+
+
   LazyColumn(
     modifier = Modifier.background(Color.Cyan),
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
     items(100) { index ->
-      Box(
+
+
+      Row(
         modifier = Modifier
           .background(Color.LightGray)
-          .widthIn(0.dp, 232.dp),
+          .then(widthConstraint),
+//          .widthIn(0.dp, 232.dp)
+//          .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
       ) {
-        Row(
-          modifier = Modifier
-            .fillMaxWidth(),
-          horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-          Text("start line $index")
-          Text("end line $index")
-        }
+        Text("start line $index")
+        Text("end line $index")
       }
+
+
+//      Box(
+//        modifier = Modifier
+//          .background(Color.LightGray)
+//          .widthIn(0.dp, 232.dp),
+//      ) {
+//        Row(
+//          modifier = Modifier
+//            .fillMaxWidth(),
+//          horizontalArrangement = Arrangement.SpaceBetween,
+//        ) {
+//          Text("start line $index")
+//          Text("end line $index")
+//        }
+//      }
     }
   }
 
