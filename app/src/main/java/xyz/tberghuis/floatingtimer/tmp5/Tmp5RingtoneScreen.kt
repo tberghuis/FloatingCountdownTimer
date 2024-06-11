@@ -58,36 +58,42 @@ fun Tmp5RingtoneScreenContent(
       .padding(padding)
       .fillMaxWidth()
   ) {
-    item {
-      OutlinedTextField(
-        value = vm.currentRingtoneVmc.currentRingtoneTitle,
-        onValueChange = {},
-        modifier = Modifier.clickable {
-          vm.currentRingtoneVmc.currentRingtoneUri?.let {
-            vm.ringtonePreviewVmc.ringtoneClick(it)
-          }
-        },
-        enabled = false,
-        readOnly = true,
-        label = {
-          Text("current")
-        },
-        colors = OutlinedTextFieldDefaults.colors(
-          disabledTextColor = MaterialTheme.colorScheme.onSurface,
-          disabledContainerColor = Color.Transparent,
-          disabledBorderColor = MaterialTheme.colorScheme.outline,
-          disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-      )
-    }
-
+    currentRingtone(vm)
     systemDefault(vm)
-
     ringtoneList("Alarms", vm.alarmList.ringtoneList, vm)
     ringtoneList("Ringtones", vm.ringtoneList.ringtoneList, vm)
     ringtoneList("Notifications", vm.notificationList.ringtoneList, vm)
   }
 }
+
+fun LazyListScope.currentRingtone(
+  vm: Tmp5RingtoneVm,
+) {
+  item {
+    OutlinedTextField(
+      value = vm.currentRingtoneVmc.currentRingtoneTitle,
+      onValueChange = {},
+      modifier = Modifier.clickable {
+        vm.currentRingtoneVmc.currentRingtoneUri?.let {
+          vm.ringtonePreviewVmc.ringtoneClick(it)
+        }
+      },
+      enabled = false,
+      readOnly = true,
+      label = {
+        Text("current")
+      },
+      colors = OutlinedTextFieldDefaults.colors(
+        disabledTextColor = MaterialTheme.colorScheme.onSurface,
+        disabledContainerColor = Color.Transparent,
+        disabledBorderColor = MaterialTheme.colorScheme.outline,
+        disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+      )
+    )
+  }
+
+}
+
 
 fun LazyListScope.systemDefault(
   vm: Tmp5RingtoneVm,
