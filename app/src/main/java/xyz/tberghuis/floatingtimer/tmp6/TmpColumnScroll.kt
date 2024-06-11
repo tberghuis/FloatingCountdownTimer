@@ -20,7 +20,7 @@ import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 @Composable
 fun TmpColumnScroll() {
   val widthConstraint = Modifier
-    .widthIn(0.dp, 232.dp)
+    .widthIn(max = 350.dp)
     .fillMaxWidth()
 
   LazyColumn(
