@@ -6,25 +6,23 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import xyz.tberghuis.floatingtimer.LocalNavController
@@ -53,31 +51,39 @@ fun Tmp5RingtoneScreenContent(
   padding: PaddingValues,
   vm: Tmp5RingtoneVm = viewModel(),
 ) {
+
+  val widthConstraint = Modifier
+    .widthIn(max = 350.dp)
+    .fillMaxWidth()
+
   LazyColumn(
     modifier = Modifier
       .padding(padding)
       .fillMaxWidth()
   ) {
-    currentRingtone(vm)
-    systemDefault(vm)
-    ringtoneList("Alarms", vm.alarmList.ringtoneList, vm)
-    ringtoneList("Ringtones", vm.ringtoneList.ringtoneList, vm)
-    ringtoneList("Notifications", vm.notificationList.ringtoneList, vm)
+    currentRingtone(widthConstraint, vm)
+    systemDefault(widthConstraint, vm)
+    ringtoneList(widthConstraint, "Alarms", vm.alarmList.ringtoneList, vm)
+    ringtoneList(widthConstraint, "Ringtones", vm.ringtoneList.ringtoneList, vm)
+    ringtoneList(widthConstraint, "Notifications", vm.notificationList.ringtoneList, vm)
   }
 }
 
 fun LazyListScope.currentRingtone(
+  widthConstraint: Modifier,
   vm: Tmp5RingtoneVm,
 ) {
   item {
     OutlinedTextField(
       value = vm.currentRingtoneVmc.currentRingtoneTitle,
       onValueChange = {},
-      modifier = Modifier.clickable {
-        vm.currentRingtoneVmc.currentRingtoneUri?.let {
-          vm.ringtonePreviewVmc.ringtoneClick(it)
-        }
-      },
+      modifier = Modifier
+        .then(widthConstraint)
+        .clickable {
+          vm.currentRingtoneVmc.currentRingtoneUri?.let {
+            vm.ringtonePreviewVmc.ringtoneClick(it)
+          }
+        },
       enabled = false,
       readOnly = true,
       label = {
@@ -96,19 +102,21 @@ fun LazyListScope.currentRingtone(
 
 
 fun LazyListScope.systemDefault(
+  widthConstraint: Modifier,
   vm: Tmp5RingtoneVm,
 ) {
   if (vm.systemDefaultAlarmVmc.systemDefaultRingtoneUri == null) {
     return
   }
   item {
-    Row {
+    Row(widthConstraint) {
       Text(vm.systemDefaultAlarmVmc.systemDefaultRingtoneTitle,
-        modifier = Modifier.clickable {
-          vm.systemDefaultAlarmVmc.systemDefaultRingtoneUri?.let { uri ->
-            vm.ringtonePreviewVmc.ringtoneClick(uri)
+        modifier = Modifier
+          .clickable {
+            vm.systemDefaultAlarmVmc.systemDefaultRingtoneUri?.let { uri ->
+              vm.ringtonePreviewVmc.ringtoneClick(uri)
+            }
           }
-        }
       )
       Button(onClick = {
         vm.systemDefaultAlarmVmc.systemDefaultRingtoneUri?.let { uri ->
@@ -123,12 +131,13 @@ fun LazyListScope.systemDefault(
 
 // doitwrong future.txt enum class for type
 fun LazyListScope.ringtoneList(
+  widthConstraint: Modifier,
   type: String,
   list: List<TmpRingtoneData>,
   vm: Tmp5RingtoneVm,
 ) {
   item {
-    Column {
+    Column(widthConstraint) {
       // todo strings.xml
       Text(
         type,
@@ -138,7 +147,7 @@ fun LazyListScope.ringtoneList(
     }
   }
   items(list) { ringtoneData ->
-    Row {
+    Row(widthConstraint) {
       Text(ringtoneData.title,
         modifier = Modifier.clickable {
           vm.ringtonePreviewVmc.ringtoneClick(ringtoneData.uri)
