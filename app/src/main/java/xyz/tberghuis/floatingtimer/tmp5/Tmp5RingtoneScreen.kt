@@ -154,7 +154,11 @@ fun LazyListScope.ringtoneList(
     }
   }
   items(list) { ringtoneData ->
-    Row(widthConstraint) {
+    Row(
+      widthConstraint,
+      horizontalArrangement = Arrangement.SpaceBetween,
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
       Text(ringtoneData.title,
         modifier = Modifier.clickable {
           vm.ringtonePreviewVmc.ringtoneClick(ringtoneData.uri)
