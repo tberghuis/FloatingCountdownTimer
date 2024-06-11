@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.tmp5
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -111,7 +112,11 @@ fun LazyListScope.systemDefault(
     return
   }
   item {
-    Row(widthConstraint) {
+    Row(
+      widthConstraint,
+      horizontalArrangement = Arrangement.SpaceBetween,
+      verticalAlignment = Alignment.CenterVertically,
+    ) {
       Text(vm.systemDefaultAlarmVmc.systemDefaultRingtoneTitle,
         modifier = Modifier
           .clickable {
