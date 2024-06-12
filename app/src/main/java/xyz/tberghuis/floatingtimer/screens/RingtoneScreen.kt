@@ -30,7 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneData
+import xyz.tberghuis.floatingtimer.data.RingtoneData
 import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneTopBar
 import xyz.tberghuis.floatingtimer.viewmodels.RingtoneScreenVm
 
@@ -157,7 +157,7 @@ fun LazyListScope.systemDefault(
 fun LazyListScope.ringtoneList(
   widthConstraint: Modifier,
   type: String,
-  list: List<TmpRingtoneData>,
+  list: List<RingtoneData>,
   vm: RingtoneScreenVm,
 ) {
   item {

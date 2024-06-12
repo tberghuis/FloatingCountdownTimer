@@ -5,21 +5,21 @@ import android.media.RingtoneManager
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneData
+import xyz.tberghuis.floatingtimer.data.RingtoneData
 import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneType
 
 class RingtoneListVmc(
   private val application: Application,
   private val ringtoneType: TmpRingtoneType,
 ) {
-  var ringtoneList by mutableStateOf(listOf<TmpRingtoneData>())
+  var ringtoneList by mutableStateOf(listOf<RingtoneData>())
 
   init {
     getRingtoneList()
   }
 
   private fun getRingtoneList() {
-    val rl = mutableListOf<TmpRingtoneData>()
+    val rl = mutableListOf<RingtoneData>()
     val manager = RingtoneManager(application)
     manager.setType(ringtoneType.type)
     val cursor = manager.cursor
@@ -28,7 +28,7 @@ class RingtoneListVmc(
       do {
         val title = cursor.getString(RingtoneManager.TITLE_COLUMN_INDEX)
         val uri = manager.getRingtoneUri(cursor.position)
-        rl.add(TmpRingtoneData(title, uri.toString()))
+        rl.add(RingtoneData(title, uri.toString()))
       } while (cursor.moveToNext())
       ringtoneList = rl
     }
