@@ -5,13 +5,12 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.tmp5.TmpRingtonePreviewVmc
 import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneType
 import xyz.tberghuis.floatingtimer.tmp5.TmpSystemDefaultAlarmVmc
 
 class RingtoneScreenVm(private val application: Application) : AndroidViewModel(application) {
   private val prefRepo = application.providePreferencesRepository()
-  val ringtonePreviewVmc = TmpRingtonePreviewVmc(application)
+  val ringtonePreviewVmc = RingtonePreviewVmc(application)
   val currentRingtoneVmc =
     CurrentRingtoneVmc(prefRepo.alarmRingtoneUriFlow, viewModelScope, application)
 

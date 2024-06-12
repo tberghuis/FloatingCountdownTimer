@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp5
+package xyz.tberghuis.floatingtimer.viewmodels
 
 import android.app.Application
 import android.media.Ringtone
@@ -6,7 +6,7 @@ import android.media.RingtoneManager
 import android.net.Uri
 import xyz.tberghuis.floatingtimer.logd
 
-class TmpRingtonePreviewVmc(val application: Application) {
+class RingtonePreviewVmc(val application: Application) {
   private var ringtone: Ringtone? = null
   private var lastRingtoneUri: String? = null
 
