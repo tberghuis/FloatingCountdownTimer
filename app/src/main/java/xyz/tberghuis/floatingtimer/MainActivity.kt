@@ -42,9 +42,8 @@ class MainActivity : ComponentActivity() {
             .fillMaxSize()
             .background(Color.White),
         ) {
-//          FtNavHost()
-//          TmpRingtone()
-          TmpNavHost()
+          FtNavHost()
+//          TmpNavHost()
         }
       }
     }

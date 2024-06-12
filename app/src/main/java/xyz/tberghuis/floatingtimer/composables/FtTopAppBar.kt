@@ -52,6 +52,15 @@ fun FtTopAppBar() {
         onDismissRequest = { showMenu = false },
       ) {
         DropdownMenuItem(
+          text = { Text(stringResource(R.string.countdown_ringtone)) },
+          onClick = {
+            navController.navigate("countdown_ringtone")
+          },
+          modifier = Modifier
+            .semantics { testTagsAsResourceId = true }
+            .testTag("countdown_ringtone_menu_item"),
+        )
+        DropdownMenuItem(
           text = { Text(stringResource(R.string.default_color)) },
           onClick = {
             navController.navigate("change_color")
