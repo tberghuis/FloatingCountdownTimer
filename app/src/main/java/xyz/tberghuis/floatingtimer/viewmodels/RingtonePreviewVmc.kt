@@ -21,6 +21,7 @@ class RingtonePreviewVmc(val application: Application) {
     ringtone = RingtoneManager.getRingtone(application, Uri.parse(uri))?.apply {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
         // this didn't work on emulator alarm
+        // for alarms such as: "Krypton"
         isLooping = false
       }
     }
