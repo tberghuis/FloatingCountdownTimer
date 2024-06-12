@@ -6,11 +6,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import xyz.tberghuis.floatingtimer.data.RingtoneData
-import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneType
+import xyz.tberghuis.floatingtimer.data.RingtoneType
 
 class RingtoneListVmc(
   private val application: Application,
-  private val ringtoneType: TmpRingtoneType,
+  private val ringtoneType: RingtoneType,
 ) {
   var ringtoneList by mutableStateOf(listOf<RingtoneData>())
 
