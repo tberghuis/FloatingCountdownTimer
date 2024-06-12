@@ -1,10 +1,12 @@
-package xyz.tberghuis.floatingtimer.tmp5
+package xyz.tberghuis.floatingtimer.viewmodels
 
 import android.app.Application
 import android.media.RingtoneManager
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneData
+import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneType
 
 class RingtoneListVmc(
   private val application: Application,
