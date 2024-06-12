@@ -103,7 +103,7 @@ fun LazyListScope.currentRingtone(
         disabledTextColor = MaterialTheme.colorScheme.onSurface,
         disabledContainerColor = Color.Transparent,
         disabledBorderColor = MaterialTheme.colorScheme.outline,
-        disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+        disabledLabelColor = MaterialTheme.colorScheme.primary,
       )
     )
   }
