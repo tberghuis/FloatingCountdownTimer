@@ -30,9 +30,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.tmp5.Tmp5RingtoneVm
 import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneData
 import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneTopBar
+import xyz.tberghuis.floatingtimer.viewmodels.RingtoneScreenVm
 
 @Composable
 fun RingtoneScreen() {
@@ -48,7 +48,7 @@ fun RingtoneScreen() {
 @Composable
 fun Tmp5RingtoneScreenContent(
   padding: PaddingValues,
-  vm: Tmp5RingtoneVm = viewModel(),
+  vm: RingtoneScreenVm = viewModel(),
 ) {
   val context = LocalContext.current
   val widthConstraint = Modifier
@@ -82,7 +82,7 @@ fun Tmp5RingtoneScreenContent(
 
 fun LazyListScope.currentRingtone(
   widthConstraint: Modifier,
-  vm: Tmp5RingtoneVm,
+  vm: RingtoneScreenVm,
 ) {
   item {
     OutlinedTextField(
@@ -114,7 +114,7 @@ fun LazyListScope.currentRingtone(
 
 fun LazyListScope.systemDefault(
   widthConstraint: Modifier,
-  vm: Tmp5RingtoneVm,
+  vm: RingtoneScreenVm,
 ) {
   if (vm.systemDefaultAlarmVmc.systemDefaultRingtoneUri == null) {
     return
@@ -158,7 +158,7 @@ fun LazyListScope.ringtoneList(
   widthConstraint: Modifier,
   type: String,
   list: List<TmpRingtoneData>,
-  vm: Tmp5RingtoneVm,
+  vm: RingtoneScreenVm,
 ) {
   item {
     Column(widthConstraint) {
