@@ -24,4 +24,9 @@ class RingtoneScreenVm(private val application: Application) : AndroidViewModel(
       prefRepo.updateAlarmRingtoneUri(uri)
     }
   }
+
+  override fun onCleared() {
+    ringtonePreviewVmc.onCleared()
+    super.onCleared()
+  }
 }

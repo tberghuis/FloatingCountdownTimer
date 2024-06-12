@@ -4,6 +4,7 @@ import android.app.Application
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
+import android.os.Build
 import xyz.tberghuis.floatingtimer.logd
 
 class RingtonePreviewVmc(val application: Application) {
@@ -17,8 +18,17 @@ class RingtonePreviewVmc(val application: Application) {
       return
     }
     ringtone?.stop()
-    ringtone = RingtoneManager.getRingtone(application, Uri.parse(uri))
+    ringtone = RingtoneManager.getRingtone(application, Uri.parse(uri))?.apply {
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        // this didn't work on emulator alarm
+        isLooping = false
+      }
+    }
     lastRingtoneUri = uri
     ringtone?.play()
+  }
+
+  fun onCleared() {
+    ringtone?.stop()
   }
 }
