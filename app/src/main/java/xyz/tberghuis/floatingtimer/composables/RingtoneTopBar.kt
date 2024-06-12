@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp5
+package xyz.tberghuis.floatingtimer.composables
 
 import androidx.compose.runtime.Composable
 import androidx.compose.material.icons.Icons
@@ -15,10 +15,10 @@ import xyz.tberghuis.floatingtimer.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TmpRingtoneTopBar() {
+fun RingtoneTopBar() {
   val navController = LocalNavController.current
   TopAppBar(
-    title = { Text("Countdown Ringtone") },
+    title = { Text(stringResource(R.string.countdown_ringtone)) },
     navigationIcon = {
       IconButton(onClick = {
         navController.navigateUp()

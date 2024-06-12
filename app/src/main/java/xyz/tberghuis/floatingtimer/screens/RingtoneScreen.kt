@@ -30,15 +30,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.composables.RingtoneTopBar
 import xyz.tberghuis.floatingtimer.data.RingtoneData
-import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneTopBar
 import xyz.tberghuis.floatingtimer.viewmodels.RingtoneScreenVm
 
 @Composable
 fun RingtoneScreen() {
   Scaffold(
     modifier = Modifier,
-    topBar = { TmpRingtoneTopBar() },
+    topBar = { RingtoneTopBar() },
     snackbarHost = {},
   ) { padding ->
     Tmp5RingtoneScreenContent(padding)
