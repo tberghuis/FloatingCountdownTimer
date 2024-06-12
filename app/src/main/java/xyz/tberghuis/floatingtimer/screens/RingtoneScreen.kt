@@ -162,7 +162,6 @@ fun LazyListScope.ringtoneList(
 ) {
   item {
     Column(widthConstraint) {
-      // todo strings.xml
       Text(
         type,
         fontWeight = FontWeight.Bold
