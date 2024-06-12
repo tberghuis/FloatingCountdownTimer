@@ -16,7 +16,8 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 class FtAlarmController(
   floatingService: FloatingService
 ) {
-  private val ringtone: MutableStateFlow<Ringtone?> = MutableStateFlow(null)
+//  private val ringtone: MutableStateFlow<Ringtone?> = MutableStateFlow(null)
+  private var ringtone: Ringtone? = null
   private val finishedCountdowns = MutableStateFlow(setOf<Countdown>())
 
   init {
@@ -24,8 +25,8 @@ class FtAlarmController(
     floatingService.scope.launch {
       prefs.alarmRingtoneUriFlow.collect { uri ->
         uri?.let {
-          ringtone.value?.stop()
-          ringtone.value =
+          ringtone?.stop()
+          ringtone =
             RingtoneManager.getRingtone(floatingService.application, Uri.parse(uri))?.apply {
               audioAttributes = AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ALARM)
@@ -48,14 +49,14 @@ class FtAlarmController(
           withContext(Main.immediate) {
             when (it.size) {
               0 -> {
-                if (ringtone.value?.isPlaying == true) {
-                  ringtone.value?.stop()
+                if (ringtone?.isPlaying == true) {
+                  ringtone?.stop()
                 }
               }
               // allow for single play ringtone on older apilevels < 28
               else -> {
-                if (ringtone.value?.isPlaying == false) {
-                  ringtone.value?.play()
+                if (ringtone?.isPlaying == false) {
+                  ringtone?.play()
                 }
               }
             }
@@ -64,8 +65,8 @@ class FtAlarmController(
       } finally {
         // scope is cancelled
         // lesson, don't call withContext in finally block
-        if (ringtone.value?.isPlaying == true) {
-          ringtone.value?.stop()
+        if (ringtone?.isPlaying == true) {
+          ringtone?.stop()
         }
       }
     }
