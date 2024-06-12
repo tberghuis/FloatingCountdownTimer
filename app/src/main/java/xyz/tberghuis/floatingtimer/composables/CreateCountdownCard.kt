@@ -2,9 +2,11 @@ package xyz.tberghuis.floatingtimer.composables
 
 import android.provider.Settings
 import androidx.activity.ComponentActivity
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +16,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.ui.Modifier
@@ -33,6 +37,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.style.TextOverflow
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
@@ -150,8 +156,12 @@ fun ColumnScope.CountdownOptions() {
   val vibration = vm.vibrationFlow.collectAsState(false)
   val sound = vm.soundFlow.collectAsState(false)
 
-  Column(modifier = Modifier.align(Alignment.CenterHorizontally)) {
-    BackgroundTransCheckbox(vm)
+  Column(
+    modifier = Modifier
+      .width(IntrinsicSize.Max)
+      .align(Alignment.CenterHorizontally)
+  ) {
+    BackgroundTransCheckbox(vm = vm)
     Row(verticalAlignment = Alignment.CenterVertically) {
       Checkbox(
         checked = vibration.value,
@@ -168,7 +178,22 @@ fun ColumnScope.CountdownOptions() {
           vm.updateSound(it)
         }
       )
-      Text(stringResource(R.string.sound))
+      Text("${stringResource(R.string.sound)} ")
+
+
+
+      Text(
+        text = "hyperlink",
+        modifier = Modifier
+          .clickable {
+          },
+        color = MaterialTheme.colorScheme.primary,
+        overflow = TextOverflow.Ellipsis,
+        maxLines = 1,
+        style = LocalTextStyle.current.copy(textDecoration = TextDecoration.Underline)
+      )
+
+
     }
   }
 }

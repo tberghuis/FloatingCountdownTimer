@@ -46,7 +46,7 @@ fun CreateStopwatchCard() {
       Text(stringResource(id = R.string.stopwatch), fontSize = 20.sp)
     }
     TimerShapeChoice(vm)
-    BackgroundTransCheckbox(vm)
+    BackgroundTransCheckbox(Modifier.align(Alignment.CenterHorizontally), vm = vm)
     Row(
       modifier = Modifier
         .padding(10.dp)

@@ -26,10 +26,12 @@ interface BackgroundTransCheckboxVm {
 }
 
 @Composable
-fun ColumnScope.BackgroundTransCheckbox(vm: BackgroundTransCheckboxVm) {
+fun ColumnScope.BackgroundTransCheckbox(
+  modifier: Modifier = Modifier,
+  vm: BackgroundTransCheckboxVm
+) {
   Row(
-    modifier = Modifier
-      .align(Alignment.CenterHorizontally),
+    modifier = modifier,
     verticalAlignment = Alignment.CenterVertically,
   ) {
     Checkbox(
@@ -56,6 +58,6 @@ fun PreviewBackgroundTransCheckbox() {
       .border(3.dp, Color.Red),
     verticalArrangement = Arrangement.Center,
   ) {
-    BackgroundTransCheckbox(vm)
+    BackgroundTransCheckbox(vm = vm)
   }
 }
