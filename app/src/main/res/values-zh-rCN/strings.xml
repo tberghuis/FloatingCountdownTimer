@@ -49,4 +49,9 @@
     <string name="apply">应用</string>
     <string name="premium_screen_text2">感谢您购买高级版。🙏\n\n您已解锁以下功能：</string>
     <string name="discount_code_applied">折扣码已应用！</string>
+    <string name="countdown_ringtone">倒计时铃声</string>
+    <string name="alarms">闹钟</string>
+    <string name="ringtones">铃声</string>
+    <string name="notifications">通知</string>
+    <string name="current">当前</string>
 </resources>

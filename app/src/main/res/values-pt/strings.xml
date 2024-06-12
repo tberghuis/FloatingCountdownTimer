@@ -49,4 +49,9 @@
     <string name="apply">Aplicar</string>
     <string name="premium_screen_text2">Obrigado por comprar premium. 🙏\n\nVocê desbloqueou os seguintes recursos:</string>
     <string name="discount_code_applied">código de desconto aplicado!</string>
+    <string name="countdown_ringtone">Toque de Contagem Regressiva</string>
+    <string name="alarms">Alarmes</string>
+    <string name="ringtones">Toques</string>
+    <string name="notifications">Notificações</string>
+    <string name="current">atual</string>
 </resources>

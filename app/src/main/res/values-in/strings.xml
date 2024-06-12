@@ -49,4 +49,9 @@
     <string name="apply">Terapkan</string>
     <string name="premium_screen_text2">Terima kasih telah membeli premium. 🙏\n\nAnda telah membuka fitur berikut:</string>
     <string name="discount_code_applied">kode diskon diterapkan!</string>
+    <string name="countdown_ringtone">Nada Dering Hitung Mundur</string>
+    <string name="alarms">Alarm</string>
+    <string name="ringtones">Nada Dering</string>
+    <string name="notifications">Notifikasi</string>
+    <string name="current">saat ini</string>
 </resources>
