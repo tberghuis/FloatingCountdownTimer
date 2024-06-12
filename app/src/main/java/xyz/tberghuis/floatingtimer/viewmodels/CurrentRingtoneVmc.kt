@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp5
+package xyz.tberghuis.floatingtimer.viewmodels
 
 import android.app.Application
 import android.content.Context
@@ -12,7 +12,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class TmpCurrentRingtoneVmc(
+class CurrentRingtoneVmc(
   private val alarmRingtoneUriFlow: Flow<String?>, scope: CoroutineScope,
   application: Application
 ) {

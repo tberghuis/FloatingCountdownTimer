@@ -21,7 +21,6 @@ import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
-import xyz.tberghuis.floatingtimer.tmp5.TmpCurrentRingtoneVmc
 
 class CountdownScreenVm(
   private val application: Application,
@@ -33,7 +32,7 @@ class CountdownScreenVm(
   private val preferencesRepository = application.providePreferencesRepository()
 
   val currentRingtoneVmc =
-    TmpCurrentRingtoneVmc(preferencesRepository.alarmRingtoneUriFlow, viewModelScope, application)
+    CurrentRingtoneVmc(preferencesRepository.alarmRingtoneUriFlow, viewModelScope, application)
 
   val vibrationFlow = preferencesRepository.vibrationFlow
   var minutes = mutableStateOf(TextFieldValue("0"))
