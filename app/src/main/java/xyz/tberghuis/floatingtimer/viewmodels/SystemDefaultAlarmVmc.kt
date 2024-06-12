@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp5
+package xyz.tberghuis.floatingtimer.viewmodels
 
 import android.app.Application
 import android.media.RingtoneManager
@@ -6,7 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 
-class TmpSystemDefaultAlarmVmc(val application: Application) {
+class SystemDefaultAlarmVmc(val application: Application) {
   var systemDefaultRingtoneUri by mutableStateOf<String?>(null)
   var systemDefaultRingtoneTitle by mutableStateOf("")
 
