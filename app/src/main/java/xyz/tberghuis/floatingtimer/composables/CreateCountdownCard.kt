@@ -39,6 +39,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
@@ -151,6 +152,7 @@ fun CreateCountdownButton() {
 @Composable
 fun ColumnScope.CountdownOptions() {
   val vm: CountdownScreenVm = viewModel()
+  val nav = LocalNavController.current
 
   // doitwrong
   val vibration = vm.vibrationFlow.collectAsState(false)
@@ -179,21 +181,17 @@ fun ColumnScope.CountdownOptions() {
         }
       )
       Text("${stringResource(R.string.sound)} ")
-
-
-
       Text(
-        text = "hyperlink",
+        text = "hyperlink todo",
         modifier = Modifier
           .clickable {
+            nav.navigate("countdown_ringtone")
           },
         color = MaterialTheme.colorScheme.primary,
         overflow = TextOverflow.Ellipsis,
         maxLines = 1,
         style = LocalTextStyle.current.copy(textDecoration = TextDecoration.Underline)
       )
-
-
     }
   }
 }
