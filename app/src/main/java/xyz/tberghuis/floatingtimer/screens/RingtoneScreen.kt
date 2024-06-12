@@ -41,12 +41,12 @@ fun RingtoneScreen() {
     topBar = { RingtoneTopBar() },
     snackbarHost = {},
   ) { padding ->
-    Tmp5RingtoneScreenContent(padding)
+    RingtoneScreenContent(padding)
   }
 }
 
 @Composable
-fun Tmp5RingtoneScreenContent(
+fun RingtoneScreenContent(
   padding: PaddingValues,
   vm: RingtoneScreenVm = viewModel(),
 ) {
