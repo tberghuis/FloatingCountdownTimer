@@ -50,4 +50,8 @@
     <string name="premium_screen_text2">Thank you for purchasing premium. 🙏\n\nYou have unlocked the following features:</string>
     <string name="discount_code_applied">discount code applied!</string>
     <string name="countdown_ringtone">Countdown Ringtone</string>
+    <string name="alarms">Alarms</string>
+    <string name="ringtones">Ringtones</string>
+    <string name="notifications">Notifications</string>
+    <string name="current">current</string>
 </resources>

@@ -22,7 +22,7 @@ import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import xyz.tberghuis.floatingtimer.screens.PremiumScreen
-import xyz.tberghuis.floatingtimer.tmp5.Tmp5RingtoneScreen
+import xyz.tberghuis.floatingtimer.screens.RingtoneScreen
 
 @Composable
 fun FtNavHost() {
@@ -59,7 +59,7 @@ fun FtNavHost() {
       }
 
       composable("countdown_ringtone") {
-        Tmp5RingtoneScreen()
+        RingtoneScreen()
       }
     }
   }

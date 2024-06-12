@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp5
+package xyz.tberghuis.floatingtimer.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -24,12 +24,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.tmp5.Tmp5RingtoneVm
+import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneData
+import xyz.tberghuis.floatingtimer.tmp5.TmpRingtoneTopBar
 
 @Composable
-fun Tmp5RingtoneScreen() {
+fun RingtoneScreen() {
   Scaffold(
     modifier = Modifier,
     topBar = { TmpRingtoneTopBar() },
@@ -44,7 +50,7 @@ fun Tmp5RingtoneScreenContent(
   padding: PaddingValues,
   vm: Tmp5RingtoneVm = viewModel(),
 ) {
-
+  val context = LocalContext.current
   val widthConstraint = Modifier
     .widthIn(max = 350.dp)
     .fillMaxWidth()
@@ -59,11 +65,17 @@ fun Tmp5RingtoneScreenContent(
     item { Spacer(Modifier.height(5.dp)) }
     systemDefault(widthConstraint, vm)
     item { Spacer(Modifier.height(5.dp)) }
-    ringtoneList(widthConstraint, "Alarms", vm.alarmList.ringtoneList, vm)
+    ringtoneList(widthConstraint, context.getString(R.string.alarms), vm.alarmList.ringtoneList, vm)
     item { Spacer(Modifier.height(5.dp)) }
-    ringtoneList(widthConstraint, "Ringtones", vm.ringtoneList.ringtoneList, vm)
+    ringtoneList(
+      widthConstraint,
+      context.getString(R.string.ringtones), vm.ringtoneList.ringtoneList, vm
+    )
     item { Spacer(Modifier.height(5.dp)) }
-    ringtoneList(widthConstraint, "Notifications", vm.notificationList.ringtoneList, vm)
+    ringtoneList(
+      widthConstraint,
+      context.getString(R.string.notifications), vm.notificationList.ringtoneList, vm
+    )
     item { Spacer(Modifier.height(5.dp)) }
   }
 }
@@ -86,7 +98,7 @@ fun LazyListScope.currentRingtone(
       enabled = false,
       readOnly = true,
       label = {
-        Text("current")
+        Text(stringResource(R.string.current))
       },
       colors = OutlinedTextFieldDefaults.colors(
         disabledTextColor = MaterialTheme.colorScheme.onSurface,
@@ -108,6 +120,7 @@ fun LazyListScope.systemDefault(
     return
   }
   item {
+    val context = LocalContext.current
     Row(
       widthConstraint,
       horizontalArrangement = Arrangement.SpaceBetween,
@@ -134,7 +147,7 @@ fun LazyListScope.systemDefault(
           bottom = 4.dp
         ),
       ) {
-        Text("Apply")
+        Text(context.getString(R.string.apply))
       }
     }
   }
@@ -158,6 +171,7 @@ fun LazyListScope.ringtoneList(
     }
   }
   items(list) { ringtoneData ->
+    val context = LocalContext.current
     Row(
       widthConstraint,
       horizontalArrangement = Arrangement.SpaceBetween,
@@ -179,7 +193,7 @@ fun LazyListScope.ringtoneList(
           bottom = 4.dp
         ),
       ) {
-        Text("Apply")
+        Text(context.getString(R.string.apply))
       }
     }
   }
