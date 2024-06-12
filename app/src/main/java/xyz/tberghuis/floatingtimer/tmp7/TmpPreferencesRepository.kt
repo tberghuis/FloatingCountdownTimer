@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp7
 
+import android.media.RingtoneManager
 import androidx.compose.ui.graphics.Color
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -81,6 +82,20 @@ class TmpPreferencesRepository(private val dataStore: DataStore<Preferences>) {
   suspend fun resetBubbleScale() {
     dataStore.edit { preferences ->
       preferences.remove(floatPreferencesKey("bubble_scale"))
+    }
+  }
+
+  val alarmRingtoneUriFlow: Flow<String?> = dataStore.data.map { preferences ->
+    var uri = preferences[stringPreferencesKey("alarm_ringtone_uri")]
+    if (uri == null) {
+      uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)?.toString()
+    }
+    uri
+  }
+
+  suspend fun updateAlarmRingtoneUri(uri: String) {
+    dataStore.edit { preferences ->
+      preferences[stringPreferencesKey("alarm_ringtone_uri")] = uri
     }
   }
 }
