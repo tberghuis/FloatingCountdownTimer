@@ -19,8 +19,6 @@ class TmpFtAlarmController(
   private val finishedCountdowns = MutableStateFlow(setOf<Countdown>())
 
   init {
-    // ????
-//    RingtoneManager.getActualDefaultRingtoneUri(floatingService, TYPE_ALARM)
     val notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
     ringtone = RingtoneManager.getRingtone(floatingService, notification)?.apply {
       audioAttributes = AudioAttributes.Builder()
