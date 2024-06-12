@@ -8,14 +8,13 @@ import xyz.tberghuis.floatingtimer.data.AppDatabase
 import xyz.tberghuis.floatingtimer.data.PreferencesRepository
 import xyz.tberghuis.floatingtimer.data.dataStore
 import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
-import xyz.tberghuis.floatingtimer.tmp7.TmpPreferencesRepository
 
 class MainApplication : Application() {
   // could i just use Context.dataStore instead for singleton
   // i could write some tests to see if singleton across application
   // and activities
   // doitwrong
-  lateinit var preferencesRepository: TmpPreferencesRepository
+  lateinit var preferencesRepository: PreferencesRepository
   lateinit var appDatabase: AppDatabase
   lateinit var boundFloatingService: BoundFloatingService
 
@@ -24,7 +23,7 @@ class MainApplication : Application() {
   override fun onCreate() {
     super.onCreate()
     appDatabase = provideDatabase()
-    preferencesRepository = TmpPreferencesRepository(dataStore)
+    preferencesRepository = PreferencesRepository(dataStore)
     boundFloatingService = BoundFloatingService(this)
     createNotificationChannel()
     billingClientWrapper = BillingClientWrapper(this)
@@ -50,7 +49,7 @@ class MainApplication : Application() {
 }
 
 // doitwrong
-fun Application.providePreferencesRepository(): TmpPreferencesRepository {
+fun Application.providePreferencesRepository(): PreferencesRepository {
   return (this as MainApplication).preferencesRepository
 }
 
