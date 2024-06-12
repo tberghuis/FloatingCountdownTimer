@@ -182,7 +182,7 @@ fun ColumnScope.CountdownOptions() {
       )
       Text("${stringResource(R.string.sound)} ")
       Text(
-        text = "hyperlink todo",
+        text = vm.currentRingtoneVmc.currentRingtoneTitle,
         modifier = Modifier
           .clickable {
             nav.navigate("countdown_ringtone")
