@@ -6,6 +6,6 @@ import android.media.RingtoneManager.TYPE_RINGTONE
 
 enum class RingtoneType(val type: Int) {
   ALARM(TYPE_ALARM),
-  RINGTONE(TYPE_NOTIFICATION),
-  NOTIFICATION(TYPE_RINGTONE),
+  RINGTONE(TYPE_RINGTONE),
+  NOTIFICATION(TYPE_NOTIFICATION),
 }
