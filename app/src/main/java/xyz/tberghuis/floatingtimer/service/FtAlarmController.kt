@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
@@ -16,14 +17,13 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 class FtAlarmController(
   floatingService: FloatingService
 ) {
-//  private val ringtone: MutableStateFlow<Ringtone?> = MutableStateFlow(null)
   private var ringtone: Ringtone? = null
   private val finishedCountdowns = MutableStateFlow(setOf<Countdown>())
 
   init {
     val prefs = floatingService.application.providePreferencesRepository()
     floatingService.scope.launch {
-      prefs.alarmRingtoneUriFlow.collect { uri ->
+      prefs.alarmRingtoneUriFlow.distinctUntilChanged().collect { uri ->
         uri?.let {
           ringtone?.stop()
           ringtone =
