@@ -19,3 +19,7 @@ local.properties
 /.idea/other.xml
 
 floatingttimer-fastlane.json
+
+/fastlane/metadata/android/*
+/fastlane/metadata/android/*/
+!/fastlane/metadata/android/en-US/
