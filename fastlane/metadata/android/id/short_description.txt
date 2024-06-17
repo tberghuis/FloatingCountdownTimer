@@ -1,1 +1,0 @@
-Penghitung waktu mundur dan stopwatch yang akan melayang di atas aplikasi lain.

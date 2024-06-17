@@ -1,1 +1,0 @@
-Possui cronômetro e contagem regressiva que flutuam sobre outros aplicativos.
