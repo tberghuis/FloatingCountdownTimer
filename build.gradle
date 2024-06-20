@@ -5,8 +5,8 @@ buildscript {
     }
 }
 plugins {
-    id 'com.android.application' version '8.4.1' apply false
-    id 'com.android.library' version '8.4.1' apply false
+    id 'com.android.application' version '8.5.0' apply false
+    id 'com.android.library' version '8.5.0' apply false
     // https://developer.android.com/jetpack/androidx/releases/compose-kotlin
     id 'org.jetbrains.kotlin.android' version '1.9.24' apply false
 
