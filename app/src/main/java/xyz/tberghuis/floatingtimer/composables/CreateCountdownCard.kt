@@ -81,7 +81,7 @@ fun CreateCountdownCard() {
           .testTag("CountdownMinutes"),
 
 
-        label = { Text(stringResource(R.string.minutes)) },
+        label = { Text(stringResource(R.string.minutes), maxLines = 1) },
         value = vm.minutes.value,
         onValueChange = { vm.minutes.value = it },
         keyboardOptions = KeyboardOptions(
@@ -95,7 +95,7 @@ fun CreateCountdownCard() {
           .width(100.dp)
 //          .padding(vertical = 20.dp)
           .onFocusSelectAll(vm.seconds),
-        label = { Text(stringResource(R.string.seconds)) },
+        label = { Text(stringResource(R.string.seconds), maxLines = 1) },
         value = vm.seconds.value,
         onValueChange = { vm.seconds.value = it },
         keyboardOptions = KeyboardOptions(
