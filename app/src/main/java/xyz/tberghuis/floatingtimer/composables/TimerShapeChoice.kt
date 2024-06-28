@@ -119,7 +119,8 @@ fun ColumnScope.TimerShapeChoice(vm: TimerShapeChoiceVm) {
             }
             .onFocusSelectAll(labelTfvState),
           enabled = vm.timerShape == "label",
-          label = { Text(stringResource(R.string.label)) }
+          label = { Text(stringResource(R.string.label)) },
+          singleLine = true,
         )
       }
     }
