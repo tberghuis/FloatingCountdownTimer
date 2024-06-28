@@ -182,10 +182,15 @@ fun LazyListScope.ringtoneList(
       horizontalArrangement = Arrangement.SpaceBetween,
       verticalAlignment = Alignment.CenterVertically,
     ) {
-      Text(ringtoneData.title,
-        modifier = Modifier.clickable {
-          vm.ringtonePreviewVmc.ringtoneClick(ringtoneData.uri)
-        }
+      Text(
+        ringtoneData.title,
+        modifier = Modifier
+          .weight(1f)
+          .clickable {
+            vm.ringtonePreviewVmc.ringtoneClick(ringtoneData.uri)
+          },
+        overflow = TextOverflow.Ellipsis,
+        softWrap = false,
       )
       Button(
         onClick = {
