@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
@@ -105,7 +106,8 @@ fun LazyListScope.currentRingtone(
         disabledContainerColor = Color.Transparent,
         disabledBorderColor = MaterialTheme.colorScheme.outline,
         disabledLabelColor = MaterialTheme.colorScheme.primary,
-      )
+      ),
+      singleLine = true,
     )
   }
 
@@ -126,13 +128,17 @@ fun LazyListScope.systemDefault(
       horizontalArrangement = Arrangement.SpaceBetween,
       verticalAlignment = Alignment.CenterVertically,
     ) {
-      Text(vm.systemDefaultAlarmVmc.systemDefaultRingtoneTitle,
+      Text(
+        vm.systemDefaultAlarmVmc.systemDefaultRingtoneTitle,
         modifier = Modifier
+          .weight(1f)
           .clickable {
             vm.systemDefaultAlarmVmc.systemDefaultRingtoneUri?.let { uri ->
               vm.ringtonePreviewVmc.ringtoneClick(uri)
             }
-          }
+          },
+        overflow = TextOverflow.Ellipsis,
+        softWrap = false,
       )
       Button(
         onClick = {

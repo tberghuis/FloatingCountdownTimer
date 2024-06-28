@@ -13,41 +13,6 @@ import xyz.tberghuis.floatingtimer.R
 
 @Composable
 fun TmpTextFieldLabel() {
-  OutlinedTextField(
-    value = "this is a long stringthis is a long stringthis is a long stringthis is a long string",
-    onValueChange = {},
-    modifier = Modifier,
-    enabled = false,
-    readOnly = true,
-    label = {
-      Text(stringResource(R.string.current))
-    },
-    colors = OutlinedTextFieldDefaults.colors(
-      disabledTextColor = MaterialTheme.colorScheme.onSurface,
-      disabledContainerColor = Color.Transparent,
-      disabledBorderColor = MaterialTheme.colorScheme.outline,
-      disabledLabelColor = MaterialTheme.colorScheme.primary,
-    )
-  )
-
-  OutlinedTextField(
-    value = "this is a long stringthis is a long stringthis is a long stringthis is a long string",
-    onValueChange = {},
-    modifier = Modifier,
-    enabled = true,
-    readOnly = true,
-    label = {
-      Text(stringResource(R.string.current))
-    },
-    colors = OutlinedTextFieldDefaults.colors(
-      disabledTextColor = MaterialTheme.colorScheme.onSurface,
-      disabledContainerColor = Color.Transparent,
-      disabledBorderColor = MaterialTheme.colorScheme.outline,
-      disabledLabelColor = MaterialTheme.colorScheme.primary,
-    ),
-
-    singleLine = true,
 
 
-    )
 }
