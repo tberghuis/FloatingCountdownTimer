@@ -30,4 +30,22 @@ fun TmpTextFieldLabel() {
     label = { Text(stringResource(R.string.label)) }
   )
 
+
+
+
+  TextField(
+    value = labelTfvState.value,
+    onValueChange = {
+      labelTfvState.value = it
+    },
+    modifier = Modifier
+      .widthIn(max = 150.dp),
+    label = { Text(stringResource(R.string.label)) },
+
+
+    singleLine = true,
+
+    )
+
+
 }
