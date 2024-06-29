@@ -11,6 +11,7 @@ import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 import xyz.tberghuis.floatingtimer.BuildConfig
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
@@ -97,7 +98,7 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
       uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)?.toString()
     }
     uri
-  }
+  }.distinctUntilChanged()
 
   suspend fun updateAlarmRingtoneUri(uri: String) {
     dataStore.edit { preferences ->

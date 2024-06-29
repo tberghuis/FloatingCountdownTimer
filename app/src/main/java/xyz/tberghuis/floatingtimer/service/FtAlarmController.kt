@@ -23,7 +23,7 @@ class FtAlarmController(
   init {
     val prefs = floatingService.application.providePreferencesRepository()
     floatingService.scope.launch {
-      prefs.alarmRingtoneUriFlow.distinctUntilChanged().collect { uri ->
+      prefs.alarmRingtoneUriFlow.collect { uri ->
         uri?.let {
           ringtone?.stop()
           ringtone =
