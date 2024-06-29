@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import xyz.tberghuis.floatingtimer.tmp4.TmpTextFieldLabel
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 @Composable
@@ -26,7 +25,7 @@ fun TmpScreen(
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
     Text("hello tmp screen")
-    TmpTextFieldLabel()
+//    TmpTextFieldLabel()
   }
 }
 
