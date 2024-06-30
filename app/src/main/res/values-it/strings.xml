@@ -7,7 +7,7 @@
     <string name="minutes">minuti</string>
     <string name="seconds">secondi</string>
     <string name="vibration">Vibrazione</string>
-    <string name="sound">Suono</string>
+    <string name="sound">Suoneria</string>
     <string name="settings">Impostazioni</string>
     <string name="go_to_settings">Vai alle Impostazioni</string>
     <string name="enable_overlay_permission">Abilita il permesso per l\'Overlay</string>
@@ -18,7 +18,7 @@
     <string name="cancel">Cancella</string>
     <string name="premium_feature">Caratteristiche Premium</string>
     <string name="ft_premium">Timer Fluttuante Premium</string>
-    <string name="premium_reason_multiple_timers">Eseguire più di 2 timers contemporaneamente richiede premium.</string>
+    <string name="premium_reason_multiple_timers">Eseguire più di 2 timers richiede premium.</string>
     <string name="premium_reason_halo_colour">Il cambio del colore del Timer richiede premium.</string>
     <string name="cancel_all_timers">Cancella tutti i Timers</string>
     <string name="invalid_countdown_duration">Arco temporale non valido. Seleziona più di 0 secondi.</string>
@@ -43,7 +43,7 @@
     <string name="premium">Premium</string>
     <string name="invalid">Non valido</string>
     <string name="premium_screen_text1">Compra \"Premium\" per sbloccare le seguenti caratteristiche:</string>
-    <string name="premium_screen_features">" - Esegui più di 2 timers contemporaneamente.\n - Cambia il colore del Timer.\n - Cambia la dimensione del timer."</string>
+    <string name="premium_screen_features">" - Esegui più di 2 timers.\n - Cambia il colore del Timer.\n - Cambia la dimensione del timer."</string>
     <string name="upgrade_to_premium">Aggiorna a Premium</string>
     <string name="discount_code">Codice Sconto</string>
     <string name="apply">Applica</string>
