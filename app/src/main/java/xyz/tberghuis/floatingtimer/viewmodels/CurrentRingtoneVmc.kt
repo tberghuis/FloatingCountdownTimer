@@ -30,6 +30,9 @@ class CurrentRingtoneVmc(
           } catch (e: SecurityException) {
             Log.e("CurrentRingtoneVmc", "SecurityException $e")
             null
+          } catch (e: NullPointerException) {
+            Log.e("CurrentRingtoneVmc", "NullPointerException $e")
+            null
           }
         } ?: ""
       }

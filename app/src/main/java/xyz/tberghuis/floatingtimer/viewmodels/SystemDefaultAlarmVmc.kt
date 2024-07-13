@@ -22,7 +22,10 @@ class SystemDefaultAlarmVmc(val application: Application) {
       try {
         RingtoneManager.getRingtone(application, uri).getTitle(application)
       } catch (e: SecurityException) {
-        Log.e("CurrentRingtoneVmc", "SecurityException $e")
+        Log.e("SystemDefaultAlarmVmc", "SecurityException $e")
+        null
+      } catch (e: NullPointerException) {
+        Log.e("SystemDefaultAlarmVmc", "NullPointerException $e")
         null
       }
     } ?: ""
