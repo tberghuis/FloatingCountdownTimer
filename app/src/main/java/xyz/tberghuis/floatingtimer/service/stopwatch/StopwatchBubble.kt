@@ -2,9 +2,14 @@ package xyz.tberghuis.floatingtimer.service.stopwatch
 
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.graphics.Color
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
+import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
+import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.service.Bubble
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import java.util.Timer
@@ -19,7 +24,15 @@ class Stopwatch(
   label: String?,
   isBackgroundTransparent: Boolean,
   savedTimer: SavedTimer? = null
-) : Bubble(service, bubbleSizeScaleFactor, haloColor, timerShape, label, isBackgroundTransparent, savedTimer) {
+) : Bubble(
+  service,
+  bubbleSizeScaleFactor,
+  haloColor,
+  timerShape,
+  label,
+  isBackgroundTransparent,
+  savedTimer
+) {
   val timeElapsed = mutableIntStateOf(0)
   val isRunningStateFlow = MutableStateFlow(false)
   private var stopwatchIncrementTask: TimerTask? = null
@@ -53,6 +66,15 @@ class Stopwatch(
   }
 
   override fun onTap() {
-    isRunningStateFlow.value = !isRunningStateFlow.value
+    // doitwrong
+//    isRunningStateFlow.value = !isRunningStateFlow.value
+    isRunningStateFlow.update { isRunning ->
+      // only save position on first start of timer
+      // not 100% accurate but good enough
+      if (timeElapsed.intValue == 0 && !isRunning) {
+        saveTimerPosition()
+      }
+      !isRunning
+    }
   }
 }

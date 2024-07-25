@@ -6,10 +6,15 @@ import androidx.compose.ui.graphics.Color
 import kotlin.math.roundToInt
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.COUNTDOWN_TIMER_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
+import xyz.tberghuis.floatingtimer.data.SavedCountdown
+import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
+import xyz.tberghuis.floatingtimer.provideDatabase
 
 // future data class implements this, use composition over inheritance
 // make update method a single method interface, does calcs and returns copy instance
@@ -48,7 +53,7 @@ abstract class Bubble(
   final override val label: String? = null,
   final override val isBackgroundTransparent: Boolean,
   // todo rename SavedTimer, SavedBubble
-  val savedTimer: SavedTimer? = null
+  private var savedTimer: SavedTimer? = null
 ) : BubbleProperties {
   final override val widthDp = when (timerShape) {
     "label", "rectangle" -> {
@@ -99,6 +104,31 @@ abstract class Bubble(
 
   abstract fun reset()
   abstract fun onTap()
+
+  fun saveTimerPosition() {
+    service.scope.launch(IO) {
+      savedTimer = savedTimer?.let {
+        when (it) {
+          is SavedStopwatch -> {
+            it.copy(
+              positionX = viewHolder.params.x,
+              positionY = viewHolder.params.y
+            ).also { savedStopwatch ->
+              service.application.provideDatabase().savedStopwatchDao().update(savedStopwatch)
+            }
+          }
+
+          is SavedCountdown -> {
+            it
+          }
+
+          else -> {
+            it
+          }
+        }
+      }
+    }
+  }
 }
 
 fun dimensionDpToPx(dp: Dp, density: Float): Int {

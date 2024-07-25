@@ -240,18 +240,22 @@ class OverlayController(val service: FloatingService) {
   fun saveTimerPositions() {
     logd("saveTimerPositions")
 
-    val bubble = bubbleSet.toList()[0]
-    val stopwatchDao = service.application.provideDatabase().savedStopwatchDao()
-    val params = bubble.viewHolder.params
-
-    service.scope.launch(IO) {
-      // doitwrong
-      val ss = (bubble.savedTimer!! as SavedStopwatch).copy(
-        positionX = params.x,
-        positionY = params.y
-      )
-      stopwatchDao.update(ss)
+    bubbleSet.forEach { bubble ->
+      bubble.saveTimerPosition()
     }
+
+//    val bubble = bubbleSet.toList()[0]
+//    val stopwatchDao = service.application.provideDatabase().savedStopwatchDao()
+//    val params = bubble.viewHolder.params
+//
+//    service.scope.launch(IO) {
+//      // doitwrong
+//      val ss = (bubble.savedTimer!! as SavedStopwatch).copy(
+//        positionX = params.x,
+//        positionY = params.y
+//      )
+//      stopwatchDao.update(ss)
+//    }
 
 
   }
