@@ -15,6 +15,7 @@ import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.composables.BackgroundTransCheckboxVm
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
+import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
@@ -53,7 +54,7 @@ class StopwatchScreenVm(
       timer.timerShape,
       timer.label,
       timer.isBackgroundTransparent,
-      timer.id
+      timer
     )
   }
 
@@ -62,7 +63,7 @@ class StopwatchScreenVm(
     timerShape: String,
     label: String?,
     isBackgroundTransparent: Boolean,
-    savedTimerId: Int? = null
+    savedTimer: SavedTimer? = null
   ) {
     viewModelScope.launch {
       if (shouldShowPremiumDialogMultipleTimers(application)) {
@@ -70,7 +71,7 @@ class StopwatchScreenVm(
         return@launch
       }
       boundFloatingService.provideFloatingService().overlayController.addStopwatch(
-        haloColor, timerShape, label, isBackgroundTransparent, savedTimerId
+        haloColor, timerShape, label, isBackgroundTransparent, savedTimer
       )
     }
   }

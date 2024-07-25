@@ -7,11 +7,12 @@ import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.PrimaryKey
 import androidx.room.Query
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
 
 @Entity
 data class SavedStopwatch(
-  @PrimaryKey(autoGenerate = true) val id: Int = 0,
+  @PrimaryKey(autoGenerate = true) override val id: Int = 0,
   @ColumnInfo(name = "shape") override val timerShape: String,
   // Color.toArgb
   @ColumnInfo(name = "color") override val timerColor: Int,
@@ -36,7 +37,11 @@ interface SavedStopwatchDao {
 
 
   // todo put in a SavedPositionDao
-  @Query("UPDATE SavedStopwatch SET positionX = :x, positionY = :y WHERE id = :id")
-  fun updatePosition(id: Int, x: Int, y: Int): Int
+//  @Query("UPDATE SavedStopwatch SET positionX = :x, positionY = :y WHERE id = :id")
+//  fun updatePosition(id: Int, x: Int, y: Int): Int
+
+  @Update
+  fun update(timer: SavedStopwatch): Int
+
 
 }

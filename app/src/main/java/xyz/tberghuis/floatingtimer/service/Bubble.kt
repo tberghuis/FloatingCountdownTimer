@@ -9,6 +9,7 @@ import androidx.compose.ui.unit.TextUnit
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.COUNTDOWN_TIMER_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
+import xyz.tberghuis.floatingtimer.data.SavedTimer
 
 // future data class implements this, use composition over inheritance
 // make update method a single method interface, does calcs and returns copy instance
@@ -46,7 +47,8 @@ abstract class Bubble(
   final override val timerShape: String,
   final override val label: String? = null,
   final override val isBackgroundTransparent: Boolean,
-  val savedTimerId: Int? = null
+  // todo rename SavedTimer, SavedBubble
+  val savedTimer: SavedTimer? = null
 ) : BubbleProperties {
   final override val widthDp = when (timerShape) {
     "label", "rectangle" -> {
@@ -83,7 +85,8 @@ abstract class Bubble(
   init {
     val widthPx: Int = dimensionDpToPx(widthDp, service.resources.displayMetrics.density)
     val heightPx: Int = dimensionDpToPx(heightDp, service.resources.displayMetrics.density)
-    viewHolder = TimerViewHolder(service, widthPx, heightPx)
+    viewHolder =
+      TimerViewHolder(service, widthPx, heightPx, savedTimer?.positionX, savedTimer?.positionY)
   }
 
   open fun exit() {
