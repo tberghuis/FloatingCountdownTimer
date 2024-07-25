@@ -45,7 +45,8 @@ abstract class Bubble(
   override val haloColor: Color,
   final override val timerShape: String,
   final override val label: String? = null,
-  final override val isBackgroundTransparent: Boolean
+  final override val isBackgroundTransparent: Boolean,
+  val savedTimerId: Int? = null
 ) : BubbleProperties {
   final override val widthDp = when (timerShape) {
     "label", "rectangle" -> {

@@ -52,7 +52,8 @@ class StopwatchScreenVm(
       Color(timer.timerColor),
       timer.timerShape,
       timer.label,
-      timer.isBackgroundTransparent
+      timer.isBackgroundTransparent,
+      timer.id
     )
   }
 
@@ -60,7 +61,8 @@ class StopwatchScreenVm(
     haloColor: Color,
     timerShape: String,
     label: String?,
-    isBackgroundTransparent: Boolean
+    isBackgroundTransparent: Boolean,
+    savedTimerId: Int? = null
   ) {
     viewModelScope.launch {
       if (shouldShowPremiumDialogMultipleTimers(application)) {
@@ -68,7 +70,7 @@ class StopwatchScreenVm(
         return@launch
       }
       boundFloatingService.provideFloatingService().overlayController.addStopwatch(
-        haloColor, timerShape, label, isBackgroundTransparent
+        haloColor, timerShape, label, isBackgroundTransparent, savedTimerId
       )
     }
   }

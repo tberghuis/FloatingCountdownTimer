@@ -17,7 +17,9 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
+import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
@@ -40,14 +42,15 @@ class OverlayController(val service: FloatingService) {
     haloColor: Color,
     timerShape: String,
     label: String?,
-    isBackgroundTransparent: Boolean
+    isBackgroundTransparent: Boolean,
+    savedTimerId: Int? = null
   ) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
         service.application.providePreferencesRepository().bubbleScaleFlow.first()
       }
       val stopwatch =
-        Stopwatch(service, bubbleScale, haloColor, timerShape, label, isBackgroundTransparent)
+        Stopwatch(service, bubbleScale, haloColor, timerShape, label, isBackgroundTransparent, savedTimerId)
       val stopwatchView = @Composable {
         CompositionLocalProvider(LocalTimerViewHolder provides stopwatch.viewHolder) {
           StopwatchView(stopwatch)
@@ -225,9 +228,18 @@ class OverlayController(val service: FloatingService) {
     }
   }
 
-
   fun saveTimerPositions() {
     logd("saveTimerPositions")
+
+    val bubble = bubbleSet.toList()[0]
+    val stopwatchDao = service.application.provideDatabase().savedStopwatchDao()
+    val params = bubble.viewHolder.params
+
+    service.scope.launch(IO) {
+      stopwatchDao.updatePosition(bubble.savedTimerId!!, params.x, params.y)
+    }
+
+
   }
 
 

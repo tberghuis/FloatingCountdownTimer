@@ -16,8 +16,9 @@ class Stopwatch(
   haloColor: Color,
   timerShape: String,
   label: String?,
-  isBackgroundTransparent: Boolean
-) : Bubble(service, bubbleSizeScaleFactor, haloColor, timerShape, label, isBackgroundTransparent) {
+  isBackgroundTransparent: Boolean,
+  savedTimerId: Int? = null
+) : Bubble(service, bubbleSizeScaleFactor, haloColor, timerShape, label, isBackgroundTransparent, savedTimerId) {
   val timeElapsed = mutableIntStateOf(0)
   val isRunningStateFlow = MutableStateFlow(false)
   private var stopwatchIncrementTask: TimerTask? = null
