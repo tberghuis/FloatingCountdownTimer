@@ -1,8 +1,8 @@
 [versions]
-kotlin = "1.9.24"
+kotlin = "2.0.0"
 agp = "8.5.1"
 # https://github.com/google/ksp/releases
-ksp = "1.9.24-1.0.20"
+ksp = "2.0.0-1.0.23"
 
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -73,3 +73,4 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

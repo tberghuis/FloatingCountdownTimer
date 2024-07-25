@@ -3,6 +3,7 @@ plugins {
   alias(libs.plugins.jetbrains.kotlin.android)
   alias(libs.plugins.ksp)
   alias(libs.plugins.kotlin.serialization)
+  alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -48,16 +49,9 @@ android {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
   }
-  kotlinOptions {
-    jvmTarget = "17"
-  }
   buildFeatures {
     compose = true
     buildConfig = true
-  }
-  composeOptions {
-    // https://www.jetpackcomposeversion.com/
-    kotlinCompilerExtensionVersion = "1.5.14"
   }
   packaging {
     resources {

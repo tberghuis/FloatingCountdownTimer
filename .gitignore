@@ -23,3 +23,5 @@ floatingttimer-fastlane.json
 /fastlane/metadata/android/*
 /fastlane/metadata/android/*/
 !/fastlane/metadata/android/en-US/
+
+/.kotlin/
