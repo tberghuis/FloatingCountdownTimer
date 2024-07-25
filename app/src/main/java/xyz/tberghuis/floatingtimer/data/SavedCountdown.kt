@@ -19,7 +19,13 @@ data class SavedCountdown(
   @ColumnInfo(name = "duration") val durationSeconds: Int,
   @ColumnInfo() override val label: String? = null,
   @ColumnInfo(defaultValue = "false") override val isBackgroundTransparent: Boolean = false,
-) : SavedTimer
+
+
+  val positionX: Int? = null,
+  val positionY: Int? = null,
+
+
+  ) : SavedTimer
 
 @Dao
 interface SavedCountdownDao {
