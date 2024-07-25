@@ -18,8 +18,8 @@ data class SavedStopwatch(
   @ColumnInfo() override val label: String? = null,
   @ColumnInfo(defaultValue = "false") override val isBackgroundTransparent: Boolean = false,
 
-  val positionX: Int? = null,
-  val positionY: Int? = null,
+  override val positionX: Int? = null,
+  override val positionY: Int? = null,
 
   ) : SavedTimer
 

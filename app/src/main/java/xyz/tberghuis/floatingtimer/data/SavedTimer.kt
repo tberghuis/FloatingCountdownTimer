@@ -5,4 +5,7 @@ interface SavedTimer {
   val timerShape: String
   val label: String?
   val isBackgroundTransparent: Boolean
+
+  val positionX: Int?
+  val positionY: Int?
 }

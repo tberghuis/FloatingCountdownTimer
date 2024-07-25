@@ -17,4 +17,13 @@ class SharedVm(application: Application) : AndroidViewModel(application) {
       boundFloatingService.provideFloatingService().overlayController.exitAll()
     }
   }
+
+
+  fun saveTimerPositions() {
+    viewModelScope.launch {
+      boundFloatingService.provideFloatingService().overlayController.saveTimerPositions()
+    }
+  }
+
+
 }
