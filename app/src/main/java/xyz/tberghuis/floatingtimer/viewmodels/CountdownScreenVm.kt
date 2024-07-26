@@ -18,6 +18,7 @@ import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.BackgroundTransCheckboxVm
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
+import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
@@ -93,7 +94,8 @@ class CountdownScreenVm(
     haloColor: Color,
     timerShape: String,
     label: String?,
-    isBackgroundTransparent: Boolean
+    isBackgroundTransparent: Boolean,
+    savedTimer: SavedTimer? = null
   ) {
     viewModelScope.launch {
       if (shouldShowPremiumDialogMultipleTimers(application)) {
@@ -105,7 +107,8 @@ class CountdownScreenVm(
         haloColor,
         timerShape,
         label,
-        isBackgroundTransparent
+        isBackgroundTransparent,
+        savedTimer
       )
     }
   }
@@ -116,7 +119,8 @@ class CountdownScreenVm(
       Color(timer.timerColor),
       timer.timerShape,
       timer.label,
-      timer.isBackgroundTransparent
+      timer.isBackgroundTransparent,
+      timer
     )
   }
 

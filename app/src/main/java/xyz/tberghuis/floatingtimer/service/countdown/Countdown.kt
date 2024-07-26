@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.Bubble
@@ -29,8 +30,17 @@ class Countdown(
   haloColor: Color,
   timerShape: String,
   label: String?,
-  isBackgroundTransparent: Boolean
-) : Bubble(service, bubbleSizeScaleFactor, haloColor, timerShape, label, isBackgroundTransparent) {
+  isBackgroundTransparent: Boolean,
+  savedTimer: SavedTimer? = null
+) : Bubble(
+  service,
+  bubbleSizeScaleFactor,
+  haloColor,
+  timerShape,
+  label,
+  isBackgroundTransparent,
+  savedTimer
+) {
   var countdownSeconds by mutableIntStateOf(durationSeconds)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
   private var countDownTimer: CountDownTimer? = null
@@ -52,6 +62,10 @@ class Countdown(
     logd("click target onclick")
     when (timerState.value) {
       is TimerStatePaused -> {
+        // on first tap update saved position
+        if (countdownSeconds == durationSeconds) {
+          saveTimerPositionIfNull()
+        }
         timerState.value = TimerStateRunning
       }
 

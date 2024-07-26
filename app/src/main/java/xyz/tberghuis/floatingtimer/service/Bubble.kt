@@ -126,7 +126,12 @@ abstract class Bubble(
           }
 
           is SavedCountdown -> {
-            it
+            it.copy(
+              positionX = viewHolder.params.x,
+              positionY = viewHolder.params.y
+            ).also { savedCountdown ->
+              service.application.provideDatabase().savedCountdownDao().update(savedCountdown)
+            }
           }
 
           else -> {

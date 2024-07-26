@@ -35,13 +35,6 @@ interface SavedStopwatchDao {
   @Delete
   fun delete(timer: SavedStopwatch)
 
-
-  // todo put in a SavedPositionDao
-//  @Query("UPDATE SavedStopwatch SET positionX = :x, positionY = :y WHERE id = :id")
-//  fun updatePosition(id: Int, x: Int, y: Int): Int
-
   @Update
   fun update(timer: SavedStopwatch): Int
-
-
 }
