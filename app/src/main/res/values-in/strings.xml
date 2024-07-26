@@ -54,4 +54,5 @@
     <string name="ringtones">Nada Dering</string>
     <string name="notifications">Notifikasi</string>
     <string name="current">saat ini</string>
+    <string name="save_timer_positions">Simpan Posisi Timer</string>
 </resources>

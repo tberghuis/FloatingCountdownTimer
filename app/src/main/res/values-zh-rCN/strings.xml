@@ -54,4 +54,5 @@
     <string name="ringtones">铃声</string>
     <string name="notifications">通知</string>
     <string name="current">当前</string>
+    <string name="save_timer_positions">保存计时器位置</string>
 </resources>

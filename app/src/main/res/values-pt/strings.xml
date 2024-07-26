@@ -54,4 +54,5 @@
     <string name="ringtones">Toques</string>
     <string name="notifications">Notificações</string>
     <string name="current">atual</string>
+    <string name="save_timer_positions">Salvar Posições do Timer</string>
 </resources>
