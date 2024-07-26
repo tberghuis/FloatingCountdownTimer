@@ -82,10 +82,7 @@ class CountdownScreenVm(
     val totalSecs = calcTotalDurationSeconds() ?: return
     // no warning about var name shadowed???
     val label = if (timerShape == "label") label else null
-
-
     logd("countdownButtonClick isBackgroundTransparent $isBackgroundTransparent")
-
     addCountdown(totalSecs, haloColor, timerShape, label, isBackgroundTransparent)
   }
 

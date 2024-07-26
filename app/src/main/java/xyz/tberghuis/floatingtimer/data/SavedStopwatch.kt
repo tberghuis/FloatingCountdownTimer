@@ -18,11 +18,9 @@ data class SavedStopwatch(
   @ColumnInfo(name = "color") override val timerColor: Int,
   @ColumnInfo() override val label: String? = null,
   @ColumnInfo(defaultValue = "false") override val isBackgroundTransparent: Boolean = false,
-
   override val positionX: Int? = null,
   override val positionY: Int? = null,
-
-  ) : SavedTimer
+) : SavedTimer
 
 @Dao
 interface SavedStopwatchDao {

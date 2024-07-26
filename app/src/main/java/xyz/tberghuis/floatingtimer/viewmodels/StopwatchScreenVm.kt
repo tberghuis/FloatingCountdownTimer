@@ -78,9 +78,7 @@ class StopwatchScreenVm(
 
   fun stopwatchButtonClick() {
     val label = if (timerShape == "label") label else null
-
     logd("stopwatchButtonClick isBackgroundTransparent $isBackgroundTransparent")
-
     addStopwatch(haloColor, timerShape, label, isBackgroundTransparent)
   }
 

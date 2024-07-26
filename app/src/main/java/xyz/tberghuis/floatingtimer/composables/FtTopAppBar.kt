@@ -83,9 +83,6 @@ fun FtTopAppBar() {
             sharedVm.cancelAllTimers()
           },
         )
-
-
-
         DropdownMenuItem(
           text = { Text(stringResource(R.string.save_timer_positions)) },
           onClick = {
@@ -93,11 +90,6 @@ fun FtTopAppBar() {
             sharedVm.saveTimerPositions()
           },
         )
-
-
-
-
-
         DropdownMenuItem(
           text = { Text("Premium") },
           onClick = {
