@@ -72,7 +72,7 @@ class Stopwatch(
       // only save position on first start of timer
       // not 100% accurate but good enough
       if (timeElapsed.intValue == 0 && !isRunning) {
-        saveTimerPosition()
+        saveTimerPositionIfNull()
       }
       !isRunning
     }

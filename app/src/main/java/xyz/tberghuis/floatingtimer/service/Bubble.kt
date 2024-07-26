@@ -105,6 +105,13 @@ abstract class Bubble(
   abstract fun reset()
   abstract fun onTap()
 
+  fun saveTimerPositionIfNull() {
+    savedTimer?.let {
+      if (it.positionX == null)
+        saveTimerPosition()
+    }
+  }
+
   fun saveTimerPosition() {
     service.scope.launch(IO) {
       savedTimer = savedTimer?.let {
