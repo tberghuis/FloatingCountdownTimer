@@ -125,6 +125,7 @@ class OverlayController(val service: FloatingService) {
       onDoubleTap = { bubble.reset() },
       onTap = { bubble.onTap() }
     )
+    logd("addBubble addView params ${bubble.viewHolder.params.x} ${bubble.viewHolder.params.y}")
     windowManager.addView(bubble.viewHolder.view, bubble.viewHolder.params)
   }
 
