@@ -35,6 +35,11 @@ fun TrashRefactorScreen(
               isBackgroundTransparent = false,
             )
           }
+
+          KeyEvent.KEYCODE_3 -> {
+            logd("3 getServiceAndAddStopwatch")
+            vm.getServiceAndAddStopwatch()
+          }
         }
       }
       true

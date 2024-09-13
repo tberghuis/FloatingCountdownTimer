@@ -2,6 +2,7 @@ package xyz.tberghuis.floatingtimer.tmp4
 
 import android.annotation.SuppressLint
 import android.app.Application
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -14,9 +15,22 @@ class Tmp4Vm(application: Application) : AndroidViewModel(application) {
   @SuppressLint("StaticFieldLeak")
   var service: FloatingService? = null
 
-  fun getService(){
+  fun getService() {
     viewModelScope.launch {
       service = boundService.provideService()
     }
   }
+
+  fun getServiceAndAddStopwatch() {
+    viewModelScope.launch {
+      boundService.provideService().overlayController.addStopwatch(
+        haloColor = Color.Blue,
+        timerShape = "circle",
+        label = null,
+        isBackgroundTransparent = false,
+      )
+    }
+  }
+
+
 }
