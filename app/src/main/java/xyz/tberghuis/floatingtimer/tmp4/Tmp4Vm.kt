@@ -6,13 +6,14 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.service.FloatingService
+import xyz.tberghuis.floatingtimer.tmp5.Tmp5BoundService
 
 class Tmp4Vm(application: Application) : AndroidViewModel(application) {
-  val boundService = Tmp4BoundService<FloatingService>(application, FloatingService::class.java)
+//  val boundService = Tmp4BoundService<FloatingService>(application, FloatingService::class.java)
+  val boundService = Tmp5BoundService(application, FloatingService::class.java)
 
   @SuppressLint("StaticFieldLeak")
   var service: FloatingService? = null
-
 
   fun getService(){
     viewModelScope.launch {

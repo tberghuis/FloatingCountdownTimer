@@ -8,15 +8,12 @@ import android.content.ServiceConnection
 import android.os.IBinder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.service.FloatingService
-import kotlin.reflect.KClass
 
 interface ServiceBinder<T : Service> {
   fun getService(): T
