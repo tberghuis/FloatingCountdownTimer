@@ -42,8 +42,8 @@ class MainActivity : ComponentActivity() {
             .fillMaxSize()
             .background(Color.White),
         ) {
-//          FtNavHost()
-          TrashRefactorScreen()
+          FtNavHost()
+//          TrashRefactorScreen()
         }
       }
     }
