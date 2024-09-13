@@ -10,7 +10,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import xyz.tberghuis.floatingtimer.logd
@@ -21,25 +23,31 @@ class Tmp6BoundService<T : Service>(
   private val serviceClass: Class<T>
 ) {
   private var boundServiceDeferred: Deferred<T>? = null
-  private val serviceStateFlow = MutableStateFlow<T?>(null)
 
-  private val connection = object : ServiceConnection {
-    override fun onServiceConnected(className: ComponentName, binder: IBinder) {
-      logd("onServiceConnected")
-      serviceStateFlow.value = (binder as ServiceBinder<T>).getService()
+  private val serviceFlow = callbackFlow {
+    val connection = object : ServiceConnection {
+      override fun onServiceConnected(className: ComponentName, binder: IBinder) {
+        logd("onServiceConnected")
+        trySend((binder as ServiceBinder<T>).getService())
+      }
+
+      override fun onServiceDisconnected(arg0: ComponentName) {
+        boundServiceDeferred = null
+      }
+
+      override fun onBindingDied(name: ComponentName?) {
+        super.onBindingDied(name)
+        boundServiceDeferred = null
+      }
     }
-
-    override fun onServiceDisconnected(arg0: ComponentName) {
-      boundServiceDeferred = null
-      serviceStateFlow.value = null
-    }
-
-    override fun onBindingDied(name: ComponentName?) {
-      super.onBindingDied(name)
-      boundServiceDeferred = null
-      serviceStateFlow.value = null
+    val intent = Intent(application, serviceClass)
+    application.startForegroundService(intent)
+    application.bindService(intent, connection, 0)
+    awaitClose {
+      application.unbindService(connection)
     }
   }
+
 
   init {
     logd("BoundService init")
@@ -55,10 +63,7 @@ class Tmp6BoundService<T : Service>(
     }
 
     return CoroutineScope(IO).async {
-      val intent = Intent(application, serviceClass)
-      application.startForegroundService(intent)
-      application.bindService(intent, connection, 0)
-      serviceStateFlow.filterNotNull().first()
+      serviceFlow.first()
     }.also {
       boundServiceDeferred = it
     }.await()
