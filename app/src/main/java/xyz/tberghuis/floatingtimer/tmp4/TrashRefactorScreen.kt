@@ -6,6 +6,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -26,7 +27,13 @@ fun TrashRefactorScreen(
           }
 
           KeyEvent.KEYCODE_2 -> {
-            logd("2 service ${vm.service}")
+            logd("2 addStopwatch")
+            vm.service?.overlayController?.addStopwatch(
+              haloColor = Color.Blue,
+              timerShape = "circle",
+              label = null,
+              isBackgroundTransparent = false,
+            )
           }
         }
       }
