@@ -8,14 +8,11 @@ import android.content.ServiceConnection
 import android.os.IBinder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers.Default
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp4.ServiceBinder
 
@@ -23,36 +20,30 @@ class Tmp5BoundService<T : Service>(
   private val application: Application,
   private val serviceClass: Class<T>
 ) {
-
-  //  private val service = MutableStateFlow<T?>(null)
   private var boundServiceDeferred: Deferred<T>? = null
 
+  private fun createDeferred(): Deferred<T> {
+    val stateFlow = MutableStateFlow<T?>(null)
+    val connection = object : ServiceConnection {
+      override fun onServiceConnected(className: ComponentName, binder: IBinder) {
+        logd("onServiceConnected")
+        stateFlow.tryEmit((binder as ServiceBinder<T>).getService())
+      }
 
-  suspend fun createDeferred(): Deferred<T> {
-    val scope = CoroutineScope(IO)
-    val flow = flow {
+      override fun onServiceDisconnected(arg0: ComponentName) {
+        boundServiceDeferred = null
+      }
+
+      override fun onBindingDied(name: ComponentName?) {
+        super.onBindingDied(name)
+        boundServiceDeferred = null
+      }
+    }
+    return CoroutineScope(IO).async {
       val intent = Intent(application, serviceClass)
       application.startForegroundService(intent)
-      application.bindService(intent, object : ServiceConnection {
-        override fun onServiceConnected(className: ComponentName, binder: IBinder) {
-          logd("onServiceConnected")
-          scope.launch {
-            emit((binder as ServiceBinder<T>).getService())
-          }
-        }
-
-        override fun onServiceDisconnected(arg0: ComponentName) {
-          boundServiceDeferred = null
-        }
-
-        override fun onBindingDied(name: ComponentName?) {
-          super.onBindingDied(name)
-          boundServiceDeferred = null
-        }
-      }, 0)
-    }
-    return scope.async {
-      flow.first()
+      application.bindService(intent, connection, 0)
+      stateFlow.filterNotNull().first()
     }
   }
 
@@ -60,9 +51,8 @@ class Tmp5BoundService<T : Service>(
     logd("BoundService init")
   }
 
-
   // doitwrong
-  // do not keep reference to FloatingService anywhere
+  // do not keep reference to T:Service anywhere
   // always use provide function
   suspend fun provideService(/* refresh bool, manual invoke by user */): T {
     logd("provideService")
