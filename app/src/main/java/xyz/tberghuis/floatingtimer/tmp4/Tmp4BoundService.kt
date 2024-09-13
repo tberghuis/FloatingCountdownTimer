@@ -26,20 +26,22 @@ class Tmp4BoundService<T : Service>(
 ) {
 
   private val service = MutableStateFlow<T?>(null)
-  var boundServiceDeferred: Deferred<T>? = null
+  private var boundServiceDeferred: Deferred<T>? = null
 
-  val connection = object : ServiceConnection {
+  private val connection = object : ServiceConnection {
     override fun onServiceConnected(className: ComponentName, binder: IBinder) {
       // to prevent ANR does this need to happen off Main dispatcher???
       service.value = (binder as ServiceBinder<T>).getService()
     }
 
     override fun onServiceDisconnected(arg0: ComponentName) {
+      boundServiceDeferred = null
       service.value = null
     }
 
     override fun onBindingDied(name: ComponentName?) {
       super.onBindingDied(name)
+      boundServiceDeferred = null
       service.value = null
     }
   }
