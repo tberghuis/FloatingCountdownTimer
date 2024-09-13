@@ -11,9 +11,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -39,16 +39,12 @@ class Tmp6BoundService<T : Service>(
       override fun onServiceDisconnected(arg0: ComponentName) {
         tmplog("onServiceDisconnected")
         trySend(null)
-        job?.cancel()
-        job = null
       }
 
       override fun onBindingDied(name: ComponentName?) {
         super.onBindingDied(name)
         tmplog("onBindingDied")
         trySend(null)
-        job?.cancel()
-        job = null
       }
     }
     val intent = Intent(application, serviceClass)
@@ -73,8 +69,11 @@ class Tmp6BoundService<T : Service>(
     if (job == null) {
       job = CoroutineScope(IO).launch {
         serviceFlow.collect {
-//          service.emit(it)
           service.value = it
+          if (it == null) {
+            job?.cancel()
+            job = null
+          }
         }
       }
     }
