@@ -29,11 +29,6 @@ fun TrashRefactorScreen(
     },
   ) {
     Text("TrashRefactorScreen")
-    Button(onClick = {
-      logd("${vm.willitblend}")
-    }) {
-      Text("button")
-    }
   }
 }
 

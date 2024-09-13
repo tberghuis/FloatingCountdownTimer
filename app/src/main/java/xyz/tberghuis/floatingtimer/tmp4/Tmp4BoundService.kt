@@ -20,7 +20,7 @@ interface ServiceBinder<T : Service> {
   fun getService(): T
 }
 
-private class Tmp4BoundService<T : Service> private constructor(
+class Tmp4BoundService<T : Service>(
   private val application: Application,
   private val serviceClass: KClass<T>
 ) {
@@ -45,7 +45,7 @@ private class Tmp4BoundService<T : Service> private constructor(
   }
 
   init {
-    logd("BoundService init - singleton")
+    logd("BoundService init")
   }
 
   private fun bindService() {
