@@ -1,8 +1,8 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
 import android.app.Application
+import android.app.Service
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.IBinder
@@ -14,26 +14,33 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.service.FloatingService
+import kotlin.reflect.KClass
 
-private class Tmp4BoundService private constructor(private val application: Application) {
-  private val myBtService = MutableStateFlow<FloatingService?>(null)
-  var boundServiceDeferred: Deferred<FloatingService>? = null
+interface ServiceBinder<T : Service> {
+  fun getService(): T
+}
+
+private class Tmp4BoundService<T : Service> private constructor(
+  private val application: Application,
+  private val serviceClass: KClass<T>
+) {
+
+  private val service = MutableStateFlow<T?>(null)
+  var boundServiceDeferred: Deferred<T>? = null
 
   val connection = object : ServiceConnection {
-    override fun onServiceConnected(className: ComponentName, service: IBinder) {
-      val binder = service as FloatingService.LocalBinder
+    override fun onServiceConnected(className: ComponentName, binder: IBinder) {
       // to prevent ANR does this need to happen off Main dispatcher???
-      myBtService.value = binder.getService()
+      service.value = (binder as ServiceBinder<T>).getService()
     }
 
     override fun onServiceDisconnected(arg0: ComponentName) {
-      myBtService.value = null
+      service.value = null
     }
 
     override fun onBindingDied(name: ComponentName?) {
       super.onBindingDied(name)
-      myBtService.value = null
+      service.value = null
     }
   }
 
@@ -42,7 +49,7 @@ private class Tmp4BoundService private constructor(private val application: Appl
   }
 
   private fun bindService() {
-    val intent = Intent(application, FloatingService::class.java)
+    val intent = Intent(application, serviceClass::class.java)
     application.startForegroundService(intent)
     application.bindService(intent, connection, 0)
   }
@@ -50,27 +57,14 @@ private class Tmp4BoundService private constructor(private val application: Appl
   // doitwrong
   // do not keep reference to FloatingService anywhere
   // always use provide function
-  suspend fun provideService(/* refresh bool, manual invoke by user */): FloatingService {
+  suspend fun provideService(/* refresh bool, manual invoke by user */): T {
     boundServiceDeferred?.let {
       return it.await()
     }
     boundServiceDeferred = CoroutineScope(Default).async {
       bindService()
-      myBtService.filterNotNull().first()
+      service.filterNotNull().first()
     }
     return boundServiceDeferred!!.await()
   }
-
-  companion object {
-    @Volatile
-    private var INSTANCE: Tmp4BoundService? = null
-    fun getInstance(context: Context): Tmp4BoundService {
-      synchronized(this) {
-        return INSTANCE ?: Tmp4BoundService(context.applicationContext as Application).also {
-          INSTANCE = it
-        }
-      }
-    }
-  }
-
 }

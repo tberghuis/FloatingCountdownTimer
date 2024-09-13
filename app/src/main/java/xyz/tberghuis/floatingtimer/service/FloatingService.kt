@@ -29,6 +29,7 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp4.ServiceBinder
 
 // https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
 class FloatingService : LifecycleService(), SavedStateRegistryOwner {
@@ -47,9 +48,13 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
 
   private val binder = LocalBinder()
 
-  inner class LocalBinder : Binder() {
-    fun getService(): FloatingService = this@FloatingService
+  inner class LocalBinder : Binder(), ServiceBinder<FloatingService> {
+    override fun getService(): FloatingService = this@FloatingService
   }
+
+//  inner class LocalBinder : Binder() {
+//    fun getService(): FloatingService = this@FloatingService
+//  }
 
   override fun onBind(intent: Intent): IBinder {
     super.onBind(intent)
