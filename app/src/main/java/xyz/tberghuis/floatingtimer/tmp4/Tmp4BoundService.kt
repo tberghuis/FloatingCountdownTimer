@@ -9,6 +9,7 @@ import android.os.IBinder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.Default
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
@@ -68,7 +69,7 @@ class Tmp4BoundService<T : Service>(
     boundServiceDeferred?.let {
       return it.await()
     }
-    boundServiceDeferred = CoroutineScope(Default).async {
+    boundServiceDeferred = CoroutineScope(IO).async {
       bindService()
       service.filterNotNull().first()
     }
