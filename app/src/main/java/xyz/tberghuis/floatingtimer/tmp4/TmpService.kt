@@ -1,5 +1,13 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
-class TmpService {
+import androidx.lifecycle.LifecycleService
+import xyz.tberghuis.floatingtimer.logd
+
+class TmpService : LifecycleService() {
+
+  init {
+    logd("TmpService init")
+  }
+
 }
 
