@@ -12,13 +12,9 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp4.ServiceBinder
 
 fun tmplog(s: String) = Log.d("111", s)
@@ -28,7 +24,6 @@ class Tmp6BoundService<T : Service>(
   private val application: Application,
   private val serviceClass: Class<T>
 ) {
-//  private val service = MutableStateFlow<T?>(null)
   private val service = MutableSharedFlow<T>()
   var job: Job? = null
 
@@ -41,7 +36,6 @@ class Tmp6BoundService<T : Service>(
 
       override fun onServiceDisconnected(arg0: ComponentName) {
         tmplog("onServiceDisconnected")
-//        trySend(null)
         job?.cancel()
         job = null
       }
@@ -49,7 +43,6 @@ class Tmp6BoundService<T : Service>(
       override fun onBindingDied(name: ComponentName?) {
         super.onBindingDied(name)
         tmplog("onBindingDied")
-//        trySend(null)
         job?.cancel()
         job = null
       }
@@ -65,16 +58,6 @@ class Tmp6BoundService<T : Service>(
 
   init {
     tmplog("BoundService init")
-//    restartJob()
-  }
-
-  fun restartJob() {
-//    job?.cancel()
-    job = CoroutineScope(IO).launch {
-      serviceFlow.collect {
-        service.emit(it)
-      }
-    }
   }
 
   // doitwrong
@@ -83,8 +66,12 @@ class Tmp6BoundService<T : Service>(
   suspend fun provideService(/* refresh bool, manual invoke by user */): T {
     tmplog("provideService")
 
-    if(job == null){
-      restartJob()
+    if (job == null) {
+      job = CoroutineScope(IO).launch {
+        serviceFlow.collect {
+          service.emit(it)
+        }
+      }
     }
 
     return service.first()
