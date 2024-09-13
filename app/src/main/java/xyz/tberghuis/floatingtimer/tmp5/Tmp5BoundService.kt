@@ -21,29 +21,23 @@ class Tmp5BoundService<T : Service>(
   private val serviceClass: Class<T>
 ) {
   private var boundServiceDeferred: Deferred<T>? = null
+  private val serviceStateFlow = MutableStateFlow<T?>(null)
 
-  private fun createDeferred(): Deferred<T> {
-    val stateFlow = MutableStateFlow<T?>(null)
-    val connection = object : ServiceConnection {
-      override fun onServiceConnected(className: ComponentName, binder: IBinder) {
-        logd("onServiceConnected")
-        stateFlow.tryEmit((binder as ServiceBinder<T>).getService())
-      }
-
-      override fun onServiceDisconnected(arg0: ComponentName) {
-        boundServiceDeferred = null
-      }
-
-      override fun onBindingDied(name: ComponentName?) {
-        super.onBindingDied(name)
-        boundServiceDeferred = null
-      }
+  private val connection = object : ServiceConnection {
+    override fun onServiceConnected(className: ComponentName, binder: IBinder) {
+      logd("onServiceConnected")
+      serviceStateFlow.value = (binder as ServiceBinder<T>).getService()
     }
-    return CoroutineScope(IO).async {
-      val intent = Intent(application, serviceClass)
-      application.startForegroundService(intent)
-      application.bindService(intent, connection, 0)
-      stateFlow.filterNotNull().first()
+
+    override fun onServiceDisconnected(arg0: ComponentName) {
+      boundServiceDeferred = null
+      serviceStateFlow.value = null
+    }
+
+    override fun onBindingDied(name: ComponentName?) {
+      super.onBindingDied(name)
+      boundServiceDeferred = null
+      serviceStateFlow.value = null
     }
   }
 
@@ -59,7 +53,13 @@ class Tmp5BoundService<T : Service>(
     boundServiceDeferred?.let {
       return it.await()
     }
-    return createDeferred().also {
+
+    return CoroutineScope(IO).async {
+      val intent = Intent(application, serviceClass)
+      application.startForegroundService(intent)
+      application.bindService(intent, connection, 0)
+      serviceStateFlow.filterNotNull().first()
+    }.also {
       boundServiceDeferred = it
     }.await()
   }
