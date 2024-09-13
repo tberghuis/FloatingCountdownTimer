@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.service.FloatingService
 import kotlin.reflect.KClass
 
 interface ServiceBinder<T : Service> {
@@ -22,7 +23,7 @@ interface ServiceBinder<T : Service> {
 
 class Tmp4BoundService<T : Service>(
   private val application: Application,
-  private val serviceClass: KClass<T>
+  private val serviceClass: Class<T>
 ) {
 
   private val service = MutableStateFlow<T?>(null)
@@ -30,6 +31,7 @@ class Tmp4BoundService<T : Service>(
 
   private val connection = object : ServiceConnection {
     override fun onServiceConnected(className: ComponentName, binder: IBinder) {
+      logd("onServiceConnected")
       // to prevent ANR does this need to happen off Main dispatcher???
       service.value = (binder as ServiceBinder<T>).getService()
     }
@@ -51,7 +53,9 @@ class Tmp4BoundService<T : Service>(
   }
 
   private fun bindService() {
-    val intent = Intent(application, serviceClass::class.java)
+    logd("bindService")
+//    val intent = Intent(application, serviceClass::class.java)
+    val intent = Intent(application, serviceClass)
     application.startForegroundService(intent)
     application.bindService(intent, connection, 0)
   }
@@ -60,6 +64,7 @@ class Tmp4BoundService<T : Service>(
   // do not keep reference to FloatingService anywhere
   // always use provide function
   suspend fun provideService(/* refresh bool, manual invoke by user */): T {
+    logd("provideService")
     boundServiceDeferred?.let {
       return it.await()
     }

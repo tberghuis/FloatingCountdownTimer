@@ -21,7 +21,12 @@ fun TrashRefactorScreen(
       if (it.nativeKeyEvent.action == KeyEvent.ACTION_UP) {
         when (it.nativeKeyEvent.keyCode) {
           KeyEvent.KEYCODE_1 -> {
-            logd("number 1 pressed")
+            logd("1 getService")
+            vm.getService()
+          }
+
+          KeyEvent.KEYCODE_2 -> {
+            logd("2 service ${vm.service}")
           }
         }
       }
@@ -29,6 +34,9 @@ fun TrashRefactorScreen(
     },
   ) {
     Text("TrashRefactorScreen")
+    Button(onClick = {}) {
+      Text("button")
+    }
   }
 }
 
