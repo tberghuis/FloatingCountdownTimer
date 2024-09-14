@@ -22,9 +22,10 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
 import xyz.tberghuis.floatingtimer.tmp6.ServiceBinder
+import xyz.tberghuis.floatingtimer.tmp6.TmpOverlayController
 
 class TmpService : LifecycleService() {
-
+  lateinit var overlayController: TmpOverlayController
 
   private val binder = LocalBinder()
 
@@ -45,6 +46,7 @@ class TmpService : LifecycleService() {
 
   override fun onCreate() {
     super.onCreate()
+    overlayController = TmpOverlayController(this)
     startInForeground()
   }
 

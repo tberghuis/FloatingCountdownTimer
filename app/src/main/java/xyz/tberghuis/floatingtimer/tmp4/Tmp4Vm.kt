@@ -21,6 +21,13 @@ class Tmp4Vm(application: Application) : AndroidViewModel(application) {
     }
   }
 
+  fun helloController() {
+    viewModelScope.launch {
+      service?.overlayController?.helloController()
+    }
+  }
+
+
 //  fun getServiceAndAddStopwatch() {
 //    viewModelScope.launch {
 //      boundService.provideService().overlayController.addStopwatch(

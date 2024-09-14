@@ -25,6 +25,11 @@ fun TrashRefactorScreen(
             logd("1 getService")
             vm.getService()
           }
+
+          KeyEvent.KEYCODE_2 -> {
+            logd("2 helloController")
+            vm.helloController()
+          }
         }
       }
       true
