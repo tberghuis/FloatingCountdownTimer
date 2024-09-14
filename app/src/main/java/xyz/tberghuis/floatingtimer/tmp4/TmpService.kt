@@ -12,6 +12,9 @@ import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LifecycleService
+import androidx.savedstate.SavedStateRegistry
+import androidx.savedstate.SavedStateRegistryController
+import androidx.savedstate.SavedStateRegistryOwner
 import xyz.tberghuis.floatingtimer.FOREGROUND_SERVICE_NOTIFICATION_ID
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND
 import xyz.tberghuis.floatingtimer.INTENT_COMMAND_EXIT
@@ -24,8 +27,13 @@ import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
 import xyz.tberghuis.floatingtimer.tmp6.ServiceBinder
 import xyz.tberghuis.floatingtimer.tmp6.TmpOverlayController
 
-class TmpService : LifecycleService() {
+class TmpService : LifecycleService(), SavedStateRegistryOwner {
   lateinit var overlayController: TmpOverlayController
+
+
+  private val savedStateRegistryController = SavedStateRegistryController.create(this)
+  override val savedStateRegistry: SavedStateRegistry
+    get() = savedStateRegistryController.savedStateRegistry
 
   private val binder = LocalBinder()
 
