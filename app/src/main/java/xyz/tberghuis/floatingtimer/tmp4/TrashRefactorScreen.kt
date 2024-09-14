@@ -25,21 +25,6 @@ fun TrashRefactorScreen(
             logd("1 getService")
             vm.getService()
           }
-
-          KeyEvent.KEYCODE_2 -> {
-            logd("2 addStopwatch")
-            vm.service?.overlayController?.addStopwatch(
-              haloColor = Color.Blue,
-              timerShape = "circle",
-              label = null,
-              isBackgroundTransparent = false,
-            )
-          }
-
-          KeyEvent.KEYCODE_3 -> {
-            logd("3 getServiceAndAddStopwatch")
-            vm.getServiceAndAddStopwatch()
-          }
         }
       }
       true

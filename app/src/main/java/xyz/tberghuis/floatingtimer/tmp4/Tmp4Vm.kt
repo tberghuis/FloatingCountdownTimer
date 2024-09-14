@@ -10,10 +10,10 @@ import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.tmp6.Tmp6BoundService
 
 class Tmp4Vm(application: Application) : AndroidViewModel(application) {
-  val boundService = Tmp6BoundService(application, FloatingService::class.java)
+  val boundService = Tmp6BoundService(application, TmpService::class.java)
 
   @SuppressLint("StaticFieldLeak")
-  var service: FloatingService? = null
+  var service: TmpService? = null
 
   fun getService() {
     viewModelScope.launch {
@@ -21,16 +21,16 @@ class Tmp4Vm(application: Application) : AndroidViewModel(application) {
     }
   }
 
-  fun getServiceAndAddStopwatch() {
-    viewModelScope.launch {
-      boundService.provideService().overlayController.addStopwatch(
-        haloColor = Color.Blue,
-        timerShape = "circle",
-        label = null,
-        isBackgroundTransparent = false,
-      )
-    }
-  }
+//  fun getServiceAndAddStopwatch() {
+//    viewModelScope.launch {
+//      boundService.provideService().overlayController.addStopwatch(
+//        haloColor = Color.Blue,
+//        timerShape = "circle",
+//        label = null,
+//        isBackgroundTransparent = false,
+//      )
+//    }
+//  }
 
 
 }
