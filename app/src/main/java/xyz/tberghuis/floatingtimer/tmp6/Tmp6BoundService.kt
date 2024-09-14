@@ -16,7 +16,10 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp4.ServiceBinder
+
+interface ServiceBinder<T : Service> {
+  fun getService(): T
+}
 
 class Tmp6BoundService<T : Service>(
   private val application: Application,

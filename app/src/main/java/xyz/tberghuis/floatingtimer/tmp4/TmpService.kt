@@ -21,6 +21,7 @@ import xyz.tberghuis.floatingtimer.NOTIFICATION_CHANNEL
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
+import xyz.tberghuis.floatingtimer.tmp6.ServiceBinder
 
 class TmpService : LifecycleService() {
 
