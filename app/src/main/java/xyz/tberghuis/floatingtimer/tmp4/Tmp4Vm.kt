@@ -21,9 +21,9 @@ class Tmp4Vm(application: Application) : AndroidViewModel(application) {
     }
   }
 
-  fun helloController() {
+  fun addTimer() {
     viewModelScope.launch {
-      service?.overlayController?.helloController()
+      service?.overlayController?.addTimer()
     }
   }
 

@@ -27,8 +27,8 @@ fun TrashRefactorScreen(
           }
 
           KeyEvent.KEYCODE_2 -> {
-            logd("2 helloController")
-            vm.helloController()
+            logd("2 addTimer")
+            vm.addTimer()
           }
         }
       }

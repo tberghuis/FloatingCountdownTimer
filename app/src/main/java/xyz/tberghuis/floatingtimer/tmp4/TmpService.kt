@@ -54,6 +54,8 @@ class TmpService : LifecycleService(), SavedStateRegistryOwner {
 
   override fun onCreate() {
     super.onCreate()
+    savedStateRegistryController.performAttach()
+    savedStateRegistryController.performRestore(null)
     overlayController = TmpOverlayController(this)
     startInForeground()
   }
