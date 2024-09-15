@@ -43,7 +43,7 @@ class TmpTrashController(val service: TmpService) {
       300,
       300,
       0,
-      0,
+      100,
       WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
       WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
       PixelFormat.TRANSLUCENT
