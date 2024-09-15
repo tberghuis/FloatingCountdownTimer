@@ -35,6 +35,11 @@ fun TrashRefactorScreen(
             logd("3 addTrash")
             vm.addTrash()
           }
+
+          KeyEvent.KEYCODE_4 -> {
+            logd("4 getTrashPosition")
+            vm.getTrashPosition()
+          }
         }
       }
       true
