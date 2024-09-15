@@ -31,8 +31,10 @@ class TmpTrashController(val service: TmpService) {
 
   fun printBounds() {
     if (Build.VERSION.SDK_INT >= 30) {
-      val bounds = windowManager.currentWindowMetrics.bounds
-      logd("addTrashView bounds $bounds")
+      val currentBounds = windowManager.currentWindowMetrics.bounds
+      val maxBounds = windowManager.maximumWindowMetrics.bounds
+      logd("addTrashView currentBounds $currentBounds")
+      logd("addTrashView maxBounds $maxBounds")
     }
   }
 
@@ -40,13 +42,15 @@ class TmpTrashController(val service: TmpService) {
     trashParams = WindowManager.LayoutParams(
       300,
       300,
-      200,
-      -200,
+      1080 - 300,
+      2400 - 600,
       WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
       WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
       PixelFormat.TRANSLUCENT
     ).apply {
       gravity = Gravity.TOP or Gravity.LEFT
+
+//      gravity = Gravity.NO_GRAVITY
 //      gravity = Gravity.CENTER
     }
 
