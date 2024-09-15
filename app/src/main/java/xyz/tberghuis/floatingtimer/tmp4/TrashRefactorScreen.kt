@@ -30,6 +30,11 @@ fun TrashRefactorScreen(
             logd("2 addTimer")
             vm.addTimer()
           }
+
+          KeyEvent.KEYCODE_3 -> {
+            logd("3 addTrash")
+            vm.addTrash()
+          }
         }
       }
       true

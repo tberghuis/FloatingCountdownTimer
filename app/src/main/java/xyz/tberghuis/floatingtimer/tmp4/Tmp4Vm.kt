@@ -27,6 +27,12 @@ class Tmp4Vm(application: Application) : AndroidViewModel(application) {
     }
   }
 
+  fun addTrash() {
+    viewModelScope.launch {
+      service?.overlayController?.trashController?.addTrashView()
+    }
+  }
+
 
 //  fun getServiceAndAddStopwatch() {
 //    viewModelScope.launch {
