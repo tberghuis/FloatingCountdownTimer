@@ -45,6 +45,12 @@ fun TrashRefactorScreen(
             logd("5 getTimerPosition")
             vm.getTimerPosition()
           }
+
+          KeyEvent.KEYCODE_6 -> {
+            logd("6 printBounds")
+            vm.printBounds()
+          }
+
         }
       }
       true

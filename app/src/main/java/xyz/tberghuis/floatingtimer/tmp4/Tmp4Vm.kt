@@ -45,6 +45,12 @@ class Tmp4Vm(application: Application) : AndroidViewModel(application) {
     }
   }
 
+  fun printBounds() {
+    viewModelScope.launch {
+      service?.overlayController?.trashController?.printBounds()
+    }
+  }
+
 
 //  fun getServiceAndAddStopwatch() {
 //    viewModelScope.launch {

@@ -1,8 +1,8 @@
 package xyz.tberghuis.floatingtimer.tmp6
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PixelFormat
+import android.os.Build
 import android.view.Gravity
 import android.view.WindowManager
 import androidx.compose.foundation.background
@@ -14,10 +14,12 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.ComposeView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp4.TmpService
+
 
 class TmpTrashController(val service: TmpService) {
   var trashComposeView: ComposeView? = null
@@ -27,9 +29,14 @@ class TmpTrashController(val service: TmpService) {
 
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
+  fun printBounds() {
+    if (Build.VERSION.SDK_INT >= 30) {
+      val bounds = windowManager.currentWindowMetrics.bounds
+      logd("addTrashView bounds $bounds")
+    }
+  }
 
   fun addTrashView() {
-
     trashParams = WindowManager.LayoutParams(
       300,
       300,
@@ -39,8 +46,8 @@ class TmpTrashController(val service: TmpService) {
       WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
       PixelFormat.TRANSLUCENT
     ).apply {
-//      gravity = Gravity.TOP or Gravity.LEFT
-      gravity = Gravity.CENTER
+      gravity = Gravity.TOP or Gravity.LEFT
+//      gravity = Gravity.CENTER
     }
 
     trashComposeView = ComposeView(service).apply {
