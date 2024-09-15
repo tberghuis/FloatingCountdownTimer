@@ -20,7 +20,8 @@ class TmpOverlayController(val service: TmpService) {
   var timerComposeView: ComposeView? = null
   var timerParams: WindowManager.LayoutParams? = null
   val timerState = TmpTimerState()
-  val trashState = TmpTrashState()
+
+  val trashController = TmpTrashController(service)
 
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
@@ -58,7 +59,7 @@ class TmpOverlayController(val service: TmpService) {
           }
 
           MotionEvent.ACTION_MOVE -> {
-            trashState.isBubbleDragging.value = true
+            trashController.trashState.isBubbleDragging.value = true
             timerParams!!.x =
               (timerState.paramStartDragX + (event.rawX - timerState.startDragRawX)).toInt()
             timerParams!!.y =
@@ -68,7 +69,7 @@ class TmpOverlayController(val service: TmpService) {
           }
 
           MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-            trashState.isBubbleDragging.value = false
+            trashController.trashState.isBubbleDragging.value = false
 //            if (trashController.isBubbleHoveringTrash) {
 //              trashController.isBubbleHoveringTrash = false
 //              exitTimer()
