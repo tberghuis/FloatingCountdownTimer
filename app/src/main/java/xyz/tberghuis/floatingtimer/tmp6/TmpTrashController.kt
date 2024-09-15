@@ -42,16 +42,13 @@ class TmpTrashController(val service: TmpService) {
     trashParams = WindowManager.LayoutParams(
       300,
       300,
-      1080 - 300,
-      2400 - 600,
+      0,
+      0,
       WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
       WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
       PixelFormat.TRANSLUCENT
     ).apply {
-      gravity = Gravity.TOP or Gravity.LEFT
-
-//      gravity = Gravity.NO_GRAVITY
-//      gravity = Gravity.CENTER
+      gravity = Gravity.CENTER_HORIZONTAL or Gravity.BOTTOM
     }
 
     trashComposeView = ComposeView(service).apply {
