@@ -39,6 +39,12 @@ class Tmp4Vm(application: Application) : AndroidViewModel(application) {
     }
   }
 
+  fun getTimerPosition() {
+    viewModelScope.launch {
+      service?.overlayController?.getTimerPosition()
+    }
+  }
+
 
 //  fun getServiceAndAddStopwatch() {
 //    viewModelScope.launch {

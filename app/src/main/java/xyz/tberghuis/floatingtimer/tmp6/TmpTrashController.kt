@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp6
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.PixelFormat
 import android.view.Gravity
@@ -68,11 +69,8 @@ class TmpTrashController(val service: TmpService) {
   }
 
   fun getTrashPosition() {
-    val window = IntArray(2)
     val screen = IntArray(2)
-    trashComposeView!!.getLocationInWindow(window)
     trashComposeView!!.getLocationOnScreen(screen)
-    logd("getTrashPosition window ${window[0]} ${window[1]}")
     logd("getTrashPosition screen ${screen[0]} ${screen[1]}")
   }
 }

@@ -40,6 +40,11 @@ fun TrashRefactorScreen(
             logd("4 getTrashPosition")
             vm.getTrashPosition()
           }
+
+          KeyEvent.KEYCODE_5 -> {
+            logd("5 getTimerPosition")
+            vm.getTimerPosition()
+          }
         }
       }
       true

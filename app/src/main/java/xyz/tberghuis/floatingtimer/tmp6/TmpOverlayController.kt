@@ -35,8 +35,10 @@ class TmpOverlayController(val service: TmpService) {
     timerParams = WindowManager.LayoutParams(
       300,
       300,
-      0,
-      0,
+//      0,
+//      0,
+      590,
+      825,
       WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
       WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
       PixelFormat.TRANSLUCENT
@@ -90,12 +92,12 @@ class TmpOverlayController(val service: TmpService) {
 
       }
     }
-
-
-
     windowManager.addView(timerComposeView, timerParams)
-
   }
 
-
+  fun getTimerPosition() {
+    val screen = IntArray(2)
+    timerComposeView!!.getLocationOnScreen(screen)
+    logd("getTimerPosition screen ${screen[0]} ${screen[1]}")
+  }
 }
