@@ -59,7 +59,11 @@ class TmpTrashController(val service: TmpService) {
     trashComposeView!!.setContent {
       Box(
         modifier = Modifier
-          .background(Color.Red)
+          .background(
+            if (trashState.isTimerHover.value) Color.Red
+            else
+              Color.Green
+          )
           .onGloballyPositioned {
             logd("trashComposeView onGloballyPositioned LayoutCoordinates $it")
             val boundsInRoot = it.boundsInRoot()
@@ -82,3 +86,6 @@ class TmpTrashController(val service: TmpService) {
     logd("getTrashPosition screen ${screen[0]} ${screen[1]}")
   }
 }
+
+
+

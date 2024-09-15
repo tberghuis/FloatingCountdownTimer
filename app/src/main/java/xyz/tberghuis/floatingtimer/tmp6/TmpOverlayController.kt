@@ -68,6 +68,9 @@ class TmpOverlayController(val service: TmpService) {
               (timerState.paramStartDragY + (event.rawY - timerState.startDragRawY)).toInt()
             // updateClickTargetParamsWithinScreenBounds
             windowManager.updateViewLayout(this, timerParams)
+
+            trashController.trashState.isTimerHover.value =
+              calcIsTimerHoverTrash(timerComposeView!!, trashController.trashComposeView!!)
           }
 
           MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
@@ -100,4 +103,31 @@ class TmpOverlayController(val service: TmpService) {
     timerComposeView!!.getLocationOnScreen(screen)
     logd("getTimerPosition screen ${screen[0]} ${screen[1]}")
   }
+}
+
+
+fun calcIsTimerHoverTrash(timerView: ComposeView, trashView: ComposeView): Boolean {
+  val timerWidthPx = 300
+  val timerHeightPx = 300
+  val trashWidthPx = 300
+  val trashHeightPx = 300
+
+  val timerLocation = IntArray(2)
+  timerView.getLocationOnScreen(timerLocation)
+
+  val trashLocation = IntArray(2)
+  timerView.getLocationOnScreen(trashLocation)
+
+  val timerCenterX = timerLocation[0] + (timerWidthPx / 2f)
+  val timerCenterY = timerLocation[1] + (timerHeightPx / 2f)
+
+  val trashLeft = trashLocation[0]
+  val trashRight = trashLocation[0] + trashWidthPx
+  val trashTop = trashLocation[1]
+  val trashBottom = trashLocation[1] + trashHeightPx
+
+  return !(timerCenterX < trashLeft ||
+      timerCenterX > trashRight ||
+      timerCenterY < trashTop ||
+      timerCenterY > trashBottom)
 }
