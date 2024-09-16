@@ -9,36 +9,22 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.layout.boundsInRoot
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
-import xyz.tberghuis.floatingtimer.logd
 
 @Composable
 fun Trash() {
-  var trashRect by remember { mutableStateOf(Rect.Zero) }
   val iconTint = Color.Black
-
   Box(
     Modifier
-      .size(TRASH_SIZE_DP.dp)
+      .fillMaxSize()
       .clip(CircleShape)
-      .background(Color.White.copy(alpha = .5f))
-      .onGloballyPositioned {
-        trashRect = it.boundsInRoot()
-        logd("trashRect, $trashRect")
-      },
+      .background(Color.White.copy(alpha = .5f)),
     contentAlignment = Alignment.Center
   ) {
     Icon(
@@ -56,24 +42,6 @@ fun TrashPreview() {
       .background(Color.Gray)
       .size(TRASH_SIZE_DP.dp),
   ) {
-    TrashTmp()
-  }
-}
-
-
-@Composable
-fun TrashTmp() {
-  val iconTint = Color.Black
-  Box(
-    Modifier
-      .fillMaxSize()
-      .clip(CircleShape)
-      .background(Color.White.copy(alpha = .5f)),
-    contentAlignment = Alignment.Center
-  ) {
-    Icon(
-      Icons.Filled.Delete, "trash", modifier = Modifier
-        .size(50.dp), tint = iconTint
-    )
+    Trash()
   }
 }
