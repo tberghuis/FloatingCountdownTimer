@@ -67,12 +67,18 @@ class Tmp6BoundService<T : Service>(
 
     if (job == null) {
       job = CoroutineScope(IO).launch {
-        serviceFlow.collect {
-          service.value = it
-          if (it == null) {
-            job?.cancel()
-            job = null
+        try {
+          serviceFlow.collect {
+            service.value = it
+            if (it == null) {
+              job?.cancel()
+              job = null
+            }
           }
+        } finally {
+          // paranoia
+          job?.cancel()
+          job = null
         }
       }
     }
