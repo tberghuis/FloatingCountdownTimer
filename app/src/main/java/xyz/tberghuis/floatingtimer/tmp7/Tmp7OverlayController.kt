@@ -222,8 +222,6 @@ class OverlayController(val service: FloatingService) {
       // this was happening in prod, can't reproduce
       Log.e("OverlayController", "IllegalArgumentException: $e")
     }
-    // remove
-//    trashController.bubbleDraggingPosition.value = IntOffset(params.x, params.y)
   }
 
   fun onConfigurationChanged() {
