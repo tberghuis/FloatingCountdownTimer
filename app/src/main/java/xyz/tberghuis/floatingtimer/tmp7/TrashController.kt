@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.service
+package xyz.tberghuis.floatingtimer.tmp7
 
 import android.graphics.PixelFormat
 import android.util.Log
@@ -11,9 +11,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
+import xyz.tberghuis.floatingtimer.service.Bubble
+import xyz.tberghuis.floatingtimer.service.FloatingService
+import xyz.tberghuis.floatingtimer.service.TrashOverlay
+import xyz.tberghuis.floatingtimer.service.createComposeView
 
 // todo move windowManager to service
-class XxxTrashController(
+class TrashController(
   private val windowManager: WindowManager,
   private val service: FloatingService,
 ) {
