@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp7.Trash
 
 @Composable
 fun TrashOverlay() {
@@ -43,57 +44,57 @@ fun TrashOverlay() {
 }
 
 @Composable
-fun Trash() {
-  val service = LocalFloatingService.current
-  var trashRect by remember { mutableStateOf(Rect.Zero) }
-
-  // this is wack, i need major refactor
-  // get correct architecture from simplified example
-  val isTimerDragHoveringTrash = remember {
-    derivedStateOf {
-      calcTimerIsHoverTrash(
-        service.overlayController.trashController.bubbleDraggingPosition.value,
-        trashRect,
-        service.overlayController.trashController.currentDraggingBubble.value
-      )
-    }
-  }
-
-  val iconTint by remember {
-    derivedStateOf {
-      if (isTimerDragHoveringTrash.value) {
-        Color.Red
-      } else {
-        Color.Black
-      }
-    }
-  }
-
-  Box(
-    Modifier
-      .size(TRASH_SIZE_DP.dp)
-      .clip(CircleShape)
-      .background(Color.White.copy(alpha = .5f))
-      .onGloballyPositioned {
-        trashRect = it.boundsInRoot()
-        logd("trashRect, $trashRect")
-      },
-    contentAlignment = Alignment.Center
-  ) {
-    Icon(
-      Icons.Filled.Delete, "trash", modifier = Modifier
-        .size(50.dp), tint = iconTint
-    )
-  }
-
-  // this is wack, but if it works...
-  LaunchedEffect(isTimerDragHoveringTrash) {
-    snapshotFlow {
-      isTimerDragHoveringTrash.value
-    }.collect {
-      service.overlayController.trashController.isBubbleHoveringTrash = it
-    }
-  }
+fun XxxTrash() {
+//  val service = LocalFloatingService.current
+//  var trashRect by remember { mutableStateOf(Rect.Zero) }
+//
+//  // this is wack, i need major refactor
+//  // get correct architecture from simplified example
+//  val isTimerDragHoveringTrash = remember {
+//    derivedStateOf {
+//      calcTimerIsHoverTrash(
+//        service.overlayController.trashController.bubbleDraggingPosition.value,
+//        trashRect,
+//        service.overlayController.trashController.currentDraggingBubble.value
+//      )
+//    }
+//  }
+//
+//  val iconTint by remember {
+//    derivedStateOf {
+//      if (isTimerDragHoveringTrash.value) {
+//        Color.Red
+//      } else {
+//        Color.Black
+//      }
+//    }
+//  }
+//
+//  Box(
+//    Modifier
+//      .size(TRASH_SIZE_DP.dp)
+//      .clip(CircleShape)
+//      .background(Color.White.copy(alpha = .5f))
+//      .onGloballyPositioned {
+//        trashRect = it.boundsInRoot()
+//        logd("trashRect, $trashRect")
+//      },
+//    contentAlignment = Alignment.Center
+//  ) {
+//    Icon(
+//      Icons.Filled.Delete, "trash", modifier = Modifier
+//        .size(50.dp), tint = iconTint
+//    )
+//  }
+//
+//  // this is wack, but if it works...
+//  LaunchedEffect(isTimerDragHoveringTrash) {
+//    snapshotFlow {
+//      isTimerDragHoveringTrash.value
+//    }.collect {
+//      service.overlayController.trashController.isBubbleHoveringTrash = it
+//    }
+//  }
 }
 
 fun calcTimerIsHoverTrash(
