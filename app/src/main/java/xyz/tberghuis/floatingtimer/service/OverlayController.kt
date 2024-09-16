@@ -9,7 +9,6 @@ import android.view.WindowManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.IntOffset
 import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -25,12 +24,13 @@ import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
 import xyz.tberghuis.floatingtimer.tmp7.TrashController
+import xyz.tberghuis.floatingtimer.tmp7.calcIsBubbleHoverTrash
 import kotlin.math.max
 import kotlin.math.min
 
-class XxxOverlayController(val service: FloatingService) {
+class OverlayController(val service: FloatingService) {
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-  val trashController = XxxTrashController(windowManager, service)
+  val trashController = TrashController(windowManager, service)
   private val bubbleSet = mutableSetOf<Bubble>()
 
   fun getNumberOfBubbles(): Int {
@@ -183,12 +183,16 @@ class XxxOverlayController(val service: FloatingService) {
           params.x = (paramStartDragX + (event.rawX - startDragRawX)).toInt()
           params.y = (paramStartDragY + (event.rawY - startDragRawY)).toInt()
           updateClickTargetParamsWithinScreenBounds(bubble.viewHolder)
+
+          trashController.overlay?.let {
+            trashController.isBubbleHoveringTrash =
+              calcIsBubbleHoverTrash(bubble.viewHolder.view, it)
+          }
         }
 
         MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
           trashController.isBubbleDragging.value = false
           trashController.currentDraggingBubble.value = null
-          // refactor how trash works???
           if (trashController.isBubbleHoveringTrash) {
             trashController.isBubbleHoveringTrash = false
             exitTimer()
@@ -217,7 +221,6 @@ class XxxOverlayController(val service: FloatingService) {
       // this was happening in prod, can't reproduce
       Log.e("OverlayController", "IllegalArgumentException: $e")
     }
-    trashController.bubbleDraggingPosition.value = IntOffset(params.x, params.y)
   }
 
   fun onConfigurationChanged() {
