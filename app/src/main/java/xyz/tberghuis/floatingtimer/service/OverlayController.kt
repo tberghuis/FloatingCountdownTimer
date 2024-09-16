@@ -9,6 +9,7 @@ import android.view.WindowManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
 import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -23,7 +24,6 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
-import xyz.tberghuis.floatingtimer.tmp7.calcIsBubbleHoverTrash
 import kotlin.math.max
 import kotlin.math.min
 
@@ -247,4 +247,37 @@ class OverlayController(val service: FloatingService) {
       bubble.saveTimerPosition()
     }
   }
+}
+
+private fun calcIsBubbleHoverTrash(
+  timerView: ComposeView,
+  trashView: ComposeView,
+): Boolean {
+  val timerWidthPx = timerView.width
+  val timerHeightPx = timerView.height
+  val trashWidthPx = trashView.width
+  val trashHeightPx = trashView.height
+
+
+  val timerLocation = IntArray(2)
+  timerView.getLocationOnScreen(timerLocation)
+
+  val trashLocation = IntArray(2)
+  trashView.getLocationOnScreen(trashLocation)
+
+  val timerCenterX = timerLocation[0] + (timerWidthPx / 2f)
+  val timerCenterY = timerLocation[1] + (timerHeightPx / 2f)
+
+  val trashLeft = trashLocation[0]
+  val trashRight = trashLocation[0] + trashWidthPx
+  val trashTop = trashLocation[1]
+  val trashBottom = trashLocation[1] + trashHeightPx
+
+  logd("timer center $timerCenterX $timerCenterY")
+  logd("trash rect $trashLeft $trashRight $trashTop $trashBottom")
+
+  return !(timerCenterX < trashLeft ||
+      timerCenterX > trashRight ||
+      timerCenterY < trashTop ||
+      timerCenterY > trashBottom)
 }
