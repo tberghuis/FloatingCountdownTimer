@@ -28,7 +28,7 @@ import xyz.tberghuis.floatingtimer.tmp7.TrashController
 import kotlin.math.max
 import kotlin.math.min
 
-class OverlayController(val service: FloatingService) {
+class XxxOverlayController(val service: FloatingService) {
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
   val trashController = TrashController(windowManager, service)
   private val bubbleSet = mutableSetOf<Bubble>()

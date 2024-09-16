@@ -39,7 +39,7 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
   val scope = CoroutineScope(Dispatchers.Default + job)
 
   lateinit var alarmController: FtAlarmController
-  lateinit var overlayController: OverlayController
+  lateinit var overlayController: XxxOverlayController
 
   private val savedStateRegistryController = SavedStateRegistryController.create(this)
 
@@ -70,7 +70,7 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     savedStateRegistryController.performRestore(null)
 
     alarmController = FtAlarmController(this)
-    overlayController = OverlayController(this)
+    overlayController = XxxOverlayController(this)
     startInForeground()
   }
 

@@ -192,10 +192,10 @@ class OverlayController(val service: FloatingService) {
           trashController.isBubbleDragging.value = false
           trashController.currentDraggingBubble.value = null
           // refactor how trash works???
-//          if (trashController.isBubbleHoveringTrash) {
-//            trashController.isBubbleHoveringTrash = false
-//            exitTimer()
-//          }
+          if (trashController.isBubbleHoveringTrash) {
+            trashController.isBubbleHoveringTrash = false
+            exitTimer()
+          }
         }
       }
       false
