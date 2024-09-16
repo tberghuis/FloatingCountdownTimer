@@ -6,11 +6,13 @@ import xyz.tberghuis.floatingtimer.logd
 fun calcIsBubbleHoverTrash(
   timerView: ComposeView,
   trashView: ComposeView,
-  timerWidthPx: Int,
-  timerHeightPx: Int,
-  trashWidthPx: Int,
-  trashHeightPx: Int,
 ): Boolean {
+  val timerWidthPx = timerView.width
+  val timerHeightPx = timerView.height
+  val trashWidthPx = trashView.width
+  val trashHeightPx = trashView.height
+
+
   val timerLocation = IntArray(2)
   timerView.getLocationOnScreen(timerLocation)
 

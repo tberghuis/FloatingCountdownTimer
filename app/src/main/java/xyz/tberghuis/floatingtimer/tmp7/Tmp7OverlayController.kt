@@ -186,20 +186,10 @@ class OverlayController(val service: FloatingService) {
           params.y = (paramStartDragY + (event.rawY - startDragRawY)).toInt()
           updateClickTargetParamsWithinScreenBounds(bubble.viewHolder)
 
-          // todo
-
-//          trashController.overlay?.let {
-//            trashController.isBubbleHoveringTrash =
-//              calcIsTimerHoverTrash(
-//                bubble.viewHolder.view, it,
-//                timerWidthPx=bubble.widthDp,
-//                timerHeightPx: Int,
-//                trashWidthPx: Int,
-//                trashHeightPx: Int,
-//                )
-//          }
-
-
+          trashController.overlay?.let {
+            trashController.isBubbleHoveringTrash =
+              calcIsBubbleHoverTrash(bubble.viewHolder.view, it)
+          }
         }
 
         MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
