@@ -26,9 +26,7 @@ class TrashController(
 ) {
   val isBubbleDragging = MutableStateFlow(false)
   val currentDraggingBubble = mutableStateOf<Bubble?>(null)
-
   var isBubbleHoveringTrash by mutableStateOf(false)
-
   var overlay: ComposeView? = null
 
   private val trashSizePx =
@@ -80,7 +78,6 @@ class TrashController(
     val view = createComposeView(service)
     view.setContent {
       CompositionLocalProvider(LocalFloatingService provides service) {
-//        TrashOverlay()
         Trash()
       }
     }
