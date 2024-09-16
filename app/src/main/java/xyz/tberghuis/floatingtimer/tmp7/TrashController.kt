@@ -16,19 +16,13 @@ import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.TrashOverlay
 import xyz.tberghuis.floatingtimer.service.createComposeView
 
-// todo move windowManager to service
 class TrashController(
   private val windowManager: WindowManager,
   private val service: FloatingService,
 ) {
   val isBubbleDragging = MutableStateFlow(false)
-
-  // todo refactor, use currentDraggingBubble
-  //   put viewHolder params.x params.y in MutableStateFlow
-  //   collect for windowManager.update
   val bubbleDraggingPosition = mutableStateOf(IntOffset.Zero)
   val currentDraggingBubble = mutableStateOf<Bubble?>(null)
-
   var isBubbleHoveringTrash = false
 
   private var overlay: ComposeView? = null
@@ -59,7 +53,6 @@ class TrashController(
           overlay?.let {
             try {
               windowManager.removeView(it)
-              // do i need disposecomposition???
             } catch (e: IllegalArgumentException) {
               Log.e("OverlayViewController", "IllegalArgumentException $e")
             } finally {
