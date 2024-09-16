@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.tmp4.TrashRefactorScreen
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class MainActivity : ComponentActivity() {
@@ -43,7 +42,6 @@ class MainActivity : ComponentActivity() {
             .background(Color.White),
         ) {
           FtNavHost()
-//          TrashRefactorScreen()
         }
       }
     }
