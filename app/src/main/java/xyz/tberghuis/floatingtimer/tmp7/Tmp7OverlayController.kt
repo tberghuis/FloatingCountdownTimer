@@ -195,11 +195,10 @@ class OverlayController(val service: FloatingService) {
         MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
           trashController.isBubbleDragging.value = false
           trashController.currentDraggingBubble.value = null
-          // TODO exit timer
-//          if (trashController.isBubbleHoveringTrash) {
-//            trashController.isBubbleHoveringTrash = false
-//            exitTimer()
-//          }
+          if (trashController.isBubbleHoveringTrash) {
+            trashController.isBubbleHoveringTrash = false
+            exitTimer()
+          }
         }
       }
       false
