@@ -1,4 +1,4 @@
-1.37.0    2024-09-16
+1.37.0    2024-09-16  dev-trash-refactor
 --------------------
 - refactor trash overlay so not using fullscreen transparent view
     this caused bug that user could not interact with screen if view not removed because of some bug
