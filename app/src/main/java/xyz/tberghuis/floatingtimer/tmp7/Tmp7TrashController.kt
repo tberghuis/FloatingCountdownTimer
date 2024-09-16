@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.Gravity
 import android.view.WindowManager
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +17,6 @@ import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
 import xyz.tberghuis.floatingtimer.service.Bubble
 import xyz.tberghuis.floatingtimer.service.FloatingService
-import xyz.tberghuis.floatingtimer.service.TrashOverlay
 import xyz.tberghuis.floatingtimer.service.createComposeView
 import xyz.tberghuis.floatingtimer.service.dimensionDpToPx
 
@@ -26,7 +27,7 @@ class TrashController(
   val isBubbleDragging = MutableStateFlow(false)
   val currentDraggingBubble = mutableStateOf<Bubble?>(null)
 
-//  var isBubbleHoveringTrash = false
+  var isBubbleHoveringTrash by mutableStateOf(false)
 
   private var overlay: ComposeView? = null
 
