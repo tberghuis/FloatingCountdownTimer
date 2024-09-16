@@ -29,7 +29,7 @@ class TrashController(
 
   var isBubbleHoveringTrash by mutableStateOf(false)
 
-  private var overlay: ComposeView? = null
+  var overlay: ComposeView? = null
 
   private val trashSizePx =
     dimensionDpToPx(TRASH_SIZE_DP.dp, service.resources.displayMetrics.density)
