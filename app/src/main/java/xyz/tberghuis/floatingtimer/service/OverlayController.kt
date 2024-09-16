@@ -30,7 +30,7 @@ import kotlin.math.min
 
 class XxxOverlayController(val service: FloatingService) {
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-  val trashController = TrashController(windowManager, service)
+  val trashController = XxxTrashController(windowManager, service)
   private val bubbleSet = mutableSetOf<Bubble>()
 
   fun getNumberOfBubbles(): Int {

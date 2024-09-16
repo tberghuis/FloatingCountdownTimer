@@ -21,9 +21,9 @@ class TrashController(
   private val service: FloatingService,
 ) {
   val isBubbleDragging = MutableStateFlow(false)
-  val bubbleDraggingPosition = mutableStateOf(IntOffset.Zero)
+//  val bubbleDraggingPosition = mutableStateOf(IntOffset.Zero)
   val currentDraggingBubble = mutableStateOf<Bubble?>(null)
-  var isBubbleHoveringTrash = false
+//  var isBubbleHoveringTrash = false
 
   private var overlay: ComposeView? = null
   private val params: WindowManager.LayoutParams = WindowManager.LayoutParams(

@@ -186,16 +186,19 @@ class OverlayController(val service: FloatingService) {
           params.x = (paramStartDragX + (event.rawX - startDragRawX)).toInt()
           params.y = (paramStartDragY + (event.rawY - startDragRawY)).toInt()
           updateClickTargetParamsWithinScreenBounds(bubble.viewHolder)
+
+          // todo
+
         }
 
         MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
           trashController.isBubbleDragging.value = false
           trashController.currentDraggingBubble.value = null
-          // refactor how trash works???
-          if (trashController.isBubbleHoveringTrash) {
-            trashController.isBubbleHoveringTrash = false
-            exitTimer()
-          }
+          // TODO exit timer
+//          if (trashController.isBubbleHoveringTrash) {
+//            trashController.isBubbleHoveringTrash = false
+//            exitTimer()
+//          }
         }
       }
       false
@@ -220,7 +223,8 @@ class OverlayController(val service: FloatingService) {
       // this was happening in prod, can't reproduce
       Log.e("OverlayController", "IllegalArgumentException: $e")
     }
-    trashController.bubbleDraggingPosition.value = IntOffset(params.x, params.y)
+    // remove
+//    trashController.bubbleDraggingPosition.value = IntOffset(params.x, params.y)
   }
 
   fun onConfigurationChanged() {
