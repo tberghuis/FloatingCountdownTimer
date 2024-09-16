@@ -99,7 +99,7 @@ class CountdownScreenVm(
         premiumVmc.showPurchaseDialog = true
         return@launch
       }
-      boundFloatingService.provideFloatingService().overlayController.addCountdown(
+      boundFloatingService.provideService().overlayController.addCountdown(
         totalSecs,
         haloColor,
         timerShape,

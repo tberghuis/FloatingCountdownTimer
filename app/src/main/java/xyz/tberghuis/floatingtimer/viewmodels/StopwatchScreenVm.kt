@@ -70,7 +70,7 @@ class StopwatchScreenVm(
         premiumVmc.showPurchaseDialog = true
         return@launch
       }
-      boundFloatingService.provideFloatingService().overlayController.addStopwatch(
+      boundFloatingService.provideService().overlayController.addStopwatch(
         haloColor, timerShape, label, isBackgroundTransparent, savedTimer
       )
     }

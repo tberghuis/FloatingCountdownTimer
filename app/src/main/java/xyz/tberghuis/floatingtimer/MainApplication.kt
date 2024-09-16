@@ -8,6 +8,8 @@ import xyz.tberghuis.floatingtimer.data.AppDatabase
 import xyz.tberghuis.floatingtimer.data.PreferencesRepository
 import xyz.tberghuis.floatingtimer.data.dataStore
 import xyz.tberghuis.floatingtimer.iap.BillingClientWrapper
+import xyz.tberghuis.floatingtimer.service.FloatingService
+import xyz.tberghuis.floatingtimer.tmp6.Tmp6BoundService
 
 class MainApplication : Application() {
   // could i just use Context.dataStore instead for singleton
@@ -16,7 +18,7 @@ class MainApplication : Application() {
   // doitwrong
   lateinit var preferencesRepository: PreferencesRepository
   lateinit var appDatabase: AppDatabase
-  lateinit var boundFloatingService: BoundFloatingService
+  lateinit var boundFloatingService: Tmp6BoundService<FloatingService>
 
   lateinit var billingClientWrapper: BillingClientWrapper
 
@@ -24,7 +26,7 @@ class MainApplication : Application() {
     super.onCreate()
     appDatabase = provideDatabase()
     preferencesRepository = PreferencesRepository(dataStore)
-    boundFloatingService = BoundFloatingService(this)
+    boundFloatingService = Tmp6BoundService(this, FloatingService::class.java)
     createNotificationChannel()
     billingClientWrapper = BillingClientWrapper(this)
   }

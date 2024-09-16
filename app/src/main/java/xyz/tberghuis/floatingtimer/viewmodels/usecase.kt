@@ -9,7 +9,7 @@ suspend fun shouldShowPremiumDialogMultipleTimers(application: Application): Boo
   val boundFloatingService = (application as MainApplication).boundFloatingService
   val premiumPurchased =
     application.providePreferencesRepository().haloColourPurchasedFlow.first()
-  val floatingService = boundFloatingService.provideFloatingService()
+  val floatingService = boundFloatingService.provideService()
   val numBubbles = floatingService.overlayController.getNumberOfBubbles()
   return !premiumPurchased && numBubbles == 2
 }

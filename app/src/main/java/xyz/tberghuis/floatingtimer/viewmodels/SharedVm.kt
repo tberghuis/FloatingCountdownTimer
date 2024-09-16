@@ -14,13 +14,13 @@ class SharedVm(application: Application) : AndroidViewModel(application) {
   var showGrantOverlayDialog by mutableStateOf(false)
   fun cancelAllTimers() {
     viewModelScope.launch {
-      boundFloatingService.provideFloatingService().overlayController.exitAll()
+      boundFloatingService.provideService().overlayController.exitAll()
     }
   }
 
   fun saveTimerPositions() {
     viewModelScope.launch {
-      boundFloatingService.provideFloatingService().overlayController.saveTimerPositions()
+      boundFloatingService.provideService().overlayController.saveTimerPositions()
     }
   }
 }
