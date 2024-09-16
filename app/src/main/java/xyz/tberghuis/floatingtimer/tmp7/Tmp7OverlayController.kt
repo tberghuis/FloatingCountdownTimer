@@ -26,7 +26,6 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
-import xyz.tberghuis.floatingtimer.tmp6.calcIsTimerHoverTrash
 import kotlin.math.max
 import kotlin.math.min
 
