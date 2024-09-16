@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp7
+package xyz.tberghuis.floatingtimer.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -13,10 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
-import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
 
 @Composable
 fun Trash() {
@@ -38,17 +35,5 @@ fun Trash() {
       Icons.Filled.Delete, "trash", modifier = Modifier
         .size(50.dp), tint = iconTint
     )
-  }
-}
-
-@Preview
-@Composable
-fun TrashPreview() {
-  Box(
-    modifier = Modifier
-      .background(Color.Gray)
-      .size(TRASH_SIZE_DP.dp),
-  ) {
-    Trash()
   }
 }

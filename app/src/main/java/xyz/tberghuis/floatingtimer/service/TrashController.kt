@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
-import xyz.tberghuis.floatingtimer.tmp7.Trash
+import xyz.tberghuis.floatingtimer.composables.Trash
 
 class TrashController(
   private val windowManager: WindowManager,
