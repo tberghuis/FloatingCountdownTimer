@@ -6,7 +6,6 @@ import android.view.WindowManager
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.unit.IntOffset
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -21,8 +20,8 @@ class TrashController(
   private val service: FloatingService,
 ) {
   val isBubbleDragging = MutableStateFlow(false)
-//  val bubbleDraggingPosition = mutableStateOf(IntOffset.Zero)
   val currentDraggingBubble = mutableStateOf<Bubble?>(null)
+
 //  var isBubbleHoveringTrash = false
 
   private var overlay: ComposeView? = null
