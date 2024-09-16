@@ -14,18 +14,15 @@ import androidx.compose.ui.layout.boundsInRoot
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.ComposeView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp4.TmpService
 
-
 class TmpTrashController(val service: TmpService) {
   var trashComposeView: ComposeView? = null
   var trashParams: WindowManager.LayoutParams? = null
   val trashState = TmpTrashState()
-
 
   val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
