@@ -36,7 +36,7 @@ class TrashController(
     trashSizePx,
     trashSizePx,
     0,
-    100,
+    dimensionDpToPx(30.dp, service.resources.displayMetrics.density), // vert padding from nav bar
     WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
     WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
     PixelFormat.TRANSLUCENT
