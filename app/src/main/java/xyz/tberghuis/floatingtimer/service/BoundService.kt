@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp6
+package xyz.tberghuis.floatingtimer.service
 
 import android.app.Application
 import android.app.Service
@@ -21,7 +21,7 @@ interface ServiceBinder<T : Service> {
   fun getService(): T
 }
 
-class Tmp6BoundService<T : Service>(
+class BoundService<T : Service>(
   private val application: Application,
   private val serviceClass: Class<T>
 ) {
