@@ -35,7 +35,7 @@ class FtAlarmController(
               if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 isHapticGeneratorEnabled = false
               }
-              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+              if (Build.VERSION.SDK_INT >= 28) {
                 isLooping = true
               }
             }
