@@ -1,5 +1,6 @@
 v1.38.0    2024-11-19  dev-settings
   update dependencies
+  billing client v7
 
 v1.37.0    2024-09-16  dev-trash-refactor
 --------------------
