@@ -1,19 +1,19 @@
 [versions]
-kotlin = "2.0.20"
-agp = "8.6.0"
+kotlin = "2.0.21"
+agp = "8.7.2"
 # https://github.com/google/ksp/releases
-ksp = "2.0.20-1.0.25"
+ksp = "2.0.21-1.0.27"
 
-coreKtx = "1.13.1"
+coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.8.5"
-lifecycleService = "2.8.5"
-activityCompose = "1.9.2"
+lifecycleRuntimeKtx = "2.8.7"
+lifecycleService = "2.8.7"
+activityCompose = "1.9.3"
 # https://developer.android.com/jetpack/compose/bom/bom-mapping
-composeBom = "2024.09.01"
-navigationCompose = "2.8.0"
+composeBom = "2024.11.00"
+navigationCompose = "2.8.4"
 room = "2.6.1"
 androidxDataStore = "1.1.1"
 ktorVersion = "2.3.10"
