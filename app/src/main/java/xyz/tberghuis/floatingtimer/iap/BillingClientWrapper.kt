@@ -8,6 +8,7 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.PendingPurchasesParams
 import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.ProductDetailsResponseListener
 import com.android.billingclient.api.Purchase
@@ -43,7 +44,8 @@ class BillingClientWrapper(
   // do not use outside startConnection(), use provideBillingClient
   private val internalBillingClient = BillingClient.newBuilder(context)
     .setListener(this)
-    .enablePendingPurchases()
+//    .enablePendingPurchases() // deprecated billingclient v7
+    .enablePendingPurchases(PendingPurchasesParams.newBuilder().enableOneTimeProducts().build())
     .build()
 
   // reference
