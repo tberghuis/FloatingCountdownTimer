@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
 import android.media.AudioAttributes
 import android.media.AudioManager
+import android.media.MediaPlayer
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.Vibrator
 import android.os.VibratorManager
+import android.util.Log
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -77,6 +79,9 @@ class TmpFtAlarmController(
     floatingService.scope.launch {
       prefs.alarmRingtoneUriFlow.collect { uri ->
         uri?.let {
+          ringtoneDuration = getRingtoneDuration(floatingService, Uri.parse(uri))
+          // cancel job
+          // stop vibration
           ringtone?.stop()
           ringtone =
             RingtoneManager.getRingtone(floatingService.application, Uri.parse(uri))?.apply {
@@ -115,3 +120,17 @@ class TmpFtAlarmController(
     finishedCountdowns.value -= c
   }
 }
+
+fun getRingtoneDuration(context: Context, ringtoneUri: Uri): Long? {
+  // will this sometimes throw without READ_EXTERNAL_STORAGE permission???
+  var duration: Long? = null
+  try {
+    val mediaPlayer: MediaPlayer? = MediaPlayer.create(context, ringtoneUri)
+    duration = mediaPlayer?.duration?.toLong()
+    mediaPlayer?.release()
+  } catch (e: Exception) {
+    Log.e("FtAlarmController", "error: ${e.message}")
+  }
+  return duration
+}
+
