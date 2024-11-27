@@ -142,6 +142,7 @@ class TmpFtAlarmController(
           }
         }
       } finally {
+        // cancellation exception
         vibrator.cancel()
         ringtone?.stop()
       }
