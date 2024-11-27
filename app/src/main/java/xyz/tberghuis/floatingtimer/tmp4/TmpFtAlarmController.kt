@@ -32,7 +32,6 @@ class TmpFtAlarmController(
   // shortcuts
   private val prefs = floatingService.application.providePreferencesRepository()
 
-
   private var ringtone: Ringtone? = null
   private val finishedCountdowns = MutableStateFlow(setOf<Countdown>())
 
@@ -41,46 +40,29 @@ class TmpFtAlarmController(
 
   private val alarmRunning = MutableStateFlow(false)
 
-  // looping : Boolean? = null
+  // todo looping : Boolean? = null
   var looping: Boolean? = false
 
-  // vibrate : Boolean? = null
-  var vibrate: Boolean? = false
-  var sound: Boolean? = true
+  var vibrate: Boolean? = null
+  var sound: Boolean? = null
   var ringtoneDuration: Long? = null
-//  var stopPlayerJob: Job? = null
-
 
   init {
+    watchFinishedCountdowns()
     watchRingtoneUri()
     watchAlarmRunning()
+
     floatingService.scope.launch {
-      try {
-        finishedCountdowns.collect {
-          withContext(Main.immediate) {
-            when (it.size) {
-              0 -> {
-                if (ringtone?.isPlaying == true) {
-                  ringtone?.stop()
-                }
-              }
-              // allow for single play ringtone on older apilevels < 28
-              else -> {
-                if (ringtone?.isPlaying == false) {
-                  ringtone?.play()
-                }
-              }
-            }
-          }
-        }
-      } finally {
-        // scope is cancelled
-        // lesson, don't call withContext in finally block
-        if (ringtone?.isPlaying == true) {
-          ringtone?.stop()
-        }
+      prefs.soundFlow.collectLatest {
+        sound = it
       }
     }
+    floatingService.scope.launch {
+      prefs.vibrationFlow.collectLatest {
+        vibrate = it
+      }
+    }
+    // todo watch looping from dataStore
   }
 
   @OptIn(ExperimentalCoroutinesApi::class)
@@ -162,6 +144,22 @@ class TmpFtAlarmController(
       } finally {
         vibrator.cancel()
         ringtone?.stop()
+      }
+    }
+  }
+
+  fun watchFinishedCountdowns() {
+    floatingService.scope.launch {
+      finishedCountdowns.collectLatest {
+        when (it.size) {
+          0 -> {
+            alarmRunning.value = false
+          }
+
+          else -> {
+            alarmRunning.value = true
+          }
+        }
       }
     }
   }
