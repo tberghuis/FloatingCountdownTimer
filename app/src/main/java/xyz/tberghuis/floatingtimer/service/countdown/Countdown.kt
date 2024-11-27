@@ -235,6 +235,7 @@ class Countdown(
       timerState.collectLatest {
         logd("timerState collectLatest $it")
         val vibrate = preferences.vibrationFlow.first()
+        // todo move into FtAlarmController
         val sound = preferences.soundFlow.first()
         when (it) {
           TimerStateFinished -> {

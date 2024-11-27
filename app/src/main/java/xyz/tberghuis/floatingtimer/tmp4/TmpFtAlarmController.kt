@@ -9,11 +9,16 @@ import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.util.Log
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
@@ -33,15 +38,19 @@ class TmpFtAlarmController(
   // todo
   private val vibrator = initVibrator()
 
-  private val alarmRunning = MutableStateFlow(false)
+//  private val alarmRunning = MutableStateFlow(false)
 
 
   // watch ringtone uri to update
 
-  // looping : Boolean?
-  // vibrate : Boolean?
+  // looping : Boolean? = null
+  var looping: Boolean? = false
+
+  // vibrate : Boolean? = null
+  var vibrate: Boolean? = false
+  var sound: Boolean? = true
   var ringtoneDuration: Long? = null
-  // stopPlayerJob = null
+  var stopPlayerJob: Job? = null
 
 
   init {
@@ -75,16 +84,17 @@ class TmpFtAlarmController(
     }
   }
 
+  @OptIn(ExperimentalCoroutinesApi::class)
   private fun watchRingtoneUri() {
     floatingService.scope.launch {
-      prefs.alarmRingtoneUriFlow.collect { uri ->
+      prefs.alarmRingtoneUriFlow.mapLatest { uriString ->
+        Uri.parse(uriString)
+      }.collect { uri ->
         uri?.let {
-          ringtoneDuration = getRingtoneDuration(floatingService, Uri.parse(uri))
-          // cancel job
-          // stop vibration
-          ringtone?.stop()
+          stopAlarmRunning()
+          ringtoneDuration = getRingtoneDuration(floatingService, uri)
           ringtone =
-            RingtoneManager.getRingtone(floatingService.application, Uri.parse(uri))?.apply {
+            RingtoneManager.getRingtone(floatingService.application, uri)?.apply {
               audioAttributes = AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ALARM)
                 .setLegacyStreamType(AudioManager.STREAM_ALARM)
@@ -119,9 +129,39 @@ class TmpFtAlarmController(
   fun stopAlarm(c: Countdown) {
     finishedCountdowns.value -= c
   }
+
+  private fun startAlarmRunning() {
+    if (ringtone?.isPlaying == true) {
+      return
+    }
+    stopPlayerJob?.cancel()
+    if (sound == true) {
+      ringtone?.play()
+    }
+    if (vibrate == true) {
+      vibrator.vibrate(
+        VibrationEffect.createWaveform(
+          longArrayOf(1500, 200), intArrayOf(255, 0), 0
+        )
+      )
+    }
+    if (looping == false && ringtoneDuration != null) {
+      stopPlayerJob = floatingService.scope.launch {
+        delay(ringtoneDuration!!)
+        stopAlarmRunning()
+      }
+    }
+  }
+
+  private fun stopAlarmRunning() {
+    vibrator.cancel()
+    ringtone?.stop()
+    stopPlayerJob?.cancel()
+    stopPlayerJob = null
+  }
 }
 
-fun getRingtoneDuration(context: Context, ringtoneUri: Uri): Long? {
+private fun getRingtoneDuration(context: Context, ringtoneUri: Uri): Long? {
   // will this sometimes throw without READ_EXTERNAL_STORAGE permission???
   var duration: Long? = null
   try {
@@ -133,4 +173,3 @@ fun getRingtoneDuration(context: Context, ringtoneUri: Uri): Long? {
   }
   return duration
 }
-
