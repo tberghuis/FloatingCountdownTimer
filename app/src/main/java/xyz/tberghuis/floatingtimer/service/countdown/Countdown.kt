@@ -155,7 +155,6 @@ import kotlin.math.roundToInt
 //}
 
 
-
 class Countdown(
   private val service: FloatingService,
   val durationSeconds: Int,
@@ -178,12 +177,8 @@ class Countdown(
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
   private var countDownTimer: CountDownTimer? = null
 
-  // todo remove
-  private val vibrator = initVibrator()
-
   override fun exit() {
     service.alarmController.stopAlarm(this)
-    vibrator.cancel()
     countDownTimer?.cancel()
     super.exit()
   }
@@ -219,36 +214,13 @@ class Countdown(
     manageCountdownTimer()
   }
 
-  private fun initVibrator(): Vibrator {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-      val vibratorManager =
-        service.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
-      vibratorManager.defaultVibrator
-    } else {
-      @Suppress("DEPRECATION") service.getSystemService(VIBRATOR_SERVICE) as Vibrator
-    }
-  }
-
   private fun manageAlarm() {
-    val preferences = service.application.providePreferencesRepository()
     service.scope.launch {
       timerState.collectLatest {
         logd("timerState collectLatest $it")
-        val vibrate = preferences.vibrationFlow.first()
-        // todo move into FtAlarmController
-        val sound = preferences.soundFlow.first()
         when (it) {
           TimerStateFinished -> {
-            if (sound) {
-              service.alarmController.startAlarm(this@Countdown)
-            }
-            if (vibrate) {
-              vibrator.vibrate(
-                VibrationEffect.createWaveform(
-                  longArrayOf(1500, 200), intArrayOf(255, 0), 0
-                )
-              )
-            }
+            service.alarmController.startAlarm(this@Countdown)
           }
 
           TimerStateRunning -> {
@@ -256,7 +228,6 @@ class Countdown(
 
           TimerStatePaused -> {
             service.alarmController.stopAlarm(this@Countdown)
-            vibrator.cancel()
           }
         }
       }
@@ -289,6 +260,3 @@ class Countdown(
     }
   }
 }
-
-
-
