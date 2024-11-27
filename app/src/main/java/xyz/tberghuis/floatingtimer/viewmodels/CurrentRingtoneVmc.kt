@@ -33,6 +33,9 @@ class CurrentRingtoneVmc(
           } catch (e: NullPointerException) {
             Log.e("CurrentRingtoneVmc", "NullPointerException $e")
             null
+          } catch (e: IllegalArgumentException) {
+            Log.e("CurrentRingtoneVmc", "IllegalArgumentException $e")
+            null
           }
         } ?: ""
       }
