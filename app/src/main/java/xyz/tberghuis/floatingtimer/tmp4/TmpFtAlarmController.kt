@@ -41,7 +41,7 @@ class TmpFtAlarmController(
   private val alarmRunning = MutableStateFlow(false)
 
   // todo looping : Boolean? = null
-  var looping: Boolean? = false
+  var looping: Boolean? = true
 
   var vibrate: Boolean? = null
   var sound: Boolean? = null
