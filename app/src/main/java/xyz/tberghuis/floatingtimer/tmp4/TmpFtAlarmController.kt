@@ -1,11 +1,15 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
+import android.content.Context
+import android.content.Context.VIBRATOR_SERVICE
 import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.Ringtone
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.os.Vibrator
+import android.os.VibratorManager
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -15,10 +19,16 @@ import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 
 class TmpFtAlarmController(
-  floatingService: FloatingService
+  private val floatingService: FloatingService
 ) {
   private var ringtone: Ringtone? = null
   private val finishedCountdowns = MutableStateFlow(setOf<Countdown>())
+
+  // todo
+  private val vibrator = initVibrator()
+
+  private val alarmRunning = MutableStateFlow(false)
+
 
   // watch ringtone uri to update
 
@@ -26,6 +36,7 @@ class TmpFtAlarmController(
   // vibrate : Boolean?
   var ringtoneDuration: Long? = null
   // stopPlayerJob = null
+
 
   init {
     val prefs = floatingService.application.providePreferencesRepository()
@@ -78,6 +89,17 @@ class TmpFtAlarmController(
       }
     }
   }
+
+  private fun initVibrator(): Vibrator {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+      val vibratorManager =
+        floatingService.getSystemService(Context.VIBRATOR_MANAGER_SERVICE) as VibratorManager
+      vibratorManager.defaultVibrator
+    } else {
+      @Suppress("DEPRECATION") floatingService.getSystemService(VIBRATOR_SERVICE) as Vibrator
+    }
+  }
+
 
   fun startAlarm(c: Countdown) {
     finishedCountdowns.value += c

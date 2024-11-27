@@ -177,6 +177,8 @@ class Countdown(
   var countdownSeconds by mutableIntStateOf(durationSeconds)
   val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
   private var countDownTimer: CountDownTimer? = null
+
+  // todo remove
   private val vibrator = initVibrator()
 
   override fun exit() {
