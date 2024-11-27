@@ -25,6 +25,7 @@ class TmpFtAlarmController(
   // looping : Boolean?
   // vibrate : Boolean?
   // ringtoneDuration : Long? = null
+  // stopPlayerJob = null
 
   init {
     val prefs = floatingService.application.providePreferencesRepository()
