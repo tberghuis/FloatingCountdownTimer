@@ -128,6 +128,10 @@ class TmpFtAlarmController(
                   )
                 )
               }
+              if (sound == false && vibrate == false) {
+                alarmRunning.value = false
+                return@collectLatest
+              }
               if (looping == false && ringtoneDuration != null) {
                 // don't need to launch as using collectLatest
                 delay(ringtoneDuration!!)
