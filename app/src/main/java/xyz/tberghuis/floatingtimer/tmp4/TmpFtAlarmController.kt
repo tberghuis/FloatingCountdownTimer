@@ -15,13 +15,11 @@ import android.os.VibratorManager
 import android.util.Log
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
@@ -41,11 +39,11 @@ class TmpFtAlarmController(
   private val alarmRunning = MutableStateFlow(false)
 
   // todo looping : Boolean? = null
-  var looping: Boolean? = true
+  private var looping: Boolean? = true
 
-  var vibrate: Boolean? = null
-  var sound: Boolean? = null
-  var ringtoneDuration: Long? = null
+  private var vibrate: Boolean? = null
+  private var sound: Boolean? = null
+  private var ringtoneDuration: Long? = null
 
   init {
     watchFinishedCountdowns()
@@ -102,7 +100,6 @@ class TmpFtAlarmController(
     }
   }
 
-
   fun startAlarm(c: Countdown) {
     finishedCountdowns.value += c
   }
@@ -153,7 +150,7 @@ class TmpFtAlarmController(
     }
   }
 
-  fun watchFinishedCountdowns() {
+  private fun watchFinishedCountdowns() {
     floatingService.scope.launch {
       finishedCountdowns.collectLatest {
         when (it.size) {
