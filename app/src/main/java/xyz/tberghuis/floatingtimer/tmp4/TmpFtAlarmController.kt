@@ -24,7 +24,7 @@ class TmpFtAlarmController(
 
   // looping : Boolean?
   // vibrate : Boolean?
-  // ringtoneDuration : Long? = null
+  var ringtoneDuration: Long? = null
   // stopPlayerJob = null
 
   init {
