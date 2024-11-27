@@ -130,32 +130,38 @@ class TmpFtAlarmController(
   }
 
   private fun watchAlarmRunning() {
-    floatingService.scope.launch {
-      alarmRunning.collectLatest { running ->
-        when (running) {
-          true -> {
-            if (sound == true) {
-              ringtone?.play()
-            }
-            if (vibrate == true) {
-              vibrator.vibrate(
-                VibrationEffect.createWaveform(
-                  longArrayOf(1500, 200), intArrayOf(255, 0), 0
+    // do I need Main.immediate dispatcher? .play() .vibrate()
+    floatingService.scope.launch(Main.immediate) {
+      try {
+        alarmRunning.collectLatest { running ->
+          when (running) {
+            true -> {
+              if (sound == true) {
+                ringtone?.play()
+              }
+              if (vibrate == true) {
+                vibrator.vibrate(
+                  VibrationEffect.createWaveform(
+                    longArrayOf(1500, 200), intArrayOf(255, 0), 0
+                  )
                 )
-              )
+              }
+              if (looping == false && ringtoneDuration != null) {
+                // don't need to launch as using collectLatest
+                delay(ringtoneDuration!!)
+                alarmRunning.value = false
+              }
             }
-            if (looping == false && ringtoneDuration != null) {
-              // don't need to launch as using collectLatest
-              delay(ringtoneDuration!!)
-              alarmRunning.value = false
-            }
-          }
 
-          false -> {
-            vibrator.cancel()
-            ringtone?.stop()
+            false -> {
+              vibrator.cancel()
+              ringtone?.stop()
+            }
           }
         }
+      } finally {
+        vibrator.cancel()
+        ringtone?.stop()
       }
     }
   }
