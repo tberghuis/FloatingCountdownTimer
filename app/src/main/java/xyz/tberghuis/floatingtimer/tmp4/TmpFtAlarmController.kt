@@ -21,6 +21,10 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 class TmpFtAlarmController(
   private val floatingService: FloatingService
 ) {
+  // shortcuts
+  private val prefs = floatingService.application.providePreferencesRepository()
+
+
   private var ringtone: Ringtone? = null
   private val finishedCountdowns = MutableStateFlow(setOf<Countdown>())
 
@@ -39,28 +43,7 @@ class TmpFtAlarmController(
 
 
   init {
-    val prefs = floatingService.application.providePreferencesRepository()
-    floatingService.scope.launch {
-      prefs.alarmRingtoneUriFlow.collect { uri ->
-        uri?.let {
-          ringtone?.stop()
-          ringtone =
-            RingtoneManager.getRingtone(floatingService.application, Uri.parse(uri))?.apply {
-              audioAttributes = AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_ALARM)
-                .setLegacyStreamType(AudioManager.STREAM_ALARM)
-                .build()
-              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                isHapticGeneratorEnabled = false
-              }
-              if (Build.VERSION.SDK_INT >= 28) {
-                isLooping = true
-              }
-            }
-        }
-      }
-    }
-
+    watchRingtoneUri()
     floatingService.scope.launch {
       try {
         finishedCountdowns.collect {
@@ -85,6 +68,29 @@ class TmpFtAlarmController(
         // lesson, don't call withContext in finally block
         if (ringtone?.isPlaying == true) {
           ringtone?.stop()
+        }
+      }
+    }
+  }
+
+  private fun watchRingtoneUri() {
+    floatingService.scope.launch {
+      prefs.alarmRingtoneUriFlow.collect { uri ->
+        uri?.let {
+          ringtone?.stop()
+          ringtone =
+            RingtoneManager.getRingtone(floatingService.application, Uri.parse(uri))?.apply {
+              audioAttributes = AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_ALARM)
+                .setLegacyStreamType(AudioManager.STREAM_ALARM)
+                .build()
+              if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                isHapticGeneratorEnabled = false
+              }
+              if (Build.VERSION.SDK_INT >= 28) {
+                isLooping = true
+              }
+            }
         }
       }
     }
