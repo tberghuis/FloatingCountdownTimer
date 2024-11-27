@@ -18,6 +18,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -38,10 +39,7 @@ class TmpFtAlarmController(
   // todo
   private val vibrator = initVibrator()
 
-//  private val alarmRunning = MutableStateFlow(false)
-
-
-  // watch ringtone uri to update
+  private val alarmRunning = MutableStateFlow(false)
 
   // looping : Boolean? = null
   var looping: Boolean? = false
@@ -50,11 +48,12 @@ class TmpFtAlarmController(
   var vibrate: Boolean? = false
   var sound: Boolean? = true
   var ringtoneDuration: Long? = null
-  var stopPlayerJob: Job? = null
+//  var stopPlayerJob: Job? = null
 
 
   init {
     watchRingtoneUri()
+    watchAlarmRunning()
     floatingService.scope.launch {
       try {
         finishedCountdowns.collect {
@@ -89,9 +88,9 @@ class TmpFtAlarmController(
     floatingService.scope.launch {
       prefs.alarmRingtoneUriFlow.mapLatest { uriString ->
         Uri.parse(uriString)
-      }.collect { uri ->
+      }.collectLatest { uri ->
         uri?.let {
-          stopAlarmRunning()
+          alarmRunning.value = false
           ringtoneDuration = getRingtoneDuration(floatingService, uri)
           ringtone =
             RingtoneManager.getRingtone(floatingService.application, uri)?.apply {
@@ -130,34 +129,35 @@ class TmpFtAlarmController(
     finishedCountdowns.value -= c
   }
 
-  private fun startAlarmRunning() {
-    if (ringtone?.isPlaying == true) {
-      return
-    }
-    stopPlayerJob?.cancel()
-    if (sound == true) {
-      ringtone?.play()
-    }
-    if (vibrate == true) {
-      vibrator.vibrate(
-        VibrationEffect.createWaveform(
-          longArrayOf(1500, 200), intArrayOf(255, 0), 0
-        )
-      )
-    }
-    if (looping == false && ringtoneDuration != null) {
-      stopPlayerJob = floatingService.scope.launch {
-        delay(ringtoneDuration!!)
-        stopAlarmRunning()
+  private fun watchAlarmRunning() {
+    floatingService.scope.launch {
+      alarmRunning.collectLatest { running ->
+        when (running) {
+          true -> {
+            if (sound == true) {
+              ringtone?.play()
+            }
+            if (vibrate == true) {
+              vibrator.vibrate(
+                VibrationEffect.createWaveform(
+                  longArrayOf(1500, 200), intArrayOf(255, 0), 0
+                )
+              )
+            }
+            if (looping == false && ringtoneDuration != null) {
+              // don't need to launch as using collectLatest
+              delay(ringtoneDuration!!)
+              alarmRunning.value = false
+            }
+          }
+
+          false -> {
+            vibrator.cancel()
+            ringtone?.stop()
+          }
+        }
       }
     }
-  }
-
-  private fun stopAlarmRunning() {
-    vibrator.cancel()
-    ringtone?.stop()
-    stopPlayerJob?.cancel()
-    stopPlayerJob = null
   }
 }
 
