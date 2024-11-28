@@ -8,9 +8,10 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.MainApplication
+import xyz.tberghuis.floatingtimer.service.boundFloatingService
 
 class SharedVm(application: Application) : AndroidViewModel(application) {
-  private val boundFloatingService = (application as MainApplication).boundFloatingService
+  private val boundFloatingService = application.boundFloatingService
   var showGrantOverlayDialog by mutableStateOf(false)
   fun cancelAllTimers() {
     viewModelScope.launch {
