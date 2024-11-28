@@ -15,11 +15,15 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.logd
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,7 +53,13 @@ fun SettingsScreen() {
 // todo stringResource hardcoded strings
 
 @Composable
-fun SettingsScreenContent(padding: PaddingValues) {
+fun SettingsScreenContent(
+  padding: PaddingValues,
+  vm: SettingsScreenVm = viewModel()
+) {
+
+  val looping by vm.loopingFlow.collectAsState(true)
+
   Column(
     modifier = Modifier
       .padding(padding)
@@ -65,9 +75,10 @@ fun SettingsScreenContent(padding: PaddingValues) {
 //      leadingContent = { Text("leadingContent") },
       trailingContent = {
         Switch(
-          checked = true,
+          checked = looping,
           onCheckedChange = {
-
+            logd("onCheckedChange $it")
+            vm.updateLooping(it)
           },
         )
 
