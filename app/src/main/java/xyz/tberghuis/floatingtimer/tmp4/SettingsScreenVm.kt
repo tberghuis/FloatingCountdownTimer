@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.viewmodels.CurrentRingtoneVmc
 
 class SettingsScreenVm(
@@ -12,7 +12,7 @@ class SettingsScreenVm(
 //  savedStateHandle: SavedStateHandle
 ) :
   AndroidViewModel(application) {
-  private val prefs = application.providePreferencesRepository()
+  private val prefs = application.preferencesRepository
 
 
   val currentRingtoneVmc =

@@ -13,11 +13,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class MainActivity : ComponentActivity() {
   private fun checkPremium() {
-    val preferencesRepository = application.providePreferencesRepository()
+    val preferencesRepository = application.preferencesRepository
     lifecycleScope.launch(IO) {
       val purchased =
         application.provideBillingClientWrapper().checkPremiumPurchased() ?: return@launch

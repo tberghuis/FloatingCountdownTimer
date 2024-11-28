@@ -19,9 +19,9 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.BackgroundTransCheckboxVm
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedTimer
+import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
-import xyz.tberghuis.floatingtimer.providePreferencesRepository
 
 class CountdownScreenVm(
   private val application: Application,
@@ -30,7 +30,7 @@ class CountdownScreenVm(
   private val savedCountdownDao = application.provideDatabase().savedCountdownDao()
   var showDeleteDialog by mutableStateOf<SavedCountdown?>(null)
 
-  private val preferencesRepository = application.providePreferencesRepository()
+  private val preferencesRepository = application.preferencesRepository
 
   val currentRingtoneVmc =
     CurrentRingtoneVmc(preferencesRepository.alarmRingtoneUriFlow, viewModelScope, application)

@@ -18,7 +18,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.Bubble
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import kotlin.math.roundToInt

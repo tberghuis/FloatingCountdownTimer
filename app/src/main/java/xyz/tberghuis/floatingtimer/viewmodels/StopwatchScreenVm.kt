@@ -16,9 +16,9 @@ import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.composables.BackgroundTransCheckboxVm
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
+import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideDatabase
-import xyz.tberghuis.floatingtimer.providePreferencesRepository
 
 class StopwatchScreenVm(
   private val application: Application,
@@ -26,7 +26,7 @@ class StopwatchScreenVm(
   private val savedStopwatchDao = application.provideDatabase().savedStopwatchDao()
   var showDeleteDialog by mutableStateOf<SavedStopwatch?>(null)
 
-  private val preferencesRepository = application.providePreferencesRepository()
+  private val preferencesRepository = application.preferencesRepository
   val premiumVmc = PremiumVmc(application, viewModelScope)
   private val boundFloatingService = (application as MainApplication).boundFloatingService
 

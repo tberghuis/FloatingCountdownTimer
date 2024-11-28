@@ -115,4 +115,23 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
       preferences[booleanPreferencesKey("looping")] = looping
     }
   }
+
+
+  companion object {
+    @Volatile
+    private var instance: PreferencesRepository? = null
+    fun getInstance(context: Context) =
+      instance ?: synchronized(this) {
+        instance ?: PreferencesRepository(context.dataStore).also { instance = it }
+      }
+  }
+
+
 }
+
+//fun Context.providePreferencesRepository(): PreferencesRepository {
+//  return PreferencesRepository.getInstance(this)
+//}
+
+val Context.preferencesRepository : PreferencesRepository
+  get() = PreferencesRepository.getInstance(this)

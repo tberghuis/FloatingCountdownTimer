@@ -18,8 +18,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.data.SavedTimer
+import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.providePreferencesRepository
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
@@ -46,7 +46,7 @@ class OverlayController(val service: FloatingService) {
   ) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
-        service.application.providePreferencesRepository().bubbleScaleFlow.first()
+        service.application.preferencesRepository.bubbleScaleFlow.first()
       }
       val stopwatch =
         Stopwatch(
@@ -80,7 +80,7 @@ class OverlayController(val service: FloatingService) {
   ) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
-        service.application.providePreferencesRepository().bubbleScaleFlow.first()
+        service.application.preferencesRepository.bubbleScaleFlow.first()
       }
       val countdown = Countdown(
         service,

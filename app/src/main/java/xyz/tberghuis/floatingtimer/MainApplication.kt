@@ -16,7 +16,7 @@ class MainApplication : Application() {
   // i could write some tests to see if singleton across application
   // and activities
   // doitwrong
-  lateinit var preferencesRepository: PreferencesRepository
+//  lateinit var preferencesRepository: PreferencesRepository
   lateinit var appDatabase: AppDatabase
   lateinit var boundFloatingService: BoundService<FloatingService>
 
@@ -25,7 +25,7 @@ class MainApplication : Application() {
   override fun onCreate() {
     super.onCreate()
     appDatabase = provideDatabase()
-    preferencesRepository = PreferencesRepository(dataStore)
+//    preferencesRepository = PreferencesRepository(dataStore)
     boundFloatingService = BoundService(this, FloatingService::class.java)
     createNotificationChannel()
     billingClientWrapper = BillingClientWrapper(this)
@@ -51,9 +51,9 @@ class MainApplication : Application() {
 }
 
 // doitwrong
-fun Application.providePreferencesRepository(): PreferencesRepository {
-  return (this as MainApplication).preferencesRepository
-}
+//fun Application.providePreferencesRepository(): PreferencesRepository {
+//  return (this as MainApplication).preferencesRepository
+//}
 
 fun Application.provideDatabase(): AppDatabase {
   return (this as MainApplication).appDatabase

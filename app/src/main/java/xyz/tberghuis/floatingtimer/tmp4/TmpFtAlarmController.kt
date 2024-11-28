@@ -20,14 +20,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 
 class TmpFtAlarmController(
   private val floatingService: FloatingService
 ) {
-  private val prefs = floatingService.application.providePreferencesRepository()
+  private val prefs = floatingService.application.preferencesRepository
 
   private val vibrator = initVibrator()
   private var ringtone: Ringtone? = null

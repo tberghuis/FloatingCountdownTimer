@@ -8,17 +8,17 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.data.preferencesRepository
 
 class SizeSettingViewModel(application: Application) : AndroidViewModel(application) {
-  private val preferences = application.providePreferencesRepository()
+  private val preferences = application.preferencesRepository
 
   // doitwrong
   var initialised by mutableStateOf(false)
   lateinit var settingsTimerPreviewVmc: SettingsTimerPreviewVmc
 
   val premiumVmc = PremiumVmc(application, viewModelScope)
-  private val premiumFlow = application.providePreferencesRepository().haloColourPurchasedFlow
+  private val premiumFlow = application.preferencesRepository.haloColourPurchasedFlow
 
   init {
     viewModelScope.launch {

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 
 class FtAlarmController(
@@ -21,7 +21,7 @@ class FtAlarmController(
   private val finishedCountdowns = MutableStateFlow(setOf<Countdown>())
 
   init {
-    val prefs = floatingService.application.providePreferencesRepository()
+    val prefs = floatingService.application.preferencesRepository
     floatingService.scope.launch {
       prefs.alarmRingtoneUriFlow.collect { uri ->
         uri?.let {

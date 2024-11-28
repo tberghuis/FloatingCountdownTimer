@@ -17,17 +17,17 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.globalKtorClient
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.provideBillingClientWrapper
-import xyz.tberghuis.floatingtimer.providePreferencesRepository
 
 class PremiumScreenVm(private val application: Application) : AndroidViewModel(application) {
   private val bcw = application.provideBillingClientWrapper()
-  private val preferences = application.providePreferencesRepository()
+  private val preferences = application.preferencesRepository
 
   val premiumPurchasedStateFlow =
-    application.providePreferencesRepository().haloColourPurchasedFlow.stateIn(
+    application.preferencesRepository.haloColourPurchasedFlow.stateIn(
       viewModelScope,
       SharingStarted.Eagerly, null
     )
