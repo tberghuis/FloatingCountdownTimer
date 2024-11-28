@@ -1,9 +1,11 @@
 package xyz.tberghuis.floatingtimer.service
 
+import android.app.Application
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
+import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
 import android.content.res.Configuration
@@ -157,4 +159,20 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     ScreenEz.refresh()
     overlayController.onConfigurationChanged()
   }
+
+
+  companion object {
+    @Volatile
+    private var instance: BoundService<FloatingService>? = null
+    fun getInstance(application: Application) =
+      instance ?: synchronized(this) {
+        instance ?: BoundService(application, FloatingService::class.java)
+          .also { instance = it }
+      }
+  }
+
+
 }
+
+val Context.boundFloatingService: BoundService<FloatingService>
+  get() = FloatingService.getInstance(this.applicationContext as Application)
