@@ -19,15 +19,15 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.BackgroundTransCheckboxVm
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedTimer
+import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.provideDatabase
 
 class CountdownScreenVm(
   private val application: Application,
 //  private val state: SavedStateHandle
 ) : AndroidViewModel(application), TimerShapeChoiceVm, BackgroundTransCheckboxVm {
-  private val savedCountdownDao = application.provideDatabase().savedCountdownDao()
+  private val savedCountdownDao = application.appDatabase.savedCountdownDao()
   var showDeleteDialog by mutableStateOf<SavedCountdown?>(null)
 
   private val preferencesRepository = application.preferencesRepository

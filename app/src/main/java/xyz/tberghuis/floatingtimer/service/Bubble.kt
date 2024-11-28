@@ -14,7 +14,7 @@ import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
-import xyz.tberghuis.floatingtimer.provideDatabase
+import xyz.tberghuis.floatingtimer.data.appDatabase
 
 // future data class implements this, use composition over inheritance
 // make update method a single method interface, does calcs and returns copy instance
@@ -121,7 +121,7 @@ abstract class Bubble(
               positionX = viewHolder.params.x,
               positionY = viewHolder.params.y
             ).also { savedStopwatch ->
-              service.application.provideDatabase().savedStopwatchDao().update(savedStopwatch)
+              service.application.appDatabase.savedStopwatchDao().update(savedStopwatch)
             }
           }
 
@@ -130,7 +130,7 @@ abstract class Bubble(
               positionX = viewHolder.params.x,
               positionY = viewHolder.params.y
             ).also { savedCountdown ->
-              service.application.provideDatabase().savedCountdownDao().update(savedCountdown)
+              service.application.appDatabase.savedCountdownDao().update(savedCountdown)
             }
           }
 

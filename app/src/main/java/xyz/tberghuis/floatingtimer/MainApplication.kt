@@ -15,14 +15,14 @@ class MainApplication : Application() {
   // could i just use Context.dataStore instead for singleton
   // i could write some tests to see if singleton across application
   // and activities
-  lateinit var appDatabase: AppDatabase
+//  lateinit var appDatabase: AppDatabase
   lateinit var boundFloatingService: BoundService<FloatingService>
 
   lateinit var billingClientWrapper: BillingClientWrapper
 
   override fun onCreate() {
     super.onCreate()
-    appDatabase = provideDatabase()
+//    appDatabase = provideDatabase()
     boundFloatingService = BoundService(this, FloatingService::class.java)
     createNotificationChannel()
     billingClientWrapper = BillingClientWrapper(this)
@@ -37,19 +37,19 @@ class MainApplication : Application() {
     manager.createNotificationChannel(notificationChannel)
   }
 
-  private fun provideDatabase(): AppDatabase {
-    return Room.databaseBuilder(
-      this,
-      AppDatabase::class.java,
-      DB_FILENAME
-    )
-      .build()
-  }
+//  private fun provideDatabase(): AppDatabase {
+//    return Room.databaseBuilder(
+//      this,
+//      AppDatabase::class.java,
+//      DB_FILENAME
+//    )
+//      .build()
+//  }
 }
 
-fun Application.provideDatabase(): AppDatabase {
-  return (this as MainApplication).appDatabase
-}
+//fun Application.provideDatabase(): AppDatabase {
+//  return (this as MainApplication).appDatabase
+//}
 
 fun Application.provideBillingClientWrapper(): BillingClientWrapper {
   return (this as MainApplication).billingClientWrapper
