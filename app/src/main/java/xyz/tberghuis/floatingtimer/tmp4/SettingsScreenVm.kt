@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.providePreferencesRepository
+import xyz.tberghuis.floatingtimer.viewmodels.CurrentRingtoneVmc
 
 class SettingsScreenVm(
   application: Application,
@@ -12,6 +13,12 @@ class SettingsScreenVm(
 ) :
   AndroidViewModel(application) {
   private val prefs = application.providePreferencesRepository()
+
+
+  val currentRingtoneVmc =
+    CurrentRingtoneVmc(prefs.alarmRingtoneUriFlow, viewModelScope, application)
+
+
   val loopingFlow = prefs.loopingFlow
 
   // can i do one way data flow?
