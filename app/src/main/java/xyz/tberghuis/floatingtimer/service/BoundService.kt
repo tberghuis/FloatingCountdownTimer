@@ -21,7 +21,7 @@ interface ServiceBinder<T : Service> {
   fun getService(): T
 }
 
-class BoundService<T : Service>(
+class BoundServiceProvider<T : Service>(
   private val application: Application,
   private val serviceClass: Class<T>
 ) {

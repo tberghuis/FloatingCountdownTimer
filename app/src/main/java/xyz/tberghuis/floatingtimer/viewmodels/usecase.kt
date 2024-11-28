@@ -2,12 +2,11 @@ package xyz.tberghuis.floatingtimer.viewmodels
 
 import android.app.Application
 import kotlinx.coroutines.flow.first
-import xyz.tberghuis.floatingtimer.MainApplication
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
-import xyz.tberghuis.floatingtimer.service.boundFloatingService
+import xyz.tberghuis.floatingtimer.service.boundFloatingServiceProvider
 
 suspend fun shouldShowPremiumDialogMultipleTimers(application: Application): Boolean {
-  val boundFloatingService = application.boundFloatingService
+  val boundFloatingService = application.boundFloatingServiceProvider
   val premiumPurchased =
     application.preferencesRepository.haloColourPurchasedFlow.first()
   val floatingService = boundFloatingService.provideService()

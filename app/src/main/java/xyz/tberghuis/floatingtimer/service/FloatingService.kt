@@ -162,14 +162,14 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
 
   companion object {
     @Volatile
-    private var instance: BoundService<FloatingService>? = null
+    private var instance: BoundServiceProvider<FloatingService>? = null
     fun getInstance(application: Application) =
       instance ?: synchronized(this) {
-        instance ?: BoundService(application, FloatingService::class.java)
+        instance ?: BoundServiceProvider(application, FloatingService::class.java)
           .also { instance = it }
       }
   }
 }
 
-val Context.boundFloatingService: BoundService<FloatingService>
+val Context.boundFloatingServiceProvider: BoundServiceProvider<FloatingService>
   get() = FloatingService.getInstance(this.applicationContext as Application)
