@@ -9,7 +9,9 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.ListItem
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
@@ -44,6 +46,8 @@ fun SettingsScreen() {
   }
 }
 
+// todo stringResource hardcoded strings
+
 @Composable
 fun SettingsScreenContent(padding: PaddingValues) {
   Column(
@@ -52,6 +56,23 @@ fun SettingsScreenContent(padding: PaddingValues) {
       .fillMaxSize(),
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-    Text("hello settings screen")
+
+
+    ListItem(
+      headlineContent = { Text("Repeating alarm sound/vibration") },
+//      overlineContent = { Text("overline") },
+      supportingContent = { Text("off = ringtone will only play once") },
+//      leadingContent = { Text("leadingContent") },
+      trailingContent = {
+        Switch(
+          checked = true,
+          onCheckedChange = {
+
+          },
+        )
+
+      },
+    )
+
   }
 }
