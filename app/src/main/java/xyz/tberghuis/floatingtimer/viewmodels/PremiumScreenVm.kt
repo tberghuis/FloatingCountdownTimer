@@ -19,11 +19,11 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.globalKtorClient
+import xyz.tberghuis.floatingtimer.iap.billingClientWrapper
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.provideBillingClientWrapper
 
 class PremiumScreenVm(private val application: Application) : AndroidViewModel(application) {
-  private val bcw = application.provideBillingClientWrapper()
+  private val bcw = application.billingClientWrapper
   private val preferences = application.preferencesRepository
 
   val premiumPurchasedStateFlow =
