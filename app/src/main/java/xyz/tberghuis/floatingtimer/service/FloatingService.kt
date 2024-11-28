@@ -160,7 +160,6 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     overlayController.onConfigurationChanged()
   }
 
-
   companion object {
     @Volatile
     private var instance: BoundService<FloatingService>? = null
@@ -170,8 +169,6 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
           .also { instance = it }
       }
   }
-
-
 }
 
 val Context.boundFloatingService: BoundService<FloatingService>
