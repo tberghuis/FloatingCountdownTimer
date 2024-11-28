@@ -27,20 +27,14 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 class TmpFtAlarmController(
   private val floatingService: FloatingService
 ) {
-  // shortcuts
   private val prefs = floatingService.application.providePreferencesRepository()
 
-  private var ringtone: Ringtone? = null
-  private val finishedCountdowns = MutableStateFlow(setOf<Countdown>())
-
-  // todo
   private val vibrator = initVibrator()
+  private var ringtone: Ringtone? = null
 
+  private val finishedCountdowns = MutableStateFlow(setOf<Countdown>())
   private val alarmRunning = MutableStateFlow(false)
-
-  // todo looping : Boolean? = null
-  private var looping: Boolean? = true
-
+  private var looping: Boolean? = null
   private var vibrate: Boolean? = null
   private var sound: Boolean? = null
   private var ringtoneDuration: Long? = null
@@ -60,7 +54,11 @@ class TmpFtAlarmController(
         vibrate = it
       }
     }
-    // todo watch looping from dataStore
+    floatingService.scope.launch {
+      prefs.loopingFlow.collectLatest {
+        looping = it
+      }
+    }
   }
 
   @OptIn(ExperimentalCoroutinesApi::class)
