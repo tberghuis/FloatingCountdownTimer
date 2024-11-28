@@ -54,10 +54,6 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
     override fun getService(): FloatingService = this@FloatingService
   }
 
-//  inner class LocalBinder : Binder() {
-//    fun getService(): FloatingService = this@FloatingService
-//  }
-
   override fun onBind(intent: Intent): IBinder {
     super.onBind(intent)
     logd("onbind")
