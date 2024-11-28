@@ -3,6 +3,7 @@ package xyz.tberghuis.floatingtimer.composables
 import androidx.activity.ComponentActivity
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -37,6 +38,21 @@ fun FtTopAppBar() {
     title = { Text(stringResource(R.string.app_name)) },
     modifier = Modifier,
     actions = {
+
+
+      IconButton(
+        onClick = {
+          navController.navigate("settings")
+        },
+        modifier = Modifier,
+      ) {
+        Icon(Icons.Filled.Settings, stringResource(R.string.settings))
+      }
+
+
+
+
+// todo remove
       IconButton(
         onClick = {
           showMenu = true
