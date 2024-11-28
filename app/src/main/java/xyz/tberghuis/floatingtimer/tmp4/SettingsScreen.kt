@@ -82,6 +82,8 @@ fun SettingsScreenContent(
       color = MaterialTheme.colorScheme.primary,
     )
 
+    // Do I really need this in this screen
+    // yes because it was in overflow menu
     ListItem(
       headlineContent = { Text("Ringtone") },
       modifier = Modifier.clickable {
