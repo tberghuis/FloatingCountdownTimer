@@ -24,7 +24,11 @@ class SettingsScreenVm(
 
   val haloColourFlow = prefs.haloColourFlow
 
+  val haloColourPurchasedFlow = prefs.haloColourPurchasedFlow
 
+init {
+//  prefs.haloColourPurchasedFlow
+}
 
   // can i do one way data flow?
   fun updateLooping(value: Boolean) {
