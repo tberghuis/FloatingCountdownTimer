@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp4
 
+import androidx.activity.ComponentActivity
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -25,6 +26,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -32,6 +34,7 @@ import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -63,7 +66,8 @@ fun SettingsScreen() {
 @Composable
 fun SettingsScreenContent(
   padding: PaddingValues,
-  vm: SettingsScreenVm = viewModel()
+  vm: SettingsScreenVm = viewModel(),
+  sharedVm: SharedVm = viewModel(LocalContext.current as ComponentActivity)
 ) {
   val navController = LocalNavController.current
 
@@ -159,6 +163,30 @@ fun SettingsScreenContent(
       headlineContent = { Text("Change default size") },
       modifier = Modifier.clickable {
         navController.navigate("change_size")
+      })
+
+
+
+    HorizontalDivider()
+    Text(
+      "Actions",
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(top = 16.dp)
+        .padding(horizontal = 16.dp),
+      color = MaterialTheme.colorScheme.primary,
+    )
+
+    ListItem(
+      headlineContent = { Text(stringResource(R.string.cancel_all_timers)) },
+      modifier = Modifier.clickable {
+        sharedVm.cancelAllTimers()
+      })
+
+    ListItem(
+      headlineContent = { Text(stringResource(R.string.save_timer_positions)) },
+      modifier = Modifier.clickable {
+        sharedVm.saveTimerPositions()
       })
 
 
