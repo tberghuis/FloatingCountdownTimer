@@ -76,22 +76,22 @@ fun FtTopAppBar() {
 //            .semantics { testTagsAsResourceId = true }
 //            .testTag("countdown_ringtone_menu_item"),
 //        )
-        DropdownMenuItem(
-          text = { Text(stringResource(R.string.default_color)) },
-          onClick = {
-            navController.navigate("change_color")
-          },
-          modifier = Modifier
-            .semantics { testTagsAsResourceId = true }
-            .testTag("change_color_menu_item"),
-        )
-        DropdownMenuItem(
-          text = { Text(stringResource(R.string.change_size)) },
-          onClick = { navController.navigate("change_size") },
-          modifier = Modifier
-            .semantics { testTagsAsResourceId = true }
-            .testTag("change_size_menu_item"),
-        )
+//        DropdownMenuItem(
+//          text = { Text(stringResource(R.string.default_color)) },
+//          onClick = {
+//            navController.navigate("change_color")
+//          },
+//          modifier = Modifier
+//            .semantics { testTagsAsResourceId = true }
+//            .testTag("change_color_menu_item"),
+//        )
+//        DropdownMenuItem(
+//          text = { Text(stringResource(R.string.change_size)) },
+//          onClick = { navController.navigate("change_size") },
+//          modifier = Modifier
+//            .semantics { testTagsAsResourceId = true }
+//            .testTag("change_size_menu_item"),
+//        )
         DropdownMenuItem(
           text = { Text(stringResource(R.string.cancel_all_timers)) },
           onClick = {

@@ -84,10 +84,24 @@ fun SettingsScreenContent(
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
 
+
+    ListItem(
+      headlineContent = { Text("Premium upgrade") },
+      modifier = Modifier.clickable {
+        navController.navigate("premium")
+      },
+      supportingContent = { Text("Unlocked") },
+    )
+
+    HorizontalDivider()
+
+
+
     Text(
       "Countdown Timer",
       modifier = Modifier
         .fillMaxWidth()
+        .padding(top = 16.dp)
         .padding(horizontal = 16.dp),
       color = MaterialTheme.colorScheme.primary,
     )
@@ -124,7 +138,7 @@ fun SettingsScreenContent(
       color = MaterialTheme.colorScheme.primary,
     )
     ListItem(
-      headlineContent = { Text("Default color") },
+      headlineContent = { Text("Change default color") },
       modifier = Modifier.clickable {
         navController.navigate("change_color")
       },
@@ -137,5 +151,14 @@ fun SettingsScreenContent(
         )
       },
     )
+
+
+    ListItem(
+      headlineContent = { Text("Change default size") },
+      modifier = Modifier.clickable {
+        navController.navigate("change_size")
+      })
+
+
   }
 }
