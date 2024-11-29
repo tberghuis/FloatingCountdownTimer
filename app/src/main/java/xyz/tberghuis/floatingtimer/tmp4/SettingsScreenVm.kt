@@ -21,6 +21,11 @@ class SettingsScreenVm(
 
   val loopingFlow = prefs.loopingFlow
 
+
+  val haloColourFlow = prefs.haloColourFlow
+
+
+
   // can i do one way data flow?
   fun updateLooping(value: Boolean) {
     viewModelScope.launch {

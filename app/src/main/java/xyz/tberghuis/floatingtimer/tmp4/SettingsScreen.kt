@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
@@ -74,6 +75,8 @@ fun SettingsScreenContent(
 
   val looping by vm.loopingFlow.collectAsState(true)
 
+  val haloColour by vm.haloColourFlow.collectAsState(DEFAULT_HALO_COLOR)
+
   Column(
     modifier = Modifier
       .padding(padding)
@@ -111,10 +114,7 @@ fun SettingsScreenContent(
         )
       },
     )
-
-
     HorizontalDivider()
-
     Text(
       "Timer",
       modifier = Modifier
@@ -128,21 +128,14 @@ fun SettingsScreenContent(
       modifier = Modifier.clickable {
         navController.navigate("change_color")
       },
-//      supportingContent = { Text("todo") },
       trailingContent = {
-        // todo color circle
-
         Icon(
           Icons.Filled.Circle,
           contentDescription = "color",
           modifier = Modifier.size(35.dp),
-          tint = Color.Blue
+          tint = haloColour
         )
-
-
       },
     )
-
-
   }
 }
