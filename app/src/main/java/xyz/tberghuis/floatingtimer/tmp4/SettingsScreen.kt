@@ -82,8 +82,7 @@ fun SettingsScreenContent(
     modifier = Modifier
       .padding(padding)
       .fillMaxSize()
-      .verticalScroll(rememberScrollState())
-    ,
+      .verticalScroll(rememberScrollState()),
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
 
@@ -102,10 +101,6 @@ fun SettingsScreenContent(
         Text(t)
       },
     )
-
-
-
-
 
     HorizontalDivider()
     Text(
@@ -131,13 +126,11 @@ fun SettingsScreenContent(
       },
     )
 
-
     ListItem(
-      headlineContent = { Text("Change default size") },
+      headlineContent = { Text("Change size") },
       modifier = Modifier.clickable {
         navController.navigate("change_size")
       })
-
 
     HorizontalDivider()
     Text(
