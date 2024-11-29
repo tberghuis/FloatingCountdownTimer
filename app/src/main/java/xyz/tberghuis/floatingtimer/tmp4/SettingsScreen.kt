@@ -99,41 +99,10 @@ fun SettingsScreenContent(
       },
     )
 
-    HorizontalDivider()
 
 
 
-    Text(
-      "Countdown Timer",
-      modifier = Modifier
-        .fillMaxWidth()
-        .padding(top = 16.dp)
-        .padding(horizontal = 16.dp),
-      color = MaterialTheme.colorScheme.primary,
-    )
 
-    // Do I really need this in this screen
-    // yes because it was in overflow menu
-    ListItem(
-      headlineContent = { Text("Ringtone") },
-      modifier = Modifier.clickable {
-        navController.navigate("countdown_ringtone")
-      },
-      supportingContent = { Text(vm.currentRingtoneVmc.currentRingtoneTitle) },
-    )
-    ListItem(
-      headlineContent = { Text("Repeating alarm sound/vibration") },
-      supportingContent = { Text("off = ringtone will only play once") },
-      trailingContent = {
-        Switch(
-          checked = looping,
-          onCheckedChange = {
-            logd("onCheckedChange $it")
-            vm.updateLooping(it)
-          },
-        )
-      },
-    )
     HorizontalDivider()
     Text(
       "Timer",
@@ -165,6 +134,38 @@ fun SettingsScreenContent(
         navController.navigate("change_size")
       })
 
+
+    HorizontalDivider()
+    Text(
+      "Countdown Timer",
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(top = 16.dp)
+        .padding(horizontal = 16.dp),
+      color = MaterialTheme.colorScheme.primary,
+    )
+    // Do I really need this in this screen
+    // yes because it was in overflow menu
+    ListItem(
+      headlineContent = { Text("Ringtone") },
+      modifier = Modifier.clickable {
+        navController.navigate("countdown_ringtone")
+      },
+      supportingContent = { Text(vm.currentRingtoneVmc.currentRingtoneTitle) },
+    )
+    ListItem(
+      headlineContent = { Text("Repeating alarm sound/vibration") },
+      supportingContent = { Text("off = ringtone will only play once") },
+      trailingContent = {
+        Switch(
+          checked = looping,
+          onCheckedChange = {
+            logd("onCheckedChange $it")
+            vm.updateLooping(it)
+          },
+        )
+      },
+    )
 
 
     HorizontalDivider()
