@@ -1,3 +1,8 @@
+v1.39.0    2024-11-30  dev-looping
+  add settings screen
+  add option to stop alarm from repeating
+  refactoring singletons with dependency on Context
+
 v1.38.0    2024-11-19  dev-settings
   update dependencies
   billing client v7
