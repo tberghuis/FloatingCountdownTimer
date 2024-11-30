@@ -9,28 +9,17 @@ import xyz.tberghuis.floatingtimer.viewmodels.CurrentRingtoneVmc
 
 class SettingsScreenVm(
   application: Application,
-//  savedStateHandle: SavedStateHandle
 ) :
   AndroidViewModel(application) {
   private val prefs = application.preferencesRepository
 
-
   val currentRingtoneVmc =
     CurrentRingtoneVmc(prefs.alarmRingtoneUriFlow, viewModelScope, application)
 
-
   val loopingFlow = prefs.loopingFlow
-
-
   val haloColourFlow = prefs.haloColourFlow
-
   val haloColourPurchasedFlow = prefs.haloColourPurchasedFlow
 
-init {
-//  prefs.haloColourPurchasedFlow
-}
-
-  // can i do one way data flow?
   fun updateLooping(value: Boolean) {
     viewModelScope.launch {
       prefs.updateLooping(value)
