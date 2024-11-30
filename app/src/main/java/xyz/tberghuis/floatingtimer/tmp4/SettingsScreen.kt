@@ -88,14 +88,14 @@ fun SettingsScreenContent(
 
 
     ListItem(
-      headlineContent = { Text("Premium upgrade") },
+      headlineContent = { Text(stringResource(R.string.premium_upgrade)) },
       modifier = Modifier.clickable {
         navController.navigate("premium")
       },
       supportingContent = {
         val t = when (purchased) {
-          true -> "Unlocked"
-          false -> "Locked"
+          true -> stringResource(R.string.unlocked)
+          false -> stringResource(R.string.locked)
           null -> ""
         }
         Text(t)
@@ -104,7 +104,7 @@ fun SettingsScreenContent(
 
     HorizontalDivider()
     Text(
-      "Timer",
+      stringResource(R.string.timer),
       modifier = Modifier
         .fillMaxWidth()
         .padding(top = 16.dp)
@@ -112,7 +112,7 @@ fun SettingsScreenContent(
       color = MaterialTheme.colorScheme.primary,
     )
     ListItem(
-      headlineContent = { Text("Change default color") },
+      headlineContent = { Text(stringResource(R.string.change_default_color)) },
       modifier = Modifier.clickable {
         navController.navigate("change_color")
       },
@@ -127,14 +127,14 @@ fun SettingsScreenContent(
     )
 
     ListItem(
-      headlineContent = { Text("Change size") },
+      headlineContent = { Text(stringResource(R.string.change_size)) },
       modifier = Modifier.clickable {
         navController.navigate("change_size")
       })
 
     HorizontalDivider()
     Text(
-      "Countdown Timer",
+      stringResource(R.string.countdown),
       modifier = Modifier
         .fillMaxWidth()
         .padding(top = 16.dp)
@@ -144,15 +144,15 @@ fun SettingsScreenContent(
     // Do I really need this in this screen
     // yes because it was in overflow menu
     ListItem(
-      headlineContent = { Text("Ringtone") },
+      headlineContent = { Text(stringResource(R.string.ringtone)) },
       modifier = Modifier.clickable {
         navController.navigate("countdown_ringtone")
       },
       supportingContent = { Text(vm.currentRingtoneVmc.currentRingtoneTitle) },
     )
     ListItem(
-      headlineContent = { Text("Repeating alarm sound/vibration") },
-      supportingContent = { Text("off = ringtone will only play once") },
+      headlineContent = { Text(stringResource(R.string.repeating_alarm_sound_vibration)) },
+      supportingContent = { Text(stringResource(R.string.off_ringtone_will_only_play_once)) },
       trailingContent = {
         Switch(
           checked = looping,
@@ -167,7 +167,7 @@ fun SettingsScreenContent(
 
     HorizontalDivider()
     Text(
-      "Actions",
+      stringResource(R.string.actions),
       modifier = Modifier
         .fillMaxWidth()
         .padding(top = 16.dp)
