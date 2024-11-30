@@ -36,6 +36,7 @@ import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.viewmodels.SettingsScreenVm
 import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
 @OptIn(ExperimentalMaterial3Api::class)

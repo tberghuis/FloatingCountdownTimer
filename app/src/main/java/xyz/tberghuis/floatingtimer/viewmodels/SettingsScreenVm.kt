@@ -1,11 +1,10 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
-import xyz.tberghuis.floatingtimer.viewmodels.CurrentRingtoneVmc
 
 class SettingsScreenVm(
   application: Application,
