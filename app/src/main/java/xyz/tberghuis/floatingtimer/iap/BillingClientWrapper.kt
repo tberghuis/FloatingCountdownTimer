@@ -195,7 +195,6 @@ class BillingClientWrapper(
     }
   }
 
-
   companion object {
     @Volatile
     private var instance: BillingClientWrapper? = null
@@ -205,8 +204,6 @@ class BillingClientWrapper(
           .also { instance = it }
       }
   }
-
-
 }
 
 val Context.billingClientWrapper: BillingClientWrapper

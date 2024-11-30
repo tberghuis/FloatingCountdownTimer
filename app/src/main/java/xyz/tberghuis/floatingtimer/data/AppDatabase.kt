@@ -20,7 +20,6 @@ abstract class AppDatabase : RoomDatabase() {
   abstract fun savedCountdownDao(): SavedCountdownDao
   abstract fun savedStopwatchDao(): SavedStopwatchDao
 
-
   companion object {
     @Volatile
     private var instance: AppDatabase? = null
@@ -35,7 +34,6 @@ abstract class AppDatabase : RoomDatabase() {
           .also { instance = it }
       }
   }
-
 }
 
 val Context.appDatabase: AppDatabase

@@ -116,7 +116,6 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
     }
   }
 
-
   companion object {
     @Volatile
     private var instance: PreferencesRepository? = null
@@ -125,13 +124,7 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
         instance ?: PreferencesRepository(context.dataStore).also { instance = it }
       }
   }
-
-
 }
-
-//fun Context.providePreferencesRepository(): PreferencesRepository {
-//  return PreferencesRepository.getInstance(this)
-//}
 
 val Context.preferencesRepository : PreferencesRepository
   get() = PreferencesRepository.getInstance(this)
