@@ -63,8 +63,6 @@ fun SettingsScreen() {
   }
 }
 
-// todo stringResource hardcoded strings
-
 @Composable
 fun SettingsScreenContent(
   padding: PaddingValues,
@@ -72,9 +70,7 @@ fun SettingsScreenContent(
   sharedVm: SharedVm = viewModel(LocalContext.current as ComponentActivity)
 ) {
   val navController = LocalNavController.current
-
   val looping by vm.loopingFlow.collectAsState(true)
-
   val haloColour by vm.haloColourFlow.collectAsState(DEFAULT_HALO_COLOR)
   val purchased by vm.haloColourPurchasedFlow.collectAsState(null)
 
@@ -85,8 +81,6 @@ fun SettingsScreenContent(
       .verticalScroll(rememberScrollState()),
     horizontalAlignment = Alignment.CenterHorizontally,
   ) {
-
-
     ListItem(
       headlineContent = { Text(stringResource(R.string.premium_upgrade)) },
       modifier = Modifier.clickable {
@@ -125,7 +119,6 @@ fun SettingsScreenContent(
         )
       },
     )
-
     ListItem(
       headlineContent = { Text(stringResource(R.string.change_size)) },
       modifier = Modifier.clickable {
@@ -141,8 +134,6 @@ fun SettingsScreenContent(
         .padding(horizontal = 16.dp),
       color = MaterialTheme.colorScheme.primary,
     )
-    // Do I really need this in this screen
-    // yes because it was in overflow menu
     ListItem(
       headlineContent = { Text(stringResource(R.string.ringtone)) },
       modifier = Modifier.clickable {
@@ -164,7 +155,6 @@ fun SettingsScreenContent(
       },
     )
 
-
     HorizontalDivider()
     Text(
       stringResource(R.string.actions),
@@ -174,19 +164,15 @@ fun SettingsScreenContent(
         .padding(horizontal = 16.dp),
       color = MaterialTheme.colorScheme.primary,
     )
-
     ListItem(
       headlineContent = { Text(stringResource(R.string.cancel_all_timers)) },
       modifier = Modifier.clickable {
         sharedVm.cancelAllTimers()
       })
-
     ListItem(
       headlineContent = { Text(stringResource(R.string.save_timer_positions)) },
       modifier = Modifier.clickable {
         sharedVm.saveTimerPositions()
       })
-
-
   }
 }
