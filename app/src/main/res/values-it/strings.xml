@@ -55,4 +55,14 @@
     <string name="notifications">Notifiche</string>
     <string name="current">Attuale</string>
     <string name="save_timer_positions">Salva Posizioni Timer</string>
+
+    <string name="premium_upgrade">Aggiornamento Premium</string>
+    <string name="unlocked">Sbloccato</string>
+    <string name="locked">Bloccato</string>
+    <string name="timer">Timer</string>
+    <string name="change_default_color">Cambia colore predefinito</string>
+    <string name="ringtone">Suoneria</string>
+    <string name="repeating_alarm_sound_vibration">Ripetizione suono/vibrazione allarme</string>
+    <string name="off_ringtone_will_only_play_once">spento = la suoneria suonerà solo una volta</string>
+    <string name="actions">Azioni</string>
 </resources>

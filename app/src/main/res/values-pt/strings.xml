@@ -55,4 +55,14 @@
     <string name="notifications">Notificações</string>
     <string name="current">atual</string>
     <string name="save_timer_positions">Salvar Posições do Timer</string>
+
+    <string name="premium_upgrade">Atualização Premium</string>
+    <string name="unlocked">Desbloqueado</string>
+    <string name="locked">Bloqueado</string>
+    <string name="timer">Temporizador</string>
+    <string name="change_default_color">Alterar a cor padrão</string>
+    <string name="ringtone">Toque</string>
+    <string name="repeating_alarm_sound_vibration">Som/vibração do alarme repetitivo</string>
+    <string name="off_ringtone_will_only_play_once">desligado = o toque tocará apenas uma vez</string>
+    <string name="actions">Ações</string>
 </resources>

@@ -55,4 +55,14 @@
     <string name="notifications">Notifications</string>
     <string name="current">current</string>
     <string name="save_timer_positions">Save Timer Positions</string>
+
+    <string name="premium_upgrade">Premium upgrade</string>
+    <string name="unlocked">Unlocked</string>
+    <string name="locked">Locked</string>
+    <string name="timer">Timer</string>
+    <string name="change_default_color">Change default color</string>
+    <string name="ringtone">Ringtone</string>
+    <string name="repeating_alarm_sound_vibration">Repeating alarm sound/vibration</string>
+    <string name="off_ringtone_will_only_play_once">off = ringtone will only play once</string>
+    <string name="actions">Actions</string>
 </resources>
