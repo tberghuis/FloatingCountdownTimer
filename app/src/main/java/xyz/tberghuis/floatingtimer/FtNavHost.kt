@@ -23,7 +23,7 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import xyz.tberghuis.floatingtimer.screens.PremiumScreen
 import xyz.tberghuis.floatingtimer.screens.RingtoneScreen
-import xyz.tberghuis.floatingtimer.tmp4.SettingsScreen
+import xyz.tberghuis.floatingtimer.screens.SettingsScreen
 
 @Composable
 fun FtNavHost() {

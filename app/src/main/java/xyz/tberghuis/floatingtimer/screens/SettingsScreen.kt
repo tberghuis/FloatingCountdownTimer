@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.screens
 
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.clickable
