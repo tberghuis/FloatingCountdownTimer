@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.0.21"
-agp = "8.7.2"
+agp = "8.7.3"
 # https://github.com/google/ksp/releases
 ksp = "2.0.21-1.0.27"
 
@@ -12,8 +12,8 @@ lifecycleRuntimeKtx = "2.8.7"
 lifecycleService = "2.8.7"
 activityCompose = "1.9.3"
 # https://developer.android.com/jetpack/compose/bom/bom-mapping
-composeBom = "2024.11.00"
-navigationCompose = "2.8.4"
+composeBom = "2024.12.01"
+navigationCompose = "2.8.5"
 room = "2.6.1"
 androidxDataStore = "1.1.1"
 ktorVersion = "2.3.10"
