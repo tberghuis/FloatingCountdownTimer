@@ -193,28 +193,28 @@ fun SettingsScreenContent(
       color = MaterialTheme.colorScheme.primary,
     )
     ListItem(
-      headlineContent = { Text("Play store") },
+      headlineContent = { Text(stringResource(R.string.play_store)) },
       modifier = Modifier.clickable {
         context.openPlayStorePage()
       },
-      supportingContent = { Text("Leave a review") },
+      supportingContent = { Text(stringResource(R.string.leave_a_review)) },
       trailingContent = {
         Icon(
           Icons.Default.OpenInBrowser,
-          contentDescription = "Localized description",
+          contentDescription = "open",
         )
       },
     )
     ListItem(
-      headlineContent = { Text("Github issues") },
+      headlineContent = { Text(stringResource(R.string.github_issues)) },
       modifier = Modifier.clickable {
         context.openGithubIssues()
       },
-      supportingContent = { Text("report a bug or request a feature") },
+      supportingContent = { Text(stringResource(R.string.report_a_bug_or_request_a_feature)) },
       trailingContent = {
         Icon(
           Icons.Default.OpenInBrowser,
-          contentDescription = "Localized description",
+          contentDescription = "open",
         )
       }
     )
