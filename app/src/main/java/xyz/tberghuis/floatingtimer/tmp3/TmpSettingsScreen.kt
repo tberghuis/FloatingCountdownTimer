@@ -46,7 +46,6 @@ fun TmpSettingsScreen(nav: NavHostController) {
       Text("draw overlay setting")
       BatterySettings()
       Text("dontkillmyapp.com")
-      Text("support (github new issue)")
       Text("app version")
     }
   }
