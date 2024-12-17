@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 
 class FtWindowManager(
-  context: Context
+  context: Context // context is really FloatingService
 ) {
   private val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
