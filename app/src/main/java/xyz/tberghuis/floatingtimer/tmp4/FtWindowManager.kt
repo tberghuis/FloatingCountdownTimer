@@ -11,6 +11,7 @@ class FtWindowManager(
   private val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
   // future.txt suspend withContext(Main)
+  // wait till i write a test case to prove it will prevent ANR
   fun addView(view: View, params: ViewGroup.LayoutParams) {
     windowManager.addView(view, params)
   }
