@@ -28,8 +28,8 @@ import kotlin.math.max
 import kotlin.math.min
 
 class OverlayController(val service: FloatingService) {
-  val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-  val trashController = TrashController(windowManager, service)
+//  val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+  val trashController = TrashController(service)
   private val bubbleSet = mutableSetOf<Bubble>()
 
   fun getNumberOfBubbles(): Int {
@@ -124,7 +124,7 @@ class OverlayController(val service: FloatingService) {
       onTap = { bubble.onTap() }
     )
     logd("addBubble addView params ${bubble.viewHolder.params.x} ${bubble.viewHolder.params.y}")
-    windowManager.addView(bubble.viewHolder.view, bubble.viewHolder.params)
+    service.ftWindowManager.addView(bubble.viewHolder.view, bubble.viewHolder.params)
   }
 
   @SuppressLint("ClickableViewAccessibility")
@@ -215,7 +215,7 @@ class OverlayController(val service: FloatingService) {
     params.x = x
     params.y = y
     try {
-      windowManager.updateViewLayout(viewHolder.view, params)
+      service.ftWindowManager.updateViewLayout(viewHolder.view, params)
     } catch (e: IllegalArgumentException) {
       // this was happening in prod, can't reproduce
       Log.e("OverlayController", "IllegalArgumentException: $e")

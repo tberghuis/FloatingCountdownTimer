@@ -18,7 +18,7 @@ import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
 import xyz.tberghuis.floatingtimer.composables.Trash
 
 class TrashController(
-  private val windowManager: WindowManager,
+//  private val windowManager: WindowManager,
   private val service: FloatingService,
 ) {
   val isBubbleDragging = MutableStateFlow(false)
@@ -53,13 +53,13 @@ class TrashController(
         true -> {
           val newOverlay = createTrashView()
           overlay = newOverlay
-          windowManager.addView(newOverlay, params)
+          service.ftWindowManager.addView(newOverlay, params)
         }
 
         false -> {
           overlay?.let {
             try {
-              windowManager.removeView(it)
+              service.ftWindowManager.removeView(it)
             } catch (e: IllegalArgumentException) {
               Log.e("OverlayViewController", "IllegalArgumentException $e")
             } finally {

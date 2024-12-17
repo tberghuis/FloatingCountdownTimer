@@ -96,7 +96,7 @@ abstract class Bubble(
 
   open fun exit() {
     try {
-      service.overlayController.windowManager.removeView(viewHolder.view)
+      service.ftWindowManager.removeView(viewHolder.view)
     } catch (e: IllegalArgumentException) {
       Log.e("Bubble", "IllegalArgumentException $e")
     }
