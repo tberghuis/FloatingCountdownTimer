@@ -9,12 +9,18 @@ class FtWindowManager(
   context: Context
 ) {
   private val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+  // future.txt suspend withContext(Main)
   fun addView(view: View, params: ViewGroup.LayoutParams) {
     windowManager.addView(view, params)
   }
+
+  // future.txt suspend withContext(Main+immediate) ???
   fun updateViewLayout(view: View, params: ViewGroup.LayoutParams) {
     windowManager.updateViewLayout(view, params)
   }
+
+  // future.txt suspend withContext(Main)
   fun removeView(view: View) {
     windowManager.removeView(view)
   }

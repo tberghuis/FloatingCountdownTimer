@@ -47,11 +47,10 @@ fun CountdownView(
       val tvh = LocalTimerViewHolder.current
       val updateViewLayout = tvh?.let {
         { size: IntSize ->
-          val windowManager = tvh.service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
           logd("runOnceOnGloballyPositioned $size")
           tvh.params.width = size.width
           tvh.params.height = size.height
-          windowManager.updateViewLayout(tvh.view, tvh.params)
+          tvh.service.ftWindowManager.updateViewLayout(tvh.view, tvh.params)
         }
       }
       // this is redundant, unless bad data in DB
