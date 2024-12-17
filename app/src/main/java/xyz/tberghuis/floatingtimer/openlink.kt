@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer
 
 import android.content.ActivityNotFoundException
 import android.content.Context

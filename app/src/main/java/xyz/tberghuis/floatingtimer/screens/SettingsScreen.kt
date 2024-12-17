@@ -37,8 +37,8 @@ import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp4.openGithubIssues
-import xyz.tberghuis.floatingtimer.tmp4.openPlayStorePage
+import xyz.tberghuis.floatingtimer.openGithubIssues
+import xyz.tberghuis.floatingtimer.openPlayStorePage
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsScreenVm
 import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
