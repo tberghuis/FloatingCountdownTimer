@@ -65,4 +65,5 @@
     <string name="repeating_alarm_sound_vibration">Repeating alarm sound/vibration</string>
     <string name="off_ringtone_will_only_play_once">off = ringtone will only play once</string>
     <string name="actions">Actions</string>
+    <string name="links">Links</string>
 </resources>
