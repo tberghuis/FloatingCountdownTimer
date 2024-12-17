@@ -65,4 +65,9 @@
     <string name="repeating_alarm_sound_vibration">Repeating alarm sound/vibration</string>
     <string name="off_ringtone_will_only_play_once">off = ringtone will only play once</string>
     <string name="actions">Actions</string>
+    <string name="links">Links</string>
+    <string name="play_store">Play store</string>
+    <string name="leave_a_review">Leave a review</string>
+    <string name="github_issues">Github issues</string>
+    <string name="report_a_bug_or_request_a_feature">report a bug or request a feature</string>
 </resources>

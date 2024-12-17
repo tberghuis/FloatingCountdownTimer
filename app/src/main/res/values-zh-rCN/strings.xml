@@ -65,4 +65,9 @@
     <string name="repeating_alarm_sound_vibration">重复闹铃声/振动</string>
     <string name="off_ringtone_will_only_play_once">关闭 = 铃声只会响一次</string>
     <string name="actions">操作</string>
+    <string name="links">链接</string>
+    <string name="play_store">应用商店</string>
+    <string name="leave_a_review">留下评论</string>
+    <string name="github_issues">Github 问题</string>
+    <string name="report_a_bug_or_request_a_feature">报告错误或请求功能</string>
 </resources>

@@ -65,4 +65,9 @@
     <string name="repeating_alarm_sound_vibration">Bunyi/vibrasi alarm berulang</string>
     <string name="off_ringtone_will_only_play_once">mati = nada dering hanya akan berbunyi sekali</string>
     <string name="actions">Tindakan</string>
+    <string name="links">Tautan</string>
+    <string name="play_store">Play Store</string>
+    <string name="leave_a_review">Tinggalkan ulasan</string>
+    <string name="github_issues">Masalah Github</string>
+    <string name="report_a_bug_or_request_a_feature">Laporkan bug atau minta fitur</string>
 </resources>

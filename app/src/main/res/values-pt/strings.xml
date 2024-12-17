@@ -65,4 +65,9 @@
     <string name="repeating_alarm_sound_vibration">Som/vibração do alarme repetitivo</string>
     <string name="off_ringtone_will_only_play_once">desligado = o toque tocará apenas uma vez</string>
     <string name="actions">Ações</string>
+    <string name="links">Links</string>
+    <string name="play_store">Play Store</string>
+    <string name="leave_a_review">Deixe uma avaliação</string>
+    <string name="github_issues">Problemas do Github</string>
+    <string name="report_a_bug_or_request_a_feature">Relatar um bug ou solicitar um recurso</string>
 </resources>

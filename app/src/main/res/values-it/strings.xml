@@ -65,4 +65,9 @@
     <string name="repeating_alarm_sound_vibration">Ripetizione suono/vibrazione allarme</string>
     <string name="off_ringtone_will_only_play_once">spento = la suoneria suonerà solo una volta</string>
     <string name="actions">Azioni</string>
+    <string name="links">Collegamenti</string>
+    <string name="play_store">Play Store</string>
+    <string name="leave_a_review">Lascia una recensione</string>
+    <string name="github_issues">Problemi su Github</string>
+    <string name="report_a_bug_or_request_a_feature">Segnala un bug o richiedi una funzionalità</string>
 </resources>
