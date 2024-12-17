@@ -28,7 +28,6 @@ import kotlin.math.max
 import kotlin.math.min
 
 class OverlayController(val service: FloatingService) {
-//  val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
   val trashController = TrashController(service)
   private val bubbleSet = mutableSetOf<Bubble>()
 
