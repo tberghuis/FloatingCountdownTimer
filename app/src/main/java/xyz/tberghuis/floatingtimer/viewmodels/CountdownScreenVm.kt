@@ -11,8 +11,10 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.BackgroundTransCheckboxVm
@@ -94,9 +96,11 @@ class CountdownScreenVm(
     isBackgroundTransparent: Boolean,
     savedTimer: SavedTimer? = null
   ) {
-    viewModelScope.launch {
+    viewModelScope.launch(IO) {
       if (shouldShowPremiumDialogMultipleTimers(application)) {
-        premiumVmc.showPurchaseDialog = true
+        withContext(Main) {
+          premiumVmc.showPurchaseDialog = true
+        }
         return@launch
       }
       boundFloatingService.provideService().overlayController.addCountdown(
