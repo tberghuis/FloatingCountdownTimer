@@ -1,3 +1,6 @@
+v1.40.1    2024-12-22  dev-anr
+  see if calling bound service on IO dispatcher results in less ANRs
+
 v1.40.0    2024-12-17  dev-review
   class FtWindowManager
   settings links section
