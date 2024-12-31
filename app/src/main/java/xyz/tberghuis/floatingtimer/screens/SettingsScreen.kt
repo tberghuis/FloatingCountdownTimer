@@ -28,9 +28,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
@@ -67,6 +71,7 @@ fun SettingsScreen() {
   }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SettingsScreenContent(
   padding: PaddingValues,
@@ -112,9 +117,12 @@ fun SettingsScreenContent(
     )
     ListItem(
       headlineContent = { Text(stringResource(R.string.change_default_color)) },
-      modifier = Modifier.clickable {
-        navController.navigate("change_color")
-      },
+      modifier = Modifier
+        .semantics { testTagsAsResourceId = true }
+        .testTag("change_color")
+        .clickable {
+          navController.navigate("change_color")
+        },
       trailingContent = {
         Icon(
           Icons.Filled.Circle,
@@ -126,9 +134,12 @@ fun SettingsScreenContent(
     )
     ListItem(
       headlineContent = { Text(stringResource(R.string.change_size)) },
-      modifier = Modifier.clickable {
-        navController.navigate("change_size")
-      })
+      modifier = Modifier
+        .semantics { testTagsAsResourceId = true }
+        .testTag("change_size")
+        .clickable {
+          navController.navigate("change_size")
+        })
 
     HorizontalDivider()
     Text(

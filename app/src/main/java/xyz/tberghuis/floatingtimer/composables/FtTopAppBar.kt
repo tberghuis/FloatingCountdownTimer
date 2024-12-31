@@ -10,7 +10,10 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 
@@ -26,7 +29,9 @@ fun FtTopAppBar() {
         onClick = {
           navController.navigate("settings")
         },
-        modifier = Modifier,
+        modifier = Modifier
+          .semantics { testTagsAsResourceId = true }
+          .testTag("settings"),
       ) {
         Icon(Icons.Filled.Settings, stringResource(R.string.settings))
       }
