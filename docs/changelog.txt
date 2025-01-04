@@ -1,4 +1,7 @@
-v1.40.2    2024-12-22  dev-translate-jp
+v1.40.3    2025-01-04  dev-translate-korea
+  korean translation
+
+v1.40.2    XXXX-XX-XX  dev-translate-jp
   japanese translation
 
 v1.40.1    2024-12-22  dev-anr
