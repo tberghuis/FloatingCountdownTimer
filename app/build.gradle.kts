@@ -30,10 +30,10 @@ android {
       buildConfigField("Boolean", "DEFAULT_PURCHASED", "false")
     }
     debug {
-//      buildConfigField("Boolean", "DEFAULT_PURCHASED", "false")
+      buildConfigField("Boolean", "DEFAULT_PURCHASED", "false")
       // for taking screenshots, use airplane mode
       // todo use environment variable
-       buildConfigField("Boolean", "DEFAULT_PURCHASED", "true")
+//       buildConfigField("Boolean", "DEFAULT_PURCHASED", "true")
     }
     create("unlockTmp") {
       initWith(getByName("debug"))
