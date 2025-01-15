@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.0.21"
-agp = "8.7.3"
+agp = "8.8.0"
 # https://github.com/google/ksp/releases
 ksp = "2.0.21-1.0.27"
 
