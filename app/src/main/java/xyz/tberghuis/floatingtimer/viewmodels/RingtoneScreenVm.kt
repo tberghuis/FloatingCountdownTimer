@@ -9,11 +9,11 @@ import xyz.tberghuis.floatingtimer.data.preferencesRepository
 
 class RingtoneScreenVm(private val application: Application) : AndroidViewModel(application) {
   private val prefRepo = application.preferencesRepository
-  val ringtonePreviewVmc = RingtonePreviewVmc(application)
+  val ringtonePreviewVmc = RingtonePreviewVmc(application, viewModelScope)
   val currentRingtoneVmc =
     CurrentRingtoneVmc(prefRepo.alarmRingtoneUriFlow, viewModelScope, application)
 
-  val systemDefaultAlarmVmc = SystemDefaultAlarmVmc(application)
+  val systemDefaultAlarmVmc = SystemDefaultAlarmVmc(application, viewModelScope)
 
   val alarmList = RingtoneListVmc(application, RingtoneType.ALARM)
   val ringtoneList = RingtoneListVmc(application, RingtoneType.RINGTONE)
