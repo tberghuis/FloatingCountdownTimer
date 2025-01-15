@@ -6,22 +6,22 @@ import android.media.AudioAttributes
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.media.Ringtone
-import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.util.Log
+import androidx.core.net.toUri
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
+import xyz.tberghuis.floatingtimer.util.uriToRingtone
 
 class FtAlarmController(
   private val floatingService: FloatingService
@@ -63,14 +63,13 @@ class FtAlarmController(
   @OptIn(ExperimentalCoroutinesApi::class)
   private fun watchRingtoneUri() {
     floatingService.scope.launch {
-      prefs.alarmRingtoneUriFlow.mapLatest { uriString ->
-        Uri.parse(uriString)
-      }.collectLatest { uri ->
+      prefs.alarmRingtoneUriFlow.collectLatest { uri ->
         uri?.let {
           alarmRunning.value = false
           ringtoneDuration = getRingtoneDuration(floatingService, uri)
+          // I should use withContext(Main) ???
           ringtone =
-            RingtoneManager.getRingtone(floatingService.application, uri)?.apply {
+            uriToRingtone(floatingService.application, uri.toUri())?.apply {
               audioAttributes = AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ALARM)
                 .setLegacyStreamType(AudioManager.STREAM_ALARM)
@@ -164,11 +163,11 @@ class FtAlarmController(
   }
 }
 
-private fun getRingtoneDuration(context: Context, ringtoneUri: Uri): Long? {
+private fun getRingtoneDuration(context: Context, ringtoneUri: String): Long? {
   // will this sometimes throw without READ_EXTERNAL_STORAGE permission???
   var duration: Long? = null
   try {
-    val mediaPlayer: MediaPlayer? = MediaPlayer.create(context, ringtoneUri)
+    val mediaPlayer: MediaPlayer? = MediaPlayer.create(context, Uri.parse(ringtoneUri))
     duration = mediaPlayer?.duration?.toLong()
     mediaPlayer?.release()
   } catch (e: Exception) {

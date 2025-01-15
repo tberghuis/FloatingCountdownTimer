@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import xyz.tberghuis.floatingtimer.util.uriToRingtone
 
 class SystemDefaultAlarmVmc(val application: Application) {
   var systemDefaultRingtoneUri by mutableStateOf<String?>(null)
@@ -20,7 +21,7 @@ class SystemDefaultAlarmVmc(val application: Application) {
     systemDefaultRingtoneUri = uri?.toString()
     systemDefaultRingtoneTitle = uri?.let {
       try {
-        RingtoneManager.getRingtone(application, uri).getTitle(application)
+        uriToRingtone(application, uri)?.getTitle(application)
       } catch (e: SecurityException) {
         Log.e("SystemDefaultAlarmVmc", "SecurityException $e")
         null

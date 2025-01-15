@@ -2,10 +2,10 @@ package xyz.tberghuis.floatingtimer.viewmodels
 
 import android.app.Application
 import android.media.Ringtone
-import android.media.RingtoneManager
-import android.net.Uri
 import android.os.Build
+import androidx.core.net.toUri
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.util.uriToRingtone
 
 class RingtonePreviewVmc(val application: Application) {
   private var ringtone: Ringtone? = null
@@ -18,7 +18,7 @@ class RingtonePreviewVmc(val application: Application) {
       return
     }
     ringtone?.stop()
-    ringtone = RingtoneManager.getRingtone(application, Uri.parse(uri))?.apply {
+    ringtone = uriToRingtone(application, uri.toUri())?.apply {
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
         // this didn't work on emulator alarm
         // for alarms such as: "Krypton"
