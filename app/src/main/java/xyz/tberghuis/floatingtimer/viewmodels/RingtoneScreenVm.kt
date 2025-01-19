@@ -15,9 +15,9 @@ class RingtoneScreenVm(private val application: Application) : AndroidViewModel(
 
   val systemDefaultAlarmVmc = SystemDefaultAlarmVmc(application, viewModelScope)
 
-  val alarmList = RingtoneListVmc(application, RingtoneType.ALARM)
-  val ringtoneList = RingtoneListVmc(application, RingtoneType.RINGTONE)
-  val notificationList = RingtoneListVmc(application, RingtoneType.NOTIFICATION)
+  val alarmList = RingtoneListVmc(application, RingtoneType.ALARM, viewModelScope)
+  val ringtoneList = RingtoneListVmc(application, RingtoneType.RINGTONE, viewModelScope)
+  val notificationList = RingtoneListVmc(application, RingtoneType.NOTIFICATION, viewModelScope)
 
   fun setRingtone(uri: String) {
     viewModelScope.launch {
