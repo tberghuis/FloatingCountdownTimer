@@ -6,11 +6,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import xyz.tberghuis.floatingtimer.composables.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownProgressArc
 
@@ -23,7 +24,7 @@ fun TmpCountdownCircleView(
   isBackgroundTransparent: Boolean
 ) {
   SquareBackground(
-    modifier = Modifier.padding(bubbleProperties.arcWidth / 2), // arcWidth / 2
+    modifier = Modifier.padding(bubbleProperties.arcWidth / 2),
     background = {
       Box {
         CountdownProgressArc(
@@ -43,10 +44,12 @@ fun TmpCountdownCircleView(
       }
     },
   ) {
-    Box(Modifier.padding(5.dp)) {
-//      TimeDisplay(countdownSeconds)
-      // todo
-      Text("time goes here")
+    Box(
+      Modifier
+        .padding(5.dp),
+      contentAlignment = Alignment.Center, // todo test if needed
+    ) {
+      TimeDisplay(countdownSeconds, bubbleProperties.fontSize, isBackgroundTransparent)
     }
   }
 }
