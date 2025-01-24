@@ -6,14 +6,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import xyz.tberghuis.floatingtimer.service.BubbleProperties
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownProgressArc
 
 @Composable
 fun TmpCountdownCircleView(
+  bubbleProperties: BubbleProperties,
   timeLeftFraction: Float,
   countdownSeconds: Int,
+  isPaused: Boolean,
+  isBackgroundTransparent: Boolean
 ) {
   SquareBackground(
     modifier = Modifier.padding(8.dp / 2), // arcWidth / 2
@@ -34,8 +37,8 @@ fun TmpCountdownCircleView(
   }
 }
 
-@Preview
-@Composable
-fun CountdownCircleViewPreview() {
-  TmpCountdownCircleView(.5f, 3600 + 59)
-}
+//@Preview
+//@Composable
+//fun CountdownCircleViewPreview() {
+//  TmpCountdownCircleView(.5f, 3600 + 59)
+//}
