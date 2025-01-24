@@ -19,13 +19,13 @@ fun TmpCountdownCircleView(
   isBackgroundTransparent: Boolean
 ) {
   SquareBackground(
-    modifier = Modifier.padding(8.dp / 2), // arcWidth / 2
+    modifier = Modifier.padding(bubbleProperties.arcWidth / 2), // arcWidth / 2
     background = {
       CountdownProgressArc(
         timeLeftFraction,
-        8.dp,
-        Color.Blue,
-        false
+        bubbleProperties.arcWidth,
+        bubbleProperties.haloColor,
+        isBackgroundTransparent
       )
     },
   ) {
