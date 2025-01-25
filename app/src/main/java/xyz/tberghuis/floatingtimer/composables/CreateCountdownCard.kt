@@ -77,7 +77,7 @@ fun CreateCountdownCard() {
         .widthIn(max = 350.dp),
       horizontalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterHorizontally)
     ) {
-//      CountdownTimeField(vm.hours, stringResource(R.string.hours))
+      CountdownTimeField(vm.hours, stringResource(R.string.hours))
       CountdownTimeField(vm.minutes, stringResource(R.string.minutes), "CountdownMinutes")
       CountdownTimeField(vm.seconds, stringResource(R.string.seconds))
     }
