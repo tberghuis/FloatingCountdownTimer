@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -108,6 +109,11 @@ fun RowScope.CountdownTimeField(
     modifier = Modifier
       .weight(1f)
       .onFocusSelectAll(tfvState)
+      .onFocusChanged {
+        if (!it.isFocused && tfvState.value.text.isBlank()) {
+          tfvState.value = TextFieldValue("0")
+        }
+      }
       .then(testTagModifier),
     label = { Text(label, maxLines = 1) },
     value = tfvState.value,
