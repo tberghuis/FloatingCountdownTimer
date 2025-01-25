@@ -1,11 +1,9 @@
 package xyz.tberghuis.floatingtimer.service
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
-import android.view.WindowManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
@@ -24,10 +22,15 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
+import xyz.tberghuis.floatingtimer.tmp4.TmpOverlayController
 import kotlin.math.max
 import kotlin.math.min
 
-class OverlayController(val service: FloatingService) {
+class OverlayController(service: FloatingService) : TmpOverlayController(service) {
+
+}
+
+class XxxOverlayController(val service: FloatingService) {
   val trashController = TrashController(service)
   private val bubbleSet = mutableSetOf<Bubble>()
 
