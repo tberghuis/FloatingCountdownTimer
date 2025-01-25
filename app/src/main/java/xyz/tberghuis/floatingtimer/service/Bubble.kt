@@ -10,7 +10,6 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
-import xyz.tberghuis.floatingtimer.COUNTDOWN_TIMER_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
@@ -27,8 +26,9 @@ interface BubbleProperties : TmpBubbleProperties {
     get() = 0.dp
 
   companion object {
+    // todo remove
     fun calcCountdownTimerSizeDp(scaleFactor: Float) =
-      COUNTDOWN_TIMER_SIZE_NO_SCALE * (scaleFactor + 1)
+      60.dp * (scaleFactor + 1)
 
     fun calcArcWidth(scaleFactor: Float) = ARC_WIDTH_NO_SCALE * (0.9f * scaleFactor + 1)
     fun calcFontSize(scaleFactor: Float) = TIMER_FONT_SIZE_NO_SCALE * (1.2 * scaleFactor + 1)
@@ -40,30 +40,17 @@ interface BubbleProperties : TmpBubbleProperties {
 // make update method a single method interface, does calcs and returns copy instance
 
 // state that is static for lifetime of bubble goes here
-interface XxxBubbleProperties {
-  val widthDp: Dp
-  val heightDp: Dp
-  val arcWidth: Dp
-  val fontSize: TextUnit
-  val haloColor: Color
-  val timerShape: String
-  val label: String?
-  val isBackgroundTransparent: Boolean
 
-  companion object {
-    fun calcCountdownTimerSizeDp(scaleFactor: Float) =
-      COUNTDOWN_TIMER_SIZE_NO_SCALE * (scaleFactor + 1)
-
-//    fun calcRectHeightDp(scaleFactor: Float): Dp {
-//      // y= mx + b
-//      // m = 22, b=50
-//      return (RECT_TIMER_HEIGHT_MAX_SCALE - RECT_TIMER_HEIGHT_NO_SCALE) * scaleFactor + RECT_TIMER_HEIGHT_NO_SCALE
-//    }
-
-    fun calcArcWidth(scaleFactor: Float) = ARC_WIDTH_NO_SCALE * (0.9f * scaleFactor + 1)
-    fun calcFontSize(scaleFactor: Float) = TIMER_FONT_SIZE_NO_SCALE * (1.2 * scaleFactor + 1)
-  }
-}
+//interface XxxBubbleProperties {
+//  val widthDp: Dp
+//  val heightDp: Dp
+//  val arcWidth: Dp
+//  val fontSize: TextUnit
+//  val haloColor: Color
+//  val timerShape: String
+//  val label: String?
+//  val isBackgroundTransparent: Boolean
+//}
 
 abstract class Bubble(
   private val service: FloatingService,
