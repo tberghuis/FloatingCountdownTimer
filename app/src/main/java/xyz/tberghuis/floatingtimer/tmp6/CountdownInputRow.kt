@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -135,6 +136,33 @@ fun CountdownInputRow(
   }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+fun RowScope.CountdownTimeField(
+  tfvState: MutableState<TextFieldValue>,
+  label: String,
+  testTag: String? = null
+) {
+  val testTagModifier = testTag?.let {
+    Modifier
+      .semantics { testTagsAsResourceId = true }
+      .testTag(testTag)
+  } ?: Modifier
+
+  TextField(
+    modifier = Modifier
+      .weight(1f)
+      .onFocusSelectAll(tfvState)
+      .then(testTagModifier),
+    label = { Text(label, maxLines = 1) },
+    value = tfvState.value,
+    onValueChange = { tfvState.value = it },
+    keyboardOptions = KeyboardOptions(
+      keyboardType = KeyboardType.Number
+    ),
+    singleLine = true
+  )
+}
 
 @Preview
 @Composable
