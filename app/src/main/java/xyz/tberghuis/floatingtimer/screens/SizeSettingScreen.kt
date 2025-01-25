@@ -36,7 +36,7 @@ import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SettingsTimerPreviewCard
-import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
+import xyz.tberghuis.floatingtimer.tmp5.TmpSettingsTimerPreviewVmc
 import xyz.tberghuis.floatingtimer.viewmodels.SizeSettingViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -105,7 +105,7 @@ fun SizeSettingScreenContent(
 
 @Composable
 fun SliderScale(
-  vmc: SettingsTimerPreviewVmc
+  vmc: TmpSettingsTimerPreviewVmc
 ) {
   Slider(
     value = vmc.bubbleSizeScaleFactor,

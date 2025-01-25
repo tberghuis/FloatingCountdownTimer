@@ -37,7 +37,6 @@ fun StopwatchView(
 ) {
   StopwatchView(
     isRunningStateFlow = stopwatch.isRunningStateFlow,
-    widthDp = stopwatch.widthDp,
     arcWidth = stopwatch.arcWidth,
     haloColor = stopwatch.haloColor,
     timeElapsed = stopwatch.timeElapsed.intValue,
@@ -52,7 +51,6 @@ fun StopwatchView(
 fun StopwatchView(
   // when isRunningStateFlow null, showing preview in saved timers card
   isRunningStateFlow: MutableStateFlow<Boolean>?,
-  widthDp: Dp,
   arcWidth: Dp,
   haloColor: Color,
   timeElapsed: Int,
@@ -67,7 +65,6 @@ fun StopwatchView(
     "circle" -> {
       StopwatchCircleView(
         isRunningStateFlow = isRunningStateFlow,
-        bubbleSizeDp = widthDp,
         arcWidth = arcWidth,
         haloColor = haloColor,
         timeElapsed = timeElapsed,

@@ -27,7 +27,7 @@ import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
-import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
+import xyz.tberghuis.floatingtimer.tmp5.TmpSettingsTimerPreviewVmc
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
 @Composable
@@ -60,7 +60,7 @@ fun <T : SavedTimer> ColumnScope.SavedTimersCard(
       savedTimers.forEach { savedTimer ->
         val c = Color(savedTimer.timerColor)
         val settingsTimerPreviewVmc =
-          SettingsTimerPreviewVmc(0f, c, savedTimer.timerShape, savedTimer.label, savedTimer.isBackgroundTransparent)
+          TmpSettingsTimerPreviewVmc(0f, c, savedTimer.timerShape, savedTimer.label, savedTimer.isBackgroundTransparent)
         Box(
           modifier = Modifier
             .align(Alignment.CenterVertically)
@@ -77,8 +77,6 @@ fun <T : SavedTimer> ColumnScope.SavedTimersCard(
             is SavedStopwatch -> {
               StopwatchView(
                 isRunningStateFlow = null,
-                // todo remove widthDp
-                widthDp = 60.dp,
                 arcWidth = ARC_WIDTH_NO_SCALE,
                 haloColor = Color(savedTimer.timerColor),
                 timeElapsed = 0,

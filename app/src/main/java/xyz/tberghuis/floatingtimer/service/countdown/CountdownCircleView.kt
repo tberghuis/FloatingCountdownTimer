@@ -17,7 +17,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import xyz.tberghuis.floatingtimer.composables.TimeDisplay
-import xyz.tberghuis.floatingtimer.service.BubbleProperties
+import xyz.tberghuis.floatingtimer.service.XxxBubbleProperties
+import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties as BubbleProperties
 import xyz.tberghuis.floatingtimer.tmp4.TmpCountdownCircleView
 
 @Composable
@@ -39,7 +40,7 @@ fun CountdownCircleView(
 
 @Composable
 fun XxxCountdownCircleView(
-  bubbleProperties: BubbleProperties,
+  bubbleProperties: XxxBubbleProperties,
   timeLeftFraction: Float,
   countdownSeconds: Int,
   isPaused: Boolean,

@@ -22,7 +22,6 @@ import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchCircleView
 fun StopwatchCircleView(
   // when isRunningStateFlow null, showing preview in saved timers card
   isRunningStateFlow: MutableStateFlow<Boolean>?,
-  bubbleSizeDp: Dp,
   arcWidth: Dp,
   haloColor: Color,
   timeElapsed: Int,

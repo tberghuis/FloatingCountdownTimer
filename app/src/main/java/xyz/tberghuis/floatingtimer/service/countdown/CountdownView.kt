@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.IntSize
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.service.BubbleProperties
+import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties as BubbleProperties
 
 @Composable
 fun CountdownView(countdown: Countdown) {

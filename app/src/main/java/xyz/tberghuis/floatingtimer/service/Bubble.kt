@@ -17,7 +17,7 @@ import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.tmp4.TmpBubble
 import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties
 
-interface BubbleProperties : TmpBubbleProperties {
+interface XxxBubbleProperties : TmpBubbleProperties {
   val widthDp: Dp
     get() = 0.dp
   val heightDp: Dp
@@ -66,14 +66,14 @@ abstract class XxxBubble(
   final override val isBackgroundTransparent: Boolean,
   // todo rename SavedTimer, SavedBubble
   private var savedTimer: SavedTimer? = null
-) : BubbleProperties {
+) : XxxBubbleProperties {
   final override val widthDp = when (timerShape) {
     "label", "rectangle" -> {
       Dp.Unspecified
     }
 
     "circle" -> {
-      BubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
+      XxxBubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
     }
 
     else -> {
@@ -83,7 +83,7 @@ abstract class XxxBubble(
 
   final override val heightDp = when (timerShape) {
     "circle" -> {
-      BubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
+      XxxBubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
     }
 
     "label", "rectangle" -> {
@@ -95,8 +95,8 @@ abstract class XxxBubble(
     }
   }
 
-  override val arcWidth = BubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
-  override val fontSize = BubbleProperties.calcFontSize(bubbleSizeScaleFactor)
+  override val arcWidth = XxxBubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
+  override val fontSize = XxxBubbleProperties.calcFontSize(bubbleSizeScaleFactor)
   val viewHolder: TimerViewHolder
 
   init {

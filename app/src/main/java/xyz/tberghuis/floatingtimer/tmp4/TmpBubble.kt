@@ -8,7 +8,6 @@ import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.appDatabase
-import xyz.tberghuis.floatingtimer.service.BubbleProperties
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.TimerViewHolder
 
@@ -22,7 +21,7 @@ abstract class TmpBubble(
   override val label: String? = null,
   override val isBackgroundTransparent: Boolean,
   private var savedTimer: SavedTimer? = null
-) : BubbleProperties {
+) : TmpBubbleProperties {
   override val arcWidth = TmpBubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
   override val fontSize = TmpBubbleProperties.calcFontSize(bubbleSizeScaleFactor)
   val viewHolder: TimerViewHolder

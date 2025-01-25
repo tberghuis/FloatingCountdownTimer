@@ -18,10 +18,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
-import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
+import xyz.tberghuis.floatingtimer.tmp5.TmpSettingsTimerPreviewVmc
 
 @Composable
-fun SettingsTimerPreviewCard(vmc: SettingsTimerPreviewVmc) {
+fun SettingsTimerPreviewCard(vmc: TmpSettingsTimerPreviewVmc) {
   ElevatedCard(
     modifier = Modifier
       .height(180.dp)
