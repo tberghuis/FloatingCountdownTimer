@@ -6,10 +6,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Text
@@ -74,8 +72,6 @@ import xyz.tberghuis.floatingtimer.composables.onFocusSelectAll
 //  }
 //}
 
-
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CountdownInputRow(
   hours: MutableState<TextFieldValue>,
@@ -89,50 +85,9 @@ fun CountdownInputRow(
 //      .fillMaxWidth(),
     horizontalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterHorizontally)
   ) {
-
-    TextField(
-      modifier = Modifier
-        .weight(1f)
-        .onFocusSelectAll(hours),
-      label = { Text(stringResource(R.string.hours), maxLines = 1) },
-      value = hours.value,
-      onValueChange = { hours.value = it },
-      keyboardOptions = KeyboardOptions(
-        keyboardType = KeyboardType.Number
-      ),
-      singleLine = true
-    )
-
-
-
-
-
-    TextField(
-      modifier = Modifier
-        .weight(1f)
-        .onFocusSelectAll(minutes)
-        .semantics { testTagsAsResourceId = true }
-        .testTag("CountdownMinutes"),
-      label = { Text(stringResource(R.string.minutes), maxLines = 1) },
-      value = minutes.value,
-      onValueChange = { minutes.value = it },
-      keyboardOptions = KeyboardOptions(
-        keyboardType = KeyboardType.Number
-      ),
-      singleLine = true
-    )
-    TextField(
-      modifier = Modifier
-        .weight(1f)
-        .onFocusSelectAll(seconds),
-      label = { Text(stringResource(R.string.seconds), maxLines = 1) },
-      value = seconds.value,
-      onValueChange = { seconds.value = it },
-      keyboardOptions = KeyboardOptions(
-        keyboardType = KeyboardType.Number
-      ),
-      singleLine = true
-    )
+    CountdownTimeField(hours, stringResource(R.string.hours))
+    CountdownTimeField(minutes, stringResource(R.string.minutes), "CountdownMinutes")
+    CountdownTimeField(seconds, stringResource(R.string.seconds))
   }
 }
 
