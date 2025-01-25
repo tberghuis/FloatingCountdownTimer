@@ -10,7 +10,7 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp4.TmpTimerViewHolder
 
 class TimerViewHolder(
-  override val service: FloatingService,
+  service: FloatingService,
   widthPx: Int,
   heightPx: Int,
   x: Int? = null,
