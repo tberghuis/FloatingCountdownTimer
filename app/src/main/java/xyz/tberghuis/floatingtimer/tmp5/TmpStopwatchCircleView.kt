@@ -14,15 +14,16 @@ import androidx.compose.material3.Icon
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.MutableStateFlow
 import xyz.tberghuis.floatingtimer.composables.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchBorderArc
+import xyz.tberghuis.floatingtimer.tmp4.SquareBackground
 
 @Composable
 fun TmpStopwatchCircleView(
   // when isRunningStateFlow null, showing preview in saved timers card
   isRunningStateFlow: MutableStateFlow<Boolean>?,
-  bubbleSizeDp: Dp,
   arcWidth: Dp,
   haloColor: Color,
   timeElapsed: Int,
@@ -30,21 +31,34 @@ fun TmpStopwatchCircleView(
   isBackgroundTransparent: Boolean
 ) {
   val isRunning = isRunningStateFlow?.collectAsState()?.value
-  Box(
-    modifier = Modifier
-      .size(bubbleSizeDp)
-      .padding(arcWidth / 2),
-    contentAlignment = Alignment.Center
+
+  SquareBackground(
+    modifier = Modifier.padding(arcWidth / 2),
+    background = {
+      Box {
+        StopwatchBorderArc(
+          isRunningStateFlow,
+          arcWidth,
+          haloColor,
+          isBackgroundTransparent
+        )
+        if (isRunning == false) {
+          Icon(
+            Icons.Filled.PlayArrow,
+            contentDescription = "paused",
+            modifier = Modifier.fillMaxSize(),
+            tint = Color.LightGray
+          )
+        }
+      }
+    },
   ) {
-    StopwatchBorderArc(isRunningStateFlow, arcWidth, haloColor, isBackgroundTransparent)
-    if (isRunning == false) {
-      Icon(
-        Icons.Filled.PlayArrow,
-        contentDescription = "paused",
-        modifier = Modifier.fillMaxSize(),
-        tint = Color.LightGray
-      )
+    Box(
+      Modifier
+        .padding(5.dp),
+      contentAlignment = Alignment.Center, // todo test if needed
+    ) {
+      TimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
     }
-    TimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
   }
 }
