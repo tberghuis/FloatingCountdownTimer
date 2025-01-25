@@ -5,7 +5,6 @@ import android.view.WindowManager
 import androidx.compose.ui.graphics.Color
 import kotlin.math.roundToInt
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -17,7 +16,6 @@ import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.tmp4.TmpBubble
 import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties
-
 
 interface BubbleProperties : TmpBubbleProperties {
   val widthDp: Dp
@@ -34,7 +32,6 @@ interface BubbleProperties : TmpBubbleProperties {
     fun calcFontSize(scaleFactor: Float) = TIMER_FONT_SIZE_NO_SCALE * (1.2 * scaleFactor + 1)
   }
 }
-
 
 // future data class implements this, use composition over inheritance
 // make update method a single method interface, does calcs and returns copy instance
