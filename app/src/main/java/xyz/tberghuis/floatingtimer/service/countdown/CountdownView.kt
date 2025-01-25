@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.IntSize
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp5.TmpCountdownView
 import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties as BubbleProperties
 
 @Composable
@@ -22,11 +23,26 @@ fun CountdownView(countdown: Countdown) {
       timerState.value == TimerStatePaused
     }
   }
-  CountdownView(countdown, timeLeftFraction, countdown.countdownSeconds, isPaused)
+  TmpCountdownView(countdown, timeLeftFraction, countdown.countdownSeconds, isPaused)
 }
 
 @Composable
 fun CountdownView(
+  bubbleProperties: BubbleProperties,
+  timeLeftFraction: Float,
+  countdownSeconds: Int,
+  isPaused: Boolean
+) {
+  TmpCountdownView(
+    bubbleProperties,
+    timeLeftFraction,
+    countdownSeconds,
+    isPaused
+  )
+}
+
+@Composable
+fun XxxCountdownView(
   bubbleProperties: BubbleProperties,
   timeLeftFraction: Float,
   countdownSeconds: Int,
