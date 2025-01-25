@@ -38,6 +38,7 @@ class CountdownScreenVm(
     CurrentRingtoneVmc(preferencesRepository.alarmRingtoneUriFlow, viewModelScope, application)
 
   val vibrationFlow = preferencesRepository.vibrationFlow
+  // todo should be val not var
   var minutes = mutableStateOf(TextFieldValue("0"))
   var seconds = mutableStateOf(TextFieldValue("0"))
 
