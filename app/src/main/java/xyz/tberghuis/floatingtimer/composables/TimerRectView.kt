@@ -24,9 +24,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectView
 
 @Composable
 fun TimerRectView(
+  isPaused: Boolean,
+  arcWidth: Dp,
+  haloColor: Color,
+  timeElapsed: Int,
+  timeLeftFraction: Float,
+  fontSize: TextUnit,
+  label: String?,
+  isBackgroundTransparent: Boolean,
+  updateViewLayout: ((IntSize) -> Unit)? = null
+) {
+  TmpTimerRectView(
+    isPaused,
+    arcWidth,
+    haloColor,
+    timeElapsed,
+    timeLeftFraction,
+    fontSize,
+    label,
+    isBackgroundTransparent,
+  )
+}
+
+@Composable
+fun XxxTimerRectView(
   isPaused: Boolean,
   arcWidth: Dp,
   haloColor: Color,
