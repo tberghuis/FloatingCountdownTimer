@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import xyz.tberghuis.floatingtimer.R
@@ -76,7 +77,8 @@ fun RowScope.CountdownTimeField(
     value = tfvState.value,
     onValueChange = { tfvState.value = it },
     keyboardOptions = KeyboardOptions(
-      keyboardType = KeyboardType.Number
+      keyboardType = KeyboardType.Number,
+      imeAction = ImeAction.Next
     ),
     singleLine = true
   )
