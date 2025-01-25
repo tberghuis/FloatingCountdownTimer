@@ -14,7 +14,6 @@ import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.appDatabase
-import xyz.tberghuis.floatingtimer.tmp4.TmpBubble
 import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties
 import xyz.tberghuis.floatingtimer.service.XxxTimerViewHolder as TimerViewHolder
 
@@ -38,25 +37,6 @@ interface XxxBubbleProperties : TmpBubbleProperties {
 // make update method a single method interface, does calcs and returns copy instance
 
 // state that is static for lifetime of bubble goes here
-
-//abstract class Bubble(
-//  private val service: FloatingService,
-//  bubbleSizeScaleFactor: Float,
-//  override val haloColor: Color,
-//  final override val timerShape: String,
-//  final override val label: String? = null,
-//  final override val isBackgroundTransparent: Boolean,
-//  private var savedTimer: SavedTimer? = null
-//) : TmpBubble(
-//  service,
-//  bubbleSizeScaleFactor,
-//  haloColor,
-//  timerShape,
-//  label,
-//  isBackgroundTransparent,
-//  savedTimer
-//) {
-//}
 
 abstract class XxxBubble(
   private val service: FloatingService,
