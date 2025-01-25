@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
@@ -42,6 +43,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp6.CountdownTimeField
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
@@ -68,42 +70,19 @@ fun CreateCountdownCard() {
         textAlign = TextAlign.Center
       )
     }
+
     Row(
       modifier = Modifier
         .padding(10.dp)
-        .fillMaxWidth(), horizontalArrangement = Arrangement.Center
+        .widthIn(max = 350.dp),
+      horizontalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterHorizontally)
     ) {
-      TextField(
-        modifier = Modifier
-          .width(100.dp)
-          .onFocusSelectAll(vm.minutes)
-          .semantics { testTagsAsResourceId = true }
-          .testTag("CountdownMinutes"),
-
-
-        label = { Text(stringResource(R.string.minutes), maxLines = 1) },
-        value = vm.minutes.value,
-        onValueChange = { vm.minutes.value = it },
-        keyboardOptions = KeyboardOptions(
-          keyboardType = KeyboardType.Number
-        ),
-        singleLine = true
-      )
-      Spacer(Modifier.width(20.dp))
-      TextField(
-        modifier = Modifier
-          .width(100.dp)
-//          .padding(vertical = 20.dp)
-          .onFocusSelectAll(vm.seconds),
-        label = { Text(stringResource(R.string.seconds), maxLines = 1) },
-        value = vm.seconds.value,
-        onValueChange = { vm.seconds.value = it },
-        keyboardOptions = KeyboardOptions(
-          keyboardType = KeyboardType.Number
-        ),
-        singleLine = true
-      )
+//      CountdownTimeField(vm.hours, stringResource(R.string.hours))
+      CountdownTimeField(vm.minutes, stringResource(R.string.minutes), "CountdownMinutes")
+      CountdownTimeField(vm.seconds, stringResource(R.string.seconds))
     }
+
+
     TimerShapeChoice(vm)
     CountdownOptions()
     Row(
