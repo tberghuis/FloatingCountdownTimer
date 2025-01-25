@@ -9,19 +9,19 @@ import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp4.TmpTimerViewHolder
 
-class TimerViewHolder(
-  service: FloatingService,
-  widthPx: Int,
-  heightPx: Int,
-  x: Int? = null,
-  y: Int? = null
-) : TmpTimerViewHolder(
-  service,
-  x,
-  y
-) {
-
-}
+//class TimerViewHolder(
+//  service: FloatingService,
+//  widthPx: Int,
+//  heightPx: Int,
+//  x: Int? = null,
+//  y: Int? = null
+//) : TmpTimerViewHolder(
+//  service,
+//  x,
+//  y
+//) {
+//
+//}
 
 class XxxTimerViewHolder(
   val service: FloatingService,

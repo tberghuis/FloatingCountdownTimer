@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
-import xyz.tberghuis.floatingtimer.service.Bubble
+import xyz.tberghuis.floatingtimer.tmp4.TmpBubble as Bubble
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import java.util.Timer
 import java.util.TimerTask

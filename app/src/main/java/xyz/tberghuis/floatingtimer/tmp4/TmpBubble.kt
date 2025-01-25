@@ -9,7 +9,7 @@ import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.service.FloatingService
-import xyz.tberghuis.floatingtimer.service.TimerViewHolder
+import xyz.tberghuis.floatingtimer.tmp4.TmpTimerViewHolder as TimerViewHolder
 
 // todo final override methods in constructor
 
@@ -30,7 +30,7 @@ abstract class TmpBubble(
     // todo TmpTimerViewHolder
     // remove widthPx heightPx params
     viewHolder =
-      TimerViewHolder(service, 0, 0, savedTimer?.positionX, savedTimer?.positionY)
+      TimerViewHolder(service, savedTimer?.positionX, savedTimer?.positionY)
   }
 
   open fun exit() {
