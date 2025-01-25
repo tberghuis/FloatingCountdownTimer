@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.composables.TimeDisplay
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownProgressArc
+import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties.Companion.calcTimerDisplayPadding
 
 @Composable
 fun TmpCountdownCircleView(
@@ -45,7 +46,7 @@ fun TmpCountdownCircleView(
   ) {
     Box(
       Modifier
-        .padding(5.dp),
+        .padding(bubbleProperties.paddingTimerDisplay),
       contentAlignment = Alignment.Center, // todo test if needed
     ) {
       TimeDisplay(countdownSeconds, bubbleProperties.fontSize, isBackgroundTransparent)

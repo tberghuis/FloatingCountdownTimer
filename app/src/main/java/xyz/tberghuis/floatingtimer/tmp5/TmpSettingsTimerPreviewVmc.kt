@@ -20,6 +20,9 @@ class TmpSettingsTimerPreviewVmc(
   override val arcWidth by derivedStateOf {
     BubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
   }
+  override val paddingTimerDisplay by derivedStateOf {
+    BubbleProperties.calcTimerDisplayPadding(bubbleSizeScaleFactor)
+  }
   override val fontSize by derivedStateOf {
     BubbleProperties.calcFontSize(bubbleSizeScaleFactor)
   }

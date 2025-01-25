@@ -24,6 +24,9 @@ abstract class TmpBubble(
 ) : TmpBubbleProperties {
   override val arcWidth = TmpBubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
   override val fontSize = TmpBubbleProperties.calcFontSize(bubbleSizeScaleFactor)
+  override val paddingTimerDisplay =
+    TmpBubbleProperties.calcTimerDisplayPadding(bubbleSizeScaleFactor)
+
   val viewHolder: TimerViewHolder
 
   init {

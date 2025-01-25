@@ -10,41 +10,41 @@ import androidx.compose.ui.unit.Dp
 import xyz.tberghuis.floatingtimer.service.XxxBubbleProperties as BubbleProperties
 
 // todo make timerShape sealed class or enum with room typeconverter
-class XxxSettingsTimerPreviewVmc(
-  initialScale: Float,
-  initialHaloColor: Color,
-  override val timerShape: String,
-  override val label: String? = null,
-  override val isBackgroundTransparent: Boolean
-) : BubbleProperties {
-  var bubbleSizeScaleFactor by mutableFloatStateOf(initialScale) // 0<=x<=1
-  override var haloColor by mutableStateOf(initialHaloColor)
-  override val widthDp by derivedStateOf {
-    when (timerShape) {
-      "circle" -> {
-        BubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
-      }
-
-      else -> {
-        Dp.Unspecified
-      }
-    }
-  }
-  override val heightDp by derivedStateOf {
-    when (timerShape) {
-      "circle" -> {
-        BubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
-      }
-
-      else -> {
-        Dp.Unspecified
-      }
-    }
-  }
-  override val arcWidth by derivedStateOf {
-    BubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
-  }
-  override val fontSize by derivedStateOf {
-    BubbleProperties.calcFontSize(bubbleSizeScaleFactor)
-  }
-}
+//class XxxSettingsTimerPreviewVmc(
+//  initialScale: Float,
+//  initialHaloColor: Color,
+//  override val timerShape: String,
+//  override val label: String? = null,
+//  override val isBackgroundTransparent: Boolean
+//) : BubbleProperties {
+//  var bubbleSizeScaleFactor by mutableFloatStateOf(initialScale) // 0<=x<=1
+//  override var haloColor by mutableStateOf(initialHaloColor)
+//  override val widthDp by derivedStateOf {
+//    when (timerShape) {
+//      "circle" -> {
+//        BubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
+//      }
+//
+//      else -> {
+//        Dp.Unspecified
+//      }
+//    }
+//  }
+//  override val heightDp by derivedStateOf {
+//    when (timerShape) {
+//      "circle" -> {
+//        BubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
+//      }
+//
+//      else -> {
+//        Dp.Unspecified
+//      }
+//    }
+//  }
+//  override val arcWidth by derivedStateOf {
+//    BubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
+//  }
+//  override val fontSize by derivedStateOf {
+//    BubbleProperties.calcFontSize(bubbleSizeScaleFactor)
+//  }
+//}
