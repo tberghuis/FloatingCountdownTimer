@@ -31,48 +31,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.composables.onFocusSelectAll
 
-//@OptIn(ExperimentalComposeUiApi::class)
-//@Composable
-//fun CountdownInputRow(
-//  hours: MutableState<TextFieldValue>,
-//  minutes: MutableState<TextFieldValue>,
-//  seconds: MutableState<TextFieldValue>
-//) {
-//  Row(
-//    modifier = Modifier
-//      .padding(10.dp)
-//      .fillMaxWidth(), horizontalArrangement = Arrangement.Center
-//  ) {
-//    TextField(
-//      modifier = Modifier
-//        .width(100.dp)
-//        .onFocusSelectAll(minutes)
-//        .semantics { testTagsAsResourceId = true }
-//        .testTag("CountdownMinutes"),
-//      label = { Text(stringResource(R.string.minutes), maxLines = 1) },
-//      value = minutes.value,
-//      onValueChange = { minutes.value = it },
-//      keyboardOptions = KeyboardOptions(
-//        keyboardType = KeyboardType.Number
-//      ),
-//      singleLine = true
-//    )
-//    Spacer(Modifier.width(20.dp))
-//    TextField(
-//      modifier = Modifier
-//        .width(100.dp)
-//        .onFocusSelectAll(seconds),
-//      label = { Text(stringResource(R.string.seconds), maxLines = 1) },
-//      value = seconds.value,
-//      onValueChange = { seconds.value = it },
-//      keyboardOptions = KeyboardOptions(
-//        keyboardType = KeyboardType.Number
-//      ),
-//      singleLine = true
-//    )
-//  }
-//}
-
 @Composable
 fun CountdownInputRow(
   hours: MutableState<TextFieldValue>,
@@ -83,7 +41,6 @@ fun CountdownInputRow(
     modifier = Modifier
       .padding(10.dp)
       .widthIn(max = 350.dp),
-//      .fillMaxWidth(),
     horizontalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterHorizontally)
   ) {
     CountdownTimeField(hours, stringResource(R.string.hours))
