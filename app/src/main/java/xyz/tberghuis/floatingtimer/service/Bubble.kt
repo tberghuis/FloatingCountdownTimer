@@ -38,17 +38,6 @@ interface BubbleProperties : TmpBubbleProperties {
 
 // state that is static for lifetime of bubble goes here
 
-//interface XxxBubbleProperties {
-//  val widthDp: Dp
-//  val heightDp: Dp
-//  val arcWidth: Dp
-//  val fontSize: TextUnit
-//  val haloColor: Color
-//  val timerShape: String
-//  val label: String?
-//  val isBackgroundTransparent: Boolean
-//}
-
 abstract class Bubble(
   private val service: FloatingService,
   bubbleSizeScaleFactor: Float,
