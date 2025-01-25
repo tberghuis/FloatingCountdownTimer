@@ -25,11 +25,14 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
-import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties
+import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectView as TimerRectView
+import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchCircleView as StopwatchCircleView
 
 @Composable
 fun StopwatchView(
@@ -43,7 +46,8 @@ fun StopwatchView(
     fontSize = stopwatch.fontSize,
     timerShape = stopwatch.timerShape,
     label = stopwatch.label,
-    isBackgroundTransparent = stopwatch.isBackgroundTransparent
+    isBackgroundTransparent = stopwatch.isBackgroundTransparent,
+    paddingTimerDisplay = stopwatch.paddingTimerDisplay
   )
 }
 
@@ -57,7 +61,8 @@ fun StopwatchView(
   fontSize: TextUnit,
   timerShape: String,
   label: String?,
-  isBackgroundTransparent: Boolean
+  isBackgroundTransparent: Boolean,
+  paddingTimerDisplay: Dp
 ) {
   val isPaused = isRunningStateFlow?.collectAsState()?.value?.not() ?: false
 
@@ -69,20 +74,12 @@ fun StopwatchView(
         haloColor = haloColor,
         timeElapsed = timeElapsed,
         fontSize = fontSize,
-        isBackgroundTransparent
+        isBackgroundTransparent = isBackgroundTransparent,
+        paddingTimerDisplay = paddingTimerDisplay
       )
     }
 
     "label", "rectangle" -> {
-      val tvh = LocalTimerViewHolder.current
-      val updateViewLayout = tvh?.let {
-        { size: IntSize ->
-          logd("runOnceOnGloballyPositioned $size")
-          tvh.params.width = size.width
-          tvh.params.height = size.height
-          tvh.service.ftWindowManager.updateViewLayout(tvh.view, tvh.params)
-        }
-      }
       TimerRectView(
         isPaused,
         arcWidth,
@@ -92,7 +89,6 @@ fun StopwatchView(
         fontSize,
         if (timerShape == "label") label else null,
         isBackgroundTransparent,
-        updateViewLayout
       )
     }
 
@@ -127,7 +123,7 @@ fun StopwatchBorderArc(
   Canvas(
     Modifier.fillMaxSize()
   ) {
-    if(!isBackgroundTransparent){
+    if (!isBackgroundTransparent) {
       drawCircle(
         color = Color.White,
       )

@@ -11,6 +11,7 @@ val TIMER_FONT_SIZE_NO_SCALE = 16.sp
 const val INTENT_COMMAND = "xyz.tberghuis.floatingtimer.COMMAND"
 
 val ARC_WIDTH_NO_SCALE = 8.dp
+val TIMER_PADDING_NO_SCALE = 5.dp
 
 const val FOREGROUND_SERVICE_NOTIFICATION_ID = 1
 const val NOTIFICATION_CHANNEL = "xyz.tberghuis.floatingtimer.ONGOING_OVERLAY"

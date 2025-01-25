@@ -18,25 +18,25 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import xyz.tberghuis.floatingtimer.composables.TimeDisplay
 import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchCircleView
 
-@Composable
-fun StopwatchCircleView(
-  // when isRunningStateFlow null, showing preview in saved timers card
-  isRunningStateFlow: MutableStateFlow<Boolean>?,
-  arcWidth: Dp,
-  haloColor: Color,
-  timeElapsed: Int,
-  fontSize: TextUnit,
-  isBackgroundTransparent: Boolean
-) {
-  TmpStopwatchCircleView(
-    isRunningStateFlow,
-    arcWidth,
-    haloColor,
-    timeElapsed,
-    fontSize,
-    isBackgroundTransparent
-  )
-}
+//@Composable
+//fun StopwatchCircleView(
+//  // when isRunningStateFlow null, showing preview in saved timers card
+//  isRunningStateFlow: MutableStateFlow<Boolean>?,
+//  arcWidth: Dp,
+//  haloColor: Color,
+//  timeElapsed: Int,
+//  fontSize: TextUnit,
+//  isBackgroundTransparent: Boolean
+//) {
+//  TmpStopwatchCircleView(
+//    isRunningStateFlow,
+//    arcWidth,
+//    haloColor,
+//    timeElapsed,
+//    fontSize,
+//    isBackgroundTransparent
+//  )
+//}
 
 @Composable
 fun XxxStopwatchCircleView(

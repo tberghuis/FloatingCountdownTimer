@@ -28,7 +28,8 @@ fun TmpStopwatchCircleView(
   haloColor: Color,
   timeElapsed: Int,
   fontSize: TextUnit,
-  isBackgroundTransparent: Boolean
+  isBackgroundTransparent: Boolean,
+  paddingTimerDisplay: Dp
 ) {
   val isRunning = isRunningStateFlow?.collectAsState()?.value
 
@@ -55,7 +56,7 @@ fun TmpStopwatchCircleView(
   ) {
     Box(
       Modifier
-        .padding(5.dp),
+        .padding(paddingTimerDisplay),
       contentAlignment = Alignment.Center, // todo test if needed
     ) {
       TimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
