@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.Color
 import kotlin.math.roundToInt
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
@@ -15,12 +16,31 @@ import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.appDatabase
+import xyz.tberghuis.floatingtimer.tmp4.TmpBubble
+import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties
+
+
+interface BubbleProperties : TmpBubbleProperties {
+  val widthDp: Dp
+    get() = 0.dp
+  val heightDp: Dp
+    get() = 0.dp
+
+  companion object {
+    fun calcCountdownTimerSizeDp(scaleFactor: Float) =
+      COUNTDOWN_TIMER_SIZE_NO_SCALE * (scaleFactor + 1)
+
+    fun calcArcWidth(scaleFactor: Float) = ARC_WIDTH_NO_SCALE * (0.9f * scaleFactor + 1)
+    fun calcFontSize(scaleFactor: Float) = TIMER_FONT_SIZE_NO_SCALE * (1.2 * scaleFactor + 1)
+  }
+}
+
 
 // future data class implements this, use composition over inheritance
 // make update method a single method interface, does calcs and returns copy instance
 
 // state that is static for lifetime of bubble goes here
-interface BubbleProperties {
+interface XxxBubbleProperties {
   val widthDp: Dp
   val heightDp: Dp
   val arcWidth: Dp
@@ -46,6 +66,25 @@ interface BubbleProperties {
 }
 
 abstract class Bubble(
+  private val service: FloatingService,
+  bubbleSizeScaleFactor: Float,
+  override val haloColor: Color,
+  final override val timerShape: String,
+  final override val label: String? = null,
+  final override val isBackgroundTransparent: Boolean,
+  private var savedTimer: SavedTimer? = null
+) : TmpBubble(
+  service,
+  bubbleSizeScaleFactor,
+  haloColor,
+  timerShape,
+  label,
+  isBackgroundTransparent,
+  savedTimer
+) {
+}
+
+abstract class XxxBubble(
   private val service: FloatingService,
   bubbleSizeScaleFactor: Float,
   override val haloColor: Color,

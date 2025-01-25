@@ -7,8 +7,8 @@ import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.createComposeView
 
-class TmpTimerViewHolder(
-  val service: FloatingService,
+open class TmpTimerViewHolder(
+  open val service: FloatingService,
   x: Int? = null,
   y: Int? = null
 ) {

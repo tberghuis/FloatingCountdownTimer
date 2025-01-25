@@ -1,15 +1,12 @@
-package xyz.tberghuis.floatingtimer.service
+package xyz.tberghuis.floatingtimer.tmp4
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
-import android.view.WindowManager
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.ComposeView
 import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -20,6 +17,11 @@ import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.service.Bubble
+import xyz.tberghuis.floatingtimer.service.FloatingService
+import xyz.tberghuis.floatingtimer.service.TimerViewHolder
+import xyz.tberghuis.floatingtimer.service.TrashController
+import xyz.tberghuis.floatingtimer.service.calcIsBubbleHoverTrash
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
@@ -27,7 +29,7 @@ import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
 import kotlin.math.max
 import kotlin.math.min
 
-class OverlayController(val service: FloatingService) {
+class TmpOverlayController(val service: FloatingService) {
   val trashController = TrashController(service)
   private val bubbleSet = mutableSetOf<Bubble>()
 
@@ -246,37 +248,4 @@ class OverlayController(val service: FloatingService) {
       bubble.saveTimerPosition()
     }
   }
-}
-
-fun calcIsBubbleHoverTrash(
-  timerView: ComposeView,
-  trashView: ComposeView,
-): Boolean {
-  val timerWidthPx = timerView.width
-  val timerHeightPx = timerView.height
-  val trashWidthPx = trashView.width
-  val trashHeightPx = trashView.height
-
-
-  val timerLocation = IntArray(2)
-  timerView.getLocationOnScreen(timerLocation)
-
-  val trashLocation = IntArray(2)
-  trashView.getLocationOnScreen(trashLocation)
-
-  val timerCenterX = timerLocation[0] + (timerWidthPx / 2f)
-  val timerCenterY = timerLocation[1] + (timerHeightPx / 2f)
-
-  val trashLeft = trashLocation[0]
-  val trashRight = trashLocation[0] + trashWidthPx
-  val trashTop = trashLocation[1]
-  val trashBottom = trashLocation[1] + trashHeightPx
-
-  logd("timer center $timerCenterX $timerCenterY")
-  logd("trash rect $trashLeft $trashRight $trashTop $trashBottom")
-
-  return !(timerCenterX < trashLeft ||
-      timerCenterX > trashRight ||
-      timerCenterY < trashTop ||
-      timerCenterY > trashBottom)
 }

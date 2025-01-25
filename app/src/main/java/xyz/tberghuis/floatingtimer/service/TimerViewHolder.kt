@@ -7,8 +7,29 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp4.TmpTimerViewHolder
 
-class TimerViewHolder(val service: FloatingService, widthPx: Int, heightPx: Int, x: Int? = null, y: Int? = null) {
+class TimerViewHolder(
+  override val service: FloatingService,
+  widthPx: Int,
+  heightPx: Int,
+  x: Int? = null,
+  y: Int? = null
+) : TmpTimerViewHolder(
+  service,
+  x,
+  y
+) {
+
+}
+
+class XxxTimerViewHolder(
+  val service: FloatingService,
+  widthPx: Int,
+  heightPx: Int,
+  x: Int? = null,
+  y: Int? = null
+) {
   val params = WindowManager.LayoutParams(
     widthPx,
     heightPx,

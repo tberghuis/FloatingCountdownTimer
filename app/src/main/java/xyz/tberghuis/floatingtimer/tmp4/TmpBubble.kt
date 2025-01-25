@@ -8,24 +8,30 @@ import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.appDatabase
+import xyz.tberghuis.floatingtimer.service.BubbleProperties
 import xyz.tberghuis.floatingtimer.service.FloatingService
+import xyz.tberghuis.floatingtimer.service.TimerViewHolder
+
+// todo final override methods in constructor
 
 abstract class TmpBubble(
   private val service: FloatingService,
   bubbleSizeScaleFactor: Float,
   override val haloColor: Color,
-  final override val timerShape: String,
-  final override val label: String? = null,
-  final override val isBackgroundTransparent: Boolean,
+  override val timerShape: String,
+  override val label: String? = null,
+  override val isBackgroundTransparent: Boolean,
   private var savedTimer: SavedTimer? = null
-) : TmpBubbleProperties {
+) : BubbleProperties {
   override val arcWidth = TmpBubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
   override val fontSize = TmpBubbleProperties.calcFontSize(bubbleSizeScaleFactor)
-  val viewHolder: TmpTimerViewHolder
+  val viewHolder: TimerViewHolder
 
   init {
+    // todo TmpTimerViewHolder
+    // remove widthPx heightPx params
     viewHolder =
-      TmpTimerViewHolder(service, savedTimer?.positionX, savedTimer?.positionY)
+      TimerViewHolder(service, 0, 0, savedTimer?.positionX, savedTimer?.positionY)
   }
 
   open fun exit() {
