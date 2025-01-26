@@ -50,7 +50,7 @@ fun CountdownCircleView(
     Box(
       Modifier
         .padding(bubbleProperties.paddingTimerDisplay),
-      contentAlignment = Alignment.Center, // todo test if needed
+      contentAlignment = Alignment.Center,
     ) {
       TimeDisplay(countdownSeconds, bubbleProperties.fontSize, isBackgroundTransparent)
     }
