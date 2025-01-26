@@ -22,7 +22,6 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
-import xyz.tberghuis.floatingtimer.tmp4.TmpTimerViewHolder
 import kotlin.math.max
 import kotlin.math.min
 
@@ -200,7 +199,7 @@ class OverlayController(val service: FloatingService) {
   }
 
   private fun updateClickTargetParamsWithinScreenBounds(
-    viewHolder: TmpTimerViewHolder,
+    viewHolder: TimerViewHolder,
   ) {
     val params = viewHolder.params
     val view = viewHolder.view
