@@ -25,7 +25,7 @@ fun TmpCountdownView(
     "label", "rectangle" -> {
       // this is redundant, unless bad data in DB
       val label = if (bubbleProperties.timerShape == "label") bubbleProperties.label else null
-      TmpTimerRectView(
+      TmpTimerRectView2(
         isPaused,
         bubbleProperties.arcWidth,
         bubbleProperties.haloColor,

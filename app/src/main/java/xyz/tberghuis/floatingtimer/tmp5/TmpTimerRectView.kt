@@ -32,71 +32,71 @@ import xyz.tberghuis.floatingtimer.composables.TimeDisplay
 import xyz.tberghuis.floatingtimer.composables.TimerText
 import kotlin.math.min
 
-@Composable
-fun TmpTimerRectView(
-  isPaused: Boolean,
-  arcWidth: Dp,
-  haloColor: Color,
-  timeElapsed: Int,
-  timeLeftFraction: Float,
-  fontSize: TextUnit,
-  label: String?,
-  isBackgroundTransparent: Boolean,
-) {
-  @Suppress("NAME_SHADOWING") val label = if (label == "") null else label
-
-  val bubbleModifier = if (isBackgroundTransparent)
-    Modifier
-  else
-    Modifier
-      .padding(5.dp)
-      .graphicsLayer(
-        shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
-        shape = RoundedCornerShape(10.dp),
-        clip = true
-      )
-      .background(Color.White)
-
-  Box(
-    modifier = Modifier
-  ) {
-    Box(
-      modifier = Modifier
-        .height(IntrinsicSize.Min)
-        .width(IntrinsicSize.Min)
-        .then(bubbleModifier),
-      contentAlignment = Alignment.Center,
-    ) {
-      if (isPaused) {
-        Icon(
-          Icons.Filled.PlayArrow,
-          contentDescription = "paused",
-          modifier = Modifier.fillMaxSize(),
-          tint = Color.LightGray
-        )
-      }
-      Column(
-        modifier = Modifier
-          .width(IntrinsicSize.Max)
-          .padding(5.dp)
-      ) {
-        Row(
-          modifier = Modifier,
-        ) {
-          label?.let {
-            TimerText("$label - ", fontSize = fontSize, isBackgroundTransparent)
-          }
-          TimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
-        }
-        CountdownProgressLine(
-          timeLeftFraction,
-          arcWidth,
-          haloColor
-        )
-      }
-    }
-  }
-}
+//@Composable
+//fun TmpTimerRectView(
+//  isPaused: Boolean,
+//  arcWidth: Dp,
+//  haloColor: Color,
+//  timeElapsed: Int,
+//  timeLeftFraction: Float,
+//  fontSize: TextUnit,
+//  label: String?,
+//  isBackgroundTransparent: Boolean,
+//) {
+//  @Suppress("NAME_SHADOWING") val label = if (label == "") null else label
+//
+//  val bubbleModifier = if (isBackgroundTransparent)
+//    Modifier
+//  else
+//    Modifier
+//      .padding(5.dp)
+//      .graphicsLayer(
+//        shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
+//        shape = RoundedCornerShape(10.dp),
+//        clip = true
+//      )
+//      .background(Color.White)
+//
+//  Box(
+//    modifier = Modifier
+//  ) {
+//    Box(
+//      modifier = Modifier
+//        .height(IntrinsicSize.Min)
+//        .width(IntrinsicSize.Min)
+//        .then(bubbleModifier),
+//      contentAlignment = Alignment.Center,
+//    ) {
+//      if (isPaused) {
+//        Icon(
+//          Icons.Filled.PlayArrow,
+//          contentDescription = "paused",
+//          modifier = Modifier.fillMaxSize(),
+//          tint = Color.LightGray
+//        )
+//      }
+//      Column(
+//        modifier = Modifier
+//          .width(IntrinsicSize.Max)
+//          .padding(5.dp)
+//      ) {
+//        Row(
+//          modifier = Modifier,
+//        ) {
+//          label?.let {
+//            TimerText("$label - ", fontSize = fontSize, isBackgroundTransparent)
+//          }
+//          TimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
+//        }
+//        CountdownProgressLine(
+//          timeLeftFraction,
+//          arcWidth,
+//          haloColor
+//        )
+//      }
+//    }
+//  }
+//}
 
 @Preview
 @Composable
@@ -111,7 +111,7 @@ fun TmpTimerRectViewDemo() {
   val label = "hellohowareyou hellohowareyou hellohowareyou hellohowareyou "
   val isBackgroundTransparent = false
 
-  TmpTimerRectViewDemo2(
+  TmpTimerRectView2(
     isPaused,
     arcWidth,
     haloColor,
@@ -125,7 +125,7 @@ fun TmpTimerRectViewDemo() {
 
 
 @Composable
-fun TmpTimerRectViewDemo2(
+fun TmpTimerRectView2(
   isPaused: Boolean,
   arcWidth: Dp,
   haloColor: Color,

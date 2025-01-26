@@ -31,7 +31,7 @@ import kotlinx.coroutines.flow.StateFlow
 import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties
-import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectView as TimerRectView
+import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectView2 as TimerRectView
 import xyz.tberghuis.floatingtimer.tmp5.TmpStopwatchCircleView as StopwatchCircleView
 
 @Composable
