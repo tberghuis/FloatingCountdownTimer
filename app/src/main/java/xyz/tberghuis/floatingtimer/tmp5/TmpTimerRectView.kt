@@ -98,33 +98,98 @@ fun TmpTimerRectView(
 @Preview
 @Composable
 fun TmpTimerRectViewDemo() {
+
+  val isPaused = false
+  val arcWidth = 8.dp
+  val haloColor = Color.Blue
+  val timeElapsed = 59
+  val timeLeftFraction = .5f
   val fontSize = TextUnit.Unspecified
+  val label = "hello"
   val isBackgroundTransparent = false
-  TmpTimerRectViewDemo2(fontSize, isBackgroundTransparent)
+
+  TmpTimerRectViewDemo2(
+    isPaused,
+    arcWidth,
+    haloColor,
+    timeElapsed,
+    timeLeftFraction,
+    fontSize,
+    label,
+    isBackgroundTransparent,
+  )
 }
 
 
 @Composable
 fun TmpTimerRectViewDemo2(
+  isPaused: Boolean,
+  arcWidth: Dp,
+  haloColor: Color,
+  timeElapsed: Int,
+  timeLeftFraction: Float,
   fontSize: TextUnit,
+  label: String?,
   isBackgroundTransparent: Boolean,
 ) {
-  Row(
-    modifier = Modifier
-      .background(
-        Color.Blue.copy(alpha = .2f)
+
+  @Suppress("NAME_SHADOWING") val label = if (label == "") null else label
+
+  val bubbleModifier = if (isBackgroundTransparent)
+    Modifier
+  else
+    Modifier
+      .padding(5.dp)
+      .graphicsLayer(
+        shadowElevation = with(LocalDensity.current) { 5.dp.toPx() },
+        shape = RoundedCornerShape(10.dp),
+        clip = true
       )
-//      .widthIn(max = 100.dp),
+      .background(Color.White)
+
+  Box(
+    modifier = Modifier
+      .height(IntrinsicSize.Min)
+      .width(IntrinsicSize.Min)
+      .then(bubbleModifier),
+    contentAlignment = Alignment.Center,
   ) {
-    Box(modifier = Modifier.weight(1f)) {
-      TimerText(        "label1fdsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfdsfsdfsd232434234",
-        fontSize,
-        isBackgroundTransparent
+    if (isPaused) {
+      Icon(
+        Icons.Filled.PlayArrow,
+        contentDescription = "paused",
+        modifier = Modifier.fillMaxSize(),
+        tint = Color.LightGray
       )
     }
-    Row {
-      TimerText(" - ", fontSize, isBackgroundTransparent)
-      TimerText("00:59", fontSize, isBackgroundTransparent)
+    Column(
+      modifier = Modifier
+//        .width(IntrinsicSize.Max)
+        .padding(5.dp)
+    ) {
+      Row(
+        modifier = Modifier
+          .background(
+            Color.Blue.copy(alpha = .2f)
+          )
+      ) {
+        Box(modifier = Modifier.weight(1f)) {
+          TimerText(
+            "label1fdsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfdsfsdfsd232434234",
+            fontSize,
+            isBackgroundTransparent
+          )
+        }
+        Row {
+          TimerText(" - ", fontSize, isBackgroundTransparent)
+          TimerText("00:59", fontSize, isBackgroundTransparent)
+        }
+      }
+      CountdownProgressLine(
+        timeLeftFraction,
+        arcWidth,
+        haloColor
+      )
     }
   }
 }
