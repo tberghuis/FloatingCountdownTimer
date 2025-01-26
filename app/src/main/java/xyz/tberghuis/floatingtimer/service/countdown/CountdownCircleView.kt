@@ -9,7 +9,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
 import xyz.tberghuis.floatingtimer.service.BubbleProperties
-import xyz.tberghuis.floatingtimer.tmp4.TmpCountdownCircleView
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material3.Icon
+import androidx.compose.ui.Alignment
+import xyz.tberghuis.floatingtimer.composables.SquareBackground
+import xyz.tberghuis.floatingtimer.composables.TimeDisplay
 
 @Composable
 fun CountdownCircleView(
@@ -19,13 +26,35 @@ fun CountdownCircleView(
   isPaused: Boolean,
   isBackgroundTransparent: Boolean
 ) {
-  TmpCountdownCircleView(
-    bubbleProperties,
-    timeLeftFraction,
-    countdownSeconds,
-    isPaused,
-    isBackgroundTransparent
-  )
+  SquareBackground(
+    modifier = Modifier.padding(bubbleProperties.arcWidth / 2),
+    background = {
+      Box {
+        CountdownProgressArc(
+          timeLeftFraction,
+          bubbleProperties.arcWidth,
+          bubbleProperties.haloColor,
+          isBackgroundTransparent
+        )
+        if (isPaused) {
+          Icon(
+            Icons.Filled.PlayArrow,
+            contentDescription = "paused",
+            modifier = Modifier.fillMaxSize(),
+            tint = Color.LightGray
+          )
+        }
+      }
+    },
+  ) {
+    Box(
+      Modifier
+        .padding(bubbleProperties.paddingTimerDisplay),
+      contentAlignment = Alignment.Center, // todo test if needed
+    ) {
+      TimeDisplay(countdownSeconds, bubbleProperties.fontSize, isBackgroundTransparent)
+    }
+  }
 }
 
 @Composable
