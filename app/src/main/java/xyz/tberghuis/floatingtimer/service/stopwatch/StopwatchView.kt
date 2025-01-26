@@ -1,7 +1,5 @@
 package xyz.tberghuis.floatingtimer.service.stopwatch
 
-import android.content.Context
-import android.view.WindowManager
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.runtime.Composable
@@ -23,14 +21,9 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
-import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties
 import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectView2 as TimerRectView
 
 @Composable

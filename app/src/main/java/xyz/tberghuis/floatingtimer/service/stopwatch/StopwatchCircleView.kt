@@ -54,7 +54,7 @@ fun StopwatchCircleView(
     Box(
       Modifier
         .padding(paddingTimerDisplay),
-      contentAlignment = Alignment.Center, // todo test if needed
+      contentAlignment = Alignment.Center,
     ) {
       TimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
     }
