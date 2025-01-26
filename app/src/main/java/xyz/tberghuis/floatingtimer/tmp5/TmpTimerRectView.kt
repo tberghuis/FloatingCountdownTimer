@@ -98,24 +98,9 @@ fun TmpTimerRectView(
 @Preview
 @Composable
 fun TmpTimerRectViewDemo() {
-  Row(
-    modifier = Modifier
-      .background(
-        Color.Blue.copy(alpha = .2f)
-      )
-      .widthIn(max = 100.dp),
-  ) {
-    Text(
-      "label1232434234",
-      modifier = Modifier.weight(1f),
-      softWrap = false,
-      maxLines = 1,
-    )
-    Text(
-      " - 00:59",
-      modifier = Modifier,
-    )
-  }
+  val fontSize = TextUnit.Unspecified
+  val isBackgroundTransparent = false
+  TmpTimerRectViewDemo2(fontSize, isBackgroundTransparent)
 }
 
 
@@ -129,10 +114,10 @@ fun TmpTimerRectViewDemo2(
       .background(
         Color.Blue.copy(alpha = .2f)
       )
-      .widthIn(max = 100.dp),
+//      .widthIn(max = 100.dp),
   ) {
     Box(modifier = Modifier.weight(1f)) {
-      TimerText("label1232434234", fontSize, isBackgroundTransparent)
+      TimerText("label1fdsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfdsfsdfsd232434234", fontSize, isBackgroundTransparent)
     }
     Box(modifier = Modifier) {
       TimerText(" - 00:59", fontSize, isBackgroundTransparent)
