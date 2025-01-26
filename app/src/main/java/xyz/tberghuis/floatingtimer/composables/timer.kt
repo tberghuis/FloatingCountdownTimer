@@ -13,7 +13,6 @@ import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.TextUnit
-import xyz.tberghuis.floatingtimer.tmp4.TmpTimeDisplay
 
 fun formatIntTimerDisplay(t: Int): String {
   return t.toString().padStart(2, '0')
@@ -81,19 +80,6 @@ fun OutlinedTextWithShadow(
       style = textStyleFill,
     )
   }
-}
-
-@Composable
-fun TimeDisplay(
-  totalSeconds: Int,
-  fontSize: TextUnit,
-  isBackgroundTransparent: Boolean
-) {
-  TmpTimeDisplay(
-    totalSeconds,
-    fontSize,
-    isBackgroundTransparent
-  )
 }
 
 @Composable
