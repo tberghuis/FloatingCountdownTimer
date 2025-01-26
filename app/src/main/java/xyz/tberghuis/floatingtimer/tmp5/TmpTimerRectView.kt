@@ -99,13 +99,13 @@ fun TmpTimerRectView(
 @Composable
 fun TmpTimerRectViewDemo() {
 
-  val isPaused = false
+  val isPaused = true
   val arcWidth = 8.dp
   val haloColor = Color.Blue
   val timeElapsed = 59
   val timeLeftFraction = .5f
   val fontSize = TextUnit.Unspecified
-  val label = "hello"
+  val label = "hello344523"
   val isBackgroundTransparent = false
 
   TmpTimerRectViewDemo2(
@@ -151,6 +151,8 @@ fun TmpTimerRectViewDemo2(
     modifier = Modifier
       .height(IntrinsicSize.Max)
       .width(IntrinsicSize.Max)
+      .widthIn(max = 500.dp)
+
       .then(bubbleModifier),
     contentAlignment = Alignment.Center,
   ) {
@@ -186,7 +188,7 @@ fun TmpTimerRectViewDemo2(
           label?.let {
             TimerText(" - ", fontSize = fontSize, isBackgroundTransparent)
           }
-          TimerText("00:59", fontSize, isBackgroundTransparent)
+          TimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
         }
       }
       CountdownProgressLine(
