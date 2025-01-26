@@ -128,20 +128,17 @@ fun TmpTimerRectViewDemo2() {
       )
       .widthIn(max = 100.dp),
   ) {
+    Box(modifier = Modifier.weight(1f)) {
+
+      TimerText("label1232434234", fontSize, isBackgroundTransparent)
 
 
-
-
-
-    Text(
-      "label1232434234",
-      modifier = Modifier.weight(1f),
-      softWrap = false,
-      maxLines = 1,
-    )
-    Text(
-      " - 00:59",
-      modifier = Modifier,
-    )
+    }
+    Box(modifier = Modifier) {
+      Text(
+        " - 00:59",
+        modifier = Modifier,
+      )
+    }
   }
 }

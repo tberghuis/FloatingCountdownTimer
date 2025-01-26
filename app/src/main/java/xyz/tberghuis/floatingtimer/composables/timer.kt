@@ -69,12 +69,14 @@ fun OutlinedTextWithShadow(
     Text(
       text = text,
       fontFamily = FontFamily.Default,
+      softWrap = false,
       maxLines = 1,
       style = textStyleOutline,
     )
     Text(
       text = text,
       fontFamily = FontFamily.Default,
+      softWrap = false,
       maxLines = 1,
       style = textStyleFill,
     )
