@@ -81,19 +81,3 @@ fun OutlinedTextWithShadow(
     )
   }
 }
-
-@Composable
-fun XxxTimeDisplay(
-  totalSeconds: Int,
-  fontSize: TextUnit,
-  isBackgroundTransparent: Boolean
-) {
-  val minutes = totalSeconds / 60
-  val seconds = totalSeconds % 60
-  val text = "${formatIntTimerDisplay(minutes)}:${formatIntTimerDisplay(seconds)}"
-  TimerText(
-    text,
-    fontSize,
-    isBackgroundTransparent
-  )
-}
