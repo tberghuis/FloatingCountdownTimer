@@ -15,7 +15,7 @@ import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties
-import xyz.tberghuis.floatingtimer.service.XxxTimerViewHolder as TimerViewHolder
+import xyz.tberghuis.floatingtimer.tmp4.TmpTimerViewHolder
 
 interface XxxBubbleProperties : TmpBubbleProperties {
   val widthDp: Dp
@@ -38,103 +38,77 @@ interface XxxBubbleProperties : TmpBubbleProperties {
 
 // state that is static for lifetime of bubble goes here
 
-//abstract class XxxBubble(
-//  private val service: FloatingService,
-//  bubbleSizeScaleFactor: Float,
-//  override val haloColor: Color,
-//  final override val timerShape: String,
-//  final override val label: String? = null,
-//  final override val isBackgroundTransparent: Boolean,
-//  // todo rename SavedTimer, SavedBubble
-//  private var savedTimer: SavedTimer? = null
-//) : XxxBubbleProperties {
-//  final override val widthDp = when (timerShape) {
-//    "label", "rectangle" -> {
-//      Dp.Unspecified
-//    }
-//
-//    "circle" -> {
-//      XxxBubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
-//    }
-//
-//    else -> {
-//      throw RuntimeException("invalid timer shape")
-//    }
-//  }
-//
-//  final override val heightDp = when (timerShape) {
-//    "circle" -> {
-//      XxxBubbleProperties.calcCountdownTimerSizeDp(bubbleSizeScaleFactor)
-//    }
-//
-//    "label", "rectangle" -> {
-//      Dp.Unspecified
-//    }
-//
-//    else -> {
-//      throw RuntimeException("invalid timer shape")
-//    }
-//  }
-//
-//  override val arcWidth = XxxBubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
-//  override val fontSize = XxxBubbleProperties.calcFontSize(bubbleSizeScaleFactor)
-//  val viewHolder: TimerViewHolder
-//
-//  init {
-//    val widthPx: Int = dimensionDpToPx(widthDp, service.resources.displayMetrics.density)
-//    val heightPx: Int = dimensionDpToPx(heightDp, service.resources.displayMetrics.density)
-//    viewHolder =
-//      TimerViewHolder(service, widthPx, heightPx, savedTimer?.positionX, savedTimer?.positionY)
-//  }
-//
-//  open fun exit() {
-//    try {
-//      service.ftWindowManager.removeView(viewHolder.view)
-//    } catch (e: IllegalArgumentException) {
-//      Log.e("Bubble", "IllegalArgumentException $e")
-//    }
-//  }
-//
-//  abstract fun reset()
-//  abstract fun onTap()
-//
-//  fun saveTimerPositionIfNull() {
-//    savedTimer?.let {
-//      if (it.positionX == null)
-//        saveTimerPosition()
-//    }
-//  }
-//
-//  fun saveTimerPosition() {
-//    service.scope.launch(IO) {
-//      savedTimer = savedTimer?.let {
-//        when (it) {
-//          is SavedStopwatch -> {
-//            it.copy(
-//              positionX = viewHolder.params.x,
-//              positionY = viewHolder.params.y
-//            ).also { savedStopwatch ->
-//              service.application.appDatabase.savedStopwatchDao().update(savedStopwatch)
-//            }
-//          }
-//
-//          is SavedCountdown -> {
-//            it.copy(
-//              positionX = viewHolder.params.x,
-//              positionY = viewHolder.params.y
-//            ).also { savedCountdown ->
-//              service.application.appDatabase.savedCountdownDao().update(savedCountdown)
-//            }
-//          }
-//
-//          else -> {
-//            it
-//          }
-//        }
-//      }
-//    }
-//  }
-//}
+abstract class Bubble(
+  private val service: FloatingService,
+  bubbleSizeScaleFactor: Float,
+  override val haloColor: Color,
+  override val timerShape: String,
+  override val label: String? = null,
+  override val isBackgroundTransparent: Boolean,
+  private var savedTimer: SavedTimer? = null
+) : TmpBubbleProperties {
+  override val arcWidth = TmpBubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
+  override val fontSize = TmpBubbleProperties.calcFontSize(bubbleSizeScaleFactor)
+  override val paddingTimerDisplay =
+    TmpBubbleProperties.calcTimerDisplayPadding(bubbleSizeScaleFactor)
+
+  val viewHolder: TmpTimerViewHolder
+
+  init {
+    // todo TmpTimerViewHolder
+    // remove widthPx heightPx params
+    viewHolder =
+      TmpTimerViewHolder(service, savedTimer?.positionX, savedTimer?.positionY)
+  }
+
+  open fun exit() {
+    try {
+      service.ftWindowManager.removeView(viewHolder.view)
+    } catch (e: IllegalArgumentException) {
+      Log.e("Bubble", "IllegalArgumentException $e")
+    }
+  }
+
+  abstract fun reset()
+  abstract fun onTap()
+
+  fun saveTimerPositionIfNull() {
+    savedTimer?.let {
+      if (it.positionX == null)
+        saveTimerPosition()
+    }
+  }
+
+  fun saveTimerPosition() {
+    service.scope.launch(IO) {
+      savedTimer = savedTimer?.let {
+        when (it) {
+          is SavedStopwatch -> {
+            it.copy(
+              positionX = viewHolder.params.x,
+              positionY = viewHolder.params.y
+            ).also { savedStopwatch ->
+              service.application.appDatabase.savedStopwatchDao().update(savedStopwatch)
+            }
+          }
+
+          is SavedCountdown -> {
+            it.copy(
+              positionX = viewHolder.params.x,
+              positionY = viewHolder.params.y
+            ).also { savedCountdown ->
+              service.application.appDatabase.savedCountdownDao().update(savedCountdown)
+            }
+          }
+
+          else -> {
+            it
+          }
+        }
+      }
+    }
+  }
+}
 
 fun dimensionDpToPx(dp: Dp, density: Float): Int {
   if (dp == Dp.Unspecified) {

@@ -17,7 +17,7 @@ import xyz.tberghuis.floatingtimer.composables.LocalTimerViewHolder
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp4.TmpBubble as Bubble
+import xyz.tberghuis.floatingtimer.service.Bubble
 import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.tmp4.TmpTimerViewHolder as TimerViewHolder
 import xyz.tberghuis.floatingtimer.service.TrashController
