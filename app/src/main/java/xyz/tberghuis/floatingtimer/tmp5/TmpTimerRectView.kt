@@ -149,8 +149,8 @@ fun TmpTimerRectViewDemo2(
 
   Box(
     modifier = Modifier
-      .height(IntrinsicSize.Min)
-      .width(IntrinsicSize.Min)
+      .height(IntrinsicSize.Max)
+      .width(IntrinsicSize.Max)
       .then(bubbleModifier),
     contentAlignment = Alignment.Center,
   ) {
@@ -169,19 +169,23 @@ fun TmpTimerRectViewDemo2(
     ) {
       Row(
         modifier = Modifier
-          .background(
-            Color.Blue.copy(alpha = .2f)
-          )
+//          .background(
+//            Color.Blue.copy(alpha = .2f)
+//          )
       ) {
-        Box(modifier = Modifier.weight(1f)) {
-          TimerText(
-            "label1fdsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfdsfsdfsd232434234",
-            fontSize,
-            isBackgroundTransparent
-          )
+        label?.let {
+          Box(modifier = Modifier.weight(1f)) {
+            TimerText(
+              label,
+              fontSize,
+              isBackgroundTransparent
+            )
+          }
         }
         Row {
-          TimerText(" - ", fontSize, isBackgroundTransparent)
+          label?.let {
+            TimerText(" - ", fontSize = fontSize, isBackgroundTransparent)
+          }
           TimerText("00:59", fontSize, isBackgroundTransparent)
         }
       }
