@@ -35,6 +35,7 @@ fun TimerText(
         text,
         fontSize = fontSize,
         fontFamily = FontFamily.Default,
+        softWrap = false,
         maxLines = 1,
         style = LocalTextStyle.current.copy(
           color = Color.Black,

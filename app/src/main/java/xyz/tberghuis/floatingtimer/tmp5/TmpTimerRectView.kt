@@ -117,3 +117,31 @@ fun TmpTimerRectViewDemo() {
     )
   }
 }
+
+@Preview
+@Composable
+fun TmpTimerRectViewDemo2() {
+  Row(
+    modifier = Modifier
+      .background(
+        Color.Blue.copy(alpha = .2f)
+      )
+      .widthIn(max = 100.dp),
+  ) {
+
+
+
+
+
+    Text(
+      "label1232434234",
+      modifier = Modifier.weight(1f),
+      softWrap = false,
+      maxLines = 1,
+    )
+    Text(
+      " - 00:59",
+      modifier = Modifier,
+    )
+  }
+}
