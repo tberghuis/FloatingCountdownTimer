@@ -70,4 +70,5 @@
     <string name="leave_a_review">留下评论</string>
     <string name="github_issues">Github 问题</string>
     <string name="report_a_bug_or_request_a_feature">报告错误或请求功能</string>
+    <string name="hours">小时</string>
 </resources>

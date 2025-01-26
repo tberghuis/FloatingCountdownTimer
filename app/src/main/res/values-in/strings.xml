@@ -70,4 +70,5 @@
     <string name="leave_a_review">Tinggalkan ulasan</string>
     <string name="github_issues">Masalah Github</string>
     <string name="report_a_bug_or_request_a_feature">Laporkan bug atau minta fitur</string>
+    <string name="hours">jam</string>
 </resources>
