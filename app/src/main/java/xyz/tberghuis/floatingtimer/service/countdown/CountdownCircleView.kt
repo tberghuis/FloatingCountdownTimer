@@ -8,7 +8,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
-import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties as BubbleProperties
+import xyz.tberghuis.floatingtimer.service.BubbleProperties
 import xyz.tberghuis.floatingtimer.tmp4.TmpCountdownCircleView
 
 @Composable

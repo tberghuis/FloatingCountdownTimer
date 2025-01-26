@@ -11,7 +11,6 @@ import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.appDatabase
-import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties
 import xyz.tberghuis.floatingtimer.tmp4.TmpTimerViewHolder
 
 abstract class Bubble(
@@ -22,11 +21,11 @@ abstract class Bubble(
   override val label: String? = null,
   override val isBackgroundTransparent: Boolean,
   private var savedTimer: SavedTimer? = null
-) : TmpBubbleProperties {
-  override val arcWidth = TmpBubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
-  override val fontSize = TmpBubbleProperties.calcFontSize(bubbleSizeScaleFactor)
+) : BubbleProperties {
+  override val arcWidth = BubbleProperties.calcArcWidth(bubbleSizeScaleFactor)
+  override val fontSize = BubbleProperties.calcFontSize(bubbleSizeScaleFactor)
   override val paddingTimerDisplay =
-    TmpBubbleProperties.calcTimerDisplayPadding(bubbleSizeScaleFactor)
+    BubbleProperties.calcTimerDisplayPadding(bubbleSizeScaleFactor)
 
   val viewHolder: TmpTimerViewHolder = TmpTimerViewHolder(service, savedTimer?.positionX, savedTimer?.positionY)
 

@@ -6,7 +6,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import xyz.tberghuis.floatingtimer.composables.TimerRectView
-import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties as BubbleProperties
+import xyz.tberghuis.floatingtimer.service.BubbleProperties
 
 @Composable
 fun CountdownView(countdown: Countdown) {

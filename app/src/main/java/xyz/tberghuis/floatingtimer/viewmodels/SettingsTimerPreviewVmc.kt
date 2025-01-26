@@ -6,7 +6,7 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
-import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties as BubbleProperties
+import xyz.tberghuis.floatingtimer.service.BubbleProperties
 
 class SettingsTimerPreviewVmc(
   initialScale: Float,

@@ -1,14 +1,16 @@
-package xyz.tberghuis.floatingtimer.tmp4
+package xyz.tberghuis.floatingtimer.service
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.TIMER_PADDING_NO_SCALE
 
-interface TmpBubbleProperties {
+// todo store scaleFactor
+// make arcWidth, fontSize, paddingTimerDisplay
+// get() properties
+interface BubbleProperties {
   val arcWidth: Dp
   val fontSize: TextUnit
   val haloColor: Color
