@@ -28,7 +28,7 @@ import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
-import xyz.tberghuis.floatingtimer.tmp5.TmpSettingsTimerPreviewVmc
+import xyz.tberghuis.floatingtimer.viewmodels.SettingsTimerPreviewVmc
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalFoundationApi::class)
 @Composable
@@ -61,7 +61,7 @@ fun <T : SavedTimer> ColumnScope.SavedTimersCard(
       savedTimers.forEach { savedTimer ->
         val c = Color(savedTimer.timerColor)
         val settingsTimerPreviewVmc =
-          TmpSettingsTimerPreviewVmc(
+          SettingsTimerPreviewVmc(
             0f,
             c,
             savedTimer.timerShape,

@@ -9,14 +9,13 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
-import xyz.tberghuis.floatingtimer.tmp5.TmpSettingsTimerPreviewVmc
 
 class SizeSettingViewModel(application: Application) : AndroidViewModel(application) {
   private val preferences = application.preferencesRepository
 
   // doitwrong
   var initialised by mutableStateOf(false)
-  lateinit var settingsTimerPreviewVmc: TmpSettingsTimerPreviewVmc
+  lateinit var settingsTimerPreviewVmc: SettingsTimerPreviewVmc
 
   val premiumVmc = PremiumVmc(application, viewModelScope)
   private val premiumFlow = application.preferencesRepository.haloColourPurchasedFlow
@@ -25,7 +24,7 @@ class SizeSettingViewModel(application: Application) : AndroidViewModel(applicat
     viewModelScope.launch {
       val haloColor = preferences.haloColourFlow.first()
       val scale = preferences.bubbleScaleFlow.first()
-      settingsTimerPreviewVmc = TmpSettingsTimerPreviewVmc(scale, haloColor, "circle", null, false)
+      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor, "circle", null, false)
       initialised = true
     }
   }

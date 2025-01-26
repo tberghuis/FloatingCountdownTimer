@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp5.TmpSettingsTimerPreviewVmc
 
 class ColorSettingViewModel(application: Application, savedStateHandle: SavedStateHandle) :
   AndroidViewModel(application) {
@@ -25,7 +24,7 @@ class ColorSettingViewModel(application: Application, savedStateHandle: SavedSta
   private val premiumFlow = application.preferencesRepository.haloColourPurchasedFlow
 
   var initialised by mutableStateOf(false)
-  lateinit var settingsTimerPreviewVmc: TmpSettingsTimerPreviewVmc
+  lateinit var settingsTimerPreviewVmc: SettingsTimerPreviewVmc
 
   // null == default color
   // if not null, set previousBackStackEntry color_result
@@ -38,7 +37,7 @@ class ColorSettingViewModel(application: Application, savedStateHandle: SavedSta
       val haloColor = preferences.haloColourFlow.first()
       colorPickerColorState.value = HsvColor.from(haloColor)
       val scale = preferences.bubbleScaleFlow.first()
-      settingsTimerPreviewVmc = TmpSettingsTimerPreviewVmc(scale, haloColor, "circle", null, false)
+      settingsTimerPreviewVmc = SettingsTimerPreviewVmc(scale, haloColor, "circle", null, false)
       initialised = true
     }
   }
