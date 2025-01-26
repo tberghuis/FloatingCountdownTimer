@@ -256,7 +256,6 @@ fun calcIsBubbleHoverTrash(
   val trashWidthPx = trashView.width
   val trashHeightPx = trashView.height
 
-
   val timerLocation = IntArray(2)
   timerView.getLocationOnScreen(timerLocation)
 
