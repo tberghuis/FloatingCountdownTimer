@@ -19,15 +19,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Text
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import xyz.tberghuis.floatingtimer.composables.CountdownProgressLine
 import xyz.tberghuis.floatingtimer.composables.TimeDisplay
 import xyz.tberghuis.floatingtimer.composables.TimerText
+import kotlin.math.min
 
 @Composable
 fun TmpTimerRectView(
@@ -105,7 +108,7 @@ fun TmpTimerRectViewDemo() {
   val timeElapsed = 59
   val timeLeftFraction = .5f
   val fontSize = TextUnit.Unspecified
-  val label = "hello344523"
+  val label = "hellohowareyou hellohowareyou hellohowareyou hellohowareyou "
   val isBackgroundTransparent = false
 
   TmpTimerRectViewDemo2(
@@ -147,12 +150,16 @@ fun TmpTimerRectViewDemo2(
       )
       .background(Color.White)
 
+  val configuration = LocalConfiguration.current
+  val maxWidth = remember(configuration) {
+    (min(configuration.screenHeightDp, configuration.screenWidthDp) * .9).dp
+  }
+
   Box(
     modifier = Modifier
       .height(IntrinsicSize.Max)
       .width(IntrinsicSize.Max)
-      .widthIn(max = 500.dp)
-
+      .widthIn(max = maxWidth)
       .then(bubbleModifier),
     contentAlignment = Alignment.Center,
   ) {
