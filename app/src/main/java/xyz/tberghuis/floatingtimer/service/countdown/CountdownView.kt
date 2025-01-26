@@ -5,7 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectView2
+import xyz.tberghuis.floatingtimer.composables.TimerRectView
 import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties as BubbleProperties
 
 @Composable
@@ -41,7 +41,7 @@ fun CountdownView(
     "label", "rectangle" -> {
       // this is redundant, unless bad data in DB
       val label = if (bubbleProperties.timerShape == "label") bubbleProperties.label else null
-      TmpTimerRectView2(
+      TimerRectView(
         isPaused,
         bubbleProperties.arcWidth,
         bubbleProperties.haloColor,

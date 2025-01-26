@@ -13,20 +13,23 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import kotlin.math.min
 
 @Composable
-fun XxxTimerRectView(
+fun TimerRectView(
   isPaused: Boolean,
   arcWidth: Dp,
   haloColor: Color,
@@ -35,7 +38,6 @@ fun XxxTimerRectView(
   fontSize: TextUnit,
   label: String?,
   isBackgroundTransparent: Boolean,
-  updateViewLayout: ((IntSize) -> Unit)? = null
 ) {
   @Suppress("NAME_SHADOWING") val label = if (label == "") null else label
 
@@ -51,46 +53,55 @@ fun XxxTimerRectView(
       )
       .background(Color.White)
 
+  val configuration = LocalConfiguration.current
+  val maxWidth = remember(configuration) {
+    (min(configuration.screenHeightDp, configuration.screenWidthDp) * .9).dp
+  }
+
   Box(
     modifier = Modifier
+      .height(IntrinsicSize.Max)
+      .width(IntrinsicSize.Max)
+      .widthIn(max = maxWidth)
+      .then(bubbleModifier),
+    contentAlignment = Alignment.Center,
   ) {
-    Box(
+    if (isPaused) {
+      Icon(
+        Icons.Filled.PlayArrow,
+        contentDescription = "paused",
+        modifier = Modifier.fillMaxSize(),
+        tint = Color.LightGray
+      )
+    }
+    Column(
       modifier = Modifier
-        .runOnceOnGloballyPositioned {
-          updateViewLayout?.invoke(it.size)
-        }
-        .height(IntrinsicSize.Min)
-        .width(IntrinsicSize.Min)
-        .then(bubbleModifier),
-      contentAlignment = Alignment.Center,
+        .padding(5.dp)
     ) {
-      if (isPaused) {
-        Icon(
-          Icons.Filled.PlayArrow,
-          contentDescription = "paused",
-          modifier = Modifier.fillMaxSize(),
-          tint = Color.LightGray
-        )
-      }
-      Column(
+      Row(
         modifier = Modifier
-          .width(IntrinsicSize.Max)
-          .padding(5.dp)
       ) {
-        Row(
-          modifier = Modifier,
-        ) {
+        label?.let {
+          Box(modifier = Modifier.weight(1f)) {
+            TimerText(
+              label,
+              fontSize,
+              isBackgroundTransparent
+            )
+          }
+        }
+        Row {
           label?.let {
-            TimerText("$label - ", fontSize = fontSize, isBackgroundTransparent)
+            TimerText(" - ", fontSize = fontSize, isBackgroundTransparent)
           }
           TimeDisplay(timeElapsed, fontSize, isBackgroundTransparent)
         }
-        CountdownProgressLine(
-          timeLeftFraction,
-          arcWidth,
-          haloColor
-        )
       }
+      CountdownProgressLine(
+        timeLeftFraction,
+        arcWidth,
+        haloColor
+      )
     }
   }
 }

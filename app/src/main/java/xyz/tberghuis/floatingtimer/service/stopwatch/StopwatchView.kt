@@ -6,7 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
-import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectView2 as TimerRectView
+import xyz.tberghuis.floatingtimer.composables.TimerRectView
 
 @Composable
 fun StopwatchView(
