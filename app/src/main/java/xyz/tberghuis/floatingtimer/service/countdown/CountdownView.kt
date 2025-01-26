@@ -5,7 +5,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import xyz.tberghuis.floatingtimer.tmp5.TmpCountdownView
+import xyz.tberghuis.floatingtimer.tmp5.TmpTimerRectView2
 import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties as BubbleProperties
 
 @Composable
@@ -17,7 +17,7 @@ fun CountdownView(countdown: Countdown) {
       timerState.value == TimerStatePaused
     }
   }
-  TmpCountdownView(countdown, timeLeftFraction, countdown.countdownSeconds, isPaused)
+  CountdownView(countdown, timeLeftFraction, countdown.countdownSeconds, isPaused)
 }
 
 @Composable
@@ -27,10 +27,34 @@ fun CountdownView(
   countdownSeconds: Int,
   isPaused: Boolean
 ) {
-  TmpCountdownView(
-    bubbleProperties,
-    timeLeftFraction,
-    countdownSeconds,
-    isPaused
-  )
+  when (bubbleProperties.timerShape) {
+    "circle" -> {
+      CountdownCircleView(
+        bubbleProperties = bubbleProperties,
+        timeLeftFraction = timeLeftFraction,
+        countdownSeconds = countdownSeconds,
+        isPaused = isPaused,
+        bubbleProperties.isBackgroundTransparent
+      )
+    }
+
+    "label", "rectangle" -> {
+      // this is redundant, unless bad data in DB
+      val label = if (bubbleProperties.timerShape == "label") bubbleProperties.label else null
+      TmpTimerRectView2(
+        isPaused,
+        bubbleProperties.arcWidth,
+        bubbleProperties.haloColor,
+        countdownSeconds,
+        timeLeftFraction,
+        bubbleProperties.fontSize,
+        label,
+        bubbleProperties.isBackgroundTransparent,
+      )
+    }
+
+    else -> {
+      throw RuntimeException("invalid timer shape")
+    }
+  }
 }
