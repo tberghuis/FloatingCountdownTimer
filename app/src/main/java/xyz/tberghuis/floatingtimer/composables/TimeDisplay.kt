@@ -2,8 +2,6 @@ package xyz.tberghuis.floatingtimer.composables
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.TextUnit
-import xyz.tberghuis.floatingtimer.composables.TimerText
-import xyz.tberghuis.floatingtimer.composables.formatIntTimerDisplay
 
 @Composable
 fun TimeDisplay(
