@@ -5,38 +5,14 @@ import android.view.WindowManager
 import androidx.compose.ui.graphics.Color
 import kotlin.math.roundToInt
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
-import xyz.tberghuis.floatingtimer.ARC_WIDTH_NO_SCALE
-import xyz.tberghuis.floatingtimer.TIMER_FONT_SIZE_NO_SCALE
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.tmp4.TmpBubbleProperties
 import xyz.tberghuis.floatingtimer.tmp4.TmpTimerViewHolder
-
-//interface XxxBubbleProperties : TmpBubbleProperties {
-//  val widthDp: Dp
-//    get() = 0.dp
-//  val heightDp: Dp
-//    get() = 0.dp
-//
-//  companion object {
-//    // todo remove
-//    fun calcCountdownTimerSizeDp(scaleFactor: Float) =
-//      60.dp * (scaleFactor + 1)
-//
-//    fun calcArcWidth(scaleFactor: Float) = ARC_WIDTH_NO_SCALE * (0.9f * scaleFactor + 1)
-//    fun calcFontSize(scaleFactor: Float) = TIMER_FONT_SIZE_NO_SCALE * (1.2 * scaleFactor + 1)
-//  }
-//}
-
-// future data class implements this, use composition over inheritance
-// make update method a single method interface, does calcs and returns copy instance
-
-// state that is static for lifetime of bubble goes here
 
 abstract class Bubble(
   private val service: FloatingService,
