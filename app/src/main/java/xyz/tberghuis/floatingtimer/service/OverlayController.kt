@@ -26,7 +26,6 @@ import xyz.tberghuis.floatingtimer.tmp4.TmpOverlayController
 import kotlin.math.max
 import kotlin.math.min
 import xyz.tberghuis.floatingtimer.service.XxxTimerViewHolder as TimerViewHolder
-import xyz.tberghuis.floatingtimer.service.XxxBubble as Bubble
 
 class OverlayController(service: FloatingService) : TmpOverlayController(service) {
 
