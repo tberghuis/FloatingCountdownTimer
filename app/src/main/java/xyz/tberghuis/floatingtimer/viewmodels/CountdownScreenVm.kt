@@ -128,16 +128,18 @@ class CountdownScreenVm(
   }
 
   private fun calcTotalDurationSeconds(): Int? {
+    val h: Int
     val min: Int
     val sec: Int
     try {
+      h = hours.value.text.toInt()
       min = minutes.value.text.toInt()
       sec = seconds.value.text.toInt()
     } catch (e: NumberFormatException) {
       showSnackbar(application.resources.getString(R.string.invalid_countdown_duration))
       return null
     }
-    val totalSecs = min * 60 + sec
+    val totalSecs = (h * 3600) + (min * 60) + sec
     if (totalSecs == 0) {
       showSnackbar(application.resources.getString(R.string.invalid_countdown_duration))
       return null
