@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -24,7 +25,7 @@ import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
 @Composable
 fun GrantOverlayDialog(
-  vm: SharedVm = viewModel(LocalContext.current as ComponentActivity)
+  vm: SharedVm = viewModel(LocalActivity.current as ComponentActivity)
 ) {
   val context = LocalContext.current
   if (vm.showGrantOverlayDialog) {
