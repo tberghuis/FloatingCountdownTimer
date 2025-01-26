@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.ui.graphics.graphicsLayer
@@ -17,9 +18,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import xyz.tberghuis.floatingtimer.composables.CountdownProgressLine
@@ -89,5 +92,28 @@ fun TmpTimerRectView(
         )
       }
     }
+  }
+}
+
+@Preview
+@Composable
+fun TmpTimerRectViewDemo() {
+  Row(
+    modifier = Modifier
+      .background(
+        Color.Blue.copy(alpha = .2f)
+      )
+      .widthIn(max = 100.dp),
+  ) {
+    Text(
+      "label1232434234",
+      modifier = Modifier.weight(1f),
+      softWrap = false,
+      maxLines = 1,
+    )
+    Text(
+      " - 00:59",
+      modifier = Modifier,
+    )
   }
 }
