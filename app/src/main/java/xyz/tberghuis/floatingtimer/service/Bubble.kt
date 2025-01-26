@@ -28,14 +28,7 @@ abstract class Bubble(
   override val paddingTimerDisplay =
     TmpBubbleProperties.calcTimerDisplayPadding(bubbleSizeScaleFactor)
 
-  val viewHolder: TmpTimerViewHolder
-
-  init {
-    // todo TmpTimerViewHolder
-    // remove widthPx heightPx params
-    viewHolder =
-      TmpTimerViewHolder(service, savedTimer?.positionX, savedTimer?.positionY)
-  }
+  val viewHolder: TmpTimerViewHolder = TmpTimerViewHolder(service, savedTimer?.positionX, savedTimer?.positionY)
 
   open fun exit() {
     try {
