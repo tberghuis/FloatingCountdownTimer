@@ -38,6 +38,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import xyz.tberghuis.floatingtimer.LocalNavController
@@ -77,8 +78,13 @@ fun CreateCountdownCard() {
         .widthIn(max = 350.dp),
       horizontalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterHorizontally)
     ) {
-      CountdownTimeField(vm.hours, stringResource(R.string.hours))
-      CountdownTimeField(vm.minutes, stringResource(R.string.minutes), "CountdownMinutes")
+      CountdownTimeField(vm.hours, stringResource(R.string.hours), imeAction = ImeAction.Next)
+      CountdownTimeField(
+        vm.minutes,
+        stringResource(R.string.minutes),
+        "CountdownMinutes",
+        imeAction = ImeAction.Next
+      )
       CountdownTimeField(vm.seconds, stringResource(R.string.seconds))
     }
 

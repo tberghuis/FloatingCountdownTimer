@@ -55,7 +55,8 @@ fun CountdownInputRow(
 fun RowScope.CountdownTimeField(
   tfvState: MutableState<TextFieldValue>,
   label: String,
-  testTag: String? = null
+  testTag: String? = null,
+  imeAction: ImeAction = ImeAction.Unspecified
 ) {
   val testTagModifier = testTag?.let {
     Modifier
@@ -78,7 +79,7 @@ fun RowScope.CountdownTimeField(
     onValueChange = { tfvState.value = it },
     keyboardOptions = KeyboardOptions(
       keyboardType = KeyboardType.Number,
-      imeAction = ImeAction.Next
+      imeAction = imeAction
     ),
     singleLine = true
   )
