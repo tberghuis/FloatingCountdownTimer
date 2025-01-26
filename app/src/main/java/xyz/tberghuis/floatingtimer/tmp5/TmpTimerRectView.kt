@@ -117,10 +117,14 @@ fun TmpTimerRectViewDemo2(
 //      .widthIn(max = 100.dp),
   ) {
     Box(modifier = Modifier.weight(1f)) {
-      TimerText("label1fdsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfdsfsdfsd232434234", fontSize, isBackgroundTransparent)
+      TimerText(        "label1fdsfsdfsdfsdfsdfsdfsdfsdfsdfsdfsdfdsfsdfsdfsdfdsfsdfsd232434234",
+        fontSize,
+        isBackgroundTransparent
+      )
     }
-    Box(modifier = Modifier) {
-      TimerText(" - 00:59", fontSize, isBackgroundTransparent)
+    Row {
+      TimerText(" - ", fontSize, isBackgroundTransparent)
+      TimerText("00:59", fontSize, isBackgroundTransparent)
     }
   }
 }
