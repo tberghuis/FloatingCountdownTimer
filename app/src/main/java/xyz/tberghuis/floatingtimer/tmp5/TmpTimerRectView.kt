@@ -118,9 +118,12 @@ fun TmpTimerRectViewDemo() {
   }
 }
 
-@Preview
+
 @Composable
-fun TmpTimerRectViewDemo2() {
+fun TmpTimerRectViewDemo2(
+  fontSize: TextUnit,
+  isBackgroundTransparent: Boolean,
+) {
   Row(
     modifier = Modifier
       .background(
@@ -129,16 +132,10 @@ fun TmpTimerRectViewDemo2() {
       .widthIn(max = 100.dp),
   ) {
     Box(modifier = Modifier.weight(1f)) {
-
       TimerText("label1232434234", fontSize, isBackgroundTransparent)
-
-
     }
     Box(modifier = Modifier) {
-      Text(
-        " - 00:59",
-        modifier = Modifier,
-      )
+      TimerText(" - 00:59", fontSize, isBackgroundTransparent)
     }
   }
 }
