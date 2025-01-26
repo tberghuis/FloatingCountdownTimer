@@ -15,7 +15,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import kotlinx.coroutines.flow.MutableStateFlow
 import xyz.tberghuis.floatingtimer.composables.TimeDisplay
-import xyz.tberghuis.floatingtimer.tmp4.SquareBackground
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.runtime.getValue
@@ -32,6 +31,7 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.geometry.Size
 import kotlinx.coroutines.flow.StateFlow
+import xyz.tberghuis.floatingtimer.composables.SquareBackground
 
 @Composable
 fun StopwatchCircleView(
