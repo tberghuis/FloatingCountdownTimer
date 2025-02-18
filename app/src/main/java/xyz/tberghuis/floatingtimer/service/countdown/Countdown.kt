@@ -23,7 +23,8 @@ class Countdown(
   timerShape: String,
   label: String?,
   isBackgroundTransparent: Boolean,
-  savedTimer: SavedTimer? = null
+  savedTimer: SavedTimer? = null,
+  start: Boolean = false
 ) : Bubble(
   service,
   bubbleSizeScaleFactor,
@@ -34,7 +35,9 @@ class Countdown(
   savedTimer
 ) {
   var countdownSeconds by mutableIntStateOf(durationSeconds)
-  val timerState = MutableStateFlow<TimerState>(TimerStatePaused)
+  val timerState = MutableStateFlow<TimerState>(
+    if (start) TimerStateRunning else TimerStatePaused
+  )
   private var countDownTimer: CountDownTimer? = null
 
   override fun exit() {
