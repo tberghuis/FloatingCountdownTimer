@@ -69,7 +69,8 @@ fun CreateCountdownCard() {
     Row(
       modifier = Modifier
         .padding(10.dp)
-        .widthIn(max = 350.dp),
+        .widthIn(max = 350.dp)
+        .align(Alignment.CenterHorizontally),
       horizontalArrangement = Arrangement.spacedBy(10.dp, alignment = Alignment.CenterHorizontally)
     ) {
       CountdownTimeField(vm.hours, stringResource(R.string.hours), imeAction = ImeAction.Next)
