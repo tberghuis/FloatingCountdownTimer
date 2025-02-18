@@ -19,7 +19,8 @@ class Stopwatch(
   timerShape: String,
   label: String?,
   isBackgroundTransparent: Boolean,
-  savedTimer: SavedTimer? = null
+  savedTimer: SavedTimer? = null,
+  start: Boolean = false,
 ) : Bubble(
   service,
   bubbleSizeScaleFactor,
@@ -30,7 +31,7 @@ class Stopwatch(
   savedTimer
 ) {
   val timeElapsed = mutableIntStateOf(0)
-  val isRunningStateFlow = MutableStateFlow(false)
+  val isRunningStateFlow = MutableStateFlow(start)
   private var stopwatchIncrementTask: TimerTask? = null
 
   // doitwrong

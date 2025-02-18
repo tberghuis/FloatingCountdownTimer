@@ -25,7 +25,7 @@ import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
 import kotlin.math.max
 import kotlin.math.min
 
-class XxxOverlayController(val service: FloatingService) {
+class OverlayController(val service: FloatingService) {
   val trashController = TrashController(service)
   private val bubbleSet = mutableSetOf<Bubble>()
 
@@ -38,7 +38,9 @@ class XxxOverlayController(val service: FloatingService) {
     timerShape: String,
     label: String?,
     isBackgroundTransparent: Boolean,
-    savedTimer: SavedTimer? = null
+    savedTimer: SavedTimer? = null,
+    // todo make default false
+    start: Boolean = true
   ) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
@@ -52,7 +54,8 @@ class XxxOverlayController(val service: FloatingService) {
           timerShape,
           label,
           isBackgroundTransparent,
-          savedTimer
+          savedTimer,
+          start
         )
       val stopwatchView = @Composable {
         CompositionLocalProvider(LocalTimerViewHolder provides stopwatch.viewHolder) {
