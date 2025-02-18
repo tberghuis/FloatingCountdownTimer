@@ -39,8 +39,7 @@ class OverlayController(val service: FloatingService) {
     label: String?,
     isBackgroundTransparent: Boolean,
     savedTimer: SavedTimer? = null,
-    // todo make default false
-    start: Boolean = true
+    start: Boolean = false
   ) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
@@ -76,8 +75,7 @@ class OverlayController(val service: FloatingService) {
     label: String?,
     isBackgroundTransparent: Boolean,
     savedTimer: SavedTimer? = null,
-    // todo make default false
-    start: Boolean = true
+    start: Boolean = false
   ) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
