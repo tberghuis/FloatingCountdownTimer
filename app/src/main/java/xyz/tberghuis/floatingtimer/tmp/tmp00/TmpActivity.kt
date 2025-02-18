@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp
+package xyz.tberghuis.floatingtimer.tmp.tmp00
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
