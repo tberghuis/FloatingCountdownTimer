@@ -12,6 +12,9 @@ class DeepLinkScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
   var link by mutableStateOf("")
+  var type by mutableStateOf("")
+  var start by mutableStateOf("")
+  var result by mutableStateOf("")
 
   fun processDataUri(data: Uri) {
     logd("data uri $data")
