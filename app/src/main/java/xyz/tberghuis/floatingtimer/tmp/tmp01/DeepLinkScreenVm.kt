@@ -5,11 +5,13 @@ import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.service.boundFloatingServiceProvider
 
 class DeepLinkScreenVm(
   private val application: Application,
@@ -39,9 +41,13 @@ class DeepLinkScreenVm(
     uiTimerType = timerType
     uiStart = start.toString()
 
+
+//  todo  check premium 2 timers
+    
+
     when (timerType) {
       "stopwatch" -> {
-
+        addStopwatch(id.toInt(), start)
       }
 
       "countdown" -> {
@@ -56,9 +62,14 @@ class DeepLinkScreenVm(
     viewModelScope.launch {
       val sw = savedStopwatchDao.getById(id)
 
+      application.boundFloatingServiceProvider.provideService().overlayController.addStopwatch(
+        haloColor = Color(sw.timerColor),
+        timerShape = sw.timerShape,
+        label = sw.label,
+        isBackgroundTransparent = sw.isBackgroundTransparent,
+        savedTimer = sw,
+        start = start
+      )
     }
   }
-
 }
-
-
