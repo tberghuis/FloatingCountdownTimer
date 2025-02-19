@@ -38,6 +38,7 @@
 
         <activity
             android:name=".tmp.tmp01.DeepLinkActivity"
+            android:noHistory="true"
             android:exported="true"
             android:theme="@style/Theme.FloatingTimer">
             <intent-filter>

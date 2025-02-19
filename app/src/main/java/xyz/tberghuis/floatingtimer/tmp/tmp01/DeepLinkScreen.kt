@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp.tmp01
 
+import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun DeepLinkScreen(
   vm: DeepLinkScreenVm = viewModel()
 ) {
+
+  val activity = LocalActivity.current
+
   // todo topbar
   Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
     Column(
@@ -30,7 +34,9 @@ fun DeepLinkScreen(
       Text("result: ${vm.uiResult}")
 
       Button(onClick = {
-        // todo
+        activity?.let {
+          vm.openFloatingTimer(activity)
+        }
       }) {
         // todo strings.xml
         Text("Open Floating Timer")

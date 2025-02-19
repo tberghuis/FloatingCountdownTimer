@@ -1,6 +1,8 @@
 package xyz.tberghuis.floatingtimer.tmp.tmp01
 
+import android.app.Activity
 import android.app.Application
+import android.content.Intent
 import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -9,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.boundFloatingServiceProvider
@@ -60,6 +63,12 @@ class DeepLinkScreenVm(
       }
       uiResult = "timer launched"
     }
+  }
+
+  fun openFloatingTimer(activity: Activity) {
+    val intent = Intent(activity, MainActivity::class.java)
+    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    activity.startActivity(intent)
   }
 
   private suspend fun addStopwatch(id: Int, start: Boolean) {
