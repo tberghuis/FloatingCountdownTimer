@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.boundFloatingServiceProvider
+import xyz.tberghuis.floatingtimer.viewmodels.shouldShowPremiumDialogMultipleTimers
 
 class DeepLinkScreenVm(
   private val application: Application,
@@ -41,20 +42,24 @@ class DeepLinkScreenVm(
     uiTimerType = timerType
     uiStart = start.toString()
 
-
-//  todo  check premium 2 timers
-    // result = "blocked, need premium for > 2 timers"
-
-
-    when (timerType) {
-      "stopwatch" -> {
-        addStopwatch(id.toInt(), start)
+    viewModelScope.launch {
+      if (shouldShowPremiumDialogMultipleTimers(application)) {
+        uiResult = "need premium to run more than 2 timers"
+        return@launch
       }
 
-      "countdown" -> {
-        // todo
-        TODO()
+      when (timerType) {
+        "stopwatch" -> {
+          addStopwatch(id.toInt(), start)
+        }
+
+        "countdown" -> {
+          // todo
+          TODO()
+        }
       }
+
+
     }
 
 
