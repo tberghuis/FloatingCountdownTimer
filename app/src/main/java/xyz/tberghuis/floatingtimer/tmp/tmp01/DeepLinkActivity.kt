@@ -17,7 +17,7 @@ class DeepLinkActivity : ComponentActivity() {
       val vm: DeepLinkScreenVm = viewModel()
       val activity = LocalActivity.current
       // hack to only run once even if configuration change
-      rememberSaveable {
+      rememberSaveable(vm) {
         activity?.intent?.data?.let {
           vm.processDataUri(it)
         }

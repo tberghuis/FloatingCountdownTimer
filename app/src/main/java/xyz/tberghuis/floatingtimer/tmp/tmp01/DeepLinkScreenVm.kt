@@ -6,6 +6,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 
 class DeepLinkScreenVm(
@@ -19,6 +21,14 @@ class DeepLinkScreenVm(
   fun processDataUri(data: Uri) {
     logd("data uri $data")
     link = data.toString()
+
+
+    viewModelScope.launch {
+
+    }
+
+
+
   }
 
 }
