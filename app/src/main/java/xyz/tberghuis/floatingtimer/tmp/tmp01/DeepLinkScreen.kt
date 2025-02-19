@@ -28,18 +28,18 @@ fun DeepLinkScreen(
       Text("timer type: ${vm.uiTimerType}")
       Text("auto start: ${vm.uiStart}")
       Text("result: ${vm.uiResult}")
-      Button(onClick = {
-        // todo
-      }) {
-        // todo strings.xml
-        Text("close")
-      }
 
       Button(onClick = {
         // todo
       }) {
         // todo strings.xml
         Text("Open Floating Timer")
+      }
+      Button(onClick = {
+        // todo
+      }) {
+        // todo strings.xml
+        Text("close")
       }
     }
   }
