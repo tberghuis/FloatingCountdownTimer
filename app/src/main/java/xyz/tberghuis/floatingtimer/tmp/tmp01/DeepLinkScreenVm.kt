@@ -35,7 +35,7 @@ class DeepLinkScreenVm(
     uiLink = data.toString()
 
     if (timerType == null || id == null) {
-      // todo error
+      uiResult = "invalid link"
       return
     }
 
@@ -58,25 +58,20 @@ class DeepLinkScreenVm(
           TODO()
         }
       }
-
-
+      uiResult = "timer launched"
     }
-
-
   }
 
-  private fun addStopwatch(id: Int, start: Boolean) {
-    viewModelScope.launch {
-      val sw = savedStopwatchDao.getById(id)
+  private suspend fun addStopwatch(id: Int, start: Boolean) {
+    val sw = savedStopwatchDao.getById(id)
 
-      application.boundFloatingServiceProvider.provideService().overlayController.addStopwatch(
-        haloColor = Color(sw.timerColor),
-        timerShape = sw.timerShape,
-        label = sw.label,
-        isBackgroundTransparent = sw.isBackgroundTransparent,
-        savedTimer = sw,
-        start = start
-      )
-    }
+    application.boundFloatingServiceProvider.provideService().overlayController.addStopwatch(
+      haloColor = Color(sw.timerColor),
+      timerShape = sw.timerShape,
+      label = sw.label,
+      isBackgroundTransparent = sw.isBackgroundTransparent,
+      savedTimer = sw,
+      start = start
+    )
   }
 }
