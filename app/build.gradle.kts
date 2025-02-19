@@ -32,6 +32,8 @@ android {
     debug {
       // for taking screenshots, use airplane mode
       // todo use .properties file gitignore
+      // clear billing client cache, run in airplane mode
+      // adb shell pm clear com.android.vending
       buildConfigField("Boolean", "DEFAULT_PURCHASED", "false")
       // buildConfigField("Boolean", "DEFAULT_PURCHASED", "true")
     }
