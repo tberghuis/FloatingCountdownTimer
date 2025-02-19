@@ -13,20 +13,32 @@ import xyz.tberghuis.floatingtimer.logd
 class DeepLinkScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
-  var link by mutableStateOf("")
-  var type by mutableStateOf("")
-  var start by mutableStateOf("")
-  var result by mutableStateOf("")
+  var uiLink by mutableStateOf("")
+  var uiType by mutableStateOf("")
+  var uiStart by mutableStateOf("")
+  var uiResult by mutableStateOf("")
 
   fun processDataUri(data: Uri) {
     logd("data uri $data")
-    link = data.toString()
 
+    val type = data.getQueryParameter("type")
+    val id = data.getQueryParameter("id")
+    val start = data.getBooleanQueryParameter("start", false)
+
+    uiLink = data.toString()
+
+    if (type == null || id == null) {
+      // todo error
+      return
+    }
+
+    uiType = type
+    uiStart = start.toString()
 
     viewModelScope.launch {
 
-    }
 
+    }
 
 
   }
