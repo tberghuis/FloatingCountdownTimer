@@ -43,7 +43,8 @@ class DeepLinkScreenVm(
 
 
 //  todo  check premium 2 timers
-    
+    // result = "blocked, need premium for > 2 timers"
+
 
     when (timerType) {
       "stopwatch" -> {

@@ -31,10 +31,11 @@ android {
     }
     debug {
       // for taking screenshots, use airplane mode
-      // todo use environment variable
-      // buildConfigField("Boolean", "DEFAULT_PURCHASED", "false")
-      buildConfigField("Boolean", "DEFAULT_PURCHASED", "true")
+      // todo use .properties file gitignore
+      buildConfigField("Boolean", "DEFAULT_PURCHASED", "false")
+      // buildConfigField("Boolean", "DEFAULT_PURCHASED", "true")
     }
+    // todo remove unlockTmp create product flavor .foss BillingClientWrapperImpl
     create("unlockTmp") {
       initWith(getByName("debug"))
       buildConfigField("Boolean", "DEFAULT_PURCHASED", "true")

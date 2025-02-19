@@ -34,6 +34,13 @@ fun DeepLinkScreen(
         // todo strings.xml
         Text("close")
       }
+
+      Button(onClick = {
+        // todo
+      }) {
+        // todo strings.xml
+        Text("Open Floating Timer")
+      }
     }
   }
 }
