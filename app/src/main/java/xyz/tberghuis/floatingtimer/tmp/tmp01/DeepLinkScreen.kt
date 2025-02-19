@@ -24,10 +24,10 @@ fun DeepLinkScreen(
       horizontalAlignment = Alignment.Start,
     ) {
       Text("hello deeplink")
-      Text("link: ${vm.link}")
-      Text("timer type: ${vm.type}")
-      Text("auto start: ${vm.start}")
-      Text("result: ${vm.result}")
+      Text("link: ${vm.uiLink}")
+      Text("timer type: ${vm.uiTimerType}")
+      Text("auto start: ${vm.uiStart}")
+      Text("result: ${vm.uiResult}")
       Button(onClick = {
         // todo
       }) {

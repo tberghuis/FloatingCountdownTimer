@@ -14,28 +14,33 @@ class DeepLinkScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
   var uiLink by mutableStateOf("")
-  var uiType by mutableStateOf("")
+  var uiTimerType by mutableStateOf("")
   var uiStart by mutableStateOf("")
   var uiResult by mutableStateOf("")
 
   fun processDataUri(data: Uri) {
     logd("data uri $data")
 
-    val type = data.getQueryParameter("type")
+    val timerType = data.getQueryParameter("type")
     val id = data.getQueryParameter("id")
     val start = data.getBooleanQueryParameter("start", false)
 
     uiLink = data.toString()
 
-    if (type == null || id == null) {
+    if (timerType == null || id == null) {
       // todo error
       return
     }
 
-    uiType = type
+    uiTimerType = timerType
     uiStart = start.toString()
 
+
+
+
     viewModelScope.launch {
+
+
 
 
     }
