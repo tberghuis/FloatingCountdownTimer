@@ -36,6 +36,19 @@
                 android:value="Floating timers to display on top of other apps" />
         </service>
 
-        <!-- TmpActivity added in unlockTmp build variant-->
+        <activity
+            android:name=".tmp.tmp01.DeepLinkActivity"
+            android:exported="true"
+            android:theme="@style/Theme.FloatingTimer">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="floatingtimer" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest>
