@@ -11,11 +11,11 @@ class TmpSavedTimerDialogVmc {
   var showOptionsDialog by mutableStateOf<SavedTimer?>(null)
   var showLinkDialog by mutableStateOf<SavedTimer?>(null)
 
+  var start by mutableStateOf(true)
 
-  fun deepLinkToClipboard(){
+  fun deepLinkToClipboard() {
 
   }
-
 
 
 }
