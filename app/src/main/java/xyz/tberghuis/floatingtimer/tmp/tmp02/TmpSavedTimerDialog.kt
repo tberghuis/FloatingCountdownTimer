@@ -1,6 +1,8 @@
 package xyz.tberghuis.floatingtimer.tmp.tmp02
 
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -23,11 +25,19 @@ fun SavedTimerOptionsDialog(
     },
     modifier = Modifier,
   ) {
-
     Surface() {
-      Text("hello options dialog")
-
+      Text("Saved Timer Options")
+      Row {
+        Button(onClick = {}) {
+          Text("link")
+        }
+        Button(onClick = {}) {
+          Text("delete")
+        }
+        Button(onClick = {}) {
+          Text("cancel")
+        }
+      }
     }
-
   }
 }
