@@ -3,6 +3,7 @@ package xyz.tberghuis.floatingtimer.tmp.tmp02
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
@@ -37,6 +38,17 @@ fun SavedTimerLinkDialog(
             onCheckedChange = { vmc.start = it }
           )
           Text("auto start")
+        }
+
+        Row {
+          Button(onClick = { vmc.deepLinkToClipboard() }) {
+            Text("clipboard")
+          }
+          Button(onClick = {
+            vmc.showLinkDialog = null
+          }) {
+            Text("cancel")
+          }
         }
       }
     }
