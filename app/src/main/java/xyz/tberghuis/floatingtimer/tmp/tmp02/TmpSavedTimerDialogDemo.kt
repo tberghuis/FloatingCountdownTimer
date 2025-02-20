@@ -13,7 +13,9 @@ class TmpCountdownScreenVm(
 ) :
   AndroidViewModel(application) {
   // this is fake CountdownScreenVm
-  val willitblend = "will it blend"
+
+  val savedTimerDialogVmc = TmpSavedTimerDialogVmc()
+
 }
 
 @Preview
@@ -23,6 +25,6 @@ fun TmpSavedTimerDialogDemo(
 ) {
   // todo fake savedtimer on long press
   Column {
-    Text("hello ${vm.willitblend}")
+    Text("hello saved timer dialog demo")
   }
 }

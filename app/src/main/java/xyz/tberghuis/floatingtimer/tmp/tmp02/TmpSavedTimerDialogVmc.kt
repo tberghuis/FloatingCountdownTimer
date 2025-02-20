@@ -8,6 +8,7 @@ import xyz.tberghuis.floatingtimer.data.SavedTimer
 class TmpSavedTimerDialogVmc {
   // stores SavedCountdown or SavedStopwatch of saved timer long press
   // close dialog = null
-  var showDialog by mutableStateOf<SavedTimer?>(null)
+  var showOptionsDialog by mutableStateOf<SavedTimer?>(null)
+  var showLinkDialog by mutableStateOf<SavedTimer?>(null)
 
 }
