@@ -36,10 +36,14 @@ fun SavedTimerOptionsDialog(
           }) {
             Text("link")
           }
-          Button(onClick = {}) {
+          Button(onClick = {
+            //todo
+          }) {
             Text("delete")
           }
-          Button(onClick = {}) {
+          Button(onClick = {
+            vm.savedTimerDialogVmc.showOptionsDialog = null
+          }) {
             Text("cancel")
           }
         }
