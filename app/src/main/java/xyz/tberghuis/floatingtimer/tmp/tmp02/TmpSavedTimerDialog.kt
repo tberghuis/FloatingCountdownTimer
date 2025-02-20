@@ -13,6 +13,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun SavedTimerOptionsDialog(
   vm: TmpCountdownScreenVm = viewModel()
 ) {
+  if (vm.savedTimerDialogVmc.showOptionsDialog == null) {
+    return
+  }
+
   BasicAlertDialog(
     onDismissRequest = {
       vm.savedTimerDialogVmc.showOptionsDialog = null
