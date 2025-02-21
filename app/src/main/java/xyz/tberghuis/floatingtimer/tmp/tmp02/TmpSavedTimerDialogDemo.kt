@@ -38,7 +38,6 @@ fun TmpSavedTimerDialogDemo(
   Column {
     Text("hello saved timer dialog demo")
 
-
     Button(onClick = {
       vm.longPressStopwatch1()
     }) {
@@ -47,8 +46,6 @@ fun TmpSavedTimerDialogDemo(
 
   }
 
-
-
-  SavedTimerOptionsDialog(vm.savedTimerDialogVmc, onDelete = {})
+  SavedTimerOptionsDialog(vm.savedTimerDialogVmc)
   SavedTimerLinkDialog(vm.savedTimerDialogVmc)
 }

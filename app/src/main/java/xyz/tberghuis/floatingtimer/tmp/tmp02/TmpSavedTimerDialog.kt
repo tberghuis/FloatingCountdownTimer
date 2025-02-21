@@ -13,8 +13,7 @@ import androidx.compose.ui.Modifier
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SavedTimerOptionsDialog(
-  vmc: TmpSavedTimerDialogVmc,
-  onDelete: () -> Unit
+  vmc: TmpSavedTimerDialogVmc
 ) {
   if (vmc.showOptionsDialog == null) {
     return
@@ -36,7 +35,7 @@ fun SavedTimerOptionsDialog(
           }) {
             Text("link")
           }
-          Button(onClick = onDelete) {
+          Button(onClick = { vmc.deleteSavedTimer() }) {
             Text("delete")
           }
           Button(onClick = {
