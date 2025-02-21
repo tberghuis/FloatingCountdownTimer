@@ -20,7 +20,9 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import xyz.tberghuis.floatingtimer.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,19 +62,19 @@ fun SavedTimerOptionsDialog(
               vmc.showOptionsDialog = null
             },
           ) {
-            Icon(Icons.Default.Link, "link")
+            Icon(Icons.Default.Link, stringResource(R.string.link))
           }
           IconButton(
             onClick = {
               vmc.deleteSavedTimer()
             },
           ) {
-            Icon(Icons.Default.Delete, "delete")
+            Icon(Icons.Default.Delete, stringResource(R.string.delete))
           }
           TextButton(onClick = {
             vmc.showOptionsDialog = null
           }) {
-            Text("Cancel")
+            Text(stringResource(R.string.cancel))
           }
         }
       }
