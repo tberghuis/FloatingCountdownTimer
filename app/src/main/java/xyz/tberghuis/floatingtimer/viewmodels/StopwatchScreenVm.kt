@@ -27,14 +27,11 @@ class StopwatchScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application), TimerShapeChoiceVm, BackgroundTransCheckboxVm {
   private val savedStopwatchDao = application.appDatabase.savedStopwatchDao()
-
-  //  var showDeleteDialog by mutableStateOf<SavedStopwatch?>(null)
-  val savedTimerDialogVmc = TmpSavedTimerDialogVmc(application, viewModelScope)
-
   private val preferencesRepository = application.preferencesRepository
-  val premiumVmc = PremiumVmc(application, viewModelScope)
   private val boundFloatingService = application.boundFloatingServiceProvider
 
+  val savedTimerDialogVmc = TmpSavedTimerDialogVmc(application, viewModelScope)
+  val premiumVmc = PremiumVmc(application, viewModelScope)
   var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
 
   override var timerShape by mutableStateOf("circle")

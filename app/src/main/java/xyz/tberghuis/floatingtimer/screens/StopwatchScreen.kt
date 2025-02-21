@@ -78,12 +78,10 @@ fun StopwatchScreenContent(
         vm.savedStopwatchClick(savedTimer)
       },
       timerOnLongClick = { savedTimer ->
-//        vm.showDeleteDialog = savedTimer
         vm.savedTimerDialogVmc.showOptionsDialog = savedTimer
       },
     )
   }
-
   SavedTimerOptionsDialog(vm.savedTimerDialogVmc)
   SavedTimerLinkDialog(vm.savedTimerDialogVmc)
 }
