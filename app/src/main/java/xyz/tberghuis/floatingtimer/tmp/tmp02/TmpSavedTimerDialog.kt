@@ -9,12 +9,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SavedTimerOptionsDialog(
-    vmc: TmpSavedTimerDialogVmc
+  vmc: TmpSavedTimerDialogVmc,
+  onDelete: () -> Unit
 ) {
   if (vmc.showOptionsDialog == null) {
     return
@@ -36,9 +36,7 @@ fun SavedTimerOptionsDialog(
           }) {
             Text("link")
           }
-          Button(onClick = {
-            //todo
-          }) {
+          Button(onClick = onDelete) {
             Text("delete")
           }
           Button(onClick = {

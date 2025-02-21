@@ -49,6 +49,6 @@ fun TmpSavedTimerDialogDemo(
 
 
 
-  SavedTimerOptionsDialog(vm.savedTimerDialogVmc)
+  SavedTimerOptionsDialog(vm.savedTimerDialogVmc, onDelete = {})
   SavedTimerLinkDialog(vm.savedTimerDialogVmc)
 }
