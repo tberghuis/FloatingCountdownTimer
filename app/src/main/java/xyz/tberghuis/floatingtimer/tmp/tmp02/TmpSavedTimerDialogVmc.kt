@@ -1,16 +1,21 @@
 package xyz.tberghuis.floatingtimer.tmp.tmp02
 
+import android.app.Application
 import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.text.AnnotatedString
+import kotlinx.coroutines.CoroutineScope
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 
-class TmpSavedTimerDialogVmc {
+class TmpSavedTimerDialogVmc(
+  application: Application,
+  scope: CoroutineScope
+) {
   // stores SavedCountdown or SavedStopwatch of saved timer long press
   // close dialog = null
   var showOptionsDialog by mutableStateOf<SavedTimer?>(null)

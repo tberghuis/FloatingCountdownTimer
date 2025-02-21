@@ -18,7 +18,7 @@ class TmpCountdownScreenVm(
   AndroidViewModel(application) {
   // this is fake CountdownScreenVm
 
-  val savedTimerDialogVmc = TmpSavedTimerDialogVmc()
+  val savedTimerDialogVmc = TmpSavedTimerDialogVmc(application, viewModelScope)
 
   fun longPressStopwatch1() {
     val savedStopwatchDao = application.appDatabase.savedStopwatchDao()
