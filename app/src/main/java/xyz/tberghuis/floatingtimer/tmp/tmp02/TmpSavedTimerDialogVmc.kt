@@ -20,8 +20,6 @@ class TmpSavedTimerDialogVmc(
   private val application: Application,
   private val scope: CoroutineScope
 ) {
-
-
   // stores SavedCountdown or SavedStopwatch of saved timer long press
   // close dialog = null
   var showOptionsDialog by mutableStateOf<SavedTimer?>(null)
