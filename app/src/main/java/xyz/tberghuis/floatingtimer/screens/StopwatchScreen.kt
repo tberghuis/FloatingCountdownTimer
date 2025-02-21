@@ -19,12 +19,13 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.composables.ConfirmDeleteSavedTimerDialog
 import xyz.tberghuis.floatingtimer.composables.CreateStopwatchCard
 import xyz.tberghuis.floatingtimer.composables.FtBottomBar
 import xyz.tberghuis.floatingtimer.composables.FtTopAppBar
 import xyz.tberghuis.floatingtimer.composables.PremiumDialog
 import xyz.tberghuis.floatingtimer.composables.SavedTimersCard
+import xyz.tberghuis.floatingtimer.tmp.tmp02.SavedTimerLinkDialog
+import xyz.tberghuis.floatingtimer.tmp.tmp02.SavedTimerOptionsDialog
 import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 import xyz.tberghuis.floatingtimer.viewmodels.StopwatchScreenVm
 
@@ -77,18 +78,12 @@ fun StopwatchScreenContent(
         vm.savedStopwatchClick(savedTimer)
       },
       timerOnLongClick = { savedTimer ->
-        vm.showDeleteDialog = savedTimer
+//        vm.showDeleteDialog = savedTimer
+        vm.savedTimerDialogVmc.showOptionsDialog = savedTimer
       },
     )
   }
-  ConfirmDeleteSavedTimerDialog(
-    showDialog = vm.showDeleteDialog != null,
-    onDismiss = { vm.showDeleteDialog = null },
-    onConfirm = {
-      vm.showDeleteDialog?.let {
-        vm.deleteSavedStopwatch(it)
-      }
-      vm.showDeleteDialog = null
-    }
-  )
+
+  SavedTimerOptionsDialog(vm.savedTimerDialogVmc)
+  SavedTimerLinkDialog(vm.savedTimerDialogVmc)
 }

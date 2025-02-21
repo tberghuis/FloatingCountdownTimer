@@ -9,7 +9,7 @@ import androidx.compose.ui.res.stringResource
 import xyz.tberghuis.floatingtimer.R
 
 @Composable
-fun ConfirmDeleteSavedTimerDialog(
+fun XxxConfirmDeleteSavedTimerDialog(
   showDialog: Boolean,
   onDismiss: () -> Unit,
   onConfirm: () -> Unit

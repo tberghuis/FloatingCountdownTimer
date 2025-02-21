@@ -21,12 +21,15 @@ import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.boundFloatingServiceProvider
+import xyz.tberghuis.floatingtimer.tmp.tmp02.TmpSavedTimerDialogVmc
 
 class StopwatchScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application), TimerShapeChoiceVm, BackgroundTransCheckboxVm {
   private val savedStopwatchDao = application.appDatabase.savedStopwatchDao()
-  var showDeleteDialog by mutableStateOf<SavedStopwatch?>(null)
+
+  //  var showDeleteDialog by mutableStateOf<SavedStopwatch?>(null)
+  val savedTimerDialogVmc = TmpSavedTimerDialogVmc(application, viewModelScope)
 
   private val preferencesRepository = application.preferencesRepository
   val premiumVmc = PremiumVmc(application, viewModelScope)
