@@ -17,8 +17,10 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import xyz.tberghuis.floatingtimer.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +32,7 @@ fun DeepLinkScreen(
     modifier = Modifier.fillMaxSize(),
     topBar = {
       TopAppBar(title = {
-        Text("Floating Timer")
+        Text(stringResource(R.string.app_name))
       })
     },
     bottomBar = {
@@ -43,13 +45,13 @@ fun DeepLinkScreen(
             vm.openFloatingTimer(activity)
           }
         }) {
-          Text("Open App")
+          Text(stringResource(R.string.open_app))
         }
         Spacer(Modifier.weight(1f))
         TextButton(onClick = {
           activity?.finish()
         }) {
-          Text("Close")
+          Text(stringResource(R.string.close))
         }
       }
     },
@@ -62,10 +64,10 @@ fun DeepLinkScreen(
       horizontalAlignment = Alignment.Start,
     ) {
       Spacer(Modifier.height(50.dp))
-      Text("link: ${vm.uiLink}")
-      Text("timer type: ${vm.uiTimerType}")
-      Text("auto start: ${vm.uiStart}")
-      Text("result: ${vm.uiResult}")
+      Text("${stringResource(R.string.link)}: ${vm.uiLink}")
+      Text("${stringResource(R.string.timer_type)}: ${vm.uiTimerType}")
+      Text("${stringResource(R.string.auto_start)}: ${vm.uiStart}")
+      Text("${stringResource(R.string.result)}: ${vm.uiResult}")
     }
   }
 }

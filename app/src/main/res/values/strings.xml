@@ -75,4 +75,8 @@
     <string name="auto_start">auto start</string>
     <string name="clipboard">Clipboard</string>
     <string name="link">link</string>
+    <string name="open_app">Open App</string>
+    <string name="close">Close</string>
+    <string name="timer_type">timer type</string>
+    <string name="result">result</string>
 </resources>
