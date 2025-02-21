@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp.tmp01
+package xyz.tberghuis.floatingtimer.viewmodels
 
 import android.app.Activity
 import android.app.Application
@@ -16,7 +16,6 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.boundFloatingServiceProvider
-import xyz.tberghuis.floatingtimer.viewmodels.shouldShowPremiumDialogMultipleTimers
 
 class DeepLinkScreenVm(
   private val application: Application,

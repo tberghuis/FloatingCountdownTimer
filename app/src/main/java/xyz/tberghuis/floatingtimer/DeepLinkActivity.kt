@@ -8,7 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.screens.DeepLinkScreen
-import xyz.tberghuis.floatingtimer.tmp.tmp01.DeepLinkScreenVm
+import xyz.tberghuis.floatingtimer.viewmodels.DeepLinkScreenVm
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class DeepLinkActivity : ComponentActivity() {

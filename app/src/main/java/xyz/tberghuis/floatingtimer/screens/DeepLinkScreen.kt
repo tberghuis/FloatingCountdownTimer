@@ -21,7 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.tmp.tmp01.DeepLinkScreenVm
+import xyz.tberghuis.floatingtimer.viewmodels.DeepLinkScreenVm
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
