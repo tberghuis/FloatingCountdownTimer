@@ -61,12 +61,12 @@ fun SavedTimerLinkDialog(
           horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
           TextButton(onClick = { vmc.deepLinkToClipboard(clipboardManager) }) {
-            Text("clipboard")
+            Text("Clipboard")
           }
           TextButton(onClick = {
             vmc.showLinkDialog = null
           }) {
-            Text("cancel")
+            Text("Cancel")
           }
         }
       }

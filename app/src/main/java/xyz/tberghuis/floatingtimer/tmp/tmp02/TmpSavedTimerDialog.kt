@@ -72,7 +72,7 @@ fun SavedTimerOptionsDialog(
           TextButton(onClick = {
             vmc.showOptionsDialog = null
           }) {
-            Text("cancel")
+            Text("Cancel")
           }
         }
       }
