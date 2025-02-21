@@ -17,7 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import xyz.tberghuis.floatingtimer.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,7 +48,7 @@ fun SavedTimerLinkDialog(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
       ) {
-        Text("Timer Link")
+        Text(stringResource(R.string.timer_link))
         Row(
           verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -54,19 +56,19 @@ fun SavedTimerLinkDialog(
             checked = vmc.start,
             onCheckedChange = { vmc.start = it }
           )
-          Text("auto start")
+          Text(stringResource(R.string.auto_start))
         }
         Row(
           modifier = Modifier,
           horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
           TextButton(onClick = { vmc.deepLinkToClipboard(clipboardManager) }) {
-            Text("Clipboard")
+            Text(stringResource(R.string.clipboard))
           }
           TextButton(onClick = {
             vmc.showLinkDialog = null
           }) {
-            Text("Cancel")
+            Text(stringResource(R.string.cancel))
           }
         }
       }
