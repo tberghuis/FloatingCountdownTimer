@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp.tmp02
+package xyz.tberghuis.floatingtimer.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.tmp.tmp02.TmpSavedTimerDialogVmc
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
