@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp.tmp01
+package xyz.tberghuis.floatingtimer.screens
 
 import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import xyz.tberghuis.floatingtimer.R
+import xyz.tberghuis.floatingtimer.tmp.tmp01.DeepLinkScreenVm
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
