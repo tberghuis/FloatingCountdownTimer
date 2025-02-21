@@ -17,6 +17,7 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.boundFloatingServiceProvider
+import android.provider.Settings
 
 class DeepLinkScreenVm(
   private val application: Application,
@@ -38,6 +39,10 @@ class DeepLinkScreenVm(
 
     uiLink = data.toString()
 
+    if (!Settings.canDrawOverlays(application)) {
+      uiResult = application.getString(R.string.error_draw_over_other_apps_permission_not_granted)
+      return
+    }
     if (timerType == null || id == null) {
       uiResult = application.getString(R.string.invalid_link)
       return
