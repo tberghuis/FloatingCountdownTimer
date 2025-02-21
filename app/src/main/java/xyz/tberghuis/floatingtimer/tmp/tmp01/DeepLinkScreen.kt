@@ -53,7 +53,7 @@ fun DeepLinkScreen(
           activity?.finish()
         }) {
           // todo strings.xml
-          Text("close")
+          Text("Close")
         }
       }
     },
