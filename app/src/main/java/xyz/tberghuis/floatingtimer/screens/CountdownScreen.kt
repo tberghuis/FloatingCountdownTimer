@@ -87,23 +87,10 @@ fun CountdownScreenContent(
       timerOnLongClick = { savedTimer ->
         // remove focus from TextField
         focusManager.clearFocus()
-//        vm.showDeleteDialog = savedTimer
         vm.savedTimerDialogVmc.showOptionsDialog = savedTimer
       },
     )
   }
-//  ConfirmDeleteSavedTimerDialog(
-//    showDialog = vm.showDeleteDialog != null,
-//    onDismiss = { vm.showDeleteDialog = null },
-//    onConfirm = {
-//      vm.showDeleteDialog?.let {
-//        vm.deleteSavedCountdown(it)
-//      }
-//      vm.showDeleteDialog = null
-//    }
-//  )
-
   SavedTimerOptionsDialog(vm.savedTimerDialogVmc)
   SavedTimerLinkDialog(vm.savedTimerDialogVmc)
-
 }
