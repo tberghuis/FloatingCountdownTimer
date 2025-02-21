@@ -20,7 +20,7 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.tmp.tmp02.SavedTimerDialogVmc
+import xyz.tberghuis.floatingtimer.viewmodels.SavedTimerDialogVmc
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

@@ -21,7 +21,6 @@ import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.boundFloatingServiceProvider
-import xyz.tberghuis.floatingtimer.tmp.tmp02.SavedTimerDialogVmc
 
 class StopwatchScreenVm(
   private val application: Application,
