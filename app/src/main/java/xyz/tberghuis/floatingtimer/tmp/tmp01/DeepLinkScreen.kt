@@ -4,24 +4,59 @@ import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DeepLinkScreen(
   vm: DeepLinkScreenVm = viewModel()
 ) {
-
   val activity = LocalActivity.current
-
-  // todo topbar
-  Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+  Scaffold(
+    modifier = Modifier.fillMaxSize(),
+    topBar = {
+      TopAppBar(title = {
+        Text("Floating Timer")
+      })
+    },
+    bottomBar = {
+      BottomAppBar(
+        modifier = Modifier,
+        contentPadding = PaddingValues(10.dp),
+      ) {
+        TextButton(onClick = {
+          activity?.let {
+            vm.openFloatingTimer(activity)
+          }
+        }) {
+          // todo strings.xml
+          Text("Open Floating Timer")
+        }
+        Spacer(Modifier.weight(1f))
+        TextButton(onClick = {
+          // todo
+        }) {
+          // todo strings.xml
+          Text("close")
+        }
+      }
+    },
+  ) { innerPadding ->
     Column(
       modifier = Modifier.padding(innerPadding),
       verticalArrangement = Arrangement.Top,
@@ -33,20 +68,7 @@ fun DeepLinkScreen(
       Text("auto start: ${vm.uiStart}")
       Text("result: ${vm.uiResult}")
 
-      Button(onClick = {
-        activity?.let {
-          vm.openFloatingTimer(activity)
-        }
-      }) {
-        // todo strings.xml
-        Text("Open Floating Timer")
-      }
-      Button(onClick = {
-        // todo
-      }) {
-        // todo strings.xml
-        Text("close")
-      }
+
     }
   }
 }
