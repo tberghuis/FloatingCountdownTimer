@@ -16,7 +16,7 @@ import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.logd
 
-class TmpSavedTimerDialogVmc(
+class SavedTimerDialogVmc(
   private val application: Application,
   private val scope: CoroutineScope
 ) {

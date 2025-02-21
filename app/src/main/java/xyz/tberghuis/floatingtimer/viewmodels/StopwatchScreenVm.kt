@@ -21,7 +21,7 @@ import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.boundFloatingServiceProvider
-import xyz.tberghuis.floatingtimer.tmp.tmp02.TmpSavedTimerDialogVmc
+import xyz.tberghuis.floatingtimer.tmp.tmp02.SavedTimerDialogVmc
 
 class StopwatchScreenVm(
   private val application: Application,
@@ -30,7 +30,7 @@ class StopwatchScreenVm(
   private val preferencesRepository = application.preferencesRepository
   private val boundFloatingService = application.boundFloatingServiceProvider
 
-  val savedTimerDialogVmc = TmpSavedTimerDialogVmc(application, viewModelScope)
+  val savedTimerDialogVmc = SavedTimerDialogVmc(application, viewModelScope)
   val premiumVmc = PremiumVmc(application, viewModelScope)
   var haloColor by mutableStateOf(DEFAULT_HALO_COLOR)
 

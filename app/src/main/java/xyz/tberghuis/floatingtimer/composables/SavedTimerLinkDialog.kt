@@ -20,12 +20,12 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import xyz.tberghuis.floatingtimer.R
-import xyz.tberghuis.floatingtimer.tmp.tmp02.TmpSavedTimerDialogVmc
+import xyz.tberghuis.floatingtimer.tmp.tmp02.SavedTimerDialogVmc
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SavedTimerLinkDialog(
-  vmc: TmpSavedTimerDialogVmc
+  vmc: SavedTimerDialogVmc
 ) {
   if (vmc.showLinkDialog == null) {
     return
