@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Link
@@ -38,13 +40,15 @@ fun SavedTimerOptionsDialog(
     modifier = Modifier,
   ) {
     Surface(
-      modifier = Modifier,
+      modifier = Modifier
+        .wrapContentWidth()
+        .wrapContentHeight(),
       shape = MaterialTheme.shapes.large,
       color = MaterialTheme.colorScheme.surfaceVariant,
     ) {
       Column(
         modifier = Modifier.padding(16.dp),
-         verticalArrangement = Arrangement.spacedBy(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
       ) {
         Text("Saved Timer Options")
         Row(
