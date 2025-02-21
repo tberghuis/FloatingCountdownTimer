@@ -1,7 +1,9 @@
 package xyz.tberghuis.floatingtimer.tmp.tmp02
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
@@ -42,10 +44,12 @@ fun SavedTimerOptionsDialog(
     ) {
       Column(
         modifier = Modifier.padding(16.dp),
+         verticalArrangement = Arrangement.spacedBy(16.dp),
       ) {
         Text("Saved Timer Options")
         Row(
-
+          modifier = Modifier,
+          horizontalArrangement = Arrangement.SpaceBetween,
         ) {
 
           IconButton(
