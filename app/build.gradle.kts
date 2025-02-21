@@ -44,11 +44,6 @@ android {
       signingConfig = signingConfigs.getByName("debug")
     }
   }
-
-
-  // todo read
-  // https://stefma.medium.com/sourcecompatibility-targetcompatibility-and-jvm-toolchains-in-gradle-explained-d2c17c8cff7c
-  // use sdkman to manage java versions
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
