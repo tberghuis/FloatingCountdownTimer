@@ -69,4 +69,17 @@
     <string name="github_issues">Vấn đề trên Github</string>
     <string name="report_a_bug_or_request_a_feature">báo cáo lỗi hoặc yêu cầu tính năng</string>
     <string name="hours">giờ</string>
+    <string name="timer_link">Liên kết đồng hồ hẹn giờ</string>
+    <string name="auto_start">tự động bắt đầu</string>
+    <string name="clipboard">Bảng tạm</string>
+    <string name="link">liên kết</string>
+    <string name="open_app">Mở ứng dụng</string>
+    <string name="close">Đóng</string>
+    <string name="timer_type">loại đồng hồ hẹn giờ</string>
+    <string name="result">kết quả</string>
+    <string name="invalid_link">liên kết không hợp lệ</string>
+    <string name="need_premium_to_run_more_than_2_timers">cần nâng cấp premium để chạy nhiều hơn 2 đồng hồ hẹn giờ</string>
+    <string name="invalid_timer_type">loại đồng hồ hẹn giờ không hợp lệ</string>
+    <string name="stopwatch_timer_launched">đồng hồ bấm giờ đã được khởi chạy</string>
+    <string name="countdown_timer_launched">đồng hồ đếm ngược đã được khởi chạy</string>
 </resources>
