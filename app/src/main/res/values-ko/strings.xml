@@ -82,4 +82,5 @@
     <string name="invalid_timer_type">유효하지 않은 타이머 유형</string>
     <string name="stopwatch_timer_launched">스톱워치 타이머 실행됨</string>
     <string name="countdown_timer_launched">카운트다운 타이머 실행됨</string>
+    <string name="error_draw_over_other_apps_permission_not_granted">오류, 다른 앱 위에 그리기 권한이 부여되지 않았습니다.</string>
 </resources>

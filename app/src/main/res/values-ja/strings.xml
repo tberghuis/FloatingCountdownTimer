@@ -82,4 +82,5 @@
     <string name="invalid_timer_type">無効なタイマータイプ</string>
     <string name="stopwatch_timer_launched">ストップウォッチタイマーが起動しました</string>
     <string name="countdown_timer_launched">カウントダウンタイマーが起動しました</string>
+    <string name="error_draw_over_other_apps_permission_not_granted">エラー、他のアプリの上に描画する権限が付与されていません</string>
 </resources>

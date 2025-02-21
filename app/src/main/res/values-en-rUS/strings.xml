@@ -82,4 +82,5 @@
     <string name="invalid_timer_type">invalid timer type</string>
     <string name="stopwatch_timer_launched">stopwatch timer launched</string>
     <string name="countdown_timer_launched">countdown timer launched</string>
+    <string name="error_draw_over_other_apps_permission_not_granted">error, draw over other apps permission not granted</string>
 </resources>

@@ -82,4 +82,5 @@
     <string name="invalid_timer_type">无效计时器类型</string>
     <string name="stopwatch_timer_launched">启动了秒表计时器</string>
     <string name="countdown_timer_launched">启动了倒计时计时器</string>
+    <string name="error_draw_over_other_apps_permission_not_granted">错误，未授予覆盖其他应用程序的权限</string>
 </resources>

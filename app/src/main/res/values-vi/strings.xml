@@ -82,4 +82,5 @@
     <string name="invalid_timer_type">loại đồng hồ hẹn giờ không hợp lệ</string>
     <string name="stopwatch_timer_launched">đồng hồ bấm giờ đã được khởi chạy</string>
     <string name="countdown_timer_launched">đồng hồ đếm ngược đã được khởi chạy</string>
+    <string name="error_draw_over_other_apps_permission_not_granted">lỗi, vẽ đè lên ứng dụng khác chưa được cấp quyền</string>
 </resources>

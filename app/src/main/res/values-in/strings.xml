@@ -82,4 +82,5 @@
     <string name="invalid_timer_type">jenis pengatur waktu tidak valid</string>
     <string name="stopwatch_timer_launched">pengatur waktu stopwatch diluncurkan</string>
     <string name="countdown_timer_launched">pengatur waktu hitung mundur diluncurkan</string>
+    <string name="error_draw_over_other_apps_permission_not_granted">kesalahan, izin menggambar di aplikasi lain tidak diberikan</string>
 </resources>
