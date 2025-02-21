@@ -54,7 +54,6 @@
     <string name="notifications">通知</string>
     <string name="current">当前</string>
     <string name="save_timer_positions">保存计时器位置</string>
-
     <string name="premium_upgrade">高级升级</string>
     <string name="unlocked">已解锁</string>
     <string name="locked">已锁定</string>
@@ -70,4 +69,17 @@
     <string name="github_issues">Github 问题</string>
     <string name="report_a_bug_or_request_a_feature">报告错误或请求功能</string>
     <string name="hours">小时</string>
+    <string name="timer_link">计时器链接</string>
+    <string name="auto_start">自动启动</string>
+    <string name="clipboard">剪贴板</string>
+    <string name="link">链接</string>
+    <string name="open_app">打开应用</string>
+    <string name="close">关闭</string>
+    <string name="timer_type">计时器类型</string>
+    <string name="result">结果</string>
+    <string name="invalid_link">无效链接</string>
+    <string name="need_premium_to_run_more_than_2_timers">需要高级版才能运行超过2个计时器</string>
+    <string name="invalid_timer_type">无效计时器类型</string>
+    <string name="stopwatch_timer_launched">启动了秒表计时器</string>
+    <string name="countdown_timer_launched">启动了倒计时计时器</string>
 </resources>
