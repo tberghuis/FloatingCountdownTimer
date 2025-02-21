@@ -14,15 +14,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SavedTimerOptionsDialog(
-  vm: TmpCountdownScreenVm = viewModel()
+    vmc: TmpSavedTimerDialogVmc
 ) {
-  if (vm.savedTimerDialogVmc.showOptionsDialog == null) {
+  if (vmc.showOptionsDialog == null) {
     return
   }
 
   BasicAlertDialog(
     onDismissRequest = {
-      vm.savedTimerDialogVmc.showOptionsDialog = null
+      vmc.showOptionsDialog = null
     },
     modifier = Modifier,
   ) {
@@ -31,8 +31,8 @@ fun SavedTimerOptionsDialog(
         Text("Saved Timer Options")
         Row {
           Button(onClick = {
-            vm.savedTimerDialogVmc.showLinkDialog = vm.savedTimerDialogVmc.showOptionsDialog
-            vm.savedTimerDialogVmc.showOptionsDialog = null
+            vmc.showLinkDialog = vmc.showOptionsDialog
+            vmc.showOptionsDialog = null
           }) {
             Text("link")
           }
@@ -42,7 +42,7 @@ fun SavedTimerOptionsDialog(
             Text("delete")
           }
           Button(onClick = {
-            vm.savedTimerDialogVmc.showOptionsDialog = null
+            vmc.showOptionsDialog = null
           }) {
             Text("cancel")
           }
