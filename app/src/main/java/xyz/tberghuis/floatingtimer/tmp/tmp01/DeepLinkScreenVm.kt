@@ -1,5 +1,6 @@
 package xyz.tberghuis.floatingtimer.tmp.tmp01
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.boundFloatingServiceProvider
 import xyz.tberghuis.floatingtimer.viewmodels.shouldShowPremiumDialogMultipleTimers
 
@@ -62,10 +64,14 @@ class DeepLinkScreenVm(
 
         else -> {
           uiResult = "invalid timer type"
-          return@launch
         }
       }
-      uiResult = "timer launched"
+
+      val numTimers =
+        application.boundFloatingServiceProvider.provideService().overlayController.getNumberOfBubbles()
+      if (numTimers == 0) {
+        application.boundFloatingServiceProvider.provideService().stopSelf()
+      }
     }
   }
 
@@ -76,19 +82,33 @@ class DeepLinkScreenVm(
   }
 
   private suspend fun addStopwatch(id: Int, start: Boolean) {
-    val sw = savedStopwatchDao.getById(id)
+    val stopwatch = savedStopwatchDao.getById(id)
+
+    if (stopwatch == null) {
+      uiResult = "stopwatch timer id=$id not found"
+      return
+    }
+
     application.boundFloatingServiceProvider.provideService().overlayController.addStopwatch(
-      haloColor = Color(sw.timerColor),
-      timerShape = sw.timerShape,
-      label = sw.label,
-      isBackgroundTransparent = sw.isBackgroundTransparent,
-      savedTimer = sw,
+      haloColor = Color(stopwatch.timerColor),
+      timerShape = stopwatch.timerShape,
+      label = stopwatch.label,
+      isBackgroundTransparent = stopwatch.isBackgroundTransparent,
+      savedTimer = stopwatch,
       start = start
     )
+
+    uiResult = "stopwatch timer launched"
   }
 
   private suspend fun addCountdown(id: Int, start: Boolean) {
     val countdown = savedCountdownDao.getById(id)
+
+    if (countdown == null) {
+      uiResult = "countdown timer id=$id not found"
+      return
+    }
+
     application.boundFloatingServiceProvider.provideService().overlayController.addCountdown(
       durationSeconds = countdown.durationSeconds,
       haloColor = Color(countdown.timerColor),
@@ -98,5 +118,7 @@ class DeepLinkScreenVm(
       savedTimer = countdown,
       start = start
     )
+
+    uiResult = "countdown timer launched"
   }
 }

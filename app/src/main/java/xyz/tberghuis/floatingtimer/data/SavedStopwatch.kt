@@ -37,5 +37,5 @@ interface SavedStopwatchDao {
   fun update(timer: SavedStopwatch): Int
 
   @Query("SELECT * FROM SavedStopwatch WHERE id = :id")
-  suspend fun getById(id: Int): SavedStopwatch
+  suspend fun getById(id: Int): SavedStopwatch?
 }
