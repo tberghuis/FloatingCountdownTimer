@@ -37,4 +37,7 @@ interface SavedCountdownDao {
 
   @Update
   fun update(timer: SavedCountdown): Int
+
+  @Query("SELECT * FROM SavedCountdown WHERE id = :id")
+  suspend fun getById(id: Int): SavedCountdown
 }

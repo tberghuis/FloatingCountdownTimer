@@ -21,7 +21,7 @@ class DeepLinkScreenVm(
   private val application: Application,
 ) : AndroidViewModel(application) {
   private val savedStopwatchDao = application.appDatabase.savedStopwatchDao()
-
+  private val savedCountdownDao = application.appDatabase.savedCountdownDao()
 
   var uiLink by mutableStateOf("")
   var uiTimerType by mutableStateOf("")
@@ -57,8 +57,12 @@ class DeepLinkScreenVm(
         }
 
         "countdown" -> {
-          // todo
-          TODO()
+          addCountdown(id.toInt(), start)
+        }
+
+        else -> {
+          uiResult = "invalid timer type"
+          return@launch
         }
       }
       uiResult = "timer launched"
@@ -73,13 +77,25 @@ class DeepLinkScreenVm(
 
   private suspend fun addStopwatch(id: Int, start: Boolean) {
     val sw = savedStopwatchDao.getById(id)
-
     application.boundFloatingServiceProvider.provideService().overlayController.addStopwatch(
       haloColor = Color(sw.timerColor),
       timerShape = sw.timerShape,
       label = sw.label,
       isBackgroundTransparent = sw.isBackgroundTransparent,
       savedTimer = sw,
+      start = start
+    )
+  }
+
+  private suspend fun addCountdown(id: Int, start: Boolean) {
+    val countdown = savedCountdownDao.getById(id)
+    application.boundFloatingServiceProvider.provideService().overlayController.addCountdown(
+      durationSeconds = countdown.durationSeconds,
+      haloColor = Color(countdown.timerColor),
+      timerShape = countdown.timerShape,
+      label = countdown.label,
+      isBackgroundTransparent = countdown.isBackgroundTransparent,
+      savedTimer = countdown,
       start = start
     )
   }
