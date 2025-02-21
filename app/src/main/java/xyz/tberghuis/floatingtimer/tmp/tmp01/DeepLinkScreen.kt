@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.BottomAppBarDefaults
@@ -58,17 +59,17 @@ fun DeepLinkScreen(
     },
   ) { innerPadding ->
     Column(
-      modifier = Modifier.padding(innerPadding),
-      verticalArrangement = Arrangement.Top,
+      modifier = Modifier
+        .padding(innerPadding)
+        .padding(horizontal = 10.dp),
+      verticalArrangement = Arrangement.spacedBy(15.dp),
       horizontalAlignment = Alignment.Start,
     ) {
-      Text("hello deeplink")
+      Spacer(Modifier.height(50.dp))
       Text("link: ${vm.uiLink}")
       Text("timer type: ${vm.uiTimerType}")
       Text("auto start: ${vm.uiStart}")
       Text("result: ${vm.uiResult}")
-
-
     }
   }
 }
