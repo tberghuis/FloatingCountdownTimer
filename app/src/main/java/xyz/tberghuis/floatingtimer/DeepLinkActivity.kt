@@ -1,4 +1,4 @@
-package xyz.tberghuis.floatingtimer.tmp.tmp01
+package xyz.tberghuis.floatingtimer
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,6 +7,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.viewmodel.compose.viewModel
+import xyz.tberghuis.floatingtimer.tmp.tmp01.DeepLinkScreen
+import xyz.tberghuis.floatingtimer.tmp.tmp01.DeepLinkScreenVm
 import xyz.tberghuis.floatingtimer.ui.theme.FloatingTimerTheme
 
 class DeepLinkActivity : ComponentActivity() {
