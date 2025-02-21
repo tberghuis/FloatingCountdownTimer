@@ -8,14 +8,20 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.ClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
+import xyz.tberghuis.floatingtimer.data.appDatabase
+import xyz.tberghuis.floatingtimer.logd
 
 class TmpSavedTimerDialogVmc(
-  application: Application,
-  scope: CoroutineScope
+  private val application: Application,
+  private val scope: CoroutineScope
 ) {
+
+
   // stores SavedCountdown or SavedStopwatch of saved timer long press
   // close dialog = null
   var showOptionsDialog by mutableStateOf<SavedTimer?>(null)
@@ -29,9 +35,25 @@ class TmpSavedTimerDialogVmc(
 //    assert(showLinkDialog != null)
     val deepLink = showLinkDialog?.toDeepLink(start).toString()
     clipboardManager.setText(AnnotatedString(deepLink))
-
     showLinkDialog = null
+  }
 
+  fun deleteSavedTimer() {
+    logd("deleteSavedTimer")
+    scope.launch(IO) {
+      showOptionsDialog?.let { timer ->
+        when (timer) {
+          is SavedStopwatch -> {
+            application.appDatabase.savedStopwatchDao().delete(timer)
+          }
+
+          is SavedCountdown -> {
+            application.appDatabase.savedCountdownDao().delete(timer)
+          }
+        }
+        showOptionsDialog = null
+      }
+    }
   }
 }
 
