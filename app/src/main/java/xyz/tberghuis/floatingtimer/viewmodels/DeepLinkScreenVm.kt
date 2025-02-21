@@ -10,6 +10,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.MainActivity
 import xyz.tberghuis.floatingtimer.R
@@ -69,8 +70,10 @@ class DeepLinkScreenVm(
         uiResult = "error $e"
       }
 
+      delay(1000)
       val numTimers =
         application.boundFloatingServiceProvider.provideService().overlayController.getNumberOfBubbles()
+      logd("numTimers $numTimers")
       if (numTimers == 0) {
         application.boundFloatingServiceProvider.provideService().stopSelf()
       }
@@ -104,6 +107,7 @@ class DeepLinkScreenVm(
   }
 
   private suspend fun addCountdown(id: Int, start: Boolean) {
+    logd("addCountdown")
     val countdown = savedCountdownDao.getById(id)
 
     if (countdown == null) {
