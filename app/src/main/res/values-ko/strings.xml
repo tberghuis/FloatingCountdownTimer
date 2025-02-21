@@ -69,4 +69,17 @@
     <string name="github_issues">Github 이슈</string>
     <string name="report_a_bug_or_request_a_feature">버그 신고 또는 기능 요청</string>
     <string name="hours">시간</string>
+    <string name="timer_link">타이머 링크</string>
+    <string name="auto_start">자동 시작</string>
+    <string name="clipboard">클립보드</string>
+    <string name="link">링크</string>
+    <string name="open_app">앱 열기</string>
+    <string name="close">닫기</string>
+    <string name="timer_type">타이머 유형</string>
+    <string name="result">결과</string>
+    <string name="invalid_link">유효하지 않은 링크</string>
+    <string name="need_premium_to_run_more_than_2_timers">2개 이상의 타이머를 실행하려면 프리미엄이 필요합니다.</string>
+    <string name="invalid_timer_type">유효하지 않은 타이머 유형</string>
+    <string name="stopwatch_timer_launched">스톱워치 타이머 실행됨</string>
+    <string name="countdown_timer_launched">카운트다운 타이머 실행됨</string>
 </resources>
