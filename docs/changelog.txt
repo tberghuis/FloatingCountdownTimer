@@ -1,3 +1,6 @@
+v1.43.1    2025-02-22  dev-deeplink
+  feature: launch timer by link
+
 v1.43.0    2025-02-22  dev-deeplink
   feature: launch timer by link
 
