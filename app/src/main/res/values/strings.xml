@@ -79,4 +79,9 @@
     <string name="close">Close</string>
     <string name="timer_type">timer type</string>
     <string name="result">result</string>
+    <string name="invalid_link">invalid link</string>
+    <string name="need_premium_to_run_more_than_2_timers">need premium to run more than 2 timers</string>
+    <string name="invalid_timer_type">invalid timer type</string>
+    <string name="stopwatch_timer_launched">stopwatch timer launched</string>
+    <string name="countdown_timer_launched">countdown timer launched</string>
 </resources>

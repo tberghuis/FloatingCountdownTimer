@@ -1,6 +1,5 @@
 package xyz.tberghuis.floatingtimer.tmp.tmp01
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
@@ -13,9 +12,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.MainActivity
+import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.data.appDatabase
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.service.FloatingService
 import xyz.tberghuis.floatingtimer.service.boundFloatingServiceProvider
 import xyz.tberghuis.floatingtimer.viewmodels.shouldShowPremiumDialogMultipleTimers
 
@@ -40,7 +39,7 @@ class DeepLinkScreenVm(
     uiLink = data.toString()
 
     if (timerType == null || id == null) {
-      uiResult = "invalid link"
+      uiResult = application.getString(R.string.invalid_link)
       return
     }
 
@@ -49,7 +48,7 @@ class DeepLinkScreenVm(
 
     viewModelScope.launch {
       if (shouldShowPremiumDialogMultipleTimers(application)) {
-        uiResult = "need premium to run more than 2 timers"
+        uiResult = application.getString(R.string.need_premium_to_run_more_than_2_timers)
         return@launch
       }
 
@@ -64,7 +63,7 @@ class DeepLinkScreenVm(
           }
 
           else -> {
-            uiResult = "invalid timer type"
+            uiResult = application.getString(R.string.invalid_timer_type)
           }
         }
       } catch (e: RuntimeException) {
@@ -102,7 +101,7 @@ class DeepLinkScreenVm(
       start = start
     )
 
-    uiResult = "stopwatch timer launched"
+    uiResult = application.getString(R.string.stopwatch_timer_launched)
   }
 
   private suspend fun addCountdown(id: Int, start: Boolean) {
@@ -123,6 +122,6 @@ class DeepLinkScreenVm(
       start = start
     )
 
-    uiResult = "countdown timer launched"
+    uiResult = application.getString(R.string.countdown_timer_launched)
   }
 }
