@@ -53,18 +53,22 @@ class DeepLinkScreenVm(
         return@launch
       }
 
-      when (timerType) {
-        "stopwatch" -> {
-          addStopwatch(id.toInt(), start)
-        }
+      try {
+        when (timerType) {
+          "stopwatch" -> {
+            addStopwatch(id.toInt(), start)
+          }
 
-        "countdown" -> {
-          addCountdown(id.toInt(), start)
-        }
+          "countdown" -> {
+            addCountdown(id.toInt(), start)
+          }
 
-        else -> {
-          uiResult = "invalid timer type"
+          else -> {
+            uiResult = "invalid timer type"
+          }
         }
+      } catch (e: RuntimeException) {
+        uiResult = "error $e"
       }
 
       val numTimers =
