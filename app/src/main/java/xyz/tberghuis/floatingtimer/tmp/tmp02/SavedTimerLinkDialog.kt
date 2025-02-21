@@ -1,7 +1,9 @@
 package xyz.tberghuis.floatingtimer.tmp.tmp02
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.BasicAlertDialog
@@ -15,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,7 +44,11 @@ fun SavedTimerLinkDialog(
       shape = MaterialTheme.shapes.large,
       color = MaterialTheme.colorScheme.surfaceVariant,
     ) {
-      Column {
+      Column(
+        modifier = Modifier.padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+      ) {
         Text("Timer Link")
         Row(
           verticalAlignment = Alignment.CenterVertically,
