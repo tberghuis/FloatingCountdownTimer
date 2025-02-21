@@ -31,7 +31,6 @@
     <string name="stopwatch_timer_color">ストップウォッチの色</string>
     <string name="countdown_timer_color">カウントダウンの色</string>
     <string name="default_timer_color">デフォルトのタイマー色</string>
-    <string name="delete_saved_timer">保存されたタイマーを削除しますか？</string>
     <string name="delete">削除</string>
     <string name="circle">円</string>
     <string name="rectangle">長方形</string>

@@ -31,7 +31,6 @@
     <string name="stopwatch_timer_color">스톱워치 색상</string>
     <string name="countdown_timer_color">카운트다운 색상</string>
     <string name="default_timer_color">기본 타이머 색상</string>
-    <string name="delete_saved_timer">저장된 타이머 삭제?</string>
     <string name="delete">삭제</string>
     <string name="circle">원형</string>
     <string name="rectangle">사각형</string>

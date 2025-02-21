@@ -31,7 +31,6 @@
     <string name="stopwatch_timer_color">Cor do cronômetro</string>
     <string name="countdown_timer_color">Cor da contagem regressiva</string>
     <string name="default_timer_color">Cor padrão do temporizador</string>
-    <string name="delete_saved_timer">Excluir temporizador salvo?</string>
     <string name="delete">Excluir</string>
     <string name="circle">círculo</string>
     <string name="rectangle">retângulo</string>

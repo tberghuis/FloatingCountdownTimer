@@ -31,7 +31,6 @@
     <string name="stopwatch_timer_color">Colore Cronometro</string>
     <string name="countdown_timer_color">Colore Countdown</string>
     <string name="default_timer_color">Colore di Default del Timer</string>
-    <string name="delete_saved_timer">Cancella il Timer Salvato?</string>
     <string name="delete">Cancella</string>
     <string name="circle">Cerchio</string>
     <string name="rectangle">rettangolo</string>

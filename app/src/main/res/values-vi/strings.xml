@@ -31,7 +31,6 @@
     <string name="stopwatch_timer_color">Màu Đồng hồ bấm giờ</string>
     <string name="countdown_timer_color">Màu Đếm ngược</string>
     <string name="default_timer_color">Màu Bộ hẹn giờ mặc định</string>
-    <string name="delete_saved_timer">Xóa Bộ hẹn giờ đã lưu?</string>
     <string name="delete">Xóa</string>
     <string name="circle">hình tròn</string>
     <string name="rectangle">hình chữ nhật</string>

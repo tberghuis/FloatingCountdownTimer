@@ -31,7 +31,6 @@
     <string name="stopwatch_timer_color">Stopwatch Color</string>
     <string name="countdown_timer_color">Countdown Color</string>
     <string name="default_timer_color">Default Timer Color</string>
-    <string name="delete_saved_timer">Delete Saved Timer?</string>
     <string name="delete">Delete</string>
     <string name="circle">circle</string>
     <string name="rectangle">rectangle</string>

@@ -31,7 +31,6 @@
     <string name="stopwatch_timer_color">Stoppuhrfarbe</string>
     <string name="countdown_timer_color">Countdown-Farbe</string>
     <string name="default_timer_color">Standard-Timerfarbe</string>
-    <string name="delete_saved_timer">Gespeicherten Timer löschen?</string>
     <string name="delete">Löschen</string>
     <string name="circle">Kreis</string>
     <string name="rectangle">Rechteck</string>
