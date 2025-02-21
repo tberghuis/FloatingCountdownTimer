@@ -171,11 +171,4 @@ class CountdownScreenVm(
       savedCountdownDao.insertAll(timer)
     }
   }
-
-  fun deleteSavedCountdown(timer: SavedCountdown) {
-    logd("deleteSavedTimer")
-    viewModelScope.launch(IO) {
-      savedCountdownDao.delete(timer)
-    }
-  }
 }

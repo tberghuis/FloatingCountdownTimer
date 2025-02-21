@@ -89,12 +89,6 @@ class StopwatchScreenVm(
     addStopwatch(haloColor, timerShape, label, isBackgroundTransparent)
   }
 
-  fun deleteSavedStopwatch(timer: SavedStopwatch) {
-    viewModelScope.launch(IO) {
-      savedStopwatchDao.delete(timer)
-    }
-  }
-
   fun addToSaved() {
     val label = if (label == "" || timerShape != "label") null else label
     val timer = SavedStopwatch(
