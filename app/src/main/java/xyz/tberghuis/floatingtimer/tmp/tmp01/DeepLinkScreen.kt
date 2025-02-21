@@ -49,7 +49,7 @@ fun DeepLinkScreen(
         }
         Spacer(Modifier.weight(1f))
         TextButton(onClick = {
-          // todo
+          activity?.finish()
         }) {
           // todo strings.xml
           Text("close")
