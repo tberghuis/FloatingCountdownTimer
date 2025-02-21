@@ -54,7 +54,6 @@
     <string name="notifications">Notifications</string>
     <string name="current">current</string>
     <string name="save_timer_positions">Save Timer Positions</string>
-
     <string name="premium_upgrade">Premium upgrade</string>
     <string name="unlocked">Unlocked</string>
     <string name="locked">Locked</string>
@@ -70,4 +69,17 @@
     <string name="github_issues">Github issues</string>
     <string name="report_a_bug_or_request_a_feature">report a bug or request a feature</string>
     <string name="hours">hours</string>
+    <string name="timer_link">Timer Link</string>
+    <string name="auto_start">auto start</string>
+    <string name="clipboard">Clipboard</string>
+    <string name="link">link</string>
+    <string name="open_app">Open App</string>
+    <string name="close">Close</string>
+    <string name="timer_type">timer type</string>
+    <string name="result">result</string>
+    <string name="invalid_link">invalid link</string>
+    <string name="need_premium_to_run_more_than_2_timers">need premium to run more than 2 timers</string>
+    <string name="invalid_timer_type">invalid timer type</string>
+    <string name="stopwatch_timer_launched">stopwatch timer launched</string>
+    <string name="countdown_timer_launched">countdown timer launched</string>
 </resources>
