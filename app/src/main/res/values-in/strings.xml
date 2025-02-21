@@ -54,7 +54,6 @@
     <string name="notifications">Notifikasi</string>
     <string name="current">saat ini</string>
     <string name="save_timer_positions">Simpan Posisi Timer</string>
-
     <string name="premium_upgrade">Peningkatan Premium</string>
     <string name="unlocked">Dibuka</string>
     <string name="locked">Terkunci</string>
@@ -70,4 +69,17 @@
     <string name="github_issues">Masalah Github</string>
     <string name="report_a_bug_or_request_a_feature">Laporkan bug atau minta fitur</string>
     <string name="hours">jam</string>
+    <string name="timer_link">Tautan Pengatur Waktu</string>
+    <string name="auto_start">mulai otomatis</string>
+    <string name="clipboard">Papan Klip</string>
+    <string name="link">tautan</string>
+    <string name="open_app">Buka Aplikasi</string>
+    <string name="close">Tutup</string>
+    <string name="timer_type">jenis pengatur waktu</string>
+    <string name="result">hasil</string>
+    <string name="invalid_link">tautan tidak valid</string>
+    <string name="need_premium_to_run_more_than_2_timers">perlu premium untuk menjalankan lebih dari 2 pengatur waktu</string>
+    <string name="invalid_timer_type">jenis pengatur waktu tidak valid</string>
+    <string name="stopwatch_timer_launched">pengatur waktu stopwatch diluncurkan</string>
+    <string name="countdown_timer_launched">pengatur waktu hitung mundur diluncurkan</string>
 </resources>
