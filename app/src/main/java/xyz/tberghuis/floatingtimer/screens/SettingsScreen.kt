@@ -81,6 +81,7 @@ fun SettingsScreenContent(
 ) {
   val navController = LocalNavController.current
   val looping by vm.loopingFlow.collectAsState(true)
+  val autoStart by vm.autoStartFlow.collectAsState(false)
   val haloColour by vm.haloColourFlow.collectAsState(DEFAULT_HALO_COLOR)
   val purchased by vm.haloColourPurchasedFlow.collectAsState(null)
   val context = LocalContext.current
@@ -141,6 +142,19 @@ fun SettingsScreenContent(
         .clickable {
           navController.navigate("change_size")
         })
+
+    ListItem(
+      headlineContent = { Text(stringResource(R.string.auto_start)) },
+      trailingContent = {
+        Switch(
+          checked = autoStart,
+          onCheckedChange = {
+            logd("onCheckedChange $it")
+            vm.updateAutoStart(it)
+          },
+        )
+      },
+    )
 
     HorizontalDivider()
     Text(

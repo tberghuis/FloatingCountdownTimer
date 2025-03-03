@@ -18,10 +18,17 @@ class SettingsScreenVm(
   val loopingFlow = prefs.loopingFlow
   val haloColourFlow = prefs.haloColourFlow
   val haloColourPurchasedFlow = prefs.haloColourPurchasedFlow
+  val autoStartFlow = prefs.autoStartFlow
 
   fun updateLooping(value: Boolean) {
     viewModelScope.launch {
       prefs.updateLooping(value)
+    }
+  }
+
+  fun updateAutoStart(value: Boolean) {
+    viewModelScope.launch {
+      prefs.updateAutoStart(value)
     }
   }
 }
