@@ -17,6 +17,7 @@ import xyz.tberghuis.floatingtimer.viewmodels.StopwatchScreenVm
 import android.Manifest
 import android.os.Build
 import androidx.compose.runtime.LaunchedEffect
+import androidx.navigation.toRoute
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
@@ -28,6 +29,17 @@ import xyz.tberghuis.floatingtimer.screens.SettingsScreen
 @Composable
 fun FtNavHost() {
   val navController = rememberNavController()
+
+  // debugging todo remove
+  LaunchedEffect(Unit) {
+    navController.currentBackStack.collect { entryList ->
+      val routeList = entryList.map {
+        it.destination.route
+      }
+      logd("routeList $routeList")
+    }
+  }
+
   CompositionLocalProvider(LocalNavController provides navController) {
     NavHost(
       navController = navController, startDestination = "countdown"
