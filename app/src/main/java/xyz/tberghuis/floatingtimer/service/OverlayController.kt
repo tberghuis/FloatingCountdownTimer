@@ -74,8 +74,8 @@ class OverlayController(val service: FloatingService) {
     timerShape: String,
     label: String?,
     isBackgroundTransparent: Boolean,
+    start: Boolean,
     savedTimer: SavedTimer? = null,
-    start: Boolean = false
   ) {
     service.scope.launch {
       val bubbleScale = withContext(IO) {
