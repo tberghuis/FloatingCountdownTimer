@@ -15,8 +15,10 @@ import xyz.tberghuis.floatingtimer.screens.StopwatchScreen
 import xyz.tberghuis.floatingtimer.viewmodels.CountdownScreenVm
 import xyz.tberghuis.floatingtimer.viewmodels.StopwatchScreenVm
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.compose.runtime.LaunchedEffect
+import androidx.navigation.NavHostController
 import androidx.navigation.toRoute
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
@@ -26,20 +28,13 @@ import xyz.tberghuis.floatingtimer.screens.PremiumScreen
 import xyz.tberghuis.floatingtimer.screens.RingtoneScreen
 import xyz.tberghuis.floatingtimer.screens.SettingsScreen
 
+
 @Composable
 fun FtNavHost() {
   val navController = rememberNavController()
-
-  // debugging todo remove
-  LaunchedEffect(Unit) {
-    navController.currentBackStack.collect { entryList ->
-      val routeList = entryList.map {
-        it.destination.route
-      }
-      logd("routeList $routeList")
-    }
-  }
-
+//  if (BuildConfig.DEBUG) {
+//    DebugBackStack(navController)
+//  }
   CompositionLocalProvider(LocalNavController provides navController) {
     NavHost(
       navController = navController, startDestination = "countdown"
@@ -94,6 +89,19 @@ fun LaunchPostNotificationsPermissionRequest() {
   if (!notificationsPermissionState.status.isGranted && !notificationsPermissionState.status.shouldShowRationale) {
     LaunchedEffect(Unit) {
       notificationsPermissionState.launchPermissionRequest()
+    }
+  }
+}
+
+@SuppressLint("RestrictedApi")
+@Composable
+fun DebugBackStack(nav: NavHostController) {
+  LaunchedEffect(Unit) {
+    nav.currentBackStack.collect { entryList ->
+      val routeList = entryList.map {
+        it.destination.route
+      }
+      logd("routeList $routeList")
     }
   }
 }
