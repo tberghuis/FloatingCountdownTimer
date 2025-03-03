@@ -11,6 +11,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.tberghuis.floatingtimer.DEFAULT_HALO_COLOR
@@ -73,8 +74,14 @@ class StopwatchScreenVm(
         }
         return@launch
       }
+      val autoStart = preferencesRepository.autoStartFlow.first()
       boundFloatingService.provideService().overlayController.addStopwatch(
-        haloColor, timerShape, label, isBackgroundTransparent, savedTimer
+        haloColor = haloColor,
+        timerShape = timerShape,
+        label = label,
+        isBackgroundTransparent = isBackgroundTransparent,
+        start = autoStart,
+        savedTimer = savedTimer,
       )
     }
   }

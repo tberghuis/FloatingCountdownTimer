@@ -116,6 +116,16 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
     }
   }
 
+  val autoStartFlow: Flow<Boolean> = dataStore.data.map { preferences ->
+    preferences[booleanPreferencesKey("autoStart")] ?: false
+  }
+
+  suspend fun updateAutoStart(autoStart: Boolean) {
+    dataStore.edit { preferences ->
+      preferences[booleanPreferencesKey("autoStart")] = autoStart
+    }
+  }
+
   companion object {
     @Volatile
     private var instance: PreferencesRepository? = null
@@ -126,5 +136,5 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
   }
 }
 
-val Context.preferencesRepository : PreferencesRepository
+val Context.preferencesRepository: PreferencesRepository
   get() = PreferencesRepository.getInstance(this)
