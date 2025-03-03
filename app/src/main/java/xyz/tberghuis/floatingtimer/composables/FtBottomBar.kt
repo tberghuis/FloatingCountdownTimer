@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import xyz.tberghuis.floatingtimer.LocalNavController
 import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.screens.ScreenType
@@ -23,6 +24,18 @@ import xyz.tberghuis.floatingtimer.screens.ScreenTypeStopwatch
 @Composable
 fun FtBottomBar(currentScreen: ScreenType) {
   val nav = LocalNavController.current
+
+  // https://github.com/android/compose-samples/blob/main/Reply/app/src/main/java/com/example/reply/ui/navigation/ReplyNavigationActions.kt
+  fun navigateTo(route: String) {
+    nav.navigate(route) {
+      popUpTo(nav.graph.findStartDestination().id) {
+        saveState = true
+      }
+      launchSingleTop = true
+      restoreState = true
+    }
+  }
+
   NavigationBar(
 
   ) {
@@ -32,7 +45,7 @@ fun FtBottomBar(currentScreen: ScreenType) {
         if (currentScreen is ScreenTypeCountdown) {
           return@NavigationBarItem
         }
-        nav.navigate("countdown")
+        navigateTo("countdown")
       },
       icon = {
         Icon(Icons.Default.Timer, contentDescription = stringResource(R.string.countdown))
@@ -50,7 +63,7 @@ fun FtBottomBar(currentScreen: ScreenType) {
         if (currentScreen is ScreenTypeStopwatch) {
           return@NavigationBarItem
         }
-        nav.navigate("stopwatch")
+        navigateTo("stopwatch")
       },
       icon = {
         Icon(Icons.Default.Timer, contentDescription = stringResource(R.string.stopwatch))
