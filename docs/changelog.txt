@@ -1,3 +1,7 @@
+v1.44.0    2025-03-04  dev-navigation
+  fix navigation back stack
+  auto start setting
+
 v1.43.1    2025-02-22  dev-deeplink
   feature: launch timer by link
 
