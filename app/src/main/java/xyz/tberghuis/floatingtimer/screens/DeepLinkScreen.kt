@@ -46,7 +46,7 @@ fun DeepLinkScreen(
       BottomAppBar(
         modifier = Modifier,
         contentPadding = PaddingValues(10.dp),
-        windowInsets = WindowInsets.safeContent.only(WindowInsetsSides.Bottom),
+//        windowInsets = WindowInsets.safeContent.only(WindowInsetsSides.Bottom),
       ) {
         TextButton(onClick = {
           activity?.let {

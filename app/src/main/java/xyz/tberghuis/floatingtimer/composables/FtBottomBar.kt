@@ -40,9 +40,9 @@ fun FtBottomBar(currentScreen: ScreenType) {
   NavigationBar(
   ) {
     Row(
-      Modifier.padding(
-        bottom = 6.dp
-      )
+//      Modifier.padding(
+//        bottom = 6.dp
+//      )
     ) {
       NavigationBarItem(
         selected = currentScreen is ScreenTypeCountdown,
