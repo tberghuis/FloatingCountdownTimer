@@ -1,4 +1,4 @@
-v1.45.0    2025-05-23  dev-edgetoedge
+v1.45.1    2025-05-23  dev-edgetoedge
   update targetSdk 35
 
 v1.44.0    2025-03-04  dev-navigation
