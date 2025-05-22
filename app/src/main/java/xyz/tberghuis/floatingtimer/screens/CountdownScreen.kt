@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -69,6 +70,7 @@ fun CountdownScreenContent(
   )
   Column(
     modifier = Modifier
+      .consumeWindowInsets(padding)
       .padding(padding)
       .verticalScroll(rememberScrollState())
   ) {

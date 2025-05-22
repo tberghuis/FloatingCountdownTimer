@@ -1,5 +1,11 @@
 package xyz.tberghuis.floatingtimer.composables
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContent
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.Icon
@@ -36,9 +42,7 @@ fun FtBottomBar(currentScreen: ScreenType) {
     }
   }
 
-  NavigationBar(
-
-  ) {
+  NavigationBar() {
     NavigationBarItem(
       selected = currentScreen is ScreenTypeCountdown,
       onClick = {
