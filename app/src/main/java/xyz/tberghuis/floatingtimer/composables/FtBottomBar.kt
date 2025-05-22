@@ -1,25 +1,14 @@
 package xyz.tberghuis.floatingtimer.composables
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.navigationBars
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContent
-import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Timer
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -33,7 +22,6 @@ import xyz.tberghuis.floatingtimer.screens.ScreenType
 import xyz.tberghuis.floatingtimer.screens.ScreenTypeCountdown
 import xyz.tberghuis.floatingtimer.screens.ScreenTypeStopwatch
 
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun FtBottomBar(currentScreen: ScreenType) {
   val nav = LocalNavController.current
@@ -52,13 +40,11 @@ fun FtBottomBar(currentScreen: ScreenType) {
   NavigationBar(
 //    windowInsets = WindowInsets.navigationBars
   ) {
-
     Row(
       Modifier.padding(
 //        bottom = WindowInsets.safeContent.asPaddingValues()
 //          .calculateBottomPadding() - WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
         bottom = 10.dp
-
       )
     ) {
       NavigationBarItem(
@@ -97,16 +83,6 @@ fun FtBottomBar(currentScreen: ScreenType) {
           Text(text = stringResource(R.string.stopwatch))
         },
       )
-
     }
-
-
-  }
-}
-
-@Composable
-fun Xxx() {
-  Row {
-
   }
 }
