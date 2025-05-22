@@ -20,7 +20,8 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.FloatingTimer">
+            android:theme="@style/Theme.FloatingTimer"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,9 +39,10 @@
 
         <activity
             android:name=".DeepLinkActivity"
-            android:noHistory="true"
             android:exported="true"
-            android:theme="@style/Theme.FloatingTimer">
+            android:noHistory="true"
+            android:theme="@style/Theme.FloatingTimer"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
                 <action android:name="android.intent.action.VIEW" />
