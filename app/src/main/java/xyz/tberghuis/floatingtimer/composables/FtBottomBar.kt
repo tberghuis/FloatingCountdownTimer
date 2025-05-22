@@ -44,7 +44,7 @@ fun FtBottomBar(currentScreen: ScreenType) {
       Modifier.padding(
 //        bottom = WindowInsets.safeContent.asPaddingValues()
 //          .calculateBottomPadding() - WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-        bottom = 10.dp
+        bottom = 6.dp
       )
     ) {
       NavigationBarItem(
