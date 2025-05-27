@@ -4,7 +4,10 @@ import android.content.Context
 import android.graphics.PixelFormat
 import android.view.Gravity
 import android.view.WindowManager
+import androidx.compose.foundation.background
 import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
@@ -23,7 +26,7 @@ class TmpOverlayController(val service: ProcessNameService) {
     val view = createComposeView(service)
     GlobalScope.launch(Main) {
       view.setContent {
-        Text("hello world")
+        Text("hello world", modifier = Modifier.background(Color.White))
       }
       windowManager.addView(view, params)
     }
