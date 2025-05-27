@@ -26,7 +26,7 @@ class TmpOverlayController(val service: ProcessNameService) {
     val view = createComposeView(service)
     GlobalScope.launch(Main) {
       view.setContent {
-        Text("hello world", modifier = Modifier.background(Color.White))
+        Text("hello world", modifier = Modifier.background(Color.Cyan))
       }
       windowManager.addView(view, params)
     }
