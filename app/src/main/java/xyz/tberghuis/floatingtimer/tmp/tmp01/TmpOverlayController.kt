@@ -13,13 +13,14 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.logd
 
-class TmpOverlayController(service: ProcessNameService) {
+class TmpOverlayController(val service: ProcessNameService) {
   private val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
   val params = WindowManager.LayoutParams()
-  val view = createComposeView(service)
 
   fun testOverlay() {
     initParams(0, 0)
+    val view = createComposeView(service)
     GlobalScope.launch(Main) {
       view.setContent {
         Text("hello world")
