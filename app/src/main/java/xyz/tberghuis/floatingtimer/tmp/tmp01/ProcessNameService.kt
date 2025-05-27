@@ -19,8 +19,11 @@ class ProcessNameService : LifecycleService(), SavedStateRegistryOwner {
   override val savedStateRegistry: SavedStateRegistry
     get() = savedStateRegistryController.savedStateRegistry
 
+  lateinit var overlayController: TmpOverlayController
+
   override fun onCreate() {
     super.onCreate()
+    overlayController = TmpOverlayController(this)
     startInForeground()
   }
 
