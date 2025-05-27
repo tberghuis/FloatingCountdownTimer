@@ -24,11 +24,17 @@ class ProcessNameService : LifecycleService(), SavedStateRegistryOwner {
   override fun onCreate() {
     super.onCreate()
     overlayController = TmpOverlayController(this)
+
     startInForeground()
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     super.onStartCommand(intent, flags, startId)
+
+
+    overlayController.testOverlay()
+
+
     return START_NOT_STICKY
   }
 
