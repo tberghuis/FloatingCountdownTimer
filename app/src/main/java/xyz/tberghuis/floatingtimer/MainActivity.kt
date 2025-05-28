@@ -47,8 +47,8 @@ class MainActivity : ComponentActivity() {
             .background(Color.White),
         ) {
           // todo revert
-//          FtNavHost()
-          ProcessName()
+          FtNavHost()
+//          ProcessName()
         }
       }
     }

@@ -261,7 +261,6 @@ fun calcIsBubbleHoverTrash(
 
   val timerLocation = IntArray(2)
   timerView.getLocationOnScreen(timerLocation)
-
   val trashLocation = IntArray(2)
   trashView.getLocationOnScreen(trashLocation)
 
@@ -275,6 +274,21 @@ fun calcIsBubbleHoverTrash(
 
   logd("timer center $timerCenterX $timerCenterY")
   logd("trash rect $trashLeft $trashRight $trashTop $trashBottom")
+
+//  val timerLocationWindow = IntArray(2)
+//  timerView.getLocationInWindow(timerLocationWindow)
+//  val timerLocationSurface = IntArray(2)
+//  timerView.getLocationInSurface(timerLocationSurface)
+//  val trashLocationWindow = IntArray(2)
+//  trashView.getLocationInWindow(trashLocationWindow)
+//  val trashLocationSurface = IntArray(2)
+//  trashView.getLocationInSurface(trashLocationSurface)
+//  logd("timerLocation ${timerLocation[0]} ${timerLocation[1]}")
+//  logd("timerLocationWindow ${timerLocationWindow[0]} ${timerLocationWindow[1]}")
+//  logd("timerLocationSurface ${timerLocationSurface[0]} ${timerLocationSurface[1]}")
+//  logd("trashLocation ${trashLocation[0]} ${trashLocation[1]}")
+//  logd("trashLocationWindow ${trashLocationWindow[0]} ${trashLocationWindow[1]}")
+//  logd("trashLocationSurface ${trashLocationSurface[0]} ${trashLocationSurface[1]}")
 
   return !(timerCenterX < trashLeft ||
       timerCenterX > trashRight ||
