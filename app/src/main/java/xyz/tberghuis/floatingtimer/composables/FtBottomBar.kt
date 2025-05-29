@@ -9,6 +9,7 @@ import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
@@ -22,6 +23,7 @@ import xyz.tberghuis.floatingtimer.screens.ScreenType
 import xyz.tberghuis.floatingtimer.screens.ScreenTypeCountdown
 import xyz.tberghuis.floatingtimer.screens.ScreenTypeStopwatch
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun FtBottomBar(currentScreen: ScreenType) {
   val nav = LocalNavController.current

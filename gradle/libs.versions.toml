@@ -12,7 +12,7 @@ lifecycleRuntimeKtx = "2.9.0"
 lifecycleService = "2.9.0"
 activityCompose = "1.10.1"
 # https://developer.android.com/jetpack/compose/bom/bom-mapping
-composeBom = "2025.05.01"
+composeBom = "2025.04.00"
 navigationCompose = "2.9.0"
 room = "2.7.1"
 androidxDataStore = "1.1.7"
