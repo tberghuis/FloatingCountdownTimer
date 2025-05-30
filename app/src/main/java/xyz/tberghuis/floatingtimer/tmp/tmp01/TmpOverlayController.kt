@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,6 +22,7 @@ class TmpOverlayController(val service: ProcessNameService) {
 
   val params = WindowManager.LayoutParams()
 
+  @OptIn(DelicateCoroutinesApi::class)
   fun testOverlay() {
     initParams(0, 0)
     val view = createComposeView(service)
