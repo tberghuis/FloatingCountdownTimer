@@ -1,3 +1,6 @@
+v1.45.2    2025-05-23  dev-processname
+  fix crash sdk 28
+
 v1.45.1    2025-05-23  dev-edgetoedge
   update targetSdk 35
 
