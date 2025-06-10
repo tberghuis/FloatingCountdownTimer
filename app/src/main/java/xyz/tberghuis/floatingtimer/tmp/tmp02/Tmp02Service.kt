@@ -28,7 +28,7 @@ class Tmp02Service : LifecycleService(), SavedStateRegistryOwner {
     savedStateRegistryController.performRestore(null)
 
     overlayController = Tmp02OverlayController(this)
-    
+
 // call manually from ktor
 //    startInForeground()
   }
