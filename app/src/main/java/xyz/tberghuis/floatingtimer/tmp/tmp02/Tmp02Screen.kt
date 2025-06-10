@@ -1,7 +1,7 @@
 package xyz.tberghuis.floatingtimer.tmp.tmp02
 
 import android.content.Intent
-import android.net.Uri
+import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.tmp.tmp01.ProcessNameService
 import androidx.core.net.toUri
 
 // reproduce foreground service not allowed exception
@@ -19,6 +18,7 @@ import androidx.core.net.toUri
 @Composable
 fun Tmp02Screen() {
   val context = LocalContext.current
+  val activity = LocalActivity.current
   Column(
     modifier = Modifier.fillMaxSize(),
     verticalArrangement = Arrangement.Center,
@@ -39,6 +39,12 @@ fun Tmp02Screen() {
       context.startActivity(browserIntent)
     }) {
       Text("open web links")
+    }
+
+    Button(onClick = {
+      activity?.finishAndRemoveTask()
+    }) {
+      Text("finish activity")
     }
   }
 }
