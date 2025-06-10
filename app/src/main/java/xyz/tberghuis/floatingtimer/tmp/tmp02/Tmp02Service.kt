@@ -28,21 +28,22 @@ class Tmp02Service : LifecycleService(), SavedStateRegistryOwner {
     savedStateRegistryController.performRestore(null)
 
     overlayController = Tmp02OverlayController(this)
-
-    startInForeground()
+    
+// call manually from ktor
+//    startInForeground()
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     super.onStartCommand(intent, flags, startId)
 
-
-    overlayController.testOverlay()
+// call manually from ktor
+//    overlayController.testOverlay()
 
 
     return START_NOT_STICKY
   }
 
-  private fun startInForeground() {
+  fun startInForeground() {
     val notification = buildNotification()
     if (Build.VERSION.SDK_INT >= 34) {
       startForeground(
