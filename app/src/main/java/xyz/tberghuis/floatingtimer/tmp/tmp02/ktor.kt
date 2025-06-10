@@ -23,5 +23,5 @@ fun runKtorServer(service: Tmp02Service) {
         call.respondText("ok\n")
       }
     }
-  }.start(wait = true)
+  }.start(wait = false)
 }
