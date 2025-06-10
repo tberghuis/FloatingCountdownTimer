@@ -13,7 +13,13 @@ fun runKtorServer(service: Tmp02Service) {
         call.respondText("Hello, world!\n")
       }
 
-      get("/run_test") {
+      get("/start_in_foreground") {
+        service.startInForeground()
+        call.respondText("ok\n")
+      }
+
+      get("/test_overlay") {
+        service.overlayController.testOverlay()
         call.respondText("ok\n")
       }
     }
