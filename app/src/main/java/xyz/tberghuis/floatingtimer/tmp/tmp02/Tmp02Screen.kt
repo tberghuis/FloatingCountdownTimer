@@ -23,7 +23,7 @@ fun Tmp02Screen() {
   ) {
     Button(onClick = {
       logd("start foreground")
-      val intent = Intent(context, ProcessNameService::class.java)
+      val intent = Intent(context, Tmp02Service::class.java)
       context.startForegroundService(intent)
     }) {
       Text("start foreground")

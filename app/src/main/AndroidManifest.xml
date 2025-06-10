@@ -39,7 +39,7 @@
 
         <!--todo remove-->
         <service
-            android:name=".tmp.tmp01.ProcessNameService"
+            android:name=".tmp.tmp02.Tmp02Service"
             android:foregroundServiceType="specialUse">
             <property
                 android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
