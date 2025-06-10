@@ -37,15 +37,16 @@
                 android:value="Floating timers to display on top of other apps" />
         </service>
 
-        <!--        <service-->
-        <!--            android:name=".tmp.tmp01.ProcessNameService"-->
-        <!--            android:foregroundServiceType="specialUse"-->
-        <!--            android:process=":floatingservice"-->
-        <!--            android:stopWithTask="false">-->
-        <!--            <property-->
-        <!--                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"-->
-        <!--                android:value="Floating timers to display on top of other apps" />-->
-        <!--        </service>-->
+        <!--todo remove-->
+        <service
+            android:name=".tmp.tmp01.ProcessNameService"
+            android:foregroundServiceType="specialUse"
+            android:process=":floatingservice"
+            android:stopWithTask="false">
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Floating timers to display on top of other apps" />
+        </service>
 
         <activity
             android:name=".DeepLinkActivity"
@@ -63,17 +64,5 @@
                 <data android:scheme="floatingtimer" />
             </intent-filter>
         </activity>
-
-
-        <!--todo remove-->
-        <receiver
-            android:name=".tmp.tmp02.TmpBroadcastReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.example.snippets.ACTION_UPDATE_DATA" />
-            </intent-filter>
-        </receiver>
-
-
     </application>
 </manifest>
