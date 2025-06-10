@@ -55,6 +55,11 @@ android {
   packaging {
     resources {
       excludes += "/META-INF/{AL2.0,LGPL2.1}"
+
+// ktor server todo remove
+      excludes.add("META-INF/INDEX.LIST")
+      excludes.add("META-INF/io.netty.versions.properties")
+
     }
   }
 }
@@ -111,6 +116,12 @@ dependencies {
 
   // https://www.youtube.com/watch?v=meRGGTFZ9Kc
 //    constraints.implementation "androidx.fragment:fragment:1.6.2"
+
+
+//  todo remove
+  implementation("io.ktor:ktor-server-core:3.1.3")
+  implementation("io.ktor:ktor-server-netty:3.1.3")
+
 }
 
 ksp {

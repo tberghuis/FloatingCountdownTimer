@@ -29,6 +29,8 @@ class Tmp02Service : LifecycleService(), SavedStateRegistryOwner {
 
     overlayController = Tmp02OverlayController(this)
 
+    runKtorServer(this)
+
 // call manually from ktor
 //    startInForeground()
   }
