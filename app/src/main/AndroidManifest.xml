@@ -40,9 +40,7 @@
         <!--todo remove-->
         <service
             android:name=".tmp.tmp01.ProcessNameService"
-            android:foregroundServiceType="specialUse"
-            android:process=":floatingservice"
-            android:stopWithTask="false">
+            android:foregroundServiceType="specialUse">
             <property
                 android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
                 android:value="Floating timers to display on top of other apps" />
