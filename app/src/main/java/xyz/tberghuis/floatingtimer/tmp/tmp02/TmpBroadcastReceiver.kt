@@ -10,6 +10,7 @@ class TmpBroadcastReceiver : BroadcastReceiver() {
   override fun onReceive(context: Context, intent: Intent) {
     logd("TmpBroadcastReceiver onReceive")
     val intent = Intent(context, FloatingService::class.java)
+//    context.startForegroundService(intent)
     context.startService(intent)
   }
 }
