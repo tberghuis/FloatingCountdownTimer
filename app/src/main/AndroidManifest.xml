@@ -46,6 +46,15 @@
                 android:value="Floating timers to display on top of other apps" />
         </service>
 
+        <!--todo remove-->
+        <receiver
+            android:name=".tmp.tmp02.TmpBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.snippets.ACTION_UPDATE_DATA" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name=".DeepLinkActivity"
             android:exported="true"
