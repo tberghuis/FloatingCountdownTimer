@@ -1,12 +1,14 @@
 The Floating Timer app features both a countdown timer and stopwatch that will float on top of other running apps. This app is useful to time activities such as: Exam practice, gaming speed runs (speed-running), gaming boss fights, cooking.
 
 Usage:
+
 - Drag to move timer position
 - Tap to start / pause
 - Double tap to reset
 - Drag to trash to exit
 
 Premium version unlocks:
+
 - Simultaneously run more than 2 timers (multiple timers)
 - Change Timer size and color
 
