@@ -26,3 +26,4 @@ floatingttimer-fastlane.json
 
 /.kotlin/
 /.idea/markdown.xml
+/.idea/appInsightsSettings.xml
