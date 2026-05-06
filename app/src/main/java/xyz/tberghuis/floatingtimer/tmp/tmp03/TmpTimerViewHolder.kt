@@ -1,0 +1,95 @@
+package xyz.tberghuis.floatingtimer.tmp.tmp03
+
+import android.graphics.PixelFormat
+import android.view.Gravity
+import android.view.WindowManager
+import android.view.View
+import androidx.compose.ui.platform.ComposeView
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.setViewTreeLifecycleOwner
+import androidx.lifecycle.setViewTreeViewModelStoreOwner
+import androidx.savedstate.SavedStateRegistry
+import androidx.savedstate.SavedStateRegistryController
+import androidx.savedstate.SavedStateRegistryOwner
+import androidx.savedstate.setViewTreeSavedStateRegistryOwner
+import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.service.FloatingService
+
+class TmpTimerViewHolder(
+  val service: FloatingService,
+  x: Int? = null,
+  y: Int? = null
+) {
+  val params = WindowManager.LayoutParams()
+  val view = createComposeView(service)
+
+  init {
+    initParams(x, y)
+    logd("TimerViewHolder params $params")
+  }
+
+  private fun initParams(
+    x: Int?,
+    y: Int?
+  ) {
+    params.x = x ?: 0
+    params.y = y ?: 0
+    params.width = WindowManager.LayoutParams.WRAP_CONTENT
+    params.height = WindowManager.LayoutParams.WRAP_CONTENT
+    params.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+    params.flags =
+      WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+    params.format = PixelFormat.TRANSLUCENT
+    params.gravity = Gravity.TOP or Gravity.LEFT
+    logd("params x y ${params.x} ${params.y}")
+  }
+}
+
+class FloatingLifecycleOwner : LifecycleOwner, ViewModelStoreOwner, SavedStateRegistryOwner {
+  private val lifecycleRegistry = LifecycleRegistry(this)
+  private val savedStateRegistryController = SavedStateRegistryController.create(this)
+
+  override val viewModelStore = ViewModelStore()
+  override val lifecycle: Lifecycle = lifecycleRegistry
+  override val savedStateRegistry: SavedStateRegistry = savedStateRegistryController.savedStateRegistry
+
+  fun onCreate() {
+    savedStateRegistryController.performRestore(null)
+    lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
+  }
+
+  fun onResume() {
+    lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_START)
+    lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_RESUME)
+  }
+
+  fun onDestroy() {
+    lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+    lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+  }
+}
+
+// https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
+fun createComposeView(service: FloatingService): ComposeView {
+  val lifecycleOwner = FloatingLifecycleOwner()
+  lifecycleOwner.onCreate()
+  lifecycleOwner.onResume()
+
+  return ComposeView(service).apply {
+    setViewTreeSavedStateRegistryOwner(lifecycleOwner)
+    setViewTreeLifecycleOwner(lifecycleOwner)
+    setViewTreeViewModelStoreOwner(lifecycleOwner)
+
+    addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
+      override fun onViewAttachedToWindow(v: View) {}
+      override fun onViewDetachedFromWindow(v: View) {
+        lifecycleOwner.onDestroy()
+      }
+    })
+  }
+}
