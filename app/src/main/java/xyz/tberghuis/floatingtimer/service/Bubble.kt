@@ -11,7 +11,6 @@ import xyz.tberghuis.floatingtimer.data.SavedCountdown
 import xyz.tberghuis.floatingtimer.data.SavedStopwatch
 import xyz.tberghuis.floatingtimer.data.SavedTimer
 import xyz.tberghuis.floatingtimer.data.appDatabase
-import xyz.tberghuis.floatingtimer.tmp.tmp03.FloatingService
 import xyz.tberghuis.floatingtimer.tmp.tmp03.TimerViewHolder
 
 abstract class Bubble(

@@ -21,7 +21,6 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import xyz.tberghuis.floatingtimer.data.preferencesRepository
 import xyz.tberghuis.floatingtimer.service.countdown.Countdown
-import xyz.tberghuis.floatingtimer.tmp.tmp03.FloatingService
 import xyz.tberghuis.floatingtimer.util.uriToRingtone
 
 class FtAlarmController(
