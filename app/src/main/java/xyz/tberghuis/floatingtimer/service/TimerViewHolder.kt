@@ -8,7 +8,7 @@ import androidx.lifecycle.setViewTreeLifecycleOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import xyz.tberghuis.floatingtimer.logd
 
-class TimerViewHolder(
+class XxxTimerViewHolder(
   val service: FloatingService,
   x: Int? = null,
   y: Int? = null

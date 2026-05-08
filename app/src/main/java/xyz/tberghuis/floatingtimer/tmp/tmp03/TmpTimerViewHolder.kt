@@ -19,7 +19,7 @@ import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.service.FloatingService
 
-class TmpTimerViewHolder(
+class TimerViewHolder(
   val service: FloatingService,
   x: Int? = null,
   y: Int? = null

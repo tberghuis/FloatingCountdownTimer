@@ -22,6 +22,7 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
+import xyz.tberghuis.floatingtimer.tmp.tmp03.TimerViewHolder
 import kotlin.math.max
 import kotlin.math.min
 
@@ -45,24 +46,27 @@ class OverlayController(val service: FloatingService) {
       val bubbleScale = withContext(IO) {
         service.application.preferencesRepository.bubbleScaleFlow.first()
       }
-      val stopwatch =
-        Stopwatch(
-          service,
-          bubbleScale,
-          haloColor,
-          timerShape,
-          label,
-          isBackgroundTransparent,
-          savedTimer,
-          start
-        )
-      val stopwatchView = @Composable {
-        CompositionLocalProvider(LocalTimerViewHolder provides stopwatch.viewHolder) {
-          StopwatchView(stopwatch)
-        }
-      }
+
       // will crash if not Main dispatcher
       withContext(Main) {
+
+        val stopwatch =
+          Stopwatch(
+            service,
+            bubbleScale,
+            haloColor,
+            timerShape,
+            label,
+            isBackgroundTransparent,
+            savedTimer,
+            start
+          )
+        val stopwatchView = @Composable {
+          CompositionLocalProvider(LocalTimerViewHolder provides stopwatch.viewHolder) {
+            StopwatchView(stopwatch)
+          }
+        }
+
         addBubble(stopwatch, stopwatchView)
       }
     }
@@ -81,23 +85,27 @@ class OverlayController(val service: FloatingService) {
       val bubbleScale = withContext(IO) {
         service.application.preferencesRepository.bubbleScaleFlow.first()
       }
-      val countdown = Countdown(
-        service,
-        durationSeconds,
-        bubbleScale,
-        haloColor,
-        timerShape,
-        label,
-        isBackgroundTransparent,
-        savedTimer,
-        start
-      )
-      val countdownView = @Composable {
-        CompositionLocalProvider(LocalTimerViewHolder provides countdown.viewHolder) {
-          CountdownView(countdown)
-        }
-      }
+
       withContext(Main) {
+
+
+        val countdown = Countdown(
+          service,
+          durationSeconds,
+          bubbleScale,
+          haloColor,
+          timerShape,
+          label,
+          isBackgroundTransparent,
+          savedTimer,
+          start
+        )
+        val countdownView = @Composable {
+          CompositionLocalProvider(LocalTimerViewHolder provides countdown.viewHolder) {
+            CountdownView(countdown)
+          }
+        }
+
         addBubble(countdown, countdownView)
       }
     }
