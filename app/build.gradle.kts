@@ -112,6 +112,7 @@ dependencies {
 
 
   implementation(libs.screen.easy)
+  // could not get jitpack to work so using dependencySubstitution in settings.gradle.kts
 //  implementation("com.github.tberghuis:ScreenEasy:cc18086576ca85186d8c8fbe217677c77e1d474e")
 
   androidTestImplementation(libs.test.rules)
