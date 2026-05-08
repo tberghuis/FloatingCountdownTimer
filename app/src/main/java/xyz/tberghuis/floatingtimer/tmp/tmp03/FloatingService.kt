@@ -5,6 +5,7 @@ import android.app.Notification
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_UPDATE_CURRENT
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
@@ -38,7 +39,7 @@ import xyz.tberghuis.floatingtimer.service.OverlayController
 import xyz.tberghuis.floatingtimer.service.ServiceBinder
 
 // https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
-class FloatingService : LifecycleService(), SavedStateRegistryOwner {
+class FloatingService : Service() {
   private val job = SupervisorJob()
 
   val scope = CoroutineScope(Dispatchers.IO + job)
@@ -48,10 +49,8 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
 
   lateinit var ftWindowManager: FtWindowManager
 
-  private val savedStateRegistryController = SavedStateRegistryController.create(this)
+  
 
-  override val savedStateRegistry: SavedStateRegistry
-    get() = savedStateRegistryController.savedStateRegistry
 
   private val binder = LocalBinder()
 
@@ -60,7 +59,7 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
   }
 
   override fun onBind(intent: Intent): IBinder {
-    super.onBind(intent)
+//    super.onBind(intent)
     logd("onbind")
     return binder
   }
@@ -68,9 +67,6 @@ class FloatingService : LifecycleService(), SavedStateRegistryOwner {
   override fun onCreate() {
     super.onCreate()
     ScreenEz.with(this.applicationContext)
-
-    savedStateRegistryController.performAttach()
-    savedStateRegistryController.performRestore(null)
 
     ftWindowManager = FtWindowManager(this)
 

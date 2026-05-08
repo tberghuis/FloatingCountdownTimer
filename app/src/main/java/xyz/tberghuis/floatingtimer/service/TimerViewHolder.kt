@@ -15,7 +15,7 @@ class XxxTimerViewHolder(
   y: Int? = null
 ) {
   val params = WindowManager.LayoutParams()
-  val view = createComposeView(service)
+//  val view = createComposeView(service)
 
   init {
     initParams(x, y)
@@ -40,9 +40,9 @@ class XxxTimerViewHolder(
 }
 
 // https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
-fun createComposeView(service: FloatingService): ComposeView {
-  return ComposeView(service).apply {
-    setViewTreeSavedStateRegistryOwner(service)
-    setViewTreeLifecycleOwner(service)
-  }
-}
+//fun createComposeView(service: FloatingService): ComposeView {
+//  return ComposeView(service).apply {
+//    setViewTreeSavedStateRegistryOwner(service)
+//    setViewTreeLifecycleOwner(service)
+//  }
+//}

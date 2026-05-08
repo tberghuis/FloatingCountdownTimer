@@ -54,9 +54,11 @@ class FloatingLifecycleOwner : LifecycleOwner, ViewModelStoreOwner, SavedStateRe
 
   override val viewModelStore = ViewModelStore()
   override val lifecycle: Lifecycle = lifecycleRegistry
-  override val savedStateRegistry: SavedStateRegistry = savedStateRegistryController.savedStateRegistry
+  override val savedStateRegistry: SavedStateRegistry =
+    savedStateRegistryController.savedStateRegistry
 
   fun onCreate() {
+    savedStateRegistryController.performAttach()
     savedStateRegistryController.performRestore(null)
     lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
   }

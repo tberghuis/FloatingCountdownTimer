@@ -17,6 +17,7 @@ import xyz.tberghuis.floatingtimer.TRASH_SIZE_DP
 import xyz.tberghuis.floatingtimer.composables.LocalFloatingService
 import xyz.tberghuis.floatingtimer.composables.Trash
 import xyz.tberghuis.floatingtimer.tmp.tmp03.FloatingService
+import xyz.tberghuis.floatingtimer.tmp.tmp03.createComposeView
 
 class TrashController(
 //  private val windowManager: WindowManager,
