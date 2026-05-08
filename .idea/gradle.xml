@@ -4,12 +4,28 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/../ScreenEasy" name="screenez_test">
+                <projects>
+                  <project path="$PROJECT_DIR$/../ScreenEasy" />
+                  <project path="$PROJECT_DIR$/../ScreenEasy/app" />
+                  <project path="$PROJECT_DIR$/../ScreenEasy/screenez" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="testRunner" value="CHOOSE_PER_TEST" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/../ScreenEasy" />
+            <option value="$PROJECT_DIR$/../ScreenEasy/app" />
+            <option value="$PROJECT_DIR$/../ScreenEasy/screenez" />
           </set>
         </option>
       </GradleProjectSettings>

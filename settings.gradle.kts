@@ -22,7 +22,12 @@ dependencyResolutionManagement {
     flatDir {
       dirs("libs")
     }
+  }
+}
 
+includeBuild("/home/tom/Desktop/myprojects/android/ScreenEasy") {
+  dependencySubstitution {
+    substitute(module("io.github.torrydo:screen-easy")).using(project(":screenez"))
   }
 }
 

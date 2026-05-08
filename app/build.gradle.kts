@@ -8,7 +8,7 @@ plugins {
 
 android {
   namespace = "xyz.tberghuis.floatingtimer"
-  compileSdk = 35
+  compileSdk = 36
 
   defaultConfig {
     applicationId = "xyz.tberghuis.floatingtimer"
@@ -109,7 +109,10 @@ dependencies {
   implementation(libs.color.picker)
   implementation(libs.colormath)
   implementation(libs.lifecycle.service)
+
+
   implementation(libs.screen.easy)
+//  implementation("com.github.tberghuis:ScreenEasy:cc18086576ca85186d8c8fbe217677c77e1d474e")
 
   androidTestImplementation(libs.test.rules)
 
