@@ -31,143 +31,144 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_EXIT
 import xyz.tberghuis.floatingtimer.REQUEST_CODE_RESET
 import xyz.tberghuis.floatingtimer.logd
+import xyz.tberghuis.floatingtimer.tmp.tmp03.FloatingService
 
 // https://stackoverflow.com/questions/76503237/how-to-use-jetpack-compose-in-service
-class FloatingService : LifecycleService(), SavedStateRegistryOwner {
-  private val job = SupervisorJob()
-
-  val scope = CoroutineScope(Dispatchers.IO + job)
-
-  lateinit var alarmController: FtAlarmController
-  lateinit var overlayController: OverlayController
-
-  lateinit var ftWindowManager: FtWindowManager
-
-  private val savedStateRegistryController = SavedStateRegistryController.create(this)
-
-  override val savedStateRegistry: SavedStateRegistry
-    get() = savedStateRegistryController.savedStateRegistry
-
-  private val binder = LocalBinder()
-
-  inner class LocalBinder : Binder(), ServiceBinder<FloatingService> {
-    override fun getService(): FloatingService = this@FloatingService
-  }
-
-  override fun onBind(intent: Intent): IBinder {
-    super.onBind(intent)
-    logd("onbind")
-    return binder
-  }
-
-  override fun onCreate() {
-    super.onCreate()
-    ScreenEz.with(this.applicationContext)
-
-    savedStateRegistryController.performAttach()
-    savedStateRegistryController.performRestore(null)
-
-    ftWindowManager = FtWindowManager(this)
-
-    alarmController = FtAlarmController(this)
-    overlayController = OverlayController(this)
-    startInForeground()
-  }
-
-  override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-    super.onStartCommand(intent, flags, startId)
-    logd("FloatingService onStartCommand")
-
-    intent?.let {
-      when (intent.getStringExtra(INTENT_COMMAND)) {
-        INTENT_COMMAND_EXIT -> {
-          overlayController.exitAll()
-        }
-
-        INTENT_COMMAND_RESET -> {
-          overlayController.resetAll()
-        }
-
-        else -> {}
-      }
-    }
-    return START_NOT_STICKY
-  }
-
-  private fun startInForeground() {
-    val notification = buildNotification()
-    if (Build.VERSION.SDK_INT >= 34) {
-      startForeground(
-        FOREGROUND_SERVICE_NOTIFICATION_ID,
-        notification,
-        ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE,
-      )
-    } else {
-      startForeground(
-        FOREGROUND_SERVICE_NOTIFICATION_ID,
-        notification,
-      )
-    }
-  }
-
-  private fun buildNotification(): Notification {
-    val pendingIntent: PendingIntent =
-      Intent(this, MainActivity::class.java).let { notificationIntent ->
-        PendingIntent.getActivity(this, 0, notificationIntent, FLAG_IMMUTABLE)
-      }
-
-    val exitIntent = Intent(applicationContext, FloatingService::class.java)
-    exitIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_EXIT)
-    val exitPendingIntent = PendingIntent.getService(
-      applicationContext,
-      REQUEST_CODE_EXIT,
-      exitIntent,
-      FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
-    )
-
-    val resetIntent = Intent(applicationContext, FloatingService::class.java)
-    resetIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_RESET)
-    val resetPendingIntent = PendingIntent.getService(
-      applicationContext,
-      REQUEST_CODE_RESET,
-      resetIntent,
-      FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
-    )
-
-    val notification: Notification =
-      NotificationCompat.Builder(this, NOTIFICATION_CHANNEL)
-        .setContentTitle(application.resources.getString(R.string.app_name))
-        .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent).addAction(
-          0, application.resources.getString(R.string.reset), resetPendingIntent
-        ).addAction(
-          0, application.resources.getString(R.string.exit), exitPendingIntent
-        )
-        .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
-        .build()
-    return notification
-  }
-
-  override fun onDestroy() {
-    job.cancel()
-    super.onDestroy()
-  }
-
-  override fun onConfigurationChanged(newConfig: Configuration) {
-    super.onConfigurationChanged(newConfig)
-    ScreenEz.refresh()
-    overlayController.onConfigurationChanged()
-  }
-
-  companion object {
-    @Volatile
-    private var instance: BoundServiceProvider<FloatingService>? = null
-    fun getInstance(application: Application) =
-      instance ?: synchronized(this) {
-        instance ?: BoundServiceProvider(application, FloatingService::class.java)
-          .also { instance = it }
-      }
-  }
-}
+//class FloatingService : LifecycleService(), SavedStateRegistryOwner {
+//  private val job = SupervisorJob()
+//
+//  val scope = CoroutineScope(Dispatchers.IO + job)
+//
+//  lateinit var alarmController: FtAlarmController
+//  lateinit var overlayController: OverlayController
+//
+//  lateinit var ftWindowManager: FtWindowManager
+//
+//  private val savedStateRegistryController = SavedStateRegistryController.create(this)
+//
+//  override val savedStateRegistry: SavedStateRegistry
+//    get() = savedStateRegistryController.savedStateRegistry
+//
+//  private val binder = LocalBinder()
+//
+//  inner class LocalBinder : Binder(), ServiceBinder<FloatingService> {
+//    override fun getService(): FloatingService = this@FloatingService
+//  }
+//
+//  override fun onBind(intent: Intent): IBinder {
+//    super.onBind(intent)
+//    logd("onbind")
+//    return binder
+//  }
+//
+//  override fun onCreate() {
+//    super.onCreate()
+//    ScreenEz.with(this.applicationContext)
+//
+//    savedStateRegistryController.performAttach()
+//    savedStateRegistryController.performRestore(null)
+//
+//    ftWindowManager = FtWindowManager(this)
+//
+//    alarmController = FtAlarmController(this)
+//    overlayController = OverlayController(this)
+//    startInForeground()
+//  }
+//
+//  override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+//    super.onStartCommand(intent, flags, startId)
+//    logd("FloatingService onStartCommand")
+//
+//    intent?.let {
+//      when (intent.getStringExtra(INTENT_COMMAND)) {
+//        INTENT_COMMAND_EXIT -> {
+//          overlayController.exitAll()
+//        }
+//
+//        INTENT_COMMAND_RESET -> {
+//          overlayController.resetAll()
+//        }
+//
+//        else -> {}
+//      }
+//    }
+//    return START_NOT_STICKY
+//  }
+//
+//  private fun startInForeground() {
+//    val notification = buildNotification()
+//    if (Build.VERSION.SDK_INT >= 34) {
+//      startForeground(
+//        FOREGROUND_SERVICE_NOTIFICATION_ID,
+//        notification,
+//        ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE,
+//      )
+//    } else {
+//      startForeground(
+//        FOREGROUND_SERVICE_NOTIFICATION_ID,
+//        notification,
+//      )
+//    }
+//  }
+//
+//  private fun buildNotification(): Notification {
+//    val pendingIntent: PendingIntent =
+//      Intent(this, MainActivity::class.java).let { notificationIntent ->
+//        PendingIntent.getActivity(this, 0, notificationIntent, FLAG_IMMUTABLE)
+//      }
+//
+//    val exitIntent = Intent(applicationContext, FloatingService::class.java)
+//    exitIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_EXIT)
+//    val exitPendingIntent = PendingIntent.getService(
+//      applicationContext,
+//      REQUEST_CODE_EXIT,
+//      exitIntent,
+//      FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
+//    )
+//
+//    val resetIntent = Intent(applicationContext, FloatingService::class.java)
+//    resetIntent.putExtra(INTENT_COMMAND, INTENT_COMMAND_RESET)
+//    val resetPendingIntent = PendingIntent.getService(
+//      applicationContext,
+//      REQUEST_CODE_RESET,
+//      resetIntent,
+//      FLAG_UPDATE_CURRENT or FLAG_IMMUTABLE
+//    )
+//
+//    val notification: Notification =
+//      NotificationCompat.Builder(this, NOTIFICATION_CHANNEL)
+//        .setContentTitle(application.resources.getString(R.string.app_name))
+//        .setSmallIcon(R.drawable.ic_alarm).setContentIntent(pendingIntent).addAction(
+//          0, application.resources.getString(R.string.reset), resetPendingIntent
+//        ).addAction(
+//          0, application.resources.getString(R.string.exit), exitPendingIntent
+//        )
+//        .setForegroundServiceBehavior(NotificationCompat.FOREGROUND_SERVICE_IMMEDIATE)
+//        .build()
+//    return notification
+//  }
+//
+//  override fun onDestroy() {
+//    job.cancel()
+//    super.onDestroy()
+//  }
+//
+//  override fun onConfigurationChanged(newConfig: Configuration) {
+//    super.onConfigurationChanged(newConfig)
+//    ScreenEz.refresh()
+//    overlayController.onConfigurationChanged()
+//  }
+//
+//  companion object {
+//    @Volatile
+//    private var instance: BoundServiceProvider<FloatingService>? = null
+//    fun getInstance(application: Application) =
+//      instance ?: synchronized(this) {
+//        instance ?: BoundServiceProvider(application, FloatingService::class.java)
+//          .also { instance = it }
+//      }
+//  }
+//}
 
 val Context.boundFloatingServiceProvider: BoundServiceProvider<FloatingService>
   get() = FloatingService.getInstance(this.applicationContext as Application)

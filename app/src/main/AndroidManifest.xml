@@ -29,8 +29,9 @@
             </intent-filter>
         </activity>
 
+<!--        todo-->
         <service
-            android:name=".service.FloatingService"
+            android:name=".tmp.tmp03.FloatingService"
             android:foregroundServiceType="specialUse">
             <property
                 android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"

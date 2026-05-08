@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import xyz.tberghuis.floatingtimer.logd
-import xyz.tberghuis.floatingtimer.service.FloatingService
+import xyz.tberghuis.floatingtimer.tmp.tmp03.FloatingService
 
 class TmpBroadcastReceiver : BroadcastReceiver() {
   override fun onReceive(context: Context, intent: Intent) {
