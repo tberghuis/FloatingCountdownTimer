@@ -12,7 +12,7 @@ android {
 
   defaultConfig {
     applicationId = "xyz.tberghuis.floatingtimer"
-    minSdk = 26
+    minSdk = 29
     targetSdk = 35
     versionCode = 85
     versionName = "1.46.0"
