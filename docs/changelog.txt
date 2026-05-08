@@ -1,3 +1,6 @@
+v1.47.0    2026-05-08  003-overlay-resume
+  fix bug where timer freezes after screen turned back on
+
 v1.46.0    2026-02-05  002-stopped-timer-screen-off
   fix bug stopwatch losing time when screen off
 
