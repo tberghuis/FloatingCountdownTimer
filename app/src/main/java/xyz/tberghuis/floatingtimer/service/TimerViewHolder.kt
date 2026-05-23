@@ -5,6 +5,7 @@ import android.view.Gravity
 import android.view.WindowManager
 import android.view.View
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -94,5 +95,9 @@ fun createComposeView(service: FloatingService): ComposeView {
         lifecycleOwner.onDestroy()
       }
     })
+
+//    setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnDetachedFromWindow)
+
+
   }
 }
