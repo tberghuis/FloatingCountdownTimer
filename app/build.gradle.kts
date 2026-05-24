@@ -8,7 +8,7 @@ plugins {
 
 android {
   namespace = "xyz.tberghuis.floatingtimer"
-  compileSdk = 36
+  compileSdk = 37
 
   defaultConfig {
     applicationId = "xyz.tberghuis.floatingtimer"

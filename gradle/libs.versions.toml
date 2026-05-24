@@ -22,7 +22,7 @@ billingClient = "7.1.1"
 testRules = "1.7.0"
 # manual check versions
 accompanist = "0.37.3"
-screenEasy = "0.1.0"
+screenEasy = "0.1.1"
 colormath = "3.6.1"
 
 [libraries]
@@ -67,7 +67,8 @@ colormath = { group = "com.github.ajalt.colormath", name = "colormath", version.
 lifecycle-service = { group = "androidx.lifecycle", name = "lifecycle-service", version.ref = "lifecycleService" }
 
 # https://github.com/TorryDo/ScreenEasy
-screen-easy = { group = "io.github.torrydo", name = "screen-easy", version.ref = "screenEasy" }
+#screen-easy = { group = "io.github.torrydo", name = "screen-easy", version.ref = "screenEasy" }
+screen-easy = { group = "com.kagehub", name = "screen-easy", version.ref = "screenEasy" }
 
 test-rules = { group = "androidx.test", name = "rules", version.ref = "testRules" }
 

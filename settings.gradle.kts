@@ -25,11 +25,11 @@ dependencyResolutionManagement {
   }
 }
 
-includeBuild("/home/tom/Desktop/myprojects/android/ScreenEasy") {
-  dependencySubstitution {
-    substitute(module("io.github.torrydo:screen-easy")).using(project(":screenez"))
-  }
-}
+//includeBuild("/home/tom/Desktop/myprojects/android/ScreenEasy") {
+//  dependencySubstitution {
+//    substitute(module("io.github.torrydo:screen-easy")).using(project(":screenez"))
+//  }
+//}
 
 rootProject.name = "Floating Countdown Timer"
 include(":app")
