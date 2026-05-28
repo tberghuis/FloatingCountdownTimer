@@ -13,11 +13,11 @@ lifecycleService = "2.10.0"
 activityCompose = "1.13.0"
 # https://developer.android.com/jetpack/compose/bom/bom-mapping
 # 2025.04.01 cause crash, sdk 28, drop timer on trash
-composeBom = "2026.05.00"
+composeBom = "2026.05.01"
 navigationCompose = "2.9.8"
 room = "2.8.4"
 androidxDataStore = "1.2.1"
-ktorVersion = "3.4.3"
+ktorVersion = "3.5.0"
 billingClient = "7.1.1"
 testRules = "1.7.0"
 # manual check versions
