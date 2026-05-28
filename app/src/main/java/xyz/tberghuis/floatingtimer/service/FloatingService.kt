@@ -142,6 +142,7 @@ class FloatingService : Service() {
 
   override fun onDestroy() {
     job.cancel()
+    overlayController.onDestroy()
     super.onDestroy()
   }
 

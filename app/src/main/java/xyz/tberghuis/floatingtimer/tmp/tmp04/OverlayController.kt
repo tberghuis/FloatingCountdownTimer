@@ -1,6 +1,10 @@
 package xyz.tberghuis.floatingtimer.tmp.tmp04
 
 import android.annotation.SuppressLint
+import android.content.Context.RECEIVER_EXPORTED
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.Build
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
@@ -32,6 +36,16 @@ import kotlin.math.min
 class OverlayController(val service: FloatingService) {
   val trashController = TrashController(service)
   private val bubbleSet = mutableSetOf<Bubble>()
+  private val unlockReceiver: UnlockReceiver = UnlockReceiver(bubbleSet)
+
+  init {
+    val filter = IntentFilter().apply {
+      addAction(Intent.ACTION_USER_PRESENT)
+    }
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+      service.registerReceiver(unlockReceiver, filter, RECEIVER_EXPORTED)
+    }
+  }
 
   fun getNumberOfBubbles(): Int {
     return bubbleSet.size
@@ -257,6 +271,12 @@ class OverlayController(val service: FloatingService) {
     logd("saveTimerPositions")
     bubbleSet.forEach { bubble ->
       bubble.saveTimerPosition()
+    }
+  }
+
+  fun onDestroy() {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+      service.unregisterReceiver(unlockReceiver)
     }
   }
 }
