@@ -25,7 +25,7 @@ import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
 import kotlin.math.max
 import kotlin.math.min
 
-class OverlayController(val service: FloatingService) {
+class XxxOverlayController(val service: FloatingService) {
   val trashController = TrashController(service)
   private val bubbleSet = mutableSetOf<Bubble>()
 
