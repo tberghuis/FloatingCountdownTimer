@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
@@ -31,15 +30,12 @@ import xyz.tberghuis.floatingtimer.service.countdown.Countdown
 import xyz.tberghuis.floatingtimer.service.countdown.CountdownView
 import xyz.tberghuis.floatingtimer.service.stopwatch.Stopwatch
 import xyz.tberghuis.floatingtimer.service.stopwatch.StopwatchView
-import xyz.tberghuis.floatingtimer.tmp.tmp04.UnlockReceiver
 import kotlin.math.max
 import kotlin.math.min
 
 class OverlayController(val service: FloatingService) {
   val trashController = TrashController(service)
   private val bubbleSet = mutableSetOf<Bubble>()
-//  private val unlockReceiver: UnlockReceiver = UnlockReceiver(bubbleSet)
-
   private val unlockReceiver = object : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
       if (intent.action == Intent.ACTION_USER_PRESENT) {
