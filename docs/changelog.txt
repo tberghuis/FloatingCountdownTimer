@@ -1,3 +1,6 @@
+v1.48.0    2026-05-29  004-overlay-resume
+  fix bug where timer freezes after screen turned back on
+
 v1.47.0    2026-05-08  003-overlay-resume
   fix bug where timer freezes after screen turned back on
 
