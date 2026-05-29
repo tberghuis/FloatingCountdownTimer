@@ -15,7 +15,6 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import com.torrydo.screenez.ScreenEz
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
@@ -40,7 +39,7 @@ class OverlayController(val service: FloatingService) {
     override fun onReceive(context: Context, intent: Intent) {
       if (intent.action == Intent.ACTION_USER_PRESENT) {
         logd("UnlockReceiver onReceive")
-        CoroutineScope(Main).launch {
+        service.scope.launch(Main) {
           // who knows what the best magic number is
           // for samsung S22 I need around 100ms delay
           // otherwise UI animation appears frozen
