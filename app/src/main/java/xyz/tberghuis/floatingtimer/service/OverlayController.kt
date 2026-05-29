@@ -1,6 +1,8 @@
 package xyz.tberghuis.floatingtimer.service
 
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Context.RECEIVER_EXPORTED
 import android.content.Intent
 import android.content.IntentFilter
@@ -13,8 +15,11 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import com.torrydo.screenez.ScreenEz
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -33,7 +38,25 @@ import kotlin.math.min
 class OverlayController(val service: FloatingService) {
   val trashController = TrashController(service)
   private val bubbleSet = mutableSetOf<Bubble>()
-  private val unlockReceiver: UnlockReceiver = UnlockReceiver(bubbleSet)
+//  private val unlockReceiver: UnlockReceiver = UnlockReceiver(bubbleSet)
+
+  private val unlockReceiver = object : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+      if (intent.action == Intent.ACTION_USER_PRESENT) {
+        logd("UnlockReceiver onReceive")
+        CoroutineScope(Main).launch {
+          // who knows what the best magic number is
+          // for samsung S22 I need around 100ms delay
+          // otherwise UI animation appears frozen
+          delay(500)
+          logd("bubbleSet composeView invalidate")
+          bubbleSet.forEach { bubble ->
+            bubble.viewHolder.view.invalidate()
+          }
+        }
+      }
+    }
+  }
 
   init {
     val filter = IntentFilter().apply {
