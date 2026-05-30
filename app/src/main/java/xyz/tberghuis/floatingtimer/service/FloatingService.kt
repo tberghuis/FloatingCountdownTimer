@@ -65,7 +65,7 @@ class FloatingService : Service() {
 
     alarmController = FtAlarmController(this)
     overlayController = OverlayController(this)
-//    startInForeground()
+    startInForeground()
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -88,7 +88,13 @@ class FloatingService : Service() {
     return START_NOT_STICKY
   }
 
+  private var startForegroundSuccess = false
+
   fun startInForeground() {
+    logd("startInForeground startForegroundSuccess $startForegroundSuccess")
+    if (startForegroundSuccess) {
+      return
+    }
     try {
       val notification = buildNotification()
       if (Build.VERSION.SDK_INT >= 34) {
@@ -103,14 +109,14 @@ class FloatingService : Service() {
           notification,
         )
       }
+      startForegroundSuccess = true
     } catch (e: Exception) {
       Log.e("FloatingService", e.toString())
-      
-      // see if I still get errors logged in play console crash reports before swallowing
-      throw e
-//      if (e.javaClass.name != "android.app.ForegroundServiceStartNotAllowedException") {
-//        throw e
-//      }
+      // swallow ForegroundServiceStartNotAllowedException
+      // I should get ForegroundServiceDidNotStartInTimeException in play console
+      if (e.javaClass.name != "android.app.ForegroundServiceStartNotAllowedException") {
+        throw e
+      }
     }
   }
 
