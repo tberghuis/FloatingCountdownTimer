@@ -65,7 +65,7 @@ class FloatingService : Service() {
 
     alarmController = FtAlarmController(this)
     overlayController = OverlayController(this)
-    startInForeground()
+//    startInForeground()
   }
 
   override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -88,7 +88,7 @@ class FloatingService : Service() {
     return START_NOT_STICKY
   }
 
-  private fun startInForeground() {
+  fun startInForeground() {
     try {
       val notification = buildNotification()
       if (Build.VERSION.SDK_INT >= 34) {
