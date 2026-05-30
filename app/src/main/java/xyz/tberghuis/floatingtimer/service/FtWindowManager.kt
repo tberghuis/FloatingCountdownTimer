@@ -6,23 +6,25 @@ import android.view.ViewGroup
 import android.view.WindowManager
 
 class FtWindowManager(
-  private val service: FloatingService // context is really FloatingService
+  private val service: FloatingService
 ) {
   private val windowManager = service.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
   private var callStartForegroundOnce = false
-  
+
   // future.txt suspend withContext(Main)
   // wait till i write a test case to prove it will prevent ANR
   fun addView(view: View, params: ViewGroup.LayoutParams) {
     windowManager.addView(view, params)
-    if(!callStartForegroundOnce){
+    if (!callStartForegroundOnce) {
       callStartForegroundOnce = true
       // if I still get ForegroundServiceStartNotAllowedException
       // option are delay here, or override onWindowVisibilityChanged in AbstractComposeView
       // or override in View and have ComposeView child
       // https://developer.android.com/about/versions/15/behavior-changes-15
-      service.startInForeground()
+      view.post {
+        service.startInForeground()
+      }
     }
   }
 
