@@ -105,9 +105,12 @@ class FloatingService : Service() {
       }
     } catch (e: Exception) {
       Log.e("FloatingService", e.toString())
-      if (e.javaClass.name != "android.app.ForegroundServiceStartNotAllowedException") {
-        throw e
-      }
+      
+      // see if I still get errors logged in play console crash reports before swallowing
+      throw e
+//      if (e.javaClass.name != "android.app.ForegroundServiceStartNotAllowedException") {
+//        throw e
+//      }
     }
   }
 
