@@ -1,6 +1,7 @@
 package xyz.tberghuis.floatingtimer.service
 
 import android.app.Application
+import android.app.ForegroundServiceStartNotAllowedException
 import android.app.Notification
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
@@ -13,6 +14,9 @@ import android.content.res.Configuration
 import android.os.Binder
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
+import androidx.annotation.RequiresApi
+import androidx.compose.ui.platform.ComposeView
 import androidx.core.app.NotificationCompat
 import com.torrydo.screenez.ScreenEz
 import kotlinx.coroutines.CoroutineScope
@@ -39,8 +43,6 @@ class FloatingService : Service() {
   lateinit var overlayController: OverlayController
 
   lateinit var ftWindowManager: FtWindowManager
-
-  
 
 
   private val binder = LocalBinder()
@@ -87,18 +89,25 @@ class FloatingService : Service() {
   }
 
   private fun startInForeground() {
-    val notification = buildNotification()
-    if (Build.VERSION.SDK_INT >= 34) {
-      startForeground(
-        FOREGROUND_SERVICE_NOTIFICATION_ID,
-        notification,
-        ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE,
-      )
-    } else {
-      startForeground(
-        FOREGROUND_SERVICE_NOTIFICATION_ID,
-        notification,
-      )
+    try {
+      val notification = buildNotification()
+      if (Build.VERSION.SDK_INT >= 34) {
+        startForeground(
+          FOREGROUND_SERVICE_NOTIFICATION_ID,
+          notification,
+          ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE,
+        )
+      } else {
+        startForeground(
+          FOREGROUND_SERVICE_NOTIFICATION_ID,
+          notification,
+        )
+      }
+    } catch (e: Exception) {
+      Log.e("FloatingService", e.toString())
+      if (e.javaClass.name != "android.app.ForegroundServiceStartNotAllowedException") {
+        throw e
+      }
     }
   }
 
