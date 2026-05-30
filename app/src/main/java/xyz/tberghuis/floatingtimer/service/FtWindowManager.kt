@@ -20,6 +20,7 @@ class FtWindowManager(
       callStartForegroundOnce = true
       // if I still get ForegroundServiceStartNotAllowedException
       // option are delay here, or override onWindowVisibilityChanged in AbstractComposeView
+      // or override in View and have ComposeView child
       // https://developer.android.com/about/versions/15/behavior-changes-15
       service.startInForeground()
     }
