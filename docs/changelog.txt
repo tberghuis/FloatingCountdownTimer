@@ -1,4 +1,4 @@
-v1.49.0    2026-05-30  005-start-foreground
+v1.49.1    2026-05-30  005-start-foreground
   attempt fix ForegroundServiceStartNotAllowedException
 
 v1.48.0    2026-05-29  004-overlay-resume
