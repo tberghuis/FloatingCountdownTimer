@@ -37,6 +37,7 @@ class FloatingService : Service() {
   val scope = CoroutineScope(Dispatchers.IO + job)
 
   lateinit var alarmController: FtAlarmController
+  lateinit var speaker: FtSpeaker
   lateinit var overlayController: OverlayController
   lateinit var ftWindowManager: FtWindowManager
 
@@ -57,6 +58,7 @@ class FloatingService : Service() {
     ScreenEz.with(this.applicationContext)
     ftWindowManager = FtWindowManager(this)
     alarmController = FtAlarmController(this)
+    speaker = FtSpeaker(this)
     overlayController = OverlayController(this)
     startInForeground()
   }
@@ -158,6 +160,7 @@ class FloatingService : Service() {
 
   override fun onDestroy() {
     job.cancel()
+    speaker.onDestroy()
     overlayController.onDestroy()
     super.onDestroy()
   }

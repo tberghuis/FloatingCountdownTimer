@@ -19,6 +19,8 @@ class SettingsScreenVm(
   val haloColourFlow = prefs.haloColourFlow
   val haloColourPurchasedFlow = prefs.haloColourPurchasedFlow
   val autoStartFlow = prefs.autoStartFlow
+  val speakTimeFlow = prefs.speakTimeFlow
+  val speakIntervalMinutesFlow = prefs.speakIntervalMinutesFlow
 
   fun updateLooping(value: Boolean) {
     viewModelScope.launch {
@@ -29,6 +31,18 @@ class SettingsScreenVm(
   fun updateAutoStart(value: Boolean) {
     viewModelScope.launch {
       prefs.updateAutoStart(value)
+    }
+  }
+
+  fun updateSpeakTime(value: Boolean) {
+    viewModelScope.launch {
+      prefs.updateSpeakTime(value)
+    }
+  }
+
+  fun updateSpeakIntervalMinutes(value: Int) {
+    viewModelScope.launch {
+      prefs.updateSpeakIntervalMinutes(value)
     }
   }
 }
