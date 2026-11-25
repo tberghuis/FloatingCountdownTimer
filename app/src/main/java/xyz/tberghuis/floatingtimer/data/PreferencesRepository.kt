@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -123,6 +124,26 @@ class PreferencesRepository(private val dataStore: DataStore<Preferences>) {
   suspend fun updateAutoStart(autoStart: Boolean) {
     dataStore.edit { preferences ->
       preferences[booleanPreferencesKey("autoStart")] = autoStart
+    }
+  }
+
+  val speakTimeFlow: Flow<Boolean> = dataStore.data.map { preferences ->
+    preferences[booleanPreferencesKey("speak_time")] ?: false
+  }
+
+  suspend fun updateSpeakTime(speakTime: Boolean) {
+    dataStore.edit { preferences ->
+      preferences[booleanPreferencesKey("speak_time")] = speakTime
+    }
+  }
+
+  val speakIntervalMinutesFlow: Flow<Int> = dataStore.data.map { preferences ->
+    preferences[intPreferencesKey("speak_interval_minutes")] ?: 1
+  }
+
+  suspend fun updateSpeakIntervalMinutes(minutes: Int) {
+    dataStore.edit { preferences ->
+      preferences[intPreferencesKey("speak_interval_minutes")] = minutes
     }
   }
 

@@ -84,6 +84,7 @@ class Countdown(
         when (it) {
           TimerStateFinished -> {
             service.alarmController.startAlarm(this@Countdown)
+            service.speaker.onCountdownFinished(label)
           }
 
           TimerStateRunning -> {
@@ -110,7 +111,9 @@ class Countdown(
           countDownTimer =
             object : CountDownTimer(countdownSeconds * 1000L, 1000) {
               override fun onTick(millisUntilFinished: Long) {
+                val previousSeconds = countdownSeconds
                 countdownSeconds = (millisUntilFinished / 1000f).roundToInt()
+                service.speaker.onCountdownTick(label, previousSeconds, countdownSeconds)
               }
 
               override fun onFinish() {

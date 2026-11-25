@@ -19,6 +19,9 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -30,6 +33,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -42,7 +46,10 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.compose.ui.unit.dp
@@ -53,6 +60,7 @@ import xyz.tberghuis.floatingtimer.R
 import xyz.tberghuis.floatingtimer.logd
 import xyz.tberghuis.floatingtimer.openGithubIssues
 import xyz.tberghuis.floatingtimer.openPlayStorePage
+import xyz.tberghuis.floatingtimer.service.SPEAK_INTERVAL_OPTIONS
 import xyz.tberghuis.floatingtimer.viewmodels.SettingsScreenVm
 import xyz.tberghuis.floatingtimer.viewmodels.SharedVm
 
@@ -91,6 +99,8 @@ fun SettingsScreenContent(
   val navController = LocalNavController.current
   val looping by vm.loopingFlow.collectAsState(true)
   val autoStart by vm.autoStartFlow.collectAsState(false)
+  val speakTime by vm.speakTimeFlow.collectAsState(false)
+  val speakIntervalMinutes by vm.speakIntervalMinutesFlow.collectAsState(1)
   val haloColour by vm.haloColourFlow.collectAsState(DEFAULT_HALO_COLOR)
   val purchased by vm.haloColourPurchasedFlow.collectAsState(null)
   val context = LocalContext.current
@@ -196,6 +206,34 @@ fun SettingsScreenContent(
       },
     )
 
+    // Whole row is one toggle, so TalkBack reads
+    // "Speak time remaining, Says the time left out loud..., switch, off"
+    // and a double tap anywhere on the row flips it.
+    ListItem(
+      headlineContent = { Text(stringResource(R.string.speak_time_remaining)) },
+      supportingContent = { Text(stringResource(R.string.speak_time_remaining_summary)) },
+      modifier = Modifier
+        .semantics { testTagsAsResourceId = true }
+        .testTag("speak_time")
+        .toggleable(
+          value = speakTime,
+          role = Role.Switch,
+          onValueChange = { vm.updateSpeakTime(it) },
+        ),
+      trailingContent = {
+        Switch(
+          checked = speakTime,
+          // handled by the row's toggleable so it is a single focus stop
+          onCheckedChange = null,
+        )
+      },
+    )
+    SpeakIntervalChoice(
+      selectedMinutes = speakIntervalMinutes,
+      enabled = speakTime,
+      onSelect = { vm.updateSpeakIntervalMinutes(it) },
+    )
+
     HorizontalDivider()
     Text(
       stringResource(R.string.actions),
@@ -269,5 +307,50 @@ fun SettingsScreenContent(
       )
     )
 
+  }
+}
+
+@Composable
+private fun SpeakIntervalChoice(
+  selectedMinutes: Int,
+  enabled: Boolean,
+  onSelect: (Int) -> Unit,
+) {
+  Column(
+    modifier = Modifier
+      .fillMaxWidth()
+      .selectableGroup()
+  ) {
+    Text(
+      stringResource(R.string.speak_every),
+      modifier = Modifier
+        .fillMaxWidth()
+        .padding(horizontal = 16.dp, vertical = 8.dp)
+        .semantics { heading() },
+      style = MaterialTheme.typography.bodyLarge,
+    )
+    SPEAK_INTERVAL_OPTIONS.forEach { minutes ->
+      val selected = minutes == selectedMinutes
+      // Each option is one radio button stop, e.g. "Every 5 minutes, radio button, selected"
+      ListItem(
+        headlineContent = { Text(pluralStringResource(R.plurals.every_n_minutes, minutes, minutes)) },
+        leadingContent = {
+          RadioButton(
+            selected = selected,
+            onClick = null,
+            enabled = enabled,
+          )
+        },
+        modifier = Modifier
+          .semantics { testTagsAsResourceId = true }
+          .testTag("speak_interval_$minutes")
+          .selectable(
+            selected = selected,
+            enabled = enabled,
+            role = Role.RadioButton,
+            onClick = { onSelect(minutes) },
+          ),
+      )
+    }
   }
 }
